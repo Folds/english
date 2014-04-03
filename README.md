@@ -12,6 +12,7 @@ Issues include:
 * Choosing what language to emit
   (such as C, CLR, Java byte code, x86 assembly, or something else).
 * Language syntax (such as keywords, namespaces, et cetera).
+* Deciding how to organize source code files and/or folders.
 
 It is practical to develop in English.
 The Osmosian Order (www.osmosian.com) has developed
@@ -28,3 +29,7 @@ This project will be different from the Osmosian project in that:
   to be tool(s) in a developer's toolbox,
   not a self-contained minimalist IDE.
 * Use of automated tests and git will be encouraged.
+
+Until this project has a compiler or interpreter of its own,
+all sample code will be written using a syntax compatible
+with Plain English.
