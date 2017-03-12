@@ -1,35 +1,29 @@
-The goals of this project are to:
-* develop a general purpose open-source English programming language, and
-* to identify and/or implement easy-to-use tools
-  for developing applications in said English programming language.
+The goal of this project is to identify and/or implement easy-to-use tools
+for developing applications in the Plain English programming language.
 
-Currently, the high-level features of both the language
+Currently, the high-level features of both the project
 and the development environment need to be worked out.
-Issues include:
+The current compiler uses files (with no file extension)
+in a single folder as its source code, and produces 32-bit x86 assembly
+Portable Executable files.  The compiled programs use 8-bit ASCII,
+and run on Windows systems (such as Microsoft Windows XP
+through Windows 10, and WINE). 
+
+Future issues include:
 * Choosing an open-source license.
-* Choosing a name for the language.
+* Deciding how to organize source code files and/or folders.
 * Choosing whether to compile or interpret the source code.
 * Choosing what language to emit
   (such as C, CLR, Java byte code, x86 assembly, or something else).
-* Language syntax (such as keywords, namespaces, et cetera).
-* Deciding how to organize source code files and/or folders.
 
-It is practical to develop in English.
-The Osmosian Order (www.osmosian.com) has developed
-an iconoclastic IDE in a similar language called Plain English.
-With the permission of the Osmosian Order, this project
-hopes to develop an English programming language with
-similar syntax to Plain English.
+This project is a "fork" that started with version 3040
+of the Osmosian Order's IDE and compiler.  The Osmosian Order
+considers this project's IDE to be "contrary to Osmosian principles,"
+and does not want their name associated with it.
 
-This project will be different from the Osmosian project in that:
-* The language syntax might be subtly different.
-* The language will be designed to scale
-  both down to small projects and up to large projects.
-* The development environment will be designed
-  to be tool(s) in a developer's toolbox,
-  not a self-contained minimalist IDE.
-* Use of automated tests and git will be encouraged.
-
-Until this project has a compiler or interpreter of its own,
-all sample code will be written using a syntax compatible
-with Plain English.
+This project (and the project's documentation) only use the word
+Osmosian where it is necessary to indicate which portions
+of the concept and code remain under the Osmosian Order's
+copyright.  This project uses the term "Plain English" to indicate
+that this project's language syntax is fully compatible
+with the language syntax of the Osmosian Order's official releases.
