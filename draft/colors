@@ -1,0 +1,457 @@
+\ The portions of this file that are from CAL-3040
+\ are copyright 2006 by the Osmosian Order.
+\ The remainder is copyright 2014, 2017 by Jasper Paulsen.
+
+the black color is a color.
+
+the blue color is a color.
+
+to clear a color:
+  put 0 and 0 and 0 into the color.
+
+the clear color is a color.
+
+a color has a hue, a saturation, and a lightness.
+
+a colorref is a number [like $00BBGGRR].
+
+to convert a color to a colorref:
+  if the color is clear,
+    put 16777215 [$00FFFFFF] into the colorref; exit. \ clear pen becomes white
+  privatize the color.
+  scale the color's saturation given 240/1000.
+  limit the color's saturation to 1 and 239.
+  scale the color's lightness given 240/1000.
+  limit the color's lightness to 1 and 239.
+  scale the color's hue given 240/3600.
+  limit the color's hue to 1 and 239.
+  call "shlwapi.dll" "ColorHLSToRGB"
+    with the color's hue and the color's lightness and the color's saturation
+    returning the colorref.
+
+to convert a color to a rgb:
+  convert the color to a colorref.
+  convert the colorref to the rgb. 
+
+to convert a colorref to a color:
+  call "shlwapi.dll" "ColorRGBToHLS"
+    with the colorref and a wyrd's whereabouts
+    and another wyrd's whereabouts and a third wyrd's whereabouts.
+  put the wyrd into the color's hue.
+  put the other wyrd into the color's  lightness.
+  put the third wyrd into the color's saturation.
+  scale the color's hue given 3600/240.
+  limit the color's hue to 0 and 3600.
+  scale the color's saturation given 1000/240.
+  limit the color's saturation to 0 and 1000.
+  scale the color's lightness given 1000/240.
+  limit the color's lightness to 0 and 1000.
+
+to convert a colorref to a rgb:
+  privatize the colorref.
+  shift the colorref right 0 bits.
+  put the colorref into the rgb's red byte.
+  shift the colorref right 8 bits.
+  put the colorref into the rgb's green byte.
+  shift the colorref right 8 bits.
+  put the colorref into the rgb's blue byte.
+
+the cyan color is a color.
+
+the dark blue color is a color.
+
+the dark cyan color is a color.
+
+the dark gray color is a color.
+
+the dark green color is a color.
+
+the dark lime color is a color.
+
+the dark magenta color is a color.
+
+the dark orange color is a color.
+
+the dark purple color is a color.
+
+the dark red color is a color.
+
+the dark sky color is a color.
+
+the dark teal color is a color.
+
+the dark violet color is a color.
+
+the dark yellow color is a color.
+
+the darker blue color is a color.
+
+the darker cyan color is a color.
+
+the darker gray color is a color.
+
+the darker green color is a color.
+
+the darker lime color is a color.
+
+the darker magenta color is a color.
+
+the darker orange color is a color.
+
+the darker purple color is a color.
+
+the darker red color is a color.
+
+the darker sky color is a color.
+
+the darker teal color is a color.
+
+the darker violet color is a color.
+
+the darker yellow color is a color.
+
+the darkest blue color is a color.
+
+the darkest cyan color is a color.
+
+the darkest gray color is a color.
+
+the darkest green color is a color.
+
+the darkest lime color is a color.
+
+the darkest magenta color is a color.
+
+the darkest orange color is a color.
+
+the darkest purple color is a color.
+
+the darkest red color is a color.
+
+the darkest sky color is a color.
+
+the darkest teal color is a color.
+
+the darkest violet color is a color.
+
+the darkest yellow color is a color.
+
+to debug a color:
+  put the color in a string.
+  debug the string.
+
+to decide if a color and another color are clear:
+  if the color is not clear, say no.
+  if the other color is not clear, say no.
+  say yes.
+
+to decide if a color is another color:
+  if the color's hue is not the other color's hue, say no.
+  if the color's saturation is not the other color's saturation, say no.
+  if the color's lightness is not the other color's lightness, say no.
+  say yes.
+
+to decide if a color is clear:
+  if the color's hue is less than 0, say yes.
+  say no.
+
+to decide if a color is dark:
+  if the color's lightness is between 250 and 374, say yes.
+  say no.
+
+to decide if a color is light:
+  if the color's lightness is between 625 and 749, say yes.
+  say no.
+
+to decide if a color is normal:
+  if the color's lightness is between 375 and 624, say yes.
+  say no.
+
+to decide if a color is very dark:
+  if the color's lightness is between 125 and 249, say yes.
+  say no.
+
+to decide if a color is very light:
+  if the color's lightness is between 750 and 874, say yes.
+  say no.
+
+to decide if a color is very very dark:
+  if the color's lightness is less than or equal to 124, say yes.
+  say no.
+
+to decide if a color is very very light:
+  if the color's lightness is greater than or equal to 875, say yes.
+  say no.
+
+to finalize the colors:
+
+the gray color is a color.
+
+the grayscale color matrix is a hex string equal to $8716993E8716993E8716993E0000000000000000A245163FA245163FA245163F0000000000000000D578E93DD578E93DD578E93D00000000000000000000000000000000000000000000803F00000000000000000000000000000000000000000000803F.
+
+the green color is a color.
+
+the hilite color is a color.
+
+a hue is an angle [0 to 3600].
+
+the pale color is a color.
+
+to initialize the colors:
+  call "gdi32.dll" "GetStockObject" with 8 [null_pen] returning the null hpen.
+  call "gdi32.dll" "GetStockObject" with 5 [null_brush] returning the null hbrush.
+  put -1 and 0 and 0 into the clear color.
+  put 0 and 0 and 1000 into the white color.
+  put 0 and 0 and 925 into the pale color.
+  put 0 and 0 and 875 into the lightest gray color.
+  put 0 and 0 and 750 into the lighter gray color.
+  put 0 and 0 and 625 into the light gray color.
+  put 0 and 0 and 500 into the gray color.
+  put 0 and 0 and 375 into the dark gray color.
+  put 0 and 0 and 250 into the darker gray color.
+  put 0 and 0 and 125 into the darkest gray color.
+  put 0 and 0 and 0 into the black color.
+  put 0 and 1000 and 875 into the lightest red color.
+  put 0 and 1000 and 750 into the lighter red color.
+  put 0 and 1000 and 625 into the light red color.
+  put 0 and 1000 and 500 into the red color.
+  put 0 and 1000 and 375 into the dark red color.
+  put 0 and 1000 and 250 into the darker red color.
+  put 0 and 1000 and 125 into the darkest red color.
+  put 300 and 1000 and 875 into the lightest orange color.
+  put 300 and 1000 and 750 into the lighter orange color.
+  put 300 and 1000 and 625 into the light orange color.
+  put 300 and 1000 and 500 into the orange color.
+  put 300 and 1000 and 375 into the dark orange color.
+  put 300 and 1000 and 250 into the darker orange color.
+  put 300 and 1000 and 125 into the darkest orange color.
+  put 600 and 1000 and 875 into the lightest yellow color.
+  put 600 and 1000 and 750 into the lighter yellow color.
+  put 600 and 1000 and 625 into the light yellow color.
+  put 600 and 1000 and 500 into the yellow color.
+  put 600 and 1000 and 375 into the dark yellow color.
+  put 600 and 1000 and 250 into the darker yellow color.
+  put 600 and 1000 and 125 into the darkest yellow color.
+  put 900 and 1000 and 875 into the lightest lime color.
+  put 900 and 1000 and 750 into the lighter lime color.
+  put 900 and 1000 and 625 into the light lime color.
+  put 900 and 1000 and 500 into the lime color.
+  put 900 and 1000 and 375 into the dark lime color.
+  put 900 and 1000 and 250 into the darker lime color.
+  put 900 and 1000 and 125 into the darkest lime color.
+  put 1200 and 1000 and 875 into the lightest green color.
+  put 1200 and 1000 and 750 into the lighter green color.
+  put 1200 and 1000 and 625 into the light green color.
+  put 1200 and 1000 and 500 into the green color.
+  put 1200 and 1000 and 375 into the dark green color.
+  put 1200 and 1000 and 250 into the darker green color.
+  put 1200 and 1000 and 125 into the darkest green color.
+  put 1500 and 1000 and 875 into the lightest teal color.
+  put 1500 and 1000 and 750 into the lighter teal color.
+  put 1500 and 1000 and 625 into the light teal color.
+  put 1500 and 1000 and 500 into the teal color.
+  put 1500 and 1000 and 375 into the dark teal color.
+  put 1500 and 1000 and 250 into the darker teal color.
+  put 1500 and 1000 and 125 into the darkest teal color.
+  put 1800 and 1000 and 875 into the lightest cyan color.
+  put 1800 and 1000 and 750 into the lighter cyan color.
+  put 1800 and 1000 and 625 into the light cyan color.
+  put 1800 and 1000 and 500 into the cyan color.
+  put 1800 and 1000 and 375 into the dark cyan color.
+  put 1800 and 1000 and 250 into the darker cyan color.
+  put 1800 and 1000 and 125 into the darkest cyan color.
+  put 2100 and 1000 and 875 into the lightest sky color.
+  put 2100 and 1000 and 750 into the lighter sky color.
+  put 2100 and 1000 and 625 into the light sky color.
+  put 2100 and 1000 and 500 into the sky color.
+  put 2100 and 1000 and 375 into the dark sky color.
+  put 2100 and 1000 and 250 into the darker sky color.
+  put 2100 and 1000 and 125 into the darkest sky color.
+  put 2400 and 1000 and 875 into the lightest blue color.
+  put 2400 and 1000 and 750 into the lighter blue color.
+  put 2400 and 1000 and 625 into the light blue color.
+  put 2400 and 1000 and 500 into the blue color.
+  put 2400 and 1000 and 375 into the dark blue color.
+  put 2400 and 1000 and 250 into the darker blue color.
+  put 2400 and 1000 and 125 into the darkest blue color.
+  put 2700 and 1000 and 875 into the lightest purple color.
+  put 2700 and 1000 and 750 into the lighter purple color.
+  put 2700 and 1000 and 625 into the light purple color.
+  put 2700 and 1000 and 500 into the purple color.
+  put 2700 and 1000 and 375 into the dark purple color.
+  put 2700 and 1000 and 250 into the darker purple color.
+  put 2700 and 1000 and 125 into the darkest purple color.
+  put 3000 and 1000 and 875 into the lightest magenta color.
+  put 3000 and 1000 and 750 into the lighter magenta color.
+  put 3000 and 1000 and 625 into the light magenta color.
+  put 3000 and 1000 and 500 into the magenta color.
+  put 3000 and 1000 and 375 into the dark magenta color.
+  put 3000 and 1000 and 250 into the darker magenta color.
+  put 3000 and 1000 and 125 into the darkest magenta color.
+  put 3300 and 1000 and 875 into the lightest violet color.
+  put 3300 and 1000 and 750 into the lighter violet color.
+  put 3300 and 1000 and 625 into the light violet color.
+  put 3300 and 1000 and 500 into the violet color.
+  put 3300 and 1000 and 375 into the dark violet color.
+  put 3300 and 1000 and 250 into the darker violet color.
+  put 3300 and 1000 and 125 into the darkest violet color.
+  put 0 and 0 and 800 into the hilite color.
+
+the light blue color is a color.
+
+the light cyan color is a color.
+
+the light gray color is a color.
+
+the light green color is a color.
+
+the light lime color is a color.
+
+the light magenta color is a color.
+
+the light orange color is a color.
+
+the light purple color is a color.
+
+the light red color is a color.
+
+the light sky color is a color.
+
+the light teal color is a color.
+
+the light violet color is a color.
+
+the light yellow color is a color.
+
+the lighter blue color is a color.
+
+the lighter cyan color is a color.
+
+the lighter gray color is a color.
+
+the lighter green color is a color.
+
+the lighter lime color is a color.
+
+the lighter magenta color is a color.
+
+the lighter orange color is a color.
+
+the lighter purple color is a color.
+
+the lighter red color is a color.
+
+the lighter sky color is a color.
+
+the lighter teal color is a color.
+
+the lighter violet color is a color.
+
+the lighter yellow color is a color.
+
+the lightest blue color is a color.
+
+the lightest cyan color is a color.
+
+the lightest gray color is a color.
+
+the lightest green color is a color.
+
+the lightest lime color is a color.
+
+the lightest magenta color is a color.
+
+the lightest orange color is a color.
+
+the lightest purple color is a color.
+
+the lightest red color is a color.
+
+the lightest sky color is a color.
+
+the lightest teal color is a color.
+
+the lightest violet color is a color.
+
+the lightest yellow color is a color.
+
+a lightness is a number [0 to 1000].
+
+the lime color is a color.
+
+the magenta color is a color.
+
+to make a color from a hue and a saturation and a lightness:
+  put the hue and the saturation and the lightness into the color.
+
+the orange color is a color.
+
+to output a color without advancing:
+  convert the color to a rgb.
+  put the rgb's red byte / 255 into a ratio.
+  convert the ratio to a red string given 4.
+  put the rgb's green byte / 255 into the ratio.
+  convert the ratio to a green string given 4.
+  put the rgb's blue byte / 255 into the ratio.
+  convert the ratio to a blue string given 4.
+  output the red string then " " then the green string
+    then " " then the blue string without advancing.
+
+to pick a color between another color and a third color:
+  pick the color's hue
+    between the other color's hue and the third color's hue.
+  pick the color's saturation
+    between the other color's saturation and the third color's saturation.
+  pick the color's lightness
+    between the other color's lightness and the third color's lightness.
+
+the purple color is a color.
+
+to put a color in a string:
+  clear the string.
+  append "hue=" to the string.
+  append the color's hue to the string.
+  append ", saturation=" to the string.
+  append the color's saturation to the string.
+  append ", lightness=" to the string.
+  append the color's lightness to the string.
+
+to put a color into another color:
+  put the color's hue into the other color's hue.
+  put the color's saturation into the other color's saturation.
+  put the color's lightness into the other color's lightness.
+
+to put a hue and a saturation and a lightness into a color:
+  put the hue into the color's hue.
+  if the color's hue is not -1,
+    limit the color's hue to 0 and 3600. \ -1 is clear
+  put the saturation into the color's saturation.
+  limit the color's saturation to 0 and 1000.
+  put the lightness into the color's lightness.
+  limit the color's lightness to 0 and 1000.
+
+the red color is a color.
+
+a rgb is a record with
+  a byte called blue byte,
+  a byte called green byte,
+  a byte called red byte.
+
+a rgb pointer is a pointer to a rgb.
+
+a saturation is a number [0 to 1000].
+
+the sky color is a color.
+
+to swap a color with another color:
+  swap the color's hue with the other color's hue.
+  swap the color's saturation with the other color's saturation.
+  swap the color's lightness with the other color's lightness.
+
+the teal color is a color.
+
+the violet color is a color.
+
+the white color is a color.
+
+the yellow color is a color.

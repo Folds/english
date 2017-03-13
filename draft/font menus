@@ -1,0 +1,522 @@
+\ The portions of this file that are from CAL-3040
+\ are copyright 2006 by the Osmosian Order.
+\ The remainder is copyright 2014, 2017 by Jasper Paulsen.
+
+to add some font name things to a submenu:
+  loop.
+    get a font name thing from the font name things.
+    if the font name thing is nil, exit.
+    add the font name thing's string to the submenu (font name).
+  repeat.
+
+to add a string to a submenu (font height name):
+  put "handle font height given " in a prefix.
+  put the prefix then the string in a handler.
+  get a height from the handler given the prefix.
+  add the string and the handler to the submenu.
+  if the height is less than the submenu's commands' last's font's height,
+    put the height in the submenu's commands' last's font's height.
+  get a font.
+  put the font's name in the submenu's commands' last's font's name.
+
+to add a string to a submenu (font name):
+  put "handle font name given " in a prefix.
+  put the prefix then the string in a handler.
+  add the string and the handler to the submenu.
+  put the string in the submenu's commands' last's font's name.
+
+to add some string things to a submenu (font height names):
+  loop.
+    get a string thing from the string things.
+    if the string thing is nil, exit.
+    add the string thing's string to the submenu (font height name).
+  repeat.
+
+to cache a font height (font height):
+  describe the font height returning a string.  
+  if the string is the recent nonstandard font height name, exit.
+  if the string is in the standard font height names, exit.
+  put the string in the recent nonstandard font height name.
+
+to cache a font name (font name):
+  if the font name is the recent nonstandard font name, exit.
+  if the font name is in the standard font names, exit.
+  put the font name in the recent nonstandard font name.
+
+to collate some font name things:
+  clear the font name things.
+  copy the standard font names into the font name things.
+  get a font. \the writer crashes here.
+  add the font's name to the font name things.
+  add the recent nonstandard font name to the font name things.
+  sort the font name things.
+  deduplicate the font name things.
+
+to collate some string things (font height names):
+  clear the string things.
+  copy the standard font height names into the string things.
+  get a font.
+  describe the font's height returning a string.
+  add the string to the string things.
+  add the recent nonstandard font height name to the string things.
+  sort the string things (by height).
+  deduplicate the string things.
+  reverse the string things.
+
+to count commands in a submenu returning a count:
+  put 0 in the count.
+  if the submenu is nil, exit.
+  count the submenu's commands returning the count.
+
+to count highlighted items in a submenu returning a count:
+  put 0 in the count.
+  loop.
+    get a command from the submenu's commands.
+    if the command is nil, break.
+    if the command is highlighted, add 1 to the count.
+  repeat.
+
+to create a submenu (font heights):
+  create the submenu.
+  collate some string things (font height names).
+  add the string things to the submenu (font height names).
+  destroy the string things.
+  add "Other..." and "handle font height other" to the submenu.
+  get a font.
+  put the font's name in the submenu's commands' last's font's name.
+  describe the font's height returning a string.
+  highlight the string in the submenu.
+
+to create a submenu (font names):
+  collate some font name things.
+  create the submenu.
+  add the font name things to the submenu.
+  destroy the font name things.
+  add "Other..." and "handle font name other" to the submenu.
+  get a font.
+  highlight the font's name in the submenu.
+
+to decide if a command is highlighted:
+  if the command's color is the lightest yellow color, say yes.
+  say no.
+
+to decide if a font height is standard (font height):
+  describe the font height returning a string.  
+  if the string is in the standard font height names, say yes.
+  say no.
+
+to decide if a font name is standard (font name):
+  if the font name is in the standard font names, say yes.
+  say no.
+
+to describe a font height returning a string:
+  put the font height / 1 inch into a ratio.
+  convert the ratio to a ratio string.
+  put the ratio string then " Inch" into the string.
+
+to finalize the font heights:
+  destroy the standard font height names.
+
+to finalize the font names:
+  destroy the standard font names.
+
+a font name thing is a string thing.
+
+to get a command from a submenu given a name:
+  void the command.
+  if the submenu is nil, exit.
+  loop.
+    get the command from the submenu's commands.
+    if the command is nil, break.
+    if the command's name is the name, exit.
+  repeat.
+
+to get first highlighted name in a submenu returning a name:
+  clear the name.
+  if the submenu is nil, exit.
+  loop.
+    get a command from the submenu's commands.
+    if the command is nil, exit.
+    if the command is highlighted,
+      put the command's name in the name; exit.
+  repeat.
+
+to get a font:
+  if the current tab's mode is "editor",
+    get the font given the current tab's node's source; exit.
+  if the current tab's mode is "writer",
+    get the font given the current tab's node's page; exit.
+  put the default font in the font.
+
+to get a font given a page:
+  if the page is nil, put the default font in the font; exit.
+  get first selected text from the page returning a text.
+  if the text is nil, put the default font in the font; exit.
+  get first text from the page returning the text.
+  if the text is nil, put the default font in the font; exit.
+  get the font given the text.
+
+to get a font given a source:
+  if the source is nil, put the default font in the font; exit.
+  get the font given the source's text.
+
+to get a font given a text:
+  if the text is nil, put the default font in the font; exit.
+  put the text's font in the font.
+
+to get a height from a handler:
+  put "handle " in a prefix.
+  put the prefix then the handler in another handler.
+  get the height from the other handler given the prefix.
+
+to get a height from a handler given a prefix:
+  put 0 in the height.
+  if the handler does not start with the prefix, exit.
+  if the handler does not end with " inch", exit.
+  get a residue from the handler after the prefix.
+  remove five bytes from the residue.
+  trim the residue.
+  convert the residue to a ratio.
+  put the ratio times 1 inch in a ratio called temp.
+  put the temp's numerator divided by the temp's denominator into the height.
+
+to get a number from a handler given a prefix:
+  put 0 in the number.
+  if the handler does not start with the prefix, exit.
+  get a residue from the handler after the prefix.
+  convert the residue to the number.
+
+to handle a command (font height...):
+  create a submenu (font heights).
+  handle the command given the submenu.
+
+to handle a command (font name...):
+  create a submenu (font names).
+  handle the command given the submenu.
+
+to handle font height given a font height:
+  if the current tab's mode is "editor",
+    handle font height given the current tab's node's source and the font height; exit.
+  if the current tab's mode is "writer",
+    handle font height given the current tab's node's page and the font height; exit.
+  cluck.
+
+to handle font height given a handler (general):
+  put "handle font height given " in a prefix.
+  get a height from the handler given the prefix.
+  if the height is not positive,
+      debug the handler (because it is undispatched); exit.
+  handle font height given the height.
+
+to handle font height other:
+  if the current tab's mode is "editor",
+    handle font height other given the current tab's node's source; exit.
+  if the current tab's mode is "writer",
+    handle font height other given the current tab's node's page; exit.
+
+to handle font name given a handler (general):
+  put "handle font name given " in a prefix.
+  get a residue from the handler after the prefix.
+  put the residue in a string.
+  handle font name given the string.
+
+to handle font name given a string:
+  if the current tab's mode is "editor",
+    handle font name given the current tab's node's source and the string; exit.
+  if the current tab's mode is "writer",
+    handle font name given the current tab's node's page and the string; exit.
+
+to handle font name other:
+  if the current tab's mode is "editor",
+    handle font name other given the current tab's node's source; exit.
+  if the current tab's mode is "writer",
+    handle font name other given the current tab's node's page; exit.
+
+to highlight a string in a submenu:
+  loop.
+    get a command from the submenu's commands.
+    if the command is nil, break.
+    if the command's name is the string,
+      put the lightest yellow color in the command's color; break.
+    if the command's name starts with "Other",
+      put the lightest yellow color in the command's color; break.
+  repeat.
+
+to initialize the font heights:
+  add "1 Inch" to the standard font height names.
+  add "1/2 Inch" to the standard font height names.
+  add "1/3 Inch" to the standard font height names.
+  add "1/4 Inch" to the standard font height names.
+  add "1/5 Inch" to the standard font height names.
+  add "1/6 Inch" to the standard font height names.
+  add "1/8 Inch" to the standard font height names.
+  describe the default font's height returning a string.
+  put the string in the recent nonstandard font height name.
+
+to initialize the font names:
+  add "Arial" to the standard font names.
+  add "Courier New" to the standard font names.
+  add "Osmosian" to the standard font names.
+  add "Symbol" to the standard font names.
+  add "Times New Roman" to the standard font names.
+  put the default font's name in the recent nonstandard font name.
+
+to put a color in part of a submenu given a number:
+  if the submenu is nil, exit.
+  put 0 in a number called counter.
+  loop.
+    get a command from the submenu's commands.
+    if the command is nil, exit.
+    add 1 to the counter.
+    if the counter is the number,
+      put the color in the command's color; exit.
+  repeat.
+
+to sort some string things (by height):
+  if the string things' first is the string things' last, exit.
+  split the string things
+    into some left string things and some right string things.
+  sort the left string things (by height).
+  sort the right string things (by height).
+  loop.
+    put the left string things' first into a left string thing.
+    put the right string things' first into a right string thing.
+    if the left string thing is nil,
+      append the right string things to the string things; exit.
+    if the right string thing is nil,
+      append the left string things to the string things; exit.
+    put the left string thing's string in a handler called left handler.
+    put the right string thing's string in a handler called right handler.
+    get a height called left height from the left handler.
+    get a height called right height from the right handler.
+    if the left height is greater than the right height,
+      move the right string thing from the right string things to the string things; repeat.
+    move the left string thing from the left string things to the string things.
+  repeat.
+
+the standard font height names are some string things.
+
+the standard font names are some font name things.
+
+to test (font menus - at least five font names):
+  create a test result about "font names" and "count choices"
+    and expecting "at least six choices".
+  create a submenu (font names).
+  count commands in the submenu returning a count called actual.
+  put the actual in the test result's actual value.
+  put the actual in the test result's interpretation.
+  if the actual is at least 6,
+    put the test result's expectation in the test result's interpretation.
+  append the test result to the status' all test results.
+  destroy the submenu.
+
+to test (font menus - courier new is wysiwyg):
+  create a test result about "font names" and "courier new is wysiwyg"
+    and expecting "courier new".
+  create a submenu (font names).
+  get a command from the submenu given "courier new".
+  if the command is not nil,
+    put the command's font's name in a string called actual.
+  check the test result given the actual.
+  append the test result to the status' all test results.
+  destroy the submenu.
+
+to test (font menus - current font height highlighted):
+  create a test result about "font heights" and "current height highlighted"
+    and expecting "current font height".
+  get a font.
+  describe the font's height returning a string.
+  create a submenu (font heights).
+  get first highlighted name in the submenu returning a name.
+  put the name in the test result's actual value.
+  put the name in the test result's interpretation.
+  if the name is the string,
+    put "current font height" in the test result's interpretation.
+  append the test result to the status' all test results.
+  destroy the submenu.
+
+to test (font menus - current font name highlighted):
+  create a test result about "font names" and "current name highlighted"
+    and expecting "current font name".
+  get a font.
+  create a submenu (font names).
+  get first highlighted name in the submenu returning a name.
+  put the name in the test result's actual value.
+  put the name in the test result's interpretation.
+  if the name is the font's name,
+    put "current font name" in the test result's interpretation.
+  append the test result to the status' all test results.
+  destroy the submenu.
+
+to test (font menus - font names):
+  create a test result about "font names" and "collation"
+    and expecting "'Courier New' before 'Times New Roman'".
+  add "Times New Roman" to some string things called dummies.
+  add "Times New Roman" to the dummies.
+  add "Courier New" to the dummies.
+  sort the dummies.
+  deduplicate the dummies.
+  summarize the dummies returning a string called actual.
+  check the test result given the actual.
+  append the test result to the status' all test results.
+  destroy the dummies.
+
+to test (font menus - get height):
+  put the tpi / 6 in a string called expectation.
+  create a test result about "font heights" and "get height"
+    and expecting the expectation.
+  put "handle font height given 1/6 inch" in a handler.
+  put "handle font height given " in a prefix.
+  get a height from the handler given the prefix.
+  put the height in a string called actual.
+  check the test result given the actual.
+  append the test result to the status' all test results.
+
+to test (font menus - get inches string):
+  create a test result about "font heights" and "get inches string"
+    and expecting "1/6 inch".
+  put "handle font height given 1/6 inch" in a handler.
+  put "handle font height given " in a prefix.
+  get a residue from the handler after the prefix.
+  put the residue in a string called actual.
+  check the test result given the actual.
+  append the test result to the status' all test results.
+
+to test (font menus - get test number):
+  put 1 in a string called expectation.
+  create a test result about "font menus" and "get test number"
+    and expecting the expectation.
+  put "handle test result 1" in a handler.
+  put "handle test result " in a prefix.
+  get a number from the handler given the prefix.
+  put the number in a string called actual.
+  check the test result given the expectation.
+  append the test result to the status' all test results.
+
+to test (font menus - heights are shown in current font):
+  create a test result about "font heights" and "1/6 Inch's font name"
+    and expecting "current font name".
+  get a font.
+  create a submenu (font heights).
+  get a command from the submenu given "1/6 Inch".
+  if the command is not nil,
+    put the command's font's name in a string called actual.
+  put the actual in the test result's actual value.
+  put the actual in the test result's interpretation.
+  if the actual is the font's name,
+    put "current font name" in the test result's interpretation.
+  append the test result to the status' all test results.
+  destroy the submenu.
+
+to test (font menus - heights followed by other):
+  create a test result about "font heights" and "has other choice"
+    and expecting "last choice starts with other".
+  create a submenu (font heights).
+  put the submenu's commands' last's name in a string called actual.
+  put the actual in the test result's actual value.
+  put the actual in the test result's expectation.
+  if the actual starts with "other",
+    put the test result's expectation in the test result's interpretation.
+  append the test result to the status' all test results.
+  destroy the submenu.
+
+to test (font menus - large heights are not wysiwyg):
+  create a test result about "font heights" and "1/2 Inch is not wysiwyg"
+    and expecting "1/4 Inch".
+  create a submenu (font heights).
+  get a command from the submenu given "1/2 Inch".
+  if the command is not nil,
+    describe the command's font's height returning a string called actual.
+  check the test result given the actual.
+  append the test result to the status' all test results.
+  destroy the submenu.
+
+to test (font menus - names followed by other):
+  create a test result about "font names" and "has other choice"
+    and expecting "last choice starts with other".
+  create a submenu (font names).
+  put the submenu's commands' last's name in a string called actual.
+  put the actual in the test result's actual value.
+  put the actual in the test result's expectation.
+  if the actual starts with "other",
+    put the test result's expectation in the test result's interpretation.
+  append the test result to the status' all test results.
+  destroy the submenu.
+
+to test (font menus - one height highlighted):
+  create a test result about "font heights" and "count highlighted item(s)"
+    and expecting "1".
+  create a submenu (font heights).
+  count highlighted items in the submenu returning a count.
+  put the count in a string called actual.
+  check the test result given the actual.
+  append the test result to the status' all test results.
+  destroy the submenu.
+
+to test (font menus - one name highlighted):
+  create a test result about "font names" and "count highlighted item(s)"
+    and expecting "1".
+  create a submenu (font names).
+  count highlighted items in the submenu returning a count.
+  put the count in a string called actual.
+  check the test result given the actual.
+  append the test result to the status' all test results.
+  destroy the submenu.
+
+to test (font menus - times new roman is wysiwyg):
+  create a test result about "font names" and "times new roman is wysiwyg"
+    and expecting "times new roman".
+  create a submenu (font names).
+  get a command from the submenu given "times new roman".
+  if the command is not nil,
+    put the command's font's name in a string called actual.
+  check the test result given the actual.
+  append the test result to the status' all test results.
+  destroy the submenu.
+
+to test (font menus - small heights are wysiwyg):
+  create a test result about "font heights" and "1/6 Inch is wysiwyg"
+    and expecting "1/6 Inch".
+  create a submenu (font heights).
+  get a command from the submenu given "1/6 Inch".
+  if the command is not nil,
+    describe the command's font's height returning a string called actual.
+  check the test result given the actual.
+  append the test result to the status' all test results.
+  destroy the submenu.
+
+to test (font menus - sorting by height):
+  create a test result about "font heights" and "sorting by height"
+    and expecting "1/8 inch, 1/8 inch, 1/8 inch, 2/9 inch, 2/9 inch, 1/4 inch, 1 inch, 1 inch".
+  add "1/8 Inch" to some string things called dummies.
+  add "1 Inch" to the dummies.
+  add "1/4 Inch" to the dummies.
+  add "1/8 Inch" to the dummies.
+  add "2/9 Inch" to the dummies.
+  add "1/8 Inch" to the dummies.
+  add "2/9 Inch" to the dummies.
+  add "1 inch" to the dummies.
+  sort the dummies (by height).
+  summarize the dummies returning a string called actual (tersely).
+  check the test result given the actual.
+  append the test result to the status' all test results.
+  destroy the dummies.
+
+to test (font menus):
+  test (font menus - get inches string).
+  test (font menus - get height).
+  test (font menus - get test number).
+  test (font menus - font names).
+  test (font menus - sorting by height).
+  test (font menus - one height highlighted).
+  test (font menus - one name highlighted).
+  test (font menus - current font name highlighted).
+  test (font menus - current font height highlighted).
+  test (font menus - at least five font names).
+  test (font menus - names followed by other).
+  test (font menus - heights followed by other).
+  test (font menus - courier new is wysiwyg).
+  test (font menus - times new roman is wysiwyg).
+  test (font menus - small heights are wysiwyg).
+  test (font menus - large heights are not wysiwyg).
+  test (font menus - heights are shown in current font).

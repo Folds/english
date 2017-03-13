@@ -1,4 +1,6 @@
-\ copyright © 2006 the osmosian order (3040)
+\ The portions of this file that are from CAL-3040
+\ are copyright 2006 by the Osmosian Order.
+\ The remainder is copyright 2014, 2017 by Jasper Paulsen.
 
 to add a nodette to a node and to the file system given a path:
   if the node is nil, exit.
@@ -21,9 +23,9 @@ to add a nodette to a node and to the file system given a path and a buffer:
 to adjust every nodette in a node:
   if the node is nil, exit.
   loop.
-  get a nodette from the node's nodettes.
-  if the nodette is nil, break.
-  adjust the nodette in the node.
+    get a nodette from the node's nodettes.
+    if the nodette is nil, break.
+    adjust the nodette in the node.
   repeat.
   limit the origin in the node.
 
@@ -59,13 +61,21 @@ to calculate a size of any selected nodettes in a node:
   put 0 into a current count.
   put the node's selected nodette count into a total count.
   loop.
-  get a nodette from the node's nodettes.
-  if the nodette is nil, exit.
-  if the nodette is not selected, repeat.
-  add 1 to the current count.
-  show status the current count then " of " then the total count then "...".
-  get another size given the nodette's path in the file system.
-  add the other size to the size.
+    get a nodette from the node's nodettes.
+    if the nodette is nil, exit.
+    if the nodette is not selected, repeat.
+    add 1 to the current count.
+    show status the current count then " of " then the total count then "...".
+    get another size given the nodette's path in the file system.
+    add the other size to the size.
+  repeat.
+
+to choose a nodette given some nodettes and a path:
+  void the nodette.
+  loop.
+    get the nodette from the nodettes.
+    if the nodette is nil, exit.
+    if the path starts with the nodette's path, exit.
   repeat.
 
 to close a node:
@@ -88,13 +98,13 @@ to copy any selected nodettes in a node returning a count:
   put 0 into a current count.
   put the node's selected nodette count into a total count.
   loop.
-  get a nodette from the node's nodettes.
-  if the nodette is nil, exit.
-  if the nodette is not selected, repeat.
-  add 1 to the current count.
-  show status the current count then " of " then the total count then "...".
-  copy the nodette in the file system.
-  add 1 to the count.
+    get a nodette from the node's nodettes.
+    if the nodette is nil, exit.
+    if the nodette is not selected, repeat.
+    add 1 to the current count.
+    show status the current count then " of " then the total count then "...".
+    copy the nodette in the file system.
+    add 1 to the count.
   repeat.
 
 to copy a nodette in the file system:
@@ -126,14 +136,14 @@ to cut any selected nodettes in a node returning a count:
   put the node's selected nodette count into a total count.
   put the node's first nodette into a next nodette.
   loop.
-  if the next nodette is nil, exit.
-  put the next nodette into a current nodette.
-  put the current nodette's next into the next nodette.
-  if the current nodette is not selected, repeat.
-  add 1 to the current count.
-  show status the current count then " of " then the total count then "...".
-  cut the current nodette in the node and in the file system.
-  add 1 to the count.
+    if the next nodette is nil, exit.
+    put the next nodette into a current nodette.
+    put the current nodette's next into the next nodette.
+    if the current nodette is not selected, repeat.
+    add 1 to the current count.
+    show status the current count then " of " then the total count then "...".
+    cut the current nodette in the node and in the file system.
+    add 1 to the count.
   repeat.
 
 to cut a nodette in a node and in the file system:
@@ -181,9 +191,9 @@ to decide if a nodette is visible in a node:
 to decide if something is selected in a node:
   if the node is nil, say no.
   loop.
-  get a nodette from the node's nodettes.
-  if the nodette is nil, say no.
-  if the nodette is selected, say yes.
+    get a nodette from the node's nodettes.
+    if the nodette is nil, say no.
+    if the nodette is selected, say yes.
   repeat.
 
 to decide if a spot is in a node:
@@ -236,13 +246,53 @@ to deselect the nodettes in a node:
   put the node's caret into the node's anchor.
   snapshot the node's nodettes.
 
+to destutter a path:
+  \ assumes that the path ends with "\",
+  \ so it does not need to check whether the path
+  \ ends with "\." or "\..".
+  if the path does not contain ".\", exit.
+  replace "\.\" with "\" in the path (throughout).
+  if the path starts with ".\",
+    remove the first two bytes from the path.
+  loop.
+    if the path does not contain "\..\", exit.
+    put the path's length in a length.
+    destutter the path (remove a back-and-forth).
+    put the path's length in another length.
+    if the length is the other length, exit.
+  repeat.
+  \ does not remove "..\" from the beginning of a path,
+  \ because there is no higher level to go back to.
+
+to destutter a path (remove a back-and-forth):
+  if the path is "", exit.
+  find a substring in the path given "\..\".
+  if the substring is "", exit.
+  if the substring's first is the path's first, exit.
+  put the substring's first minus the path's first plus 1 into a byte#.
+  \ the byte# is the position of the substring's leading "\" within the path.
+  extract a drive from the path.
+  if the drive's last minus the drive's first plus 1 is the byte#,
+    \ the drive's trailing "\" is the substring's leading "\".
+    remove leading bytes from the path given the byte# plus 3;
+    exit.
+  loop.
+    if the substring's first is the path's first, exit.
+    subtract 1 from the substring's first.
+    if the substring's first's target is the backslash byte,
+      add 1 to the substring's first;
+      remove bytes from the path given the substring;
+      exit.    
+  repeat.
+  put the path's last minus the substring's last into a length called suffix length.
+
 to draw any visible nodettes in a node:
   if the node is nil, exit.
   loop.
-  get a nodette from the node's nodettes.
-  if the nodette is nil, exit.
-  if the nodette is not visible in the node, repeat.
-  draw the nodette in the node.
+    get a nodette from the node's nodettes.
+    if the nodette is nil, exit.
+    if the nodette is not visible in the node, repeat.
+    draw the nodette in the node.
   repeat.
 
 to draw a node:
@@ -280,10 +330,10 @@ to dump a buffer into another buffer:
   slap a substring on the buffer.
   put the substring's first plus 16 minus 1 into the substring's last.
   loop.
-  if the substring's first is greater than the buffer's last, break.
-  if the substring's last is greater than the buffer's last, put the buffer's last into the substring's last.
-  dump the substring of the buffer into the other buffer.
-  move the substring given 16.
+    if the substring's first is greater than the buffer's last, break.
+    if the substring's last is greater than the buffer's last, put the buffer's last into the substring's last.
+    dump the substring of the buffer into the other buffer.
+    move the substring given 16.
   repeat.
 
 to dump a substring of a buffer into another buffer:
@@ -303,22 +353,22 @@ to dump a substring of a buffer into another buffer (address bytes):
 to dump a substring of a buffer into another buffer (ascii bytes):
   slap another substring on the substring.
   loop.
-  if the other substring is blank, break.
-  put the other substring's first's target into a byte.
-  if the byte is not printable, put the period byte into the byte.
-  if the byte is the space byte, put the period byte into the byte.
-  append the byte to the other buffer.
-  add 1 to the other substring's first.
+    if the other substring is blank, break.
+    put the other substring's first's target into a byte.
+    if the byte is not printable, put the period byte into the byte.
+    if the byte is the space byte, put the period byte into the byte.
+    append the byte to the other buffer.
+    add 1 to the other substring's first.
   repeat.
 
 to dump a substring of a buffer into another buffer (hex bytes):
   slap another substring on the substring.
   loop.
-  if the other substring is blank, break.
-  convert the other substring's first's target to a nibble string.
-  append the nibble string to the other buffer.
-  append the space byte to the other buffer.
-  add 1 to the other substring's first.
+    if the other substring is blank, break.
+    convert the other substring's first's target to a nibble string.
+    append the nibble string to the other buffer.
+    append the space byte to the other buffer.
+    add 1 to the other substring's first.
   repeat.
   append the space byte to the other buffer.
   put 16 minus the substring's length times 3 into a count.
@@ -348,17 +398,17 @@ to find a nodette given a node and a spot:
   void the nodette.
   if the node is nil, exit.
   loop.
-  get the nodette from the node's nodettes.
-  if the nodette is nil, exit.
-  if the spot is in the nodette, exit.
+    get the nodette from the node's nodettes.
+    if the nodette is nil, exit.
+    if the spot is in the nodette, exit.
   repeat.
 
 to find a nodette given some nodettes and a designator:
   void the nodette.
   loop.
-  get the nodette from the nodettes.
-  if the nodette is nil, exit.
-  if the nodette's designator is the designator, exit.
+    get the nodette from the nodettes.
+    if the nodette is nil, exit.
+    if the nodette's designator is the designator, exit.
   repeat.
 
 to find a nodette in a node given a spot (limiting):
@@ -382,11 +432,11 @@ to focus on a nodette in a node:
 to get some selected path links given a node:
   if the node is nil, exit.
   loop.
-  get a nodette from the node's nodettes.
-  if the nodette is nil, exit.
-  if the nodette is not selected, repeat.
-  create a path link given the nodette's path.
-  append the path link to the selected path links.
+    get a nodette from the node's nodettes.
+    if the nodette is nil, exit.
+    if the nodette is not selected, repeat.
+    create a path link given the nodette's path.
+    append the path link to the selected path links.
   repeat.
 
 to get the status for a node:
@@ -538,16 +588,16 @@ to handle an event given a node (key down - up-arrow key):
   show the desktop with status.
 
 to handle an event given a node (key down):
-  if the event's key is the backspace key, handle the event given the node (key down - backspace key); exit.
-  if the event's key is the delete key, handle the event given the node (key down - delete key); exit.
-  if the event's key is the enter key, handle the event given the node (key down - enter key); exit.
+  if the event's key is the backspace key,  handle the event given the node (key down - backspace key); exit.
+  if the event's key is the delete key,     handle the event given the node (key down - delete key); exit.
+  if the event's key is the enter key,      handle the event given the node (key down - enter key); exit.
   if the event's key is the down-arrow key, handle the event given the node (key down - down-arrow key); exit.
-  if the event's key is the end key, handle the event given the node (key down - end key); exit.
-  if the event's key is the escape key, handle the event given the node (key down - escape key); exit.
-  if the event's key is the home key, handle the event given the node (key down - home key); exit.
-  if the event's key is the page-down key, handle the event given the node (key down - page-down key); exit.
-  if the event's key is the page-up key, handle the event given the node (key down - page-up key); exit.
-  if the event's key is the up-arrow key, handle the event given the node (key down - up-arrow key); exit.
+  if the event's key is the end key,        handle the event given the node (key down - end key); exit.
+  if the event's key is the escape key,     handle the event given the node (key down - escape key); exit.
+  if the event's key is the home key,       handle the event given the node (key down - home key); exit.
+  if the event's key is the page-down key,  handle the event given the node (key down - page-down key); exit.
+  if the event's key is the page-up key,    handle the event given the node (key down - page-up key); exit.
+  if the event's key is the up-arrow key,   handle the event given the node (key down - up-arrow key); exit.
 
 to handle an event given a node (left click - modified):
   snapshot the node's nodettes.
@@ -716,12 +766,7 @@ to handle sort nodettes given a node and a string:
 
 to initialize the finder:
   put the temp path then "the " then the module's name then " clipboard\" into the finder's clipboard.
-  put the node height and the node height into the finder's grid.
-  put 1/4 inch into the finder's margin.
-  put the pad's box into a box.
-  put the box's height divided by the node height times the node height into a height.
-  put the box's top plus the height into the box's bottom.
-  put the box into the finder's box.
+  resize the finder.
 
 to limit the origin in a node:
   if the node is nil, exit.
@@ -779,20 +824,22 @@ to open a node (file as text):
 to open a node (file):
   read the node's path into a buffer.
   if the i/o error is not blank, exit.
-  if the buffer is document-format, open the node given the buffer (file as document); exit.
-  if the buffer is text-format, open the node given the buffer (file as text); exit.
+  if the buffer is document-format,
+    open the node given the buffer (file as document); exit.
+  if the buffer is text-format,
+    open the node given the buffer (file as text); exit.
   open the node given the buffer (file as dump).
 
 to open a node (root):
-  put the accent byte into a byte.
+  put the accent byte into an alleged drive byte.
   loop.
-  add 1 to the byte.
-  if the byte is greater than the little-z byte, break.
-  if the byte is not any valid drive, repeat.
-  put the byte then ":\" into a path.
-  create a nodette given the path.
-  append the nodette to the node's nodettes.
-  put the node into the nodette's parent node.
+    add 1 to the alleged drive byte.
+    if the alleged drive byte is greater than the little-z byte, break.
+    if the alleged drive byte is not any valid drive, repeat.
+    put the alleged drive byte then ":\" into a path.
+    create a nodette given the path.
+    append the nodette to the node's nodettes.
+    put the node into the nodette's parent node.
   repeat.
   adjust the node.
 
@@ -814,14 +861,29 @@ to open a node given a buffer (file as text):
 
 to open a node given a path:
   if the node is nil, exit.
+  if the node's kind is "root",
+    open the node given the path (from root); exit.
   extract a directory from the path.
   if the directory is not blank, open the node given the directory.
   extract a designator from the path.
   find a nodette given the node's nodettes and the designator.
-  if the nodette is nil, put "directory or file does not exist" into the i/o error; exit.
+  if the nodette is nil,
+    put "directory or file does not exist" into the i/o error; exit.
   open the nodette.
   focus on the nodette in the node.
   if the i/o error is blank, put the nodette into the node.
+
+to open a node given a path (from root):
+  if the node's nodettes are empty,
+    open the node (root).
+  destutter the path.
+  loop.
+    choose a nodette given the node's nodettes and the path.
+    if the nodette is nil, break.
+    open the nodette.    
+    focus on the nodette in the node.
+    put the nodette into the node.
+  repeat.
 
 to paste any copied items into a node and into the file system returning a count:
   put 0 into the count.
@@ -831,14 +893,14 @@ to paste any copied items into a node and into the file system returning a count
   put the node's first selected nodette into a first selected nodette.
   deselect the nodettes in the node.
   loop.
-  get an item from the finder's clipboard.
-  if the item is not found, exit.
-  add 1 to the current count.
-  if the user does not want to overwrite the item in the node, repeat.
-  show status the current count then " of " then the total count then "...".
-  paste the item into the node and into the file system before the first selected nodette.
-  if the i/o error is not blank, repeat.
-  add 1 to the count.
+    get an item from the finder's clipboard.
+    if the item is not found, exit.
+    add 1 to the current count.
+    if the user does not want to overwrite the item in the node, repeat.
+    show status the current count then " of " then the total count then "...".
+    paste the item into the node and into the file system before the first selected nodette.
+    if the i/o error is not blank, repeat.
+    add 1 to the count.
   repeat.
 
 to paste an item into a node and into the file system before a nodette:
@@ -870,35 +932,35 @@ to put a node's first selected nodette into a nodette:
   void the nodette.
   if the node is nil, exit.
   loop.
-  get the nodette from the node's nodettes.
-  if the nodette is nil, break.
-  if the nodette is selected, exit.
+    get the nodette from the node's nodettes.
+    if the nodette is nil, break.
+    if the nodette is selected, exit.
   repeat.
 
 to put a node's first visible nodette into a nodette:
   void the nodette.
   if the node is nil, exit.
   loop.
-  get the nodette from the node's nodettes.
-  if the nodette is nil, break.
-  if the nodette is visible in the node, exit.
+    get the nodette from the node's nodettes.
+    if the nodette is nil, break.
+    if the nodette is visible in the node, exit.
   repeat.
 
 to put a node's last selected nodette into a nodette:
   void the nodette.
   if the node is nil, exit.
   loop.
-  get the nodette from the node's nodettes (backwards).
-  if the nodette is nil, break.
-  if the nodette is selected, exit.
+    get the nodette from the node's nodettes (backwards).
+    if the nodette is nil, break.
+    if the nodette is selected, exit.
   repeat.
 
 to put a node's root node into another node:
   privatize the node.
   loop.
-  if the node is nil, break.
-  if the node's parent node is nil, break.
-  put the node's parent node into the node.
+    if the node is nil, break.
+    if the node's parent node is nil, break.
+    put the node's parent node into the node.
   repeat.
   put the node into the other node.
 
@@ -906,9 +968,9 @@ to put a node's selected nodette count into a count:
   put 0 into the count.
   if the node is nil, exit.
   loop.
-  get a nodette from the node's nodettes.
-  if the nodette is nil, exit.
-  if the nodette is selected, add 1 to the count.
+    get a nodette from the node's nodettes.
+    if the nodette is nil, exit.
+    if the nodette is selected, add 1 to the count.
   repeat.
 
 to remove any selected nodettes in a node and in the file system returning a count:
@@ -918,15 +980,15 @@ to remove any selected nodettes in a node and in the file system returning a cou
   put the node's selected nodette count into a total count.
   put the node's first nodette into a next nodette.
   loop.
-  if the next nodette is nil, exit.
-  put the next nodette into a current nodette.
-  put the current nodette's next into the next nodette.
-  if the current nodette is not selected, repeat.
-  add 1 to the current count.
-  show status the current count then " of " then the total count then "...".
-  remove the current nodette in the node and in the file system.
-  if the i/o error is not blank, repeat.
-  add 1 to the count.
+    if the next nodette is nil, exit.
+    put the next nodette into a current nodette.
+    put the current nodette's next into the next nodette.
+    if the current nodette is not selected, repeat.
+    add 1 to the current count.
+    show status the current count then " of " then the total count then "...".
+    remove the current nodette in the node and in the file system.
+    if the i/o error is not blank, repeat.
+    add 1 to the count.
   repeat.
 
 to remove a nodette in a node and in the file system:
@@ -950,6 +1012,14 @@ to rename a nodette in a node and in the file system given a path:
   put the nodette's designator into the nodette's designator w/o backslash.
   remove any trailing backslash from the nodette's designator w/o backslash.
   extract the nodette's extension from the path.
+
+to resize the finder:
+  put the node height and the node height into the finder's grid.
+  put 1/4 inch into the finder's margin.
+  put the pad's box into a box.
+  put the box's height divided by the node height times the node height into a height.
+  put the box's top plus the height into the box's bottom.
+  put the box into the finder's box.
 
 to reverse a node:
   if the node is nil, exit.
@@ -991,13 +1061,13 @@ to scroll a node given an event:
   if the node is nil, exit.
   find a sector given the finder's grid and the event's spot.
   loop.
-  if the mouse's right button is up, exit.
-  find another sector given the finder's grid and the mouse's spot.
-  get a difference between the other sector and the sector.
-  if the difference is 0, repeat.
-  scroll the node given the difference.
-  show the desktop.
-  add the difference to the sector.
+    if the mouse's right button is up, exit.
+    find another sector given the finder's grid and the mouse's spot.
+    get a difference between the other sector and the sector.
+    if the difference is 0, repeat.
+    scroll the node given the difference.
+    show the desktop.
+    add the difference to the sector.
   repeat.
 
 to scroll a node up one page:
@@ -1033,11 +1103,11 @@ to select some nodettes given a node selection:
   subtract the tpp from the box's bottom.
   normalize the box.
   loop.
-  get a nodette from the nodettes.
-  if the nodette is nil, exit.
-  put the nodette's previously selected flag into the nodette's selected flag.
-  if the nodette's box is not touching the box, repeat.
-  reverse the nodette's selected flag.
+    get a nodette from the nodettes.
+    if the nodette is nil, exit.
+    put the nodette's previously selected flag into the nodette's selected flag.
+    if the nodette's box is not touching the box, repeat.
+    reverse the nodette's selected flag.
   repeat.  
 
 some selected path links are some path links.
@@ -1047,10 +1117,10 @@ to set the caret and anchor in a node using the selected nodettes:
   put the node's last selected nodette into the node's caret.
   put the node's caret into a nodette.
   loop.
-  if the nodette is nil, exit.
-  if the nodette is not selected, exit.
-  put the nodette into the node's anchor.
-  put the nodette's previous into the nodette.
+    if the nodette is nil, exit.
+    if the nodette is not selected, exit.
+    put the nodette into the node's anchor.
+    put the nodette's previous into the nodette.
   repeat.
 
 to set a node to read-only mode:
@@ -1091,12 +1161,12 @@ to sort some nodettes by designator:
   sort the left nodettes by designator.
   sort the right nodettes by designator.
   loop.
-  put the left nodettes' first into a left nodette.
-  put the right nodettes' first into a right nodette.
-  if the left nodette is nil, append the right nodettes to the nodettes; exit.
-  if the right nodette is nil, append the left nodettes to the nodettes; exit.
-  if the left nodette's designator w/o backslash is greater than the right nodette's designator w/o backslash, move the right nodette from the right nodettes to the nodettes; repeat.
-  move the left nodette from the left nodettes to the nodettes.
+    put the left nodettes' first into a left nodette.
+    put the right nodettes' first into a right nodette.
+    if the left nodette is nil, append the right nodettes to the nodettes; exit.
+    if the right nodette is nil, append the left nodettes to the nodettes; exit.
+    if the left nodette's designator w/o backslash is greater than the right nodette's designator w/o backslash, move the right nodette from the right nodettes to the nodettes; repeat.
+    move the left nodette from the left nodettes to the nodettes.
   repeat.
 
 to sort some nodettes by extension:
@@ -1105,12 +1175,12 @@ to sort some nodettes by extension:
   sort the left nodettes by extension.
   sort the right nodettes by extension.
   loop.
-  put the left nodettes' first into a left nodette.
-  put the right nodettes' first into a right nodette.
-  if the left nodette is nil, append the right nodettes to the nodettes; exit.
-  if the right nodette is nil, append the left nodettes to the nodettes; exit.
-  if the left nodette's extension is greater than the right nodette's extension, move the right nodette from the right nodettes to the nodettes; repeat.
-  move the left nodette from the left nodettes to the nodettes.
+    put the left nodettes' first into a left nodette.
+    put the right nodettes' first into a right nodette.
+    if the left nodette is nil, append the right nodettes to the nodettes; exit.
+    if the right nodette is nil, append the left nodettes to the nodettes; exit.
+    if the left nodette's extension is greater than the right nodette's extension, move the right nodette from the right nodettes to the nodettes; repeat.
+    move the left nodette from the left nodettes to the nodettes.
   repeat.
 
 to sort some nodettes by kind:
@@ -1119,13 +1189,23 @@ to sort some nodettes by kind:
   sort the left nodettes by kind.
   sort the right nodettes by kind.
   loop.
-  put the left nodettes' first into a left nodette.
-  put the right nodettes' first into a right nodette.
-  if the left nodette is nil, append the right nodettes to the nodettes; exit.
-  if the right nodette is nil, append the left nodettes to the nodettes; exit.
-  if the left nodette's kind is greater than the right nodette's kind, move the right nodette from the right nodettes to the nodettes; repeat.
-  move the left nodette from the left nodettes to the nodettes.
+    put the left nodettes' first into a left nodette.
+    put the right nodettes' first into a right nodette.
+    if the left nodette is nil, append the right nodettes to the nodettes; exit.
+    if the right nodette is nil, append the left nodettes to the nodettes; exit.
+    if the left nodette's kind is greater than the right nodette's kind, move the right nodette from the right nodettes to the nodettes; repeat.
+    move the left nodette from the left nodettes to the nodettes.
   repeat.
+
+to test (the finder - destutter a path):
+  create a test result about "the finder" and "destutter a path"
+    and expecting "fred\joe\..jim.txt".
+  put ".\fred\jack\..\joe\.\.\bill\..\..jim.txt" in a path called actual.
+  destutter the actual.
+  stash the test result given the actual.
+
+to test (the finder):
+  test (the finder - destutter a path). 
 
 a total count is a count.
 
@@ -1134,12 +1214,12 @@ to track a node given an event:
   if the event is nil, exit.
   clear a node selection.
   loop.
-  if a flag is set, show the desktop with status.
-  if the mouse's left button is up, exit.
-  put the mouse's spot into a spot.
-  autoscroll the node given the spot and the flag.
-  extend any selection in the node given the spot.
-  if the node's selection is the node selection, repeat.
-  set the flag.
-  put the node's selection into the node selection.
+    if a flag is set, show the desktop with status.
+    if the mouse's left button is up, exit.
+    put the mouse's spot into a spot.
+    autoscroll the node given the spot and the flag.
+    extend any selection in the node given the spot.
+    if the node's selection is the node selection, repeat.
+    set the flag.
+    put the node's selection into the node selection.
   repeat.

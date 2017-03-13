@@ -1,0 +1,605 @@
+\ copyright © 2014, 2017 by Jasper Paulsen.
+
+This file lists issues that have been demonstrably fixed
+(but not yet automatically regression-tested)
+in the Plain English programming environment.
+All of these fixes have been fully demonstrated.
+The Plain English programming environment is called Cal.
+Currently, the file has a .txt extension,
+so that it will not be compiled into the executable.
+
+The list of outstanding issues is in issues.txt.
+Done issues.txt explains how the issues are rated.
+                It has issues that are marked won't do,
+                and fixes that have been demonstrated
+                    and automatically regression-tested.
+
+\ ======================================
+   
+The following requests have been completed.
+The program's change log is implicit
+in the source code repository's change log.
+These items should occasionally be moved to fixed issues.txt.
+
+\ ======================================
+   
+The following requests have been demonstrated, and have test plan(s),
+but have not yet been tested.
+
+070.  Don't hide programs outside of the program's window.
+  Currently, the program grabs a screenshot when it starts.
+  The screenshot includes the full screen,
+  not just the area the program is supposed to be in.
+  This means that other programs are hidden
+  whenever Cal is the active window.
+  The benefit is important -- most Windows and Linux programmers
+    alternate working in their IDEs and doing other things.
+  The difficulty is hard -- it should not require much code,
+    but it is not obvious which code needs to be fixed.
+  The status is demonstrated.
+  The audiences are Windows programmers and Linux programmers.
+  Demoing would be easy.  Windows programmers and Linux programmers
+     would demo it all the time, but some full-screen users would only demo it
+     when Cal did not occupy the full screen
+     (or when they use two side-by-side instances of Cal).
+  Testing would be hard.  The test would need to check that
+     the size metadata of the bitmap used by the main window
+     was consistent with the intended size of the main window.
+     This would use the bitmapinfoheader feature of the Win32 API.
+  Requested by Jasper Paulsen on March 7, 2014.
+
+\ ======================================
+   
+The following requests have been demonstrated,
+but do not have test plans yet.
+
+146.  Fix crashing bug in writer's Font Name… menu item.
+  The program crashes (Windows is OK)
+  immediately upon trying to clicking the Font Name…
+  menu item, when the current tab is in "writer" mode.
+  The submenu of available fonts does not appear.
+  The "editor" mode does not have this problem.
+  Benefit.   Critical.  
+  Status.    Demonstrated fix.
+  Audience.  Users of the writer.
+  Implementation difficulty.  Medium.
+  Demoing difficulty.  Easy.
+  Testing difficulty.  Medium.
+  Requested by Jasper Paulsen on March 8, 2017.
+
+147.  Fix crashing bug in writer's Font Height… menu item.
+  The program crashes (Windows is OK)
+  immediately upon trying to clicking the Font Height…
+  menu item, when the current tab is in "writer" mode.
+  The submenu of available font heights does not appear.
+  The "editor" mode does not have this problem.
+  Benefit.   Critical.  
+  Status.    Demonstrated fix.
+  Audience.  Users of the writer.
+  Implementation difficulty.  Medium.
+  Demoing difficulty.  Easy.
+  Testing difficulty.  Medium.
+  Requested by Jasper Paulsen on March 8, 2017.
+
+118.  A command-line version of the compiler.
+  Benefit:  Major.  Would allow a programmer to automatically
+            trigger a build upon every commit to a source-code
+            repository.
+  Implementation difficulty:  Hard.  Would require changing
+            compiler's output location from inside CAL
+            to either nowhere, or Standard Error.
+            Might require not opening the GUI.  Would require
+            the program returning 0 on success, 1 on failure.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Medium.
+  Audience:  Programmers.
+  Requested by David Zemon on March 18, 2016.
+            http://forums.parallax.com/discussion/comment/1369232/#Comment_1369232
+
+119.  Make command-line compiler return 0 on success.
+  Benefit:  Major.  Would allow automated build tools
+            to include CAL in a pipeline.
+  Implementation difficulty:  Easy.  Need to modify the compiler's
+            "to add and compile the initialize before run
+              and run and finalize after run routine"
+  Status:   Already done.
+  Demoing difficulty:  Hard.
+  Testing difficulty:  Medium.
+  Audience:  Programmers.
+  Requested by Jasper Paulsen on March 1, 2017.
+
+120.  Make command-line compiler return 1 on failure.
+  Benefit:  Major.  Would allow automated build tools
+            to include CAL in a pipeline.
+  Implementation difficulty:  Easy.  Need to modify the compiler's
+            "to add and compile the initialize before run
+              and run and finalize after run routine"
+  Demoing difficulty:  Hard.
+  Testing difficulty:  Medium.
+  Audience:  Programmers.
+  Requested by Jasper Paulsen on March 1, 2017.
+
+135.  Add a command-line option to just run all the tests.
+  0 = all tests passed.
+  Return a positive number if any test fails.
+  (Cannot simply return the number of failed tests,
+   because a return status of 259 is reserved by the kluge
+   to indicate that the process or thread is still running.)
+  Benefit:  Major.  This would allow automated
+            build verification tests in a build pipeline.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Medium.
+  Audience:  Windows and Linux programmers.
+  Requested by Jasper Paulsen on March 1, 2017.
+
+121.  Allow sending output to Standard Error.
+  Benefit:  Major.  Would allow other IDEs to make use of
+            CAL's compiler error messages.
+  Implementation difficulty:  Medium.  Would require using
+            the Windows API to open and close Standard Error.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Medium.
+  Audience:  Programmers.
+  Requested by Jasper Paulsen on March 1, 2017.
+
+136:  Output test failure messages to StdErr when tests requested.
+  Use the same infrastructure as the compile failure messages.
+  Only do this when testing is requested on the command line.
+  Benefit:  Medium.  This would make it easier to interpret
+            build verification test results in a build pipeline.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Medium.
+  Audience:  Windows and Linux programmers.
+  Requested by Jasper Paulsen on March 1, 2017.
+
+122.  Make compiler errors sent to StdErr use a standard format.
+  For example, the format for specifying the problem,
+  the problematic source file, and the problematic line
+  used by GCC.  (The text of the problem specification itself
+  can still be in Plain English.)
+  Benefit:  Major.  Would allow other IDEs to make use of
+            CAL's compiler error messages.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Medium.
+  Audience:  Programmers.
+  Requested by Jasper Paulsen on March 1, 2017.
+
+144.  Allow viewing result of running a program.
+  Add a menu item to review the run's result.
+  259 means the program is still active.
+  If the recently run program has finished, show its return code.
+  Benefit:  Minor.  Helps demonstrate command-line compiler return code.
+  Implementation difficulty:  Hard.
+  Demoing difficulty:  Easy.
+  Testing difficulty:  Medium.
+  Audience:  Programmers.
+  Requested by Jasper Paulsen on March 6, 2017.
+
+139.  Allow requesting a /folder that includes ..\
+  Benefit:  Minor.
+  Status:   Demonstrated.
+  Implementation difficulty:  Easy.
+  Demoing difficulty:  Easy.
+  Testing difficulty:  Hard.
+  Audience:  Windows and Linux programmers.
+  Requested by Jasper Paulsen on March 3, 2017.
+  
+140.  Allow requesting a /folder that includes .\
+  Benefit:  Minor.
+  Status:   Demonstrated.
+  Implementation difficulty:  Easy.
+  Demoing difficulty:  Easy.
+  Testing difficulty:  Hard.
+  Audience:  Windows and Linux programmers.
+  Requested by Jasper Paulsen on March 3, 2017.
+
+141.  Allow requesting a /file that includes ..\
+  Benefit:  Medium.
+  Implementation difficulty:  Easy.
+  Demoing difficulty:  Easy.
+  Testing difficulty:  Hard.
+  Audience:  Windows and Linux programmers.
+  Requested by Jasper Paulsen on March 3, 2017.
+  
+142.  Allow requesting a /file that includes .\
+  Benefit:  Medium.
+  Implementation difficulty:  Easy.
+  Demoing difficulty:  Easy.
+  Testing difficulty:  Hard.
+  Audience:  Windows and Linux programmers.
+  Requested by Jasper Paulsen on March 3, 2017.
+
+143.  A command-line way to call the "list" mode of the compiler.
+  Benefit:  Minor.
+  Implementation difficulty:  Easy 
+           (once there is a command-line version of the compiler.)
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Medium.
+  Requested by Jasper Paulsen on March 4, 2017.
+
+067.  Add F3 as a shortcut for find next.
+  Audience:  Windows programmers.
+  Status:  Demonstrated.
+  Benefit:  Minor.
+  Implementation difficulty:  Easy.
+  Demoing difficulty:  Easy.
+  Testing difficulty:  Medium.
+  Requested by Jasper Paulsen on March 9, 2014.
+
+068. Add F5 as a shortcut for run (from the editor window).
+  Audience:  Windows programmers.
+  Status:  Demonstrated.
+  Benefit:  Minor.
+  Implementation difficulty:  Trivial.
+  Demoing difficulty:  Easy.
+  Testing difficulty:  Medium.
+  Requested by Jasper Paulsen on March 9, 2014.
+  Benefit:  Very important
+
+096.  Enable minimize on Windows kluges, but not on WINE kluges.
+  Benefit:  Important.
+  Audience:  Windows programmers.
+  Status:  Partially demonstrated.
+    (Demonstrated on WINE, but not on Windows.)
+  Implementation difficulty:  Easy -- if and only if
+    it is possible to distinguish Windows kluges from WINE kluges.
+  Demoing difficulty:  Hard.
+  Testing difficulty:  Profound.
+  Requested by Jasper Paulsen on March 17, 2014.
+
+089.  Allow the maximum number of displayed regression tests to depend
+  only on the amount of room available for displaying them.
+  Specifically, do not require the corresponding menu handler
+  to be hardcoded in the menu handler switch.
+  Audience: Programmers.
+  Status:   Implemented.
+  Benefit:  Minor.
+  Implementation difficulty:  Hard.
+  Demoing difficulty:  Easy, after there are many tests that all pass.
+  Testing difficulty:  Medium.
+  Requested by Jasper Paulsen on March 12, 2014.
+
+090.  Allow user to copy a test result to the clipboard by clicking on it.
+  Audience: Programmers.
+  Status:   Demonstrated.
+  Benefit:  Important.  This allows using the regression test feature
+     to output text to the clipboard, which means run-time values can
+     be copied into code sources for reading and munging by the user.
+     In turn, this makes it much easier to fix many bugs.
+  Implementation difficulty:  Medium.
+  Testing difficulty:  Medium.
+  Requested by Jasper Paulsen on March 12, 2014.
+
+013.  Allow changing the main window size and location at run-time.
+  Currently, the main window is fixed at the top-left corner of the screen.
+  Currently, the main window's size is fixed.
+  Currently, the program does not have mouse cursors available
+  for changing widths, changing heights, nor dragging window corners.
+  Status:  Demonstrated.
+  Audience:  Windows programmers and Linux programmers.
+  Benefit:  Important.  It will allow users to adjust the size of Cal
+            depending on how important their distractions from Cal are.
+  Implementation difficulty:  Hard.
+  Demoing difficulty:  Easy.
+  Testing difficulty:  Hard.
+  Requested by Jasper Paulsen on March 7, 2014.
+
+080.  Keep track of the user's most recent choice
+  of any "Other font height" that is not one of the standard font heights.
+  Audience:  Windows programmers and Linux programmers.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Easy.
+  Testing difficulty:  Medium.
+  Benefit:  Minor.
+  Status: Demonstrated.
+  Requested by Jasper Paulsen on March 12, 2014.
+
+081.  If the user's most recent choice of non-standard
+  "Other font height" is not otherwise listed in the font height submenu,
+  include it.
+  Audience:  Windows programmers and Linux programmers.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Medium.
+  Benefit:  Minor.
+  Status: Demonstrated.
+  Requested by Jasper Paulsen on March 12, 2014.
+
+082.  If the current font height (in the editor or writer pad)
+  is not otherwise listed in the font height submenu, include it.
+  Audience:  Windows programmers and Linux programmers.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Medium.
+  Benefit:  Minor.
+  Status: Demonstrated.
+  Requested by Jasper Paulsen on March 12, 2014.
+
+078.  Allow font names to be added dynamically to the menus.
+  Specifically, do not require the corresponding menu handler
+  to be hardcoded in the menu handler switch.
+  Audience:  Windows programmers and Linux programmers.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Medium.
+  Benefit:  Minor.
+  Status: Demonstrated.
+  Requested by Jasper Paulsen on March 12, 2014.
+
+073.  Keep track of the user's most recent choice
+  of any "Other font name" that is not one of the standard fonts.
+  Audience:  Windows programmers and Linux programmers.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Medium.
+  Benefit:  Minor.
+  Status: Demonstrated.
+  Requested by Jasper Paulsen on March 12, 2014.
+
+074.  If the user's most recent choice of non-standard
+  "Other font name" is not otherwise listed in the font name submenu,
+  include it.
+  Audience:  Windows programmers and Linux programmers.
+  Implementation difficulty:  Trivial.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Medium.
+  Benefit:  Minor.
+  Status: Demonstrated.
+  Requested by Jasper Paulsen on March 12, 2014.
+
+011.  Allow the menus (and status bar) to fold to two rows.
+  Currently, Cal's menus and status bar need about 1000 pixels of width
+  at the top of the screen.  This forces Cal to be at least 1000 pixels wide.
+  (The width is approximate, because Cal does not check whether Windows
+   has more than 96 pixels per inch.)
+  Audience:  Windows programmers and Linux programmers.
+  Benefit:  Important.  Most users would need this feature
+    to be able to put two instances of Cal side-by-side.
+  Implementation difficulty:  Hard.
+  Demoing difficulty:  Hard (without the ability
+    to adjust the main window's width at run time);
+    Easy (if the user can adjust the main window's width at run time).
+  Testing difficulty: Medium.
+  Status:  Demonstrated.
+  Requested by Jasper Paulsen on March 7, 2014.
+
+019.  Allow the "Run" feature to launch the new instance of Cal
+next to the first instance, instead of covering the first instance.
+  Audience:  programmers.
+  Benefit:  Probably important.  This would allow simultaneously
+    using the draft program, and viewing the relevant source code.
+  Status: Demonstrated.
+  Requested by Jasper Paulsen on March 7, 2014.
+
+032.  Adjust the number of tabs, depending on the initial width of the main window.
+  Status: Demonstrated.
+  Audience:  Windows programmers and Linux programmers.
+  Implementation Difficulty:  easy.
+  Demoing difficulty:  easy.
+  Testing difficulty:  medium.
+  Benefit:  Minor.
+  Requested by Jasper Paulsen on March 7, 2014.
+
+038.  Add a vertical scroll bar.
+  Currently, the user can move vertically in a document by panning
+    (with the mouse), or by using the up and down arrow keys,
+    or by using the page up and page down keys.
+  None of these features indicate how much more document
+    is above or below the currently shown region.
+  None of these features allow the user to quickly
+    go to a particular place in the document.
+  Panning requires one click-and-drag of the viewable height,
+    plus another drag of the viewable height,
+    per page of text being panned.
+  Audience -- Windows programmers.
+     Windows users expect to be able to use the scroll bar to:
+     quickly find a place in the document,
+     quickly scroll through then entire document,
+     fine-tune their location in the document.
+  The benefit is important -- this feature will allow people to
+     use large documents without needing Ctrl-F
+     every time they want to find something.
+  The status is a demonstrated.
+  The implementation difficulty is hard.
+     A scroll bar has many sub-features,
+     all of which need to be implemented similarly to a standard.
+     The relevant standard is Windows' implementation of vertical
+     scroll bars.  Each individual sub-feature is easy.
+  The testing difficulty is hard, for the same reasons
+     as the implemenation difficulty.
+     Each individual sub-feature has a medium testing difficulty.
+  The demoing difficulty is medium.
+     Each individual sub-feature can be demoed easily.
+  This feature will be much easier to implement
+     once name spaces are available.
+  Requested by Jasper Paulsen on March 7, 2014.
+
+102.  Add a command line option to choose a fixed-width font.
+  If the system has "Courier New" available, use it.
+  Benefit:  Very important -- many potential users did not even try
+            the system, because the first font they saw was the
+            old default font, and they did not see how to change the font.
+  Audience:  Windows programmers and Linux programmers.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Hard.
+  Testing difficulty:  Medium.
+  Status:  Demonstrated.
+  Requested by Jasper Paulsen on April 11, 2014.
+
+112.  Enable vertical mouse-wheel scrolling in editor panes.
+  Make using the mouse-wheel similar to dragging the scrollbar cab.
+  Status:  Demonstrated.
+  Benefit: Important.  Most users of web browsers rely
+           on mouse-wheel scrolling.
+  Implementation difficulty:  Hard.
+           Requires handling another Windows event. (#522.)
+  Demoing difficulty:  Easy.
+  Testing difficulty:  Medium.
+  Audience:  Windows and Linux programmers.
+  Requested by Jasper Paulsen on February 24, 2017
+
+138.  Add ability to copy compiler error messages to the clipboard.
+  Similar to copying test results to the clipboard.
+  Benefit:  Medium.
+            Would make it easier to fix compiler errors.
+            Would mitigate the problem of error messages
+            that are too long to display when
+            the desktop is only half the screen.
+  Status:   Demonstrated.
+  Implementation difficulty:  Easy.
+  Demoing difficulty:  Easy.
+  Testing difficulty:  Medium.
+  Audience:  Windows programmers.
+  Requested by Jasper Paulsen on March 3, 2017.
+  
+127.  Allow requesting the default finder location in the command line.
+  Could (at startup) just set any unused tabs
+  to the requested folder location, in finder mode.
+  Also needs to treat "finder" tabs that have
+  the default location as if they were empty,
+  for purposes of choosing which tabs to open things in.
+  Benefit:  Medium.  Would reduce the number of steps needed
+            to start CAL.
+  Status:   Demonstrated.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Hard.
+  Audience:  Windows and Linux programmers.
+  Requested by Jasper Paulsen on March 1, 2017.
+
+128.  In the command line, use default finder location to shorten source names.
+  Allow making command line requests for tabs' source names
+  be relative to the command line's request
+  for the default finder location.
+  Benefit:  Medium.  Could greatly shorten command lines.
+            Would make it much easier to maintain command lines
+            when the working directory changes.
+  Status:   Demonstrated.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Hard.
+  Testing difficulty:  Hard.
+  Audience:  Windows and Linux programmers.
+  Requested by Jasper Paulsen on March 1, 2017.
+
+124.  Allow requesting tabs' sources in the command line.
+  Benefit:  Medium.  Would help speed up demonstrating features.
+  Status:   Demonstrated.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Hard.
+  Testing difficulty:  Hard.
+  Audience:  Windows and Linux programmers.
+  Requested by Jasper Paulsen on February 28, 2017.
+
+117.  Enable shift mouse-wheel scrolling horizontally in editor panes.
+  Let the user press Shift while scrolling the vertical wheel,
+  in order to scroll horizontally.  In this scenario,
+  use the vertical settings to control the horizontal speed.
+  Status:  Demonstrated.
+  Benefit: Medium.  Tilting the mouse wheel is harder
+           than rolling the wheel.
+  Implementation difficulty:  Easy.
+  Demoing difficulty:  Easy.
+  Testing difficulty:  Medium.
+  Audience:  Macintosh programmers.
+  Requested by Jasper Paulsen on February 28, 2017
+
+110.  Prevent scrollbar's downtick from scrolling past last line.
+  Neither CAL's down arrow, nor Notepad's downtick
+  scrolls past the last line of the file.
+  Status:  Demonstrated.
+  Benefit:  Minor.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Easy.
+  Testing difficulty:  Medium.
+  Audience:  Windows programmers.
+  Requested by Jasper Paulsen on February 28, 2017.
+  
+111.  Prevent mouse wheel from scrolling past last line.
+  Neither CAL's scrollbar, nor Notepad's mouse wheel
+  scrolls past the last line of the file.
+  Status:  Demonstrated.
+  Benefit:  Minor.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Easy.
+  Testing difficulty:  Medium.
+  Audience:  Windows programmers.
+  Requested by Jasper Paulsen on February 28, 2017.
+
+113.  Adjust mouse-wheel scrolling speed per System Parameters.
+  Per Microsoft specs, the mouse-wheel scrolling speed
+  should be adjustable using Windows' interface for changing
+  System Parameters.
+  Status:  Demonstrated.
+  Benefit: Important.  Most users of web browsers rely
+           on mouse-wheel scrolling.
+  Implementation difficulty:  Hard.
+           Requires handling another Windows event. ( #26.)
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Medium.
+  Audience:  Windows and Linux programmers.
+  Requested by Jasper Paulsen on February 24, 2017
+
+114.  Allow mouse-wheel scrolling at one screen per 15°.
+  This is a Windows undocumented feature that can be set
+  using Windows' interface for changing System Parameters.
+  This feature sets the scroll speed to -1.
+  Status:  Demonstrated.
+  Benefit: Medium.  Most users of web browsers rely
+           on mouse-wheel scrolling, but most do not
+           set their mice this fast.
+  Implementation difficulty:  Easy.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Medium.
+  Audience:  Windows and Linux programmers.
+  Requested by Jasper Paulsen on February 27, 2017
+
+115.  Enable horizontal mouse-wheel scrolling in editor panes.
+  Let the user tilt the mouse-wheel to move an editor's text
+  horizontally, in units of average characters instead of lines.
+  Status:  Demonstrated.
+  Benefit: Minor.  Tilting the mouse wheel is harder
+           than rolling the wheel.
+  Implementation difficulty:  Hard.
+           Requires handling another Windows event. (#526)
+  Demoing difficulty:  Easy.
+  Testing difficulty:  Medium.
+  Audience:  Windows and Linux programmers.
+  Requested by Jasper Paulsen on February 28, 2017
+
+098.  Add a "Diagnostics..." menu item for the regression tests.
+  Status:   Demonstrated.  (But as the "Test" menu item.)
+  Benefit:  Minor.  The paradigm is that all features should be
+    available through the menu.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Easy.
+  Testing difficulty:  Hard -- need to add a feature to test
+    whether a menu item exists.
+  Requested by Gerry Rzeppa on March 18, 2014.
+
+116.  Enable fast horizontal mouse-wheel scrolling in editor panes.
+  Let the user tilt the mouse-wheel to move an editor's text
+  horizontally, in units of screen widths.
+  Status:  Demonstrated.
+  Benefit: Minor.  Tilting the mouse wheel is harder
+           than rolling the wheel.
+  Implementation difficulty:  Easy.
+  Demoing difficulty:  Easy.
+  Testing difficulty:  Medium.
+  Audience:  Windows and Linux programmers.
+  Requested by Jasper Paulsen on February 28, 2017
+
+109.  Do not show zero-height command boxes in the scrollbar.
+  Often the scrollbar's uppage or downpage box has zero height.
+  When this occurs, the zero-height box should not be drawn.
+  Status:   Demonstrated.
+  Benefit:  Minor.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Easy.
+  Testing difficulty:  Medium.
+  Audience:  Windows and Linux programmers.
+  Requested by Jasper Paulsen on February 26, 2017.
+
+

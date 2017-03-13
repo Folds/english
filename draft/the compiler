@@ -1,4 +1,6 @@
-\ copyright © 2006 the osmosian order (3040)
+\ The portions of this file that are from CAL-3040
+\ are copyright 2006 by the Osmosian Order.
+\ The remainder is copyright 2014, 2017 by Jasper Paulsen.
 
 \ firstparam=esp+4/ebp+8, secondparam=esp+8/ebp+12, etc...
 
@@ -15,6 +17,8 @@ to abort with a string and a byte pointer:
   put the string into the compiler's abort message.
   find the compiler's abort path and the compiler's abort row# given the byte pointer.
   if the compiler's abort path is blank, exit.
+  if list was requested,    diagnose abort message; exit.
+  if compile was requested, diagnose abort message; exit.
   extract a file name from the compiler's abort path.
   prepend "Error in " then the file name then ". " to the compiler's abort message.
 
@@ -54,7 +58,8 @@ to add and compile the initialize before run and run and finalize after run rout
   append "run. " to the routine's body string.
   append the global finalizers to the routine's body string.
   append "finalize after run. " to the routine's body string.
-  append "call ""kernel32.dll"" ""ExitProcess"" with 0. " to the routine's body string.
+  append "call ""kernel32.dll"" ""ExitProcess"" with the return code. " 
+    to the routine's body string.
   slap the routine's routine header on the routine's header string.
   slap the routine's routine body on the routine's body string.
   compile the header of the routine.
@@ -102,11 +107,11 @@ to add the destroy routine for a type (pointer):
   if the type's target type can be reduced to "pointer", append "destroy the " then the type's name then "'s target. " to the routine's body string.
   if the type's target type can be reduced to "things", append "destroy the " then the type's name then "'s target. " to the routine's body string.
   loop.
-  get a field from the type's target type's fields.
-  if the field is nil, break.
-  if the field's reference flag is set, repeat.
-  if the field's type should not be forgotten, repeat.
-  append "destroy the " then the type's name then "'s " then the field's name then ". " to the routine's body string.
+    get a field from the type's target type's fields.
+    if the field is nil, break.
+    if the field's reference flag is set, repeat.
+    if the field's type should not be forgotten, repeat.
+    append "destroy the " then the type's name then "'s " then the field's name then ". " to the routine's body string.
   repeat.
   append "deallocate the " then the type's name then ". " to the routine's body string.
   slap the routine's routine header on the routine's header string.
@@ -163,10 +168,10 @@ to add the finalize routine for a type (record):
   append "~finalize a " then the type's name to the routine's header string.
   append "intel $50. " to the routine's body string. \ push eax
   loop.
-  get a field from the type's fields.
-  if the field is nil, break.
-  if the field's type should not be finalized, repeat.
-  append "~finalize the " then the type's name then "'s " then the field's name then ". " to the routine's body string.
+    get a field from the type's fields.
+    if the field is nil, break.
+    if the field's type should not be finalized, repeat.
+    append "~finalize the " then the type's name then "'s " then the field's name then ". " to the routine's body string.
   repeat.
   append "intel $58." to the routine's body string. \ pop eax
   slap the routine's routine header on the routine's header string.
@@ -279,12 +284,12 @@ to add a monikette to some monikettes given a type:
 to add push fragments given some monikettes:
   if the current routine is nil, exit.
   loop.
-  get a monikette from the monikettes (backwards).
-  if the monikette is nil, exit.
-  if the monikette's variable is nil, repeat.
-  if the monikette's current substring is not blank, repeat.
-  if the monikette's current type is nil, repeat.
-  add a fragment given the push address tag and the monikette's variable.
+    get a monikette from the monikettes (backwards).
+    if the monikette is nil, exit.
+    if the monikette's variable is nil, repeat.
+    if the monikette's current substring is not blank, repeat.
+    if the monikette's current type is nil, repeat.
+    add a fragment given the push address tag and the monikette's variable.
   repeat.
 
 to add the put or convert fragments given a variable and another variable and a locus:
@@ -480,9 +485,9 @@ to address some imports given an address:
   multiply the other count by 4.
   put the current thunk address plus the other count into the current name address.
   loop.
-  get an import from the imports.
-  if the import is nil, break.
-  address the import.
+    get an import from the imports.
+    if the import is nil, break.
+    address the import.
   repeat.
   put the current name address minus the address into a number.
   add the number to the address.
@@ -780,12 +785,12 @@ to calculate the length of a type:
   if the type's fields are empty, put the type's base type's length into the type's length; exit.
   put 0 into the type's length.
   loop.
-  if the compiler's abort flag is set, exit.
-  get a field from the type's fields.
-  if the field is nil, exit.
-  if the field's redefinition target name is not blank, repeat.
-  calculate the length of the field's type.
-  add the field's type's length times the field's count to the type's length.
+    if the compiler's abort flag is set, exit.
+    get a field from the type's fields.
+    if the field is nil, exit.
+    if the field's redefinition target name is not blank, repeat.
+    calculate the length of the field's type.
+    add the field's type's length times the field's count to the type's length.
   repeat.
 
 to calculate the lengths of some types:
@@ -799,12 +804,12 @@ to calculate the offsets in a type:
   if the type is nil, exit.
   put 0 into an offset.
   loop.
-  if the compiler's abort flag is set, exit.
-  get a field from the type's fields.
-  if the field is nil, exit.
-  if the field's redefinition target name is not blank, repeat.
-  put the offset into the field's offset.
-  add the field's type's length times the field's count to the offset.
+    if the compiler's abort flag is set, exit.
+    get a field from the type's fields.
+    if the field is nil, exit.
+    if the field's redefinition target name is not blank, repeat.
+    put the offset into the field's offset.
+    add the field's type's length times the field's count to the offset.
   repeat.
 
 to calculate the offsets in some types:
@@ -817,13 +822,13 @@ to calculate the offsets in some types:
 to calculate the redefinition offsets in a type:
   if the type is nil, exit.
   loop.
-  if the compiler's abort flag is set, exit.
-  get a field from the type's fields.
-  if the field is nil, exit.
-  if the field's redefinition target name is blank, repeat.
-  find another field given the field's redefinition target name and the type's fields.
-  if the other field is nil, abort with "Invalid redefine. I can't find the '" then the field's redefinition target name then "' field." and the field's locus; exit.
-  put the other field's offset into the field's offset.
+    if the compiler's abort flag is set, exit.
+    get a field from the type's fields.
+    if the field is nil, exit.
+    if the field's redefinition target name is blank, repeat.
+    find another field given the field's redefinition target name and the type's fields.
+    if the other field is nil, abort with "Invalid redefine. I can't find the '" then the field's redefinition target name then "' field." and the field's locus; exit.
+    put the other field's offset into the field's offset.
   repeat.
 
 to calculate the redefinition offsets in some types:
@@ -881,16 +886,18 @@ to compile the body of a routine:
   set the routine's compiled flag.
   slap a rider on the routine's routine body.
   move the rider (compiler rules).
-  if the rider's token is "employ", compile the body of the routine given the rider (employ); exit.
+  if the rider's token is "employ",
+    compile the body of the routine given the rider (employ); exit.
   put the current routine into a saved routine.
   put the routine into the current routine.
   create the routine's nickname index given 101.
-  eliminate duplicate nicknames from the routine's parameters given the routine's nickname index.
+  eliminate duplicate nicknames from the routine's parameters
+    given the routine's nickname index.
   compile the body of the routine (prolog).
   loop.
-  if the compiler's abort flag is set, exit.
-  if the rider's token is blank, break.
-  compile the next statement given the rider.
+    if the compiler's abort flag is set, exit.
+    if the rider's token is blank, break.
+    compile the next statement given the rider.
   repeat.
   compile the body of the routine (epilog).
   put the saved routine into the current routine.
@@ -900,14 +907,14 @@ to compile the body of a routine (epilog):
   if the compiler's abort flag is set, exit.
   add a fragment given the finalize tag.
   loop.
-  get a variable from the routine's locals.
-  if the variable is nil, break.
-  if the variable's kind is "scratch", repeat.
-  if the variable's type should not be finalized, repeat.
-  add another fragment given the push address tag and the variable.
-  find another routine given "~finalize" and the variable's type.
-  if the other routine is nil, abort with "Internal error - compile the body of a routine (epilog)"; exit.
-  add a third fragment given the call internal tag and the other routine.
+    get a variable from the routine's locals.
+    if the variable is nil, break.
+    if the variable's kind is "scratch", repeat.
+    if the variable's type should not be finalized, repeat.
+    add another fragment given the push address tag and the variable.
+    find another routine given "~finalize" and the variable's type.
+    if the other routine is nil, abort with "Internal error - compile the body of a routine (epilog)"; exit.
+    add a third fragment given the call internal tag and the other routine.
   repeat.
   add a fourth fragment given the epilog tag.
 
@@ -920,7 +927,8 @@ to compile the body of a routine (prolog):
 to compile the body of the routine called a string:
   if the compiler's abort flag is set, exit.
   find a routine given the string and the routine index.
-  if the routine is nil, abort with "I need a routine to '" then the string then "'."; exit.
+  if the routine is nil,
+    abort with "I need a routine to '" then the string then "'."; exit.
   compile the body of the routine.
 
 to compile the body of a routine given a rider (employ):
@@ -928,11 +936,16 @@ to compile the body of a routine given a rider (employ):
   compile a routine reference given the rider.
   convert the routine reference to the routine's employs moniker.
   destroy the routine reference.
-  if the rider's token is not ".", abort with "Employ statments should end with a period not '" then the rider's token then "'." and the rider; exit.
+  if the rider's token is not ".",
+    abort with "Employ statments should end with a period not '"
+    then the rider's token then "'." and the rider; exit.
   move the rider (compiler rules).
-  if the rider's token is not blank, abort with "Once an employ, only an employ" and the rider; exit.
+  if the rider's token is not blank,
+    abort with "Once an employ, only an employ" and the rider; exit.
   find another routine given the routine's employs moniker and the routine index.
-  if the other routine is nil, abort with "I can't find the '" then the routine's employs moniker then "' routine you're trying to employ." and the routine's locus; exit.
+  if the other routine is nil,
+    abort with "I can't find the '" then the routine's employs moniker
+    then "' routine you're trying to employ." and the routine's locus; exit.
   compile the body of the other routine.
 
 to compile the call'd part given a rider and a variable:
@@ -945,6 +958,7 @@ to compile the call'd part given a rider and a variable:
 to compile a directory:
   compile the directory (start).
   compile the directory (read the source files).
+  define a global variable given "the return code is a number.".
   compile the directory (scan the source files).
   compile the directory (resolve the types).
   compile the directory (resolve the globals).
@@ -1195,7 +1209,8 @@ to compile the header of a routine given a rider (callback):
   set the routine's callback flag.
   compile the routine's monikettes and the routine's parameters given the rider.
   convert the routine's monikettes to the routine's moniker.
-  if the routine's moniker is in the routine index, abort with "I already know how to '" then the routine's moniker then "'." and the routine's locus; exit.
+  if the routine's moniker is in the routine index,
+    abort with "I already know how to '" then the routine's moniker then "'." and the routine's locus; exit.
   index the routine given the routine's monikettes and the routine index.
 
 to compile the header of a routine given a rider (decider):
@@ -1205,9 +1220,11 @@ to compile the header of a routine given a rider (decider):
   move the rider (compiler rules).
   set the routine's decider flag.
   compile the routine's monikettes and the routine's parameters given the rider.
-  if any of the routine's monikettes are negative words, abort with "It's a bad idea to use negatives in decider names." and the rider; exit.
+  if any of the routine's monikettes are negative words,
+    abort with "It's a bad idea to use negatives in decider names." and the rider; exit.
   convert the routine's monikettes to the routine's moniker.
-  if the routine's moniker is in the routine index, abort with "I already know how to '" then the routine's moniker then "'." and the routine's locus; exit.
+  if the routine's moniker is in the routine index,
+    abort with "I already know how to '" then the routine's moniker then "'." and the routine's locus; exit.
   index the routine given the routine's monikettes and the routine index.
 
 to compile the header of a routine given a rider (function):
@@ -1228,7 +1245,8 @@ to compile the header of a routine given a rider (function):
   if the moniker is in the routine index, abort with "I already know how to '" then the moniker then "'." and the routine's locus; exit.
   index the routine given the routine's monikettes and the routine index.
   move the rider (compiler rules).
-  if the rider's token is not any indefinite article, abort with "I was expecting an indefinite article, but found '" then the rider's token then "'." and the rider; exit.
+  if the rider's token is not any indefinite article,
+    abort with "I was expecting an indefinite article, but found '" then the rider's token then "'." and the rider; exit.
   compile the routine's monikettes and the routine's parameters given the rider (indefinite article).
   if the rider's token is not blank, abort with "There's extra stuff on the end of this function." and the rider; exit.
   convert the routine's monikettes to the routine's moniker.
@@ -1238,7 +1256,8 @@ to compile the header of a routine given a rider (procedure):
   if the compiler's abort flag is set, exit.
   compile the routine's monikettes and the routine's parameters given the rider.
   convert the routine's monikettes to the routine's moniker.
-  if the routine's moniker is in the routine index, abort with "I already know how to '" then the routine's moniker then "'." and the routine's locus; exit.
+  if the routine's moniker is in the routine index,
+    abort with "I already know how to '" then the routine's moniker then "'." and the routine's locus; exit.
   index the routine given the routine's monikettes and the routine index.
 
 to compile the headers of some routines:
@@ -1851,10 +1870,10 @@ to convert some monikettes to a moniker:
 to convert some monikettes to a moniker given a monikette:
   clear the moniker.
   loop.
-  get a current monikette from the monikettes.
-  if the current monikette is nil, exit.
-  append the current monikette to the moniker.
-  if the current monikette is the monikette, exit.
+    get a current monikette from the monikettes.
+    if the current monikette is nil, exit.
+    append the current monikette to the moniker.
+    if the current monikette is the monikette, exit.
   repeat.
 
 to convert a nibble substring to a string: employ convert a nibble string to a hex string.
@@ -1892,10 +1911,10 @@ to copy some fields into some other fields (data fields only):
   if the fields' first's next is nil, exit.
   put the fields' first's next's next into a field.
   loop.
-  if the field is nil, exit.
-  copy the field into another field.
-  append the other field to the other fields.
-  get the field from the fields.
+    if the field is nil, exit.
+    copy the field into another field.
+    append the other field to the other fields.
+    get the field from the fields.
   repeat.
 
 to copy a monikette into another monikette:
@@ -1910,10 +1929,10 @@ to copy a monikette into another monikette:
 to copy some monikettes into some other monikettes:
   destroy the other monikettes.
   loop.
-  get a monikette from the monikettes.
-  if the monikette is nil, exit.
-  copy the monikette into another monikette.
-  append the other monikette to the other monikettes.
+    get a monikette from the monikettes.
+    if the monikette is nil, exit.
+    copy the monikette into another monikette.
+    append the other monikette to the other monikettes.
   repeat.
 
 to create an entry:
@@ -2019,6 +2038,11 @@ to decide if some fields should be finalized:
   if the field is nil, say no.
   if the field's type should be finalized, say yes.
   repeat.
+
+to decide if listing failed:
+  if list was not requested, say no.
+  if the i/o error is blank, say no.
+  say yes.
 
 to decide if a moniker is in an index:
   find a refer given the moniker and the index.
@@ -2403,10 +2427,10 @@ to decide if a type can be reduced to a type name:
   if the type is nil, say no.
   privatize the type.
   loop.
-  if the type is nil, say no.
-  if the type's name is the type name, say yes.
-  if the type's base type is the type, say no.
-  put the type's base type into the type.
+    if the type is nil, say no.
+    if the type's name is the type name, say yes.
+    if the type's base type is the type, say no.
+    put the type's base type into the type.
   repeat.
 
 to decide if a type is any built-in type:
@@ -2448,7 +2472,35 @@ to decide if a variable is duplicated in some variables:
   if the other variable's name is the variable's name, say yes.
   repeat.
 
+to define a global variable given a string:
+  if the compiler's abort flag is set, exit.
+  privatize the string.
+  if the string starts with "the ",
+    remove leading bytes from the string given 4.
+  trim the string.
+  slap a rider on the string.
+  scan a global given the rider.
+  put nil in the global's locus.
+
 the dereference tag is a tag equal to 5.
+
+to diagnose abort message:
+  \ Prepend the error location, using gcc's format.
+  \ The first line is a per-file heading.
+  \ Each subsequent line has an error.
+  \ (CAL aborts compilation on the first error.)
+  \ gcc also includes the column number of the error
+  \ after the row number.
+  \ Hopefully, other programs can parse this format.
+  extract a file name from the compiler's abort path.
+  prepend "compiling " then the file name
+    then the return byte then the linefeed byte
+    then  the compiler's abort path then ":"
+    then  the compiler's abort row# then ":"
+    then  " error: "
+    to the compiler's abort message.
+  append the return byte then the linefeed byte
+    to the compiler's abort message.
 
 a dos header is a record with
   a wyrd called signature,
@@ -2479,9 +2531,9 @@ to eliminate duplicate nicknames from some variables:
 to eliminate duplicate nicknames from some variables given an index:
   if the index is nil, exit.
   loop.
-  get a variable from the variables.
-  if the variable is nil, exit.
-  eliminate duplicate nicknames given the variable and the index.
+    get a variable from the variables.
+    if the variable is nil, exit.
+    eliminate duplicate nicknames given the variable and the index.
   repeat.
 
 to eliminate duplicate nicknames given a variable and an index:
@@ -2538,9 +2590,9 @@ the finalize tag is a tag equal to 9.
 to find an entry given a string and some entries:
   void the entry.
   loop.
-  get the entry from the entries.
-  if the entry is nil, exit.
-  if the entry's name is the string, exit.
+    get the entry from the entries.
+    if the entry is nil, exit.
+    if the entry's name is the string, exit.
   repeat.
 
 to find a field term given a phrase and a type and a name:
@@ -2566,25 +2618,25 @@ to find a field term given a type and a name:
 to find a fragment given another fragment and a tag:
   put the other fragment into the fragment.
   loop.
-  if the fragment is nil, exit.
-  if the fragment's tag is the tag, exit.
-  put the fragment's next into the fragment.
+    if the fragment is nil, exit.
+    if the fragment's tag is the tag, exit.
+    put the fragment's next into the fragment.
   repeat.
 
 to find a fragment given another fragment and a tag (backwards):
   put the other fragment into the fragment.
   loop.
-  if the fragment is nil, exit.
-  if the fragment's tag is the tag, exit.
-  put the fragment's previous into the fragment.
+    if the fragment is nil, exit.
+    if the fragment's tag is the tag, exit.
+    put the fragment's previous into the fragment.
   repeat.
 
 to find an import given a string:
   void the import.
   loop.
-  get the import from the imports.
-  if the import is nil, exit.
-  if the import's name is the string, exit.
+    get the import from the imports.
+    if the import is nil, exit.
+    if the import's name is the string, exit.
   repeat.
 
 to find a path and a row# given a byte pointer:
@@ -2602,14 +2654,14 @@ to find a routine given a moniker and a monikette and an index:
   put the monikette's type into the monikette's current type.
   slap the monikette's current substring on the monikette's string.
   loop.
-  append the monikette to the moniker (while bubbling).
-  find a refer given the moniker and the index.
-  if the refer is not nil, put the refer's pointer into the routine.
-  if the refer is not nil, find the routine given the moniker and the monikette's next and the index.
-  if the routine is not nil, break.
-  bubble the monikette.
-  if the monikette is bubbled out, break.
-  put the original moniker into the moniker.
+    append the monikette to the moniker (while bubbling).
+    find a refer given the moniker and the index.
+    if the refer is not nil, put the refer's pointer into the routine.
+    if the refer is not nil, find the routine given the moniker and the monikette's next and the index.
+    if the routine is not nil, break.
+    bubble the monikette.
+    if the monikette is bubbled out, break.
+    put the original moniker into the moniker.
   repeat.
 
 to find a routine given some monikettes:
@@ -2661,10 +2713,10 @@ to find a row# given a source file and a byte pointer:
   slap a substring on the source file's buffer.
   put 1 into the row#.
   loop.
-  if the substring is blank, exit.
-  if the substring's first is the byte pointer, exit.
-  if the substring's first's target is the return byte, add 1 to the row#.
-  add 1 to the substring's first.
+    if the substring is blank, exit.
+    if the substring's first is the byte pointer, exit.
+    if the substring's first's target is the return byte, add 1 to the row#.
+    add 1 to the substring's first.
   repeat.
 
 to find a source file given a byte pointer:
@@ -2680,10 +2732,10 @@ to find a type and a nickname given a name:
   clear the nickname.
   slap a substring on the name.
   loop.
-  if the substring is blank, exit.
-  find the type given the substring and the type index.
-  if the type is not nil, break.
-  skip to the next word in the substring.
+    if the substring is blank, exit.
+    find the type given the substring and the type index.
+    if the type is not nil, break.
+    skip to the next word in the substring.
   repeat.
   put the name's first into another substring's first.
   put the substring's first minus 2 into the other substring's last.
@@ -2703,10 +2755,10 @@ to find a variable given a name:
 to find a variable given a name and some variables:
   void the variable.
   loop.
-  get the variable from the variables.
-  if the variable is nil, exit.
-  if the variable's name is the name, exit.
-  if the variable's nickname is the name, exit.
+    get the variable from the variables.
+    if the variable is nil, exit.
+    if the variable's name is the name, exit.
+    if the variable's nickname is the name, exit.
   repeat.
 
 a fragment is a thing with
@@ -2737,10 +2789,10 @@ to get an address given a routine:
 to get a count given some imports (all entries plus markers):
   put 0 into the count.
   loop.
-  get an import from the imports.
-  if the import is nil, exit.
-  add the import's entries' count to the count.
-  add 1 to the count.
+    get an import from the imports.
+    if the import is nil, exit.
+    add the import's entries' count to the count.
+    add 1 to the count.
   repeat.
 
 a global body is a substring.
@@ -2813,11 +2865,11 @@ to index a routine given some monikettes and an index:
   if the routine is nil, exit.
   clear a partial moniker.
   loop.
-  get a monikette from the monikettes.
-  if the monikette is nil, exit.
-  append the monikette to the partial moniker.
-  if the monikette is the monikettes' last, break.
-  index the partial moniker given the index (special).
+    get a monikette from the monikettes.
+    if the monikette is nil, exit.
+    append the monikette to the partial moniker.
+    if the monikette is the monikettes' last, break.
+    index the partial moniker given the index (special).
   repeat.
   index the routine given the partial moniker as a moniker and the index (special).
 
@@ -2984,6 +3036,10 @@ to list:
   list the source files under "SOURCE FILES:" in the compiler's listing.
   list the timers under "TIMERS:" in the compiler's listing.
   write the compiler's listing to the compiler's listing path.
+  if listing failed,
+    put 1 in the return code;
+    append the i/o error to a buffer;
+    write the buffer to stderr.
 
 to list an abort message in a buffer:
   if the abort message is blank, exit.
@@ -3056,9 +3112,9 @@ to list an index in a buffer:
   append the index's count then " refers" to the buffer (with separator).
   advance the buffer (twice).
   loop.
-  get a bucket given the index.
-  if the bucket is nil, exit.
-  list the bucket in the buffer.
+    get a bucket given the index.
+    if the bucket is nil, exit.
+    list the bucket in the buffer.
   repeat.
 
 to list an index under a string in a buffer:
@@ -3347,15 +3403,15 @@ to offset the locals in a routine:
   if the routine's compiled flag is not set, exit.
   clear the routine's local size.
   loop.
-  if the compiler's abort flag is set, exit.
-  get a local from the routine's locals.
-  if the local is nil, exit.
-  if the local's previous is not nil, put the local's previous' offset into the local's offset.
-  put the local's type's length into a length.
-  if the local's kind is "scratch", put a pointer's magnitude into the length.
-  round the length up to the nearest multiple of 4.
-  subtract the length from the local's offset.
-  add the length to the routine's local size.
+    if the compiler's abort flag is set, exit.
+    get a local from the routine's locals.
+    if the local is nil, exit.
+    if the local's previous is not nil, put the local's previous' offset into the local's offset.
+    put the local's type's length into a length.
+    if the local's kind is "scratch", put a pointer's magnitude into the length.
+    round the length up to the nearest multiple of 4.
+    subtract the length from the local's offset.
+    add the length to the routine's local size.
   repeat.
 
 to offset the locals in some routines:
@@ -3370,13 +3426,13 @@ to offset the parameters in a routine:
   if the routine's compiled flag is not set, exit.
   clear the routine's parameter size.
   loop.
-  if the compiler's abort flag is set, exit.
-  get a parameter from the routine's parameters.
-  if the parameter is nil, exit.
-  if the routine's callback flag is set, set the parameter's by-value flag.
-  if the parameter's previous is nil, put 8 into the parameter's offset. \ skip the return address and saved ebp
-  if the parameter's previous is not nil, put the parameter's previous' offset plus 4 into the parameter's offset. \ all parameters are 4 byte pointers or 4 byte values for callbacks
-  add 4 to the routine's parameter size.
+    if the compiler's abort flag is set, exit.
+    get a parameter from the routine's parameters.
+    if the parameter is nil, exit.
+    if the routine's callback flag is set, set the parameter's by-value flag.
+    if the parameter's previous is nil, put 8 into the parameter's offset. \ skip the return address and saved ebp
+    if the parameter's previous is not nil, put the parameter's previous' offset plus 4 into the parameter's offset. \ all parameters are 4 byte pointers or 4 byte values for callbacks
+    add 4 to the routine's parameter size.
   repeat.
 
 to offset the parameters in some routines:
@@ -3524,6 +3580,14 @@ to put the compiler's listing path into a path:
   remove any trailing backslash from the designator.
   put the compiler's directory then the designator then ".lst" into the path.
 
+  \ The preceding routine is a getter routine.
+  \ Even though the compiler was NOT defined to have
+  \ a member field called listing path,
+  \ the existence of this routine allows routines
+  \ (that are getting data from the compiler record)
+  \ to pretend that the compiler was defined to include:
+  \   a path called listing path
+
 to put a term into another term:
   put the term's variable into the other term's variable.
   put the term's phrase into the other term's phrase.
@@ -3531,17 +3595,19 @@ to put a term into another term:
 to read a source file:
   if the source file is nil, exit.
   read the source file's path into the source file's buffer.
-  if the i/o error is not blank, abort with "Could not read the file named '" then the source file's path then "'."; exit.
+  if the i/o error is not blank,
+    abort with "Could not read the file named '"
+    then the source file's path then "'."; exit.
 
 to read some source files:
   loop.
-  if the compiler's abort flag is set, exit.
-  get an item from the compiler's directory.
-  if the item is not found, break.
-  if the item's kind is not "file", repeat.
-  if the item's extension is not blank, repeat.
-  add a source file to the source files given the item's path.
-  read the source file.
+    if the compiler's abort flag is set, exit.
+    get an item from the compiler's directory.
+    if the item is not found, break.
+    if the item's kind is not "file", repeat.
+    if the item's extension is not blank, repeat.
+    add a source file to the source files given the item's path.
+    read the source file.
   repeat.
 
 the reading timer is a timer.
@@ -3557,14 +3623,14 @@ to reduce some monikettes for utility use:
 to reduce a type to another type for utility use:
   put the type into the other type.
   loop.
-  if the other type is nil, exit.
-  if the other type's name is "hex string", exit.
-  if the other type's name is "string", exit.
-  if the other type's name is "number", exit.
-  if the other type's name is "pointer", exit.
-  if the other type's name is "thing", void the other type; exit.
-  if the other type's base type is the other type, void the other type; exit.
-  put the other type's base type into the other type.
+    if the other type is nil, exit.
+    if the other type's name is "hex string", exit.
+    if the other type's name is "string", exit.
+    if the other type's name is "number", exit.
+    if the other type's name is "pointer", exit.
+    if the other type's name is "thing", void the other type; exit.
+    if the other type's base type is the other type, void the other type; exit.
+    put the other type's base type into the other type.
   repeat.
 
 to reindex the utility index:
@@ -3590,15 +3656,15 @@ to remove any negatives from some monikettes returning a flag:
   clear the flag.
   swap the monikettes with some other monikettes.
   loop.
-  put the other monikettes' first into a monikette.
-  if the monikette is nil, exit.
-  remove the monikette from the other monikettes.
-  if the monikette's string is "not", reverse the flag; destroy the monikette; repeat.
-  append the monikette to the monikettes.
-  if the monikette's string is "cannot", reverse the flag; put "can" into the monikette's string; repeat.
-  if the monikette's string is "nothing", reverse the flag; put "something" into the monikette's string; repeat.
-  if the monikette's string is "won't", reverse the flag; put "will" into the monikette's string; repeat.
-  if the monikette's string ends with "n't", reverse the flag; remove trailing bytes from the monikette's string given 3; repeat.
+    put the other monikettes' first into a monikette.
+    if the monikette is nil, exit.
+    remove the monikette from the other monikettes.
+    if the monikette's string is "not", reverse the flag; destroy the monikette; repeat.
+    append the monikette to the monikettes.
+    if the monikette's string is "cannot", reverse the flag; put "can" into the monikette's string; repeat.
+    if the monikette's string is "nothing", reverse the flag; put "something" into the monikette's string; repeat.
+    if the monikette's string is "won't", reverse the flag; put "will" into the monikette's string; repeat.
+    if the monikette's string ends with "n't", reverse the flag; remove trailing bytes from the monikette's string given 3; repeat.
   repeat.
 
 the repeat tag is a tag equal to 21.
@@ -3690,16 +3756,16 @@ to resolve a type (optional info - record):
   if the compiler's abort flag is set, exit.
   if the type's fields are empty, copy the type's base type's fields into the type's fields; exit.
   loop.
-  if the compiler's abort flag is set, exit.
-  get a field from the type's fields (backwards).
-  if the field is nil, break.
-  if the field is duplicated in the type's fields, abort with "The '" then the field's name then "' field is defined more than once." and the field's locus; exit.
-  resolve the field.
-  if the compiler's abort flag is set, exit.
-  if the field's type's cooking flag is set, abort with "Recursive definition with '" then the field's type's name then "'." and the field's locus; exit.
-  resolve the field's type (optional info).
-  if the field's reference flag is not set, repeat.
-  if the field's type cannot be reduced to "pointer", abort with "Exactly what do you mean by '(reference)' here on this '" then the field's name then "'?" and the field's locus; exit.
+    if the compiler's abort flag is set, exit.
+    get a field from the type's fields (backwards).
+    if the field is nil, break.
+    if the field is duplicated in the type's fields, abort with "The '" then the field's name then "' field is defined more than once." and the field's locus; exit.
+    resolve the field.
+    if the compiler's abort flag is set, exit.
+    if the field's type's cooking flag is set, abort with "Recursive definition with '" then the field's type's name then "'." and the field's locus; exit.
+    resolve the field's type (optional info).
+    if the field's reference flag is not set, repeat.
+    if the field's type cannot be reduced to "pointer", abort with "Exactly what do you mean by '(reference)' here on this '" then the field's name then "'?" and the field's locus; exit.
   repeat.
   eliminate duplicate nicknames from the type's fields.
   if the type cannot be reduced to "thing record", exit.
@@ -3772,6 +3838,25 @@ to resolve a variable (explicit type name):
 the resolving globals timer is a timer.
 
 the resolving types timer is a timer.
+
+\ the return code is a number.
+
+\ An uncommented version of the previous comment line
+\ is automatically inserted by the compiler,
+\ so that source code that compiled on pre-3075 cal compilers
+\ will compile without change.
+
+\ The return code is returned by the program
+\ to the operating system when the program ends.
+\ It is 0 if the program succeeds.
+\ It is 1 if a command-line requested compilation failed.
+\ (The /compile and /list flags request compilation.)
+\ It is a positive number if one or more tests
+\ in a command-line requested regression test run failed.
+
+\ 259 is not a valid return code, because Windows
+\ uses 259 to mean that a process is STILL_ACTIVE.
+\ https://msdn.microsoft.com/en-us/library/windows/desktop/ms683189(v=vs.85).aspx
 
 to round up borough sizes:
   put the import borough's length into the import borough's size.
@@ -3897,12 +3982,12 @@ to scan a global body given a rider:
   put the rider's token's first into the global body's first.
   put -1 into the global body's last.
   loop.
-  if the compiler's abort flag is set, exit.
-  if the rider's token is blank, exit.
-  if the rider's token is the colon byte, exit.
-  if the rider's token is the period byte, exit.
-  put the rider's token's last into the global body's last.
-  move the rider (compiler rules).
+    if the compiler's abort flag is set, exit.
+    if the rider's token is blank, exit.
+    if the rider's token is the colon byte, exit.
+    if the rider's token is the period byte, exit.
+    put the rider's token's last into the global body's last.
+    move the rider (compiler rules).
   repeat.
 
 to scan a global given a rider:
@@ -3969,10 +4054,10 @@ to scan a name given a rider:
   if the compiler's abort flag is set, exit.
   if the rider's token is any name starter, extend the name with the rider's token; move the rider (compiler rules).
   loop.
-  if the compiler's abort flag is set, exit.
-  if the rider's token is any name ender, break.
-  extend the name with the rider's token.
-  move the rider (compiler rules).
+    if the compiler's abort flag is set, exit.
+    if the rider's token is any name ender, break.
+    extend the name with the rider's token.
+    move the rider (compiler rules).
   repeat.
   if the name is blank, abort with "I was kind of hoping for a name around here, but I found '" then the rider's token then "'." and the rider; exit.
 
@@ -3982,13 +4067,13 @@ to scan a routine body given a rider:
   if the rider's token is the start of any definition, exit.
   put the rider's token's first into the routine body's first.
   loop.
-  if the compiler's abort flag is set, exit.
-  if the rider's token is blank, exit.
-  put the rider's token's last into the routine body's last.
-  if the rider's token is the colon byte, abort with "You may have forgotten a period somewhere above this. You better check." and the rider; exit.
-  if the rider's token is not the period byte, move the rider (compiler rules); repeat.
-  move the rider (compiler rules).
-  if the rider's token is the start of any definition, exit.
+    if the compiler's abort flag is set, exit.
+    if the rider's token is blank, exit.
+    put the rider's token's last into the routine body's last.
+    if the rider's token is the colon byte, abort with "You may have forgotten a period somewhere above this. You better check." and the rider; exit.
+    if the rider's token is not the period byte, move the rider (compiler rules); repeat.
+    move the rider (compiler rules).
+    if the rider's token is the start of any definition, exit.
   repeat.
 
 to scan a routine given a rider:
@@ -4006,12 +4091,12 @@ to scan a routine header given a rider:
   put the rider's token's first into the routine header's first.
   put -1 into the routine header's last.
   loop.
-  if the compiler's abort flag is set, exit.
-  if the rider's token is blank, exit.
-  if the rider's token is the colon byte, exit.
-  if the rider's token is the period byte, exit.
-  put the rider's token's last into the routine header's last.
-  move the rider (compiler rules).
+    if the compiler's abort flag is set, exit.
+    if the rider's token is blank, exit.
+    if the rider's token is the colon byte, exit.
+    if the rider's token is the period byte, exit.
+    put the rider's token's last into the routine header's last.
+    move the rider (compiler rules).
   repeat.
 
 to scan a source file:
@@ -4020,12 +4105,12 @@ to scan a source file:
   slap a rider on the source file's buffer.
   move the rider (compiler rules).
   loop.
-  if the compiler's abort flag is set, exit.
-  if the rider's token is blank, exit.
-  if the rider's token is the start of any type, scan a type given the rider; repeat.
-  if the rider's token is the start of any global, scan a global given the rider; repeat.
-  if the rider's token is the start of any routine, scan a routine given the rider; repeat.
-  abort with "I was hoping for a definition but all I found was '" then the rider's token then "'." and the rider.
+    if the compiler's abort flag is set, exit.
+    if the rider's token is blank, exit.
+    if the rider's token is the start of any type, scan a type given the rider; repeat.
+    if the rider's token is the start of any global, scan a global given the rider; repeat.
+    if the rider's token is the start of any routine, scan a routine given the rider; repeat.
+    abort with "I was hoping for a definition but all I found was '" then the rider's token then "'." and the rider.
   repeat.
 
 to scan some source files:
@@ -4087,11 +4172,11 @@ to scrub an index:
 to scrub some refers:
   swap the refers with some other refers.
   loop.
-  put the other refers' first into a refer.
-  if the refer is nil, exit.
-  remove the refer from the other refers.
-  if the refer's pointer is nil, destroy the refer; repeat.
-  append the refer to the refers.
+    put the other refers' first into a refer.
+    if the refer is nil, exit.
+    remove the refer from the other refers.
+    if the refer's pointer is nil, destroy the refer; repeat.
+    append the refer to the refers.
   repeat.
 
 to set the compiled flag in a variable:
@@ -4305,7 +4390,7 @@ a variable is a thing with
   a by-value flag [parameters only],
   an global body [globals only],
   an initializer string [globals only],
-  a literal (reference) [globals only - constant with which to initalize the global],
+  a literal (reference) [globals only - constant with which to initialize the global],
   a hex string called data [literals only].
 
 the writing timer is a timer.

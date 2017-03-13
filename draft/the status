@@ -1,0 +1,527 @@
+\ The portions of this file that are from CAL-3040
+\ are copyright 2006 by the Osmosian Order.
+\ The remainder is copyright 2014, 2017 by Jasper Paulsen.
+
+\ The status is part of the desktop's pad.
+\ The status contains the test results.
+\ The status uses menu items to summarize the test results,
+\   and show sample test results.
+
+to append the failures from a test result set to another test result set (copying failures):
+  loop.
+    get a test result from the test result set's test results.
+    if the test result is nil, exit.
+    if the test result is not OK,
+      create a test result called duplicate given the test result;
+      append the duplicate to the other test result set.
+  repeat.
+
+to append a result set to a buffer:
+  append the result set's test results to the buffer.
+
+to append a test result to a result set:
+  append the test result to the result set's test results.
+  if the test result is OK, add one to the result set's passed.
+  if the test result is not OK, add one to the result set's failed.
+
+to append some test results to a buffer:
+  loop.
+    get a test result from the test results.
+    if the test result is nil, exit.
+    summarize the test result returning a string.
+    append the string to the buffer.
+    advance the buffer.
+  repeat.
+
+to check a test result given a string called actual:
+  if the actual is the test result's expectation,
+    pass the test result given the actual.
+  if the actual is not the test result's expectation,
+    fail the test result given the actual.
+
+to create a test result:
+  allocate memory for the test result.
+
+to create a test result about a string called context and a string called test name and expecting an expectation:
+  create the test result.
+  describe the test result given the context and the test name.
+  put the expectation in the test result's expectation.
+
+to create a test result called duplicate given a test result:
+  create the duplicate.
+  put the test result's context in the duplicate's context.
+  put the test result's test name in the duplicate's test name.
+  put the test result's expectation in the duplicate's expectation.
+  put the test result's actual value in the duplicate's actual value.
+  put the test result's interpretation in the duplicate's interpretation.
+
+to decide if 3-way-match given an expectation and a string and an interpretation:
+  if the expectation is not the string, say no.
+  if the expectation is the interpretation, say yes.
+  say no.
+
+to decide if one should be hidden given a number and a quota:
+  if the number is not 1, say no.
+  if the quota is greater than 0, say no.
+  say yes.
+
+to decide if a result set is OK:
+  if the result set's passed is 0, say no.
+  if the result set's failed is 0, say yes.
+  say no.
+
+to decide if a spot is in the status:
+  if the bar's mode is not "normal", say no.
+  if the spot is in the status' roundy box, say yes.
+  say no.
+
+to decide if a test result is OK:
+  if the test result's interpretation
+    is the test result's expectation, say yes.
+  say no.
+
+to decide if the tests failed:
+  if the status' all test results' failed is 0, say no.
+  say yes.
+
+to decide if the tests passed:
+  if the status' all test results is OK, say yes.
+  say no.
+
+to decide if the trio shoves the status:
+  if there is not room (for the trio), say no.
+  count menu rows returning a count.
+  if the count is 1, say yes.
+  say no.
+
+to describe a test result given a string called context and a string called test name:
+  put the context in the test result's context.
+  put the test name in the test result's test name.
+
+to destroy a test result set:
+  destroy the test result set's test results.
+
+to draw the status:
+  \ if list or compile or test was requested,
+  \ the noodle's to refresh routines will not display anything.
+  unmask everything.
+  draw the status' roundy box with the desktop color and the desktop color.
+  draw the status' roundy box with the black color and the status' color.
+  put the status' roundy box into a box.
+  adjust the box given 1/8 inch and 0 and -1/8 inch and 0.
+  mask outside the box.
+  if the status' string is not "",
+    update lingering status.
+  if the status' string is "",
+    put the lingering status string in the status' string.
+  draw the status' string in the box
+    with the black color and the default font and "right".
+
+an expectation is a string.
+
+a fail color is a color.
+
+to fail a test result given a string called actual:
+  \ assumes that the test result's expectation is already populated.
+  put the actual in the test result's actual value.
+  put the actual in the test result's interpretation.
+
+to fail a test result given a string called expectation and a string called actual:
+  populate the test result given the expectation and the actual and the actual.
+
+to finalize a result set:
+  destroy the result set's test results.
+
+to finalize the status:
+  finalize the status' all test results.
+  finalize the status' failures.
+  destroy the status' command.
+
+to handle a command (copy test result):
+  put the command's handler in a handler.
+  put "handle test result " in a prefix.
+  get a number from the handler given the prefix.
+  if the number is less than 1,
+      debug the handler (because it is undispatched); exit.
+  handle the command given the number (copy test result).
+
+to handle a command (tests failed...):
+  widen the command.
+  create a submenu.
+  put the test quota in a quota.
+  put the status' failures' failed in a number called failed.
+  summarize failure given the failed and the quota returning a string.
+  Add the string and "(Click a result to copy it.)"
+    and "handle test quota" to the submenu.
+  handle the command given the submenu and the quota
+    and the status' failures' test results.
+
+to handle a command (tests passed...):
+  widen the command.
+  create a submenu.
+  put the test quota in a quota.
+  put the status' all test results' passed in a number called passed.
+  summarize success given the passed and the quota returning a string.
+  Add the string and "(Click a result to copy it.)"
+    and "handle test quota" to the submenu.
+  handle the command given the submenu and the quota
+    and the status' all test results' test results.
+
+to handle a command given a number (copy test result):
+  tint the status.
+  show status "Copying...".
+  put the command's name on the windows clipboard.
+  show the desktop with "Copied".
+
+to handle a command given a submenu and a quota and some test results:
+  put 1 in a number called counter.
+  Loop.
+    if the counter is greater than the quota, break.
+    get a test result from the test results.
+    if the test result is nil, break.
+    summarize the test result returning a name.
+    put "handle test result " then the counter into a handler.
+    Add the name and the handler to the submenu.
+    add 1 to the counter.
+  Repeat.
+  widen the submenu to the command's width.
+  refont the submenu.
+  handle the command given the submenu.
+
+to handle an event (left click - status):
+  if the status' started tests is yes,
+    handle the event (show cached test results); exit.
+  handle the event (regression test).
+
+to handle an event (regression test):
+  put yes in the status' started tests.
+  untint the status.
+  show status "Testing...".
+  test.
+  put "The tests ran in " then the status' all test results' timer's string
+    then " ms" in a message.
+  show status the message.
+  handle the event (show cached test results).
+
+to handle an event (requested test):
+  if test was not requested, cluck; exit.
+  if the status' started tests is yes, exit.
+  put yes in the status' started tests.
+  test.
+  if the tests failed,
+    put 1 in the return code.
+  summarize the status' all test results returning a string.
+  append the string to a buffer.
+  advance the buffer.
+  if verbose test was requested,
+    append the status' all test results to the buffer.
+  if verbose test was not requested,
+    append the status' failures to the buffer.
+  write the buffer to stderr.
+
+to handle an event (show cached test results):
+  tint the status.
+  widen the status' command to 3 inches.
+  put the status' roundy box's right
+    minus the status' command's width
+    into a number called left.
+  put the left into the status' command's roundy box's left.
+  create a submenu.
+  summarize the status' all test results returning a string.
+  if the tests passed,
+    add the string and "tests passed..." to the submenu.
+  if the tests failed,
+    add the string and "tests failed..." to the submenu.
+  widen the submenu to the status' command's width.
+  refont the submenu.
+  handle the status' command given the submenu.
+
+to handle test quota:
+  put the maximum test quota into a quota called max.
+  ask "Show how many tests (0-" then the max then ")?" with the test quota.
+  if the answer is blank, exit.
+  if the answer is not any numeric literal,
+    show error "Invalid test quota."; exit.
+  convert the answer to a number.
+  if the number is less than 0,
+    show error "Invalid test quota."; exit.
+  If the number is more than the max,
+    show error "I can only show 0-" then the max then " tests.  "
+      then the max then " is the best I can do.";
+    put the max in the number.
+  if the number is the test quota, exit.
+  put the number in the test quota.
+  if the tests passed,
+    handle the status' command (tests passed...); exit.
+  handle the status' command (tests failed...).
+
+to initialize a result set:
+  put 0 in the result set's passed.
+  put 0 in the result set's failed.
+
+to initialize the status:
+  create the status' command.
+  initialize the status' all test results.
+  initialize the status' failures.
+  resize the status.
+  put the lightest green color into the status' pass color.
+  put the lightest red color into the status' fail color.
+  untint the status.
+  put no in the status' started tests.
+
+an interpretation is a string.
+
+to linger the status:
+  put the status' string in the lingering status string.
+  \ This causes the as-drawn status to linger
+  \ until the status' string is changed to a different value
+  \ (other than "".)  See also "to update lingering status"
+  \ and "to draw the status".
+
+the lingering status string is a string.
+
+the maximum test quota is a quota equal to 15.
+
+a pass color is a color.
+
+to pass a test result given a string called actual:
+  \ assumes that the test result's expectation is already populated.
+  put the actual in the test result's actual value.
+  put the test result's expectation in the test result's interpretation.
+
+to pass a test result given a string called expectation and a string called actual:
+  populate the test result given the expectation and the actual and the expectation.
+
+to populate a test result given a string called expectation
+    and a string called actual and a string called interpretation:
+  put the expectation in the test result's expectation.
+  put the actual in the test result's actual value.
+  put the interpretation in the test result's interpretation.   
+
+to put a test result set into another test result set:
+  put the test result set's passed
+    into the other test result set's passed.
+  put the test result set's failed
+    into the other test result set's failed.
+
+a quota is a number.
+
+to refont a submenu:
+  if the submenu is nil, exit.
+  get a current font. 
+  loop.
+    get a command from the submenu's commands.
+    if the command is nil, exit.
+    put the current font's name into the command's font's name.
+    if the current font's height is at most the command's font's height,
+      put the current font's height into the command's font's height.
+  repeat.
+
+to remove the last three bytes from a string:
+  remove the last byte from the string.
+  remove the last byte from the string.
+  remove the last byte from the string.
+
+to resize the status:
+  put the bar's display and 1/12 inch into the status' roundy box.
+  put the status' roundy box's bottom minus the command height
+    into the status' roundy box's top.
+  put the trio allowance into a width.
+  if the trio shoves the status,
+    put the status' right minus the width into the status' right.
+  put the menu's commands' last's right into the status' left.
+
+a result set has a number called passed,
+  a number called failed,
+  a timer,
+  and some test results.
+
+to show the status:
+  \ if list or compile or test was requested,
+  \ the noodle's to refresh routines will not display anything.
+  draw the status.
+  refresh the screen given the status' roundy box.
+
+to show status a number and a string or another string:
+  format the number and the string or the other string into a third string.
+  show status the third string.
+
+to show status a string:
+  put the string into the status' string.
+  show the status.
+
+to stash a test result given a number:
+  put the number in a string called actual.
+  stash the test result given the actual.
+
+to stash a test result given a string:
+  check the test result given the string.
+  append the test result to the status' all test results.
+
+the status has a roundy box and a string
+  and a color and a pass color and a fail color
+  and a result set called all test results
+  and a result set called failures
+  and a command
+  and a flag called started tests.
+
+to summarize failure given a number and a quota returning a string:
+  summarize given the number and "failed" and the quota returning the string.
+
+to summarize given a number and a string and a quota returning a string called result:
+  if the number is less than 1,
+    put "No tests " then the string then "." in the result; exit.
+  if one should be hidden given the number and the quota,
+    put "1 test " then the string then "." in the result; exit.
+  if the quota is less than 1,
+    put the number then " tests " then the string then "." in the result; exit.
+  if the number is 1,
+    put "1 test " then the string then ".  It was:" in the result; exit.
+  if the quota is 1,
+    put the number then " tests " then the string then "."
+      then "  The first 1 is:" in the result; exit.
+  put the number then " tests " then the string in the result.
+  if the number is at most the quota,
+    append ":" to the result.
+  if the number is more than the quota,
+    append ".  The first " then the quota then " were:" to the result.
+
+to summarize given a number and a string returning a string called result:
+  if the number is 0,
+    put "No tests " then the string then "." into the result; exit.
+  if the number is 1,
+    put "1 test " then the string then "." into the result; exit.
+  put the number then " tests " then the string then "." into the result.
+
+to summarize success given a number and a quota returning a string:
+  summarize given the number and "passed" and the quota returning the string.
+
+to summarize a test result returning a string:
+  summarize the test result returning the string (description).
+  put the test result's expectation in an expectation.
+  put the test result's actual value in a string called actual.
+  put the test result's interpretation in an interpretation.
+  append "  Expected '" then the expectation then "'" to the string.
+  \ expectation == actual == interpretation => OK
+  if 3-way-match given the expectation and the actual and the interpretation,
+    append ", which I got." to the string; exit.
+  \ expectation == interpretation != actual => OK
+  if the expectation is the interpretation,
+    append ", and got '" then the actual then "'"
+      then ", which is OK." to the string; exit.
+  \ actual == expectation != interpretation => not OK, but should not happen.
+  if the actual is the expectation,
+    append ", which I got, but it meant '" then the interpretation then "'"
+      then ", so the test failed." to the string; cluck; exit.
+  \ actual == interpretation != expectation -> not OK.
+  if the actual is the interpretation,
+    append ", but I got '" then the actual then "'"
+      then ", so the test failed." to the string; exit.
+  \ all 3 are different.
+  append ", but I got '" then the actual then "'" to the string.
+  append " which is '" then the interpretation then "'" to the string.
+  append ", so the test failed." to the string.
+
+to summarize a test result returning a string (description):
+  put "In " then the test result's context
+    then ", tried " then the test result's test name then "." in the string.
+
+to summarize a test result set returning a string:
+  put the test result set's passed in a number called passed.
+  put the test result set's failed in a number called failed.
+  put the passed plus the failed in a number called total.
+  if the test result set is OK,
+    summarize given the passed and "passed" returning the string; exit.
+  if the test result set is not OK,
+    summarize given the failed and "failed" returning the string;
+    append "  Just " then the passed then " / " then the total then " were OK."
+      to the string; exit.
+  put "The tests have not run yet." into the string.
+
+to test:
+  test (all).
+  append the failures from the status' all test results
+    to the status' failures (copying failures).
+  if test was not requested,
+    tint the status; exit.
+
+to test (all):
+  start the status' all test results' timer.
+  test (the desktop).
+  test (font menus).
+  test (the status).
+  test (the noodle).
+  test (the finder).
+  stop the status' all test results' timer.
+  test (the testing time).
+
+to test (the status - minimum width):
+  put 1/2 inch in a number called minimum.
+  put "at least " then the minimum in an expectation.
+  create a test result about "the status" and "minimum width"
+    and expecting the expectation.
+  put the status' width in a string called actual.
+  if the status' width is at least the minimum,
+    pass the test result given the actual.
+  if the status' width is not at least the minimum,
+    fail the test result given the actual.
+  append the test result to the status' all test results.
+
+to test (the status):
+  test (the status - minimum width).
+
+to test (the testing time):
+  put 10 seconds in a number called maximum.
+  put "at most " then the maximum
+    then " ms" in a string called expectation.
+  create a test result about "the status" and "maximum testing time"
+    and expecting the expectation.
+  put the status' all test results' timer's string
+    then " ms" in a string called actual.
+  if the status' all test results' timer's total ticks is at most the maximum,
+    pass the test result given the actual.
+  if the status' all test results' timer's total ticks is more than the maximum,
+    fail the test result given the actual.
+  append the test result to the status' all test results.
+
+the test quota is a quota equal to 10.
+
+a test result is a thing with
+  a string called context,
+  a string called test name,
+  an expectation,
+  a string called actual value, and
+  an interpretation.
+
+to tint the status:
+  if the tests passed,
+    put the status' pass color into the status' color; exit.
+  if the tests failed,
+    put the status' fail color into the status' color; exit.
+  untint the status.
+
+to untint the status:
+  put the white color into the status' color.
+
+to update lingering status:
+  if the status' string is the lingering status string, exit.
+  if the status' string is "", exit.
+  put "" in the lingering status string.
+
+to widen a command:
+  widen the command to the status' roundy box's right
+    minus the bar's display's left.
+  put the bar's display's left into the command's roundy box's left.
+
+to widen a command to a width:
+  put the width into the command's width.
+  put the width plus the command's roundy box's left
+    into the command's roundy box's right.
+
+to widen a submenu to a width:
+  if the submenu is nil, exit.
+  loop.
+    get a command from the submenu's commands.
+    if the command is nil, exit.
+    widen the command to the width.
+  repeat.

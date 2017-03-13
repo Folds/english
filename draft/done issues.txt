@@ -1,0 +1,749 @@
+\ copyright © 2014, 2017 by Jasper Paulsen.
+
+This file lists issues that have been either marked won't do,
+or demonstrably fixed and automatically regression-tested
+in the Plain English programming environment.
+The Plain English programming environment is called Cal.
+Currently, the file has a .txt extension,
+so that it will not be compiled into the executable.
+
+The list of outstanding issues is in issues.txt.
+The list of demonstrably fixed
+  (but not yet automatically regression tested)
+  issues is in demoed_fixes.txt
+
+\ ======================================   
+
+Here is how the issues are rated:
+  Of course, all of the ratings are guesses.
+  A difficulty rating can be one of the following:
+     Already done.
+     Already done, but would be easier with an alias.
+     Already done, but the natural alias conflicts
+                   with another feature of Cal.
+     Trivial.  It needs just a short procedure.
+     Easy.  It needs less than a screenful of code.
+     Medium.
+     Hard.
+     Profound.  It needs a different way of doing things,
+       which is either not easy to design, or is hard
+       to make consistent with the project's design goals.
+
+  An implementation difficulty rating is a difficulty rating.
+    It describes how hard it is to implement a feature or bug-fix.
+  A demoing difficulty rating is a difficulty rating.
+    It describes how hard it is to try out the feature or bug-fix,
+    to be confident that it works.
+  A testing difficulty rating is a difficulty rating.
+    It describes how hard it is to write automated unit tests
+    for the feature, to be confident that other feature changes
+    and/or refactorings do not break the feature.
+    Automated unit tests can be run frequently
+   (such as every time the program is compiled),
+    so most tests need to be very fast.
+
+  A benefit rating can be one of the following:
+    Probably a very bad idea.  Would not work well,
+      or would make other things not work well.
+    Probably does more harm than good.
+    Might do more harm than good.
+    Neutral.
+    Minor benefit.
+    Important.
+    Very important.
+    Critical.
+
+  An audience can be one of the following:
+    An Plain English-only programmer.
+      A programmer who chooses to only program in Plain English.
+    A Windows programmer.  An English-speaking programmer
+      who uses a native-Windows computer, and expects
+      Windows-like functionality.
+    A Linux programmer.  An English-speaking programmer
+      who uses a *nix computer and expects some
+      Windows-like functionality.
+      Because Cal is currently available only for Wintel platforms,
+      a Linux programmer will use WINE to run Cal.
+   An application user.  A person who uses Plain English
+      because of a cool feature available in it
+      (such as the editor, or the pdf writer),
+      but avoids adding new procedures.
+   (Please add more audiences as needed.)
+
+A status rating can be one of the following:
+   A vague idea.
+   A request.  It is possible to think about how it might be done,
+     and what the trade-offs might be.
+   Designed.
+   Planned test(s).
+   Implemented.
+   Demonstrated.
+   Tested.  (With automated unit tests.)
+   Refactored.  It has been incorporated into the program
+     in a way that makes the overall system as simple as practical.
+   Won't do.  While any user is welcome to implement any feature
+     on their own computer, there are no plans to implement the feature
+     in the standard version of the software.
+  The request date.
+  Who made the request.
+  Who implemented the request.
+  Who tested the implementation.
+
+\ ======================================   
+   
+The following requests have either been completed, or marked as "Won't do."
+The program's change log is implicit
+in the source code repository's change log.
+Occasionally, more fixed items should be moved from issues.txt.
+
+022 - not applicable.  CAL-3040 already compiles all
+  files (that do not have extensions) that are in
+  the project directory, regardless of whether
+  they are open in the editor.
+
+023 - not applicable.  The documentation already discusses
+  which files CAL compiles.
+  
+026.  The End key works similarly to other environments.
+  Currently:
+    The End key moves the cursor to the end of the current line.
+    Ctrl-End moves the cursor to the end of the current file.
+  Audience:  programmers.
+  Status:  Demonstrated.  This feature is part of CAL-3040.
+  Implementation difficulty:  Done, as part of CAL-3040.
+  Demoing difficulty:  Easy.
+  Testing difficulty:  Profound.
+
+027.  The Home key works similarly to other environments.
+  Currently:
+    The Home key moves the cursor to the start of the current line.
+    Ctrl-Home moves the cursor to the start of the current file.
+  Audience:  programmers.
+  Status:  Demonstrated.  This feature is part of CAL-3040.
+  Implementation difficulty:  Done, as part of CAL-3040.
+  Demoing difficulty:  Easy.
+  Testing difficulty:  Profound.
+
+001.  By default, run automated unit tests immediately after each compilation.
+  This could be disabled by a configuration option.
+  Show the results in a convenient way.  If necessary,
+  the tests can be manually grouped into a high-level procedure.
+  Audience:  programmers.
+  Status:  tested.
+  Benefit:  Critical.  Frequently running a comprehensive
+    automated test suite makes it much easier, safer, and faster
+    to refactor and/or add features.
+  Implementation difficulty:  High.
+  Demoing difficulty:  Trivial.
+  Testing difficulty:  Trivial.
+  Requested by Jasper Paulsen on March 7, 2014.
+
+049.  On WINE systems, show WINE's complaint about memory leak(s).
+  Currently, the "wine cmd" shell reports something like the following after Cal quits:
+fixme:heap:HeapSetInformation 0x110000 0 0x40bc08 4
+  Audience:  Linux programmers.
+  Status:  Won't do.  CAL-3040 already shows its debug complaint about memory leaks
+    on WINE systems.  WINE's documentation states that WINE produces many fixme
+    complaints, most of which can be ignored.
+  Benefit:  Neutral.
+  Implementation difficulty:  Profound.
+  Demo difficulty:  Hard, unless the programmer is using WINE (which makes it easy).
+  Test difficulty:  Medium.
+  Requested by Jasper Paulsen on March 7, 2014.
+
+052.  On WINE systems, prevent the following error message:
+  Currently, the "wine cmd" shell reports something like the following after Cal quits:
+fixme:font:RemoveFontMemResourceEx (0x8771ccb9) stub
+  Audience:  Linux programmers.
+  Status:  Won't do.  This is caused by WINE having only implemented a stub
+    for "RemoveFontMemResourceEx".
+  Implementation difficulty:  Profound.
+  Benefit:  neutral.
+  Demo difficulty:  Hard, unless the programmer is using WINE (which makes it easy).
+  Test difficulty:  Profound.
+  Requested by Jasper Paulsen on March 7, 2014.
+
+088.  Add a test that the regression tests finished in an acceptable time.
+  For example, 10 seconds or 3600 seconds.
+  Audience:  Programmers.
+  Status:   Tested.
+  Benefit:  Minor.
+  Implementation difficulty:  Easy.
+  Demoing difficulty:  Easy.
+  Testing difficulty:  Easy.
+  Requested by Jasper Paulsen on March 12, 2014.
+
+061.  Make it easy to open all of the files in a project.
+  Audience: Windows programmers and Linux programmers.
+  Status:  Demonstrated in CAL-3040.  The de facto project file
+    is all files (that lack file extensions) in the same folder
+    as the active source when the compile or run feature is chosen.
+  Implementation difficulty:  Done in CAL-3040.
+  Demoing difficulty:  medium.
+  Testing difficulty:  medium.
+  Requested by Jasper Paulsen on March 7, 2014.
+  
+062.  Allow using the Desktop after documents have been loaded into the editor.
+  This might require using a tab for the purpose.
+  Audience:  All users.
+  Status:   Demonstrated in CAL-3040.  All blank tabs have this feature.
+  Implementation difficulty:  Done in CAL-3040.
+  Demoing difficulty:  Trivial.
+  Testing difficulty:  Medium.
+  Requested by Jasper Paulsen on March 7, 2014.
+
+063.  Allow opening files that are selected in the project file.
+  Audience:  Windows programmers.
+  Status:  Demonstrated in CAL-3040.  The de facto project file
+    is all files (that lack file extensions) in the same folder
+    as the active source when the compile or run feature is chosen.
+  Benefit:  Minor.
+  Implementation difficulty:  Done in CAL-3040.
+  Demoing difficulty:  Easy.
+  Testing difficulty:  Medium.
+  Requested by Jasper Paulsen on March 7, 2014.
+  
+039.  Allow the user to decide whether to regression test each build.
+  This could be implemented by only running the regression tests
+  the first time the user clicks on the status.  This would eliminate
+  the risk of an infinite loop or null pointer exception preventing
+  the user from seeing that the program compiled quickly and successfully.
+  Audience: Windows programmers and Linux programmers.
+  Status:   Demonstrated.
+  Benefit:  Very important.
+  Implementation difficulty:  Easy.
+  Demoing difficulty:  Easy.
+  Testing difficulty:  Profound.
+  Requested by Jasper Paulsen on March 7, 2014.
+
+087.  Show how long it took to run the regression tests in the status,
+  upon completion of the regression tests.
+  Audience:  Programmers.
+  Status:    Demonstrated.
+  Benefit:  Very important.
+  Implementation difficulty:  Easy.
+  Demoing difficulty:  Easy.
+  Testing difficulty:  Profound.
+  Requested by Jasper Paulsen on March 7, 2014.
+
+003.  Gray out (and disable) unused menu letters.
+  Cal has an alphabetical menu structure.
+  Currently, many of the letters do not have menu items.
+  These blank menu letters look like they have menus, though.
+  This is confusing to users, and makes it hard
+  for them to learn what menus are available.
+  Status:  Tested.  (Specifically,
+    tested that the "q" menu's temporary color is the command's color,
+    whereas the "z" menu's temporary color is the desktop color.
+    If the q menu is empty (in other words, does not include "quit"),
+    and/or if the z menu is populated, the test code will need to be changed.
+  Benefit:  Important.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Easy.
+  Testing difficulty:  Medium.
+  Audience:  all users.
+  Requested by Jasper Paulsen on March 7, 2014.
+
+009.  Allow the user to change programs by clicking on a program outside of Cal.
+  Currently, a Linux/Wine/Cal user has to
+  press Alt-Tab-Tab to change to another program.
+  The program could notice if a mouse click
+  is outside of the program's window.
+  If so, and if the program is not in the middle of something important,
+  the program could yield control to the windowing system.
+  The status is demonstrated.
+  The audiences are Windows programmers and Linux programmers.
+  The benefit is important -- most Windows and Linux programmers
+    alternate working in their IDEs and doing other things.
+  The difficulty is medium.  It requires modifying mouse event handler(s)
+    to call the pre-existing yield feature.
+  Demoing would be easy.  Windows programmers and Linux programmers
+    would demo it all the time, but full-screen users would only demo it
+    when Cal did not occupy the full screen.
+  Testing would be profound.
+  Requested by Jasper Paulsen on March 7, 2014.
+
+010.  Allow the program to share the screen with other programs.
+  The benefit is important -- most Windows and Linux programmers
+    alternate working in their IDEs and doing other things.
+    This feature would also allow Plain English-only programmers
+    to have two side-by-side instances of Cal,
+    and copy-and-paste between the instances.
+  The difficulty is hard, because the
+    "Don't hide programs outside of the program's window"
+    sub-feature is hard.
+  The status is demonstrated.
+  The audiences are Windows programmers and Linux programmers.
+  Demoing would be easy.  Windows programmers and Linux programmers
+    would demo it all the time, but full-screen users
+    would only demo it when Cal did not occupy the full screen
+    (or when they use two side-by-side instances of Cal).
+  Testing would be profound.
+  Requested by Jasper Paulsen on March 7, 2014.
+
+030.  Show minimize, restore, and maximize buttons at the top right corner.
+  Status:  Tested.
+  Audience:  Windows programmers.
+  Benefit:  Important.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Easy.
+  Testing difficulty:  Medium.  Just tested that the trio has 3 commands.
+    Did not test whether the trio is displayed.  Depending on the
+    main window size, sometimes the trio is deliberately not displayed.
+  Requested by Jasper Paulsen on March 7, 2014.
+
+097.  Refactor test code so that each test needs less code.
+  Audience:  Programmers.
+  Status:  Tested.
+  Benefit:  Important -- makes it much easier to write tests.
+  Implementation difficulty:  Easy.
+  Demoing difficulty:  Easy.
+  Testing difficulty:  Not applicable.
+  Requested by Gerry Rzeppa on March 18, 2014.
+
+095.  Identify whether the program is running on WINE.
+  Benefit:  Important.  This would allow commenting out features
+    that do not work on WINE, but do work on Windows
+    (such as minimizing, and text-to-speech).
+  Audience:  Linux programmers.
+  Status:  Tested.
+  Implementation difficulty:  Profound.
+  Demoing difficulty:  Hard.
+  Testing difficulty:  Medium.  Tested whether CAL can
+    check if a library contains a particular procedure.
+    The WINE check looks for "wine_get_version" in "ntdll.dll".
+  Requested by Jasper Paulsen on March 17, 2014.
+
+079.  Allow font heights to be added dynamically to the menus.
+  Specifically, do not require the corresponding menu handler
+  to be hardcoded in the menu handler switch.
+  Audience:  Windows programmers and Linux programmers.
+  Status:  Tested.
+  Implementation difficulty:  Hard.
+  Demoing difficulty:  Easy.
+  Testing difficulty:  Medium.
+  Benefit:  Minor.
+  Requested by Jasper Paulsen on March 12, 2014.
+
+100.  In the font height submenu, sort by height from tallest to shortest, then offer the other... option.
+  Audience:  Windows programmers and Linux programmers.
+  Implementation difficulty:  Hard.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Medium.
+  Benefit:  Minor.
+  Status: Tested.
+  Requested by Jasper Paulsen on March 12, 2014.
+
+101.  In the font name submenu, sort alphabetically by name, then offer the other... option.
+  Audience:  Windows programmers and Linux programmers.
+  Implementation difficulty:  Hard.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Medium.
+  Benefit:  Minor.
+  Status: Tested.
+  Requested by Jasper Paulsen on March 12, 2014.
+
+029.  If the font is fixed width, show a subtle line at the 80 character mark.
+  The intent is that if the user chooses to have a fixed width font,
+  then make it easy for the user to manually line wrap.
+  Audience:  Linux programmers -- this is a feature of IntelliJ.
+  Status:  Tested.
+  Benefit:  Minor
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Easy.
+  Testing difficulty:  Medium.  Tested the code to check
+    if the current font is fixed-width or proportional.
+    Did not test if the line is present.
+  Requested by Jasper Paulsen on March 7, 2014.
+
+083.  Highlight the current font height on the font height submenu.
+  If (and only if) the current font height is not on the font height submenu,
+  highlight the "Other" submenu item.
+  Audience:  Windows programmers and Linux programmers.
+  Status:  Tested.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Medium.
+  Benefit:  Minor.
+  Requested by Jasper Paulsen on March 12, 2014.
+
+071.  Add standard fonts to the menu.
+  The following four fonts are standard on Windows computers:
+  Arial, Times New Roman, Courier New, and Symbol.
+  The old default font was standard in CAL.
+  For each of these five fonts that is present,
+  include the font in a font name submenu.
+  Audience:  Windows programmers and Linux programmers.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Easy.
+  Testing difficulty:  Medium.
+  Benefit:  Important.
+  Status: Tested.
+  Requested by Jasper Paulsen on March 12, 2014.
+
+072.  Add an "Other" option to the font name submenu,
+  which does what CAL-3040's "Font Name..." menu item does:
+  ask the user in the dialog to type in a font name.
+  Audience:  Windows programmers and Linux programmers.
+  Implementation difficulty:  Trivial.
+  Demoing difficulty:  Easy.
+  Testing difficulty:  Medium.
+  Benefit:  Minor.
+  Status: Tested.
+  Requested by Jasper Paulsen on March 12, 2014.
+
+077.  Highlight the current font name on the font name submenu.
+  If (and only if) the current font name is not on the font name submenu,
+  highlight the "Other" submenu item.
+  Audience:  Windows programmers and Linux programmers.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Easy.
+  Testing difficulty:  Medium.
+  Benefit:  Minor.
+  Status: Tested.
+  Requested by Jasper Paulsen on March 12, 2014.
+
+076.  In the font name submenu,
+  use each font to display the font name.
+  For example, courier new would be in courier new,
+  and arial would be in arial.
+  Audience:  Windows programmers and Linux programmers.
+  Implementation difficulty:  Easy.
+  Demoing difficulty:  Easy.
+  Testing difficulty:  Medium.
+  Benefit:  Minor.
+  Status: Tested.
+  Requested by Jasper Paulsen on March 12, 2014.
+
+084.  In the font height submenu,
+  use the current font to display the font heights.
+  Audience:  Windows programmers and Linux programmers.
+  Implementation difficulty:  Easy.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Medium.
+  Benefit:  Minor.
+  Status: Tested.
+  Requested by Jasper Paulsen on March 12, 2014.
+
+085.  In the font height submenu,
+  for each font height that is shorter than the default font height,
+  show the font height in its own height.
+  For example, if the default font height is 1/4 inch:
+  the font height submenu would show "1/8 Inch" smaller than "1/4 Inch",
+  but it would show "1/2 Inch" the same size as "1/4 Inch".
+  Audience:  Windows programmers and Linux programmers.
+  Implementation difficulty:  Easy.
+  Demoing difficulty:  Easy.
+  Testing difficulty:  Medium.
+  Benefit:  Minor.
+  Status: Tested.
+  Requested by Jasper Paulsen on March 12, 2014.
+
+075.  If the current font (in the editor or writer pad)
+  is not otherwise listed in the font name submenu, include it.
+  Audience:  Windows programmers and Linux programmers.
+  Implementation difficulty:  Easy.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Medium.
+  Benefit:  Minor.
+  Status: Tested.
+  Requested by Jasper Paulsen on March 12, 2014.
+
+045.  Change the sort order of byte and key declarations.
+As of March 7, 2014, the byte and key declarations
+were scattered throughout the noodle.  Since then,
+they have been moved to the 'characters' file.
+  Audience:  Linux programmers.
+  Status:  Won't do.
+  Benefit:  Minor.
+  Implementation difficulty:  easy.
+  Demo difficulty:  Easy.
+  Test difficulty:  Medium.
+  Requested by Jasper Paulsen on March 7, 2014.
+
+046.  Change the sort order of color declarations.
+As of March 7, 2014, the color declarations were scattered
+throughout the noodle.  Since then,
+they have been moved to the 'colors' file.
+  Audience:  Linux programmers.
+  Status:  Won't do.
+  Benefit:  Minor.
+  Implementation difficulty:  easy.
+  Demo difficulty:  Easy.
+  Test difficulty:  Medium.
+
+018.  Only ask "Are you quite sure [you want to quit]" if there is unsaved work.
+  Ask the user if they want to save the files.
+  Update the documentation accordingly.
+  Audience:  all users.
+  Status:  Won't do.
+  Benefit:  minor.
+  Implementation difficulty:  easy.
+  Demoing difficulty:  medium.
+  Testing difficulty:  medium.
+  Requested by Jasper Paulsen on March 7, 2014.
+
+043.  Add a "frequently used" menu bar.
+   Most of the time, a user only uses a few features from the menus.
+   For example, when writing and running code, a user is likely to use:
+   Comment, Find, Find Next, Open, Quit, Run, Save, Save As, Uncomment, Undo
+   It would be possible to keep track of which menu commands
+   have been called (using the menus, ignoring uses via Ctrl- keys)
+   during the past arbitrary number of menu commands.
+   It would also be possible to calculate how many menu items
+   would fit in a horizontal row beneath the alphabetical menu.
+   The most frequently used menu items could be put in such a row,
+   in alphabetical order.  If no menu items have ever been used,
+   the row could default to a few typical commands,
+   with the rest of the row blank.
+   Status:  Won't do.
+   Audience:  Windows programmers.
+   Benefit:  Minor.  It might make the system much easier to use.
+   Implementation difficulty:  Easy.
+   Demoing difficulty:  Hard, because of the lag
+     due to the arbitrary number of recent uses.
+   Testing difficulty:  Medium.  It would be possible to set up a mock menu,
+       pass it a history of menu clicks, and verify which menu items
+       appear in the mock frequently used menu.
+       It would also be easy to verify that
+       the real frequently used menu is visible.
+  Requested by Jasper Paulsen on March 7, 2014.
+
+044.  Update the documentation to discuss the "frequently used menu" bar.
+  Audience:  all users.
+  Status:   Won't do.
+  Benefit:  Important -- the documentation needs to be accurate.
+  Implementation difficulty:  Medium.
+  Demo difficulty:  Easy.
+  Test difficulty:  not applicable.
+  Requested by Jasper Paulsen on March 7, 2014.
+
+006.  Hide unused tabs in the tab-strip.
+  Cal has a tab-strip at the bottom of its screen.
+  The tab-strip shows blank tabs for tabs
+    that have not been populated with documents yet.
+  This confuses users.
+  The request is to hide all but one of the unused tabs.
+  The one blank tab will let users start working on a new document.
+  When the user starts working on a new document, unhide another tab.
+  Benefit:  Might do more harm than good.
+  Status:   Won't do.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Easy.
+  Testing difficulty:  Medium.
+  Audience:  Windows programmers.
+  Requested by Jasper Paulsen on March 7, 2014.
+
+106.  Correctly parse the command line.
+  Handle quoted strings in the command line the same way
+  that the Windows shell scripting language does.
+  Status:   Already done.
+  Benefit:  Medium.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Easy.
+  Audience:  Windows and Linux programmers.
+  Requested by Jasper Paulsen on February 24, 2017.
+
+107.  Extract parameter values from command line arguments.
+  For example:
+  mycommand arg1 arg2= arg3=value arg4="another value"
+  should produce empty strings for arg1 and arg2's parameter values,
+  value for arg3's parameter value,
+  and "another value" (with the quotes) for arg4's parameter value.
+  This behavior matches a convention for C#/SCOPE programming.
+  Status:   Already done.
+  Benefit:  Medium.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Easy.
+  Audience:  Windows and Linux programmers.
+  Requested by Jasper Paulsen on February 26, 2017.
+
+108.  Extract the program name from the command line.
+  The zeroeth command line argument is the name used to call the program.
+  It is not necessarily the program's canonical name.
+  Status:   Already done.
+  Benefit:  Minor.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Easy.
+  Audience:  Windows and Linux programmers.
+  Requested by Jasper Paulsen on February 26, 2017.
+
+125.  Allow setting the Run feature's command line parameters.
+  Benefit:  Medium.  Would help speed up demonstrating features.
+  Status:   Already done.  See the desktop's "to handle run" routine.
+            The parameter string can be further customized.              
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Easy.
+  Testing difficulty:  Hard.
+  Audience:  Windows and Linux programmers.
+  Requested by Jasper Paulsen on March 1, 2017.
+
+137.  Add a "Running Options…" menu item in the editor.
+  At program start up, populate the running options
+  based on the current instance's settings
+  (such as /left, /right, and /tt).  Use these command line options
+  when a program is run using the Run menu item or Ctrl-R.
+  Status:   Already done.
+  Benefit:  Major.  Will make it much easier to demonstrate features.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Easy.
+  Testing difficulty:  Medium.
+  Audience:  Windows programmers.
+  Requested by Jasper Paulsen on March 2, 2017
+
+007.  Have a configuration file.
+  Some users have preferences that they would like to keep from
+  one session of Cal to another.  For example:
+    font name,
+    font size,
+    font name for UI features,
+    main window size and location,
+    initial size and location of the main window
+      of a program run by the compiler,
+    state of the "most recently used menus" feature
+  Store these settings in a configuration file, in Plain English.
+  Include a prominent note that the program updates these settings,
+    based on user actions.
+  Audience:  Windows programmers and Linux programmers.
+  Benefit:  Possibly does more harm than good.
+            Most of the value of this feature can
+            be achieved using command line options.
+  Status:   Won't do.
+  Implementation difficulty:  Hard.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Medium.
+  Requested by Jasper Paulsen on March 7, 2014.
+
+069. Update the documentation to discuss configuration.
+  Audience:  Windows programmers and Linux programmers.
+  Status:  request.
+  Benefit:  Important -- the documentation needs to be accurate.
+  Implementation difficulty:  Medium.
+  Demo difficulty:  Easy.
+  Test difficulty:  not applicable.
+  Requested by Jasper Paulsen on March 7, 2014.
+
+130.  Allow calling a config.txt file from the command line.
+  Benefit:  Might do more harm than good.
+            A non- Plain English format would be awkward.
+            A Plain English format would be dangerous,
+            because it tempt users to use CAL as an interpreter,
+            or even as a worm.
+            Would allow entering long command lines
+            in a text file, which is much easer to view
+            and edit than a command line.  (And can be
+            much longer.)  Would need to have an extension,
+            to avoid being compiled.
+  Status:   Won't do.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Hard.
+  Testing difficulty:  Hard.
+  Audience:  Windows and Linux programmers.
+  Requested by Jasper Paulsen on March 1, 2017.
+
+131.  Allow the config.txt file to be in Plain English.
+  Benefit:  Might do more harm than good.
+            A Plain English format would be dangerous,
+            because it tempt users to use CAL as an interpreter,
+            or even as a worm.  Perhaps it could be restricted
+            to just making "requests" similar to the command line?
+            But arbitrarily restricting Plain English
+            seems, well, arbitrary.
+  Status:   Won't do.
+  Implementation difficulty:  Hard.
+  Demoing difficulty:  Hard.
+  Testing difficulty:  Hard.
+  Audience:  Programmers.
+  Requested by Jasper Paulsen on March 1, 2017.
+
+129.  Allow using Plain English in the command line.
+  Benefit:  Might do more harm than good.
+            Long command lines are hard to maintain.
+            Various shells have various limits on command line
+            length.  These limits are not very long.
+  Status:   Won't do.
+  Implementation difficulty:  Hard.
+  Demoing difficulty:  Hard.
+  Testing difficulty:  Hard.
+  Audience:  Plain English-only programmers.
+  Requested by Jasper Paulsen on March 1, 2017.
+
+132.  Allow the config.txt file to have command-line flags.
+  Benefit:  Might do more harm than good.
+            The format would seem awkward compared to
+            Plain English.
+  Status:   Won't do.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Hard.
+  Testing difficulty:  Hard.
+  Audience:  Programmers.
+  Requested by Jasper Paulsen on March 1, 2017.
+
+145.  Define new variable types, so that routines that
+  assume that particular parameters are being used
+  within certain contexts have compiler support
+  for these assumptions.
+  For example, the wyrd parameter of
+    to decide if extra button one is implied by a wyrd:
+  Status:    Done.
+  Audience:  Programmers.
+  Benefit:   Medium.  Reduces the need for comments.
+  Implementation difficulty:  Easy.  But there might be
+             many such variables to fix.
+  Demoing difficulty:  Easy.
+  Testing difficulty:  Easy.  Built-in to the compiler.
+  Requested by Jasper Paulsen on March 7, 2017.
+
+005.  Update the version and copyright information.
+  Update both the program and the documentation.
+  Audience:  all users.
+  Status:   Done.
+  Benefit:  Important -- the documentation needs to be accurate.
+  Implementation difficulty:  Easy, but requires consultation with
+    the Osmosian Order of Plain English Programmers.
+  Demo difficulty:  Easy.
+  Test difficulty:  not applicable.
+  Requested by Jasper Paulsen on March 7, 2014.
+    
+002.  Update the documentation once the program has automated testing.
+Automated tests make debugging easier.
+  Audience:  Windows programmers and Linux programmers.
+  Status:   Documented.
+  Benefit:  Important -- the documentation needs to be accurate.
+  Implementation difficulty:  Easy.
+  Demoing difficulty:  Easy.
+  Testing difficulty:  not applicable
+  Requested by Jasper Paulsen on March 7, 2014.
+
+015.  Update the documentation once the program
+  is able to share the screen with other programs.
+  Audience:  Windows programmers and Linux programmers.
+  Status:   Documented.
+  Benefit:  Important -- the documentation needs to be accurate.
+  Implementation difficulty:  Easy.
+  Demoing difficulty:  Easy.
+  Testing difficulty:  not applicable.
+  Requested by Jasper Paulsen on March 7, 2014.
+
+103.  Update the documentation to discuss command-line options.
+  Audience:  Windows programmers and Linux programmers.
+  Status:   Documented.
+  Benefit:  Important -- the documentation needs to be accurate.
+  Implementation difficulty:  Medium.
+  Demo difficulty:  Easy.
+  Test difficulty:  not applicable.
+  Requested by Jasper Paulsen on April 11, 2014.
+
+053.  Update the documentation to reflect updated error messages while closing.
+  Audience:  Linux programmers.
+  Status:   Documented.
+  Benefit:  Important -- the documentation needs to be accurate.
+  Implementation difficulty:  Medium.
+  Demo difficulty:  Easy.
+  Test difficulty:  not applicable.
+  Requested by Jasper Paulsen on March 7, 2014.
+
+

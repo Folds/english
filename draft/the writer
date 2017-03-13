@@ -1,4 +1,6 @@
-\ copyright © 2006 the osmosian order (3040)
+\ The portions of this file that are from CAL-3040
+\ are copyright 2006 by the Osmosian Order.
+\ The remainder is copyright 2014, 2017 by Jasper Paulsen.
 
 to add a page to a document:
   if the document is nil, exit.
@@ -19,9 +21,9 @@ to adjust a document:
 to adjust the edge of every page in a document:
   if the document is nil, exit.
   loop.
-  get a page from the document's pages.
-  if the page is nil, break.
-  adjust the edge of the page in the document.
+    get a page from the document's pages.
+    if the page is nil, break.
+    adjust the edge of the page in the document.
   repeat.
   limit the origin in the document.
 
@@ -88,16 +90,17 @@ to adjust the title of a page:
   if the page's title ends with "...", exit.
   if the page's title ends with "..", append "." to the page's title; exit.
   if the page's title ends with ".", append ".." to the page's title; exit.
+  if the page's title ends with ")", append "..." to the page's title; exit.
   if the page's title's last's target is symbolic, exit.
   append "..." to the page's title.
 
 to align any selected shapes on a page given an alignment:
   if the page is nil, exit.
   loop.
-  get a shape from the page's shapes.
-  if the shape is nil, exit.
-  if the shape is not selected, repeat.
-  align the shape given the alignment.
+    get a shape from the page's shapes.
+    if the shape is nil, exit.
+    if the shape is not selected, repeat.
+    align the shape given the alignment.
   repeat.
 
 to align a shape given an alignment:
@@ -152,10 +155,10 @@ to begin edit on a page given a shape:
 to border any selected shapes on a page given a color:
   if the page is nil, exit.
   loop.
-  get a shape from the page's shapes.
-  if the shape is nil, exit.
-  if the shape is not selected, repeat.
-  border the shape given the color.
+    get a shape from the page's shapes.
+    if the shape is nil, exit.
+    if the shape is not selected, repeat.
+    border the shape given the color.
   repeat.
 
 to border a shape given a color:
@@ -174,21 +177,21 @@ to bring any selected shapes on a page forward:
   if the page is nil, exit.
   move the page's shapes to some original shapes.
   loop.
-  put the original shapes' first into a shape.
-  if the shape is nil, break.
-  remove the shape from the original shapes.
-  if the shape is selected, append the shape to some other shapes; repeat.
-  append the shape to the page's shapes.
+    put the original shapes' first into a shape.
+    if the shape is nil, break.
+    remove the shape from the original shapes.
+    if the shape is selected, append the shape to some other shapes; repeat.
+    append the shape to the page's shapes.
   repeat.
   append the other shapes to the page's shapes.
 
 to capitalize any selected shapes on a page:
   if the page is nil, exit.
   loop.
-  get a shape from the page's shapes.
-  if the shape is nil, exit.
-  if the shape is not selected, repeat.
-  capitalize the shape.
+    get a shape from the page's shapes.
+    if the shape is nil, exit.
+    if the shape is not selected, repeat.
+    capitalize the shape.
   repeat.
 
 to capitalize a shape:
@@ -232,28 +235,28 @@ to center a shape in a box:
 to change any selected shapes on a page given a font height:
   if the page is nil, exit.
   loop.
-  get a shape from the page's shapes.
-  if the shape is nil, exit.
-  if the shape is not selected, repeat.
-  change the shape given the font height.
+    get a shape from the page's shapes.
+    if the shape is nil, exit.
+    if the shape is not selected, repeat.
+    change the shape given the font height.
   repeat.
 
 to change any selected shapes on a page given a font name:
   if the page is nil, exit.
   loop.
-  get a shape from the page's shapes.
-  if the shape is nil, exit.
-  if the shape is not selected, repeat.
-  change the shape given the font name.
+    get a shape from the page's shapes.
+    if the shape is nil, exit.
+    if the shape is not selected, repeat.
+    change the shape given the font name.
   repeat.
 
 to change any selected shapes on a page given a radius:
   if the page is nil, exit.
   loop.
-  get a shape from the page's shapes.
-  if the shape is nil, exit.
-  if the shape is not selected, repeat.
-  change the shape given the radius.
+    get a shape from the page's shapes.
+    if the shape is nil, exit.
+    if the shape is not selected, repeat.
+    change the shape given the radius.
   repeat.
 
 to change a shape given a font height:
@@ -318,11 +321,11 @@ to check spelling given a page and a flag (shapes):
   get a shape refer with which to start finding given the page.
   get the find anchor with which to start finding given the shape refer and the page.
   loop.
-  if the shape refer is nil, exit.
-  find the next misspelling in the shape refer's shape's text given the flag.
-  if the flag is set, begin edit on the page given the shape refer's shape; exit.
-  put 1 and 1 into the find anchor.
-  put the shape refer's next into the shape refer.
+    if the shape refer is nil, exit.
+    find the next misspelling in the shape refer's shape's text given the flag.
+    if the flag is set, begin edit on the page given the shape refer's shape; exit.
+    put 1 and 1 into the find anchor.
+    put the shape refer's next into the shape refer.
   repeat.
 
 to clear a knob:
@@ -341,24 +344,24 @@ to close a page:
 to convert some paragraphs to some rows:
   destroy the rows.
   loop.
-  get a paragraph from the paragraphs.
-  if the paragraph is nil, break.
-  create a row given the paragraph's string.
-  append the return byte to the row's string.
-  append the row to the rows.
+    get a paragraph from the paragraphs.
+    if the paragraph is nil, break.
+    create a row given the paragraph's string.
+    append the return byte to the row's string.
+    append the row to the rows.
   repeat.
   renumber the rows.
 
 to convert some rows to some paragraphs:
   destroy the paragraphs.
   loop.
-  get a row from the rows.
-  if the row is nil, exit.
-  if a paragraph is nil, create the paragraph; append the paragraph to the paragraphs.
-  append the row's string to the paragraph's string.
-  if the row's string's last's target is not the return byte, repeat.
-  subtract 1 from the paragraph's string's last. \ paragraphs don't end with carriage returns; use subtract for speed
-  void the paragraph.
+    get a row from the rows.
+    if the row is nil, exit.
+    if a paragraph is nil, create the paragraph; append the paragraph to the paragraphs.
+    append the row's string to the paragraph's string.
+    if the row's string's last's target is not the return byte, repeat.
+    subtract 1 from the paragraph's string's last. \ paragraphs don't end with carriage returns; use subtract for speed
+    void the paragraph.
   repeat.
 
 a copied page is a page.
@@ -368,24 +371,24 @@ to copy any selected pages in a document to a page clipboard returning a count:
   if the document is nil, exit.
   put the document's selected page count into a total count.
   loop.
-  get a page from the document's pages.
-  if the page is nil, exit.
-  if the page is not selected, repeat.
-  add 1 to the count.
-  show status the count then " of " then the total count then "...".
-  copy the page to the page clipboard.
+    get a page from the document's pages.
+    if the page is nil, exit.
+    if the page is not selected, repeat.
+    add 1 to the count.
+    show status the count then " of " then the total count then "...".
+    copy the page to the page clipboard.
   repeat.
 
 to copy any selected shapes on a page to a shape clipboard:
   if the page is nil, exit.
   destroy the shape clipboard.
   loop.
-  get a shape from the page's shapes.
-  if the shape is nil, exit.
-  if the shape is not selected, repeat.
-  copy the shape into another shape.
-  scale the other shape to 1/1.
-  append the other shape to the shape clipboard.
+    get a shape from the page's shapes.
+    if the shape is nil, exit.
+    if the shape is not selected, repeat.
+    copy the shape into another shape.
+    scale the other shape to 1/1.
+    append the other shape to the shape clipboard.
   repeat.
 
 to copy a page into another page:
@@ -435,10 +438,10 @@ to copy a shape into another shape:
 to copy some shapes into some other shapes:
   destroy the other shapes.
   loop.
-  get a shape from the shapes.
-  if the shape is nil, exit.
-  copy the shape into another shape.
-  append the other shape to the other shapes.
+    get a shape from the shapes.
+    if the shape is nil, exit.
+    copy the shape into another shape.
+    append the other shape to the other shapes.
   repeat.
 
 to create a document:
@@ -560,13 +563,13 @@ to cut any selected pages in a document to a page clipboard returning a count:
   put the document's selected page count into a total count.
   move the document's pages to some original pages.
   loop.
-  put the original pages' first into a page.
-  if the page is nil, break.
-  remove the page from the original pages.
-  if the page is not selected, append the page to the document's pages; repeat.
-  add 1 to the count.
-  show status the count then " of " then the total count then "...".
-  append the page to the page clipboard.
+    put the original pages' first into a page.
+    if the page is nil, break.
+    remove the page from the original pages.
+    if the page is not selected, append the page to the document's pages; repeat.
+    add 1 to the count.
+    show status the count then " of " then the total count then "...".
+    append the page to the page clipboard.
   repeat.
   set the document's modified flag.
   adjust the edge of every page in the document.
@@ -654,21 +657,27 @@ to decide if a shape is selected:
   if the shape's selected flag is set, say yes.
   say no.
 
+to decide if a shape is selected text:
+  if the shape is nil, say no.
+  if the shape is not selected, say no.
+  if the shape's kind is "text", say yes.
+  say no.
+
 to decide if something is selected in a document:
   if the document is nil, say no.
   loop.
-  get a page from the document's pages.
-  if the page is nil, say no.
-  if the page is selected, say yes.
+    get a page from the document's pages.
+    if the page is nil, say no.
+    if the page is selected, say yes.
   repeat.
 
 to decide if something is selected on a page:
   if the page is nil, say no.
   if the page is being edited, say yes.
   loop.
-  get a shape from the page's shapes.
-  if the shape is nil, say no.
-  if the shape is selected, say yes.
+    get a shape from the page's shapes.
+    if the shape is nil, say no.
+    if the shape is selected, say yes.
   repeat.
 
 to decide if a spot is in a cropper of a shape on a page:
@@ -744,9 +753,9 @@ to decide if a spot is in a shape (group):
   if the shape's kind is not "group", say no.
   if the spot is not in the shape's box, say no.
   loop.
-  get another shape from the shape's shapes (backwards).
-  if the other shape is nil, say no.
-  if the spot is in the other shape, say yes.
+    get another shape from the shape's shapes (backwards).
+    if the other shape is nil, say no.
+    if the spot is in the other shape, say yes.
   repeat.
 
 to decide if a spot is in a shape (picture):
@@ -813,9 +822,9 @@ to decide if a spot is on a shape (ellipse):
 to decide if a spot is on a shape (group):
   if the shape's kind is not "group", say no.
   loop.
-  get another shape from the shape's shapes (backwards).
-  if the other shape is nil, say no.
-  if the spot is on the other shape, say yes.
+    get another shape from the shape's shapes (backwards).
+    if the other shape is nil, say no.
+    if the spot is on the other shape, say yes.
   repeat.
 
 to decide if a spot is on a shape (picture):
@@ -950,10 +959,10 @@ to draw the edge of a page in a document:
 to draw the edges of any visible pages in a document:
   if the document is nil, exit.
   loop.
-  get a page from the document's pages.
-  if the page is nil, exit.
-  if the edge of the page is not visible in the document, repeat.
-  draw the edge of the page in the document.
+    get a page from the document's pages.
+    if the page is nil, exit.
+    if the edge of the page is not visible in the document, repeat.
+    draw the edge of the page in the document.
   repeat.
 
 to draw the grid on a page:
@@ -967,9 +976,9 @@ to draw the grid on a page (horizontal grid lines):
   scale the number given the page's scale.
   put 0 and the number and the page's width and the number into a line.
   loop.
-  if the line's start's y is greater than or equal to the page's height, exit.
-  draw the line with the grid color.
-  move the line given 0 and the number.
+    if the line's start's y is greater than or equal to the page's height, exit.
+    draw the line with the grid color.
+    move the line given 0 and the number.
   repeat.
 
 to draw the grid on a page (vertical grid lines):
@@ -977,9 +986,9 @@ to draw the grid on a page (vertical grid lines):
   scale the number given the page's scale.
   put the number and 0 and the number and the page's height into a line.
   loop.
-  if the line's start's x is greater than or equal to the page's width, exit.
-  draw the line with the grid color.
-  move the line given the number and 0.
+    if the line's start's x is greater than or equal to the page's width, exit.
+    draw the line with the grid color.
+    move the line given the number and 0.
   repeat.
 
 to draw a knob:
@@ -1081,10 +1090,10 @@ to draw the vertices on a shape:
   if the shape is nil, exit.
   if the shape's kind is not "polygon", exit.
   loop.
-  get a vertex from the shape's polygon's vertices.
-  if the vertex is nil, exit.
-  draw the vertex.
-  if the vertex is the shape's polygon's vertices' last, draw the vertex's spot with the black color.
+    get a vertex from the shape's polygon's vertices.
+    if the vertex is nil, exit.
+    draw the vertex.
+    if the vertex is the shape's polygon's vertices' last, draw the vertex's spot with the black color.
   repeat.
 
 to draw the vertices on some shapes:
@@ -1100,15 +1109,15 @@ to duplicate any selected pages in a document returning a count:
   put the document's last selected page's next into a saved page.
   put the document's selected page count into a total count.
   loop.
-  get a page from the document's pages.
-  if the page is nil, break.
-  if the page is not selected, repeat.
-  add 1 to the count.
-  show status the count then " of " then the total count then "...".
-  copy the page into a copied page.
-  deselect the page.
-  select the copied page.
-  append the copied page to some copied pages.
+    get a page from the document's pages.
+    if the page is nil, break.
+    if the page is not selected, repeat.
+    add 1 to the count.
+    show status the count then " of " then the total count then "...".
+    copy the page into a copied page.
+    deselect the page.
+    select the copied page.
+    append the copied page to some copied pages.
   repeat.
   insert the copied pages into the document's pages before the saved page.
   set the document's modified flag.
@@ -1119,14 +1128,14 @@ to duplicate any selected shapes on a page:
   set the page's superduper's flag.
   if the superduper of the page should be reset, reset the superduper given the page.
   loop.
-  get a shape from the page's shapes.
-  if the shape is nil, break.
-  if the shape is not selected, repeat.
-  copy the shape into another shape.
-  append the other shape to some shapes.
-  deselect the shape.
-  select the other shape.
-  move the other shape given the page's superduper's pair.
+    get a shape from the page's shapes.
+    if the shape is nil, break.
+    if the shape is not selected, repeat.
+    copy the shape into another shape.
+    append the other shape to some shapes.
+    deselect the shape.
+    select the other shape.
+    move the other shape given the page's superduper's pair.
   repeat.
   append the shapes to the page's shapes.
 
@@ -1241,9 +1250,9 @@ to externalize a polygon given a buffer and an indent:
   if the polygon is nil, exit.
   externalize the polygon's vertices' count given the buffer and the indent.
   loop.
-  get a vertex from the polygon's vertices.
-  if the vertex is nil, exit.
-  externalize the vertex's spot given the buffer and the indent.
+    get a vertex from the polygon's vertices.
+    if the vertex is nil, exit.
+    externalize the vertex's spot given the buffer and the indent.
   repeat.
 
 to externalize a ratio given a buffer and an indent:
@@ -1357,10 +1366,10 @@ to fail with a string:
 to fill any selected shapes on a page given a color:
   if the page is nil, exit.
   loop.
-  get a shape from the page's shapes.
-  if the shape is nil, exit.
-  if the shape is not selected, repeat.
-  fill the shape given the color.
+    get a shape from the page's shapes.
+    if the shape is nil, exit.
+    if the shape is not selected, repeat.
+    fill the shape given the color.
   repeat.
 
 to fill a shape given a color:
@@ -1394,13 +1403,14 @@ to find given a page and a flag (shapes):
   if the page is nil, exit.
   put the page's shape refers' first into a shape refer.
   if the page is not the find page, put 1 and 1 into the find anchor.
-  if the page is the find page, find the shape refer given the page's shape refers and the find shape.
+  if the page is the find page,
+    find the shape refer given the page's shape refers and the find shape.
   loop.
-  if the shape refer is nil, exit.
-  find next given the shape refer's shape's text and the flag.
-  if the flag is set, begin edit on the page given the shape refer's shape; exit.
-  put 1 and 1 into the find anchor.
-  put the shape refer's next into the shape refer.
+    if the shape refer is nil, exit.
+    find next given the shape refer's shape's text and the flag.
+    if the flag is set, begin edit on the page given the shape refer's shape; exit.
+    put 1 and 1 into the find anchor.
+    put the shape refer's next into the shape refer.
   repeat.
 
 to find next given a page and a flag:
@@ -1420,20 +1430,20 @@ to find next given a page and a flag (shapes):
   get a shape refer with which to start finding given the page.
   get the find anchor with which to start finding given the shape refer and the page.
   loop.
-  if the shape refer is nil, exit.
-  find next given the shape refer's shape's text and the flag.
-  if the flag is set, begin edit on the page given the shape refer's shape; exit.
-  put 1 and 1 into the find anchor.
-  put the shape refer's next into the shape refer.
+    if the shape refer is nil, exit.
+    find next given the shape refer's shape's text and the flag.
+    if the flag is set, begin edit on the page given the shape refer's shape; exit.
+    put 1 and 1 into the find anchor.
+    put the shape refer's next into the shape refer.
   repeat.
 
 to find a page given a document and a spot:
   void the page.
   if the document is nil, exit.
   loop.
-  get the page from the document's pages.
-  if the page is nil, exit.
-  if the spot is in the edge of the page, exit.
+    get the page from the document's pages.
+    if the page is nil, exit.
+    if the spot is in the edge of the page, exit.
   repeat.
 
 to find a page in a document given a spot (limiting):
@@ -1496,28 +1506,28 @@ the find shape is a shape.
 to find a shape refer given some shape refers and a shape:
   void the shape refer.
   loop.
-  get the shape refer from the shape refers.
-  if the shape refer is nil, exit.
-  if the shape refer's shape is the shape, exit.
+    get the shape refer from the shape refers.
+    if the shape refer is nil, exit.
+    if the shape refer's shape is the shape, exit.
   repeat.
 
 to find a vertex given a polygon and a spot: 
   void the vertex.
   if the polygon is nil, exit.
   loop.
-  get the vertex from the polygon's vertices (backwards).
-  if the vertex is nil, exit.
-  make a knob given the vertex's spot.
-  if the spot is in the knob, exit.
+    get the vertex from the polygon's vertices (backwards).
+    if the vertex is nil, exit.
+    make a knob given the vertex's spot.
+    if the spot is in the knob, exit.
   repeat.
 
 to flip any selected shapes on a page:
   if the page is nil, exit.
   loop.
-  get a shape from the page's shapes.
-  if the shape is nil, exit.
-  if the shape is not selected, repeat.
-  flip the shape.
+    get a shape from the page's shapes.
+    if the shape is nil, exit.
+    if the shape is not selected, repeat.
+    flip the shape.
   repeat.
 
 to flip a shape:
@@ -1533,12 +1543,12 @@ to flip a shape:
 to flip a shape (group):
   put the shape's box's center into a center spot.
   loop.
-  get another shape from the shape's shapes.
-  if the other shape is nil, break.
-  put the center's y minus the other shape's box's center's y into a pair's y.
-  multiply the pair's y by 2.
-  move the other shape given the pair.
-  flip the other shape.
+    get another shape from the shape's shapes.
+    if the other shape is nil, break.
+    put the center's y minus the other shape's box's center's y into a pair's y.
+    multiply the pair's y by 2.
+    move the other shape given the pair.
+    flip the other shape.
   repeat.
   adjust the shape.
 
@@ -1575,19 +1585,48 @@ to get a box of the selected shapes on a page:
   if nothing is selected on the page, clear the box; exit.
   put the largest number and the largest number and the smallest number and the smallest number into the box.
   loop.
-  get a shape from the page's shapes.
-  if the shape is nil, exit.
-  if the shape is not selected, repeat.
-  if the shape's left is less than the box's left, put the shape's left into the box's left.
-  if the shape's top is less than the box's top, put the shape's top into the box's top.
-  if the shape's right is greater than the box's right, put the shape's right into the box's right.
-  if the shape's bottom is greater than the box's bottom, put the shape's bottom into the box's bottom.
+    get a shape from the page's shapes.
+    if the shape is nil, exit.
+    if the shape is not selected, repeat.
+    if the shape's left is less than the box's left, put the shape's left into the box's left.
+    if the shape's top is less than the box's top, put the shape's top into the box's top.
+    if the shape's right is greater than the box's right, put the shape's right into the box's right.
+    if the shape's bottom is greater than the box's bottom, put the shape's bottom into the box's bottom.
   repeat.
 
 to get a difference between a spot and another spot given a sizer:
   get the difference between the spot and the other spot.
   if the sizer's kind starts with "left-", negate the difference's x.
   if the sizer's kind ends with "-top", negate the difference's y.
+
+to get first selected text from a page returning a text:
+  if the page is nil, exit.
+  get first selected text from the page's shapes returning the text.
+
+to get first selected text from some shapes returning a text:
+  loop.
+    get a shape from the shapes.
+    if the shape is nil, exit.
+    if the shape is not selected, repeat.
+    if the shape's kind is "group",
+      get first selected text from the shape's shapes returning the text; exit.
+    if the shape is selected text,
+      put the shape's text in the text; exit.
+  repeat.
+
+to get first text from a page returning a text:
+  if the page is nil, exit.
+  get first text from the page's shapes returning the text.
+
+to get first text from some shapes returning a text:
+  loop.
+    get a shape from the shapes.
+    if the shape is nil, exit.
+    if the shape's kind is "group",
+      get first text from the shape's shapes returning the text; exit.
+    if the shape's kind is "text",
+      put the shape's text in the text; exit.
+  repeat.
 
 to get a focus shape given a shape and a spot:
   if the shape is nil, void the focus shape; exit.
@@ -1617,10 +1656,10 @@ to get a font name given a page:
 to get a page number given some pages and a page:
   put 0 into the page number.
   loop.
-  get another page from the pages.
-  if the other page is nil, exit.
-  add 1 to the page number.
-  if the other page is the page, exit.
+    get another page from the pages.
+    if the other page is nil, exit.
+    add 1 to the page number.
+    if the other page is the page, exit.
   repeat.
 
 to get a radius given a page:
@@ -1683,10 +1722,10 @@ to get the status for a shape given a measure:
 to grayscale any selected shapes on a page given a flag:
   if the page is nil, exit.
   loop.
-  get a shape from the page's shapes.
-  if the shape is nil, exit.
-  if the shape is not selected, repeat.
-  grayscale the shape given the flag.
+    get a shape from the page's shapes.
+    if the shape is nil, exit.
+    if the shape is not selected, repeat.
+    grayscale the shape given the flag.
   repeat.
 
 to grayscale a shape given a flag:
@@ -1710,12 +1749,12 @@ to group any selected shapes on a page:
   put the page's scale into the group shape's scale.
   move the page's shapes to some original shapes.
   loop.
-  put the original shapes' first into a shape.
-  if the shape is nil, break.
-  remove the shape from the original shapes.
-  if the shape is not selected, append the shape to the page's shapes; repeat.
-  deselect the shape.
-  append the shape to the group shape's shapes.
+    put the original shapes' first into a shape.
+    if the shape is nil, break.
+    remove the shape from the original shapes.
+    if the shape is not selected, append the shape to the page's shapes; repeat.
+    deselect the shape.
+    append the shape to the group shape's shapes.
   repeat.  
   append the group shape to the page's shapes.
   select the group shape.
@@ -2403,29 +2442,42 @@ to handle font height other given a page:
   convert the answer to another ratio.
   if the other ratio is 0, show error "Invalid font height."; exit.
   put 1 inch times the other ratio into another font height.
+  if the other font height is not standard (font height),
+    cache the other font height (font height).
   handle font height given the page and the other font height.
 
-to handle font name given a page:
-  if the page is being edited, handle font name given the page (editing); exit.
+to handle font name given a page and a string:
+  show the desktop.
+  show status "Changing...".
+  remember the page.
+  change any selected shapes on the page given the string.
+  show the desktop with status.
+
+to handle font name given a page and a string (editing):
+  show the desktop.
+  show status "Changing...".
+  set the current tab's node's document's modified flag.
+  handle font name given the page's edit shape's text and the string.
+  show the desktop with status.
+
+to handle font name other given a page:
+  if the page is being edited,
+    handle font name other given the page (editing); exit.
   if nothing is selected on the page, cluck; exit.
   get a font name given the page.
   ask "Name?" with the font name.
   if the answer is blank, exit.
-  show the desktop.
-  show status "Changing...".
-  remember the page.
-  change any selected shapes on the page given the answer.
-  show the desktop with status.
+  if the font name is not standard (font name),
+    cache the font name (font name).
+  handle font name given the page and the answer.
 
-to handle font name given a page (editing):
+to handle font name other given a page (editing):
   get a font name given the page.
   ask "Name?" with the font name.
   if the answer is blank, exit.
-  show the desktop.
-  show status "Changing...".
-  set the current tab's node's document's modified flag.
-  handle font name given the page's edit shape's text and the answer.
-  show the desktop with status.
+  if the font name is not standard (font name),
+    cache the font name (font name).
+  handle font name given the page and the answer (editing).
 
 to handle grayscale given a page and a flag:
   if the page is being edited, end edit on the page.
@@ -2657,7 +2709,8 @@ to handle rotate shape given a page:
   show the desktop with status.
 
 to handle save as pdf given a document:
-  if nothing is selected in the document, show error "I'm not sure what you want me to save."; exit.
+  if nothing is selected in the document,
+    show error "I'm not sure what you want me to save."; exit.
   ask "Path?" with the remembered pdf path.
   if the answer is blank, exit.
   put the answer into a path.
@@ -2867,11 +2920,11 @@ to internalize a polygon given a rider:
   create the polygon.
   internalize a count given the rider.
   loop.
-  if the i/o error is not blank, exit.
-  if the count is 0, exit.
-  internalize a spot given the rider.
-  append the spot to the polygon.
-  subtract 1 from the count.
+    if the i/o error is not blank, exit.
+    if the count is 0, exit.
+    internalize a spot given the rider.
+    append the spot to the polygon.
+    subtract 1 from the count.
   repeat.
 
 to internalize a ratio given a rider:
@@ -3015,10 +3068,10 @@ to limit the undos in a document:
 to lowercase any selected shapes on a page:
   if the page is nil, exit.
   loop.
-  get a shape from the page's shapes.
-  if the shape is nil, exit.
-  if the shape is not selected, repeat.
-  lowercase the shape.
+    get a shape from the page's shapes.
+    if the shape is nil, exit.
+    if the shape is not selected, repeat.
+    lowercase the shape.
   repeat.
 
 to lowercase a shape:
@@ -3057,10 +3110,10 @@ a measure is a ratio.
 to mirror any selected shapes on a page:
   if the page is nil, exit.
   loop.
-  get a shape from the page's shapes.
-  if the shape is nil, exit.
-  if the shape is not selected, repeat.
-  mirror the shape.
+    get a shape from the page's shapes.
+    if the shape is nil, exit.
+    if the shape is not selected, repeat.
+    mirror the shape.
   repeat.
 
 to mirror a shape:
@@ -3076,12 +3129,12 @@ to mirror a shape:
 to mirror a shape (group):
   put the shape's box's center into a center spot.
   loop.
-  get another shape from the shape's shapes.
-  if the other shape is nil, break.
-  put the center's x minus the other shape's box's center's x into a pair's x.
-  multiply the pair's x by 2.
-  move the other shape given the pair.
-  mirror the other shape.
+    get another shape from the shape's shapes.
+    if the other shape is nil, break.
+    put the center's x minus the other shape's box's center's x into a pair's x.
+    multiply the pair's x by 2.
+    move the other shape given the pair.
+    mirror the other shape.
   repeat.
   adjust the shape.
 
@@ -3096,10 +3149,10 @@ to mirror a shape (polygon):
 to move any selected shapes on a page given a pair:
   if the page is nil, exit.
   loop.
-  get a shape from the page's shapes.
-  if the shape is nil, exit.
-  if the shape is not selected, repeat.
-  move the shape given the pair.
+    get a shape from the page's shapes.
+    if the shape is nil, exit.
+    if the shape is not selected, repeat.
+    move the shape given the pair.
   repeat.
 
 to move any selected shapes on a page given a pair and a sizer:
@@ -3135,10 +3188,10 @@ to move a rider (document rules):
   if the rider's source is blank, exit.
   if the rider's source's first's target is the double-quote byte, move the rider (quoted string rules); exit.
   loop.
-  if the rider's source is blank, exit.
-  if the rider's source's first's target is noise, exit.
-  add 1 to the rider's token's last.
-  add 1 to the rider's source's first.
+    if the rider's source is blank, exit.
+    if the rider's source's first's target is noise, exit.
+    add 1 to the rider's token's last.
+    add 1 to the rider's source's first.
   repeat.
 
 to move a shape given a pair:
@@ -3198,8 +3251,10 @@ to move some shapes given a ratio pair and a spot:
 
 to open a page:
   if the page is nil, exit.
-  if the current tab's node's page's scale is not 1/1, debug "internal error: current page scale is incorrect".
-  if the page's scale is not 1/1, debug "internal error: page scale is incorrect".
+  if the current tab's node's page's scale is not 1/1, 
+    debug "internal error: current page scale is incorrect".
+  if the page's scale is not 1/1,
+    debug "internal error: page scale is incorrect".
   scale the page given the current tab's node's document's scale.
   center the page.
 
@@ -3240,13 +3295,13 @@ to paste any pages on a page clipboard into a document returning a count:
   put the document's first selected page into a first selected page.
   deselect the document's pages.
   loop.
-  get a copied page from the page clipboard.
-  if the copied page is nil, break.
-  add 1 to the count.
-  show status the count then " of " then the total count then "...".
-  copy the copied page into another copied page.
-  insert the other copied page into the document's pages before the first selected page.
-  select the other copied page.
+    get a copied page from the page clipboard.
+    if the copied page is nil, break.
+    add 1 to the count.
+    show status the count then " of " then the total count then "...".
+    copy the copied page into another copied page.
+    insert the other copied page into the document's pages before the first selected page.
+    select the other copied page.
   repeat.
   set the document's modified flag.
   adjust the edge of every page in the document.
@@ -3255,12 +3310,12 @@ to paste any shapes on a shape clipboard into a page:
   if the page is nil, exit.
   deselect the page's shapes.
   loop.
-  get a shape from the shape clipboard.
-  if the shape is nil, exit.
-  copy the shape into another shape.
-  scale the other shape given the page's scale.
-  select the other shape.
-  append the other shape to the page's shapes.
+    get a shape from the shape clipboard.
+    if the shape is nil, exit.
+    copy the shape into another shape.
+    scale the other shape given the page's scale.
+    select the other shape.
+    append the other shape to the page's shapes.
   repeat.
 
 to pdfify a document to a pdf:
@@ -3269,12 +3324,12 @@ to pdfify a document to a pdf:
   put the document's selected page count into a total count.
   begin printing the pdf.
   loop.
-  get a page from the document's pages.
-  if the page is nil, break.
-  if the page is not selected, repeat.
-  add 1 to the current count.
-  show status the current count then " of " then the total count then "...".
-  pdfify the page.
+    get a page from the document's pages.
+    if the page is nil, break.
+    if the page is not selected, repeat.
+    add 1 to the current count.
+    show status the current count then " of " then the total count then "...".
+    pdfify the page.
   repeat.
   end printing the pdf.
 
@@ -3293,10 +3348,10 @@ to pdfify a page:
 to pen any selected shapes on a page given a color:
   if the page is nil, exit.
   loop.
-  get a shape from the page's shapes.
-  if the shape is nil, exit.
-  if the shape is not selected, repeat.
-  pen the shape given the color.
+    get a shape from the page's shapes.
+    if the shape is nil, exit.
+    if the shape is not selected, repeat.
+    pen the shape given the color.
   repeat.
 
 to pen a shape given a color:
@@ -3321,21 +3376,21 @@ to print a copy of a document:
   if the document is nil, exit.
   put the document's selected page count into a count.
   loop.
-  get a page from the document's pages.
-  if the page is nil, exit.
-  if the page is not selected, repeat.
-  add 1 to a number.
-  show status the copy then " of " then the number then " of " then the count then "...".
-  print the page.
+    get a page from the document's pages.
+    if the page is nil, exit.
+    if the page is not selected, repeat.
+    add 1 to a number.
+    show status the copy then " of " then the number then " of " then the count then "...".
+    print the page.
   repeat.
 
 to print a document given a copy count:
   if the document is nil, exit.
   begin printing.
   loop.
-  add 1 to a copy.
-  if the copy is greater than the copy count, break.
-  print the copy of the document.
+    add 1 to a copy.
+    if the copy is greater than the copy count, break.
+    print the copy of the document.
   repeat.
   end printing.
 
@@ -3353,10 +3408,10 @@ to print a page given a copy count:
   if the page is nil, exit.
   begin printing.
   loop.
-  add 1 to a copy.
-  if the copy is greater than the copy count, break.
-  show status the copy then " of " then the copy count then "...".
-  print the page.
+    add 1 to a copy.
+    if the copy is greater than the copy count, break.
+    show status the copy then " of " then the copy count then "...".
+    print the page.
   repeat.
   end printing.
 
@@ -3364,36 +3419,36 @@ to put a document's first selected page into a page:
   void the page.
   if the document is nil, exit.
   loop.
-  get the page from the document's pages.
-  if the page is nil, exit.
-  if the page is selected, exit.
+    get the page from the document's pages.
+    if the page is nil, exit.
+    if the page is selected, exit.
   repeat.
 
 to put a document's first visible page into a page:
   void the page.
   if the document is nil, exit.
   loop.
-  get the page from the document's pages.
-  if the page is nil, exit.
-  if the edge of the page is visible in the document, exit.
+    get the page from the document's pages.
+    if the page is nil, exit.
+    if the edge of the page is visible in the document, exit.
   repeat.
 
 to put a document's last selected page into a page:
   void the page.
   if the document is nil, exit.
   loop.
-  get the page from the document's pages (backwards).
-  if the page is nil, exit.
-  if the page is selected, exit.
+    get the page from the document's pages (backwards).
+    if the page is nil, exit.
+    if the page is selected, exit.
   repeat.
 
 to put a document's selected page count into a count:
   put 0 into the count.
   if the document is nil, exit.
   loop.
-  get a page from the document's pages.
-  if the page is nil, exit.
-  if the page is selected, add 1 to the count.
+    get a page from the document's pages.
+    if the page is nil, exit.
+    if the page is selected, add 1 to the count.
   repeat.
 
 to put a page's box into a box:
@@ -3407,9 +3462,9 @@ to put a page's first selected shape into a shape:
   void the shape.
   if the page is nil, exit.
   loop.
-  get the shape from the page's shapes.
-  if the shape is nil, exit.
-  if the shape is selected, exit.
+    get the shape from the page's shapes.
+    if the shape is nil, exit.
+    if the shape is selected, exit.
   repeat.
 
 to put a page's globalized box into a box:
@@ -3430,18 +3485,18 @@ to put a page's selected shape count into a count:
   put 0 into the count.
   if the page is nil, exit.
   loop.
-  get a shape from the page's shapes.
-  if the shape is nil, exit.
-  if the shape is selected, add 1 to the count.
+    get a shape from the page's shapes.
+    if the shape is nil, exit.
+    if the shape is selected, add 1 to the count.
   repeat.
 
 to put a page's selected shape refer count into a count:
   put 0 into the count.
   if the page is nil, exit.
   loop.
-  get a shape refer from the page's shape refers.
-  if the shape refer is nil, exit.
-  if the shape refer's shape is selected, add 1 to the count.
+    get a shape refer from the page's shape refers.
+    if the shape refer is nil, exit.
+    if the shape refer's shape is selected, add 1 to the count.
   repeat.
 
 to put a page's yank into a grid:
@@ -3460,30 +3515,30 @@ to put some shape refers' first selected shape into a shape:
 to put some shape refers' first selected shape refer into a shape refer:
   void the shape refer.
   loop.
-  get the shape refer from the shape refers.
-  if the shape refer is nil, exit.
-  if the shape refer's shape is selected, exit.
+    get the shape refer from the shape refers.
+    if the shape refer is nil, exit.
+    if the shape refer's shape is selected, exit.
   repeat.
 
 to put some shape refers' last selected shape refer into a shape refer:
   void the shape refer.
   loop.
-  get the shape refer from the shape refers (backwards).
-  if the shape refer is nil, exit.
-  if the shape refer's shape is selected, exit.
+    get the shape refer from the shape refers (backwards).
+    if the shape refer is nil, exit.
+    if the shape refer's shape is selected, exit.
   repeat.
 
 to put some shapes' box into a box:
   if the shapes are empty, clear the box; exit.
   put the largest number and the largest number and the smallest number and the smallest number into the box.
   loop.
-  get a shape from the shapes.
-  if the shape is nil, exit.
-  if the shape's box is the zero box, repeat.
-  if the shape's left is less than the box's left, put the shape's left into the box's left.
-  if the shape's top is less than the box's top, put the shape's top into the box's top.
-  if the shape's right is greater than the box's right, put the shape's right into the box's right.
-  if the shape's bottom is greater than the box's bottom, put the shape's bottom into the box's bottom.
+    get a shape from the shapes.
+    if the shape is nil, exit.
+    if the shape's box is the zero box, repeat.
+    if the shape's left is less than the box's left, put the shape's left into the box's left.
+    if the shape's top is less than the box's top, put the shape's top into the box's top.
+    if the shape's right is greater than the box's right, put the shape's right into the box's right.
+    if the shape's bottom is greater than the box's bottom, put the shape's bottom into the box's bottom.
   repeat.
 
 to put a superduper into another superduper:
@@ -3511,15 +3566,15 @@ to remove any selected pages in a document returning a count:
   put the document's selected page count into a total count.
   put the document's first page into a next page.
   loop.
-  if the next page is nil, break.
-  put the next page into a current page.
-  put the current page's next into the next page.
-  if the current page is not selected, repeat.
-  add 1 to the current count.
-  show status the count then " of " then the total count then "...".
-  remove the current page from the document's pages.
-  destroy the current page.
-  add 1 to the count.
+    if the next page is nil, break.
+    put the next page into a current page.
+    put the current page's next into the next page.
+    if the current page is not selected, repeat.
+    add 1 to the current count.
+    show status the count then " of " then the total count then "...".
+    remove the current page from the document's pages.
+    destroy the current page.
+    add 1 to the count.
   repeat.
   set the document's modified flag.
   adjust the edge of every page in the document.
@@ -3528,11 +3583,11 @@ to remove any selected shapes on a page:
   if the page is nil, exit.
   move the page's shapes to some original shapes.
   loop.
-  put the original shapes' first into a shape.
-  if the shape is nil, exit.
-  remove the shape from the original shapes.
-  if the shape is not selected, append the shape to the page's shapes; repeat.
-  destroy the shape.
+    put the original shapes' first into a shape.
+    if the shape is nil, exit.
+    remove the shape from the original shapes.
+    if the shape is not selected, append the shape to the page's shapes; repeat.
+    destroy the shape.
   repeat.
 
 to renumber every page in a document starting with a page number and returning a count:
@@ -3541,12 +3596,12 @@ to renumber every page in a document starting with a page number and returning a
   privatize the page number.
   put the document's pages' count into a total count.
   loop.
-  get a page from the document's pages.
-  if the page is nil, break.
-  add 1 to the count.
-  show status the count then " of " then the total count then "...".
-  renumber the page given the page number.
-  add 1 to the page number.
+    get a page from the document's pages.
+    if the page is nil, break.
+    add 1 to the count.
+    show status the count then " of " then the total count then "...".
+    renumber the page given the page number.
+    add 1 to the page number.
   repeat.
   set the document's modified flag.
 
@@ -3582,10 +3637,10 @@ to reset the superduper given a page:
 to resize any selected shapes on a page given a pair:
   if the page is nil, exit.
   loop.
-  get a shape from the page's shapes.
-  if the shape is nil, exit.
-  if the shape is not selected, repeat.
-  resize the shape given the pair.
+    get a shape from the page's shapes.
+    if the shape is nil, exit.
+    if the shape is not selected, repeat.
+    resize the shape given the pair.
   repeat.
 
 to resize a shape given a pair:
@@ -3680,13 +3735,15 @@ to resize some shapes given a ratio pair:
   resize the shape given the ratio pair.
   repeat.
 
+to resize the writer:
+
 to rotate any selected shapes on a page:
   if the page is nil, exit.
   loop.
-  get a shape from the page's shapes.
-  if the shape is nil, exit.
-  if the shape is not selected, repeat.
-  rotate the shape.
+    get a shape from the page's shapes.
+    if the shape is nil, exit.
+    if the shape is not selected, repeat.
+    rotate the shape.
   repeat.
 
 to rotate a shape:
@@ -3707,15 +3764,15 @@ to rotate a shape (group):
   rotate the shape's box.
   put the shape's box's center into a center spot.
   loop.
-  get another shape from the shape's shapes.
-  if the other shape is nil, break.
-  put the other shape's box's center into another center spot.
-  put the center's y minus the other center's y plus the center's x into a pair's x.
-  subtract the other center's x from the pair's x.
-  put the center's y plus the other center's x minus the center's x into the pair's y.
-  subtract the other center's y from the pair's y.
-  move the other shape given the pair.
-  rotate the other shape.
+    get another shape from the shape's shapes.
+    if the other shape is nil, break.
+    put the other shape's box's center into another center spot.
+    put the center's y minus the other center's y plus the center's x into a pair's x.
+    subtract the other center's x from the pair's x.
+    put the center's y plus the other center's x minus the center's x into the pair's y.
+    subtract the other center's y from the pair's y.
+    move the other shape given the pair.
+    rotate the other shape.
   repeat.
   adjust the shape.
 
@@ -3825,13 +3882,13 @@ to scroll a document given an event:
   if the document is nil, exit.
   find a sector given the document's grid and the event's spot.
   loop.
-  if the mouse's right button is up, exit.
-  find another sector given the document's grid and the mouse's spot.
-  get a difference between the other sector and the sector.
-  if the difference is 0, repeat.
-  scroll the document given the difference.
-  show the desktop with status.
-  add the difference to the sector.
+    if the mouse's right button is up, exit.
+    find another sector given the document's grid and the mouse's spot.
+    get a difference between the other sector and the sector.
+    if the difference is 0, repeat.
+    scroll the document given the difference.
+    show the desktop with status.
+    add the difference to the sector.
   repeat.
 
 to scroll a document up one page:
@@ -3875,14 +3932,14 @@ to scroll a page given an event:
   if the page is nil, exit.
   find a sector given the page's grid and the event's spot.
   loop.
-  if the mouse's right button is up, exit.
-  find another sector given the page's grid and the mouse's spot.
-  get a difference between the other sector and the sector.
-  if the difference is 0, repeat.
-  scroll the page given the difference.
-  limit the page.
-  show the desktop.
-  add the difference to the sector.
+    if the mouse's right button is up, exit.
+    find another sector given the page's grid and the mouse's spot.
+    get a difference between the other sector and the sector.
+    if the difference is 0, repeat.
+    scroll the page given the difference.
+    limit the page.
+    show the desktop.
+    add the difference to the sector.
   repeat.
 
 to scroll a page left:
@@ -3909,9 +3966,9 @@ to scroll a page up:
 to select every shape on a page:
   if the page is nil, exit.
   loop.
-  get a shape from the page's shapes.
-  if the shape is nil, exit.
-  select the shape.
+    get a shape from the page's shapes.
+    if the shape is nil, exit.
+    select the shape.
   repeat.
 
 to select a page:
@@ -3932,11 +3989,11 @@ to select some pages given a document selection:
   subtract the tpp from the box's bottom.
   normalize the box.
   loop.
-  get a page from the pages.
-  if the page is nil, exit.
-  put the page's previously selected flag into the page's selected flag.
-  if the page's edge is not touching the box, repeat.
-  reverse the page's selected flag.
+    get a page from the pages.
+    if the page is nil, exit.
+    put the page's previously selected flag into the page's selected flag.
+    if the page's edge is not touching the box, repeat.
+    reverse the page's selected flag.
   repeat.  
 
 to select a shape: set the shape's selected flag.
@@ -3951,22 +4008,22 @@ to select some shapes given a box:
   privatize the box.
   normalize the box.
   loop.
-  get a shape from the shapes.
-  if the shape is nil, exit.
-  put the shape's previously selected flag into the shape's selected flag.
-  if the shape's box is not inside the box, repeat.
-  reverse the shape's selected flag.
+    get a shape from the shapes.
+    if the shape is nil, exit.
+    put the shape's previously selected flag into the shape's selected flag.
+    if the shape's box is not inside the box, repeat.
+    reverse the shape's selected flag.
   repeat.
 
 to send any selected shapes on a page backward:
   if the page is nil, exit.
   move the page's shapes to some original shapes.
   loop.
-  put the original shapes' first into a shape.
-  if the shape is nil, break.
-  remove the shape from the original shapes.
-  if the shape is not selected, append the shape to some other shapes; repeat.
-  append the shape to the page's shapes.
+    put the original shapes' first into a shape.
+    if the shape is nil, break.
+    remove the shape from the original shapes.
+    if the shape is not selected, append the shape to some other shapes; repeat.
+    append the shape to the page's shapes.
   repeat.
   append the other shapes to the page's shapes.
 
@@ -3975,10 +4032,10 @@ to set the caret and anchor in a document using the selected pages:
   put the document's last selected page into the document's caret.
   put the document's caret into a page.
   loop.
-  if the page is nil, exit.
-  if the page is not selected, exit.
-  put the page into the document's anchor.
-  put the page's previous into the page.
+    if the page is nil, exit.
+    if the page is not selected, exit.
+    put the page into the document's anchor.
+    put the page's previous into the page.
   repeat.
 
 the shape clipboard is a shape clipboard.
@@ -4005,10 +4062,10 @@ a sizer is a knob.
 to smooth any selected shapes on a page:
   if the page is nil, exit.
   loop.
-  get a shape from the page's shapes.
-  if the shape is nil, exit.
-  if the shape is not selected, repeat.
-  smooth the shape.
+    get a shape from the page's shapes.
+    if the shape is nil, exit.
+    if the shape is not selected, repeat.
+    smooth the shape.
   repeat.
 
 to smooth a shape:
@@ -4042,12 +4099,12 @@ to sort some shape refers (horizontally):
   sort the left shape refers (horizontally).
   sort the right shape refers (horizontally).
   loop.
-  put the left shape refers' first into a left shape refer.
-  put the right shape refers' first into a right shape refer.
-  if the left shape refer is nil, append the right shape refers to the shape refers; exit.
-  if the right shape refer is nil, append the left shape refers to the shape refers; exit.
-  if the left shape refer's shape's left is greater than the right shape refer's shape's left, move the right shape refer from the right shape refers to the shape refers; repeat.
-  move the left shape refer from the left shape refers to the shape refers.
+    put the left shape refers' first into a left shape refer.
+    put the right shape refers' first into a right shape refer.
+    if the left shape refer is nil, append the right shape refers to the shape refers; exit.
+    if the right shape refer is nil, append the left shape refers to the shape refers; exit.
+    if the left shape refer's shape's left is greater than the right shape refer's shape's left, move the right shape refer from the right shape refers to the shape refers; repeat.
+    move the left shape refer from the left shape refers to the shape refers.
   repeat.
 
 to sort some shape refers (vertically):
@@ -4056,12 +4113,12 @@ to sort some shape refers (vertically):
   sort the left shape refers (vertically).
   sort the right shape refers (vertically).
   loop.
-  put the left shape refers' first into a left shape refer.
-  put the right shape refers' first into a right shape refer.
-  if the left shape refer is nil, append the right shape refers to the shape refers; exit.
-  if the right shape refer is nil, append the left shape refers to the shape refers; exit.
-  if the left shape refer's shape's top is greater than the right shape refer's shape's top, move the right shape refer from the right shape refers to the shape refers; repeat.
-  move the left shape refer from the left shape refers to the shape refers.
+    put the left shape refers' first into a left shape refer.
+    put the right shape refers' first into a right shape refer.
+    if the left shape refer is nil, append the right shape refers to the shape refers; exit.
+    if the right shape refer is nil, append the left shape refers to the shape refers; exit.
+    if the left shape refer's shape's top is greater than the right shape refer's shape's top, move the right shape refer from the right shape refers to the shape refers; repeat.
+    move the left shape refer from the left shape refers to the shape refers.
   repeat.
 
 a superduper has a flag and a pair.
@@ -4083,19 +4140,19 @@ to track a cropper on a shape on a page given an event:
   put the event's spot into a current spot.
   localize the current spot given the page's origin.
   loop.
-  if a flag is set, show the desktop with status.
-  if the mouse's left button is up, break.
-  put the mouse's spot into a spot.
-  autoscroll the page given the spot and the flag.
-  localize the spot given the page's origin.
-  get a difference between the spot and the current spot given the page's yank.
-  if the difference is 0, repeat.
-  set the flag.
-  move the current spot given the difference.
-  put the current spot into a yanked spot.
-  round the yanked spot to the page's yank.
-  crop the shape's picture given the cropper and the yanked spot.
-  adjust the shape.
+    if a flag is set, show the desktop with status.
+    if the mouse's left button is up, break.
+    put the mouse's spot into a spot.
+    autoscroll the page given the spot and the flag.
+    localize the spot given the page's origin.
+    get a difference between the spot and the current spot given the page's yank.
+    if the difference is 0, repeat.
+    set the flag.
+    move the current spot given the difference.
+    put the current spot into a yanked spot.
+    round the yanked spot to the page's yank.
+    crop the shape's picture given the cropper and the yanked spot.
+    adjust the shape.
   repeat.
   show the desktop with status.
 
@@ -4104,14 +4161,14 @@ to track a document given an event:
   if the event is nil, exit.
   clear a document selection.
   loop.
-  if a flag is set, show the desktop with status.
-  if the mouse's left button is up, exit.
-  put the mouse's spot into a spot.
-  autoscroll the document given the spot and the flag.
-  extend any selection in the document given the spot.
-  if the document's selection is the document selection, repeat.
-  set the flag.
-  put the document's selection into the document selection.
+    if a flag is set, show the desktop with status.
+    if the mouse's left button is up, exit.
+    put the mouse's spot into a spot.
+    autoscroll the document given the spot and the flag.
+    extend any selection in the document given the spot.
+    if the document's selection is the document selection, repeat.
+    set the flag.
+    put the document's selection into the document selection.
   repeat.
 
 to track the rubberband on a page given an event:
@@ -4124,18 +4181,18 @@ to track the rubberband on a page given an event:
   put 0 and 0 into a current spot.
   put the tpp and the tpp into a grid.
   loop.
-  if a flag is set, show the desktop with status.
-  if the mouse's left button is up, break.
-  put the mouse's spot into the box's right-bottom.
-  autoscroll the page given the box's right-bottom and the flag.
-  localize the box's right-bottom given the page's origin.
-  if the current spot is within the grid of the box's right-bottom, repeat.
-  set the flag.
-  put the box's right-bottom into the current spot.
-  select the page's shapes given the box.
-  put the box into the focus box.
-  normalize the focus box.
-  globalize the focus box given the page's origin.
+    if a flag is set, show the desktop with status.
+    if the mouse's left button is up, break.
+    put the mouse's spot into the box's right-bottom.
+    autoscroll the page given the box's right-bottom and the flag.
+    localize the box's right-bottom given the page's origin.
+    if the current spot is within the grid of the box's right-bottom, repeat.
+    set the flag.
+    put the box's right-bottom into the current spot.
+    select the page's shapes given the box.
+    put the box into the focus box.
+    normalize the focus box.
+    globalize the focus box given the page's origin.
   repeat.
   clear the focus box.
   show the desktop with status.
@@ -4149,17 +4206,17 @@ to track a shape on a page given an event:
   put the start spot into a current spot.
   put the shape's box into a box. \ for status
   loop.
-  if a flag is set, show the desktop.
-  if the mouse's left button is up, break.
-  put the mouse's spot into a spot.
-  autoscroll the page given the spot and the flag.
-  localize the spot given the page's origin.
-  get a difference between the spot and the current spot given the page's yank.
-  if the difference is 0, repeat.
-  set the flag.
-  move any selected shapes on the page given the difference.
-  get the status for the box and the shape's box given the page's measure.
-  add the difference to the current spot.
+    if a flag is set, show the desktop.
+    if the mouse's left button is up, break.
+    put the mouse's spot into a spot.
+    autoscroll the page given the spot and the flag.
+    localize the spot given the page's origin.
+    get a difference between the spot and the current spot given the page's yank.
+    if the difference is 0, repeat.
+    set the flag.
+    move any selected shapes on the page given the difference.
+    get the status for the box and the shape's box given the page's measure.
+    add the difference to the current spot.
   repeat.
   get the difference between the current spot and the start spot given the page's yank.
   if the page's superduper's flag is set, add the difference to the page's superduper's pair.
@@ -4175,15 +4232,15 @@ to track a shape on a page given an event (text selection):
   if the event's shift flag is not set, deselect the shape's text.
   clear a selection.
   loop.
-  if a flag is set, show the desktop with status.
-  if the mouse's left button is up, exit.
-  put the mouse's spot into a spot.
-  autoscroll the page given the spot and the flag.
-  localize the spot given the page's origin.
-  extend any selection in the shape's text given the spot.
-  if the shape's text's selection is the selection, repeat.
-  set the flag.
-  put the shape's text's selection into the selection.
+    if a flag is set, show the desktop with status.
+    if the mouse's left button is up, exit.
+    put the mouse's spot into a spot.
+    autoscroll the page given the spot and the flag.
+    localize the spot given the page's origin.
+    extend any selection in the shape's text given the spot.
+    if the shape's text's selection is the selection, repeat.
+    set the flag.
+    put the shape's text's selection into the selection.
   repeat.
 
 to track a sizer on a shape on a page given an event:
@@ -4197,22 +4254,22 @@ to track a sizer on a shape on a page given an event:
   put the shape's box into a box. \ for status
   copy the page's shapes into some original shapes.
   loop.
-  if a flag is set, show the desktop.
-  if the mouse's left button is up, break.
-  put the mouse's spot into a spot.
-  autoscroll the page given the spot and the flag.
-  localize the spot given the page's origin.
-  get a difference between the spot and the current spot given the page's yank.
-  if the difference is 0, repeat.
-  set the flag.
-  move the current spot given the difference.
-  get another difference between the current spot and the start spot given the sizer.
-  copy the original shapes into the page's shapes.
-  resize any selected shapes on the page given the other difference.
-  move any selected shapes on the page given the other difference and the sizer.
-  put the box into another box.
-  resize the other box given the other difference.
-  get the status for the other box given the page's measure.
+    if a flag is set, show the desktop.
+    if the mouse's left button is up, break.
+    put the mouse's spot into a spot.
+    autoscroll the page given the spot and the flag.
+    localize the spot given the page's origin.
+    get a difference between the spot and the current spot given the page's yank.
+    if the difference is 0, repeat.
+    set the flag.
+    move the current spot given the difference.
+    get another difference between the current spot and the start spot given the sizer.
+    copy the original shapes into the page's shapes.
+    resize any selected shapes on the page given the other difference.
+    move any selected shapes on the page given the other difference and the sizer.
+    put the box into another box.
+    resize the other box given the other difference.
+    get the status for the other box given the page's measure.
   repeat.
   destroy the original shapes.
   show the desktop with status.
@@ -4225,17 +4282,17 @@ to track a vertex on a shape on a page given an event:
   put the event's spot into a current spot.
   localize the current spot given the page's origin.
   loop.
-  if a flag is set, show the desktop with status.
-  if the mouse's left button is up, break.
-  put the mouse's spot into a spot.
-  autoscroll the page given the spot and the flag.
-  localize the spot given the page's origin.
-  get a difference between the spot and the current spot given the page's yank.
-  if the difference is 0, repeat.
-  set the flag.
-  move the current spot given the difference.
-  move the vertex given the difference.
-  adjust the shape.
+    if a flag is set, show the desktop with status.
+    if the mouse's left button is up, break.
+    put the mouse's spot into a spot.
+    autoscroll the page given the spot and the flag.
+    localize the spot given the page's origin.
+    get a difference between the spot and the current spot given the page's yank.
+    if the difference is 0, repeat.
+    set the flag.
+    move the current spot given the difference.
+    move the vertex given the difference.
+    adjust the shape.
   repeat.
   show the desktop with status.
 
@@ -4243,23 +4300,23 @@ to ungroup any selected shapes on a page:
   if the page is nil, exit.
   move the page's shapes to some original shapes.
   loop.
-  put the original shapes' first into a shape.
-  if the shape is nil, exit.
-  remove the shape from the original shapes.
-  if the shape is not selected, append the shape to the page's shapes; repeat.
-  if the shape's kind is not "group", append the shape to the page's shapes; repeat.
-  select the shape's shapes.
-  append the shape's shapes to the page's shapes.
-  destroy the shape.
+    put the original shapes' first into a shape.
+    if the shape is nil, exit.
+    remove the shape from the original shapes.
+    if the shape is not selected, append the shape to the page's shapes; repeat.
+    if the shape's kind is not "group", append the shape to the page's shapes; repeat.
+    select the shape's shapes.
+    append the shape's shapes to the page's shapes.
+    destroy the shape.
   repeat.
 
 to unlabel any selected shapes on a page:
   if the page is nil, exit.
   loop.
-  get a shape from the page's shapes.
-  if the shape is nil, exit.
-  if the shape is not selected, repeat.
-  unlabel the shape.
+    get a shape from the page's shapes.
+    if the shape is nil, exit.
+    if the shape is not selected, repeat.
+    unlabel the shape.
   repeat.
 
 to unlabel a shape:
@@ -4279,10 +4336,10 @@ some unsorted shape refers are some shape refers.
 to uppercase any selected shapes on a page:
   if the page is nil, exit.
   loop.
-  get a shape from the page's shapes.
-  if the shape is nil, exit.
-  if the shape is not selected, repeat.
-  uppercase the shape.
+    get a shape from the page's shapes.
+    if the shape is nil, exit.
+    if the shape is not selected, repeat.
+    uppercase the shape.
   repeat.
 
 to uppercase a shape:

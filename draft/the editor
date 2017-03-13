@@ -1,4 +1,6 @@
-\ copyright © 2006 the osmosian order (3040)
+\ The portions of this file that are from CAL-3040
+\ are copyright 2006 by the Osmosian Order.
+\ The remainder is copyright 2014, 2017 by Jasper Paulsen.
 
 to add to some blocks:
   create a block.
@@ -67,13 +69,14 @@ to create some blocks given some rows:
 to create a source given a buffer:
   allocate memory for the source.
   put the pad's box into a box.
-  put the box's height divided by the default font's height times the default font's height into a height.
+  put the box's height divided by the requested font's height
+    times the requested font's height into a height.
   put the box's top plus the height into the box's bottom.
   center the box in the pad's box (vertically).
   create the source's text.
   put the box into the source's text's box.
   put the black color into the source's text's pen.
-  put the default font into the source's text's font.
+  put the requested font into the source's text's font.
   put 1/4 inch into the source's text's margin.
   put the buffer into the source's text.
   set the source's text's horizontal scroll flag.
@@ -82,9 +85,9 @@ to create a source given a buffer:
 to decide if a buffer is text-format:
   slap a substring on the buffer.
   loop.
-  if the substring's first is greater than the substring's last, say yes.
-  if the substring's first's target is not any text byte, say no.
-  add 1 to the substring's first.
+    if the substring's first is greater than the substring's last, say yes.
+    if the substring's first's target is not any text byte, say no.
+    add 1 to the substring's first.
   repeat.
 
 to decide if a byte is any text byte:
@@ -152,39 +155,66 @@ to decide if a string starts with any routine starter:
   if the string starts with "to ", say yes.
   say no.
 
+to draw the right margin of a source given a color:
+  put 80 in a count.
+  fill a string with the big-w byte given the count.
+  get a width given the string and the memory canvas and the source's text's font.
+  put the source's text's globalized origin's x in a number called left margin.
+  put the width plus the left margin in a number called x.
+  draw vertical line placed the x into the source's text's box using the color.
+
 to draw a row of a source (colorized):
   if the source is nil, exit.
   get a substring given the row and the source (commented part).
-  if the substring is blank, draw the row of the source's text (editing); exit.
+  if the substring is blank,
+    draw the row of the source's text (editing); exit.
   draw the selection box for the row of the source's text.
   get a box given the row and the source's text.
   \ uncommented part
   slap another substring on the row's string.
   put the substring's first minus 1 into the other substring's last.
-  draw the other substring in the box with the black color and the source's text's font and the source's text's alignment.
+  draw the other substring in the box
+    with the black color and the source's text's font and the source's text's alignment.
   \ commented part
   get a width given the other substring and the memory canvas and the source's text's font.
   add the width to the box's left.
-  draw the substring in the box with the comment color and the source's text's font and the source's text's alignment.
+  draw the substring in the box with the comment color
+    and the source's text's font and the source's text's alignment.
 
 to draw a source:
   if the source is nil, exit.
+  if the scrollbar is needed,
+    put the pad's right minus 1/4 inch in the source's text's right.
+  if the scrollbar is not needed,
+    put the pad's right in the source's text's right.
   mask only outside the source's text's box.
+  if the source's text's font is fixed-width,
+    draw the right margin of the source using the white color.
   if the source's colorized flag is set, draw the source (colorized); exit.
   draw the source (not colorized).
 
 to draw a source (colorized):
   if the source is nil, exit.
-  get a row from the source's text's rows.
-  if the row is nil, break.
-  if the row of the source's text is not visible, repeat.
-  draw the row of the source (colorized).
+  loop.
+    get a row from the source's text's rows.
+    if the row is nil, break.
+    if the row of the source's text is not visible, repeat.
+    draw the row of the source (colorized).
   repeat.
   draw the caret in the source's text.
 
 to draw a source (not colorized):
   if the source is nil, exit.
   draw the source's text (editing).
+
+to draw vertical line placed a number into a box using a color:
+  if the number is negative, exit.
+  if the number is greater than the box's width, exit.
+  put the box's left plus the number in a number called x.
+  put the box's top in a number called top.
+  put the box's bottom in a number called bottom.
+  make a line with the x and the top and the x and the bottom.
+  draw the line with the color.
 
 to finalize the editor:
 
@@ -520,7 +550,9 @@ to handle find next given a source (find):
 
 to handle font height given a source and a font height:
   privatize the font height.
-  limit the font height to 1/96 inch and 1 inch.
+  put the tpp in a number called pixelsize.
+  if the pixelsize is less than 1, put 1/96 inch into the pixelsize.
+  limit the font height to the pixelsize and 1 inch.
   put the pad's box into a box.
   put the box's height divided by the font height times the font height into a height.
   put the box's top plus the height into the box's bottom.
@@ -537,14 +569,21 @@ to handle font height other given a source:
   convert the answer to another ratio.
   if the other ratio is 0, show error "Invalid font height."; exit.
   put 1 inch times the other ratio into a font height.
+  if the font height is not standard (font height),
+    cache the font height (font height).
   handle font height given the source and the font height.
 
-to handle font name given a source:
+to handle font name given a source and a string:
+  show the desktop.
+  handle font name given the source's text and the string.
+  show the desktop with status.
+
+to handle font name other given a source:
   ask "Name?" with the source's text's font's name.
   if the answer is blank, exit.
-  show the desktop.
-  handle font name given the source's text and the answer.
-  show the desktop with status.
+  if the answer is not standard (font name),
+    cache the answer (font name).
+  handle font name given the source and the answer.
 
 to handle indent given a source:
   if nothing is selected in the source, cluck; exit.
@@ -721,15 +760,20 @@ to print a row of a source at a spot:
   get a substring given the row and the source (commented part).
   \ uncommented part
   slap another substring on the row's working string.
-  if the substring is not blank, put the substring's first minus 1 into the other substring's last.
-  draw the other substring in the box with the black color and the source's text's font and the source's text's alignment.
+  if the substring is not blank,
+    put the substring's first minus 1 into the other substring's last.
+  draw the other substring in the box with the black color
+    and the source's text's font and the source's text's alignment.
   \ commented part
   if the substring is blank, exit.
   put the comment color into a color.
-  if the source's colorized flag is not set, put the black color into the color.
-  get a width given the other substring and the memory canvas and the source's text's font.
+  if the source's colorized flag is not set,
+    put the black color into the color.
+  get a width given the other substring
+    and the memory canvas and the source's text's font.
   add the width to the box's left.
-  draw the substring in the box with the color and the source's text's font and the source's text's alignment.
+  draw the substring in the box with the color
+    and the source's text's font and the source's text's alignment.
 
 to put a source's rows/sheet into a rows/sheet:
   if the source is nil, put 0 into the rows/sheet; exit.
@@ -741,19 +785,21 @@ to put a source's sheets/copy into a sheets/copy:
   put the quotient into the sheets/copy.
   if the remainder is not 0, add 1 to the sheets/copy.
 
+to resize the editor:
+
 a rows/sheet is a number.
 
 to scroll a source given an event:
   if the source is nil, exit.
   find a sector given the source's text's grid and the event's spot.
   loop.
-  if the mouse's right button is up, exit.
-  find another sector given the source's text's grid and the mouse's spot.
-  get a difference between the other sector and the sector.
-  if the difference is 0, repeat.
-  scroll the source's text given the difference.
-  show the desktop.
-  add the difference to the sector.
+    if the mouse's right button is up, exit.
+    find another sector given the source's text's grid and the mouse's spot.
+    get a difference between the other sector and the sector.
+    if the difference is 0, repeat.
+    scroll the source's text given the difference.
+    show the desktop.
+    add the difference to the sector.
   repeat.
 
 to scrub a block:
@@ -830,14 +876,14 @@ to track a source given an event:
   if the event's shift flag is not set, deselect the source's text.
   clear a selection.
   loop.
-  if a flag is set, show the desktop with status.
-  if the mouse's left button is up, exit.
-  put the mouse's spot into a spot.
-  autoscroll the source's text given the spot and the flag.
-  extend any selection in the source's text given the spot.
-  if the source's text's selection is the selection, repeat.
-  set the flag.
-  put the source's text's selection into the selection.
+    if a flag is set, show the desktop with status.
+    if the mouse's left button is up, exit.
+    put the mouse's spot into a spot.
+    autoscroll the source's text given the spot and the flag.
+    extend any selection in the source's text given the spot.
+    if the source's text's selection is the selection, repeat.
+    set the flag.
+    put the source's text's selection into the selection.
   repeat.
 
 to uncomment any selected rows in a source:

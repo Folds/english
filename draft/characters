@@ -1,0 +1,1023 @@
+\ The portions of this file that are from CAL-3040
+\ are copyright 2006 by the Osmosian Order.
+\ The remainder is copyright 2014, 2017 by Jasper Paulsen.
+
+\ this file defines and manipulates the bytes and the keys,
+\ but does not handle any events.
+
+the a-key is a key equal to 65. 
+
+the accent byte is a byte equal to 96.
+
+the accent key is a key equal to 192.
+
+the acknowledge byte is a byte equal to 6.
+
+the acute-accent byte is a byte equal to 180.
+
+to add a byte to another byte:
+  intel $8B8508000000. \ mov eax,[ebp+8] \ the byte
+  intel $0FB600. \ movzx eax,[eax]
+  intel $8B9D0C000000. \ mov ebx,[ebp+12] \ the other byte
+  intel $0003. \ add [ebx],al
+
+to add a byte to a number:
+  intel $8B8508000000. \ mov eax,[ebp+8] \ the byte
+  intel $0FB600. \ movzx eax,[eax]
+  intel $8B9D0C000000. \ mov ebx,[ebp+12] \ the number
+  intel $0103. \ add [ebx],eax
+
+to add a number to a byte:
+  intel $8B8508000000. \ mov eax,[ebp+8] \ the number
+  intel $8B00. \ mov eax,[eax]
+  intel $8B9D0C000000. \ mov ebx,[ebp+12] \ the byte
+  intel $0FB60B. \ movzx ecx,[ebx]
+  intel $03C8. \ add ecx,eax
+  intel $880B. \ mov [ebx],cl
+
+the alt key is a key equal to 18.
+
+the ampersand byte is a byte equal to 38.
+
+the asterisk byte is a byte equal to 42.
+
+the at-sign byte is a byte equal to 64.
+
+the b-key is a key equal to 66.
+
+the backslash byte is a byte equal to 92.
+
+the backspace key is a key equal to 8.
+
+the bar byte is a byte equal to 124.
+
+the bell byte is a byte equal to 7.
+
+the big-a byte is a byte equal to 65.
+
+the big-a-acute byte is a byte equal to 193.
+
+the big-a-circumflex byte is a byte equal to 194.
+
+the big-a-diaeresis byte is a byte equal to 196.
+
+the big-a-grave byte is a byte equal to 192.
+
+the big-a-ring byte is a byte equal to 197.
+
+the big-a-tilde byte is a byte equal to 195.
+
+the big-ae byte is a byte equal to 198.
+
+the big-b byte is a byte equal to 66.
+
+the big-c byte is a byte equal to 67.
+
+the big-c-cedilla byte is a byte equal to 199.
+
+the big-d byte is a byte equal to 68.
+
+the big-e byte is a byte equal to 69.
+
+the big-e-acute byte is a byte equal to 201.
+
+the big-e-circumflex byte is a byte equal to 202.
+
+the big-e-diaeresis byte is a byte equal to 203.
+
+the big-e-grave byte is a byte equal to 200.
+
+the big-eth byte is a byte equal to 208.
+
+the big-f byte is a byte equal to 70.
+
+the big-g byte is a byte equal to 71.
+
+the big-h byte is a byte equal to 72.
+
+the big-i byte is a byte equal to 73.
+
+the big-i-acute byte is a byte equal to 205.
+
+the big-i-circumflex byte is a byte equal to 206.
+
+the big-i-diaeresis byte is a byte equal to 207.
+
+the big-i-grave byte is a byte equal to 204.
+
+the big-j byte is a byte equal to 74.
+
+the big-k byte is a byte equal to 75.
+
+the big-l byte is a byte equal to 76.
+
+the big-m byte is a byte equal to 77.
+
+the big-n byte is a byte equal to 78.
+
+the big-n-tilde byte is a byte equal to 209.
+
+the big-o byte is a byte equal to 79.
+
+the big-o-acute byte is a byte equal to 211.
+
+the big-o-circumflex byte is a byte equal to 212.
+
+the big-o-diaeresis byte is a byte equal to 214.
+
+the big-o-grave byte is a byte equal to 210.
+
+the big-o-stroke byte is a byte equal to 216.
+
+the big-o-tilde byte is a byte equal to 213.
+
+the big-oe byte is a byte equal to 140.
+
+the big-p byte is a byte equal to 80.
+
+the big-q byte is a byte equal to 81.
+
+the big-r byte is a byte equal to 82.
+
+the big-s byte is a byte equal to 83.
+
+the big-s-caron byte is a byte equal to 138.
+
+the big-t byte is a byte equal to 84.
+
+the big-thorn byte is a byte equal to 222.
+
+the big-u byte is a byte equal to 85.
+
+the big-u-acute byte is a byte equal to 218.
+
+the big-u-circumflex byte is a byte equal to 219.
+
+the big-u-diaeresis byte is a byte equal to 220.
+
+the big-u-grave byte is a byte equal to 217.
+
+the big-v byte is a byte equal to 86.
+
+the big-w byte is a byte equal to 87.
+
+the big-x byte is a byte equal to 88.
+
+the big-y byte is a byte equal to 89.
+
+the big-y-acute byte is a byte equal to 221.
+
+the big-y-diaeresis byte is a byte equal to 159.
+
+the big-z byte is a byte equal to 90.
+
+the big-z-caron byte is a byte equal to 142.
+
+to bitwise and a byte with another byte:
+  intel $8B850C000000. \ mov eax,[ebp+12] \ the other byte
+  intel $8A00. \ mov al,[eax]
+  intel $8B9D08000000. \ mov ebx,[ebp+8] \ the byte
+  intel $2003. \ and [ebx],al
+
+to bitwise and a byte with a number:
+  intel $8B850C000000. \ mov eax,[ebp+12] \ the number
+  intel $8B00. \ mov eax,[eax]
+  intel $8B9D08000000. \ mov ebx,[ebp+8] \ the byte
+  intel $2003. \ and [ebx],al
+
+to bitwise or a byte with another byte:
+  intel $8B850C000000. \ mov eax,[ebp+12] \ the other byte
+  intel $8A00. \ mov al,[eax]
+  intel $8B9D08000000. \ mov ebx,[ebp+8] \ the byte
+  intel $0803. \ or [ebx],al
+
+to bitwise or a byte with a number:
+  intel $8B850C000000. \ mov eax,[ebp+12] \ the number
+  intel $8B00. \ mov eax,[eax]
+  intel $8B9D08000000. \ mov ebx,[ebp+8] \ the byte
+  intel $0803. \ or [ebx],al
+
+the broken-bar byte is a byte equal to 166.
+
+the bullet byte is a byte equal to 149.
+
+a byte count is a count.
+
+a byte pointer is a pointer to a byte.
+
+a byte# is a number.
+
+the c-key is a key equal to 67.
+
+the cancel byte is a byte equal to 24.
+
+the caps key is a key equal to 20.
+
+the caret byte is a byte equal to 94.
+
+the cedilla byte is a byte equal to 184.
+
+the cent-sign byte is a byte equal to 162.
+
+a character is a byte.
+
+the circumflex byte is a byte equal to 136.
+
+to clear a byte:
+  put the null byte into the byte.
+
+the clear key is a key equal to 12.
+
+the colon byte is a byte equal to 58.
+
+the comma byte is a byte equal to 44.
+
+the copyright byte is a byte equal to 169.
+
+the crlf string is a string equal to $0D0A.
+
+the cross byte is a byte equal to 43.
+
+the ctrl key is a key equal to 17.
+
+the currency-sign byte is a byte equal to 164.
+
+the d-key is a key equal to 68.
+
+the dagger byte is a byte equal to 134.
+
+the dash byte is a byte equal to 45.
+
+the dash key is a key equal to 189.
+
+the data-link-escape byte is a byte equal to 16.
+
+to debug a byte:
+  put the byte into a number.
+  convert the number to a string.
+  debug the string.
+
+to decide if a byte is alphanumeric:
+  if the byte is any letter, say yes.
+  if the byte is any digit, say yes.
+  say no.
+
+to decide if a byte is another byte:
+  intel $C7C001000000. \ mov eax,1 \ assume true
+  intel $8B9D08000000. \ mov ebx,[ebp+8] \ the byte
+  intel $8A1B. \ mov bl,[ebx]
+  intel $8B8D0C000000. \ mov ecx,[ebp+12] \ the other byte
+  intel $3A19. \ cmp bl,[ecx]
+  intel $0F8406000000. \ je over the next 1 statement
+  intel $C7C000000000. \ mov eax,0 \ now it's false
+
+to decide if a byte is another byte or a third byte:
+  if the byte is the other byte, say yes.
+  if the byte is the third byte, say yes.
+  say no.
+
+to decide if a byte is any consonant:
+  if the byte is in "bcdfghjklmnpqrstvwxyz", say yes.
+  say no.
+
+to decide if a byte is any digit:
+  if the byte is less than the zero byte, say no.
+  if the byte is greater than the nine byte, say no.
+  say yes.
+
+to decide if a byte is any letter:
+  if the byte is between the big-a byte and the big-z byte, say yes.
+  if the byte is between the little-a byte and the little-z byte, say yes.
+  if the byte is 131 or 138, say yes. 
+  if the byte is 140 or 142, say yes. 
+  if the byte is 154 or 156, say yes. 
+  if the byte is between 158 and 159, say yes.
+  if the byte is between 192 and 214, say yes.
+  if the byte is between 216 and 246, say yes.
+  if the byte is between 248 and 255, say yes.
+  say no.
+
+to decide if a byte is any numeric starter:
+  if the byte is any digit, say yes.
+  if the byte is any sign, say yes.
+  say no.
+
+to decide if a byte is any sign:
+  if the byte is the dash byte, say yes.
+  if the byte is the cross byte, say yes.
+  say no.
+
+to decide if a byte is any vowel:
+  if the byte is in "aeiou", say yes.
+\  if the byte is "y", say sometimes. \ ha ha ha
+  say no.
+
+to decide if a byte is between another byte and a third byte:
+  if the byte is less than the other byte, say no.
+  if the byte is greater than the third byte, say no.
+  say yes.
+
+to decide if a byte is between a number and another number:
+  if the byte is less than the number, say no.
+  if the byte is greater than the other number, say no.
+  say yes.
+
+to decide if a byte is greater than another byte:
+  intel $C7C001000000. \ mov eax,1 \ assume true
+  intel $8B9D08000000. \ mov ebx,[ebp+8] \ the byte
+  intel $8A1B. \ mov bl,[ebx]
+  intel $8B8D0C000000. \ mov ecx,[ebp+12] \ the other byte
+  intel $3A19. \ cmp bl,[ecx]
+  intel $0F8706000000. \ ja over the next 1 statement
+  intel $C7C000000000. \ mov eax,0 \ now it's false
+
+to decide if a byte is greater than a number:
+  intel $C7C001000000. \ mov eax,1 \ assume true
+  intel $8B9D08000000. \ mov ebx,[ebp+8] \ the byte
+  intel $0FB61B. \ movzx ebx,byte ptr [ebx]
+  intel $8B8D0C000000. \ mov ecx,[ebp+12] \ the number
+  intel $3B19. \ cmp ebx,[ecx]
+  intel $0F8F06000000. \ jg over the next 1 statement
+  intel $C7C000000000. \ mov eax,0 \ now it's false
+
+to decide if a byte is greater than or equal to another byte:
+  intel $C7C001000000. \ mov eax,1 \ assume true
+  intel $8B9D08000000. \ mov ebx,[ebp+8] \ the byte
+  intel $8A1B. \ mov bl,[ebx]
+  intel $8B8D0C000000. \ mov ecx,[ebp+12] \ the other byte
+  intel $3A19. \ cmp bl,[ecx]
+  intel $0F8306000000. \ ja over the next 1 statement
+  intel $C7C000000000. \ mov eax,0 \ now it's false
+
+to decide if a byte is less than another byte:
+  intel $C7C001000000. \ mov eax,1 \ assume true
+  intel $8B9D08000000. \ mov ebx,[ebp+8] \ the byte
+  intel $8A1B. \ mov bl,[ebx]
+  intel $8B8D0C000000. \ mov ecx,[ebp+12] \ the other byte
+  intel $3A19. \ cmp bl,[ecx]
+  intel $0F8206000000. \ jb over the next 1 statement
+  intel $C7C000000000. \ mov eax,0 \ now it's false
+
+to decide if a byte is less than a number:
+  intel $C7C001000000. \ mov eax,1 \ assume true
+  intel $8B9D08000000. \ mov ebx,[ebp+8] \ the byte
+  intel $0FB61B. \ movzx ebx,byte ptr [ebx]
+  intel $8B8D0C000000. \ mov ecx,[ebp+12] \ the number
+  intel $3B19. \ cmp ebx,[ecx]
+  intel $0F8C06000000. \ jl over the next 1 statement
+  intel $C7C000000000. \ mov eax,0 \ now it's false
+
+to decide if a byte is less than or equal to another byte:
+  intel $C7C001000000. \ mov eax,1 \ assume true
+  intel $8B9D08000000. \ mov ebx,[ebp+8] \ the byte
+  intel $8A1B. \ mov bl,[ebx]
+  intel $8B8D0C000000. \ mov ecx,[ebp+12] \ the other byte
+  intel $3A19. \ cmp bl,[ecx]
+  intel $0F8606000000. \ jbe over the next 1 statement
+  intel $C7C000000000. \ mov eax,0 \ now it's false
+
+to decide if a byte is like another byte: \ used internally for word wrap
+   if the byte is whitespace, set a flag.
+   if the other byte is whitespace, set another flag.
+   if the flag is the other flag, say yes.
+   say no.
+
+to decide if a byte is noise:
+  if the byte is less than or equal to the space byte, say yes.
+  if the byte is the delete byte, say yes.
+  if the byte is the non-breaking-space byte, say yes.
+  if the byte is 129, say yes.
+  if the byte is 141, say  yes.
+  if the byte is 143, say yes.
+  if the byte is 144, say yes.
+  if the byte is 157, say yes.
+  say no.
+
+to decide if a byte is a number:
+  intel $C7C001000000. \ mov eax,1 \ assume true
+  intel $8B9D08000000. \ mov ebx,[ebp+8] \ the byte
+  intel $0FB61B. \ movzx ebx,byte ptr [ebx]
+  intel $8B8D0C000000. \ mov ecx,[ebp+12] \ the number
+  intel $3B19. \ cmp ebx,[ecx]
+  intel $0F8406000000. \ je over the next 1 statement
+  intel $C7C000000000. \ mov eax,0 \ now it's false
+
+to decide if a byte is a number or another number:
+  if the byte is the number, say yes.
+  if the byte is the other number, say yes.
+  say no.
+
+to decide if a byte is printable:
+  if the byte is less than the space byte, say no.
+  if the byte is the delete byte, say no.
+  if the byte is 129, say no.
+  if the byte is 141, say no.
+  if the byte is 143, say no.
+  if the byte is 144, say no.
+  if the byte is 157, say no.
+  say yes.
+
+to decide if a byte is symbolic:
+  if the byte is between the exclamation byte and the slash byte, say yes.
+  if the byte is between the colon byte and the at-sign byte, say yes.
+  if the byte is between the left-bracket byte and the accent byte, say yes.
+  if the byte is between the left-brace byte and the tilde byte, say yes.
+  if the byte is 128, say yes.
+  if the byte is 130, say yes.
+  if the byte is between 132 and 137, say yes.
+  if the byte is 139, say yes.
+  if the byte is between 145 and 153, say yes.
+  if the byte is 155, say yes.
+  if the byte is between 161 and 180, say yes.
+  if the byte is between 183 and 191, say yes.
+  if the byte is 215, say yes.
+  if the byte is 247, say yes.
+  say no.
+
+to decide if a byte is whitespace:
+  if the byte is the space byte, say yes.
+  if the byte is the tab byte, say yes.
+  if the byte is the return byte, say yes.
+  if the byte is the linefeed byte, say yes.
+  say no.
+
+to decide if a key is any digit key:
+  if the key is between 48 and 57, say yes.
+  say no.
+
+to decide if a key is any function key:
+  if the key is between the f1-key and the f12-key, say yes.
+  say no.
+
+to decide if a key is any letter key:
+  if the key is between 65 and 90, say yes.
+  say no.
+
+to decide if a key is any modifier key:
+  if the key is the alt key,   say yes.
+  if the key is the ctrl key,  say yes.
+  if the key is the shift key, say yes.
+  say no.
+
+to decide if a key is any pad key:
+  if the key is between 96 and 111, say yes.
+  say no.
+
+to decide if a key is any printable key:
+  if the key is the space key,  say yes.
+  if the key is any digit key,  say yes.
+  if the key is any letter key, say yes.
+  if the key is any pad key,    say yes.
+  if the key is any symbol key, say yes.
+  say no.
+
+to decide if a key is any symbol key:
+  if the key is between 186 and 192, say yes.
+  if the key is between 219 and 222, say yes.
+  say no.
+
+the degree-symbol byte is a byte equal to 176.
+
+the delete byte is a byte equal to 127.
+
+the delete key is a key equal to 46.
+
+the device-control-four byte is a byte equal to 20.
+
+the device-control-one byte is a byte equal to 17.
+
+the device-control-three byte is a byte equal to 19.
+
+the device-control-two byte is a byte equal to 18.
+
+the diaeresis byte is a byte equal to 168.
+
+the division-symbol byte is a byte equal to 247.
+
+the dollar-sign byte is a byte equal to 36.
+
+the double-dagger byte is a byte equal to 135.
+
+the double-quote byte is a byte equal to 34.
+
+the down-arrow key is a key equal to 40.
+
+the e-key is a key equal to 69.
+
+the eight byte is a byte equal to 56.
+
+the eight key is a key equal to 56.
+
+the ellipsis byte is a byte equal to 133.
+
+the em-dash byte is a byte equal to 151.
+
+the en-dash byte is a byte equal to 150.
+
+the end key is a key equal to 35.
+
+the end-of-medium byte is a byte equal to 25.
+
+the end-of-text byte is a byte equal to 3.
+
+the end-of-transmission byte is a byte equal to 4.
+
+the end-of-transmission-block byte is a byte equal to 23.
+
+the enquiry byte is a byte equal to 5.
+
+the enter key is a key equal to 13.
+
+the equal-sign byte is a byte equal to 61.
+
+the equal-sign key is a key equal to 187.
+
+the escape byte is a byte equal to 27.
+
+the escape key is a key equal to 27.
+
+the euro-sign byte is a byte equal to 128.
+
+the exclamation byte is a byte equal to 33.
+
+the f-key is a key equal to 70.
+
+the f1-key is a key equal to 112.
+
+the f10-key is a key equal to 121.
+
+the f11-key is a key equal to 122.
+
+the f12-key is a key equal to 123.
+
+the f2-key is a key equal to 113.
+
+the f3-key is a key equal to 114.
+
+the f4-key is a key equal to 115.
+
+the f5-key is a key equal to 116.
+
+the f6-key is a key equal to 117.
+
+the f7-key is a key equal to 118.
+
+the f8-key is a key equal to 119.
+
+the f9-key is a key equal to 120.
+
+the feminine byte is a byte equal to 170.
+
+the file-separator byte is a byte equal to 28.
+
+the five byte is a byte equal to 53.
+
+the five key is a key equal to 53.
+
+the form-feed byte is a byte equal to 12.
+
+the four byte is a byte equal to 52.
+
+the four key is a key equal to 52.
+
+the g-key is a key equal to 71.
+
+the group-separator byte is a byte equal to 29.
+
+the h-key is a key equal to 72.
+
+the home key is a key equal to 36.
+
+the i-key is a key equal to 73.
+
+the insert key is a key equal to 45.
+
+the inverted-exclamation-mark byte is a byte equal to 161.
+
+the inverted-question-mark byte is a byte equal to 191.
+
+the j-key is a key equal to 74.
+
+the k-key is a key equal to 75.
+
+a key is a number.
+
+the l-key is a key equal to 76.
+
+the left-alligator byte is a byte equal to 60.
+
+the left-alligator-quote byte is a byte equal to 139.
+
+the left-arrow key is a key equal to 37.
+
+the left-brace byte is a byte equal to 123.
+
+the left-bracket byte is a byte equal to 91.
+
+the left-double-alligator-quote byte is a byte equal to 171.
+
+the left-double-quote byte is a byte equal to 147.
+
+the left-paren byte is a byte equal to 40.
+
+the left-single-quote byte is a byte equal to 145.
+
+the left-window key is a key equal to 91.
+
+the linefeed byte is a byte equal to 10.
+
+the little-a byte is a byte equal to 97.
+
+the little-a-acute byte is a byte equal to 225.
+
+the little-a-circumflex byte is a byte equal to 226.
+
+the little-a-diaeresis byte is a byte equal to 228.
+
+the little-a-grave byte is a byte equal to 224.
+
+the little-a-ring byte is a byte equal to 229.
+
+the little-a-tilde byte is a byte equal to 227.
+
+the little-ae byte is a byte equal to 230.
+
+the little-b byte is a byte equal to 98.
+
+the little-c byte is a byte equal to 99.
+
+the little-c-cedilla byte is a byte equal to 231.
+
+the little-d byte is a byte equal to 100.
+
+the little-e byte is a byte equal to 101.
+
+the little-e-acute byte is a byte equal to 233.
+
+the little-e-circumflex byte is a byte equal to 234.
+
+the little-e-diaeresis byte is a byte equal to 235.
+
+the little-e-grave byte is a byte equal to 232.
+
+the little-eth byte is a byte equal to 240.
+
+the little-f byte is a byte equal to 102.
+
+the little-f-hook byte is a byte equal to 131.
+
+the little-g byte is a byte equal to 103.
+
+the little-h byte is a byte equal to 104.
+
+the little-i byte is a byte equal to 105.
+
+the little-i-acute byte is a byte equal to 237.
+
+the little-i-circumflex byte is a byte equal to 238.
+
+the little-i-diaeresis byte is a byte equal to 239.
+
+the little-i-grave byte is a byte equal to 236.
+
+the little-j byte is a byte equal to 106.
+
+the little-k byte is a byte equal to 107.
+
+the little-l byte is a byte equal to 108.
+
+the little-m byte is a byte equal to 109.
+
+the little-n byte is a byte equal to 110.
+
+the little-n-tilde byte is a byte equal to 241.
+
+the little-o byte is a byte equal to 111.
+
+the little-o-acute byte is a byte equal to 243.
+
+the little-o-circumflex byte is a byte equal to 244.
+
+the little-o-diaeresis byte is a byte equal to 246.
+
+the little-o-grave byte is a byte equal to 242.
+
+the little-o-stroke byte is a byte equal to 248.
+
+the little-o-tilde byte is a byte equal to 245.
+
+the little-oe byte is a byte equal to 156.
+
+the little-p byte is a byte equal to 112.
+
+the little-q byte is a byte equal to 113.
+
+the little-r byte is a byte equal to 114.
+
+the little-s byte is a byte equal to 115.
+
+the little-s-caron byte is a byte equal to 154.
+
+the little-t byte is a byte equal to 116.
+
+the little-thorn byte is a byte equal to 254.
+
+the little-tilde byte is a byte equal to 152.
+
+the little-u byte is a byte equal to 117.
+
+the little-u-acute byte is a byte equal to 250.
+
+the little-u-circumflex byte is a byte equal to 251.
+
+the little-u-diaeresis byte is a byte equal to 252.
+
+the little-u-grave byte is a byte equal to 249.
+
+the little-v byte is a byte equal to 118.
+
+the little-w byte is a byte equal to 119.
+
+the little-x byte is a byte equal to 120.
+
+the little-y byte is a byte equal to 121.
+
+the little-y-acute byte is a byte equal to 253.
+
+the little-y-diaeresis byte is a byte equal to 255.
+
+the little-z byte is a byte equal to 122.
+
+the little-z-caron byte is a byte equal to 158.
+
+the lower-double-quote byte is a byte equal to 132.
+
+the lower-single-quote byte is a byte equal to 130.
+
+to lowercase a byte:
+  intel $8B8508000000. \ mov eax,[ebp+8] \ the byte
+  intel $803841. \ cmp byte ptr [eax],'A'
+  intel $0F820C000000. \ jb END
+  intel $80385A. \ cmp byte ptr [eax],'Z'
+  intel $0F8703000000. \ ja END
+  intel $800020. \ add byte ptr [eax],$20
+  \ END
+
+the m-key is a key equal to 77.
+
+the masculine byte is a byte equal to 186.
+
+the menu key is a key equal to 93.
+
+the micro byte is a byte equal to 181.
+
+the multiplication-symbol byte is a byte equal to 215.
+
+the n-key is a key equal to 78.
+
+the negative-acknowledge byte is a byte equal to 21.
+
+the nine byte is a byte equal to 57.
+
+the nine key is a key equal to 57.
+
+the non-breaking-space byte is a byte equal to 160.
+
+the not byte is a byte equal to 172.
+
+the null byte is a byte equal to 0.
+
+the number-sign byte is a byte equal to 35.
+
+the numlock key is a key equal to 144.
+
+the numpad-astrisk key is a key equal to 106.
+
+the numpad-cross key is a key equal to 107.
+
+the numpad-dash key is a key equal to 109.
+
+the numpad-eight key is a key equal to 104.
+
+the numpad-five key is a key equal to 101.
+
+the numpad-four key is a key equal to 100.
+
+the numpad-nine key is a key equal to 105.
+
+the numpad-one key is a key equal to 97.
+
+the numpad-period key is a key equal to 110.
+
+the numpad-seven key is a key equal to 103.
+
+the numpad-six key is a key equal to 102.
+
+the numpad-slash key is a key equal to 111.
+
+the numpad-three key is a key equal to 99.
+
+the numpad-two key is a key equal to 98.
+
+the numpad-zero key is a key equal to 96.
+
+the o-key is a key equal to 79.
+
+the one byte is a byte equal to 49.
+
+the one key is a key equal to 49.
+
+the one-half byte is a byte equal to 189.
+
+the one-quarter byte is a byte equal to 188.
+
+the p-key is a key equal to 80.
+
+the page-down key is a key equal to 34.
+
+the page-up key is a key equal to 33.
+
+the paragraph byte is a byte equal to 182.
+
+the pause key is a key equal to 19.
+
+the per-mille-sign byte is a byte equal to 137.
+
+the percent-sign byte is a byte equal to 37.
+
+the period byte is a byte equal to 46.
+
+the pipe byte is a byte equal to 124.
+
+the plus-or-minus byte is a byte equal to 177.
+
+the pound-sign byte is a byte equal to 163.
+
+the print-screen key is a key equal to 44.
+
+to put a byte into another byte:
+  intel $8B8508000000. \ mov eax,[ebp+8] \ the byte
+  intel $8A00. \ mov al,[eax]
+  intel $8B9D0C000000. \ mov ebx,[ebp+12] \ the other byte
+  intel $8803. \ mov [ebx],al
+
+to put a byte into eax:
+  intel $8B9D08000000. \ mov ebx,[ebp+8] \ the byte
+  intel $0FB603. \ movzx eax,byte ptr [ebx]
+
+the q-key is a key equal to 81.
+
+the question-mark byte is a byte equal to 63.
+
+the r-key is a key equal to 82.
+
+the record-separator byte is a byte equal to 30.
+
+the registered byte is a byte equal to 174.
+
+the registered-trade-mark byte is a byte equal to 174.
+
+the return byte is a byte equal to 13.
+
+the right-alligator byte is a byte equal to 62.
+
+the right-alligator-quote byte is a byte equal to 155.
+
+the right-arrow key is a key equal to 39.
+
+the right-brace byte is a byte equal to 125.
+
+the right-bracket byte is a byte equal to 93.
+
+the right-double-alligator-quote byte is a byte equal to 187.
+
+the right-double-quote byte is a byte equal to 148.
+
+the right-paren byte is a byte equal to 41.
+
+the right-single-quote byte is a byte equal to 146.
+
+the right-window key is a key equal to 92.
+
+the s-key is a key equal to 83.
+
+the scrolllock key is a key equal to 145.
+
+the sector byte is a byte equal to 167.
+
+the semi-colon byte is a byte equal to 59.
+
+the seven byte is a byte equal to 55.
+
+the seven key is a key equal to 55.
+
+the sharp-s byte is a byte equal to 223.
+
+the shift key is a key equal to 16.
+
+the shift-in byte is a byte equal to 15.
+
+the shift-out byte is a byte equal to 14.
+
+the single-quote byte is a byte equal to 39.
+
+the six byte is a byte equal to 54.
+
+the six key is a key equal to 54.
+
+a size is a number.
+
+the slash byte is a byte equal to 47.
+
+the small-bullet byte is a byte equal to 183.
+
+the soft-dash byte is a byte equal to 173.
+
+the space byte is a byte equal to 32.
+
+the space key is a key equal to 32.
+
+the space string is a string equal to " ".
+
+the start-of-heading byte is a byte equal to 1.
+
+the start-of-text byte is a byte equal to 2.
+
+the substitute byte is a byte equal to 26.
+
+to subtract a byte from another byte:
+  intel $8B8508000000. \ mov eax,[ebp+8] \ the byte
+  intel $0FB600. \ movzx eax,[eax]
+  intel $8B9D0C000000. \ mov ebx,[ebp+12] \ the other byte
+  intel $2803. \ sub [ebx],al
+
+to subtract a byte from a number:
+  intel $8B8508000000. \ mov eax,[ebp+8] \ the byte
+  intel $0FB600. \ movzx eax,[eax]
+  intel $8B9D0C000000. \ mov ebx,[ebp+12] \ the number
+  intel $2903. \ sub [ebx],eax
+
+the superscript-one byte is a byte equal to 185.
+
+the superscript-three byte is a byte equal to 179.
+
+the superscript-two byte is a byte equal to 178.
+
+the synchronous-idle byte is a byte equal to 22.
+
+the t-key is a key equal to 84.
+
+the tab byte is a byte equal to 9.
+
+the tab key is a key equal to 9.
+
+the three byte is a byte equal to 51.
+
+the three key is a key equal to 51.
+
+the three-quarter byte is a byte equal to 190.
+
+the tilde byte is a byte equal to 126.
+
+the trade-mark byte is a byte equal to 153.
+
+the two byte is a byte equal to 50.
+
+the two key is a key equal to 50.
+
+the u-key is a key equal to 85.
+
+the underscore byte is a byte equal to 95.
+
+the unit-separator byte is a byte equal to 31.
+
+the up-arrow key is a key equal to 38.
+
+to uppercase a byte:
+  intel $8B8508000000. \ mov eax,[ebp+8] \ the byte
+  intel $803861. \ cmp byte ptr [eax],'a'
+  intel $0F820C000000. \ jb END
+  intel $80387A. \ cmp byte ptr [eax],'z'
+  intel $0F8703000000. \ ja END
+  intel $802820. \ sub byte ptr [eax],$20
+  \ END
+
+the upperscore byte is a byte equal to 175.
+
+the v-key is a key equal to 86.
+
+the vertical-tab byte is a byte equal to 11.
+
+the w-key is a key equal to 87.
+
+the x-key is a key equal to 88.
+
+the y-key is a key equal to 89.
+
+the yen-sign byte is a byte equal to 165.
+
+the z-key is a key equal to 90.
+
+the zero byte is a byte equal to 48.
+
+the zero key is a key equal to 48.
