@@ -1,0 +1,851 @@
+\ copyright © 2006 the osmosian order (3040)
+
+to add to some blocks:
+  create a block.
+  append the block to the blocks.
+
+to append some blocks to some rows:
+  get a block from the blocks.
+  if the block is nil, exit.
+  append the block's rows to the rows.
+  repeat.
+
+a block is a thing with a name and some rows.
+
+to bump a substring (past a qualifier):
+  if the substring's first's target is the return byte, exit.
+  if the substring's first's target is the left-paren byte, add 1 to a count.
+  if the substring's first's target is the right-paren byte, subtract 1 from the count.
+  add 1 to the substring's first.  
+  if the count is 0, exit.
+  repeat.
+
+to bump a substring (past a remark):
+  if the substring's first's target is the return byte, exit.
+  if the substring's first's target is the left-bracket byte, add 1 to a count.
+  if the substring's first's target is the right-bracket byte, subtract 1 from the count.
+  add 1 to the substring's first.  
+  if the count is 0, exit.
+  repeat.
+
+to bump a substring (past a string):
+  if the substring's first's target is the return byte, exit.
+  add 1 to the substring's first.
+  if the substring's first's target is not the double-quote byte, repeat.
+  add 1 to the substring's first.
+  if the substring's first's target is not the double-quote byte, exit.
+  repeat.
+
+to comment any selected rows in a source:
+  if the source is nil, exit.
+  loop.
+  get a row from the source's text's rows.
+  if the row is nil, exit.
+  if the row of the source's text is not selected, repeat.
+  if the row is blank, repeat.
+  prepend "\" to the row's string.
+  repeat.
+
+the comment color is a color.
+
+to convert a source to a buffer:
+  if the source is nil, clear the buffer; exit.
+  extract the buffer from the source's text.
+
+to create a block:
+  allocate memory for the block.
+
+to create some blocks given some rows:
+  get a row from the rows.
+  if the row is nil, exit.
+  if the row's string starts with any definition starter, add to the blocks.
+  if the blocks are empty, add to the blocks.
+  copy the row into another row.
+  append the other row to the blocks' last's rows.
+  repeat.
+
+to create a source given a buffer:
+  allocate memory for the source.
+  put the pad's box into a box.
+  put the box's height divided by the default font's height times the default font's height into a height.
+  put the box's top plus the height into the box's bottom.
+  center the box in the pad's box (vertically).
+  create the source's text.
+  put the box into the source's text's box.
+  put the black color into the source's text's pen.
+  put the default font into the source's text's font.
+  put 1/4 inch into the source's text's margin.
+  put the buffer into the source's text.
+  set the source's text's horizontal scroll flag.
+  set the source's text's vertical scroll flag.
+
+to decide if a buffer is text-format:
+  slap a substring on the buffer.
+  loop.
+  if the substring's first is greater than the substring's last, say yes.
+  if the substring's first's target is not any text byte, say no.
+  add 1 to the substring's first.
+  repeat.
+
+to decide if a byte is any text byte:
+  if the byte is printable, say yes.
+  if the byte is the tab byte, say yes.
+  if the byte is the linefeed byte, say yes.
+  if the byte is the return byte, say yes.
+  say no.
+
+to decide if a row is any comment:
+  if the row is nil, say no.
+  slap a substring on the row's string.
+  loop.
+  if the substring is blank, say no.
+  if the substring's first's target is the backslash byte, say yes.
+  if the substring's first's target is noise, add 1 to the substring's first; repeat.
+  say no.
+
+to decide if something is selected in a source:
+  if the source is nil, say no.
+  if something is selected in the source's text, say yes.
+  say no.
+
+to decide if a source is modified:
+  if the source is nil, say no.
+  if the source's read-only flag is set, say no.
+  if the source's text is modified, say yes.
+  say no.
+
+to decide if a source is read-only:
+  if the source is nil, say no.
+  if the source's read-only flag is set, say yes.
+  say no.
+
+to decide if a spot is in a source:
+  if the source is nil, say no.
+  if the spot is in the source's text, say yes.
+  say no.
+
+to decide if a string does start with any definite article: employ a string starts with any definite article.
+
+to decide if a string does start with any indefinite article: employ a string starts with any indefinite article.
+
+to decide if a string does start with any routine starter: employ a string starts with any routine starter.
+
+to decide if a string starts with any definite article:
+  if the string starts with "the ", say yes.
+  say no.
+
+to decide if a string starts with any definition starter:
+  if the string starts with "a ", say yes.
+  if the string starts with "an ", say yes.
+  if the string starts with "some ", say yes.
+  if the string starts with "to ", say yes.
+  if the string starts with "the ", say yes.
+  say no.
+
+to decide if a string starts with any indefinite article:
+  if the string starts with "a ", say yes.
+  if the string starts with "an ", say yes.
+  if the string starts with "some ", say yes.
+  say no.
+
+to decide if a string starts with any routine starter:
+  if the string starts with "to ", say yes.
+  say no.
+
+to draw a row of a source (colorized):
+  if the source is nil, exit.
+  get a substring given the row and the source (commented part).
+  if the substring is blank, draw the row of the source's text (editing); exit.
+  draw the selection box for the row of the source's text.
+  get a box given the row and the source's text.
+  \ uncommented part
+  slap another substring on the row's string.
+  put the substring's first minus 1 into the other substring's last.
+  draw the other substring in the box with the black color and the source's text's font and the source's text's alignment.
+  \ commented part
+  get a width given the other substring and the memory canvas and the source's text's font.
+  add the width to the box's left.
+  draw the substring in the box with the comment color and the source's text's font and the source's text's alignment.
+
+to draw a source:
+  if the source is nil, exit.
+  mask only outside the source's text's box.
+  if the source's colorized flag is set, draw the source (colorized); exit.
+  draw the source (not colorized).
+
+to draw a source (colorized):
+  if the source is nil, exit.
+  get a row from the source's text's rows.
+  if the row is nil, break.
+  if the row of the source's text is not visible, repeat.
+  draw the row of the source (colorized).
+  repeat.
+  draw the caret in the source's text.
+
+to draw a source (not colorized):
+  if the source is nil, exit.
+  draw the source's text (editing).
+
+to finalize the editor:
+
+to get a first row and an last row given a sheet number and a source:
+  if the source is nil, void the first row; void the last row; exit.
+  put the source's text's normalized selection into a selection.
+  put the selection's anchor row# into a row#.
+  add the sheet number minus 1 times the source's rows/sheet to the row#.
+  get the first row given the row# and the source's text.
+  put the row# plus the source's rows/sheet minus 1 into another row#.
+  limit the other row# to 1 and the selection's caret row#.
+  get the last row given the other row# and the source's text.
+
+to get the status for a source:
+  if the source is nil, clear the status' string; exit.
+  put the source's text's status string into the status's string.
+  if the source's read-only flag is set, append " (r)" to the status's string.
+
+to get a substring given a row and a source (commented part):
+  if the source is nil, clear the substring; exit.
+  if the row is nil, clear the substring; exit.
+  slap the substring on the row's string.
+  loop.
+  if the substring's first's target is the return byte, clear the substring; break.
+  if the substring's first's target is the backslash byte, break.
+  if the substring's first's target is the double-quote byte, bump the substring (past a string); repeat.
+  if the substring's first's target is the left-paren byte, bump the substring (past a qualifier); repeat.
+  if the substring's first's target is the left-bracket byte, bump the substring (past a remark); repeat.
+  add 1 to the substring's first.
+  repeat.
+  subtract 1 from the substring's last. \ so we don't draw the return byte
+
+to handle capitalize given a source:
+  if nothing is selected in the source, cluck; exit.
+  show status "Capitalizing...".
+  handle capitalize given the source's text.
+  show the desktop with "Capitalizeds".
+
+to handle check spelling given a source:
+  load the lexicon.
+  if the lexicon is nil, show error "I can't find any lecksicon."; exit.
+  put "check spelling" into the find mode.
+  clear the source's text's last operation.
+  put 1 into the find anchor.
+  find the next misspelling in the source's text given a flag.
+  if the flag is not set, cluck; show the desktop with "Done"; exit.
+  scroll the source's text to the caret and center it.
+  show the desktop with "Found".
+
+to handle comment given a source:
+  if nothing is selected in the source, cluck; exit.
+  remember the source's text with "comment".
+  comment any selected rows in the source.
+  square up any selection in the source's text.
+  show the desktop with status.
+
+to handle copy given a source:
+  if nothing is selected in the source, cluck; exit.
+  show status "Copying...".
+  handle copy given the source's text.
+  show the desktop with "Copied".
+
+to handle cut given a source:
+  if nothing is selected in the source, cluck; exit.
+  show status "Cutting...".
+  handle cut given the source's text.
+  show the desktop with "Cut".
+
+to handle decrypt given a source:
+  if nothing is selected in the source, cluck; exit.
+  ask "Passphrase?".
+  if the answer is blank, show error "Passphrase cannot be blank."; exit.
+  show status "Decrypting...".
+  extract a buffer from the source's text (selected bytes).
+  decrypt the buffer with the answer.
+  if the i/o error is not blank, show error the i/o error; exit.
+  put the buffer on the windows clipboard.
+  show the desktop with "On the clipboard".
+
+to handle encrypt given a source:
+  if nothing is selected in the source, cluck; exit.
+  ask "Passphrase?".
+  if the answer is blank, show error "Passphrase cannot be blank."; exit.
+  show status "Encrypting...".
+  extract a buffer from the source's text (selected bytes).
+  encrypt the buffer with the answer.
+  if the i/o error is not blank, show error the i/o error; exit.
+  put the buffer on the windows clipboard.
+  show the desktop with "On the clipboard".
+
+to handle an event given a source (finding - key down - backspace key):
+  if the find string is blank, cluck; exit.
+  remove the last byte from the find string.
+  find next given the source's text and a flag.
+  if the flag is not set, cluck.
+  if the find string is blank, put the find anchor into the source's text's caret; deselect the source's text.
+  scroll the source's text to the caret and center it.
+  show the desktop with "Finding...".
+
+to handle an event given a source (finding - key down - printable key):
+  append the event's byte to the find string.
+  put the find anchor into an anchor.
+  put the source's text's anchor into the find anchor.
+  find next given the source's text and a flag.
+  put the anchor into the find anchor.
+  if the flag is not set, cluck; remove the last byte from the find string; exit.
+  scroll the source's text to the caret and center it.
+  show the desktop with "Finding...".
+
+to handle an event given a source (finding - key down):
+  if the event's byte is printable, handle the event given the source (finding - key down - printable key); exit.
+  if the event's key is the backspace key, handle the event given the source (finding - key down - backspace key); exit.
+  if the event's key is the shift key, exit.
+  relinquish control.
+
+to handle an event given a source (finding - left click):
+  relinquish control.
+
+to handle an event given a source (finding - refresh):
+  show the desktop with "Finding...".
+
+to handle an event given a source (finding - right click):
+  relinquish control.
+
+to handle an event given a source (finding - set cursor):
+  show the arrow cursor.
+
+to handle an event given a source (finding):
+  if the event's kind is "key down", handle the event given the source (finding - key down); exit.
+  if the event's kind is "left click", handle the event given the source (finding - left click); exit.
+  if the event's kind is "refresh", handle the event given the source (finding - refresh); exit.
+  if the event's kind is "right click", handle the event given the source (finding - right click); exit.
+  if the event's kind is "set cursor", handle the event given the source (finding - set cursor); exit.
+
+to handle an event given a source (key down - backspace key):
+  hide the cursor.
+  if there is nothing to backspace in the source's text, cluck; exit.
+  handle the event given the source's text (backspace key).
+  show the desktop with status.
+
+to handle an event given a source (key down - delete key):
+  hide the cursor.
+  if there is nothing to remove in the source's text, cluck; exit.
+  handle the event given the source's text (delete key).
+  show the desktop with status.
+
+to handle an event given a source (key down - down-arrow key):
+  hide the cursor.
+  handle the event given the source's text (down-arrow key).
+  show the desktop with status.
+
+to handle an event given a source (key down - end key):
+  hide the cursor.
+  handle the event given the source's text (end key).
+  show the desktop with status.
+
+to handle an event given a source (key down - enter key):
+  hide the cursor.
+  handle the event given the source's text (enter key).
+  show the desktop with status.
+
+to handle an event given a source (key down - escape key):
+  handle the event given the source's text (escape key).
+  show the desktop with status.
+
+to handle an event given a source (key down - home key):
+  hide the cursor.
+  handle the event given the source's text (home key).
+  show the desktop with status.
+
+to handle an event given a source (key down - left-arrow key):
+  hide the cursor.
+  handle the event given the source's text (left-arrow key).
+  show the desktop with status.
+
+to handle an event given a source (key down - page-down key):
+  hide the cursor.
+  handle the event given the source's text (page-down key).
+  show the desktop with status.
+
+to handle an event given a source (key down - page-up key):
+  hide the cursor.
+  handle the event given the source's text (page-up key).
+  show the desktop with status.
+
+to handle an event given a source (key down - printable key):
+  hide the cursor.
+  handle the event given the source's text (printable key).
+  show the desktop with status.
+
+to handle an event given a source (key down - right-arrow key):
+  hide the cursor.
+  handle the event given the source's text (right-arrow key).
+  show the desktop with status.
+
+to handle an event given a source (key down - tab key):
+  hide the cursor.
+  handle the event given the source's text (tab key).
+  show the desktop with status.
+
+to handle an event given a source (key down - up-arrow key):
+  hide the cursor.
+  handle the event given the source's text (up-arrow key).
+  show the desktop with status.
+
+to handle an event given a source (key down):
+  if the event's byte is printable, handle the event given the source (key down - printable key); exit.
+  if the event's key is the backspace key, handle the event given the source (key down - backspace key); exit.
+  if the event's key is the delete key, handle the event given the source (key down - delete key); exit.
+  if the event's key is the down-arrow key, handle the event given the source (key down - down-arrow key); exit.
+  if the event's key is the end key, handle the event given the source (key down - end key); exit.
+  if the event's key is the enter key, handle the event given the source (key down - enter key); exit.
+  if the event's key is the escape key, handle the event given the source (key down - escape key); exit.
+  if the event's key is the home key, handle the event given the source (key down - home key); exit.
+  if the event's key is the left-arrow key, handle the event given the source (key down - left-arrow key); exit.
+  if the event's key is the page-down key, handle the event given the source (key down - page-down key); exit.
+  if the event's key is the page-up key, handle the event given the source (key down - page-up key); exit.
+  if the event's key is the right-arrow key, handle the event given the source (key down - right-arrow key); exit.
+  if the event's key is the tab key, handle the event given the source (key down - tab key); exit.
+  if the event's key is the up-arrow key, handle the event given the source (key down - up-arrow key); exit.
+
+to handle an event given a source (left click):
+  if the event's spot is not in the source, exit.
+  track the source given the event.
+  refresh the cursor.
+
+to handle an event given a source (left double click):
+  handle the event given the source's text (left double click).
+  show the desktop with status.
+
+to handle an event given a source (right click):
+  if the event's spot is not in the source, exit.
+  show the hand cursor.
+  scroll the source given the event.
+  refresh the cursor.
+
+to handle an event given a source (set cursor):
+  if the event's spot is in the source, show the i-beam cursor; exit.
+  show the arrow cursor.
+
+to handle events given a source (finding):
+  deque an event.
+  if the event is nil, exit.
+  handle the event given the source (finding).
+  repeat.
+
+to handle extract globals given a source:
+  show status "Extracting...".
+  create some blocks given the source's text's rows.
+  scrub the blocks for extracting.
+  name the blocks.
+  sort the blocks.
+  loop.
+  get a block from the blocks.
+  if the block is nil, break.
+  if the block's first row is nil, repeat.
+  if the block's first row's string does not start with any definite article, repeat.
+  convert the block's rows to a string.
+  append the string to a clipboard string.
+  repeat.
+  put the clipboard string on the windows clipboard.
+  destroy the blocks.
+  show the desktop with "On the clipboard".
+
+to handle extract routine headers given a source:
+  show status "Extracting...".
+  create some blocks given the source's text's rows.
+  scrub the blocks for extracting.
+  name the blocks.
+  sort the blocks.
+  loop.
+  get a block from the blocks.
+  if the block is nil, break.
+  if the block's first row is nil, repeat.
+  if the block's first row's string does not start with any routine starter, repeat.
+  append the block's first row's string then the linefeed byte to a clipboard string.
+  repeat.
+  put the clipboard string on the windows clipboard.
+  destroy the blocks.
+  show the desktop with "On the clipboard".
+
+to handle extract types given a source:
+  show status "Extracting...".
+  create some blocks given the source's text's rows.
+  scrub the blocks for extracting.
+  name the blocks.
+  sort the blocks.
+  loop.
+  get a block from the blocks.
+  if the block is nil, break.
+  if the block's first row is nil, repeat.
+  if the block's first row's string does not start with any indefinite article, repeat.
+  convert the block's rows to a string.
+  append the string to a clipboard string.
+  repeat.
+  put the clipboard string on the windows clipboard.
+  destroy the blocks.
+  show the desktop with "On the clipboard".
+
+to handle find given a source:
+  clear the source's text's last operation.
+  deselect the source's text.
+  scroll the source's text to the caret.
+  put the source's text's anchor into the find anchor.
+  clear the find string.
+  put "find" into the find mode.
+  show the desktop with "Finding...".
+  hide the cursor.
+  handle events given the source (finding).
+  show the desktop with status.
+  refresh the cursor.
+
+to handle find next given a source:
+  if the find mode is "find", handle find next given the source (find); exit.
+  if the find mode is "check spelling", handle find next given the source (check spelling); exit.
+  cluck.
+
+to handle find next given a source (check spelling):
+  clear the source's text's last operation.
+  put the source's text's caret into the find anchor.
+  find the next misspelling in the source's text given a flag.
+  if the flag is not set, cluck; show status "Done"; exit.
+  scroll the source's text to the caret and center it.
+  show the desktop with "Found".
+
+to handle find next given a source (find):
+  clear the source's text's last operation.
+  put the source's text's caret into the find anchor.
+  find next given the source's text and a flag.
+  if the flag is not set, cluck; show status "Not found"; exit.
+  scroll the source's text to the caret and center it.
+  show the desktop with "Found".
+
+to handle font height given a source and a font height:
+  privatize the font height.
+  limit the font height to 1/96 inch and 1 inch.
+  put the pad's box into a box.
+  put the box's height divided by the font height times the font height into a height.
+  put the box's top plus the height into the box's bottom.
+  center the box in the pad's box (vertically).
+  handle font height given the source's text and the box and the font height.
+  show the desktop with status.
+
+to handle font height other given a source:
+  put the source's text's font's height / 1 inch into a ratio.
+  convert the ratio to a ratio string.
+  ask "Height (inches)?" with the ratio string.
+  if the answer is blank, exit.
+  show the desktop.
+  convert the answer to another ratio.
+  if the other ratio is 0, show error "Invalid font height."; exit.
+  put 1 inch times the other ratio into a font height.
+  handle font height given the source and the font height.
+
+to handle font name given a source:
+  ask "Name?" with the source's text's font's name.
+  if the answer is blank, exit.
+  show the desktop.
+  handle font name given the source's text and the answer.
+  show the desktop with status.
+
+to handle indent given a source:
+  if nothing is selected in the source, cluck; exit.
+  handle indent given the source's text.
+  show the desktop with status.
+
+to handle lowercase given a source:
+  if nothing is selected in the source, cluck; exit.
+  handle lowercase given the source's text.
+  show the desktop with status.
+
+to handle outdent given a source:
+  if nothing is selected in the source, cluck; exit.
+  handle outdent given the source's text.
+  show the desktop with status.
+
+to handle paste given a source:
+  if there is not text on the windows clipboard, cluck; exit.
+  show status "Pasting...".
+  handle paste given the source's text.
+  show the desktop with "Pasted".
+
+to handle print given a source:
+  put the source's text's selected row count into a count.
+  if the count is 0, show error "I'm not sure what you want me to print."; exit.
+  ask "Copies?" with "1".
+  if the answer is blank, exit.
+  convert the answer to a number between 1 and the largest number.
+  show the desktop with "Printing...".
+  print the number of copies of the source.
+  show status "Printed".
+
+to handle redo given a source:
+  if the source's text cannot be redone, cluck; exit.
+  handle redo given the source's text.
+  show the desktop with status.
+
+to handle reverse given a source:
+  if nothing is selected in the source, cluck; exit.
+  handle reverse given the source's text.
+  show the desktop with status.
+
+to handle select all given a source:
+  handle select all given the source's text.
+  show the desktop with status.
+
+to handle sort definitions given a source:
+  show status "Sorting...".
+  remember the source's text with "sort definitions".
+  sort definitions given the source.
+  show the desktop with "Sorted".
+
+to handle sort selected lines given a source:
+  if nothing is selected in the source, cluck; exit.
+  show status "Sorting...".
+  handle sort any selected rows given the source's text.
+  show the desktop with "Sorted".
+
+to handle uncomment given a source:
+  if nothing is selected in the source, cluck; exit.
+  remember the source's text with "comment".
+  uncomment any selected rows in the source.
+  square up any selection in the source's text.
+  show the desktop with status.
+
+to handle undo given a source:
+  if the source's text cannot be undone, cluck; exit.
+  handle undo given the source's text.
+  show the desktop with status.
+
+to handle uppercase given a source:
+  if nothing is selected in the source, cluck; exit.
+  handle uppercase given the source's text.
+  show the desktop with status.
+
+to initialize the editor:
+
+to move a rider (qualifier rules):
+  if the rider's source's first's target is the left-paren byte, add 1 to a count.
+  if the rider's source's first's target is the right-paren byte, subtract 1 from the count.
+  bump the rider.
+  if the count is 0, exit.
+  repeat.
+
+to move a rider (remark rules):
+  if the rider's source's first's target is the left-bracket byte, add 1 to a count.
+  if the rider's source's first's target is the right-bracket byte, subtract 1 from the count.
+  bump the rider.
+  if the count is 0, exit.
+  repeat.
+
+to move a rider (source sorting rules):
+  skip any leading noise in the rider's source.
+  position the rider's token on the rider's source.
+  if the rider's source is blank, exit.
+  bump the rider.
+  if the rider's token's last's target is any mark, exit.
+  loop.
+  if the rider's source is blank, exit.
+  if the rider's source's first's target is noise, exit.
+  if the rider's source's first's target is any mark, exit.
+  bump the rider.
+  repeat.
+
+to name a block:
+  if the block is nil, exit.
+  clear the block's name.
+  if the block's first row is nil, exit.
+  if the block's first row is any comment, exit.
+  slap a rider on the block's first row's string.
+  loop.
+  move the rider (source sorting rules).
+  if the rider's token is blank, exit.
+  if the rider's token is "a", repeat.
+  if the rider's token is "an", repeat.
+  if the rider's token is "some", repeat.
+  if the rider's token is "the", repeat.
+  if the rider's token is "to", repeat.
+  if the rider's token is "*", repeat.
+  if the rider's token is ",", exit.
+  if the rider's token is ";", exit.
+  if the rider's token is ":", exit.
+  if the rider's token is ".", exit.
+  append the rider's token then the space byte to the block's name.
+  repeat.
+
+to name some blocks:
+  get a block from the blocks.
+  if the block is nil, exit.
+  name the block.
+  repeat.
+
+to print a copy of a sheet number of a sheets/copy of a source:
+  if the source is nil, exit.
+  show status the copy then " of " then the sheet number then " of " then the sheets/copy then "...".
+  get a first row and a last row given the sheet number and the source.
+  put 1/2 inch and 1/2 inch into a spot.
+  begin a sheet.
+  put the first row into a current row.
+  loop.
+  print the current row of the source at the spot.
+  if the current row is the last row, break.
+  put the current row's next into the current row.
+  add the source's text's row height to the spot's y.
+  repeat.
+  end the sheet.
+
+to print a copy of a source:
+  if the source is nil, exit.
+  put the source's sheets/copy into a sheets/copy.
+  put 1 into a sheet number.
+  loop.
+  if the sheet number is greater than the sheets/copy, exit.
+  print the copy of the sheet number of the sheets/copy of the source.
+  add 1 to the sheet number.
+  repeat.
+
+to print a number of copies of a source:
+  if the source is nil, exit.
+  begin printing.
+  loop.
+  add 1 to a copy.
+  if the copy is greater than the number, break.
+  print the copy of the source.
+  repeat.
+  end printing.
+
+to print a row of a source at a spot:
+  if the source is nil, exit.
+  if the row is nil, exit.
+  put 0 and 0 and 7-1/2 inches and the source's text's row height into a box.
+  move the box to the spot.
+  mask only outside the box.
+  get a substring given the row and the source (commented part).
+  \ uncommented part
+  slap another substring on the row's working string.
+  if the substring is not blank, put the substring's first minus 1 into the other substring's last.
+  draw the other substring in the box with the black color and the source's text's font and the source's text's alignment.
+  \ commented part
+  if the substring is blank, exit.
+  put the comment color into a color.
+  if the source's colorized flag is not set, put the black color into the color.
+  get a width given the other substring and the memory canvas and the source's text's font.
+  add the width to the box's left.
+  draw the substring in the box with the color and the source's text's font and the source's text's alignment.
+
+to put a source's rows/sheet into a rows/sheet:
+  if the source is nil, put 0 into the rows/sheet; exit.
+  put 10 inches divided by the source's text's row height into the rows/sheet.
+
+to put a source's sheets/copy into a sheets/copy:
+  if the source is nil, put 0 into the sheets/copy; exit.
+  divide the source's text's selected row count by the source's rows/sheet giving a quotient and a remainder.
+  put the quotient into the sheets/copy.
+  if the remainder is not 0, add 1 to the sheets/copy.
+
+a rows/sheet is a number.
+
+to scroll a source given an event:
+  if the source is nil, exit.
+  find a sector given the source's text's grid and the event's spot.
+  loop.
+  if the mouse's right button is up, exit.
+  find another sector given the source's text's grid and the mouse's spot.
+  get a difference between the other sector and the sector.
+  if the difference is 0, repeat.
+  scroll the source's text given the difference.
+  show the desktop.
+  add the difference to the sector.
+  repeat.
+
+to scrub a block:
+  if the block is nil, exit.
+  put the block's last row into a row.
+  if the row is nil, break.
+  if the row is not blank, break.
+  remove the row from the block's rows.
+  destroy the row.
+  repeat.
+  create another row given the return byte.
+  append the other row to the block's rows.
+
+to scrub a block for extracting:
+  if the block is nil, exit.
+  put the block's last row into a row.
+  if the row is nil, break.
+  if the row is blank, remove the row from the block's rows; destroy the row; repeat.
+  if the row's string starts with "\", remove the row from the block's rows; destroy the row; repeat.
+
+to scrub some blocks:
+  get a block from the blocks.
+  if the block is nil, exit.
+  scrub the block.
+  repeat.
+
+to scrub some blocks for extracting:
+  get a block from the blocks.
+  if the block is nil, exit.
+  scrub the block for extracting.
+  repeat.
+
+a sheet number is a number.
+
+a sheets/copy is a number.
+
+to sort some blocks:
+  if the blocks' first is the blocks' last, exit.
+  split the blocks into some left blocks and some right blocks.
+  sort the left blocks.
+  sort the right blocks.
+  loop.
+  put the left blocks' first into a left block.
+  put the right blocks' first into a right block.
+  if the left block is nil, append the right blocks to the blocks; exit.
+  if the right block is nil, append the left blocks to the blocks; exit.
+  if the left block's name is greater than the right block's name, move the right block from the right blocks to the blocks; repeat.
+  move the left block from the left blocks to the blocks.
+  repeat.
+
+to sort definitions given a source:
+  if the source is nil, exit.
+  create some blocks given the source's text's rows.
+  scrub the blocks.
+  name the blocks.
+  sort the blocks.
+  destroy the source's text's rows.
+  append the blocks to the source's text's rows.
+  reset the origin of the source's text.
+  reset the caret of the source's text.
+  deselect the source's text.
+  renumber the source's text's rows.
+  destroy the blocks.
+
+a source is a thing with
+  a read-only flag,
+  a colorized flag,
+  a text.
+
+to track a source given an event:
+  if the source is nil, exit.
+  if the event is nil, exit.
+  extend any selection in the source's text given the event's spot.
+  if the event's shift flag is not set, deselect the source's text.
+  clear a selection.
+  loop.
+  if a flag is set, show the desktop with status.
+  if the mouse's left button is up, exit.
+  put the mouse's spot into a spot.
+  autoscroll the source's text given the spot and the flag.
+  extend any selection in the source's text given the spot.
+  if the source's text's selection is the selection, repeat.
+  set the flag.
+  put the source's text's selection into the selection.
+  repeat.
+
+to uncomment any selected rows in a source:
+  if the source is nil, exit.
+  loop.
+  get a row from the source's text's rows.
+  if the row is nil, exit.
+  if the row of the source's text is not selected, repeat.
+  if the row's string's first's target is not the backslash byte, repeat.
+  remove the first byte from the row's string.  
+  repeat.

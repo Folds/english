@@ -1,0 +1,1145 @@
+\ copyright © 2006 the osmosian order (3040)
+
+to add a nodette to a node and to the file system given a path:
+  if the node is nil, exit.
+  create the path in the file system.
+  if the i/o error is not blank, exit.
+  create the nodette given the path.
+  insert the nodette into the node's nodettes before the node's first selected nodette.
+  put the node into the nodette's parent node.
+  adjust every nodette in the node.
+
+to add a nodette to a node and to the file system given a path and a buffer:
+  if the node is nil, exit.
+  write the buffer to the path.
+  if the i/o error is not blank, exit.
+  create the nodette given the path.
+  insert the nodette into the node's nodettes before the node's first selected nodette.
+  put the node into the nodette's parent node.
+  adjust every nodette in the node.
+
+to adjust every nodette in a node:
+  if the node is nil, exit.
+  loop.
+  get a nodette from the node's nodettes.
+  if the nodette is nil, break.
+  adjust the nodette in the node.
+  repeat.
+  limit the origin in the node.
+
+to adjust a node:
+  if the node is nil, exit.
+  put the finder's left plus the finder's margin into the node's origin's x.
+  put the finder's top into the node's origin's y.
+  adjust every nodette in the node.
+  void the node's caret.
+  put the node's caret into the node's anchor.
+
+to adjust a nodette in a node:
+  if the node is nil, exit.
+  if the nodette is nil, exit.
+  put 0 into the nodette's left.
+  put 32767 into the nodette's right. \ windows gdi max
+  put 0 into the nodette's top.
+  if the nodette is not the node's first nodette, put the nodette's previous' bottom into the nodette's top.
+  put the nodette's top plus the node height into the nodette's bottom.
+
+to autoscroll a node given a spot and a flag:
+  if the node is nil, exit.
+  if the spot is in the finder's box, clear the flag; exit.
+  set the flag.
+  if the spot's y is less than the finder's top, put the node height into a difference's y.
+  if the spot's y is greater than the finder's bottom, put - the node height into the difference's y.
+  scroll the node given the difference.
+  wait for 50 milliseconds.
+
+to calculate a size of any selected nodettes in a node:
+  if the node is nil, put 0 into the size; exit.
+  put 0 into the size.
+  put 0 into a current count.
+  put the node's selected nodette count into a total count.
+  loop.
+  get a nodette from the node's nodettes.
+  if the nodette is nil, exit.
+  if the nodette is not selected, repeat.
+  add 1 to the current count.
+  show status the current count then " of " then the total count then "...".
+  get another size given the nodette's path in the file system.
+  add the other size to the size.
+  repeat.
+
+to close a node:
+  if the node is nil, exit.
+  destroy the node's nodettes.
+  destroy the node's source.
+  destroy the node's document.
+  void the node's page.
+
+to collapse a node to root-level:
+  if the node is nil, exit.
+  if the node's kind is "root", exit.
+  close the node.
+  put the node's parent node into the node.
+  repeat.
+
+to copy any selected nodettes in a node returning a count:
+  put 0 into the count.
+  if the node is nil, exit.
+  put 0 into a current count.
+  put the node's selected nodette count into a total count.
+  loop.
+  get a nodette from the node's nodettes.
+  if the nodette is nil, exit.
+  if the nodette is not selected, repeat.
+  add 1 to the current count.
+  show status the current count then " of " then the total count then "...".
+  copy the nodette in the file system.
+  add 1 to the count.
+  repeat.
+
+to copy a nodette in the file system:
+  if the nodette is nil, exit.
+  put the finder's clipboard then the nodette's designator into a path.
+  duplicate the nodette's path to the path in the file system.
+
+to create a node:
+  allocate memory for the node.
+  put "root" into the node's kind.
+
+to create a node given a path:
+  create the node.
+  if the path is directory-format, put "directory" into the node's kind.
+  if the path is file-format, put "file" into the node's kind.
+  if the path is drive-format, put "disk" into the node's kind.
+  put the path into the node's path.
+  lowercase the node's path.
+  extract the node's directory from the node's path.
+  extract the node's designator from the node's path.
+  put the node's designator into the node's designator w/o backslash.
+  remove any trailing backslash from the node's designator w/o backslash.
+  extract the node's extension from the node's path.
+
+to cut any selected nodettes in a node returning a count:
+  put 0 into the count.
+  if the node is nil, exit.
+  put 0 into a current count.
+  put the node's selected nodette count into a total count.
+  put the node's first nodette into a next nodette.
+  loop.
+  if the next nodette is nil, exit.
+  put the next nodette into a current nodette.
+  put the current nodette's next into the next nodette.
+  if the current nodette is not selected, repeat.
+  add 1 to the current count.
+  show status the current count then " of " then the total count then "...".
+  cut the current nodette in the node and in the file system.
+  add 1 to the count.
+  repeat.
+
+to cut a nodette in a node and in the file system:
+  if the node is nil, exit.
+  if the nodette is nil, exit.
+  copy the nodette in the file system.
+  remove the nodette in the node and in the file system.
+
+to decide if a node is empty:
+  if the node is nil, say yes.
+  if the node's first nodette is nil, say yes.
+  say no.
+
+to decide if a node is modified:
+  if the node is nil, say no.
+  if the node's source is modified, say yes.
+  if the node's document is modified, say yes.
+  say no.
+
+to decide if a node is root-level:
+  if the node is nil, say no.
+  if the node's parent node is nil, say yes.
+  say no.
+
+to decide if a node is savable:
+  if the node is nil, say no.
+  if the node's kind is not "file", say no.
+  if the node's source is read-only, say no.
+  if the node's document is read-only, say no.
+  say yes.
+
+to decide if a nodette is selected:
+  if the nodette is nil, say no.
+  if the nodette's selected flag is set, say yes.
+  say no.
+
+to decide if a nodette is visible in a node:
+  if the nodette is nil, say no.
+  put the nodette's box into a box.
+  globalize the box given the node's origin.
+  if the box's top is less than the finder's top, say no.
+  if the box's bottom is greater than the finder's bottom, say no.
+  say yes.
+
+to decide if something is selected in a node:
+  if the node is nil, say no.
+  loop.
+  get a nodette from the node's nodettes.
+  if the nodette is nil, say no.
+  if the nodette is selected, say yes.
+  repeat.
+
+to decide if a spot is in a node:
+  if the node is nil, say no.
+  if the spot is not in the pad, say no.
+  privatize the spot.
+  localize the spot given the node's origin.
+  find a nodette given the node and the spot.
+  if the nodette is nil, say no.
+  say yes.
+
+to decide if a spot is in a nodette:
+  if the nodette is nil, say no.
+  if the spot is in the nodette's box, say yes.
+  say no.
+
+to decide if the user does want to overwrite an item in a node: employ the user wants to overwrite an item in a node.
+
+to decide if the user does want to overwrite a path: employ the user wants to overwrite a path.
+
+to decide if the user wants to overwrite an item in a node:
+  if the node is nil, say no.
+  put the node's path into a path.
+  append the item's designator to the path.
+  if the user wants to overwrite the path, say yes.
+  say no.
+
+to decide if the user wants to overwrite a path:
+  if the path is not in the file system, say yes.
+  extract a designator from the path.
+  quote the designator.
+  ask "Overwrite " then the designator then "?" with choices "Yes" and "No".
+  if the answer is "yes", say yes.
+  say no.
+
+to deselect a node:
+  if the node is nil, exit.
+  clear the node's selected flag.
+
+to deselect some nodes:
+  get a node from the nodes.
+  if the node is nil, exit.
+  deselect the node.
+  repeat.
+
+to deselect the nodettes in a node:
+  if the node is nil, exit.
+  deselect the node's nodettes.
+  void the node's caret.
+  put the node's caret into the node's anchor.
+  snapshot the node's nodettes.
+
+to draw any visible nodettes in a node:
+  if the node is nil, exit.
+  loop.
+  get a nodette from the node's nodettes.
+  if the nodette is nil, exit.
+  if the nodette is not visible in the node, repeat.
+  draw the nodette in the node.
+  repeat.
+
+to draw a node:
+  if the node is nil, exit.
+  mask only outside the finder's box.
+  draw the finder's box with the desktop color and the desktop color.
+  put the finder's box into a box.
+  subtract the finder's margin from the box's right.
+  mask outside the box.
+  draw any visible nodettes in the node.
+
+to draw a nodette in a node:
+  if the node is nil, exit.
+  if the nodette is nil, exit.
+  put the desktop color into a border color.
+  put the desktop color into a fill color.
+  put the nodette's box and 1/12 inch into a roundy box.
+  globalize the roundy box given the node's origin.
+  put the finder's right minus the finder's margin into the roundy box's right.
+  if the nodette's selected flag is set, put the hilite color into the border.
+  if the nodette's selected flag is set, put the hilite color into the fill.
+  draw the roundy box with the border and the fill.
+  add 1/24 inch to the roundy box's left.
+  draw the nodette's directory in the roundy box with the gray color and the default font and "left".
+  put the nodette's designator into a designator.
+  if the nodette's kind is "disk", get a drive kind for the nodette's path.
+  if the nodette's kind is "disk", append " (" then the drive kind then ")" to the designator.
+  get a width given the nodette's directory and the memory canvas and the default font.
+  add the width to the roundy box's left.
+  draw the designator in the roundy box with the black color and the default font and "left".
+
+to dump a buffer into another buffer:
+  clear the other buffer.
+  if the buffer's length is 0, exit.
+  slap a substring on the buffer.
+  put the substring's first plus 16 minus 1 into the substring's last.
+  loop.
+  if the substring's first is greater than the buffer's last, break.
+  if the substring's last is greater than the buffer's last, put the buffer's last into the substring's last.
+  dump the substring of the buffer into the other buffer.
+  move the substring given 16.
+  repeat.
+
+to dump a substring of a buffer into another buffer:
+  dump the substring of the buffer into the other buffer (address bytes).
+  dump the substring of the buffer into the other buffer (hex bytes).
+  dump the substring of the buffer into the other buffer (ascii bytes).
+  append the return byte to the other buffer.
+  append the linefeed byte to the other buffer.
+
+to dump a substring of a buffer into another buffer (address bytes):
+  put the substring's first minus the buffer's first into an address.
+  convert the address to a nibble string.
+  append the nibble string to the other buffer.
+  append the space byte to the other buffer.
+  append the space byte to the other buffer.
+
+to dump a substring of a buffer into another buffer (ascii bytes):
+  slap another substring on the substring.
+  loop.
+  if the other substring is blank, break.
+  put the other substring's first's target into a byte.
+  if the byte is not printable, put the period byte into the byte.
+  if the byte is the space byte, put the period byte into the byte.
+  append the byte to the other buffer.
+  add 1 to the other substring's first.
+  repeat.
+
+to dump a substring of a buffer into another buffer (hex bytes):
+  slap another substring on the substring.
+  loop.
+  if the other substring is blank, break.
+  convert the other substring's first's target to a nibble string.
+  append the nibble string to the other buffer.
+  append the space byte to the other buffer.
+  add 1 to the other substring's first.
+  repeat.
+  append the space byte to the other buffer.
+  put 16 minus the substring's length times 3 into a count.
+  append the space byte to the other buffer given the count.    
+
+to duplicate a nodette in a node and in the file system given a path returning a new nodette:
+  void the new nodette.
+  if the node is nil, exit.
+  if the nodette is nil, exit.
+  duplicate the nodette's path to the path in the file system.
+  if the i/o error is not blank, exit.
+  create the new nodette given the path.
+  insert the new nodette into the node's nodettes after the node's first selected nodette.
+  put the node into the new nodette's parent node.
+  adjust every nodette in the node.
+
+to extend any selection in a node given a spot:
+  if the node is nil, exit.
+  localize the spot given the node's origin.
+  find the node's caret in the node given the spot (limiting).
+  if the node's anchor is nil, put the node's caret into the node's anchor.
+  select the node's nodettes given the node's selection.
+
+to finalize the finder:
+
+to find a nodette given a node and a spot:
+  void the nodette.
+  if the node is nil, exit.
+  loop.
+  get the nodette from the node's nodettes.
+  if the nodette is nil, exit.
+  if the spot is in the nodette, exit.
+  repeat.
+
+to find a nodette given some nodettes and a designator:
+  void the nodette.
+  loop.
+  get the nodette from the nodettes.
+  if the nodette is nil, exit.
+  if the nodette's designator is the designator, exit.
+  repeat.
+
+to find a nodette in a node given a spot (limiting):
+  if the node is nil, void the nodette; exit.
+  put the node's first nodette's box's left-top into a box's left-top.
+  put the node's last nodette's box's right-bottom into the box's right-bottom.
+  limit the spot to the box.
+  find the nodette given the node and the spot.
+
+the finder has a box, a grid, a margin and a clipboard path.
+
+to focus on a nodette in a node:
+  if the node is nil, exit.
+  if the nodette is nil, exit.
+  deselect the nodettes in the node.
+  select the nodette.
+  put the nodette into the node's caret.
+  put the node's caret into the node's anchor.
+  scroll to the nodette given the node.
+
+to get some selected path links given a node:
+  if the node is nil, exit.
+  loop.
+  get a nodette from the node's nodettes.
+  if the nodette is nil, exit.
+  if the nodette is not selected, repeat.
+  create a path link given the nodette's path.
+  append the path link to the selected path links.
+  repeat.
+
+to get the status for a node:
+  if the node is nil, clear the status' string; exit.
+  put the node's selected nodette count into a count.
+  if the count is 0, format the node's nodettes' count and "item" or "items" into the status' string.
+  if the count is not 0, format the count and "item selected" or "items selected" into the status' string.
+  if the node is root-level, exit.
+  if the node's path is read-only, append " (r)" to the status' string.
+
+to handle copy given a node:
+  if the node is root-level, cluck; exit.
+  if nothing is selected in the node, show error "I'm not sure what you want me to copy."; exit.
+  show status "Copying...".
+  destroy the finder's clipboard in the file system.
+  create the finder's clipboard in the file system.
+  copy any selected nodettes in the node returning a count.
+  show the desktop.
+  show status the count and "item copied" or "items copied".
+  flush the event queue.
+
+to handle cut given a node:
+  if the node is root-level, cluck; exit.
+  if nothing is selected in the node, show error "I'm not sure what you want me to cut."; exit.
+  show status "Cutting...".
+  put the node's last selected nodette's next into a nodette.
+  destroy the finder's clipboard in the file system.
+  create the finder's clipboard in the file system.
+  cut any selected nodettes in the node returning a count.
+  if the nodette is nil, put the node's last nodette into the nodette.
+  focus on the nodette in the node.
+  show the desktop.
+  show status the count and "item cut" or "items cut".
+  flush the event queue.
+
+to handle duplicate given a node:
+  if the node is root-level, cluck; exit.
+  if the node's path is read-only, show error "I'm sorry, but this directory is read only."; exit.
+  put the node's first selected nodette into a nodette.
+  if the nodette is nil, show error "I'm not sure what you want me to duplicate."; exit.
+  ask  "New name?" with the nodette's designator w/o backslash.
+  if the answer is blank, exit.
+  lowercase the answer.
+  put the nodette's directory then the answer into a path.
+  if the nodette's kind is "directory", append "\" to the path.
+  if the path is in the file system, show error "I'm sorry, but that name is already in the file system."; exit.
+  show the desktop with "Duplicating...".
+  duplicate the nodette in the node and in the file system given the path returning a new nodette.
+  if the i/o error is not blank, show error the i/o error; exit.
+  focus on the new nodette in the node.
+  show the desktop with "Duplicated".
+  flush the event queue.
+
+to handle an event given a node (key down - backspace key):
+  handle the event given the node (key down - delete key).
+
+to handle an event given a node (key down - delete key):
+  if the current tab's mode is not "finder", debug "Internal error: handle delete given a node"; exit.
+  if the node is root-level, cluck; exit.
+  if the node's path is read-only, show error "I'm sorry, but this directory is read only."; exit.
+  if nothing is selected in the node, show error "I'm not sure what you want me to delete."; exit.
+  if the user is not sure, exit.
+  show status "Deleting...".
+  put the node's last selected nodette's next into a nodette.
+  remove any selected nodettes in the node and in the file system returning a count.
+  if the nodette is nil, put the node's last nodette into the nodette.
+  focus on the nodette in the node.
+  show the desktop.
+  show status the count and "item deleted" or "items deleted".
+  flush the event queue.
+
+to handle an event given a node (key down - down-arrow key - shifted):
+  if the node's caret's next is nil, cluck; exit.
+  put the node's caret's next into the node's caret.
+  select the node's nodettes given the node's selection.
+  scroll to the node's caret given the node.
+  show the desktop with status.
+
+to handle an event given a node (key down - down-arrow key):
+  if the node is empty, exit.
+  if the node's caret is nil, focus on the node's first nodette in the node; show the desktop with status; exit.
+  if the event's shift flag is set, handle the event given the node (key down - down-arrow key - shifted); exit.
+  put the node's caret's next into a nodette.
+  if the nodette is nil, put the node's first nodette into the nodette.
+  focus on the nodette in the node.
+  show the desktop with status.
+
+to handle an event given a node (key down - end key):
+  if the node is empty, exit.
+  if the event's shift flag is not set, focus on the node's last nodette in the node; show the desktop; exit.
+  if the node's anchor is nil, put the node's first nodette into the node's anchor.
+  put the node's last nodette into the node's caret.
+  select the node's nodettes given the node's selection.
+  scroll to the node's caret given the node.
+  show the desktop with status.
+
+to handle an event given a node (key down - enter key):
+  handle open.
+
+to handle an event given a node (key down - escape key):
+  if nothing is selected in the node, handle close; exit.
+  if the node is empty, exit.
+  deselect the nodettes in the node.
+  show the desktop with status.
+
+to handle an event given a node (key down - home key):
+  if the node is empty, exit.
+  if the event's shift flag is not set, focus on the node's first nodette in the node; show the desktop; exit.
+  if the node's anchor is nil, put the node's last nodette into the node's anchor.
+  put the node's first nodette into the node's caret.
+  select the node's nodettes given the node's selection.
+  scroll to the node's caret given the node.
+  show the desktop with status.
+
+to handle an event given a node (key down - page-down key):
+  if the node is empty, exit.
+  scroll the node down one page.
+  if the event's shift flag is not set, focus on the node's first visible nodette in the node; show the desktop with status; exit.
+  if the node's anchor is nil, put the node's first nodette into the node's anchor.
+  put the node's first visible nodette into the node's caret.
+  select the node's nodettes given the node's selection.
+  scroll to the node's caret given the node.
+  show the desktop with status.
+
+to handle an event given a node (key down - page-up key):
+  if the node is empty, exit.
+  scroll the node up one page.
+  if the event's shift flag is not set, focus on the node's first visible nodette in the node; show the desktop with status; exit.
+  if the node's anchor is nil, put the node's last nodette into the node's anchor.
+  put the node's first visible nodette into the node's caret.
+  select the node's nodettes given the node's selection.
+  scroll to the node's caret given the node.
+  show the desktop with status.
+
+to handle an event given a node (key down - up-arrow key - shifted):
+  if the node's caret's previous is nil, cluck; exit.
+  put the node's caret's previous into the node's caret.
+  select the node's nodettes given the node's selection.
+  scroll to the node's caret given the node.
+  show the desktop with status.
+
+to handle an event given a node (key down - up-arrow key):
+  if the node is empty, exit.
+  if the node's caret is nil, focus on the node's last nodette in the node; show the desktop with status; exit.
+  if the event's shift flag is set, handle the event given the node (key down - up-arrow key - shifted); exit.
+  put the node's caret's previous into a nodette.
+  if the nodette is nil, put the node's last nodette into the nodette.
+  focus on the nodette in the node.
+  show the desktop with status.
+
+to handle an event given a node (key down):
+  if the event's key is the backspace key, handle the event given the node (key down - backspace key); exit.
+  if the event's key is the delete key, handle the event given the node (key down - delete key); exit.
+  if the event's key is the enter key, handle the event given the node (key down - enter key); exit.
+  if the event's key is the down-arrow key, handle the event given the node (key down - down-arrow key); exit.
+  if the event's key is the end key, handle the event given the node (key down - end key); exit.
+  if the event's key is the escape key, handle the event given the node (key down - escape key); exit.
+  if the event's key is the home key, handle the event given the node (key down - home key); exit.
+  if the event's key is the page-down key, handle the event given the node (key down - page-down key); exit.
+  if the event's key is the page-up key, handle the event given the node (key down - page-up key); exit.
+  if the event's key is the up-arrow key, handle the event given the node (key down - up-arrow key); exit.
+
+to handle an event given a node (left click - modified):
+  snapshot the node's nodettes.
+  position the selection in the node given the event's spot.
+  track the node given the event.
+
+to handle an event given a node (left click - not in node):
+  deselect the nodettes in the node.
+  show the desktop with status.
+
+to handle an event given a node (left click - not modified, not shifted):
+  deselect the node's nodettes.
+  snapshot the node's nodettes.
+  position the selection in the node given the event's spot.
+  track the node given the event.
+
+to handle an event given a node (left click - shifted):
+  track the node given the event.
+
+to handle an event given a node (left click):
+  if the event's spot is not in the node, handle the event given the node (left click - not in node); exit.
+  if the event is modified, handle the event given the node (left click - modified); exit.
+  if the event's shift flag is set, handle the event given the node (left click - shifted); exit.
+  handle the event given the node (left click - not modified, not shifted).
+
+to handle an event given a node (left double click):
+  if something is selected in the node, handle open; exit.
+  if the event's spot is not in the node, handle open; exit.
+  extend any selection in the node given the event's spot.
+  show the desktop with status.
+  handle open.
+
+to handle an event given a node (right click):
+  if the event's spot is not in the pad, exit.
+  if the node is empty, exit.
+  show the hand cursor.
+  scroll the node given the event.
+  refresh the cursor.
+
+to handle an event given a node (set cursor):
+  show the arrow cursor.
+
+to handle extract nibble literal given a node:
+  if the node is root-level, cluck; exit.
+  if the node's selected nodette count is not 1, show error "Select only one file item to extract."; exit.
+  show status "Copying...".
+  put the node's first selected nodette into a nodette.
+  if the nodette's kind is not "file", show error "I can only extract files into nibble literals."; exit.
+  read the nodette's path into a buffer.
+  if  the i/o error is not blank, show error the i/o error; exit.
+  convert the buffer to a nibble string.
+  prepend "$" to the nibble string.
+  put the nibble string on the windows clipboard.
+  show status "Copied".  
+
+to handle get size given a node:
+  if the node is root-level, cluck; exit.
+  if nothing is selected in the node, show error "I'm not sure what you want me to get the size of."; exit.
+  show status "Getting...".
+  calculate a size of any selected nodettes in the node.
+  format the size and "byte" or "bytes" into a string.
+  show the desktop with the string.
+  flush the event queue.
+
+to handle new directory given a node:
+  if the node is root-level, cluck; exit.
+  if the node's path is read-only, show error "I'm sorry, but this directory is read only."; exit.
+  ask "Directory name?".
+  if the answer is blank, exit.
+  if the answer is not dos-compatible, show error "I'm sorry, but that is not a valid name."; exit.
+  put the node's path then the answer then "\" into a path.
+  if the path is in the file system, show error "I'm sorry, but that name is already in the file system."; exit.
+  show the desktop with "Creating...".
+  add a nodette to the node and to the file system given the path.
+  if the i/o error is not blank, show error the i/o error; exit.
+  focus on the nodette in the node.
+  show the desktop with "Directory created".
+  flush the event queue.
+
+to handle new document given a node:
+  if the node is root-level, cluck; exit.
+  if the node's path is read-only, show error "I'm sorry, but this directory is read only."; exit.
+  ask "Document name?".
+  if the answer is blank, exit.
+  if the answer is not dos-compatible, show error "I'm sorry, but that is not a valid name."; exit.
+  put the node's path then the answer into a path.
+  if the path is in the file system, show error "I'm sorry, but that name is already in the file system."; exit.
+  show the desktop with "Creating...".
+  put "ream " then the document version into a buffer.
+  append the return byte to the buffer.
+  append the linefeed byte to the buffer.
+  append "end" to the buffer.
+  add a nodette to the node and to the file system given the path and the buffer.
+  if the i/o error is not blank, show error the i/o error; exit.
+  focus on the nodette in the node.
+  show the desktop with "Document created".
+  flush the event queue.
+
+to handle new text file given a node:
+  if the node is root-level, cluck; exit.
+  if the node's path is read-only, show error "I'm sorry, but this directory is read only."; exit.
+  ask "File name?".
+  if the answer is blank, exit.
+  if the answer is not dos-compatible, show error "I'm sorry, but that is not a valid name."; exit.
+  put the node's path then the answer into a path.
+  if the path is in the file system, show error "I'm sorry, but that name is already in the file system."; exit.
+  show the desktop with "Creating...".
+  add a nodette to the node and to the file system given the path.
+  if the i/o error is not blank, show error the i/o error; exit.
+  focus on the nodette in the node.
+  show the desktop with "File created".
+  flush the event queue.
+
+to handle paste given a node:
+  if the node is root-level, cluck; exit.
+  if the finder's clipboard is empty in the file system, cluck; exit.
+  if the node's path is read-only, show error "I'm sorry, but this directory is read only."; exit.
+  show status "Pasting...".
+  paste any copied items into the node and into the file system returning a count.
+  set the caret and anchor in the node using the selected nodettes.
+  scroll to the node's caret given the node.
+  show the desktop.
+  show status the count and "item pasted" or "items pasted".
+  flush the event queue.
+
+to handle rename given a node:
+  if the node is root-level, cluck; exit.
+  if the node's path is read-only, show error "I'm sorry, but this directory is read only."; exit.
+  put the node's first selected nodette into a nodette.
+  if the nodette is nil, show error "I'm not sure what you want me to rename."; exit.
+  ask "New name?" with the nodette's designator w/o backslash.
+  if the answer is blank, exit.
+  lowercase the answer.
+  put the nodette's directory then the answer into a path.
+  if the nodette's kind is "directory", append "\" to the path.
+  if the path is in the file system, show error "I'm sorry, but that name is already in the file system."; exit.
+  show the desktop with "Renaming...".
+  rename the nodette in the node and in the file system given the path.
+  if the i/o error is not blank, show error the i/o error; exit.
+  focus on the nodette in the node.
+  show the desktop with "Renamed".
+  flush the event queue.
+
+to handle reverse given a node:
+  if the node is root-level, cluck; exit.
+  reverse the node.
+  show the desktop with status.
+  flush the event queue.
+
+to handle select all given a node:
+  if the node is root-level, cluck; exit.
+  deselect the nodettes in the node.
+  select the node's nodettes.
+  put the node's first nodette into the node's anchor.
+  put the node's last nodette into the node's caret.
+  show the desktop with status.
+
+to handle sort nodettes given a node and a string:
+  if the node is root-level, cluck; exit.
+  if the string is "kind", sort the node by kind.
+  if the string is "name", sort the node by designator.
+  if the string is "extension", sort the node by extension.
+  show the desktop.
+  show status the node's nodettes' count and "item sorted" or "items sorted".
+  flush the event queue.
+
+to initialize the finder:
+  put the temp path then "the " then the module's name then " clipboard\" into the finder's clipboard.
+  put the node height and the node height into the finder's grid.
+  put 1/4 inch into the finder's margin.
+  put the pad's box into a box.
+  put the box's height divided by the node height times the node height into a height.
+  put the box's top plus the height into the box's bottom.
+  put the box into the finder's box.
+
+to limit the origin in a node:
+  if the node is nil, exit.
+  if the node is empty, exit.
+  limit the node's origin's x to -32767 and the finder's left plus the finder's margin.
+  put the finder's top minus the node's last nodette's top into a number.
+  limit the node's origin's y to the number and the finder's top.
+
+the node height is 360.
+
+a node is a thing with
+  a parent node (reference),
+  a box,
+  an origin,
+  a node selection called selection,
+  a kind,
+  a path, a directory, a designator, a designator called designator w/o backslash, an extension,
+  a selected flag, a previously selected flag,
+  some nodettes,
+  a source, or 
+  a document and a page (reference).
+
+a node selection is a pair with an anchor nodette, a caret nodette.
+
+a nodette is a node.
+
+to open a node:
+  if the node is nil, exit.
+  if the node's kind is "root", open the node (root); exit.
+  if the node's kind is "disk", open the node (disk or directory); exit.
+  if the node's kind is "directory", open the node (disk or directory); exit.
+  if the node's kind is "file", open the node (file); exit.
+
+to open a node (disk or directory):
+  get an item from the node's path.
+  if the item is not found, break.
+  put the node's path then the item's designator into a path.
+  create a nodette given the path.
+  append the nodette to the node's nodettes.
+  put the node into the nodette's parent node.
+  repeat.
+  adjust the node.
+  sort the node.
+
+to open a node (file as dump):
+  read the node's path into a buffer.
+  if the i/o error is not blank, exit.
+  open the node given the buffer (file as dump).
+
+to open a node (file as text):
+  read the node's path into a buffer.
+  if the i/o error is not blank, exit.
+  open the node given the buffer (file as text).
+
+to open a node (file):
+  read the node's path into a buffer.
+  if the i/o error is not blank, exit.
+  if the buffer is document-format, open the node given the buffer (file as document); exit.
+  if the buffer is text-format, open the node given the buffer (file as text); exit.
+  open the node given the buffer (file as dump).
+
+to open a node (root):
+  put the accent byte into a byte.
+  loop.
+  add 1 to the byte.
+  if the byte is greater than the little-z byte, break.
+  if the byte is not any valid drive, repeat.
+  put the byte then ":\" into a path.
+  create a nodette given the path.
+  append the nodette to the node's nodettes.
+  put the node into the nodette's parent node.
+  repeat.
+  adjust the node.
+
+to open a node given a buffer (file as document):
+  create the node's document given the buffer.
+
+to open a node given a buffer (file as dump):
+  dump the buffer into another buffer.
+  create the node's source given the other buffer.
+  put "courier new" into a font name.
+  change the node's source's text given the font name.
+  set the node's source's read-only flag.
+  clear the node's source's colorized flag.
+
+to open a node given a buffer (file as text):
+  create the node's source given the buffer.
+  clear the node's source's colorized flag.
+  if the node's extension is blank, set the node's source's colorized flag.
+
+to open a node given a path:
+  if the node is nil, exit.
+  extract a directory from the path.
+  if the directory is not blank, open the node given the directory.
+  extract a designator from the path.
+  find a nodette given the node's nodettes and the designator.
+  if the nodette is nil, put "directory or file does not exist" into the i/o error; exit.
+  open the nodette.
+  focus on the nodette in the node.
+  if the i/o error is blank, put the nodette into the node.
+
+to paste any copied items into a node and into the file system returning a count:
+  put 0 into the count.
+  if the node is nil, exit.
+  put 0 into a current count.
+  get a total count of items in the finder's clipboard in the file system.
+  put the node's first selected nodette into a first selected nodette.
+  deselect the nodettes in the node.
+  loop.
+  get an item from the finder's clipboard.
+  if the item is not found, exit.
+  add 1 to the current count.
+  if the user does not want to overwrite the item in the node, repeat.
+  show status the current count then " of " then the total count then "...".
+  paste the item into the node and into the file system before the first selected nodette.
+  if the i/o error is not blank, repeat.
+  add 1 to the count.
+  repeat.
+
+to paste an item into a node and into the file system before a nodette:
+  if the node is nil, exit.
+  put the node's path into a path.
+  append the item's designator to the path.
+  duplicate the item's path to the path in the file system.
+  if the i/o error is not blank, exit.
+  find another nodette given the node's nodettes and the item's designator.
+  if the other nodette is not nil, select the other nodette; exit.
+  create a third nodette given the path.
+  insert the third nodette into the node's nodettes before the nodette.
+  put the node into the third nodette's parent node.
+  select the third nodette.
+  adjust every nodette in the node.
+
+a path link is a string thing.
+
+to position the selection in a node given a spot:
+  if the node is nil, exit.
+  localize the spot given the node's origin.
+  find the node's caret in the node given the spot (limiting).
+  put the node's caret into the node's anchor.
+
+to put the finder's y-extent into a height:
+  put the finder's box's y-extent into the height.
+
+to put a node's first selected nodette into a nodette:
+  void the nodette.
+  if the node is nil, exit.
+  loop.
+  get the nodette from the node's nodettes.
+  if the nodette is nil, break.
+  if the nodette is selected, exit.
+  repeat.
+
+to put a node's first visible nodette into a nodette:
+  void the nodette.
+  if the node is nil, exit.
+  loop.
+  get the nodette from the node's nodettes.
+  if the nodette is nil, break.
+  if the nodette is visible in the node, exit.
+  repeat.
+
+to put a node's last selected nodette into a nodette:
+  void the nodette.
+  if the node is nil, exit.
+  loop.
+  get the nodette from the node's nodettes (backwards).
+  if the nodette is nil, break.
+  if the nodette is selected, exit.
+  repeat.
+
+to put a node's root node into another node:
+  privatize the node.
+  loop.
+  if the node is nil, break.
+  if the node's parent node is nil, break.
+  put the node's parent node into the node.
+  repeat.
+  put the node into the other node.
+
+to put a node's selected nodette count into a count:
+  put 0 into the count.
+  if the node is nil, exit.
+  loop.
+  get a nodette from the node's nodettes.
+  if the nodette is nil, exit.
+  if the nodette is selected, add 1 to the count.
+  repeat.
+
+to remove any selected nodettes in a node and in the file system returning a count:
+  put 0 into the count.
+  if the node is nil, exit.
+  put 0 into a current count.
+  put the node's selected nodette count into a total count.
+  put the node's first nodette into a next nodette.
+  loop.
+  if the next nodette is nil, exit.
+  put the next nodette into a current nodette.
+  put the current nodette's next into the next nodette.
+  if the current nodette is not selected, repeat.
+  add 1 to the current count.
+  show status the current count then " of " then the total count then "...".
+  remove the current nodette in the node and in the file system.
+  if the i/o error is not blank, repeat.
+  add 1 to the count.
+  repeat.
+
+to remove a nodette in a node and in the file system:
+  if the node is nil, exit.
+  if the nodette is nil, exit.
+  destroy the nodette's path in the file system.
+  if the i/o error is not blank, exit.
+  remove the nodette from the node's nodettes.
+  destroy the nodette.
+  adjust every nodette in the node.
+
+to rename a nodette in a node and in the file system given a path:
+  if the node is nil, exit.
+  if the nodette is nil, exit.
+  rename the nodette's path to the path in the file system.
+  if the i/o error is not blank, exit.
+  put the path into the nodette's path.
+  lowercase the nodette's path.
+  extract the nodette's directory from the path.
+  extract the nodette's designator from the path.
+  put the nodette's designator into the nodette's designator w/o backslash.
+  remove any trailing backslash from the nodette's designator w/o backslash.
+  extract the nodette's extension from the path.
+
+to reverse a node:
+  if the node is nil, exit.
+  reverse the node's nodettes.
+  adjust every nodette in the node.
+
+to save a node:
+  if the node is nil, exit.
+  if the node's source is not nil, save the node (source).
+  if the node's document is not nil, save the node (document).
+
+to save a node (document):
+  clear the i/o error.
+  if the node's document is not modified, exit.
+  externalize the node's document into a buffer.
+  write the buffer to the node's path.
+  if the i/o error is blank, clear the node's document's modified flag.
+
+to save a node (source):
+  clear the i/o error.
+  if the node's source is not modified, exit.
+  remember the node's source's text with "save".
+  convert the node's source to a buffer.
+  write the buffer to the node's path.
+  if the i/o error is blank, clear the node's source's text's modified flag.
+
+to scroll a node down one page:
+  if the node is nil, exit.
+  put the finder's y-extent minus the node height into a difference's y.
+  negate the difference's y.
+  scroll the node given the difference.
+
+to scroll a node given a difference:
+  if the node is nil, exit.
+  add the difference to the node's origin.
+  limit the origin in the node.
+
+to scroll a node given an event:
+  if the node is nil, exit.
+  find a sector given the finder's grid and the event's spot.
+  loop.
+  if the mouse's right button is up, exit.
+  find another sector given the finder's grid and the mouse's spot.
+  get a difference between the other sector and the sector.
+  if the difference is 0, repeat.
+  scroll the node given the difference.
+  show the desktop.
+  add the difference to the sector.
+  repeat.
+
+to scroll a node up one page:
+  if the node is nil, exit.
+  put the finder's y-extent minus the node height into a difference's y.
+  scroll the node given the difference.
+
+to scroll to a nodette given a node:
+  if the node is nil, exit.
+  if the nodette is nil, exit.
+  if the nodette is visible in the node, exit.
+  put the nodette's box into a box.
+  globalize the box given the node's origin.
+  if the box's bottom is less than or equal to the finder's top, put the finder's top minus the box's top into a difference's y.
+  if the box's top is greater than or equal to the finder's bottom, put the finder's bottom minus the box's top minus the edge height into the difference's y.
+  scroll the node given the difference.
+
+to select a nodette:
+  if the nodette is nil, exit.
+  set the nodette's selected flag.
+
+to select some nodettes:
+  get a nodette from the nodettes.
+  if the nodette is nil, exit.
+  select the nodette.
+  repeat.
+
+to select some nodettes given a node selection:
+  if the node selection's anchor is nil, exit.
+  if the node selection's caret is nil, exit.
+  put the node selection's anchor's box's left-top and the node selection's caret's box's right-bottom into a box.
+  add the tpp to the box's top.
+  subtract the tpp from the box's bottom.
+  normalize the box.
+  loop.
+  get a nodette from the nodettes.
+  if the nodette is nil, exit.
+  put the nodette's previously selected flag into the nodette's selected flag.
+  if the nodette's box is not touching the box, repeat.
+  reverse the nodette's selected flag.
+  repeat.  
+
+some selected path links are some path links.
+
+to set the caret and anchor in a node using the selected nodettes:
+  if the node is nil, exit.
+  put the node's last selected nodette into the node's caret.
+  put the node's caret into a nodette.
+  loop.
+  if the nodette is nil, exit.
+  if the nodette is not selected, exit.
+  put the nodette into the node's anchor.
+  put the nodette's previous into the nodette.
+  repeat.
+
+to set a node to read-only mode:
+  if the node is nil, exit.
+  if the node's source is not nil, set the node's source's read-only flag.
+  if the node's document is not nil, set the node's document's read-only flag.
+
+to snapshot some nodettes:
+  get a nodette from the nodettes.
+  if the nodette is nil, exit.
+  put the nodette's selected flag into the nodette's previously selected flag.
+  repeat.
+
+to sort a node:
+  if the node is nil, exit.
+  sort the node by extension.
+  sort the node by designator.
+  sort the node by kind.
+
+to sort a node by designator:
+  if the node is nil, exit.
+  sort the node's nodettes by designator.
+  adjust every nodette in the node.
+
+to sort a node by extension:
+  if the node is nil, exit.
+  sort the node's nodettes by extension.
+  adjust every nodette in the node.
+
+to sort a node by kind:
+  if the node is nil, exit.
+  sort the node's nodettes by kind.
+  adjust every nodette in the node.
+
+to sort some nodettes by designator:
+  if the nodettes' first is the nodettes' last, exit.
+  split the nodettes into some left nodettes and some right nodettes.
+  sort the left nodettes by designator.
+  sort the right nodettes by designator.
+  loop.
+  put the left nodettes' first into a left nodette.
+  put the right nodettes' first into a right nodette.
+  if the left nodette is nil, append the right nodettes to the nodettes; exit.
+  if the right nodette is nil, append the left nodettes to the nodettes; exit.
+  if the left nodette's designator w/o backslash is greater than the right nodette's designator w/o backslash, move the right nodette from the right nodettes to the nodettes; repeat.
+  move the left nodette from the left nodettes to the nodettes.
+  repeat.
+
+to sort some nodettes by extension:
+  if the nodettes' first is the nodettes' last, exit.
+  split the nodettes into some left nodettes and some right nodettes.
+  sort the left nodettes by extension.
+  sort the right nodettes by extension.
+  loop.
+  put the left nodettes' first into a left nodette.
+  put the right nodettes' first into a right nodette.
+  if the left nodette is nil, append the right nodettes to the nodettes; exit.
+  if the right nodette is nil, append the left nodettes to the nodettes; exit.
+  if the left nodette's extension is greater than the right nodette's extension, move the right nodette from the right nodettes to the nodettes; repeat.
+  move the left nodette from the left nodettes to the nodettes.
+  repeat.
+
+to sort some nodettes by kind:
+  if the nodettes' first is the nodettes' last, exit.
+  split the nodettes into some left nodettes and some right nodettes.
+  sort the left nodettes by kind.
+  sort the right nodettes by kind.
+  loop.
+  put the left nodettes' first into a left nodette.
+  put the right nodettes' first into a right nodette.
+  if the left nodette is nil, append the right nodettes to the nodettes; exit.
+  if the right nodette is nil, append the left nodettes to the nodettes; exit.
+  if the left nodette's kind is greater than the right nodette's kind, move the right nodette from the right nodettes to the nodettes; repeat.
+  move the left nodette from the left nodettes to the nodettes.
+  repeat.
+
+a total count is a count.
+
+to track a node given an event:
+  if the node is nil, exit.
+  if the event is nil, exit.
+  clear a node selection.
+  loop.
+  if a flag is set, show the desktop with status.
+  if the mouse's left button is up, exit.
+  put the mouse's spot into a spot.
+  autoscroll the node given the spot and the flag.
+  extend any selection in the node given the spot.
+  if the node's selection is the node selection, repeat.
+  set the flag.
+  put the node's selection into the node selection.
+  repeat.
