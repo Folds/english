@@ -25,6 +25,15 @@ The program's change log is implicit
 in the source code repository's change log.
 These items should occasionally be moved to done issues.txt.
 
+158.  Remove the two example pictures from the instructions.
+  Status:   Done.
+  Benefit:  Permissions request.
+  Implementation difficulty:  Easy.
+  Demoing difficulty:  Easy.
+  Testing difficulty:  Not applicable.
+
+
+
 \ ======================================
    
 The following requests have been demonstrated, and have test plan(s),
@@ -42,16 +51,58 @@ These items should occasionally be moved to demoed fixes.txt.
 \ ======================================   
 The following requests have been partially demonstrated.
 
+155.  Add a /full command line option for full-screen mode.
+  Status:   Designed.
+  Benefit.  Minor.
+  Implementation difficulty:  Easy.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Medium.
+  Requested by:  Jasper Paulsen on March 13, 2017.
 
-\ ======================================   
-The following requests are roughly sorted
-from higher priority to lower priority.
+151.  Change default height from 1/4 inch to 2/9 inch.
+  Status:   Request.
+  Benefit:  Important.  Would make menus, status, and tab strip
+            easier to read.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Easy.
+  Testing difficulty:  Medium.
+  Requested by:  Jasper Paulsen on March 13, 2017.
 
 104.  Include a shortcut with /left /tt command-line options.
   This shortcut would be designed for newbies.
   Audience:  Windows programmers.
-  Status:  Request.
+  Status:    Demonstrated, by making these the default.
   Requested by Jasper Paulsen on April 11, 2014.
+
+153.  Center text vertically in tab strips.
+  Status:   Already done in 3043.
+  Benefit:  Minor.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Medium.
+  Requested by:  Jasper Paulsen on March 13, 2017.
+
+154.  Center text vertically in menus and status.
+  Status:   Already done in 3043.
+  Benefit:  Minor.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Medium.
+  Requested by:  Jasper Paulsen on March 13, 2017.
+
+152.  Only load/unload/preview the Osmosian font when needed.
+  Status:   Request.
+  Benefit:  Minor.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Medium.
+  Requested by:  Jasper Paulsen on March 13, 2017.
+
+
+
+\ ======================================   
+The following requests are roughly sorted
+from higher priority to lower priority.
 
 105.  Create a Linux shortcut with /left /tt command-line options.
   This shortcut would be designed for newbies running WINE.
@@ -563,5 +614,124 @@ with an adjustable slider between them.
 \ ======================================   
 Unsorted requests:
 
-Next item number:  148.
+156.  Add a 1/9 inch yank setting when 2/9 inch high fonts are present.
+  Status:   Request.
+  Benefit:  Minor.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Medium.
+  Requested by:  Jasper Paulsen on March 13, 2017.
+
+157.  Support multiple headers per routine, a la CAL-4700.
+  Status:   Request.
+  Benefit:  Permissions requirement.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Medium.
+  Requested by Gerry Rzeppa on March 13, 2017.
+
+159.  Incorporate CAL-4700's turtle graphics features.
+  Status:   Request.
+  Benefit:  Medium.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Medium.
+  Requested by Gerry Rzeppa on March 13, 2017.
+
+160.  Make new editor panes use recent pane(s)' font name.
+  Status:   Request.
+  Benefit:  Medium.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Medium.
+  Requested by Jasper Paulsen on March 13, 2014.
+
+161.  Make new editor panes use recent pane(s)' font height.
+  Status:   Request.
+  Benefit:  Medium.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Medium.
+  Requested by Jasper Paulsen on March 13, 2014.
+
+162.  In writer, make font name choice affect new texts.
+  Status:   Request.
+  Benefit:  Medium.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Medium.
+  Requested by Jasper Paulsen on March 13, 2014.
+ 
+163.  In writer, make font height choice affect new texts.
+  Status:   Request.
+  Benefit:  Medium.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Medium.
+  Requested by Jasper Paulsen on March 13, 2014.
+
+164.  In writer, make font name menu highlight match selected text.
+  Status:   Request.
+  Benefit:  Medium.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Medium.
+  Requested by Jasper Paulsen on March 13, 2014.
+ 
+165.  In writer, make font height menu highlight match selected text.
+  Status:   Request.
+  Benefit:  Medium.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Medium.
+  Requested by Jasper Paulsen on March 13, 2014.
+
+166.  In writer, open doc with font name based on contents of doc.
+  Status:   Request.
+  Benefit:  Medium.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Medium.
+  Requested by Jasper Paulsen on March 13, 2014.
+
+167.  In writer, open doc with font height based on contents of doc.
+  Status:   Request.
+  Benefit:  Medium.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Medium.
+  Requested by Jasper Paulsen on March 13, 2014.
+
+168.  Add scrollbar to writer's page menu.
+  Status:   Request.
+  Benefit:  Medium.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Medium.
+  Requested by Jasper Paulsen on March 13, 2014.
+ 
+169.  Add mouse scrolling to writer's page menu.
+  Status:   Request.
+  Benefit:  Medium.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Medium.
+  Requested by Jasper Paulsen on March 13, 2014.
+ 
+170.  Add scrollbar to writer's page editing feature.
+  Status:   Request.
+  Benefit:  Medium.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Medium.
+  Requested by Jasper Paulsen on March 13, 2014.
+ 
+171.  Add mouse scrolling to writer's page editing feature.
+  Status:   Request.
+  Benefit:  Medium.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Medium.
+  Requested by Jasper Paulsen on March 13, 2014.
+ 
+Next item number:  172.
 

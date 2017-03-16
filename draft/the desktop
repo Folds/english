@@ -133,6 +133,7 @@ the bar has a height, a box, a display box and a mode.
 to boldly format a command:
   put "center" into the command's alignment.
   put "arial" into the command's font's name.
+  put 1/4 inch into the command's font's height.
 
 to boldly format a command given a color:
   boldly format the command.
@@ -164,7 +165,7 @@ to count menu rows returning a count:
 to create a command:
   allocate memory for the command.
   put the clear color into the command's color.
-  put the default font into the command's font.
+  put the requested control font into the command's font.
   put the black color into the command's font color.
   put 1/12 inch into the command's roundy box's radius.
   put "left" into the command's alignment.
@@ -194,7 +195,8 @@ to create a tab:
 
 to create a trio:
   allocate memory for the trio.
-  put the en-dash byte in a string.
+  \put the en-dash byte in a string.
+  put the underscore byte in a string.
   add the string and "handle minimize" to the trio.
   boldly format the trio's commands' last.
   if running on wine,
@@ -288,9 +290,8 @@ to decide if a font is proportional:
   say yes.
 
 to decide if half screen was requested:
-  if left  was requested, say yes.
-  if right was requested, say yes.
-  say no.
+  if full was requested, say no.
+  say yes.
 
 to decide if a handler has a letter menu:
   if the handler's length is not 1, say no.
@@ -467,7 +468,7 @@ to draw a tab:
   if the tab is not the current tab,
     draw the tab's box's top line with the black color.
   draw the tab's name in the center of the tab's box
-    with the black color and the default font.
+    with the black color and the requested control font.
 
 to draw some tabs:
   get a tab from the tabs.
@@ -485,7 +486,7 @@ to fill some tabs:
     if the flag is not set,
       get a string thing from the string things.
     if the string thing is nil,
-      set the flag.
+      set the flag. \ran out of requested paths.
     if the tab is nil,
       destroy the string things; exit.
     put "finder" into the tab's mode.
@@ -584,14 +585,16 @@ to format a string to fit in a box given a font:
     get another width given the string and the memory canvas and the font.
     if the other width is less than the width, exit.
     if the string starts with "the ",
-      remove the first byte from the string;
-      remove the first byte from the string;
-      remove the first byte from the string;
-      remove the first byte from the string;
+      remove leading bytes from the string given 4;
+\      remove the first byte from the string;
+\      remove the first byte from the string;
+\      remove the first byte from the string;
+\      remove the first byte from the string;
       put "t…" then the string in the string;
       repeat.
-    remove the last byte from the string.
-    remove the last byte from the string.
+    remove the last two bytes from the string.
+\    remove the last byte from the string.
+\    remove the last byte from the string.
     append "…" to the string.
   repeat.
 
@@ -647,10 +650,12 @@ to get requested run folder returning a string given a command line:
   get the string from the command line given "/folder".
 
 to get running options given a command line returning a string:
-  if "/left" is important in the command line,
+  if left was requested in the command line,
     put "/right" in the string.
-  if "/right" is important in the command line,
+  if right was requested in the command line,
     put "/left" in the string.
+  if full was requested in the command line,
+    put "/full" in the string.
   if "/tt" [fixed-width] is important in the command line,
     append " /tt" to the string.
   put "" in a string called run folder.
@@ -1548,7 +1553,7 @@ to handle open as text:
   flush the event queue.
 
 to handle open without drawing (docster):
-  put the current tab's node's document's first selected page into an page.
+  put the current tab's node's document's first selected page into a page.
   if the page is nil,
     show error "I'm not sure what you want me to open."; exit.
   focus on the page in the current tab's node's document.
@@ -2144,11 +2149,6 @@ the recent thread handle is a thread handle.
 the recent twin thread handle is a thread handle.
 
 to remove five bytes from a string:
-\  remove the last byte from the string.
-\  remove the last byte from the string.
-\  remove the last byte from the string.
-\  remove the last byte from the string.
-\  remove the last byte from the string.
   remove trailing bytes from the string given 5.
 
 the requested leaf directory path is a path.
@@ -2272,7 +2272,7 @@ to switch a tab to a node:
   put the node into the tab's node.
   put the node's designator into the tab's name.
   lowercase the tab's name.
-  format the tab's name to fit in the tab's box given the default font.
+  format the tab's name to fit in the tab's box given the requested control font.
   put "finder" into the tab's mode.
   if the node's source is not nil, put "editor" into the tab's mode.
   if the node's document is not nil, put "docster" into the tab's mode.
@@ -2385,8 +2385,8 @@ to test (the desktop - menu has 26 buttons):
 
 to test (the desktop - no running options):
   create a test result about "the desktop"
-    and "hardcoded running options"
-    and expecting "".
+    and "no running options"
+    and expecting "/right".
   create a command line equal to "cal.exe".
   get running options given the command line returning a string called actual.
   stash the test result given the actual.

@@ -96,6 +96,8 @@ to create a submenu (font names):
   get a font.
   highlight the font's name in the submenu.
 
+the custom font names are some font name things.
+
 to decide if a command is highlighted:
   if the command's color is the lightest yellow color, say yes.
   say no.
@@ -119,6 +121,7 @@ to finalize the font heights:
 
 to finalize the font names:
   destroy the standard font names.
+  destroy the custom font names.
 
 a font name thing is a string thing.
 
@@ -243,10 +246,11 @@ to highlight a string in a submenu:
   repeat.
 
 to initialize the font heights:
-  add "1 Inch" to the standard font height names.
+\  add "1 Inch" to the standard font height names.
   add "1/2 Inch" to the standard font height names.
   add "1/3 Inch" to the standard font height names.
   add "1/4 Inch" to the standard font height names.
+  add "2/9 Inch" to the standard font height names.
   add "1/5 Inch" to the standard font height names.
   add "1/6 Inch" to the standard font height names.
   add "1/8 Inch" to the standard font height names.
@@ -256,10 +260,27 @@ to initialize the font heights:
 to initialize the font names:
   add "Arial" to the standard font names.
   add "Courier New" to the standard font names.
-  add "Osmosian" to the standard font names.
-  add "Symbol" to the standard font names.
+  if the osmosian font is loaded,
+    add "Osmosian" to the standard font names.
+  if the osmosian font is not loaded,
+    add "Osmosian" to the custom font names.
+  add "Symbol" to the custom font names.
   add "Times New Roman" to the standard font names.
   put the default font's name in the recent nonstandard font name.
+
+to make sure a font name is loaded (custom):
+  if the font name is "", exit.
+  if the font name is not in the custom font names, exit.
+  if the font name is "Osmosian",
+    make sure the osmosian font is loaded.
+  add the font name to the standard font names.
+  sort the standard font names.
+  remove the font name from the custom font names.
+
+to make sure a font name is standard (font name):
+  if the font name is standard (font name), exit.
+  add the font name to the standard font names.
+  sort the standard font names.
 
 to put a color in part of a submenu given a number:
   if the submenu is nil, exit.
@@ -270,6 +291,15 @@ to put a color in part of a submenu given a number:
     add 1 to the counter.
     if the counter is the number,
       put the color in the command's color; exit.
+  repeat.
+
+to remove a font name from some font name things:
+  loop.
+    get a font name thing from the font name things.
+    if the font name thing is nil, exit.
+    if the font name is the font name thing's string,
+      remove the font name thing from the font name things;
+      destroy the font name thing.
   repeat.
 
 to sort some string things (by height):
@@ -298,14 +328,14 @@ the standard font height names are some string things.
 
 the standard font names are some font name things.
 
-to test (font menus - at least five font names):
+to test (font menus - at least three font names):
   create a test result about "font names" and "count choices"
-    and expecting "at least six choices".
+    and expecting "at least four choices".
   create a submenu (font names).
   count commands in the submenu returning a count called actual.
   put the actual in the test result's actual value.
   put the actual in the test result's interpretation.
-  if the actual is at least 6,
+  if the actual is at least 4,
     put the test result's expectation in the test result's interpretation.
   append the test result to the status' all test results.
   destroy the submenu.
@@ -421,8 +451,11 @@ to test (font menus - heights followed by other):
   destroy the submenu.
 
 to test (font menus - large heights are not wysiwyg):
+  put the current tab's node's text's font's height and the tpi in a ratio.
+  reduce the ratio.
+  put the ratio then " Inch" in a string.  
   create a test result about "font heights" and "1/2 Inch is not wysiwyg"
-    and expecting "1/4 Inch".
+    and expecting the string.
   create a submenu (font heights).
   get a command from the submenu given "1/2 Inch".
   if the command is not nil,
@@ -463,17 +496,6 @@ to test (font menus - one name highlighted):
   append the test result to the status' all test results.
   destroy the submenu.
 
-to test (font menus - times new roman is wysiwyg):
-  create a test result about "font names" and "times new roman is wysiwyg"
-    and expecting "times new roman".
-  create a submenu (font names).
-  get a command from the submenu given "times new roman".
-  if the command is not nil,
-    put the command's font's name in a string called actual.
-  check the test result given the actual.
-  append the test result to the status' all test results.
-  destroy the submenu.
-
 to test (font menus - small heights are wysiwyg):
   create a test result about "font heights" and "1/6 Inch is wysiwyg"
     and expecting "1/6 Inch".
@@ -502,6 +524,17 @@ to test (font menus - sorting by height):
   append the test result to the status' all test results.
   destroy the dummies.
 
+to test (font menus - times new roman is wysiwyg):
+  create a test result about "font names" and "times new roman is wysiwyg"
+    and expecting "times new roman".
+  create a submenu (font names).
+  get a command from the submenu given "times new roman".
+  if the command is not nil,
+    put the command's font's name in a string called actual.
+  check the test result given the actual.
+  append the test result to the status' all test results.
+  destroy the submenu.
+
 to test (font menus):
   test (font menus - get inches string).
   test (font menus - get height).
@@ -512,7 +545,7 @@ to test (font menus):
   test (font menus - one name highlighted).
   test (font menus - current font name highlighted).
   test (font menus - current font height highlighted).
-  test (font menus - at least five font names).
+  test (font menus - at least three font names).
   test (font menus - names followed by other).
   test (font menus - heights followed by other).
   test (font menus - courier new is wysiwyg).
