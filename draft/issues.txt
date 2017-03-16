@@ -74,12 +74,6 @@ The following requests have been partially demonstrated.
   Status:    Demonstrated, by making these the default.
   Requested by Jasper Paulsen on April 11, 2014.
 
-105.  Create a Linux shortcut with /left /tt command-line options.
-  This shortcut would be designed for newbies running WINE.
-  Audience:  Linux programmers.
-  Status:  Request.
-  Requested by Jasper Paulsen on April 11, 2014.
-
 153.  Center text vertically in tab strips.
   Status:   Already done in 3043.
   Benefit:  Minor.
@@ -104,19 +98,17 @@ The following requests have been partially demonstrated.
   Testing difficulty:  Medium.
   Requested by:  Jasper Paulsen on March 13, 2017.
 
-156.  Add a 1/9 inch yank setting when 2/9 inch high fonts are present.
-  Status:   Request.
-  Benefit:  Minor.
-  Implementation difficulty:  Medium.
-  Demoing difficulty:  Medium.
-  Testing difficulty:  Medium.
-  Requested by:  Jasper Paulsen on March 13, 2017.
-
 
 
 \ ======================================   
 The following requests are roughly sorted
 from higher priority to lower priority.
+
+105.  Create a Linux shortcut with /left /tt command-line options.
+  This shortcut would be designed for newbies running WINE.
+  Audience:  Linux programmers.
+  Status:  Request.
+  Requested by Jasper Paulsen on April 11, 2014.
 
 094.  Document "Plain English programming idioms",
   and how they compare to other common programming languages.
@@ -621,6 +613,14 @@ with an adjustable slider between them.
 
 \ ======================================   
 Unsorted requests:
+
+156.  Add a 1/9 inch yank setting when 2/9 inch high fonts are present.
+  Status:   Request.
+  Benefit:  Minor.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Medium.
+  Requested by:  Jasper Paulsen on March 13, 2017.
 
 157.  Support multiple headers per routine, a la CAL-4700.
   Status:   Request.
