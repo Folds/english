@@ -140,9 +140,7 @@ to decide if the user is sure:
   say no.
 
 to decide if the user is willing to close a node:
-  if list was requested, say yes.
   if compile was requested, say yes.
-  if test was requested, say yes.
   if the node is nil, say yes.
   if the node is not modified, say yes.
   ask "Save?" with choices "Yes" and "No" and "Cancel".
@@ -166,7 +164,7 @@ to draw a button:
   draw the button's roundy box with the black color and the white color.
   mask outside the button's roundy box.
   draw the button's name in the button's roundy box
-    with the black color and the requested control font and "center".
+    with the black color and the default font and "center".
 
 to draw some buttons:
   get a button from the buttons.

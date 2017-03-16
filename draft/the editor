@@ -69,14 +69,14 @@ to create some blocks given some rows:
 to create a source given a buffer:
   allocate memory for the source.
   put the pad's box into a box.
-  put the box's height divided by the requested editor font's height
-    times the requested editor font's height into a height.
+  put the box's height divided by the requested font's height
+    times the requested font's height into a height.
   put the box's top plus the height into the box's bottom.
   center the box in the pad's box (vertically).
   create the source's text.
   put the box into the source's text's box.
   put the black color into the source's text's pen.
-  put the requested editor font into the source's text's font.
+  put the requested font into the source's text's font.
   put 1/4 inch into the source's text's margin.
   put the buffer into the source's text.
   set the source's text's horizontal scroll flag.
@@ -557,11 +557,7 @@ to handle font height given a source and a font height:
   put the box's height divided by the font height times the font height into a height.
   put the box's top plus the height into the box's bottom.
   center the box in the pad's box (vertically).
-  if the source's text is not modified,
-    set a flag.
   handle font height given the source's text and the box and the font height.
-  if the flag is set,
-    clear the source's text's modified flag.
   show the desktop with status.
 
 to handle font height other given a source:
@@ -579,19 +575,12 @@ to handle font height other given a source:
 
 to handle font name given a source and a string:
   show the desktop.
-  if the source's text is not modified,
-    set a flag.
   handle font name given the source's text and the string.
-  if the flag is set,
-    clear the source's text's modified flag.
   show the desktop with status.
 
 to handle font name other given a source:
   ask "Name?" with the source's text's font's name.
   if the answer is blank, exit.
-  put the answer in a font name.
-  if the font name is in the custom font names,
-    make sure the font name is loaded (custom).
   if the answer is not standard (font name),
     cache the answer (font name).
   handle font name given the source and the answer.
