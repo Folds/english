@@ -112,6 +112,22 @@ The following requests have been partially demonstrated.
   Testing difficulty:  Medium.
   Requested by:  Jasper Paulsen on March 13, 2017.
 
+168.  Add scrollbar to writer's page menu.
+  Status:   Request.
+  Benefit:  Medium.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Medium.
+  Requested by Jasper Paulsen on March 13, 2014.
+ 
+169.  Add mouse scrolling to writer's page menu.
+  Status:   Request.
+  Benefit:  Medium.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Medium.
+  Requested by Jasper Paulsen on March 13, 2014.
+ 
 
 
 \ ======================================   
@@ -701,22 +717,6 @@ Unsorted requests:
   Testing difficulty:  Medium.
   Requested by Jasper Paulsen on March 13, 2014.
 
-168.  Add scrollbar to writer's page menu.
-  Status:   Request.
-  Benefit:  Medium.
-  Implementation difficulty:  Medium.
-  Demoing difficulty:  Medium.
-  Testing difficulty:  Medium.
-  Requested by Jasper Paulsen on March 13, 2014.
- 
-169.  Add mouse scrolling to writer's page menu.
-  Status:   Request.
-  Benefit:  Medium.
-  Implementation difficulty:  Medium.
-  Demoing difficulty:  Medium.
-  Testing difficulty:  Medium.
-  Requested by Jasper Paulsen on March 13, 2014.
- 
 170.  Add scrollbar to writer's page editing feature.
   Status:   Request.
   Benefit:  Medium.
