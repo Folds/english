@@ -23,17 +23,6 @@ to adjust a scrollbar:
 
 an arrow is a polygon.
 
-to convert a count to a height given a document (invert scrollbar drag):
-  put the scrollbar's box's height
-    minus the scrollbar's uptick's height
-    minus the scrollbar's cab's height
-    minus the scrollbar's downtick's height
-    in a height called range.
-  get another count of invisible pages given the document.
-  put the range and the other count in a ratio. \ scrollbar twips per page
-  put the count in the height.
-  scale the height given the ratio.
-
 to convert a count to a height given a source (invert scrollbar drag):
   put the scrollbar's box's height
     minus the scrollbar's uptick's height
@@ -44,17 +33,6 @@ to convert a count to a height given a source (invert scrollbar drag):
   put the range and the other count in a ratio. \ scrollbar twips per row
   put the count in the height.
   scale the height given the ratio.
-
-to convert a height to a count given a document (scrollbar drag):
-  put the scrollbar's box's height
-    minus the scrollbar's uptick's height
-    minus the scrollbar's cab's height
-    minus the scrollbar's downtick's height
-    in a height called range.
-  get another count of invisible pages given the document.
-  put the other count and the range in a ratio. \ pages per scrollbar twip
-  put the height in the count.
-  scale the count given the ratio.
 
 to convert a height to a count given a source (scrollbar drag):
   put the scrollbar's box's height
@@ -95,20 +73,6 @@ to decide if a command is wafer thin:
   if the command's roundy box is wafer thin, say yes.
   say no.
 
-to decide if an event is in a scrollbar:
-  if the scrollbar is not needed, say no.
-  if the event's spot is in the scrollbar's box, say yes.
-  say no.
-
-to decide if a mode is never scrollable:
-  if the mode is sometimes scrollable, say no.
-  say yes.
-
-to decide if a mode is sometimes scrollable:
-  if the current tab's mode is "editor", say yes.
-  if the current tab's mode is "docster", say yes.
-  say no.
-
 to decide if a roundy box is wafer thin:  
   if the roundy box's top  is the roundy box's bottom, say yes.
   if the roundy box's left is the roundy box's right,  say yes.
@@ -118,20 +82,6 @@ to decide if a roundy box is wafer thin:
 
 to decide if the scrollbar is needed:
   if the current tab is nil, say no.
-  if the current tab's mode is never scrollable, say no.
-  if the scrollbar is needed (editor), say yes.
-  if the scrollbar is needed (docster), say yes.
-  say no.
-
-to decide if the scrollbar is needed (docster):
-  if the current tab's mode is not "docster", say no.
-  get a count of leading invisible pages given the current tab's node's document.
-  if the count is positive, say yes.
-  get another count of trailing invisible pages given the current tab's node's document.
-  if the other count is positive, say yes.
-  say no.
-
-to decide if the scrollbar is needed (editor):
   if the current tab's mode is not "editor", say no.
   put the current tab's node's source's text's row count in a count.
   count the visible rows of the current tab's node's source's text
@@ -230,35 +180,6 @@ to get a height (scrollbar cab height):
   if the current tab's mode is "editor",
     get the height given the current tab's node's source's text
       (scrollbar cab height); exit.
-  if the current tab's mode is "docster",
-    get the height given the current tab's node's document
-      (scrollbar cab height); exit.
-
-to get a height given a document (scrollbar cab height):
-  put the scrollbar's box's height
-    minus the scrollbar's uptick's height
-    minus the scrollbar's downtick's height
-    into the height.
-  if the height is less than 1/4 inch, exit.
-  if the document is nil, exit.
-  get a page from the document's pages.
-  if the page is nil, exit.
-  put the page's edge into a box.
-  globalize the box given the document's origin.
-  get another page from the document's pages (backwards).
-  if the other page is nil, exit.
-  put the other page's edge into another box.
-  globalize the other box given the document's origin.
-  put the other box's bottom minus the box's top 
-    into a height called total edge height.
-  put the document's bottom minus the document's top
-    into a height called document height.
-  put the document height and the total edge height into a ratio.
-  if the ratio's numerator is greater than the ratio's denominator,
-    put 1 into the ratio.
-  scale the height given the ratio.
-  if the height is less than 1/4 inch,
-    put 1/4 inch into the height.
 
 to get a height given a text (scrollbar cab height):
   count the visible rows of the text returning a count.
@@ -272,7 +193,7 @@ to get a height given a text (scrollbar cab height):
   if the height is less than 1/4 inch, exit.
   scale the height given the ratio.
   if the height is less than 1/4 inch,
-    put 1/4 inch into the height.
+    put 1/4 inch into the height.  
 
 to get the horizontal scroll speed returning a number:
   if the stashed horizontal scroll speed is 0,
@@ -297,9 +218,6 @@ to get a ratio of invisible rows:
   if the current tab's mode is "editor",
     get the ratio of invisible rows
       given the current tab's node's source's text; exit.
-  if the current tab's mode is "docster",
-    get the ratio of invisible pages
-      given the current tab's node's document; exit.
 
 to get a ratio of invisible rows given a text:
   get the first visible row number of the text returning a number.
@@ -328,17 +246,6 @@ to get the scroll speed returning a number (from windows):
 to handle downtick:
   if the current tab's mode is "editor",
     handle downtick given the current tab's node's source; exit.
-  if the current tab's mode is "docster",
-    handle downtick given the current tab's node's document; exit.
-
-to handle downtick given a document:
-  hide the cursor.
-  put the edge height into a difference's y.
-  negate the difference's y.
-  scroll the document given the difference.
-  show the desktop with status.
-  wait for 50 milliseconds.
-  if the scrollbar's downtick is left-clicked, repeat.
 
 to handle downtick given a source:
   hide the cursor.
@@ -365,7 +272,6 @@ to handle an event (mouse horizontal scroll speed changed):
 
 to handle an event (mouse horizontal wheel):
   if the current tab's mode is not "editor", exit.
-  \ the docster only scrolls vertically, not horizontally.
   if the event is modified, exit.
   put the event's byte in a mouse wyrd.
   \ The scrollbar behaves opposite to "right-click and push",
@@ -418,9 +324,6 @@ to handle an event (mouse wheel):
   if the current tab's mode is "editor",
     scroll the current tab's source given - the requested lines;
     show the desktop with status.
-  if the current tab's mode is "docster",
-    scroll the current tab's document down given - the requested lines;
-    show the desktop with status.
   put the requested lines times the roll quantum in a number called requested roll.
   subtract the requested roll from the unprocessed mouse roll.
 
@@ -434,7 +337,6 @@ to handle an event (shift mouse wheel):
   \ Shift-mouse scrolling is much easier and more accurate
   \ than horizontal mouse scrolling.
   if the current tab's mode is not "editor", exit.
-  \ the docster only scrolls vertically, not horizontally.
   if the event is modified, exit.
   if the event's shift flag is not set, exit.
   put the event's byte in a mouse wyrd.
@@ -463,19 +365,8 @@ to handle an event (shift mouse wheel):
 to handle page down:
   if the current tab's mode is "editor",
     handle page down given the current tab's node's source; exit.
-  if the current tab's mode is "docster",
-    handle page down given the current tab's node's document; exit.
-
-to handle page down given a document:
-  if the document is empty, exit.
-  hide the cursor.
-  scroll the document down one page.
-  show the desktop with status.
-  wait for 200 milliseconds.
-  if the scrollbar's downpage is left-clicked, repeat.
 
 to handle page down given a source:
-  if the source is nil, exit.
   hide the cursor.
   handle page down given the source's text.
   show the desktop with status.
@@ -492,16 +383,6 @@ to handle page down given a text:
 to handle page up:
   if the current tab's mode is "editor",
     handle page up given the current tab's node's source; exit.
-  if the current tab's mode is "docster",
-    handle page up given the current tab's node's document; exit.
-
-to handle page up given a document:
-  if the document is empty, exit.
-  hide the cursor.
-  scroll the document up one page.
-  show the desktop with status.
-  wait for 200 milliseconds.
-  if the scrollbar's uppage is left-clicked, repeat.
 
 to handle page up given a source:
   hide the cursor.
@@ -520,16 +401,6 @@ to handle page up given a text:
 to handle uptick:
   if the current tab's mode is "editor",
     handle uptick given the current tab's node's source; exit.
-  if the current tab's mode is "docster",
-    handle uptick given the current tab's node's document; exit.
-
-to handle uptick given a document:
-  hide the cursor.
-  put the edge height into a difference's y.
-  scroll the document given the difference.
-  show the desktop with status.
-  wait for 50 milliseconds.
-  if the scrollbar's uptick is left-clicked, repeat.
 
 to handle uptick given a source:
   hide the cursor.
@@ -614,39 +485,10 @@ to resize a scrollbar:
     in the scrollbar's downpage's bottom.
   adjust the scrollbar.
 
-to scroll a document given an event (scrollbar drag):
-  if the document is nil, exit.
-  if the event is nil, exit.
-  put the event's spot in a spot called old spot.
-  put the old spot's y in a number called old y.
-  put 3 in a count called leeway count.
-  convert the leeway count to a height called leeway height
-    given the document (invert scrollbar drag).  
-  put the scrollbar's downpage's height plus the old y
-    plus the leeway height in a number called max y.
-  put the old y in a number called previous y.
-  loop.
-    if a flag is set, show the desktop with status.
-    put the mouse's spot's y in a number called current y.
-    if the mouse's left button is up,
-      exit.
-    if the current y is greater than the max y,
-      put the max y in the current y.
-    put the current y minus the previous y in a height.
-    if the height is 0, repeat.
-    convert the height to a count given the document (scrollbar drag).
-    if the count is 0, repeat.
-    scroll the document down given the count.
-    put the current y in the previous y.
-    set the flag.
-  repeat.
-
 to scroll given an event (scrollbar drag):
   if the current tab is nil, exit.
   if the current tab's mode is "editor",
     scroll the current tab's source given the event (scrollbar drag); exit.
-  if the current tab's mode is "docster",
-    scroll the current tab's document given the event (scrollbar drag); exit.
 
 to scroll a source given a count:
   if the source is nil, exit.

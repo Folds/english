@@ -33,11 +33,8 @@ to adjust the edge of a page in a document:
   put 1/12 inch into the page's edge's radius.
   put 1/4 inch into the page's edge's left.
   put the document's right minus 1/4 inch into the page's edge's right.
-  if the scrollbar is needed,
-    subtract 1/8 inch from the page's edge's right.
   put 0 into the page's edge's top.
-  if the page is not the document's first page, 
-    put the page's previous' edge's bottom into the page's edge's top.
+  if the page is not the document's first page, put the page's previous' edge's bottom into the page's edge's top.
   put the page's edge's top plus the edge height into the page's edge's bottom.
 
 to adjust a page:
@@ -610,29 +607,6 @@ to decide if a document is relying on a font name:
     if the page is relying on the font name, say yes.
   repeat.
 
-to decide if a document needs adjustment:
-  if the document needs adjustment (scrollbar), say yes.
-  if the document needs adjustment (no scrollbar), say yes.
-  say no.
-
-to decide if a document needs adjustment (no scrollbar):
-  if the document is nil, say no.
-  get a page from the document's pages.
-  if the page is nil, say no.
-  if the scrollbar is needed, say yes.
-  put the document's right minus the page's edge's right in a width.
-  if the width is at least 1/3 inch, say yes.
-  say no.
-
-to decide if a document needs adjustment (scrollbar):
-  if the document is nil, say no.
-  get a page from the document's pages.
-  if the page is nil, say no.
-  if the scrollbar is not needed, say no.
-  put the document's right minus the page's edge's right in a width.
-  if the width is less than 1/3 inch, say yes.
-  say no.
-
 to decide if a document needs a font name to be loaded (custom):
   loop.
     get a font name thing from the custom font names.
@@ -981,7 +955,7 @@ a document is a thing with
   a document selection called selection,
   some pages,
   a grid showing flag,
-  a yank grid, [1/8 inch, 1/9 inch, 1/16 inch, 1/24 inch, 1/32 inch, 1/48 inch, 0]
+  a yank grid, [1/8 inch, 1/12 inch, 1/16 inch, 1/24 inch, 1/32 inch, 1/48 inch, 0]
   a scale ratio,
   some pages called page undos,
   some pages called page redos.
@@ -1009,8 +983,6 @@ to draw a document:
   if the document is nil, exit.
   mask only outside the document's box.
   draw the document's box with the desktop color and the desktop color.
-  if the document needs adjustment,
-    adjust the edge of every page in the document.
   draw the edges of any visible pages in the document.
 
 to draw the edge of a page in a document:
@@ -1031,7 +1003,7 @@ to draw the edge of a page in a document:
   put the other box's right minus 1/2 inch plus 1/24 inch into the other box's left.
   subtract 1/24 inch from the other box's right.
   mask only outside the other box.
-  draw the page's page number in the other box (docster page number).
+  draw the page's page number in the other box with the black color and the default font and "right".
 
 to draw the edges of any visible pages in a document:
   if the document is nil, exit.
@@ -1156,22 +1128,6 @@ to draw the sizers on some shapes:
   if the shape is not selected, repeat.
   draw the sizers on the shape.
   repeat.
-
-to draw a string in a box (docster page number):
-  if the string does not end with "1",
-    draw the string in the box with the black color
-      and the default font and "right";
-    exit.
-  if the default font's name is not "Arial",
-    draw the string in the box with the black color
-      and the default font and "right";
-    exit.
-  \work around a bug in Arial's right justification.
-  privatize the box.
-  get a width given "1" and the memory canvas and the default font.
-  subtract the width divided by 3 from the box's right.
-  draw the string in the box with the black color
-    and the default font and "right".
 
 to draw a vertex:
   if the vertex is nil, exit.
@@ -1687,35 +1643,6 @@ to get a box of the selected shapes on a page:
     if the shape's bottom is greater than the box's bottom, put the shape's bottom into the box's bottom.
   repeat.
 
-to get a count of invisible pages given a document:
-  get a count called top of leading invisible pages given the document.
-  get a count called bottom of trailing invisible pages given the document.
-  put the top plus the bottom in the count.
-
-to get a count of leading invisible pages given a document:
-  put 0 in the count.
-  if the document is nil, exit.
-  loop.
-    get a page from the document's pages.
-    if the page is nil, exit.
-    put the page's edge into a box.
-    globalize the box given the document's origin.
-    if the box's top is at least the document's top, exit.
-    add 1 to the count.
-  repeat.
-
-to get a count of trailing invisible pages given a document:
-  put 0 in the count.
-  if the document is nil, exit.
-  loop.
-    get a page from the document's pages (backwards).
-    if the page is nil, exit.
-    put the page's edge into a box.
-    globalize the box given the document's origin.
-    if the document's bottom is at least the box's bottom, exit.
-    add 1 to the count.
-  repeat.
-
 to get a difference between a spot and another spot given a sizer:
   get the difference between the spot and the other spot.
   if the sizer's kind starts with "left-", negate the difference's x.
@@ -1791,14 +1718,6 @@ to get a radius given a page:
   if the shape's kind is "rectangle", put the shape's rectangle's radius into the radius.
   if the shape's kind is "text", put the shape's text rectangle's radius into the radius.
   divide the radius by the page's scale.
-
-to get a ratio of invisible pages given a document:
-  get a count called top of leading invisible pages given the document.
-  get a count called bottom of trailing invisible pages given the document.
-  put the top plus the bottom in a number called invisible.
-  if the invisible is less than the top,
-    put the top and the top in the ratio; exit.
-  put the top and the invisible in the ratio.
 
 to get a shape refer with which to start finding given a page:
   if the page is nil, void the shape refer; exit.
@@ -2057,11 +1976,8 @@ to handle an event given a document (key down - down-arrow key - shifted):
 
 to handle an event given a document (key down - down-arrow key):
   if the document is empty, exit.
-  if the document's caret is nil, 
-    focus on the document's first page in the document; 
-    show the desktop with status; exit.
-  if the event's shift flag is set, 
-    handle the event given the document (key down - down-arrow key - shifted); exit.
+  if the document's caret is nil, focus on the document's first page in the document; show the desktop with status; exit.
+  if the event's shift flag is set, handle the event given the document (key down - down-arrow key - shifted); exit.
   put the document's caret's next into a page.
   if the page is nil, put the document's first page into the page.
   focus on the page in the document.
@@ -2096,11 +2012,8 @@ to handle an event given a document (key down - home key):
 to handle an event given a document (key down - page-down key):
   if the document is empty, exit.
   scroll the document down one page.
-  if the event's shift flag is not set, 
-    focus on the document's first visible page in the document; 
-    show the desktop with status; exit.
-  if the document's anchor is nil, 
-    put the document's first page into the document's anchor.
+  if the event's shift flag is not set, focus on the document's first visible page in the document; show the desktop with status; exit.
+  if the document's anchor is nil, put the document's first page into the document's anchor.
   put the document's first visible page into the document's caret.
   select the document's pages given the document's selection.
   scroll to the edge of the document's caret given the document.
@@ -2169,7 +2082,6 @@ to handle an event given a document (left click):
   handle the event given the document (left click - not modified, not shifted).
 
 to handle an event given a document (left double click):
-  if the event is in the scrollbar, exit.
   if something is selected in the document, handle open; exit.
   if the event's spot is not in the edge of any page in the document, handle open; exit.
   extend any selection in the document given the event's spot.
@@ -2688,8 +2600,7 @@ to handle mirror given a page:
   show the desktop with status.
 
 to handle new page given a document:
-  if the current tab's node's path is read-only, 
-    show error "I'm sorry, but this directory is read only."; exit.
+  if the current tab's node's path is read-only, show error "I'm sorry, but this directory is read only."; exit.
   show status "Creating...".
   add a page to the document.
   focus on the page in the document.
@@ -2957,7 +2868,7 @@ to handle yank given a page and a number:
   reset the superduper given the page.
   privatize the number.
   put the number into the document's yank.
-  put "Yank " then the original number / the tpi into a string.
+  put "Yank " then the original number / 1440 into a string.
   show the desktop with the string.
 
 to initialize the writer:
@@ -3186,11 +3097,10 @@ a knob has a kind, a box and a fill color.
 a label is a string.
 
 to limit the origin in a document:
+  if the document is nil, exit.
   if the document is empty, exit.
   put the document's left into the document's origin's x.
-  put the document's edges/box minus 3 into a count.
-  put the count times the edge height into a height.
-  put the document's top minus the document's last page's edge's top plus the height into a number.  
+  put the document's top minus the document's last page's edge's top into a number.
   limit the document's origin's y to the number and the document's top.
 
 to limit a page:
@@ -3557,11 +3467,6 @@ to print a page given a copy count:
     print the page.
   repeat.
   end printing.
-
-to put a document's edges/box into a count:
-  if the document is nil, put 0 into the count; exit.
-  put the document's bottom minus the document's top into a height.
-  put the height divided by the edge height into the count.
 
 to put a document's first selected page into a page:
   void the page.
@@ -4015,12 +3920,6 @@ to scale some shapes given a ratio:
 to scale a superduper given a ratio:
   scale the superduper's pair given the ratio.
 
-to scroll a document down given a count:
-  if the document is nil, exit.
-  put the edge height times the count into a difference's y.
-  negate the difference's y.
-  scroll the document given the difference.
-
 to scroll a document down one page:
   if the document is nil, exit.
   put the document's box's y-extent minus the edge height into a difference's y.
@@ -4056,10 +3955,8 @@ to scroll to the edge of a page given a document:
   if the edge of the page is visible in the document, exit.
   put the page's edge into a box.
   globalize the box given the document's origin.
-  if the box's bottom is less than or equal to the document's top, 
-    put the document's top minus the box's top into a difference's y.
-  if the box's top is greater than or equal to the document's bottom, 
-    put the document's bottom minus the box's top minus the edge height into the difference's y.
+  if the box's bottom is less than or equal to the document's top, put the document's top minus the box's top into a difference's y.
+  if the box's top is greater than or equal to the document's bottom, put the document's bottom minus the box's top minus the edge height into the difference's y.
   scroll the document given the difference.
 
 to scroll a page to the caret:
