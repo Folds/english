@@ -35,7 +35,6 @@ to convert a count to a height given a document (invert scrollbar drag):
   scale the height given the ratio.
 
 to convert a count to a height given a source (invert scrollbar drag):
-  if the source is nil, put 0 in the height; exit.
   put the scrollbar's box's height
     minus the scrollbar's uptick's height
     minus the scrollbar's cab's height
@@ -69,7 +68,6 @@ to convert a height to a count given a source (scrollbar drag):
   scale the count given the ratio.
 
 to count the invisible rows of a text returning a number:
-  if the text is nil, put 0 in the number; exit.
   count the visible rows of the text returning another number.
   put the text's row count minus the other number in the number.
 
@@ -78,7 +76,6 @@ to count the invisible rows of a text returning a number:
 \ 1 is the first row of the text.
 
 to count the visible rows of a text returning a number:
-  if the text is nil, put 0 in the number; exit.
   put the text's box's y-extent divided by the text's row height
     in the number.
 
@@ -108,8 +105,8 @@ to decide if a mode is never scrollable:
   say yes.
 
 to decide if a mode is sometimes scrollable:
-  if the mode is "editor", say yes.
-  if the mode is "docster", say yes.
+  if the current tab's mode is "editor", say yes.
+  if the current tab's mode is "docster", say yes.
   say no.
 
 to decide if a roundy box is wafer thin:  
@@ -127,9 +124,7 @@ to decide if the scrollbar is needed:
   say no.
 
 to decide if the scrollbar is needed (docster):
-  if the current tab is nil, say no.
   if the current tab's mode is not "docster", say no.
-  if the current tab's node is nil, say no.
   get a count of leading invisible pages given the current tab's node's document.
   if the count is positive, say yes.
   get another count of trailing invisible pages given the current tab's node's document.
@@ -137,11 +132,7 @@ to decide if the scrollbar is needed (docster):
   say no.
 
 to decide if the scrollbar is needed (editor):
-  if the current tab is nil, say no.
   if the current tab's mode is not "editor", say no.
-  if the current tab's node is nil, say no.
-  if the current tab's node's source is nil, say no.
-  if the current tab's node's source's text is nil, say no.
   put the current tab's node's source's text's row count in a count.
   count the visible rows of the current tab's node's source's text
     returning another count.
@@ -212,7 +203,6 @@ to find a command given a scrollbar and a spot:
 
 to get the default fast horizontal scroll speed returning a number:
   put 3 in the number.
-  if the current tab is nil, exit.
   if the current tab's mode is not "editor", exit.
   if the current tab's source is nil, exit.
   if the current tab's source's text is nil, exit.
@@ -222,7 +212,6 @@ to get the default fast horizontal scroll speed returning a number:
 
 to get the default fast scroll speed returning a number:
   put 3 in the number.
-  if the current tab is nil, exit.
   if the current tab's mode is not "editor", exit.
   if the current tab's source is nil, exit.
   if the current tab's source's text is nil, exit.
@@ -238,9 +227,8 @@ to get the first visible row number of a text returning a number:
 to get a height (scrollbar cab height):
   put 1/4 inch in the height.
   if the current tab is nil, exit.
-  if the current tab's node is nil, exit.
   if the current tab's mode is "editor",
-    get the height given the current tab's node's source
+    get the height given the current tab's node's source's text
       (scrollbar cab height); exit.
   if the current tab's mode is "docster",
     get the height given the current tab's node's document
@@ -272,15 +260,9 @@ to get a height given a document (scrollbar cab height):
   if the height is less than 1/4 inch,
     put 1/4 inch into the height.
 
-to get a height given a source (scrollbar cab height):
-  if the source is nil, exit.
-  get the height given the source's text (scrollbar cab height).
-
 to get a height given a text (scrollbar cab height):
-  put 1 and 1 into a ratio.
-  if the text is not nil,
-    count the visible rows of the text returning a count;
-    put the count and the text's row count into the ratio.
+  count the visible rows of the text returning a count.
+  put the count and the text's row count into a ratio.
   if the ratio's numerator is greater than the ratio's denominator,
     put 1 into the ratio.
   put the scrollbar's box's height
@@ -312,26 +294,19 @@ to get the horizontal scroll speed returning a number (from windows):
 to get a ratio of invisible rows:
   put 1 and 2 in the ratio.
   if the current tab is nil, exit.
-  if the current tab's node is nil, exit.
   if the current tab's mode is "editor",
     get the ratio of invisible rows
-      given the current tab's node's source; exit.
+      given the current tab's node's source's text; exit.
   if the current tab's mode is "docster",
     get the ratio of invisible pages
       given the current tab's node's document; exit.
-
-to get a ratio of invisible rows given a source:
-  put 1 and 2 in the ratio.
-  if the source is nil, exit.
-  get the ratio of invisible rows given the source's text.
 
 to get a ratio of invisible rows given a text:
   get the first visible row number of the text returning a number.
   put the number minus 1 in a number called top.
   count the visible rows of the text returning another number.
-  if the text is nil, put 0 in a number called invisible.
-  if the text is not nil,
-    put the text's row count minus the other number in the invisible.
+  put the text's row count minus the other number
+    in a number called invisible.
   if the invisible is less than the top,
     put the top and the top in the ratio; exit.
   put the top and the invisible in the ratio.
@@ -351,8 +326,6 @@ to get the scroll speed returning a number (from windows):
     and the number's whereabouts and 0 [not used].
 
 to handle downtick:
-  if the current tab is nil, exit.
-  if the current tab's node is nil, exit.
   if the current tab's mode is "editor",
     handle downtick given the current tab's node's source; exit.
   if the current tab's mode is "docster",
@@ -391,8 +364,6 @@ to handle an event (mouse horizontal scroll speed changed):
   stash horizontal scroll speed.
 
 to handle an event (mouse horizontal wheel):
-  if the event is nil, exit.
-  if the current tab is nil, exit.
   if the current tab's mode is not "editor", exit.
   \ the docster only scrolls vertically, not horizontally.
   if the event is modified, exit.
@@ -423,7 +394,6 @@ to handle an event (mouse scroll speed changed):
   stash scroll speed.
 
 to handle an event (mouse wheel):
-  if the event is nil, exit.
   if the event's shift flag is set,
     handle the event (shift mouse wheel); exit.
   if the scrollbar is not needed, exit.
@@ -449,14 +419,12 @@ to handle an event (mouse wheel):
     scroll the current tab's source given - the requested lines;
     show the desktop with status.
   if the current tab's mode is "docster",
-    scroll the current tab's node's document down given - the requested lines;
+    scroll the current tab's document down given - the requested lines;
     show the desktop with status.
   put the requested lines times the roll quantum in a number called requested roll.
   subtract the requested roll from the unprocessed mouse roll.
 
 to handle an event (shift mouse wheel):
-  if the event is nil, exit.
-  if the current tab is nil, exit.
   \ Some users (especially of Macintoshes)
   \ use Shift-mouse-scrolling
   \ to request horizontal mouse scrolling.
@@ -493,8 +461,6 @@ to handle an event (shift mouse wheel):
   subtract the requested roll from the unprocessed horizontal mouse roll.
 
 to handle page down:
-  if the current tab is nil, exit.
-  if the current tab's node is nil, exit.
   if the current tab's mode is "editor",
     handle page down given the current tab's node's source; exit.
   if the current tab's mode is "docster",
@@ -524,8 +490,6 @@ to handle page down given a text:
   put the old flag in the text's vertical scroll flag.
 
 to handle page up:
-  if the current tab is nil, exit.
-  if the current tab's node is nil, exit.
   if the current tab's mode is "editor",
     handle page up given the current tab's node's source; exit.
   if the current tab's mode is "docster",
@@ -554,8 +518,6 @@ to handle page up given a text:
   put the old flag in the text's vertical scroll flag.
 
 to handle uptick:
-  if the current tab is nil, exit.
-  if the current tab's node is nil, exit.
   if the current tab's mode is "editor",
     handle uptick given the current tab's node's source; exit.
   if the current tab's mode is "docster",
@@ -570,7 +532,6 @@ to handle uptick given a document:
   if the scrollbar's uptick is left-clicked, repeat.
 
 to handle uptick given a source:
-  if the source is nil, exit.
   hide the cursor.
   handle uptick given the source's text.
   show the desktop with status.
@@ -588,7 +549,6 @@ to horizontal scroll a source given a count:
   \debug the source's text's x.
   if the source is nil, exit.
   if the count is 0, exit.
-  if the source's text is nil, exit.
   put the source's text's horizontal scroll flag in a flag called old flag.
   set the source's text's horizontal scroll flag.
   estimate character width given the source's text's font returning a ratio.
@@ -683,16 +643,14 @@ to scroll a document given an event (scrollbar drag):
 
 to scroll given an event (scrollbar drag):
   if the current tab is nil, exit.
-  if the current tab's node is nil, exit.
   if the current tab's mode is "editor",
-    scroll the current tab's node's source given the event (scrollbar drag); exit.
+    scroll the current tab's source given the event (scrollbar drag); exit.
   if the current tab's mode is "docster",
-    scroll the current tab's node's document given the event (scrollbar drag); exit.
+    scroll the current tab's document given the event (scrollbar drag); exit.
 
 to scroll a source given a count:
-  if the count is 0, exit.
   if the source is nil, exit.
-  if the source's text is nil, exit.
+  if the count is 0, exit.
   put the source's text's vertical scroll flag in a flag called old flag.
   set the source's text's vertical scroll flag.
   scroll the source's text given the count.  
