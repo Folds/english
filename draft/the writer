@@ -12,8 +12,7 @@ to add a page to a document:
 to adjust a document:
   if the document is nil, exit.
   put the pad's box into a box.
-  put the box's height divided by the default font's height 
-    times the default font's height into a height.
+  put the box's height divided by the default font's height times the default font's height into a height.
   put the box's top plus the height into the box's bottom.
   put the box into the document's box.
   put 0 and the edge height into the document's grid.
@@ -109,8 +108,7 @@ to align any selected shapes on a page given an alignment:
 
 to align a shape given an alignment:
   if the shape is nil, exit.
-  if the shape's kind is "group", 
-    align the shape's shapes given the alignment; exit.
+  if the shape's kind is "group", align the shape's shapes given the alignment; exit.
   if the shape's kind is not "text", exit.
   align the shape's text given the alignment.
 
@@ -239,7 +237,6 @@ to center a shape in a box:
 
 to change any selected shapes on a page given a font height:
   if the page is nil, exit.
-  put the font height in the current font's height.
   loop.
     get a shape from the page's shapes.
     if the shape is nil, exit.
@@ -249,7 +246,6 @@ to change any selected shapes on a page given a font height:
 
 to change any selected shapes on a page given a font name:
   if the page is nil, exit.
-  put the font name in the current font's name.
   loop.
     get a shape from the page's shapes.
     if the shape is nil, exit.
@@ -398,10 +394,6 @@ to copy any selected shapes on a page to a shape clipboard:
     append the other shape to the shape clipboard.
   repeat.
 
-to copy a font into another font:
-  put the font's name into the other font's name.
-  put the font's height into the other font's height.
-
 to copy a page into another page:
   if the page is nil, void the other page; exit.
   allocate memory for the other page.
@@ -528,8 +520,7 @@ to create a shape given a kind (default - text):
   create the shape's text.
   put the shape's text rectangle into the shape's text's box.
   put the black color into the shape's text's pen.
-  update the current font.
-  put the current font into the shape's text's font.
+  put the default font into the shape's text's font.
   set the shape's text's wrap flag.
   adjust the text in the shape.
 
@@ -662,135 +653,6 @@ to decide if the edge of a page is visible in a document:
   if the box's bottom is greater than the document's bottom, say no.
   say yes.
 
-to decide if a font is another font:
-  if the font's name is not the other font's name, say no.
-  if the font's height is the other font's height, say yes.
-  say no.
-
-to decide if a font is selected given a page:
-  if the page is nil, say no.
-  if the font is selected given the page's shapes, say yes.
-  say no.
-
-to decide if a font is selected given a shape:
-  if the shape is nil, say no.
-  if the font is selected given the shape (group), say yes.
-  if the font is selected given the shape (text), say yes.
-  say no.
-
-to decide if a font is selected given a shape (group):
-  if the shape is nil, say no.
-  if the shape's kind is not "group", say no.
-  if the font is selected given the shape's shapes, say yes.
-  say no.
-
-to decide if a font is selected given a shape (text):
-  if the shape is nil, say no.
-  if the shape's kind is not "text", say no.
-  if the shape is not selected, say no.
-  if the shape's text is nil, say no.
-  if the font is the shape's text's font, say yes.
-  say no.
-
-to decide if a font is selected given some shapes:
-  loop.
-    get a shape from the shapes.
-    if the shape is nil, say no.
-    if the font is selected given the shape, say yes.
-  repeat.
-
-to decide if a font is set:
-  if the font's name   is not "", say yes.
-  if the font's height is not 0,  say yes.
-  say no.
-
-to decide if a font is used by a page:
-  if the page is nil, say no.
-  if the font is used by the page's shapes, say yes.
-  say no.
-
-to decide if a font is used by a shape:
-  if the shape is nil, say no.
-  if the font is used by the shape (group), say yes.
-  if the font is used by the shape (text), say yes.
-  say no.
-
-to decide if a font is used by a shape (group):
-  if the shape is nil, say no.
-  if the shape's kind is not "group", say no.
-  if the font is used by the shape's shapes, say yes.
-  say no.
-
-to decide if a font is used by a shape (text):
-  if the shape is nil, say no.
-  if the shape's kind is not "text", say no.
-  if the shape's text is nil, say no.
-  if the font is the shape's text's font, say yes.
-  say no.
-
-to decide if a font is used by some shapes:
-  loop.
-    get a shape from the shapes.
-    if the shape is nil, say no.
-    if the font is used by the shape, say yes.
-  repeat.
-
-to decide if a font is visible given a page:
-  if the page is nil, say no.
-  if the font is visible given the page's shapes, say yes.
-  say no.
-
-to decide if a font is visible given a shape:
-  if the shape is nil, say no.
-  if the font is visible given the shape (group), say yes.
-  if the font is visible given the shape (text), say yes.
-  say no.
-
-to decide if a font is visible given a shape (group):
-  if the shape is nil, say no.
-  if the shape's kind is not "group", say no.
-  if the font is visible given the shape's shapes, say yes.
-  say no.
-
-to decide if a font is visible given a shape (text):
-  if the shape is nil, say no.
-  if the shape's kind is not "text", say no.
-  if the shape's text is nil, say no.
-  if the font is not the shape's text's font, say no.
-  get a box (text visibility).
-  if the shape's text's box's left is greater than the box's right, say no.
-  if the shape's text's box's right is less than the box's left, say no.
-  if the shape's text's box's top is greater than the box's bottom, say no.
-  if the shape's text's box's bottom is less than the box's top, say no.
-  say yes.
-
-to decide if a font is visible given some shapes:
-  loop.
-    get a shape from the shapes.
-    if the shape is nil, say no.
-    if the font is visible given the shape, say yes.
-  repeat.
-
-to decide if a page does contain selected text:
-  get first selected text from the page returning a text.
-  if the text is nil, say no.
-  say yes.
-
-to decide if a page does contain selected visible text:
-  get first selected visible text from the page returning a text.
-  if the text is nil, say no.
-  say yes.
-
-to decide if a page does contain text:
-  get first text from the page returning a text.
-  if the text is nil, say no.
-  say yes.
-
-to decide if a page does contain visible text:
-  get first visible text from the page returning a text.
-  if the text is nil, say no.
-  say yes.
-
 to decide if a page is being edited:
   if the page is nil, say no.
   if the page's edit shape is nil, say no.
@@ -874,19 +736,6 @@ to decide if a shape is selected text:
   if the shape is nil, say no.
   if the shape is not selected, say no.
   if the shape's kind is "text", say yes.
-  say no.
-
-to decide if a shape is selected visible text:
-  if the shape is nil, say no.
-  if the shape is not selected, say no.
-  if the shape's kind is not "text", say no.
-  if the shape's text is visible given the pad's box, say yes.
-  say no.
-
-to decide if a shape is visible text:
-  if the shape is nil, say no.
-  if the shape's kind is not "text", say no.
-  if the shape's text is visible given the pad's box, say yes.
   say no.
 
 to decide if something is selected in a document:
@@ -1113,7 +962,6 @@ to deselect a shape:
   if the shape is nil, exit.
   clear the shape's selected flag.
   if the shape's kind is "group", deselect the shape's shapes.
-  cluck.
 
 to deselect some shapes:
   get a shape from the shapes.
@@ -1187,8 +1035,6 @@ to draw the edge of a page in a document:
 
 to draw the edges of any visible pages in a document:
   if the document is nil, exit.
-  if the default font's height is greater than the edge height,
-    put the default font's height in the edge height.
   loop.
     get a page from the document's pages.
     if the page is nil, exit.
@@ -1276,8 +1122,7 @@ to draw a shape on a page (text - editing):
   mask outside the shape's text rectangle.
   draw the shape's text (editing).
   restore the current canvas.
-  if the shape's border is not clear, 
-    draw the shape's text rectangle with the shape's border and the clear color.
+  if the shape's border is not clear, draw the shape's text rectangle with the shape's border and the clear color.
 
 to draw a shape on a page (text - not editing):
   draw the shape's text rectangle with the shape's border and the shape's fill.
@@ -1285,12 +1130,10 @@ to draw a shape on a page (text - not editing):
   mask outside the shape's text rectangle.
   draw the shape's text.
   restore the current canvas.
-  if the shape's border is not clear, 
-    draw the shape's text rectangle with the shape's border and the clear color.
+  if the shape's border is not clear, draw the shape's text rectangle with the shape's border and the clear color.
 
 to draw a shape on a page (text):
-  if the shape is the page's edit shape, 
-    draw the shape on the page (text - editing); exit.
+  if the shape is the page's edit shape, draw the shape on the page (text - editing); exit.
   draw the shape on the page (text - not editing).
 
 to draw some shapes on a page:
@@ -1830,11 +1673,6 @@ to get an anchor with which to start finding given a shape refer and a page:
   if the shape refer's shape is not the page's edit shape, exit.
   put the shape refer's shape's text's caret into the anchor.
 
-to get a box (text visibility):
-  put the pad's box in the box.
-  get an origin (text visibility).
-  move the box given - the origin's x and - the origin's y.
-
 to get a box of the selected shapes on a page:
   if the page is nil, clear the box; exit.
   if nothing is selected on the page, clear the box; exit.
@@ -1898,21 +1736,6 @@ to get first selected text from some shapes returning a text:
       put the shape's text in the text; exit.
   repeat.
 
-to get first selected visible text from a page returning a text:
-  if the page is nil, exit.
-  get first selected visible text from the page's shapes returning the text.
-
-to get first selected visible text from some shapes returning a text:
-  loop.
-    get a shape from the shapes.
-    if the shape is nil, exit.
-    if the shape is not selected, repeat.
-    if the shape's kind is "group",
-      get first selected visible text from the shape's shapes returning the text; exit.
-    if the shape is selected visible text,
-      put the shape's text in the text; exit.
-  repeat.
-
 to get first text from a page returning a text:
   if the page is nil, exit.
   get first text from the page's shapes returning the text.
@@ -1927,20 +1750,6 @@ to get first text from some shapes returning a text:
       put the shape's text in the text; exit.
   repeat.
 
-to get first visible text from a page returning a text:
-  if the page is nil, exit.
-  get first visible text from the page's shapes returning the text.
-
-to get first visible text from some shapes returning a text:
-  loop.
-    get a shape from the shapes.
-    if the shape is nil, exit.
-    if the shape's kind is "group",
-      get first visible text from the shape's shapes returning the text; exit.
-    if the shape is visible text,
-      put the shape's text in the text; exit.
-  repeat.
-
 to get a focus shape given a shape and a spot:
   if the shape is nil, void the focus shape; exit.
   if the shape's kind is not "group", put the shape into the focus shape; exit.
@@ -1950,25 +1759,6 @@ to get a focus shape given a shape and a spot:
   if the spot is not in the focus shape, repeat.
   get another focus shape given the focus shape and the spot.
   put the other focus shape into the focus shape.
-
-to get a font given some shapes (visible):
-  loop.
-    get a shape from the shapes.
-    if the shape is nil, exit.
-    if the shape's kind is "group",
-      get another font given the shape's shapes (visible).
-    if the other font is set,
-      put the other font in the font; exit.
-    if the shape's kind is not "text", repeat.
-    if the shape's text is nil, repeat.
-    get a box (text visibility).
-    if the shape's text's box's left is greater than the box's right, repeat.
-    if the shape's text's box's right is less than the box's left, repeat.
-    if the shape's text's box's top is greater than the box's bottom, repeat.
-    if the shape's text's box's bottom is less than the box's top, repeat.    
-    put the shape's text's font in the font.
-    exit.
-  repeat.
 
 to get a font height given a page:
   put the default font's height into the font height.
@@ -1984,14 +1774,6 @@ to get a font name given a page:
   if the shape is nil, exit.
   if the shape's kind is not "text", exit.
   put the shape's text's font's name into the font name.
-
-to get an origin (text visibility):
-  put 0 and 0 in the origin.
-  if the current tab is nil, exit.
-  if the current tab's mode is not "writer", exit.
-  if the current tab's node is nil, exit.
-  if the current tab's node's page is nil, exit.
-  put the current tab's node's page's origin in the origin.
 
 to get a page number given some pages and a page:
   put 0 into the page number.
@@ -2660,8 +2442,6 @@ to handle an event given a page and a shape (left click - dragging):
 to handle an event given a page and a shape (left click - shifted):
   reset the superduper given the page.
   reverse the shape's selected flag.
-  if the shape's selected flag is set,
-    update the current font given the shape.
   show the desktop with status.
 
 to handle an event given a page and a shape (left click):
@@ -2775,9 +2555,6 @@ to handle flip given a page:
   show the desktop with status.
 
 to handle font height given a page and a font height:
-  put the current font's name in the manual font's name.
-  put the font height in the manual font's height.
-  put the manual font in the current font.
   if the page is being edited, handle font height given the page and the font height (editing); exit.
   if nothing is selected on the page, cluck; exit.
   show status "Changing...".
@@ -2807,9 +2584,6 @@ to handle font height other given a page:
   handle font height given the page and the other font height.
 
 to handle font name given a page and a string:
-  put the current font's height in the manual font's height.
-  put the string in the manual font's name.
-  put the manual font in the current font.
   show the desktop.
   show status "Changing...".
   remember the page.
@@ -4295,18 +4069,10 @@ to scroll a page to the caret:
   if the box is not inside the page's edit shape's box, exit.
   if the box is inside the page's localized visible box, exit.
   globalize the box given the page's origin.
-  if the box's left is less than the pad's left, 
-    put the pad's left minus the box's right plus the box's width 
-      into a difference's x.
-  if the box's right is greater than the pad's right, 
-    put the pad's right minus the box's left minus the box's width 
-      into the difference's x.
-  if the box's top is less than the pad's top, 
-    put the pad's top minus the box's bottom plus the box's height 
-      into the difference's y.
-  if the box's bottom is greater than the pad's bottom, 
-    put the pad's bottom minus the box's top minus the box's height 
-      into the difference's y.
+  if the box's left is less than the pad's left, put the pad's left minus the box's right plus the box's width into a difference's x.
+  if the box's right is greater than the pad's right, put the pad's right minus the box's left minus the box's width into the difference's x.
+  if the box's top is less than the pad's top, put the pad's top minus the box's bottom plus the box's height into the difference's y.
+  if the box's bottom is greater than the pad's bottom, put the pad's bottom minus the box's top minus the box's height into the difference's y.
   round the difference to the page's grid.
   add the difference to the page's origin.
 
@@ -4386,13 +4152,7 @@ to select some pages given a document selection:
     reverse the page's selected flag.
   repeat.  
 
-to select a shape:
-  if the shape is nil, exit.
-  set the shape's selected flag.
-  if the shape's kind is "text",
-    set the current font given the shape's text; exit.
-  if the shape's kind is "group",
-    set the current font given the shape's shapes.
+to select a shape: set the shape's selected flag.
 
 to select some shapes:
   get a shape from the shapes.
@@ -4433,54 +4193,6 @@ to set the caret and anchor in a document using the selected pages:
     put the page into the document's anchor.
     put the page's previous into the page.
   repeat.
-
-to set the current font given a page:
-  if the page is nil, exit.
-  get first selected visible text from the page returning a text.
-  if the text is not nil,
-    copy the text's font into the current font; exit.
-  get first selected text from the page returning the text.
-  if the text is not nil,
-    copy the text's font into the current font; exit.
-  get a font given the page's shapes (visible).
-  if the font is set,
-    copy the font into the current font; exit.
-  set the current font given the page's shapes.
-
-to set the current font given a page (selected text):
-  if the page is nil, exit.
-  get first selected visible text from the page returning a text.
-  if the text is not nil,
-    copy the text's font into the current font; exit.
-  get first selected text from the page returning the text.
-  if the text is not nil,
-    copy the text's font into the current font; exit.
-
-to set the current font given a page (visible text):
-  if the page is nil, exit.
-  get first selected visible text from the page returning a text.
-  if the text is not nil,
-    copy the text's font into the current font; exit.
-  get first selected text from the page returning the text.
-  if the text is not nil,
-    copy the text's font into the current font; exit.
-  get a font given the page's shapes (visible).
-  if the font is set,
-    copy the font into the current font; exit.
-
-to set the current font given some shapes:
-  loop.
-    get a shape from the shapes.
-    if the shape is nil, exit.
-    if the shape's kind is "text",
-      set the current font given the shape's text; exit.
-    if the shape's kind is "group",
-      set the current font given the shape's shapes; exit.
-  repeat.
-
-to set the current font given a text:
-  if the text is nil, exit.
-  put the text's font in the current font.
 
 the shape clipboard is a shape clipboard.
 
@@ -4688,8 +4400,7 @@ to track a shape on a page given an event (text selection):
   repeat.
 
 to track a sizer on a shape on a page given an event:
-  \ the idea on sizing is always size from bottom right, 
-  \ then move shapes if sized from sizer other than right-bottom
+  \ the idea on sizing is always size from bottom right, then move shapes if sized from sizer other than right-bottom
   if the page is nil, exit.
   if the shape is nil, exit.
   if the event is nil, exit.
@@ -4777,30 +4488,6 @@ to unlabel some shapes:
   repeat.  
 
 some unsorted shape refers are some shape refers.
-
-to update the current font:
-  if the current font is the manual font, exit.
-  if the current tab is nil, exit.
-  if the current tab's mode is not "writer", exit.
-  if the current tab's node is nil, exit.
-  if the current tab's node's page does not contain text, exit.
-  if the current font is selected given the current tab's node's page, exit.
-  if the current tab's node's page does contain selected text,
-    set the current font given the current tab's node's page (selected text).
-  if the current font is visible given the current tab's node's page, exit.
-  if the current tab's node's page does contain visible text,
-    set the current font given the current tab's node's page (visible text).
-  if the current font is used by the current tab's node's page, exit.
-  set the current font given the current tab's node's page.
-
-to update the current font given a shape:
-  if the current tab is nil, exit.
-  if the current tab's mode is not "writer", exit.
-  if the shape is nil, exit.
-  if the shape's kind is "text",
-    set the current font given the shape's text; exit.
-  if the shape's kind is "group",
-    set the current font given the shape's shapes.
 
 to uppercase any selected shapes on a page:
   if the page is nil, exit.

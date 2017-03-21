@@ -128,74 +128,11 @@ The following requests have been partially demonstrated.
   Testing difficulty:  Medium.
   Requested by Jasper Paulsen on March 13, 2014.
  
-164.  In writer, make font name menu highlight match selected text.
-  Status:   Request.
-  Benefit:  Medium.
-  Implementation difficulty:  Medium.
-  Demoing difficulty:  Medium.
-  Testing difficulty:  Medium.
-  Requested by Jasper Paulsen on March 13, 2014.
- 
-165.  In writer, make font height menu highlight match selected text.
-  Status:   Request.
-  Benefit:  Medium.
-  Implementation difficulty:  Medium.
-  Demoing difficulty:  Medium.
-  Testing difficulty:  Medium.
-  Requested by Jasper Paulsen on March 13, 2014.
-
-162.  In writer, make font name choice affect new texts.
-  Status:   Request.
-  Benefit:  Medium.
-  Implementation difficulty:  Medium.
-  Demoing difficulty:  Medium.
-  Testing difficulty:  Medium.
-  Requested by Jasper Paulsen on March 13, 2014.
- 
-163.  In writer, make font height choice affect new texts.
-  Status:   Request.
-  Benefit:  Medium.
-  Implementation difficulty:  Medium.
-  Demoing difficulty:  Medium.
-  Testing difficulty:  Medium.
-  Requested by Jasper Paulsen on March 13, 2014.
-
-166.  In writer, open page with font name based on contents of page.
-  Status:   Request.
-  Benefit:  Medium.
-  Implementation difficulty:  Medium.
-  Demoing difficulty:  Medium.
-  Testing difficulty:  Medium.
-  Requested by Jasper Paulsen on March 13, 2014.
-
-167.  In writer, open page with font height based on contents of page.
-  Status:   Request.
-  Benefit:  Medium.
-  Implementation difficulty:  Medium.
-  Demoing difficulty:  Medium.
-  Testing difficulty:  Medium.
-  Requested by Jasper Paulsen on March 13, 2014.
-
 
 
 \ ======================================   
 The following requests are roughly sorted
 from higher priority to lower priority.
-
-157.  Support multiple headers per routine, a la CAL-4700.
-  Status:   Request.
-  Benefit:  Permissions requirement.
-  Implementation difficulty:  Medium.
-  Demoing difficulty:  Medium.
-  Testing difficulty:  Medium.
-  Requested by Gerry Rzeppa on March 13, 2017.
-
-159.  Incorporate CAL-4700's turtle graphics features.
-  Status:   Request.
-  Benefit:  Medium.
-  Demoing difficulty:  Medium.
-  Testing difficulty:  Medium.
-  Requested by Gerry Rzeppa on March 13, 2017.
 
 094.  Document "Plain English programming idioms",
   and how they compare to other common programming languages.
@@ -571,38 +508,6 @@ while a letter's menu is visible.
   Testing difficulty:  Medium.
   Requested by Jasper Paulsen on March 7, 2014.
 
-170.  Add scrollbar to writer's page editing feature.
-  Status:   Request.
-  Benefit:  Medium.
-  Implementation difficulty:  Medium.
-  Demoing difficulty:  Medium.
-  Testing difficulty:  Medium.
-  Requested by Jasper Paulsen on March 13, 2014.
- 
-171.  Add mouse scrolling to writer's page editing feature.
-  Status:   Request.
-  Benefit:  Medium.
-  Implementation difficulty:  Medium.
-  Demoing difficulty:  Medium.
-  Testing difficulty:  Medium.
-  Requested by Jasper Paulsen on March 13, 2014.
- 
-160.  Make new editor panes use recent pane(s)' font name.
-  Status:   Request.
-  Benefit:  Medium.
-  Implementation difficulty:  Medium.
-  Demoing difficulty:  Medium.
-  Testing difficulty:  Medium.
-  Requested by Jasper Paulsen on March 13, 2014.
-
-161.  Make new editor panes use recent pane(s)' font height.
-  Status:   Request.
-  Benefit:  Medium.
-  Implementation difficulty:  Medium.
-  Demoing difficulty:  Medium.
-  Testing difficulty:  Medium.
-  Requested by Jasper Paulsen on March 13, 2014.
-
 055.  Add an array feature (either dynamic or fixed length).
   Audience:  Windows programmers and Linux programmers.
   Status:  request.
@@ -733,14 +638,100 @@ with an adjustable slider between them.
 \ ======================================   
 Unsorted requests:
 
-172.  Factor out command-line parsing into a "commands" file.
-  Status:  request.
-  Audience:  Programmers.
-  Benefit:   minor.
-  Implementation difficulty:  Easy.
-  Demoing difficulty:  Not applicable.
-  Testing difficulty:  Not applicable.
-  Requested by Jasper Paulsen on March 20, 2017.
+157.  Support multiple headers per routine, a la CAL-4700.
+  Status:   Request.
+  Benefit:  Permissions requirement.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Medium.
+  Requested by Gerry Rzeppa on March 13, 2017.
 
+159.  Incorporate CAL-4700's turtle graphics features.
+  Status:   Request.
+  Benefit:  Medium.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Medium.
+  Requested by Gerry Rzeppa on March 13, 2017.
+
+160.  Make new editor panes use recent pane(s)' font name.
+  Status:   Request.
+  Benefit:  Medium.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Medium.
+  Requested by Jasper Paulsen on March 13, 2014.
+
+161.  Make new editor panes use recent pane(s)' font height.
+  Status:   Request.
+  Benefit:  Medium.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Medium.
+  Requested by Jasper Paulsen on March 13, 2014.
+
+162.  In writer, make font name choice affect new texts.
+  Status:   Request.
+  Benefit:  Medium.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Medium.
+  Requested by Jasper Paulsen on March 13, 2014.
+ 
+163.  In writer, make font height choice affect new texts.
+  Status:   Request.
+  Benefit:  Medium.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Medium.
+  Requested by Jasper Paulsen on March 13, 2014.
+
+164.  In writer, make font name menu highlight match selected text.
+  Status:   Request.
+  Benefit:  Medium.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Medium.
+  Requested by Jasper Paulsen on March 13, 2014.
+ 
+165.  In writer, make font height menu highlight match selected text.
+  Status:   Request.
+  Benefit:  Medium.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Medium.
+  Requested by Jasper Paulsen on March 13, 2014.
+
+166.  In writer, open doc with font name based on contents of doc.
+  Status:   Request.
+  Benefit:  Medium.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Medium.
+  Requested by Jasper Paulsen on March 13, 2014.
+
+167.  In writer, open doc with font height based on contents of doc.
+  Status:   Request.
+  Benefit:  Medium.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Medium.
+  Requested by Jasper Paulsen on March 13, 2014.
+
+170.  Add scrollbar to writer's page editing feature.
+  Status:   Request.
+  Benefit:  Medium.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Medium.
+  Requested by Jasper Paulsen on March 13, 2014.
+ 
+171.  Add mouse scrolling to writer's page editing feature.
+  Status:   Request.
+  Benefit:  Medium.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Medium.
+  Requested by Jasper Paulsen on March 13, 2014.
+ 
 Next item number:  172.
 
