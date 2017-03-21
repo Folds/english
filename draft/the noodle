@@ -135,7 +135,6 @@ to adjust spacing given a string:
   call "gdi32.dll" "SetTextCharacterExtra" with the printer canvas and the number.
 
 to align a text given an alignment:
-  if the text is nil, exit.
   put the alignment into the text's alignment.
 
 an alignment is a string [center, left, or right].
@@ -2694,7 +2693,6 @@ to decide if shift is implied by a mouse wyrd:
   say no.
 
 to decide if something is selected in a text:
-  if the text is nil, say no.
   if the text's anchor is the text's caret, say no.
   say yes.
 
@@ -3463,8 +3461,7 @@ to draw an ellipse:
   draw the ellipse with the black color and the clear color.
 
 to draw an ellipse with a border color and a fill color:
-  if the pdf state's page flag is set, 
-    draw the ellipse with the border and the fill (pdf style); exit.
+  if the pdf state's page flag is set, draw the ellipse with the border and the fill (pdf style); exit.
   privatize the ellipse.
   create the hpen of the current canvas given the border.
   create the hbrush of the current canvas given the fill.
@@ -4507,6 +4504,8 @@ to find a substring in a string given another string:
   repeat.
   put the substring's first plus the other string's length minus 1 into the substring's last.
 
+\** very useful
+
 to find a value string given some dyads and a name:
   find a dyad given the dyads and the name.
   if the dyad is nil, clear the value; exit.
@@ -4847,6 +4846,8 @@ to get a gcd given a number and another number:
     put the remainder into the gcd.
   repeat.
 
+to get a height given a font and a command line:
+
 to get an ip address given a host string:
   clear the ip address.
   get a sockaddr given the host string.
@@ -4937,6 +4938,10 @@ to get requested leaf directory path given a command line returning a path:
     trim the designator's length from the path.
     if the path is "", exit.
   repeat.
+
+\to-do:  Replace repeated remove last byte
+\and remove first byte code with remove first __ bytes
+\and remove last __ bytes code.
 
 to get a residue from a string after a prefix:
   put "" in the residue.
@@ -5431,7 +5436,6 @@ to handle cut given a text:
 
 to handle an event given a console:
   if the console is nil, exit.
-  if the event is nil, exit.
   if the event's kind is "key down",
     handle the event given the console (key down); exit.
   if the event's kind is "refresh",
@@ -5465,7 +5469,6 @@ to handle an event given a console (home key):
   show the console.
 
 to handle an event given a console (key down):
-  if the event is nil, exit.
   if the event's key is the backspace key,
     handle the event given the console (backspace key); exit.
   if the event's key is the down-arrow key,
@@ -8673,6 +8676,8 @@ to remove bytes from a string given a substring:
   reassign the string's first given the new length.
   put the string's first plus the new length minus 1 into the string's last.
 
+\**very useful **
+
 to remove bytes from a text (backspace over a return):
   if the text is nil, exit.
   if the text's caret row# is 1, exit.
@@ -8749,6 +8754,8 @@ to remove leading bytes from a string given a count:
   put the substring's first plus the count minus 1 into the substring's last.
   remove bytes from the string given the substring.
 
+\** very useful
+
 to remove the rows of a text between a row and another row:
   if the text is nil, exit.
   if the row is nil, exit.
@@ -8780,6 +8787,8 @@ to remove trailing bytes from a string given a count:
   slap a substring on the last byte of the string.
   put the substring's last minus the count plus 1 into the substring's first.
   remove bytes from the string given the substring.
+
+\**very useful **
 
 to rename a path to another path in the file system:
   privatize the path.
@@ -8834,11 +8843,11 @@ the requested control font is a control font.
 
 the requested editor font is an editor font.
 
+the requested font is a font.
+
 \to decide if fixed-width font was requested:
 \  if the requested editor font is "Courier New", say yes.
 \  say no.
-
-the requested font is a font.
 
 to reset the caret of a text:
   if the text is nil, exit.
