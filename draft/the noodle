@@ -1949,6 +1949,8 @@ the current canvas is a canvas.
 
 the current event is an event.
 
+the current font is a font.
+
 a cursor is a handle.
 
 a date/time has
@@ -2646,6 +2648,16 @@ to decide if a row of a text is visible:
   if the box is touching the other box, say yes.
   say no.
 
+to decide if a row of a text is visible given a box:
+  if the row of the text is not visible, say no.
+  privatize the box.
+  get another box given the row and the text.
+  put the current tab's node's page's origin in a spot.
+  adjust the box given 0 and the tpp and 0 and - the tpp.
+  adjust the box given the spot's x and the spot's y and the spot's x and the spot's y.
+  if the box is touching the other box, say yes.
+  say no.
+
 to decide if running on wine:
   \ http://www.winehq.org/pipermail/wine-devel/2008-September/069387.html
   put "ntdll.dll" in a library.
@@ -3063,6 +3075,15 @@ to decide if a text is modified:
   if the text's modified flag is set, say yes.
   say no.
 
+to decide if a text is visible given a box:
+  if the text is nil, say no.
+  loop.
+    get a row from the text's rows.
+    if the row is nil, say no.
+    \debug the row's string.
+    if the row of the text is visible given the box, say yes.
+  repeat.
+
 to decide if there is something to backspace in a text:
   if the text is nil, say no.
   if something is selected in the text, say yes.
@@ -3379,6 +3400,7 @@ to draw any visible rows of a text (editing):
   loop.
     get a row from the text's rows.
     if the row is nil, exit.
+\    if the row of the text is not visible given the screen's box, repeat.
     if the row of the text is not visible, repeat.
     draw the row of the text (editing).
   repeat.
@@ -4724,7 +4746,7 @@ to get a control font given a command line:
     get a font given the command line;
     put the font in the control font;
     exit.
-  get a string from the command line given "controlfont".
+  get a string from the command line given "/controlfont".
   unquote the string.
   trim the string.
   if the string is "",
@@ -4776,10 +4798,10 @@ to get a drive kind for a path:
 
 to get an editor font given a command line:
   put 2/9 inch in the editor font's height.
-  if "/tt" is important in the command line,
-    put "Courier New" in the editor font's name.
+  \if "/tt" is important in the command line,
+  put "Courier New" in the editor font's name.
   if "/edfont" is important in the command line,
-    get the editor font's name from the command line given "edfont".
+    get the editor font's name from the command line given "/edfont".
   unquote the editor font's name.
   trim the editor font's name.
   if the editor font's name is "",
@@ -4802,7 +4824,7 @@ to get a font given a command line:
   put 2/9 inch in the font's height.
   if "/font" is not important in the command line,
     put "Arial" in the font's name; exit.
-  get the font's name from the command line given "font".
+  get the font's name from the command line given "/font".
   unquote the font's name.
   trim the font's name.
   if the font's name is "", put "Arial" in the font's name.
@@ -5949,6 +5971,9 @@ to initialize the fonts:
   get the requested control font given the command line.
   get the requested editor font given the command line.
   put the requested font in the default font.
+\  debug change given the current font and the requested font
+\    and "Initializing fonts.".
+  put the requested font in the current font.
 \  debug "The requested font is " 
 \    then the requested font's name 
 \    then " (" then the requested font's height then ");"
@@ -7858,6 +7883,7 @@ to put a flag into a number: employ put a number into another number.
 to put a flag into a string: employ convert a flag to a string.
 
 to put a font into another font:
+  if the font is the other font, exit.
   put the font's name into the other font's name.
   put the font's height into the other font's height.
 
@@ -10879,18 +10905,18 @@ a wave is a hex string.
 
 a wide string is a string.
 
-to widen a window:
-  initialize a window placement.
-  call "User32.dll" "GetWindowPlacement"
-    with the window and the window placement's whereabouts
-    returning a flag.
-  if the flag is no, exit.
-  put the window placement's boxWhenRestored in a box.
-  put the box's right plus 100 in the box's right.
-  put the box in the window placement's boxWhenRestored.
-  call "User32.dll" "SetWindowPlacement"
-    with the window and the window placement's whereabouts
-    returning another flag.
+\to widen a window:
+\  initialize a window placement.
+\  call "User32.dll" "GetWindowPlacement"
+\    with the window and the window placement's whereabouts
+\    returning a flag.
+\  if the flag is no, exit.
+\  put the window placement's boxWhenRestored in a box.
+\  put the box's right plus 100 in the box's right.
+\  put the box in the window placement's boxWhenRestored.
+\  call "User32.dll" "SetWindowPlacement"
+\    with the window and the window placement's whereabouts
+\    returning another flag.
 
 a width is some twips.
 

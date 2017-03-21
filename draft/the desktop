@@ -586,15 +586,9 @@ to format a string to fit in a box given a font:
     if the other width is less than the width, exit.
     if the string starts with "the ",
       remove leading bytes from the string given 4;
-\      remove the first byte from the string;
-\      remove the first byte from the string;
-\      remove the first byte from the string;
-\      remove the first byte from the string;
       put "t…" then the string in the string;
       repeat.
     remove the last two bytes from the string.
-\    remove the last byte from the string.
-\    remove the last byte from the string.
     append "…" to the string.
   repeat.
 
@@ -1496,6 +1490,7 @@ to handle open:
 to handle open (docster):
   handle open without drawing (docster).
   show the desktop with status.
+\  set the current font given the current tab's node's page.
   flush the event queue.
   refresh the cursor.
 
