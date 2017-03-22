@@ -509,6 +509,7 @@ to handle an event given a node (key down - delete key):
   flush the event queue.
 
 to handle an event given a node (key down - down-arrow key - shifted):
+  if the node is nil, cluck; exit.
   if the node's caret's next is nil, cluck; exit.
   put the node's caret's next into the node's caret.
   select the node's nodettes given the node's selection.
@@ -572,6 +573,7 @@ to handle an event given a node (key down - page-up key):
   show the desktop with status.
 
 to handle an event given a node (key down - up-arrow key - shifted):
+  if the node is nil, cluck; exit.
   if the node's caret's previous is nil, cluck; exit.
   put the node's caret's previous into the node's caret.
   select the node's nodettes given the node's selection.
@@ -625,12 +627,14 @@ to handle an event given a node (left click):
 
 to handle an event given a node (left double click):
   if something is selected in the node, handle open; exit.
+  if the event is nil, handle open; exit.
   if the event's spot is not in the node, handle open; exit.
   extend any selection in the node given the event's spot.
   show the desktop with status.
   handle open.
 
 to handle an event given a node (right click):
+  if the event is nil, exit.
   if the event's spot is not in the pad, exit.
   if the node is empty, exit.
   show the hand cursor.
@@ -642,6 +646,7 @@ to handle an event given a node (set cursor):
 
 to handle extract nibble literal given a node:
   if the node is root-level, cluck; exit.
+  if the node is nil, cluck; exit.
   if the node's selected nodette count is not 1, show error "Select only one file item to extract."; exit.
   show status "Copying...".
   put the node's first selected nodette into a nodette.
@@ -655,6 +660,7 @@ to handle extract nibble literal given a node:
 
 to handle get size given a node:
   if the node is root-level, cluck; exit.
+  if the node is nil, cluck; exit.
   if nothing is selected in the node, show error "I'm not sure what you want me to get the size of."; exit.
   show status "Getting...".
   calculate a size of any selected nodettes in the node.
@@ -664,6 +670,7 @@ to handle get size given a node:
 
 to handle new directory given a node:
   if the node is root-level, cluck; exit.
+  if the node is nil, cluck; exit.
   if the node's path is read-only, show error "I'm sorry, but this directory is read only."; exit.
   ask "Directory name?".
   if the answer is blank, exit.
@@ -679,6 +686,7 @@ to handle new directory given a node:
 
 to handle new document given a node:
   if the node is root-level, cluck; exit.
+  if the node is nil, cluck; exit.
   if the node's path is read-only, show error "I'm sorry, but this directory is read only."; exit.
   ask "Document name?".
   if the answer is blank, exit.
@@ -698,6 +706,7 @@ to handle new document given a node:
 
 to handle new text file given a node:
   if the node is root-level, cluck; exit.
+  if the node is nil, cluck; exit.
   if the node's path is read-only, show error "I'm sorry, but this directory is read only."; exit.
   ask "File name?".
   if the answer is blank, exit.
@@ -713,6 +722,7 @@ to handle new text file given a node:
 
 to handle paste given a node:
   if the node is root-level, cluck; exit.
+  if the node is nil, cluck; exit.
   if the finder's clipboard is empty in the file system, cluck; exit.
   if the node's path is read-only, show error "I'm sorry, but this directory is read only."; exit.
   show status "Pasting...".
@@ -725,6 +735,7 @@ to handle paste given a node:
 
 to handle rename given a node:
   if the node is root-level, cluck; exit.
+  if the node is nil, cluck; exit.
   if the node's path is read-only, show error "I'm sorry, but this directory is read only."; exit.
   put the node's first selected nodette into a nodette.
   if the nodette is nil, show error "I'm not sure what you want me to rename."; exit.
@@ -749,6 +760,7 @@ to handle reverse given a node:
 
 to handle select all given a node:
   if the node is root-level, cluck; exit.
+  if the node is nil, cluck; exit.
   deselect the nodettes in the node.
   select the node's nodettes.
   put the node's first nodette into the node's anchor.
@@ -761,7 +773,8 @@ to handle sort nodettes given a node and a string:
   if the string is "name", sort the node by designator.
   if the string is "extension", sort the node by extension.
   show the desktop.
-  show status the node's nodettes' count and "item sorted" or "items sorted".
+  if the node is not nil,
+    show status the node's nodettes' count and "item sorted" or "items sorted".
   flush the event queue.
 
 to initialize the finder:
@@ -801,12 +814,14 @@ to open a node:
   if the node's kind is "file", open the node (file); exit.
 
 to open a node (disk or directory):
-  get an item from the node's path.
-  if the item is not found, break.
-  put the node's path then the item's designator into a path.
-  create a nodette given the path.
-  append the nodette to the node's nodettes.
-  put the node into the nodette's parent node.
+  if the node is nil, exit.
+  loop.
+    get an item from the node's path.
+    if the item is not found, break.
+    put the node's path then the item's designator into a path.
+    create a nodette given the path.
+    append the nodette to the node's nodettes.
+    put the node into the nodette's parent node.
   repeat.
   adjust the node.
   sort the node.
@@ -822,6 +837,7 @@ to open a node (file as text):
   open the node given the buffer (file as text).
 
 to open a node (file):
+  if the node is nil, exit.
   read the node's path into a buffer.
   if the i/o error is not blank, exit.
   if the buffer is document-format,
@@ -831,6 +847,7 @@ to open a node (file):
   open the node given the buffer (file as dump).
 
 to open a node (root):
+  if the node is nil, exit.
   put the accent byte into an alleged drive byte.
   loop.
     add 1 to the alleged drive byte.
