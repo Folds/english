@@ -140,7 +140,6 @@ to boldly format a command given a color:
   put the color into the command's font color.
 
 to choose a color for a command (temporary color):
-  if the command is nil, put the desktop color into the color; exit.
   put the command's color into the color.
   if the color is clear, put the white color into the color.
   if the command is pointless,
@@ -196,6 +195,7 @@ to create a tab:
 
 to create a trio:
   allocate memory for the trio.
+  \put the en-dash byte in a string.
   put the underscore byte in a string.
   add the string and "handle minimize" to the trio.
   boldly format the trio's commands' last.
@@ -249,7 +249,6 @@ to debug a trio:
   debug the string.
 
 to decide if a command is pointless:
-  if the command is nil, say yes.
   if the command's handler's length is not 1, say no.
   if the command's handler has a letter menu, say no.
   say yes.
@@ -296,7 +295,6 @@ to decide if half screen was requested:
 
 to decide if a handler has a letter menu:
   if the handler's length is not 1, say no.
-  if the current tab is nil, say no.
   create a submenu.
   populate the submenu given the handler and the current tab's mode (letter).
   if the submenu is populated, destroy the submenu; say yes.
@@ -552,7 +550,6 @@ to find a command given a menu and a spot:
 
 to find a directory to compile:
   clear the directory.
-  if the current tab is nil, exit.
   if the current tab's node is nil, exit.
   if the current tab's node's source is nil, exit.
   put the current tab's node's directory into the directory.
@@ -563,7 +560,6 @@ to find a free tab starting with a tab:
   loop.
     if the tab is nil, break.
     if the tab is free, break.
-    if the tab's node is nil, break.
     if the tab's node's path is the path, break.
     put the tab's next into the tab.
   repeat.
@@ -610,7 +606,7 @@ to get a process status of a process:
 
 to get relevant path given a path and a string thing returning another path:
   if the string thing is nil,
-    put the path in the other path; exit.
+    put the path in the other path.
   put the string thing's string in a path called temp path.
   if the temp path is absolute,
     put the temp path in the other path; exit.
@@ -696,26 +692,21 @@ to gray out a submenu:
   repeat.
 
 to handle align given an alignment:
-  if the current tab is nil, cluck; exit.
-  if the current tab's mode is not "writer", cluck; exit.
-  if the current tab's node is nil, cluck; exit.
-  handle align given the current tab's node's page and the alignment.
+  if the current tab's mode is "writer",
+    handle align given the current tab's node's page and the alignment; exit.
+  cluck.
 
 to handle border given a color:
-  if the current tab is nil, cluck; exit.
-  if the current tab's mode is not "writer", cluck; exit.
-  if the current tab's node is nil, cluck; exit.
-  handle border given the current tab's node's page and the color.
+  if the current tab's mode is "writer",
+    handle border given the current tab's node's page and the color; exit.
+  cluck.
 
 to handle bring to front:
-  if the current tab is nil, cluck; exit.
-  if the current tab's mode is not "writer", cluck; exit.
-  if the current tab's node is nil, cluck; exit.
-  handle bring to front given the current tab's node's page.
+  if the current tab's mode is "writer",
+    handle bring to front given the current tab's node's page; exit.
+  cluck.
 
 to handle capitalize:
-  if the current tab is nil, cluck; exit.
-  if the current tab's node is nil, cluck; exit.
   if the current tab's mode is "editor",
     handle capitalize given the current tab's node's source; exit.
   if the current tab's mode is "writer",
@@ -723,34 +714,26 @@ to handle capitalize:
   cluck.
 
 to handle check spelling:
-  if the current tab is nil, cluck; exit.
-  if the current tab's node is nil, cluck; exit.
   if the current tab's mode is "editor",
     handle check spelling given the current tab's node's source; exit.
   cluck.
 
 to handle check spelling (current page only):
-  if the current tab is nil, cluck; exit.
-  if the current tab's node is nil, cluck; exit.
   if the current tab's mode is "writer",
     handle check spelling given the current tab's node's page (current page only); exit.
   cluck.
 
 to handle check spelling (entire document):
-  if the current tab is nil, cluck; exit.
-  if the current tab's node is nil, cluck; exit.
   if the current tab's mode is "writer",
     handle check spelling given the current tab's node's page (entire document); exit.
   cluck.
 
 to handle close:
-  if the current tab is nil, exit.
   if the current tab's mode is "writer",
     handle close (writer); exit.
   handle close (other).
 
 to handle close (other):
-  if the current tab is nil, cluck; exit.
   if the current tab's node is root-level, cluck;
     deselect the nodettes in the current tab's node;
     show the desktop with status; exit.
@@ -780,8 +763,6 @@ to handle close all:
   show the desktop with status.
 
 to handle close without drawing (writer):
-  if the current tab is nil, exit.
-  if the current tab's node is nil, exit.
   close the current tab's node's page.
   void the current tab's node's page.
   switch the current tab to the current tab's node.
@@ -1032,14 +1013,12 @@ to handle a command given a submenu and a width:
   refresh the cursor.
 
 to handle comment:
-  if the current tab is nil, cluck; exit.
   if the current tab's mode is "editor",
     handle comment given the current tab's node's source; exit.
   cluck.
 
 to handle compile:
   if compile was requested, handle compile (requested); exit.
-  if the current tab is nil, cluck; exit.
   if the current tab's mode is not "editor", cluck; exit.
   handle save all.
   if the i/o error is not blank, exit.
@@ -1077,7 +1056,6 @@ to handle compile or list or run error:
   loop.
   get a tab from the tabs.
   if the tab is nil, show error the compiler's abort message; exit.
-  if the tab's node is nil, show error the compiler's abort message; exit.
   if the compiler's abort path is not the tab's node's path, repeat.
   if the tab's node's source is nil,
     show error the compiler's abort message; exit.
@@ -1088,7 +1066,6 @@ to handle compile or list or run error:
   show error the compiler's abort message.
 
 to handle copy:
-  if the current tab is nil, cluck; exit.
   if the current tab's mode is "finder",
     handle copy given the current tab's node; exit.
   if the current tab's mode is "editor",
@@ -1100,7 +1077,6 @@ to handle copy:
   cluck.
 
 to handle cut:
-  if the current tab is nil, cluck; exit.
   if the current tab's mode is "finder",
     handle cut given the current tab's node; exit.
   if the current tab's mode is "editor",
@@ -1115,13 +1091,11 @@ to handle debug window:
   debug the main window.
 
 to handle decrypt:
-  if the current tab is nil, cluck; exit.
   if the current tab's mode is "editor",
     handle decrypt given the current tab's node's source; exit.
   cluck.
 
 to handle duplicate:
-  if the current tab is nil, cluck; exit.
   if the current tab's mode is "finder",
     handle duplicate given the current tab's node; exit.
   if the current tab's mode is "docster",
@@ -1131,13 +1105,11 @@ to handle duplicate:
   cluck.
 
 to handle encrypt:
-  if the current tab is nil, cluck; exit.
   if the current tab's mode is "editor",
     handle encrypt given the current tab's node's source; exit.
   cluck.
 
 to handle enlarge:
-  if the current tab is nil, cluck; exit.
   if the current tab's mode is "writer",
     handle enlarge given the current tab's node's page; exit.
   cluck.
@@ -1156,7 +1128,6 @@ to handle an event:
   if the event's kind is "setting change", handle the event (setting change); exit.
 
 to handle an event (key down - ctrl-tab):
-  if the event is nil, exit.
   if the event's shift flag is set,
     switch to the predecessor of the current tab.
   if the event's shift flag is not set,
@@ -1164,7 +1135,6 @@ to handle an event (key down - ctrl-tab):
   show the desktop with status.
 
 to handle an event (key down - shortcut):
-  if the event is nil, cluck; exit.
   put the event's key in a key.
   put the current tab's mode in a mode.
   if the key is the a-key, handle select all; exit.
@@ -1213,7 +1183,6 @@ to handle an event (key down - shortcut):
 to handle an event (key down):
   if the event is any shortcut, handle the event (key down - shortcut); exit.
   if the event is ctrl-tab, handle the event (key down - ctrl-tab); exit.
-  if the current tab is nil, exit.
   if the current tab's mode is "finder",
     handle the event given the current tab's node (key down); exit.
   if the current tab's mode is "editor",
@@ -1243,7 +1212,6 @@ to handle an event (left click - trio):
   handle the command.
 
 to handle an event (left click):
-  if the event is nil, exit.
   put the event's spot in a spot.
   if the spot is in the scrollbar,
     handle the event (left click - scrollbar); exit.
@@ -1261,10 +1229,8 @@ to handle an event (left click):
     handle the event given the current tab's node's page (left click); exit.
 
 to handle an event (left double click):
-  if the event is nil, exit.
   if the event's spot is in the bar, exit.
   if the event's spot is in the switch, exit.
-  if the current tab is nil, exit.
   if the current tab's mode is "finder",
     handle the event given the current tab's node (left double click); exit.
   if the current tab's mode is "editor",
@@ -1281,7 +1247,6 @@ to handle an event (refresh):
   show the desktop with status.
 
 to handle an event (right click):
-  if the current tab is nil, exit.
   if the current tab's mode is "finder",
     handle the event given the current tab's node (right click); exit.
   if the current tab's mode is "editor",
@@ -1292,7 +1257,6 @@ to handle an event (right click):
     handle the event given the current tab's node's page (right click); exit.
 
 to handle an event (set cursor):
-  if the current tab is nil, show the arrow cursor; exit.
   if the current tab's mode is "finder",
     handle the event given the current tab's node (set cursor); exit.
   if the current tab's mode is "editor",
@@ -1308,7 +1272,6 @@ to handle an event (setting change):
   handle the event (mouse scroll speed changed).
 
 to handle an event given a submenu:
-  if the event is nil, exit.
   if the event's kind is "key down",
     handle the event given the submenu (key down); exit.
   if the event's kind is "left click",
@@ -1319,18 +1282,15 @@ to handle an event given a submenu:
     handle the event given the submenu (set cursor); exit.
 
 to handle an event given a submenu (key down):
-  if the event is nil, exit.
   if the event's key is the escape key, relinquish control.
 
 to handle an event given a submenu (left click - menu):
-  if the event is nil, exit.
   find a command given the submenu and the event's spot.
   if the command is nil, exit.
   put the command into the selected command.
   relinquish control.
 
 to handle an event given a submenu (left click):
-  if the event is nil, relinquish control; exit.
   if the event's spot is in the submenu,
     handle the event given the submenu (left click - menu); exit.
   relinquish control.
@@ -1355,42 +1315,31 @@ to handle events given a submenu:
   repeat.
 
 to handle extract globals:
-  if the current tab is nil, cluck; exit.
-  if the current tab's node is nil, cluck; exit.
   if the current tab's mode is "editor",
     handle extract globals given the current tab's node's source; exit.
   cluck.
 
 to handle extract nibble literal:
-  if the current tab is nil, cluck; exit.
   if the current tab's mode is "finder",
     handle extract nibble literal given the current tab's node; exit.
   cluck.
 
 to handle extract routine headers:
-  if the current tab is nil, cluck; exit.
-  if the current tab's node is nil, cluck; exit.
   if the current tab's mode is "editor",
     handle extract routine headers given the current tab's node's source; exit.
   cluck.
 
 to handle extract types:
-  if the current tab is nil, cluck; exit.
-  if the current tab's node is nil, cluck; exit.
   if the current tab's mode is "editor",
     handle extract types given the current tab's node's source; exit.
   cluck.
 
 to handle fill given a color:
-  if the current tab is nil, cluck; exit.
-  if the current tab's node is nil, cluck; exit.
   if the current tab's mode is "writer",
     handle fill given the current tab's node's page and the color; exit.
   cluck.
 
 to handle find:
-  if the current tab is nil, cluck; exit.
-  if the current tab's node is nil, cluck; exit.
   if the current tab's mode is "editor",
     handle find given the current tab's node's source; exit.
   if the current tab's mode is "writer",
@@ -1398,8 +1347,6 @@ to handle find:
   cluck.
 
 to handle find next:
-  if the current tab is nil, cluck; exit.
-  if the current tab's node is nil, cluck; exit.
   if the current tab's mode is "editor",
     handle find next given the current tab's node's source; exit.
   if the current tab's mode is "writer",
@@ -1407,56 +1354,42 @@ to handle find next:
   cluck.
 
 to handle flip:
-  if the current tab is nil, cluck; exit.
-  if the current tab's node is nil, cluck; exit.
   if the current tab's mode is "writer",
     handle flip given the current tab's node's page; exit.
   cluck.
 
 to handle get size:
-  if the current tab is nil, cluck; exit.
   if the current tab's mode is "finder",
     handle get size given the current tab's node; exit.
   cluck.
 
 to handle grayscale given a flag:
-  if the current tab is nil, cluck; exit.
-  if the current tab's node is nil, cluck; exit.
   if the current tab's mode is "writer",
     handle grayscale given the current tab's node's page and the flag; exit.
   cluck.
 
 to handle grid given a flag:
-  if the current tab is nil, cluck; exit.
-  if the current tab's node is nil, cluck; exit.
   if the current tab's mode is "writer",
     handle grid given the current tab's node's page and the flag; exit.
   cluck.
 
 to handle group:
-  if the current tab is nil, cluck; exit.
-  if the current tab's node is nil, cluck; exit.
   if the current tab's mode is "writer",
     handle group given the current tab's node's page; exit.
   cluck.
 
 to handle indent:
-  if the current tab is nil, cluck; exit.
-  if the current tab's node is nil, cluck; exit.
   if the current tab's mode is "editor",
     handle indent given the current tab's node's source; exit.
   cluck.
 
 to handle label given a label:
-  if the current tab is nil, cluck; exit.
-  if the current tab's node is nil, cluck; exit.
   if the current tab's mode is "writer",
     handle label given the current tab's node's page and the label; exit.
   cluck.
 
 to handle list:
   if list was requested, handle list (requested); exit.
-  if the current tab is nil, exit.
   if the current tab's mode is not "editor", cluck; exit.
   handle save all.
   if the i/o error is not blank, exit.
@@ -1493,8 +1426,6 @@ to handle list or compile or test:
   handle an event (requested test).
 
 to handle lowercase:
-  if the current tab is nil, cluck; exit.
-  if the current tab's node is nil, cluck; exit.
   if the current tab's mode is "editor",
     handle lowercase given the current tab's node's source; exit.
   if the current tab's mode is "writer",
@@ -1512,8 +1443,6 @@ to handle maximize:
   enque the event.
 
 to handle measure:
-  if the current tab is nil, cluck; exit.
-  if the current tab's node is nil, cluck; exit.
   if the current tab's mode is "writer",
     handle measure given the current tab's node's page; exit.
   cluck.
@@ -1524,46 +1453,36 @@ to handle minimize:
   minimize the main window.
 
 to handle mirror:
-  if the current tab is nil, cluck; exit.
-  if the current tab's node is nil, cluck; exit.
   if the current tab's mode is "writer",
     handle mirror given the current tab's node's page; exit.
   cluck.
 
 to handle new directory:
-  if the current tab is nil, cluck; exit.
   if the current tab's mode is "finder",
     handle new directory given the current tab's node; exit.
   cluck.
 
 to handle new document:
-  if the current tab is nil, cluck; exit.
   if the current tab's mode is "finder",
     handle new document given the current tab's node; exit.
   cluck.
 
 to handle new page:
-  if the current tab is nil, cluck; exit.
-  if the current tab's node is nil, cluck; exit.
   if the current tab's mode is "docster",
     handle new page given the current tab's node's document; exit.
   cluck.
 
 to handle new shape given a kind:
-  if the current tab is nil, cluck; exit.
-  if the current tab's node is nil, cluck; exit.
   if the current tab's mode is "writer",
     handle new shape given the current tab's node's page and the kind; exit.
   cluck.
 
 to handle new text file:
-  if the current tab is nil, cluck; exit.
   if the current tab's mode is "finder",
     handle new text file given the current tab's node; exit.
   cluck.
 
 to handle open:
-  if the current tab is nil, cluck; exit.
   if the current tab's mode is "finder", handle open (finder); exit.
   if the current tab's mode is "docster", handle open (docster); exit.
   cluck.
@@ -1576,7 +1495,6 @@ to handle open (docster):
   refresh the cursor.
 
 to handle open (finder):
-  if the current tab is nil, cluck; exit.
   if the current tab's mode is not "finder", cluck; exit.
   get some selected path links given the current tab's node.
   if the selected path links are empty,
@@ -1604,9 +1522,7 @@ to handle open (finder):
   refresh the cursor.
 
 to handle open as dump:
-  if the current tab is nil, cluck; exit.
   if the current tab's mode is not "finder", cluck; exit.
-  if the current tab's node is nil, cluck; exit.
   put the current tab's node's first selected nodette into a nodette.
   if the nodette is nil,
     show error "I'm not sure what you want me to open."; exit.
@@ -1619,9 +1535,7 @@ to handle open as dump:
   flush the event queue.
 
 to handle open as text:
-  if the current tab is nil, cluck; exit.
   if the current tab's mode is not "finder", cluck; exit.
-  if the current tab's node is nil, cluck; exit.
   put the current tab's node's first selected nodette into a nodette.
   if the nodette is nil,
     show error "I'm not sure what you want me to open."; exit.
@@ -1634,9 +1548,6 @@ to handle open as text:
   flush the event queue.
 
 to handle open without drawing (docster):
-  if the current tab is nil, exit.
-  if the current tab's node is nil, exit.
-  if the current tab's node's document is nil, exit.
   put the current tab's node's document's first selected page into a page.
   if the page is nil,
     show error "I'm not sure what you want me to open."; exit.
@@ -1646,17 +1557,13 @@ to handle open without drawing (docster):
   switch the current tab to the current tab's node.
 
 to handle outdent:
-  if the current tab is nil, cluck; exit.
-  if the current tab's node is nil, cluck; exit.
   if the current tab's mode is "editor",
     handle outdent given the current tab's node's source; exit.
   cluck.
 
 to handle paste:
-  if the current tab is nil, cluck; exit.
   if the current tab's mode is "finder",
     handle paste given the current tab's node; exit.
-  if the current tab's node is nil, cluck; exit.
   if the current tab's mode is "editor",
     handle paste given the current tab's node's source; exit.
   if the current tab's mode is "docster",
@@ -1671,8 +1578,6 @@ to handle pen given a color:
   cluck.
 
 to handle print:
-  if the current tab is nil, cluck; exit.
-  if the current tab's node is nil, cluck; exit.
   if the current tab's mode is "editor",
     handle print given the current tab's node's source; exit.
   if the current tab's mode is "docster",
@@ -1694,15 +1599,11 @@ to handle quit:
   repeat.
 
 to handle radius:
-  if the current tab is nil, cluck; exit.
-  if the current tab's node is nil, cluck; exit.
   if the current tab's mode is "writer",
     handle radius given the current tab's node's page; exit.
   cluck.
 
 to handle redo:
-  if the current tab is nil, cluck; exit.
-  if the current tab's node is nil, cluck; exit.
   if the current tab's mode is "editor",
     handle redo given the current tab's node's source; exit.
   if the current tab's mode is "writer",
@@ -1710,21 +1611,16 @@ to handle redo:
   cluck.
 
 to handle reduce:
-  if the current tab is nil, cluck; exit.
-  if the current tab's node is nil, cluck; exit.
   if the current tab's mode is "writer",
     handle reduce given the current tab's node's page; exit.
   cluck.
 
 to handle rename:
-  if the current tab is nil, cluck; exit.
   if the current tab's mode is "finder",
     handle rename given the current tab's node; exit.
   cluck.
 
 to handle renumber pages:
-  if the current tab is nil, cluck; exit.
-  if the current tab's node is nil, cluck; exit.
   if the current tab's mode is "docster",
     handle renumber pages given the current tab's node's document; exit.
   cluck.
@@ -1762,30 +1658,23 @@ to handle result:
   show status "Finished with " then the thread status' status.
 
 to handle reverse:
-  if the current tab is nil, cluck; exit.
   if the current tab's mode is "finder",
     handle reverse given the current tab's node; exit.
-  if the current tab's node is nil, cluck; exit.
   if the current tab's mode is "editor",
     handle reverse given the current tab's node's source; exit.
   cluck.
 
 to handle rotate page:
-  if the current tab is nil, cluck; exit.
-  if the current tab's node is nil, cluck; exit.
   if the current tab's mode is "writer",
     handle rotate page given the current tab's node's page; exit.
   cluck.
 
 to handle rotate shape:
-  if the current tab is nil, cluck; exit.
-  if the current tab's node is nil, cluck; exit.
   if the current tab's mode is "writer",
     handle rotate shape given the current tab's node's page; exit.
   cluck.
 
 to handle run:
-  if the current tab is nil, cluck; exit.
   if the current tab's mode is not "editor", cluck; exit.
   handle save all.
   untint the status.
@@ -1816,7 +1705,6 @@ to handle run:
   show status the compiler's timer's string then " ms".
 
 to handle running options:
-  if the current tab is nil, cluck; exit.
   if the current tab's mode is not "editor", cluck; exit.
   put the running options in a string called old options.
   ask a question with the running options.
@@ -1835,7 +1723,6 @@ to handle running options:
     show the desktop with "Running options cleared.".
 
 to handle save:
-  if the current tab is nil, cluck; exit.
   if the current tab's node is not savable, cluck;
     show status "Unable to save"; exit.
   show status "Saving...".
@@ -1859,17 +1746,13 @@ to handle save all:
   show error the i/o error.
 
 to handle save as pdf:
-  if the current tab is nil, cluck; exit.
-  if the current tab's node is nil, cluck; exit.
   if the current tab's mode is "docster",
     handle save as pdf given the current tab's node's document; exit.
   cluck.
 
 to handle select all:
-  if the current tab is nil, cluck; exit.
   if the current tab's mode is "finder",
     handle select all given the current tab's node; exit.
-  if the current tab's node is nil, cluck; exit.
   if the current tab's mode is "editor",
     handle select all given the current tab's node's source; exit.
   if the current tab's mode is "docster",
@@ -1879,35 +1762,26 @@ to handle select all:
   cluck.
 
 to handle send to back:
-  if the current tab is nil, cluck; exit.
-  if the current tab's node is nil, cluck; exit.
   if the current tab's mode is "writer",
     handle send to back given the current tab's node's page; exit.
   cluck.
 
 to handle smooth:
-  if the current tab is nil, cluck; exit.
-  if the current tab's node is nil, cluck; exit.
   if the current tab's mode is "writer",
     handle smooth given the current tab's node's page; exit.
   cluck.
 
 to handle sort definitions:
-  if the current tab is nil, cluck; exit.
-  if the current tab's node is nil, cluck; exit.
   if the current tab's mode is "editor",
     handle sort definitions given the current tab's node's source; exit.
   cluck.
 
 to handle sort nodettes given a string:
-  if the current tab is nil, cluck; exit.
   if the current tab's mode is "finder",
     handle sort nodettes given the current tab's node and the string; exit.
   cluck.
 
 to handle sort selected lines:
-  if the current tab is nil, cluck; exit.
-  if the current tab's node is nil, cluck; exit.
   if the current tab's mode is "editor",
     handle sort selected lines given the current tab's node's source; exit.
   cluck.
@@ -1920,7 +1794,6 @@ to handle stop:
   show status "Stopped".
 
 to handle test:
-  if the current tab is nil, cluck; exit.
   if the current tab's mode is "editor",
     handle an event (left click - status); exit.
   cluck.
@@ -1931,15 +1804,11 @@ to handle toggle screensize:
   handle restore.
 
 to handle uncomment:
-  if the current tab is nil, cluck; exit.
-  if the current tab's node is nil, cluck; exit.
   if the current tab's mode is "editor",
     handle uncomment given the current tab's node's source; exit.
   cluck.
 
 to handle undo:
-  if the current tab is nil, cluck; exit.
-  if the current tab's node is nil, cluck; exit.
   if the current tab's mode is "editor",
     handle undo given the current tab's node's source; exit.
   if the current tab's mode is "writer",
@@ -1947,22 +1816,16 @@ to handle undo:
   cluck.
 
 to handle ungroup:
-  if the current tab is nil, cluck; exit.
-  if the current tab's node is nil, cluck; exit.
   if the current tab's mode is "writer",
     handle ungroup given the current tab's node's page; exit.
   cluck.
 
 to handle unlabel:
-  if the current tab is nil, cluck; exit.
-  if the current tab's node is nil, cluck; exit.
   if the current tab's mode is "writer",
     handle unlabel given the current tab's node's page; exit.
   cluck.
 
 to handle uppercase:
-  if the current tab is nil, cluck; exit.
-  if the current tab's node is nil, cluck; exit.
   if the current tab's mode is "editor",
     handle uppercase given the current tab's node's source; exit.
   if the current tab's mode is "writer",
@@ -1980,8 +1843,6 @@ to handle yank given a handler (general):
   handle yank given the height.
 
 to handle yank given a number:
-  if the current tab is nil, cluck; exit.
-  if the current tab's node is nil, cluck; exit.
   if the current tab's mode is "writer",
     handle yank given the current tab's node's page and the number; exit.
   cluck.
@@ -2078,7 +1939,6 @@ to populate a submenu given a handler and a mode (letter):
   if the handler is "z", populate the submenu given the mode (z); exit.
 
 to populate a submenu given a mode (a):
-  if the current tab is nil, cluck; exit.
   if the current tab's mode is "writer", add "Align Left" to the submenu.
   if the current tab's mode is "writer", add "Align Center" to the submenu.
   if the current tab's mode is "writer", add "Align Right" to the submenu.
@@ -2357,10 +2217,8 @@ to show the desktop:
 
 to show the desktop with status:
   clear the status' string.
-  if the current tab is nil, show the desktop; exit.
   put the current tab's mode in a mode.
   if the mode is "finder",  get the status for the current tab's node.
-  if the current tab's node is nil, show the desktop; exit.
   if the mode is "editor",  get the status for the current tab's node's source.
   if the mode is "docster", get the status for the current tab's node's document.
   if the mode is "writer",  get the status for the current tab's node's page.
