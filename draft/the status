@@ -34,7 +34,6 @@ to append some test results to a buffer:
   repeat.
 
 to check a test result given a string called actual:
-  if the test result is nil, exit.
   if the actual is the test result's expectation,
     pass the test result given the actual.
   if the actual is not the test result's expectation,
@@ -49,7 +48,6 @@ to create a test result about a string called context and a string called test n
   put the expectation in the test result's expectation.
 
 to create a test result called duplicate given a test result:
-  if the test result is nil, exit.
   create the duplicate.
   put the test result's context in the duplicate's context.
   put the test result's test name in the duplicate's test name.
@@ -78,7 +76,6 @@ to decide if a spot is in the status:
   say no.
 
 to decide if a test result is OK:
-  if the test result is nil, say no.
   if the test result's interpretation
     is the test result's expectation, say yes.
   say no.
@@ -98,7 +95,6 @@ to decide if the trio shoves the status:
   say no.
 
 to describe a test result given a string called context and a string called test name:
-  if the test result is nil, exit.
   put the context in the test result's context.
   put the test name in the test result's test name.
 
@@ -126,7 +122,6 @@ an expectation is a string.
 a fail color is a color.
 
 to fail a test result given a string called actual:
-  if the test result is nil, exit.
   \ assumes that the test result's expectation is already populated.
   put the actual in the test result's actual value.
   put the actual in the test result's interpretation.
@@ -143,7 +138,6 @@ to finalize the status:
   destroy the status' command.
 
 to handle a command (copy test result):
-  if the command is nil, exit.
   put the command's handler in a handler.
   put "handle test result " in a prefix.
   get a number from the handler given the prefix.
@@ -174,7 +168,6 @@ to handle a command (tests passed...):
     and the status' all test results' test results.
 
 to handle a command given a number (copy test result):
-  if the command is nil, exit.
   tint the status.
   show status "Copying...".
   put the command's name on the windows clipboard.
@@ -191,8 +184,7 @@ to handle a command given a submenu and a quota and some test results:
     Add the name and the handler to the submenu.
     add 1 to the counter.
   Repeat.
-  if the command is not nil,
-    widen the submenu to the command's width.
+  widen the submenu to the command's width.
   refont the submenu.
   handle the command given the submenu.
 
@@ -519,11 +511,9 @@ to update lingering status:
 to widen a command:
   widen the command to the status' roundy box's right
     minus the bar's display's left.
-  if the command is not nil,
-    put the bar's display's left into the command's roundy box's left.
+  put the bar's display's left into the command's roundy box's left.
 
 to widen a command to a width:
-  if the command is nil, exit.
   put the width into the command's width.
   put the width plus the command's roundy box's left
     into the command's roundy box's right.
