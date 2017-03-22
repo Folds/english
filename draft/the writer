@@ -2792,7 +2792,7 @@ to handle font height given a page and a font height (editing):
   show the desktop with status.
 
 to handle font height other given a page:
-  if nothing is selected on the page, cluck; exit.
+\  if nothing is selected on the page, cluck; exit.
   get a font height given the page.
   put the font height and 1 inch into a ratio.
   convert the ratio to a ratio string.
@@ -2826,25 +2826,27 @@ to handle font name given a page and a string (editing):
 to handle font name other given a page:
   if the page is being edited,
     handle font name other given the page (editing); exit.
-  if nothing is selected on the page, cluck; exit.
+\  if nothing is selected on the page, cluck; exit.
   get a font name given the page.
   ask "Name?" with the font name.
   if the answer is blank, exit.
-  if the font name is in the custom font names,
-    make sure the font name is loaded (custom).
-  if the font name is not standard (font name),
-    cache the font name (font name).
-  handle font name given the page and the answer.
+  put the answer in another font name.
+  if the other font name is in the custom font names,
+    make sure the other font name is loaded (custom).
+  if the other font name is not standard (font name),
+    cache the other font name (font name).
+  handle font name given the page and the other font name.
 
 to handle font name other given a page (editing):
   get a font name given the page.
   ask "Name?" with the font name.
   if the answer is blank, exit.
-  if the font name is in the custom font names,
-    make sure the font name is loaded (custom).
-  if the font name is not standard (font name),
-    cache the font name (font name).
-  handle font name given the page and the answer (editing).
+  put the answer in another font name.
+  if the other font name is in the custom font names,
+    make sure the other font name is loaded (custom).
+  if the other font name is not standard (font name),
+    cache the other font name (font name).
+  handle font name given the page and the other font name (editing).
 
 to handle grayscale given a page and a flag:
   if the page is being edited, end edit on the page.

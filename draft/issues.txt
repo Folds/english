@@ -176,6 +176,24 @@ The following requests have been partially demonstrated.
   Testing difficulty:  Medium.
   Requested by Jasper Paulsen on March 13, 2014.
 
+173.  Allow font name other to work in writer when nothing is selected.
+  Status:    designed.
+  Audience:  ordinary users.
+  Benefit:   medium.
+  Implementation difficulty:  Easy.
+  Demoing difficulty:  Easy.
+  Testing difficulty:  Medium.
+  Requested by Jasper Paulsen on March 21, 2017.
+
+174.  Allow font height other to work in writer when nothing is selected.
+  Status:    designed.
+  Audience:  ordinary users.
+  Benefit:   medium.
+  Implementation difficulty:  Easy.
+  Demoing difficulty:  Easy.
+  Testing difficulty:  Medium.
+  Requested by Jasper Paulsen on March 21, 2017.
+
 
 
 \ ======================================   
@@ -742,5 +760,6 @@ Unsorted requests:
   Testing difficulty:  Not applicable.
   Requested by Jasper Paulsen on March 20, 2017.
 
-Next item number:  172.
+
+Next item number:  175.
 
