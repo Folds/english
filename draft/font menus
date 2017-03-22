@@ -46,7 +46,7 @@ to cache a font name (font name):
 to collate some font name things:
   clear the font name things.
   copy the standard font names into the font name things.
-  get a font. \the writer crashes here.
+  get a font.
   add the font's name to the font name things.
   add the recent nonstandard font name to the font name things.
   sort the font name things.
@@ -70,6 +70,7 @@ to count commands in a submenu returning a count:
 
 to count highlighted items in a submenu returning a count:
   put 0 in the count.
+  if the submenu is nil, exit.
   loop.
     get a command from the submenu's commands.
     if the command is nil, break.
@@ -99,6 +100,7 @@ to create a submenu (font names):
 the custom font names are some font name things.
 
 to decide if a command is highlighted:
+  if the command is nil, say no.
   if the command's color is the lightest yellow color, say yes.
   say no.
 
@@ -145,12 +147,16 @@ to get first highlighted name in a submenu returning a name:
   repeat.
 
 to get a font:
-  if the current tab's mode is "editor",
-    get the font given the current tab's node's source; exit.
+  if the current tab is nil,
+    put the default font in the font; exit.
   if the current tab's mode is "writer",
     update the current font;
     put the current font in the font; exit.
-  put the default font in the font.
+  if the current tab's mode is not "editor",
+    put the default font in the font; exit.
+  if the current tab's node is nil,
+    put the default font in the font; exit.
+  get the font given the current tab's node's source.
 
 to get a font given a source:
   if the source is nil, put the default font in the font; exit.
@@ -191,6 +197,8 @@ to handle a command (font name...):
   handle the command given the submenu.
 
 to handle font height given a font height:
+  if the current tab is nil, cluck; exit.
+  if the current tab's node is nil, cluck; exit.
   if the current tab's mode is "editor",
     handle font height given the current tab's node's source and the font height; exit.
   if the current tab's mode is "writer",
@@ -205,6 +213,8 @@ to handle font height given a handler (general):
   handle font height given the height.
 
 to handle font height other:
+  if the current tab is nil, exit.
+  if the current tab's node is nil, exit.
   if the current tab's mode is "editor",
     handle font height other given the current tab's node's source; exit.
   if the current tab's mode is "writer",
@@ -217,18 +227,23 @@ to handle font name given a handler (general):
   handle font name given the string.
 
 to handle font name given a string:
+  if the current tab is nil, exit.
+  if the current tab's node is nil, exit.
   if the current tab's mode is "editor",
     handle font name given the current tab's node's source and the string; exit.
   if the current tab's mode is "writer",
     handle font name given the current tab's node's page and the string; exit.
 
 to handle font name other:
+  if the current tab is nil, exit.
+  if the current tab's node is nil, exit.
   if the current tab's mode is "editor",
     handle font name other given the current tab's node's source; exit.
   if the current tab's mode is "writer",
     handle font name other given the current tab's node's page; exit.
 
 to highlight a string in a submenu:
+  if the submenu is nil, exit.
   loop.
     get a command from the submenu's commands.
     if the command is nil, break.
