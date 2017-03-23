@@ -194,6 +194,15 @@ The following requests have been partially demonstrated.
   Testing difficulty:  Medium.
   Requested by Jasper Paulsen on March 21, 2017.
 
+175.  Propagate font options from command line to running options.
+  Status:    Designed.
+  Audience:  Programmers.
+  Benefit:   Minor.
+  Implementation difficulty:  Easy.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Medium.
+  Requested by Jasper Paulsen on March 22, 2017.
+
 
 
 \ ======================================   
@@ -760,6 +769,5 @@ Unsorted requests:
   Testing difficulty:  Not applicable.
   Requested by Jasper Paulsen on March 20, 2017.
 
-
-Next item number:  175.
+Next item number:  176.
 

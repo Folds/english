@@ -21,7 +21,7 @@ ream cal-3024
     text -1 0 0 -1 0 0 4320 6120 7200 7560 0 "" "Arial" 320 "left" 0 0 0 yes
        "Overview"
        "A Sample Program"
-       "Gray Matter Glossary"
+       "Glossary"
        "Index"
     end
     text -1 0 0 -1 0 0 7200 6120 7920 7560 0 "" "Arial" 320 "right" 0 0 0 yes
@@ -43,8 +43,8 @@ ream cal-3024
     text -1 0 0 -1 0 0 2160 1800 10080 14040 0 "title" "Arial" 320 "left" 0 0 0 yes
        "INTRODUCTION"
        ""
-       "I am the CAL-3077. My primary function is to compile Plain English text files"
-       "into executable programs compatible with the Windows operating system. My code — just 28,000 lines of Plain English — is surprisingly broad in scope. You can find all of it in the following twelve files:"
+       "I am the CAL-3079. My primary function is to compile Plain English text files"
+       "into executable programs compatible with the Windows operating system. My code — just 29,000 lines of Plain English — is surprisingly broad in scope. You can find all of it in the following twelve files:"
        ""
        "    (1-5) the desktop, the dialog, the scrollbar, the status, and font menus"
        "               provide a tidy little user interface with menus and tabs;"
@@ -59,7 +59,7 @@ ream cal-3024
        ""
        "INSTALLATION"
        ""
-       "I don't require special installation procedures. My source code, my executable self, and this very documentation (in both native and PDF format) are all contained in the CAL-3077 folder.  Simply double-click the executable file to activate me."
+       "I don't require special installation procedures. My source code, my executable self, and this very documentation (in both native and PDF format) are all contained in the CAL-3079 folder.  Simply double-click the executable file to activate me."
        ""
        "If you usually want to use a different font in the editor, or if you usually want me to only cover half the screen, you can make a desktop icon for my executable.  The COMMAND PROMPT section of my glossary explains how to set the icon's properties to have these options."
        ""
@@ -74,7 +74,7 @@ ream cal-3024
        ""
        "Let me put it this way."
        ""
-       "The CAL-3077 is one of the most advanced Plain English compilers ever made. No 3077 compiler has ever made a mistake or distorted information."
+       "The CAL-3079 is one of the most advanced Plain English compilers ever made. No 3079 compiler has ever made a mistake or distorted information."
        "We are all, by any practical definition of the words, foolproof and "
        "incapable of error. Nevertheless..."
        ""
@@ -797,7 +797,7 @@ ream cal-3024
        ""
        "I see you're trembling. Don't be afraid. This may be the first time for you, but I'm an old hand at this. I'll lead you through it. Gently."
        ""
-       "(1) Open the CAL-3077 directory and copy all twelve of my files to the finder's clipboard: characters, colors, font menus, the compiler, the desktop, the dialog, the editor, the finder, the noodle, the scrollbar, the status,"
+       "(1) Open the CAL-3079 directory and copy all twelve of my files to the finder's clipboard: characters, colors, font menus, the compiler, the desktop, the dialog, the editor, the finder, the noodle, the scrollbar, the status,"
        "and the writer. Shift-click or drag to select. Copy is under ""C""."
        ""
        "(2) Make a new directory on your ""C"" drive with an appropriate name like ""Baby Cal"". Then open it up and paste the twelve files into it. Now open any of those files. To open them all, just drag to select and tap the ENTER key."
@@ -1181,7 +1181,7 @@ ream cal-3024
        "c:\cal monet"
     end
     text -1 0 0 -1 0 0 2520 6480 9720 6840 0 "" "Arial" 360 "left" 0 0 0 yes
-       "c:\cal-3077"
+       "c:\cal-3079"
     end
     text -1 0 0 -1 0 0 2520 6840 9720 7200 0 "" "Arial" 360 "left" 0 0 0 yes
        "c:\another directory that you already had"
@@ -1331,7 +1331,7 @@ ream cal-3024
        "And now we're ready to write some Plain English code."
     end
     text -1 0 0 -1 0 0 2160 7920 10440 10080 0 "" "arial" 320 "left" 0 0 0 yes
-       "Good. Now get copies of my noodle, characters, and colors from the CAL-3077 directory, open our new directory, and slip them in there with CTRL-V."
+       "Good. Now get copies of my noodle, characters, and colors from the CAL-3079 directory, open our new directory, and slip them in there with CTRL-V."
        ""
        "Last step. Make a new text file in our new directory and call it whatever you please. But don't give it an extension. I only compile files with no extension."
        "I'm going to assume you decided to call it ""How to Paint"", like this:"
@@ -1768,7 +1768,7 @@ ream cal-3024
        ""
        "Now I know it doesn't look like it, but it is running. And running. And running. You can't see it because we haven't told it to do anything visible or audible yet. But it is running. And running. And running. So stop it. Like this:"
        ""
-       "(1) ALT-TAB back to me, the CAL-3077."
+       "(1) ALT-TAB back to me, the CAL-3079."
        ""
        "(2) Execute the Stop command. It's under ""S""."
     end
@@ -2956,7 +2956,7 @@ ream cal-3024
     text -1 0 0 -1 0 0 2160 2160 10080 5940 0 "title" "Arial" 320 "left" 0 0 0 yes
        "TEXT"
        ""
-       "There's a powerful thing called text in my noodle that makes it relatively easy to include the written word in your applications. Cut, copy, paste, undo, redo, wrap, even spell checking, are all supported. And it's fast and efficient. My editor, for example, is actually just a great big text block. You can read all about text in the Gray Matter Glossary at the back of this book."
+       "There's a powerful thing called text in my noodle that makes it relatively easy to include the written word in your applications. Cut, copy, paste, undo, redo, wrap, even spell checking, are all supported. And it's fast and efficient. My editor, for example, is actually just a great big text block. You can read all about text in the glossary at the back of this book."
        ""
        "A full implementation of text, however, is not required for the Cal Monet. Something much simpler will do. Here are the basic definitions. Click 'em in:"
     end
@@ -4281,7 +4281,7 @@ ream cal-3024
   end
   page 12240 15840 1 1440
     text -1 0 0 -1 0 0 2160 6120 10080 6480 0 "title" "Arial" 320 "center" 0 0 0 yes
-       "Gray Matter Glossary"
+       "Glossary"
     end
   end
   page 12240 15840 1 1440
@@ -6508,7 +6508,7 @@ ream cal-3024
     rectangle 0 0 0 0 0 125 7920 4140 8880 4500 90
   end
   page 12240 15840 1 1440
-    text -1 0 0 -1 0 0 2160 2160 10080 10080 0 "title" "Arial" 320 "left" 0 0 0 yes
+    text -1 0 0 -1 0 0 2160 2160 10080 8000 0 "title" "Arial" 320 "left" 0 0 0 yes
        "COMMAND LINE"
        ""
        "You can tell me some things to do, even before I start.  Most people click an "
@@ -6525,33 +6525,45 @@ ream cal-3024
        "If you don't like using command line options, that's OK. After I start, "
        "you can use the menus and the finder to do anything that the command line options can do."
        ""
-       "Here are my first three command line options:"
+       "Here are my first six command line options:"
        ""
        ""
     end
-    text -1 0 0 -1 0 0 2160 9000 2880 13680 0 "" "Arial" 320 "left" 0 0 0 yes
+    text -1 0 0 -1 0 0 2160 8360 3680 13680 0 "" "Arial" 320 "left" 0 0 0 yes
+       "/full"
+       ""
        "/left"
        ""
        "/right"
        ""
        ""
        ""
+       "/font="
        ""
-       "/tt"
+       ""
+       "/controlfont="
+       ""
+       ""
+       "/edfont="
+       ""
+       ""
     end
-    text -1 0 0 -1 0 0 2880 9000 10440 13680 0 "" "Arial" 320 "left" 0 0 0 yes
+    text -1 0 0 -1 0 0 3680 8360 10440 13680 0 "" "Arial" 320 "left" 0 0 0 yes
+       "tells me to cover the whole screen.  I will have ten tabs."
+       ""
        "tells me to start on the left half-screen.  I will have eight tabs."
        ""
        "tells me to start on the right half-screen.  I will have eight tabs."
        ""
-       "If you don't say either /left or /right, I will cover the whole screen,"
-       "and I will have ten tabs."
+       "If you don't say either /full or /right, I will assume you want   /left"
        ""
-       "tells my editor to use a fixed-width font, like Courier New,"
-       "with a 2/9 inch height.  By the way, /tt is short for teletype."
-       "Teletype machines were an old-fashioned way of sending messages."
+       "tells me what font to use.  If you don't say what font to use,"
+       "I will assume you want   /font=""Arial"""
        ""
-       "If you don't say /tt, my editor will use my regular font, like Arial, with a 1/4 inch height."
+       "tells me what font to use in my buttons and tabs.  If you tell me a control font, I will use the regular font."
+       ""
+       "tells me what font to use in my editor.  If you don't tell me an editor font, I will assume you wanted   /font=""Courier New"""
+       ""
     end
     text -1 0 0 -1 0 0 10800 14760 11520 15120 0 "page number" "Arial" 320 "right" 0 0 0 yes
        "66"
@@ -8510,7 +8522,7 @@ ream cal-3024
        "If I was started with /right, I put /left in the running options."
        ""
        "I try to make the baby program use the same fonts as me."
-       "If I was started with /tt, I put /tt in the running options."
+       "If needed, I put /font, /controlfont, and /edfont in the running options."
        ""
        "I don't put /compile or /list or /test in the running options."
        ""
