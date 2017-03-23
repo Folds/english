@@ -1,4 +1,4 @@
-\ Copyright © 2014, 2017 by Jasper Paulsen.
+\ copyright © 2014, 2017 by Jasper Paulsen.
 
 This file lists issues that have been either marked won't do,
 or demonstrably fixed and automatically regression-tested
@@ -762,13 +762,6 @@ Automated tests make debugging easier.
   Testing difficulty:  Not applicable.
 
 150.  Change default font to Arial.
-  Status:   Done.
-  Benefit:  Permissions request.
-  Implementation difficulty:  Easy.
-  Demoing difficulty:  Easy.
-  Testing difficulty:  Not applicable.
-
-158.  Remove the two example pictures from the instructions.
   Status:   Done.
   Benefit:  Permissions request.
   Implementation difficulty:  Easy.
