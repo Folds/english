@@ -1,6 +1,4 @@
-\ The portions of this file that are from CAL-3040
-\ are copyright 2006 by the Osmosian Order.
-\ The remainder is copyright 2014, 2017 by Jasper Paulsen.
+\ Copyright © 2014, 2017 by Jasper Paulsen.
 
 This file is the start of a bug-tracking system
 for the Plain English programming environment.
@@ -51,7 +49,7 @@ The following requests are roughly sorted
 from higher priority to lower priority.
 
 157.  Support multiple headers per routine, a la CAL-4700.
-  Status:   Request.
+  Status:   Designed.
   Benefit:  Permissions requirement.
   Implementation difficulty:  Medium.
   Demoing difficulty:  Medium.
@@ -59,12 +57,27 @@ from higher priority to lower priority.
   Requested by Gerry Rzeppa on March 13, 2017.
 
 159.  Incorporate CAL-4700's turtle graphics features.
-  Status:   Request.
+  Status:   Designed.
   Benefit:  Medium.
   Demoing difficulty:  Medium.
   Testing difficulty:  Medium.
   Requested by Gerry Rzeppa on March 13, 2017.
 
+176.  Add a "Measure Code" menu item.
+  Output a text file with the following columns:
+  source   code lines  just comments   blank lines  code wraps  total lines
+  with one line for each source file in the folder,
+  and one line for the totals. 
+  Use tab-separated variable format.
+  Save as <exe name>.tsv
+  Status:  Request.
+  Audience:  Programmers
+  Benefit:   Minor.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Easy.
+  Testing difficulty:  Medium.
+  Requested by Jasper Paulsen on March 23, 2017.
+   
 094.  Document "Plain English programming idioms",
   and how they compare to other common programming languages.
   Implementation difficulty:  Hard.
@@ -611,6 +624,5 @@ with an adjustable slider between them.
 Unsorted requests:
 
 
-
-Next item number:  176.
+Next item number:  177.
 
