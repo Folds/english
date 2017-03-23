@@ -441,6 +441,36 @@ next to the first instance, instead of covering the first instance.
   Audience:  Windows and Linux programmers.
   Requested by Jasper Paulsen on February 24, 2017
 
+155.  Add a /full command line option for full-screen mode.
+  Status:   Demonstrated.
+  Benefit.  Minor.
+  Implementation difficulty:  Easy.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Medium.
+  Requested by:  Jasper Paulsen on March 13, 2017.
+
+151.  Change default height from 1/4 inch to 2/9 inch.
+  If Osmosian is chosen, it will default to 1/4 inch high.
+  Status:   Demonstrated.
+  Benefit:  Important.  Would make menus, status, and tab strip
+            easier to read.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Easy.
+  Testing difficulty:  Medium.
+  Requested by:  Jasper Paulsen on March 13, 2017.
+
+104.  Include a shortcut with /left /tt command-line options.
+  This shortcut would be designed for newbies.
+  Audience:  Windows programmers.
+  Status:    Demonstrated, by making these the default.
+  Requested by Jasper Paulsen on April 11, 2014.
+
+105.  Create a Linux shortcut with /left /tt command-line options.
+  This shortcut would be designed for newbies running WINE.
+  Audience:  Linux programmers.
+  Status:  Demonstrated, by making these the default.
+  Requested by Jasper Paulsen on April 11, 2014.
+
 138.  Add ability to copy compiler error messages to the clipboard.
   Similar to copying test results to the clipboard.
   Benefit:  Medium.
@@ -517,6 +547,38 @@ next to the first instance, instead of covering the first instance.
   Audience:  Windows programmers.
   Requested by Jasper Paulsen on February 28, 2017.
   
+153.  Center text vertically in tab strips.
+  Status:   Already done in 3043.
+  Benefit:  Minor.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Medium.
+  Requested by:  Jasper Paulsen on March 13, 2017.
+
+154.  Center text vertically in menus and status.
+  Status:   Already done in 3043.
+  Benefit:  Minor.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Medium.
+  Requested by:  Jasper Paulsen on March 13, 2017.
+
+152.  Only load/unload/preview the Osmosian font when needed.
+  Status:   Demonstrated.
+  Benefit:  Minor.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Medium.
+  Requested by:  Jasper Paulsen on March 13, 2017.
+
+156.  Add a 1/9 inch yank setting when 2/9 inch high fonts are present.
+  Status:   Demonstrated.
+  Benefit:  Minor.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Medium.
+  Requested by:  Jasper Paulsen on March 13, 2017.
+
 111.  Prevent mouse wheel from scrolling past last line.
   Neither CAL's scrollbar, nor Notepad's mouse wheel
   scrolls past the last line of the file.
@@ -541,6 +603,81 @@ next to the first instance, instead of covering the first instance.
   Testing difficulty:  Medium.
   Audience:  Windows and Linux programmers.
   Requested by Jasper Paulsen on February 24, 2017
+
+164.  In writer, make font name menu highlight match selected text.
+  Status:   Demonstrated.
+  Benefit:  Medium.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Medium.
+  Requested by Jasper Paulsen on March 13, 2014.
+ 
+165.  In writer, make font height menu highlight match selected text.
+  Status:   Demonstrated.
+  Benefit:  Medium.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Medium.
+  Requested by Jasper Paulsen on March 13, 2014.
+
+162.  In writer, make font name choice affect new texts.
+  Status:   Demonstrated.
+  Benefit:  Medium.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Medium.
+  Requested by Jasper Paulsen on March 13, 2014.
+ 
+163.  In writer, make font height choice affect new texts.
+  Status:   Demonstrated.
+  Benefit:  Medium.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Medium.
+  Requested by Jasper Paulsen on March 13, 2014.
+
+166.  In writer, open page with font name based on contents of page.
+  Status:   Demonstrated.
+  Benefit:  Medium.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Medium.
+  Requested by Jasper Paulsen on March 13, 2014.
+
+167.  In writer, open page with font height based on contents of page.
+  Status:   Demonstrated.
+  Benefit:  Medium.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Medium.
+  Requested by Jasper Paulsen on March 13, 2014.
+
+173.  Allow font name other to work in writer when nothing is selected.
+  Status:    Demonstrated.
+  Audience:  ordinary users.
+  Benefit:   medium.
+  Implementation difficulty:  Easy.
+  Demoing difficulty:  Easy.
+  Testing difficulty:  Medium.
+  Requested by Jasper Paulsen on March 21, 2017.
+
+174.  Allow font height other to work in writer when nothing is selected.
+  Status:    Demonstrated.
+  Audience:  ordinary users.
+  Benefit:   medium.
+  Implementation difficulty:  Easy.
+  Demoing difficulty:  Easy.
+  Testing difficulty:  Medium.
+  Requested by Jasper Paulsen on March 21, 2017.
+
+175.  Propagate font options from command line to running options.
+  Status:    Demonstrated.
+  Audience:  Programmers.
+  Benefit:   Minor.
+  Implementation difficulty:  Easy.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Medium.
+  Requested by Jasper Paulsen on March 22, 2017.
 
 114.  Allow mouse-wheel scrolling at one screen per 15°.
   This is a Windows undocumented feature that can be set
@@ -579,6 +716,22 @@ next to the first instance, instead of covering the first instance.
     whether a menu item exists.
   Requested by Gerry Rzeppa on March 18, 2014.
 
+168.  Add scrollbar to writer's page menu (aka docster).
+  Status:   Demonstrated.
+  Benefit:  Medium.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Medium.
+  Requested by Jasper Paulsen on March 13, 2014.
+ 
+169.  Add mouse scrolling to writer's page menu (aka docster).
+  Status:   Demonstrated.
+  Benefit:  Medium.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Medium.
+  Requested by Jasper Paulsen on March 13, 2014.
+ 
 116.  Enable fast horizontal mouse-wheel scrolling in editor panes.
   Let the user tilt the mouse-wheel to move an editor's text
   horizontally, in units of screen widths.
