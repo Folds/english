@@ -664,6 +664,11 @@ to decide if the edge of a page is visible in a document:
   if the box's bottom is greater than the document's bottom, say no.
   say yes.
 
+to decide if a font is another font:
+  if the font's name is not the other font's name, say no.
+  if the font's height is the other font's height, say yes.
+  say no.
+
 to decide if a font is selected given a page:
   if the page is nil, say no.
   if the font is selected given the page's shapes, say yes.

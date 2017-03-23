@@ -2246,11 +2246,6 @@ to decide if a flag is set:
   if the flag is yes, say yes.
   say no.
 
-to decide if a font is another font:
-  if the font's name is not the other font's name, say no.
-  if the font's height is the other font's height, say yes.
-  say no.
-
 to decide if full [screen] was requested:
   get a string (command line).
   put the string in a command line.
