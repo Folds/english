@@ -647,21 +647,6 @@ to get requested run folder returning a string given a command line:
     put "" in the string; exit.
   get the string from the command line given "/folder".
 
-to get running option given a command line and a string returning another string:
-  put "" in the other string.
-  if the string is not important in the command line, exit.
-  put the string in the other string.
-  get a string called value from the command line given the string.
-  if the value is "", exit.
-  append "=" to the other string.
-  if the value does not contain " ",
-    append the value to the other string; exit.
-  if the value is wrapped in double-quotes,
-    append the value to the other string; exit.
-  append the double-quote byte to the other string.
-  append the value to the other string.  
-  append the double-quote byte to the other string.
-
 to get running options given a command line returning a string:
   if left was requested in the command line,
     put "/right" in the string.
@@ -671,18 +656,6 @@ to get running options given a command line returning a string:
     put "/full" in the string.
   if "/tt" [fixed-width] is important in the command line,
     append " /tt" to the string.
-  if "/font" is important in the command line,
-    get running option given the command line and "/font" 
-      returning a string called font option;
-    append " " then the font option to the string.
-  if "/controlfont" is important in the command line,
-    get running option given the command line and "/controlfont" 
-      returning a string called control font option;
-    append " " then the control font option to the string.
-  if "/edfont" is important in the command line,
-    get running option given the command line and "/edfont" 
-      returning a string called editor font option;
-    append " " then the editor font option to the string.
   put "" in a string called run folder.
   if "/runfolder" is important in the command line,
     get requested run folder returning the run folder given the command line.
@@ -2531,11 +2504,11 @@ to test (the desktop - hardcoded running options):
   create a test result about "the desktop"
     and "hardcoded running options"
     and expecting
-      "/left " then
+      "/left /tt " then
       "/folder=""/folder"" " then 
       "/files=""/files""".
   create a command line equal to
-      "cal.exe /right " then
+      "cal.exe /right /tt " then
       "/folder=""C:\Users\Owner\Plain English\draft"" " then 
       "/files=""the noodle"";;;;;;issues.txt;""fixed issues.txt"" " then 
       "/runfolder=""/folder"" /runfiles=""/files""".
@@ -2584,14 +2557,6 @@ to test (the desktop - parse handle yank):
   get a height called actual from the handler given the prefix.
   stash the test result given the actual.
 
-\In the desktop, tried propagate running options.  
-\Expected '/left /folder="C:\Users\Owner\Plain English\draft" 
-\/files="the noodle";;;;;;issues.txt;"fixed issues.txt" 
-\/runfolder=/folder /runfiles=/files', 
-\but I got '/left    /folder="C:\Users\Owner\Plain English\draft" 
-\/files="the noodle";;;;;;issues.txt;"fixed issues.txt" 
-\/runfolder=/folder /runfiles=/files', so the test failed.
-
 to test (the desktop - propagate running options):
   \ In this test, /runfolder=/folder and /runfiles=/files
   \ These particular unquoted strings should be treated
@@ -2600,12 +2565,12 @@ to test (the desktop - propagate running options):
   create a test result about "the desktop"
     and "propagate running options"
     and expecting
-      "/left " then
+      "/left /tt " then
       "/folder=""C:\Users\Owner\Plain English\draft"" " then 
       "/files=""the noodle"";;;;;;issues.txt;""fixed issues.txt"" " then 
       "/runfolder=/folder /runfiles=/files".
   create a command line equal to
-      "cal.exe /right " then
+      "cal.exe /right /tt " then
       "/folder=""C:\Users\Owner\Plain English\draft"" " then 
       "/files=""the noodle"";;;;;;issues.txt;""fixed issues.txt"" " then 
       "/runfolder=/folder /runfiles=/files".
