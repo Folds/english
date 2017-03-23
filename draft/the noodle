@@ -8278,6 +8278,7 @@ to put a text's row height into a height:
 
 to put a text's rows/box into a count:
   if the text is nil, put 0 into the count; exit.
+  if the text's row height is 0, put 0 into the count; exit.
   put the text's box's height divided by the text's row height into the count.
 
 to put a text's selected byte count into a count:
@@ -9202,7 +9203,8 @@ to scale a line to a percent:
 
 to scale a number given a ratio:
   if the ratio's denominator is 0, exit.
-  call "kernel32.dll" "MulDiv" with the number and the ratio's numerator and the ratio's denominator returning the number.
+  call "kernel32.dll" "MulDiv" with the number
+    and the ratio's numerator and the ratio's denominator returning the number.
 
 to scale a pair given a ratio:
   if the ratio is 1/1, exit.
@@ -9256,10 +9258,10 @@ to scale a roundy box to a percent:
 to scale a text given a ratio:
   if the text is nil, exit.
   if the ratio is 1/1, exit.
-  scale the text's box given the ratio.
+  scale the text's box    given the ratio.
   scale the text's origin given the ratio.
-  scale the text's font given the ratio.
-  scale the text's scale given the ratio.
+  scale the text's font   given the ratio.
+  scale the text's scale  given the ratio.
 
 to scale a text to a percent:
   if the text is nil, exit.

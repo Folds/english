@@ -1144,16 +1144,18 @@ to handle enlarge:
 
 to handle an event:
   if the event is nil, exit.
-  if the event's kind is "key down", handle the event (key down); exit.
-  if the event's kind is "left click", handle the event (left click); exit.
+  if the event's kind is "key down",    handle the event (key down); exit.
+  if the event's kind is "left click",  handle the event (left click); exit.
   if the event's kind is "left double click",
     handle the event (left double click); exit.
-  if the event's kind is "mouse horizontal wheel", handle the event (mouse horizontal wheel); exit.
+  if the event's kind is "mouse horizontal wheel", 
+    handle the event (mouse horizontal wheel); exit.
   if the event's kind is "mouse wheel", handle the event (mouse wheel); exit.
-  if the event's kind is "refresh", handle the event (refresh); exit.
+  if the event's kind is "refresh",     handle the event (refresh); exit.
   if the event's kind is "right click", handle the event (right click); exit.
-  if the event's kind is "set cursor", handle the event (set cursor); exit.
-  if the event's kind is "setting change", handle the event (setting change); exit.
+  if the event's kind is "set cursor",  handle the event (set cursor); exit.
+  if the event's kind is "setting change", 
+    handle the event (setting change); exit.
 
 to handle an event (key down - ctrl-tab):
   if the event is nil, exit.
@@ -1216,6 +1218,7 @@ to handle an event (key down):
   if the current tab is nil, exit.
   if the current tab's mode is "finder",
     handle the event given the current tab's node (key down); exit.
+  if the current tab's node is nil, exit.
   if the current tab's mode is "editor",
     handle the event given the current tab's node's source (key down); exit.
   if the current tab's mode is "docster",
