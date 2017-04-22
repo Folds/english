@@ -41,11 +41,11 @@ to bump a substring (past a string):
 to comment any selected rows in a source:
   if the source is nil, exit.
   loop.
-  get a row from the source's text's rows.
-  if the row is nil, exit.
-  if the row of the source's text is not selected, repeat.
-  if the row is blank, repeat.
-  prepend "\" to the row's string.
+    get a row from the source's text's rows.
+    if the row is nil, exit.
+    if the row of the source's text is not selected, repeat.
+    if the row is blank, repeat.
+    prepend "\" to the row's string.
   repeat.
 
 the comment color is a color.
@@ -241,12 +241,12 @@ to get a substring given a row and a source (commented part):
   if the row is nil, clear the substring; exit.
   slap the substring on the row's string.
   loop.
-  if the substring's first's target is the return byte, clear the substring; break.
-  if the substring's first's target is the backslash byte, break.
-  if the substring's first's target is the double-quote byte, bump the substring (past a string); repeat.
-  if the substring's first's target is the left-paren byte, bump the substring (past a qualifier); repeat.
-  if the substring's first's target is the left-bracket byte, bump the substring (past a remark); repeat.
-  add 1 to the substring's first.
+    if the substring's first's target is the return byte, clear the substring; break.
+    if the substring's first's target is the backslash byte, break.
+    if the substring's first's target is the double-quote byte, bump the substring (past a string); repeat.
+    if the substring's first's target is the left-paren byte, bump the substring (past a qualifier); repeat.
+    if the substring's first's target is the left-bracket byte, bump the substring (past a remark); repeat.
+    add 1 to the substring's first.
   repeat.
   subtract 1 from the substring's last. \ so we don't draw the return byte
 
@@ -471,12 +471,12 @@ to handle extract globals given a source:
   name the blocks.
   sort the blocks.
   loop.
-  get a block from the blocks.
-  if the block is nil, break.
-  if the block's first row is nil, repeat.
-  if the block's first row's string does not start with any definite article, repeat.
-  convert the block's rows to a string.
-  append the string to a clipboard string.
+    get a block from the blocks.
+    if the block is nil, break.
+    if the block's first row is nil, repeat.
+    if the block's first row's string does not start with any definite article, repeat.
+    convert the block's rows to a string.
+    append the string to a clipboard string.
   repeat.
   put the clipboard string on the windows clipboard.
   destroy the blocks.
@@ -489,11 +489,11 @@ to handle extract routine headers given a source:
   name the blocks.
   sort the blocks.
   loop.
-  get a block from the blocks.
-  if the block is nil, break.
-  if the block's first row is nil, repeat.
-  if the block's first row's string does not start with any routine starter, repeat.
-  append the block's first row's string then the linefeed byte to a clipboard string.
+    get a block from the blocks.
+    if the block is nil, break.
+    if the block's first row is nil, repeat.
+    if the block's first row's string does not start with any routine starter, repeat.
+    append the block's first row's string then the linefeed byte to a clipboard string.
   repeat.
   put the clipboard string on the windows clipboard.
   destroy the blocks.
@@ -506,12 +506,12 @@ to handle extract types given a source:
   name the blocks.
   sort the blocks.
   loop.
-  get a block from the blocks.
-  if the block is nil, break.
-  if the block's first row is nil, repeat.
-  if the block's first row's string does not start with any indefinite article, repeat.
-  convert the block's rows to a string.
-  append the string to a clipboard string.
+    get a block from the blocks.
+    if the block is nil, break.
+    if the block's first row is nil, repeat.
+    if the block's first row's string does not start with any indefinite article, repeat.
+    convert the block's rows to a string.
+    append the string to a clipboard string.
   repeat.
   put the clipboard string on the windows clipboard.
   destroy the blocks.
@@ -685,9 +685,9 @@ to move a rider (source sorting rules):
   bump the rider.
   if the rider's token's last's target is any mark, exit.
   loop.
-  if the rider's source is blank, exit.
-  if the rider's source's first's target is noise, exit.
-  if the rider's source's first's target is any mark, exit.
+    if the rider's source is blank, exit.
+    if the rider's source's first's target is noise, exit.
+    if the rider's source's first's target is any mark, exit.
   bump the rider.
   repeat.
 
@@ -698,19 +698,19 @@ to name a block:
   if the block's first row is any comment, exit.
   slap a rider on the block's first row's string.
   loop.
-  move the rider (source sorting rules).
-  if the rider's token is blank, exit.
-  if the rider's token is "a", repeat.
-  if the rider's token is "an", repeat.
-  if the rider's token is "some", repeat.
-  if the rider's token is "the", repeat.
-  if the rider's token is "to", repeat.
-  if the rider's token is "*", repeat.
-  if the rider's token is ",", exit.
-  if the rider's token is ";", exit.
-  if the rider's token is ":", exit.
-  if the rider's token is ".", exit.
-  append the rider's token then the space byte to the block's name.
+    move the rider (source sorting rules).
+    if the rider's token is blank, exit.
+    if the rider's token is "a", repeat.
+    if the rider's token is "an", repeat.
+    if the rider's token is "some", repeat.
+    if the rider's token is "the", repeat.
+    if the rider's token is "to", repeat.
+    if the rider's token is "*", repeat.
+    if the rider's token is ",", exit.
+    if the rider's token is ";", exit.
+    if the rider's token is ":", exit.
+    if the rider's token is ".", exit.
+    append the rider's token then the space byte to the block's name.
   repeat.
 
 to name some blocks:
@@ -727,10 +727,10 @@ to print a copy of a sheet number of a sheets/copy of a source:
   begin a sheet.
   put the first row into a current row.
   loop.
-  print the current row of the source at the spot.
-  if the current row is the last row, break.
-  put the current row's next into the current row.
-  add the source's text's row height to the spot's y.
+    print the current row of the source at the spot.
+    if the current row is the last row, break.
+    put the current row's next into the current row.
+    add the source's text's row height to the spot's y.
   repeat.
   end the sheet.
 
@@ -739,18 +739,18 @@ to print a copy of a source:
   put the source's sheets/copy into a sheets/copy.
   put 1 into a sheet number.
   loop.
-  if the sheet number is greater than the sheets/copy, exit.
-  print the copy of the sheet number of the sheets/copy of the source.
-  add 1 to the sheet number.
+    if the sheet number is greater than the sheets/copy, exit.
+    print the copy of the sheet number of the sheets/copy of the source.
+    add 1 to the sheet number.
   repeat.
 
 to print a number of copies of a source:
   if the source is nil, exit.
   begin printing.
   loop.
-  add 1 to a copy.
-  if the copy is greater than the number, break.
-  print the copy of the source.
+    add 1 to a copy.
+    if the copy is greater than the number, break.
+    print the copy of the source.
   repeat.
   end printing.
 
@@ -845,12 +845,12 @@ to sort some blocks:
   sort the left blocks.
   sort the right blocks.
   loop.
-  put the left blocks' first into a left block.
-  put the right blocks' first into a right block.
-  if the left block is nil, append the right blocks to the blocks; exit.
-  if the right block is nil, append the left blocks to the blocks; exit.
-  if the left block's name is greater than the right block's name, move the right block from the right blocks to the blocks; repeat.
-  move the left block from the left blocks to the blocks.
+    put the left blocks' first into a left block.
+    put the right blocks' first into a right block.
+    if the left block is nil, append the right blocks to the blocks; exit.
+    if the right block is nil, append the left blocks to the blocks; exit.
+    if the left block's name is greater than the right block's name, move the right block from the right blocks to the blocks; repeat.
+    move the left block from the left blocks to the blocks.
   repeat.
 
 to sort definitions given a source:
@@ -892,9 +892,9 @@ to track a source given an event:
 to uncomment any selected rows in a source:
   if the source is nil, exit.
   loop.
-  get a row from the source's text's rows.
-  if the row is nil, exit.
-  if the row of the source's text is not selected, repeat.
-  if the row's string's first's target is not the backslash byte, repeat.
-  remove the first byte from the row's string.  
+    get a row from the source's text's rows.
+    if the row is nil, exit.
+    if the row of the source's text is not selected, repeat.
+    if the row's string's first's target is not the backslash byte, repeat.
+    remove the first byte from the row's string.  
   repeat.

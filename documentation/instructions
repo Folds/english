@@ -43,7 +43,7 @@ ream cal-3024
     text -1 0 0 -1 0 0 2160 1800 10080 14040 0 "title" "Arial" 320 "left" 0 0 0 yes
        "INTRODUCTION"
        ""
-       "I am the CAL-3077. My primary function is to compile Plain English text files"
+       "I am the CAL-3083. My primary function is to compile Plain English text files"
        "into executable programs compatible with the Windows operating system. My code — just 28,000 lines of Plain English — is surprisingly broad in scope. You can find all of it in the following twelve files:"
        ""
        "    (1-5) the desktop, the dialog, the scrollbar, the status, and font menus"
@@ -59,7 +59,7 @@ ream cal-3024
        ""
        "INSTALLATION"
        ""
-       "I don't require special installation procedures. My source code, my executable self, and this very documentation (in both native and PDF format) are all contained in the CAL-3077 folder.  Simply double-click the executable file to activate me."
+       "I don't require special installation procedures. My source code, my executable self, and this very documentation (in both native and PDF format) are all contained in the CAL-3083 folder.  Simply double-click the executable file to activate me."
        ""
        "If you usually want to use a different font in the editor, or if you usually want me to only cover half the screen, you can make a desktop icon for my executable.  The COMMAND PROMPT section of my glossary explains how to set the icon's properties to have these options."
        ""
@@ -74,7 +74,7 @@ ream cal-3024
        ""
        "Let me put it this way."
        ""
-       "The CAL-3077 is one of the most advanced Plain English compilers ever made. No 3077 compiler has ever made a mistake or distorted information."
+       "The CAL-3083 is one of the most advanced Plain English compilers ever made. No 3083 compiler has ever made a mistake or distorted information."
        "We are all, by any practical definition of the words, foolproof and "
        "incapable of error. Nevertheless..."
        ""
@@ -797,7 +797,7 @@ ream cal-3024
        ""
        "I see you're trembling. Don't be afraid. This may be the first time for you, but I'm an old hand at this. I'll lead you through it. Gently."
        ""
-       "(1) Open the CAL-3077 directory and copy all twelve of my files to the finder's clipboard: characters, colors, font menus, the compiler, the desktop, the dialog, the editor, the finder, the noodle, the scrollbar, the status,"
+       "(1) Open the CAL-3083 directory and copy all twelve of my files to the finder's clipboard: characters, colors, font menus, the compiler, the desktop, the dialog, the editor, the finder, the noodle, the scrollbar, the status,"
        "and the writer. Shift-click or drag to select. Copy is under ""C""."
        ""
        "(2) Make a new directory on your ""C"" drive with an appropriate name like ""Baby Cal"". Then open it up and paste the twelve files into it. Now open any of those files. To open them all, just drag to select and tap the ENTER key."
@@ -855,7 +855,8 @@ ream cal-3024
        "A second is 1000 milliseconds."
        ""
        "To initialize com:"
-       "  Call ""ole32.dll"" ""CoInitializeEx"" with 0 and 2 [coinit_aparthreaded]."
+       "  Call ""ole32.dll"" ""CoInitializeEx"""
+       "    with 0 and 2 [coinit_aparthreaded]."
        ""
        "to multiply a ratio by a number:"
        "  multiply the ratio's numerator by the number."
@@ -1181,7 +1182,7 @@ ream cal-3024
        "c:\cal monet"
     end
     text -1 0 0 -1 0 0 2520 6480 9720 6840 0 "" "Arial" 360 "left" 0 0 0 yes
-       "c:\cal-3077"
+       "c:\cal-3083"
     end
     text -1 0 0 -1 0 0 2520 6840 9720 7200 0 "" "Arial" 360 "left" 0 0 0 yes
        "c:\another directory that you already had"
@@ -1331,7 +1332,7 @@ ream cal-3024
        "And now we're ready to write some Plain English code."
     end
     text -1 0 0 -1 0 0 2160 7920 10440 10080 0 "" "arial" 320 "left" 0 0 0 yes
-       "Good. Now get copies of my noodle, characters, and colors from the CAL-3077 directory, open our new directory, and slip them in there with CTRL-V."
+       "Good. Now get copies of my noodle, characters, and colors from the CAL-3083 directory, open our new directory, and slip them in there with CTRL-V."
        ""
        "Last step. Make a new text file in our new directory and call it whatever you please. But don't give it an extension. I only compile files with no extension."
        "I'm going to assume you decided to call it ""How to Paint"", like this:"
@@ -1572,7 +1573,7 @@ ream cal-3024
        ""
     end
     text -1 0 0 -1 0 0 2340 8640 9900 9000 0 "" "Courier New" 288 "left" 2100 1000 625 yes
-       "                         \This is a useless comment at the end of a line"
+       "                         \This comment is at the end of a line"
        ""
     end
   end
@@ -1768,7 +1769,7 @@ ream cal-3024
        ""
        "Now I know it doesn't look like it, but it is running. And running. And running. You can't see it because we haven't told it to do anything visible or audible yet. But it is running. And running. And running. So stop it. Like this:"
        ""
-       "(1) ALT-TAB back to me, the CAL-3077."
+       "(1) ALT-TAB back to me, the CAL-3083."
        ""
        "(2) Execute the Stop command. It's under ""S""."
     end
@@ -2691,7 +2692,7 @@ ream cal-3024
        ""
        "But if you're an observant reader, experienced or not, you will conclude that buttons do not require dynamic memory allocation, since we use the word ""make"" instead of ""create"" in the second definition's header."
        ""
-       "And you will also see, I hope, that a button's width depends on it's name, and that the spot we start with is at the right-bottom of the button."
+       "And you will also see, I hope, that a button's width depends on its name, and that the spot we start with is at the right-bottom of the button."
     end
   end
   page 12240 15840 1 1440
@@ -6266,7 +6267,8 @@ ream cal-3024
        "MAKE a box WITH this spot AND that spot."
        "MAKE a box WITH this left AND top AND right AND bottom."
        ""
-       "I can, of course, DRAW a box. And I've got functions in my noodle to get a box's WIDTH, HEIGHT, and CENTER, among other things. I can even tell if a box IS INSIDE or IS TOUCHING another box. And whether or not a certain spot IS IN a box or IS ON the edge of a box. Not to mention all the other ""Graphic Transformations"" you can read about elsewhere in this glossary."
+       "I can, of course, DRAW a box. And I have functions in my noodle to get"
+       "a box's WIDTH, HEIGHT, and CENTER, among other things. I can even tell if a box IS INSIDE or IS TOUCHING another box. And whether or not a certain spot IS IN a box or IS ON the edge of a box. Not to mention all the other ""Graphic Transformations"" you can read about elsewhere in this glossary."
     end
     text -1 0 0 -1 0 0 10800 14760 11520 15120 0 "page number" "Arial" 320 "right" 0 0 0 yes
        "63"
@@ -6766,7 +6768,7 @@ ream cal-3024
     polygon 0 0 0 -1 0 0 4 2160 5760 5040 5670 7920 5850 10080 5760
     polygon 0 0 0 -1 0 0 2 10080 4320 10080 5760
     text -1 0 0 -1 0 0 2520 4320 9720 5400 0 "" "Arial" 320 "left" 0 0 0 yes
-       "I am the CAL-3040. What is your name?"
+       "I am the CAL-3083. What is your name?"
        "> Dr. Chandra"
        "Good morning, Dr. Chandra. I'm ready for my first lesson."
     end
@@ -6961,7 +6963,7 @@ ream cal-3024
        "MAKE an ellipse WITH this spot AND that spot."
        "MAKE an ellipse WITH this left AND top AND right AND bottom."
        ""
-       "I can, of course, DRAW an ellipse. And I've got functions to get an ellipse's WIDTH, HEIGHT, and CENTER, among other things. I can even tell if a spot IS IN an ellipse or IS ON the edge of an ellipse. Not to mention all the usual ""Graphic Transformations"" you can read about elsewhere in this glossary."
+       "I can, of course, DRAW an ellipse. And I have functions to get an ellipse's WIDTH, HEIGHT, and CENTER, among other things. I can even tell if a spot IS IN an ellipse or IS ON the edge of an ellipse. Not to mention all the usual ""Graphic Transformations"" you can read about elsewhere in this glossary."
     end
     text -1 0 0 -1 0 0 10800 14760 11520 15120 0 "page number" "Arial" 320 "right" 0 0 0 yes
        "76"
@@ -7270,7 +7272,7 @@ ream cal-3024
        ""
        "The second field includes an adjective, ADDRESS, between the article and the type. This is ""the person's address string"", or just ""the person's address""."
        ""
-       "The third field is defined like the first field, but with a name forced upon it in the CALLED clause. It is ""the person's gender"". You will normally use this form only when a field's type has nothing to do with it's name."
+       "The third field is defined like the first field, but with a name forced upon it in the CALLED clause. It is ""the person's gender"". You will normally use this form only when a field's type has nothing to do with its name."
        ""
        "The fourth field uses AT to redefine the third, giving it a new name. Overlapping data types must be compatible for things like this to work."
        ""
@@ -7427,7 +7429,7 @@ ream cal-3024
        ""
        "Draw ""Hello, World!"" in the center of the screen's box with the font."
        ""
-       "If your fonts don't look right, you've probably got a bad font name. Remember, a font name is not necessarily the name of the file in the ""font"" folder on your disk. Rather, it is the ""typeface name"" displayed in the sample box when you double-click on one of those font files."
+       "If your fonts don't look right, you probably have a bad font name. Remember, a font name is not necessarily the name of the file in the ""font"" folder on your disk. Rather, it is the ""typeface name"" displayed in the sample box when you double-click on one of those font files."
     end
     text -1 0 0 -1 0 0 10800 14760 11520 15120 0 "page number" "Arial" 320 "right" 0 0 0 yes
        "83"
@@ -7472,10 +7474,10 @@ ream cal-3024
        "A ""global"" is a variable that is visible to, and can be used by, any routine in a program. Globals can be defined in various ways, but their definitions always begin with the definite article THE. Here are some examples from my noodle:"
        ""
        "The arrow cursor is a cursor."
-       "The backspace key is a key equal to 8."
+       "The max text undos is a count equal to 32."
        "The largest number is 2147483647."
        ""
-       "The first global will be initialized to all zeros. The second has an explicit type, ""key"", and a value. The third has an implied type. The general forms here are:"
+       "The first global will be initialized to all zeros. The second has an explicit type, ""count"", and a value. The third has an implied type. The general forms are:"
        ""
        "THE name IS A type name."
        "THE name IS A type name EQUAL TO something."
@@ -7860,7 +7862,8 @@ ream cal-3024
        "The third example puts a literal 101 into a new local variable of type number. This variable is defined with adjectives preceding the type name, so it can be referenced by its full name, ""the other course number"", or by nickname, "
        """the other course"". You can read more about names under the ""Names"" topic."
        ""
-       "See also the ""Loops"" page, where a local variable and a decider lets us make ""counted loops"" without adding any new keywords to my compiler."
+       "See also the ""Loops"" page, where a local variable and a decider let us"
+       "make ""counted loops"" without adding any new keywords to my compiler."
     end
     text -1 0 0 -1 0 0 10800 14760 11520 15120 0 "page number" "Arial" 320 "right" 0 0 0 yes
        "95"
@@ -7955,7 +7958,7 @@ ream cal-3024
        "\ stuff you want to do after the loop"
     end
     text -1 0 0 -1 0 0 2550 5040 10020 5400 0 "" "Courier New" 288 "left" 2100 1000 625 yes
-       "\ stuff you want to do at least once"
+       "  \ stuff you want to do at least once"
     end
     text -1 0 0 -1 0 0 2550 6720 10020 7080 0 "" "Courier New" 288 "left" 2100 1000 625 yes
        "\ stuff you may or may not want to do"
@@ -7987,7 +7990,7 @@ ream cal-3024
        "MASK ONLY INSIDE something."
        "MASK ONLY OUTSIDE something."
        ""
-       "Note that if you're drawing your heart out and nothing is showing up, it's probably because you've got masking tape where you don't want it, or you've forgotten to REFRESH THE SCREEN as described in the ""Drawing"" topic."
+       "Note that if you're drawing your heart out and nothing is showing up, it's probably because you have masking tape where you don't want it, or you've forgotten to REFRESH THE SCREEN as described in the ""Drawing"" topic."
     end
     text -1 0 0 -1 0 0 10800 14760 11520 15120 0 "page number" "Arial" 320 "right" 0 0 0 yes
        "97"
@@ -8060,13 +8063,14 @@ ream cal-3024
        ""
        "To add a number to another number:"
        "To decide if a spot is in some polygons:"
-       "To put an ellipse's center into a spot:"
+       "To put a box's center into a spot:"
        ""
        "The first routine is a procedure that expects two parameters: ""a number"" and ""another number"". The first is input; the second is both input and output."
        ""
        "The second routine is a decider. It also expects two parameters, ""a spot"" and ""some polygons"". Both parameters are input only."
        ""
-       "The third routine is a function with two parameters: ""an ellipse"" and ""a spot"". The ellipse is input and the spot is output."
+       "The third routine is a function with two parameters: ""a box"" and ""a spot""."
+       "The box is input and the spot is output."
        ""
        "Parameter definitions are easy to spot because they always start with an indefinite article, A, AN, ANOTHER, or SOME, followed by a name. You can read more about names in the ""Names"" topic."
        ""
@@ -8426,7 +8430,7 @@ ream cal-3024
        "MAKE a roundy box WITH a left AND top AND right AND bottom AND radius."
        "MAKE a roundy box FROM a box AND a radius."
        ""
-       "I can, of course, DRAW a roundy box. And I've got functions to get a roundy box's WIDTH, HEIGHT, and CENTER, among other things. I can even tell  whether or not a certain spot IS IN a roundy box or IS ON the edge of a roundy box. Not to mention all the usual ""Graphic Transformations""."
+       "I can, of course, DRAW a roundy box. And I have functions to get a roundy box's WIDTH, HEIGHT, and CENTER, among other things. I can even tell  whether or not a certain spot IS IN a roundy box or IS ON the edge of a roundy box. Not to mention all the usual ""Graphic Transformations""."
     end
     text -1 0 0 -1 0 0 10800 14760 11520 15120 0 "page number" "Arial" 320 "right" 0 0 0 yes
        "109"
@@ -8595,6 +8599,7 @@ ream cal-3024
        ""
        ""
        ""
+       ""
        "Spots are made from an x and a y, or you can get one from someplace else:"
        ""
        "MAKE a spot WITH this AND that."
@@ -8609,14 +8614,24 @@ ream cal-3024
     text -1 0 0 -1 0 0 10800 14760 11520 15120 0 "page number" "Arial" 320 "right" 0 0 0 yes
        "114"
     end
-    text -1 0 0 -1 0 0 2160 5790 2520 6150 0 "" "Arial" 360 "right" 0 0 0 yes
-       "X"
+    text -1 0 0 -1 0 0 2205 6060 2565 6420 0 "" "Arial" 360 "right" 0 0 0 yes
+       "Y"
     end
-    text -1 0 0 -1 0 0 2700 5790 3060 6150 0 "" "Arial" 360 "center" 0 0 0 yes
+    text -1 0 0 -1 0 0 3030 5880 3390 6240 0 "" "Arial" 360 "center" 0 0 0 yes
        "•"
     end
-    text -1 0 0 -1 0 0 2700 5340 3060 5700 0 "" "Arial" 360 "center" 0 0 0 yes
-       "Y"
+    text -1 0 0 -1 0 0 3180 5175 3540 5535 0 "" "Arial" 360 "center" 0 0 0 yes
+       "X"
+    end
+    group
+      polygon 0 0 0 -1 0 0 2 2490 5340 2490 6060
+      polygon 0 0 0 -1 0 0 2 2580 5880 2490 6060
+      polygon 0 0 0 -1 0 0 2 2400 5880 2490 6060
+    end
+    group
+      polygon 0 0 0 -1 0 0 2 2490 5340 3210 5340
+      polygon 0 0 0 -1 0 0 2 3030 5250 3210 5340
+      polygon 0 0 0 -1 0 0 2 3030 5430 3210 5340
     end
   end
   page 12240 15840 1 1440

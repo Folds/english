@@ -3137,8 +3137,8 @@ to deselect a text:
   put the text's caret into the text's anchor.
 
 a designator is a string.
-  \ rightmost directory with slash = folder2\
-  \ OR after the last slash to end of path = file.ext
+  \ rightmost directory with backslash = folder2\
+  \ OR after the last backslash to end of path = file.ext
 
 to destroy a crypt session:
   if the crypt session is nil, exit.
@@ -3270,12 +3270,12 @@ a devmode is a record with
 a difference is a pair.
 
 a directory is a path.
-  \ start of path to last slash inclusive = c:\folder1\folder2\
+  \ start of path to last backslash inclusive = c:\folder1\folder2\
 
-a directory name is a string. \ rightmost directory with slash = folder2\
+a directory name is a string. \ rightmost directory with backslash = folder2\
 
-a directory name w/o slash is a string.
-  \ rightmost directory without slash = folder2
+a directory name w/o backslash is a string.
+  \ rightmost directory without backslash = folder2
 
 a distance is a number.
 
@@ -3790,8 +3790,8 @@ to draw a text (editing):
   restore the current canvas.
 
 a drive is a string.
-  \ start of path to first slash = c:\
-  \ OR start of path to fourth slash = \\computer\share\
+  \ start of path to first backslash = c:\
+  \ OR start of path to fourth backslash = \\computer\share\
 
 a drive kind is a string.
 
@@ -4125,10 +4125,10 @@ to extract a directory name from a path:
   if the path is not directory-format, exit.
   extract the directory name as a designator from the path.
 
-to extract a directory name w/o slash from a path:
-  extract the directory name w/o slash as a directory name from the path.
-  if the directory name w/o slash is blank, exit.
-  remove the last byte from the directory name w/o slash.
+to extract a directory name w/o backslash from a path:
+  extract the directory name w/o backslash as a directory name from the path.
+  if the directory name w/o backslash is blank, exit.
+  remove the last byte from the directory name w/o backslash.
 
 to extract a drive from a path:
   clear the drive.
@@ -4216,10 +4216,10 @@ to extract a string from a text (selected bytes):
 
 a file is a handle.
 
-a file name is a string. \ after the last slash to end of path = file.ext
+a file name is a string. \ after the last backslash to end of path = file.ext
 
 a file name w/o extension is a string.
-  \ after the last slash to last dot or end of path = file
+  \ after the last backslash to last dot or end of path = file
 
 a filetime is a record with
   a number called dwlowdatetime,
@@ -4543,7 +4543,7 @@ some font widths is a thing with \ used for pdf conversion
   a count,
   a number pointer called data.
 
-an foot is 12 inches.
+a foot is 12 inches.
 
 to format a number and a singular string or a plural string into a string:
   convert the number to the string.
@@ -5810,7 +5810,8 @@ to initialize the cgi:
     returning the stdout handle.
 
 to initialize com:
-  call "ole32.dll" "CoInitializeEx" with 0 and 2 [coinit_apartmentthreaded].
+  call "ole32.dll" "CoInitializeEx"
+    with 0 and 2 [coinit_apartmentthreaded].
 
 to initialize the cursors:
   initialize the cursors (arrow cursor).
