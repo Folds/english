@@ -98,9 +98,6 @@ to describe a test result given a string called context and a string called test
   put the context in the test result's context.
   put the test name in the test result's test name.
 
-to destroy a test result set:
-  destroy the test result set's test results.
-
 to draw the status:
   \ if list or compile or test was requested,
   \ the noodle's to refresh routines will not display anything.
@@ -119,15 +116,10 @@ to draw the status:
 
 an expectation is a string.
 
-a fail color is a color.
-
 to fail a test result given a string called actual:
   \ assumes that the test result's expectation is already populated.
   put the actual in the test result's actual value.
   put the actual in the test result's interpretation.
-
-to fail a test result given a string called expectation and a string called actual:
-  populate the test result given the expectation and the actual and the actual.
 
 to finalize a result set:
   destroy the result set's test results.
@@ -282,27 +274,10 @@ the lingering status string is a string.
 
 the maximum test quota is a quota equal to 15.
 
-a pass color is a color.
-
 to pass a test result given a string called actual:
   \ assumes that the test result's expectation is already populated.
   put the actual in the test result's actual value.
   put the test result's expectation in the test result's interpretation.
-
-to pass a test result given a string called expectation and a string called actual:
-  populate the test result given the expectation and the actual and the expectation.
-
-to populate a test result given a string called expectation
-    and a string called actual and a string called interpretation:
-  put the expectation in the test result's expectation.
-  put the actual in the test result's actual value.
-  put the interpretation in the test result's interpretation.   
-
-to put a test result set into another test result set:
-  put the test result set's passed
-    into the other test result set's passed.
-  put the test result set's failed
-    into the other test result set's failed.
 
 a quota is a number.
 
@@ -316,11 +291,6 @@ to refont a submenu:
     if the current font's height is at most the command's font's height,
       put the current font's height into the command's font's height.
   repeat.
-
-to remove the last three bytes from a string:
-  remove the last byte from the string.
-  remove the last byte from the string.
-  remove the last byte from the string.
 
 to resize the status:
   put the bar's display and 1/12 inch into the status' roundy box.

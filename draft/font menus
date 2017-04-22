@@ -261,17 +261,6 @@ to initialize the font names:
   add "Times New Roman" to the standard font names.
   put the default font's name in the recent nonstandard font name.
 
-to put a color in part of a submenu given a number:
-  if the submenu is nil, exit.
-  put 0 in a number called counter.
-  loop.
-    get a command from the submenu's commands.
-    if the command is nil, exit.
-    add 1 to the counter.
-    if the counter is the number,
-      put the color in the command's color; exit.
-  repeat.
-
 to sort some string things (by height):
   if the string things' first is the string things' last, exit.
   split the string things
@@ -300,12 +289,12 @@ the standard font names are some font name things.
 
 to test (font menus - at least five font names):
   create a test result about "font names" and "count choices"
-    and expecting "at least six choices".
+    and expecting "at least five choices".
   create a submenu (font names).
   count commands in the submenu returning a count called actual.
   put the actual in the test result's actual value.
   put the actual in the test result's interpretation.
-  if the actual is at least 6,
+  if the actual is at least 5,
     put the test result's expectation in the test result's interpretation.
   append the test result to the status' all test results.
   destroy the submenu.
@@ -463,17 +452,6 @@ to test (font menus - one name highlighted):
   append the test result to the status' all test results.
   destroy the submenu.
 
-to test (font menus - times new roman is wysiwyg):
-  create a test result about "font names" and "times new roman is wysiwyg"
-    and expecting "times new roman".
-  create a submenu (font names).
-  get a command from the submenu given "times new roman".
-  if the command is not nil,
-    put the command's font's name in a string called actual.
-  check the test result given the actual.
-  append the test result to the status' all test results.
-  destroy the submenu.
-
 to test (font menus - small heights are wysiwyg):
   create a test result about "font heights" and "1/6 Inch is wysiwyg"
     and expecting "1/6 Inch".
@@ -501,6 +479,17 @@ to test (font menus - sorting by height):
   check the test result given the actual.
   append the test result to the status' all test results.
   destroy the dummies.
+
+to test (font menus - times new roman is wysiwyg):
+  create a test result about "font names" and "times new roman is wysiwyg"
+    and expecting "times new roman".
+  create a submenu (font names).
+  get a command from the submenu given "times new roman".
+  if the command is not nil,
+    put the command's font's name in a string called actual.
+  check the test result given the actual.
+  append the test result to the status' all test results.
+  destroy the submenu.
 
 to test (font menus):
   test (font menus - get inches string).

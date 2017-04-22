@@ -2039,6 +2039,29 @@ to decide if some fields should be finalized:
   if the field's type should be finalized, say yes.
   repeat.
 
+to decide if a global is conflicted:
+  if the global's name is not in the global index, say no.
+  if the global is perfectly predefined, say no.
+  say yes.
+
+to decide if a global is perfectly predefined:
+  loop.
+    get another global from the predefined globals.
+    if the other global is nil, say no.
+    if the global is twin of the other global, say yes.
+  repeat.
+
+to decide if a global is twin of another global:
+  if the global is nil, say no.
+  if the other global is nil, say no.
+  \ OK to have different loci.
+  if the global's kind is not "global", say no.
+  if the other global's kind is not "global", say no.
+  if the global's name is not the other global's name, say no.
+  if the global's type name is not the other global's type name, say no.
+  if the global's global body is not the other global's global body, say no.
+  say yes.
+
 to decide if listing failed:
   if list was not requested, say no.
   if the i/o error is blank, say no.
@@ -2481,6 +2504,8 @@ to define a global variable given a string:
   slap a rider on the string.
   scan a global given the rider.
   put nil in the global's locus.
+  twin the global returning another global.
+  append the other global to the predefined globals.
 
 the dereference tag is a tag equal to 5.
 
@@ -2582,6 +2607,7 @@ to finalize the compiler:
   destroy the routines.
   destroy the literals.
   destroy the globals.
+  destroy the predefined globals.
   destroy the types.
   destroy the source files.
 
@@ -2828,7 +2854,11 @@ the increment tag is a tag equal to 10.
 to index a global:
   if the compiler's abort flag is set, exit.
   if the global is nil, exit.
-  if the global's name is in the global index, abort with "'" then the global's name then "' is a duplicate global variable." and the global's locus; exit.
+  if the global is conflicted,
+    abort with "'" then the global's name 
+      then "' is a duplicate global variable."
+      and the global's locus; exit.
+  if the global's name is in the global index, exit.
   index the global given the global's name and the global index.
 
 to index a literal:
@@ -3556,6 +3586,8 @@ to pluralize a string: \ nouns only
   if the string ends with "z", append "es" to the string; exit.
   append "s" to the string.
 
+the predefined globals are some globals.
+
 the prolog tag is a tag equal to 17.
 
 a prototype string has a first byte pointer and a last byte pointer.
@@ -3579,7 +3611,7 @@ to put the compiler's listing path into a path:
   extract a designator from the compiler's directory.
   remove any trailing backslash from the designator.
   put the compiler's directory then the designator then ".lst" into the path.
-
+  \
   \ The preceding routine is a getter routine.
   \ Even though the compiler was NOT defined to have
   \ a member field called listing path,
@@ -3838,25 +3870,6 @@ to resolve a variable (explicit type name):
 the resolving globals timer is a timer.
 
 the resolving types timer is a timer.
-
-\ the return code is a number.
-
-\ An uncommented version of the previous comment line
-\ is automatically inserted by the compiler,
-\ so that source code that compiled on pre-3075 cal compilers
-\ will compile without change.
-
-\ The return code is returned by the program
-\ to the operating system when the program ends.
-\ It is 0 if the program succeeds.
-\ It is 1 if a command-line requested compilation failed.
-\ (The /compile and /list flags request compilation.)
-\ It is a positive number if one or more tests
-\ in a command-line requested regression test run failed.
-
-\ 259 is not a valid return code, because Windows
-\ uses 259 to mean that a process is STILL_ACTIVE.
-\ https://msdn.microsoft.com/en-us/library/windows/desktop/ms683189(v=vs.85).aspx
 
 to round up borough sizes:
   put the import borough's length into the import borough's size.
@@ -4355,6 +4368,15 @@ to transmogrify some routines:
   repeat.
 
 the transmogrifying timer is a timer.
+
+to twin a global returning another global:
+  if the global is nil, exit.
+  if the other global is nil,
+    allocate memory for the other global.
+  put the global's kind in the other global's kind.
+  put the global's name in the other global's name.
+  put the global's type name in the other global's type name.
+  put the global's global body in the other global's global body.
 
 the type index is an index.
 

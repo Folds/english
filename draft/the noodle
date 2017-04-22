@@ -874,7 +874,7 @@ to compatibly handle any message with a window a message number a w-param and an
   if the message is 260, handle any wm-syskeydown with the w-param and the l-param; put 0 into eax; exit.
   if the message is 026, handle any wm-settingchange; put 0 into eax; exit.
   call "user32.dll" "DefWindowProcA" with the window and the message and the w-param and the l-param.
-
+\
 \The wm- message numbers are listed at:
 \http://www.pinvoke.net/default.aspx/Constants.WM
 
@@ -1498,6 +1498,7 @@ to copy some rows into some other rows:
   repeat.
 
 to copy some string things into some string things called duplicates:
+  \ to-do:  validate all uses of this routine.
   destroy the duplicates.
   loop.
     get a string thing from the string things.
@@ -1878,6 +1879,7 @@ to create a socket given a host string and a port number: \ this guy creates and
   if the result is not 0, put "Could not set receive timeout." into the i/o error; exit.
 
 to create a string thing:
+  \ to-do:  validate uses of this routine.
   allocate memory for the string thing.
 
 to create a string thing given a string:
@@ -2050,7 +2052,7 @@ to debug a rgb:
 to debug a string:
   privatize the string.
   null terminate the string.
-  call "user32.dll" "MessageBoxA" with 0 
+  call "user32.dll" "MessageBoxA" with 0
     and the string's first and "debug"'s first and 0.
 
 to debug a string (quoted):
@@ -3097,6 +3099,7 @@ to decrypt a buffer given a passphrase string: \ sets i/o error if failure
 
 to deduplicate some string things:
   \ assumes the string things are already sorted.
+  \ to-do:  verify.
   if the string things' first is the string things' last, exit.
   get a string thing from the string things.
   if the string thing is nil, exit.
@@ -4246,7 +4249,7 @@ to finalize after run:
     put the count then " drip." into a string.
   if the count is not 1,
     put the count then " drips." into the string.
-\  debug the string.
+  debug the string.
 
 to finalize the canvases:
   finalize the memory canvas.
@@ -4453,8 +4456,6 @@ to find a substring in a string given another string:
     add 1 to the substring's first.
   repeat.
   put the substring's first plus the other string's length minus 1 into the substring's last.
-
-\** very useful
 
 to find a value string given some dyads and a name:
   find a dyad given the dyads and the name.
@@ -4837,7 +4838,7 @@ to get requested leaf directory path given a command line returning a path:
     trim the designator's length from the path.
     if the path is "", exit.
   repeat.
-
+\
 \to-do:  Replace repeated remove last byte
 \and remove first byte code with remove first __ bytes
 \and remove last __ bytes code.
@@ -5028,7 +5029,7 @@ to get a string [program name] from a command line:
   parse the command line returning some string things.
   put the string things' first's string in the string.
   destroy the string things.
-
+\
 \ In Windows, the first item in the command line
 \ is the program name used to call the program;
 \ it is not necessarily the program's canonical name.
@@ -5238,24 +5239,24 @@ to handle any wm-paint with a window:
   create an event.
   put "refresh" into the event's kind.
   enque the event.
-
+\
 \ to-do:
 \ to decide if a window has an update region:
 \   create a box.
 \   call "user32.dll" "GetUpdateRect" with the window and the box' whereabouts  and no.
 \   if all four sides of the box are zero, say no.
 \   say yes.
-
+\
 \ to-do:
 \ to handle any wm-displaychange with a window a w-param:
 \  w-param is the new display resolution, in pixels per inch
 \  l-param's low-order word specifies the horizontal resolution of the screen.
 \  l-param's high-order word specifies the vertical resolution of the screen.
-
+\
 \ to-do:
 \ to handle any wm-ncpaint with a window a w-param and an l-param:
 \  w-param is the handle to the update region of the window frame.
-
+\
 \ to-do:
 \ to handle any wm-size with the window and the w-param and the l-param:
 \   w-param possible values:
@@ -5266,7 +5267,7 @@ to handle any wm-paint with a window:
 \     0:  the window has been resized, but neither minimized nor maximized.
 \   the l-param's low-order word is the new width of the client area.
 \   the l-param's high-order word is the new height of the client area.
-
+\
 \ to-do:
 \ to handle any wm-sizing with the window and the w-param and the l-param:
 \   w-param possible values:
@@ -5306,8 +5307,7 @@ to handle any wm-settingchange:
   put "setting change" into the event's kind.
   enque the event.
 
-to handle any wm-syskeydown with a w-param and an l-param:
-  employ handle any wm-keydown with a w-param and an l-param.
+to handle any wm-syskeydown with a w-param and an l-param: employ handle any wm-keydown with a w-param and an l-param.
 
 to handle capitalize given a text:
   if the text is nil, exit.
@@ -5880,7 +5880,7 @@ to initialize the fonts:
 to initialize gdi+:
   put 1 into a gdiplusstartupinput's gdiplusversion.
   call "gdiplus.dll" "GdiplusStartup" with the gptoken's whereabouts
-   and the gdiplusstartupinput's whereabouts and 0.
+    and the gdiplusstartupinput's whereabouts and 0.
 
 to initialize the memory canvas:
   call "gdi32.dll" "CreateCompatibleDC" with the screen canvas returning the memory canvas.
@@ -5993,9 +5993,8 @@ to initialize the window:
   put the module's handle into the window class' hinstance.
   put the module's name's first into the window class' lpszclassname.
   call "user32.dll" "RegisterClassExA" with the window class's whereabouts.
-  put 1000 into a number called window width.
   call "user32.dll" "CreateWindowExA" with 0 and the module's name's first
-    and the module's name's first and -2147483648 [ws_popup]
+    and the module's name's first and -2147483648 [ws_popup] 
     and 0 and 0 and the screen's pixel width and the screen's pixel height
     and 0 and 0 and the module's handle and 0.
   resize the main window given the screen.
@@ -8551,8 +8550,6 @@ to remove bytes from a string given a substring:
   reassign the string's first given the new length.
   put the string's first plus the new length minus 1 into the string's last.
 
-\**very useful **
-
 to remove bytes from a text (backspace over a return):
   if the text is nil, exit.
   if the text's caret row# is 1, exit.
@@ -8619,6 +8616,9 @@ to remove the last byte from a string:
   slap a substring on the last byte of the string.
   remove bytes from the string given the substring.
 
+to remove the last three bytes from a string:
+  remove trailing bytes from the string given 3.
+
 to remove the last two bytes from a string:
   remove trailing bytes from the string given 2.
 
@@ -8628,8 +8628,6 @@ to remove leading bytes from a string given a count:
   slap a substring on the first byte of the string.
   put the substring's first plus the count minus 1 into the substring's last.
   remove bytes from the string given the substring.
-
-\** very useful
 
 to remove the rows of a text between a row and another row:
   if the text is nil, exit.
@@ -8662,8 +8660,6 @@ to remove trailing bytes from a string given a count:
   slap a substring on the last byte of the string.
   put the substring's last minus the count plus 1 into the substring's first.
   remove bytes from the string given the substring.
-
-\**very useful **
 
 to rename a path to another path in the file system:
   privatize the path.
@@ -8886,6 +8882,36 @@ to restore a screen:
 
 to restore a window:
   call "user32.dll" "ShowWindow" with the window and 9 [sw_restore].
+
+the return code is a number.
+\
+\ The return code is returned by the program
+\ to the operating system when the program ends.
+\ It is 0 if the program succeeds.
+\ It is 1 if a command-line requested compilation failed.
+\ (The /compile and /list flags request compilation.)
+\ It is a positive number if one or more tests
+\ in a command-line requested regression test run failed.
+\
+\ 259 is not a valid return code, because Windows
+\ uses 259 to mean that a process is STILL_ACTIVE.
+\ https://msdn.microsoft.com/en-us/library/windows/desktop/ms683189(v=vs.85).aspx
+\
+\ Forward- and backward-compatibility notes:
+\  * A copy of this global declaration
+\    is inserted by the compiler.
+\    Thus, source code that compiled on cal compilers that
+\    have hard-coded return codes will compile without change.
+\  * Including this global declaration allows this source code
+\    to compile on cal compilers that
+\    do not insert a copy of this global declaration.
+\  * This global declaration exactly matches
+\    what is inserted by the compiler.
+\    This otherwise-duplicate global declaration is ignored
+\    because of the exact match to the inserted code.
+\    Ignoring this otherwise-duplicate global declaration
+\    allows compilers that insert the global declaration
+\    to compile this source code.
 
 to reverse any selected rows of a text:
   if the text is nil, exit.
@@ -9228,6 +9254,7 @@ to scroll a text down one page:
   if the text's vertical scroll flag is not set, exit.
   subtract the text's box's y-extent from the text's y.
   add the text's row height to the text's y.
+\  limit the origin of the text.
   limit the origin of the text (scrolling).
 
 to scroll a text given a count:
@@ -9247,13 +9274,15 @@ to scroll a text given a difference:
     put 0 into the difference's y.
   if the difference is 0, exit.
   move the text's origin given the difference.
+\  limit the origin of the text.
   limit the origin of the text (scrolling).
 
 to scroll a text to the top:
   if the text is nil, exit.
   if the text's vertical scroll flag is not set, exit.
   put 0 into the text's y.
-  limit the origin of the text.
+\  limit the origin of the text.
+  limit the origin of the text (scrolling).
 
 to scroll a text up one line:
   if the text is nil, exit.
@@ -9266,6 +9295,7 @@ to scroll a text up one page:
   if the text's vertical scroll flag is not set, exit.
   add the text's box's y-extent to the text's y.
   subtract the text's row height from the text's y.
+\  limit the origin of the text.
   limit the origin of the text (scrolling).
 
 a second is 1000 milliseconds.
@@ -10273,7 +10303,7 @@ to test (command line - parsing):
   summarize the string things returning a string called actual (tersely).
   stash the test result given the actual.
   destroy the string things.
-
+\
 \ CAL interprets a pair of double-quotes
 \   (in the source code that defines a string)
 \   as one double-quote (in the defined string).
@@ -10503,7 +10533,7 @@ to test (the talker - find winmm):
   put "'winmm.dll' not found" in a string called actual.
   if the library is loadable, put "'winmm.dll' found" in the actual.
   stash the test result using the actual.
-
+\
 \to test (the talker - get winmm clsid):
 \  \ winmm.dll includes "PlaySound".
 \  create a test result about "the noodle" and "get winmm.dll's clsid"
@@ -10868,7 +10898,7 @@ to write a buffer to a file:
 to write a buffer to a path:
   clear the i/o error.
   extract a directory from the path.
-  if the directory is not in the file system, 
+  if the directory is not in the file system,
     put "Directory '" then the directory then "' doesn't exist."
       into the i/o error;
     exit.

@@ -9,6 +9,8 @@
 \ The desktop's bar includes the status.  The status' code is in another file.
 \ The status' code includes the regression test results and their menu.
 
+an abbreviation byte is a byte.
+
 to add a color and a handler to a menu:
   if the menu is nil, exit.
   create a command.
@@ -16,9 +18,6 @@ to add a color and a handler to a menu:
   put the swatch width into the command's width.
   put the handler into the command's handler.
   put the color into the command's color.
-
-to add a name and a handler and a color to a submenu:
-  add the name and "" and the handler and the color to the submenu.
 
 to add a name and a handler to a menu:
   if the menu is nil, exit.
@@ -251,11 +250,6 @@ to decide if a command is pointless:
   if the command's handler has a letter menu, say no.
   say yes.
 
-to decide if a doer status is caused by invalid handle:
-  if the doer status' error flag is not set, say no.
-  if the doer status' error is 6, say yes.
-  say no.  
-
 to decide if a doer status is still active:
   if the doer status' error flag is set, say no.
   if the doer status' status is 259 [STILL_ACTIVE], say yes.
@@ -283,10 +277,6 @@ to decide if a font is fixed-width:
   if the width is the other width, say yes.
   say no.
 
-to decide if a font is proportional:
-  if the font is fixed-width, say no.
-  say yes.
-
 to decide if half screen was requested:
   if left  was requested, say yes.
   if right was requested, say yes.
@@ -301,7 +291,7 @@ to decide if a handler has a letter menu:
   say no.
 
 to decide if a node should be read-only:
-  if the node is nil, say no.
+  if the node is nil, say  no.
   if the node's kind is not "file", say no.
   loop.
     get a tab from the tabs.
@@ -493,11 +483,10 @@ to fill some tabs:
     put the path in another path.
     if the string thing is not nil,
       get relevant path given the path and the string thing returning the other path.
-    if the other path is not "",
-      open the tab's node given the other path;
-      switch the tab to the tab's node.
     if the other path is "",
-      open the tab's node.
+      open the tab's node; repeat.
+    open the tab's node given the other path.
+    switch the tab to the tab's node.
   repeat.
 
 to finalize:
@@ -583,29 +572,37 @@ to format a string to fit in a box given a font:
     if the string's length is less than 2, exit.
     get another width given the string and the memory canvas and the font.
     if the other width is less than the width, exit.
+    get an abbreviation byte given the font.
     if the string starts with "the ",
       remove the first byte from the string;
       remove the first byte from the string;
       remove the first byte from the string;
       remove the first byte from the string;
-      put "t…" then the string in the string;
+      put the little-t byte then the abbreviation byte
+        then the string in the string;
       repeat.
     remove the last byte from the string.
     remove the last byte from the string.
-    append "…" to the string.
+    append the abbreviation byte to the string.
   repeat.
 
 a free tab is a tab.
 
-to get a process status of a process:
-  clear the process status' error flag.
-  put 0 in the process status' error.
-  call "kernel32.dll" "GetExitCodeProcess" with the process
-    and the process status' status' whereabouts
-    returning a number.
-  if the number is 0,
-    put the system's last error into the process status' error;
-    set the process status' error flag.
+to get an abbreviation byte given a font:
+  \ "…" is the best abbreviation, so use it in fixed-width fonts.
+  if the font is fixed-width,
+    put the ellipsis byte in the abbreviation byte; exit.
+  \ In proportional fonts, "…" is rather wide.
+  \ "t„noodle" takes the same space as "t…noo…" in Arial.
+  \ The "„" does not look as good, but is much narrower,
+  \ so use it instead.
+  put the lower-double-quote byte in the abbreviation byte.
+  \ To-do:  Allow wide strings as command names.
+  \         Allow drawing wide strings in boxes.
+  \         Allow wide strings in sources, text, and rows.
+  \         Change the "„" (U+0084)
+  \         to a "modifier letter low tilde" (U+02F7)
+  \         https://www.everything2.com/title/Spacing+modifier+letters
 
 to get relevant path given a path and a string thing returning another path:
   if the string thing is nil,
@@ -683,14 +680,6 @@ to get a thread status of a thread handle:
   if the number is 0,
     put the system's last error into the thread status' error;
     set the thread status' error flag.
-
-to gray out a submenu:
-  if the submenu is nil, exit.
-  loop.
-    get a command from the submenu's commands.
-    if the command is nil, exit.
-    put the desktop color in the command's color.
-  repeat.
 
 to handle align given an alignment:
   if the current tab's mode is "writer",
@@ -912,8 +901,8 @@ to handle a command:
   if the handler is "handle ungrayscale", handle grayscale given no; exit.
   if the handler is "handle ungroup", handle ungroup; exit.
   if the handler is "handle unlabel", handle unlabel; exit.
-  if the handler is "handle uptick", handle uptick; exit.
   if the handler is "handle uppercase", handle uppercase; exit.
+  if the handler is "handle uptick", handle uptick; exit.
   if the handler is "handle version", handle version; exit.
   if the handler is "handle yank the tpp", handle yank given the tpp; exit.
   if the handler starts with "handle yank ",
@@ -1022,6 +1011,7 @@ to handle compile:
   if compile was requested, handle compile (requested); exit.
   if the current tab's mode is not "editor", cluck; exit.
   handle save all.
+  untint the status.
   if the i/o error is not blank, exit.
   find a directory to compile.
   if the directory is blank, show error "I'm not sure what to compile."; exit.
@@ -1393,6 +1383,7 @@ to handle list:
   if list was requested, handle list (requested); exit.
   if the current tab's mode is not "editor", cluck; exit.
   handle save all.
+  untint the status.
   if the i/o error is not blank, exit.
   find a directory to compile.
   if the directory is blank,
@@ -1686,16 +1677,19 @@ to handle run:
   if the compiler's abort flag is set,
     handle compile or list or run error; exit.
   show status "Running...".
+\  start the current process
+\    given the compiler's exe path.
+\
   \ CloseHandle does not end a thread if the thread
   \   is still running; CloseHandle just dumps the handle
   \ If the handle was the last handle to a completed thread,
   \   CloseHandle makes the thread status unreachable
   \   and lets the system re-use the space, resources,
   \   handles, and IDs associated with the thread.
-  if the recent thread handle is not 0,
-    call "kernel32.dll" "CloseHandle" with the recent thread handle.
-  if the recent twin thread handle is not 0,
-    call "kernel32.dll" "CloseHandle" with the recent twin thread handle.
+\  if the recent thread handle is not 0,
+\    call "kernel32.dll" "CloseHandle" with the recent thread handle.
+\  if the recent twin thread handle is not 0,
+\    call "kernel32.dll" "CloseHandle" with the recent twin thread handle.
   start the current process
     given the compiler's exe path and the running options
     returning the recent thread handle and the recent twin thread handle.
@@ -1939,9 +1933,9 @@ to populate a submenu given a handler and a mode (letter):
   if the handler is "z", populate the submenu given the mode (z); exit.
 
 to populate a submenu given a mode (a):
-  if the current tab's mode is "writer", add "Align Left" to the submenu.
-  if the current tab's mode is "writer", add "Align Center" to the submenu.
-  if the current tab's mode is "writer", add "Align Right" to the submenu.
+  if the mode is "writer", add "Align Left" to the submenu.
+  if the mode is "writer", add "Align Center" to the submenu.
+  if the mode is "writer", add "Align Right" to the submenu.
 
 to populate a submenu given a mode (b):
   if the mode is "writer", add "Border..." and "border..." to the submenu.
@@ -1956,7 +1950,7 @@ to populate a submenu given a mode (c):
     add "Check Spelling..." and "check spelling..." to the submenu.
   add "Close" and "W" and "handle close" to the submenu.
   add "Close All" to the submenu.
-  if the current tab's mode is "writer",
+  if the mode is "writer",
     add "Color..." and "color..." to the submenu.
   if the mode is "editor",
     add "Comment" and "T" and "handle comment" to the submenu.
@@ -1988,7 +1982,7 @@ to populate a submenu given a mode (f):
   if the mode is "writer", add "Find" and "F" and "handle find" to the submenu.
   if the mode is "editor", add "Find Next" and "N" and "handle find next" to the submenu.
   if the mode is "writer", add "Find Next" and "N" and "handle find next" to the submenu.
-  if the mode is "writer", add "Fill..." to the submenu.
+  if the mode is "writer", add "Fill..." and "fill..." to the submenu.
   if the mode is "writer", add "Flip" to the submenu.
   if the mode is "editor", add "Font Height..." and "font height..." to the submenu.
   if the mode is "writer", add "Font Height..." and "font height..." to the submenu.
@@ -2126,12 +2120,6 @@ to populate a submenu given a mode (y):
   add "Yank None" and "handle yank the tpp" to the submenu.
 
 to populate a submenu given a mode (z):
-
-a process status is a doer status.
-
-to put the rest of a handler after a string into another string:
-  put the handler into a string called fullstring.
-  put the rest of the fullstring after the string into the other string.
 
 the recent nonstandard font height name is a string.
 
@@ -2502,9 +2490,6 @@ to track a tab returning a flag:
 a trio is a menu. \ containing the minimize, restore/maximize, and quit buttons.
 
 the trio is a trio.
-
-to ungray first item of a submenu:
-  put the white color in part of the submenu given 1.
 
 to unquote some string things:
   loop.

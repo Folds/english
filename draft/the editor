@@ -183,6 +183,9 @@ to draw a row of a source (colorized):
 
 to draw a source:
   if the source is nil, exit.
+  \ the scrollbar overlaps with the pad, but shoves the source's text.
+  \ the shoving lets the scrollbar have the (default) arrow cursor,
+  \ instead of the source's i-beam cursor.  
   if the scrollbar is needed,
     put the pad's right minus 1/4 inch in the source's text's right.
   if the scrollbar is not needed,

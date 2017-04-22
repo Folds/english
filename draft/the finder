@@ -152,6 +152,13 @@ to cut a nodette in a node and in the file system:
   copy the nodette in the file system.
   remove the nodette in the node and in the file system.
 
+to decide if a byte is any valid drive:
+  put the byte into a path.
+  append ":\" to the path.
+  get a drive kind for the path.
+  if the drive kind is "", say no.
+  say yes.
+
 to decide if a node is empty:
   if the node is nil, say yes.
   if the node's first nodette is nil, say yes.

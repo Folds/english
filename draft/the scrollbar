@@ -3,6 +3,7 @@
 \ The remainder is copyright 2014, 2017 by Jasper Paulsen.
 
 to adjust a scrollbar:
+  if the scrollbar's cab is nil, exit.
   get a height called cabheight (scrollbar cab height).
   put the scrollbar's cab's top plus the cabheight
     in the scrollbar's cab's bottom.
@@ -49,13 +50,12 @@ to count the invisible rows of a text returning a number:
   count the visible rows of the text returning another number.
   put the text's row count minus the other number in the number.
 
-\ the text's row count is the last row of the text.
-
-\ 1 is the first row of the text.
-
 to count the visible rows of a text returning a number:
   put the text's box's y-extent divided by the text's row height
     in the number.
+\
+\ the text's row count is the last row of the text.
+\ 1 is the first row of the text.
 
 to create a scrollbar:
   create the scrollbar's uptick.
@@ -83,6 +83,9 @@ to decide if a roundy box is wafer thin:
 to decide if the scrollbar is needed:
   if the current tab is nil, say no.
   if the current tab's mode is not "editor", say no.
+  if the current tab's node is nil, say no.
+  if the current tab's node's source is nil, say no.
+  if the current tab's node's source's text is nil, say no.
   put the current tab's node's source's text's row count in a count.
   count the visible rows of the current tab's node's source's text
     returning another count.
@@ -208,7 +211,7 @@ to get the horizontal scroll speed returning a number (from windows):
   call "user32.dll" "SystemParametersInfoA"
     with 108 [SPI_GETWHEELSCROLLCHARS] and 0 [not used]
     and the number's whereabouts and 0 [not used].
-
+\
 \ https://msdn.microsoft.com/en-us/library/windows/desktop/ms724947(v=vs.85).aspx
 \ lists the System Parameters Info (SPI) constants.
 
@@ -550,11 +553,11 @@ to stash scroll speed:
     put the number in the stashed scroll speed.
 
 the stashed horizontal scroll speed is a number.
-
+\
 \ A stashed horizontal scroll speed of -1 = one screen at a time.
 
 the stashed scroll speed is a number.
-
+\
 \ A stashed scroll speed of -1 = one screen at a time.
 
 the unprocessed horizontal mouse roll is a number.

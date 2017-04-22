@@ -3251,7 +3251,7 @@ to move some shapes given a ratio pair and a spot:
 
 to open a page:
   if the page is nil, exit.
-  if the current tab's node's page's scale is not 1/1, 
+  if the current tab's node's page's scale is not 1/1,
     debug "internal error: current page scale is incorrect".
   if the page's scale is not 1/1,
     debug "internal error: page scale is incorrect".
