@@ -598,6 +598,27 @@ to decide if a document is read-only:
   if the document's read-only flag is set, say yes.
   say no.
 
+to decide if a document is relying on a font name: 
+  if the document is nil, say no. 
+  if the font name is "", say no. 
+  loop. 
+    get a page from the document's pages. 
+    if the page is nil, say no. 
+    if the page is relying on the font name, say yes. 
+  repeat. 
+
+to decide if a document needs a font name to be loaded (custom): 
+  loop. 
+    get a font name thing from the custom font names. 
+    if the font name thing is nil, 
+      put "" in the font name; 
+      say no. 
+    put the font name thing's string in another font name. 
+    if the document is relying on the other font name, 
+      put the other font name in the font name; 
+      say yes. 
+  repeat. 
+
 to decide if the edge of a page is visible in a document:
   if the page is nil, say no.
   put the page's edge into a box.
@@ -610,6 +631,14 @@ to decide if a page is being edited:
   if the page is nil, say no.
   if the page's edit shape is nil, say no.
   say yes.
+
+to decide if a page is relying on a font name: 
+  if the page is nil, say no. 
+  loop. 
+    get a shape from the page's shapes. 
+    if the shape is nil, say no. 
+    if the shape is relying on the font name, say yes. 
+  repeat. 
 
 to decide if a page is selected:
   if the page is nil, say no.
@@ -651,6 +680,26 @@ to decide if a shape is clear:
   if the shape's kind is "text", say no.
   if the shape's fill is clear, say yes.
   say no.
+
+to decide if a shape is relying on a font name: 
+  if the shape is relying on the font name (text), 
+    say yes. 
+  if the shape is relying on the font name (group), 
+    say yes. 
+  say no. 
+
+to decide if a shape is relying on a font name (group): 
+  if the shape's kind is not "group", say no. 
+  loop. 
+    get another shape from the shape's shapes. 
+    if the other shape is nil, say no. 
+    if the other shape is relying on the font name, say yes. 
+  repeat. 
+
+to decide if a shape is relying on a font name (text): 
+  if the shape's kind is not "text", say no. 
+  if the shape's text's font's name is the font name, say yes. 
+  say no. 
 
 to decide if a shape is selected:
   if the shape is nil, say no.
@@ -2467,6 +2516,8 @@ to handle font name other given a page:
   get a font name given the page.
   ask "Name?" with the font name.
   if the answer is blank, exit.
+  if the font name is in the custom font names, 
+    make sure the font name is loaded (custom). 
   if the font name is not standard (font name),
     cache the font name (font name).
   handle font name given the page and the answer.
@@ -2475,6 +2526,8 @@ to handle font name other given a page (editing):
   get a font name given the page.
   ask "Name?" with the font name.
   if the answer is blank, exit.
+  if the font name is in the custom font names, 
+    make sure the font name is loaded (custom). 
   if the font name is not standard (font name),
     cache the font name (font name).
   handle font name given the page and the answer (editing).

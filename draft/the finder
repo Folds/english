@@ -852,6 +852,8 @@ to open a node (root):
 
 to open a node given a buffer (file as document):
   create the node's document given the buffer.
+  if the node's document needs a font name to be loaded (custom), 
+    make sure the font name is loaded (custom). 
 
 to open a node given a buffer (file as dump):
   dump the buffer into another buffer.

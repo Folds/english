@@ -746,4 +746,25 @@ Automated tests make debugging easier.
   Test difficulty:  not applicable.
   Requested by Jasper Paulsen on March 7, 2014.
 
-
+148.  Remove "osmosian" except where needed for copyright purposes. 
+  Status:   Done. 
+  Benefit:  Permissions requirement. 
+  Implementation difficulty:  Easy. 
+  Demoing difficulty:  Easy. 
+  Testing difficulty:  Not applicable. 
+  Requested by Gerry Rzeppa on March 11, 2017. 
+ 
+149.  Change instructions font to Arial. 
+  Status:   Done. 
+  Benefit.  Permissions request. 
+  Implementation difficulty:  Medium. 
+  Demoing difficulty:  Easy. 
+  Testing difficulty:  Not applicable. 
+ 
+150.  Change default font to Arial. 
+  Status:   Done. 
+  Benefit:  Permissions request. 
+  Implementation difficulty:  Easy. 
+  Demoing difficulty:  Easy. 
+  Testing difficulty:  Not applicable. 
+ 

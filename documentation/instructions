@@ -21,7 +21,7 @@ ream cal-3024
     text -1 0 0 -1 0 0 4320 6120 7200 7560 0 "" "Arial" 320 "left" 0 0 0 yes
        "Overview"
        "A Sample Program"
-       "Gray Matter Glossary"
+       "Glossary"
        "Index"
     end
     text -1 0 0 -1 0 0 7200 6120 7920 7560 0 "" "Arial" 320 "right" 0 0 0 yes
@@ -2957,7 +2957,7 @@ ream cal-3024
     text -1 0 0 -1 0 0 2160 2160 10080 5940 0 "title" "Arial" 320 "left" 0 0 0 yes
        "TEXT"
        ""
-       "There's a powerful thing called text in my noodle that makes it relatively easy to include the written word in your applications. Cut, copy, paste, undo, redo, wrap, even spell checking, are all supported. And it's fast and efficient. My editor, for example, is actually just a great big text block. You can read all about text in the Gray Matter Glossary at the back of this book."
+       "There's a powerful thing called text in my noodle that makes it relatively easy to include the written word in your applications. Cut, copy, paste, undo, redo, wrap, even spell checking, are all supported. And it's fast and efficient. My editor, for example, is actually just a great big text block. You can read all about text in the glossary at the back of this book."
        ""
        "A full implementation of text, however, is not required for the Cal Monet. Something much simpler will do. Here are the basic definitions. Click 'em in:"
     end
@@ -4282,7 +4282,7 @@ ream cal-3024
   end
   page 12240 15840 1 1440
     text -1 0 0 -1 0 0 2160 6120 10080 6480 0 "title" "Arial" 320 "center" 0 0 0 yes
-       "Gray Matter Glossary"
+       "Glossary"
     end
   end
   page 12240 15840 1 1440
@@ -6510,7 +6510,7 @@ ream cal-3024
     rectangle 0 0 0 0 0 125 7920 4140 8880 4500 90
   end
   page 12240 15840 1 1440
-    text -1 0 0 -1 0 0 2160 2160 10080 10080 0 "title" "Arial" 320 "left" 0 0 0 yes
+    text -1 0 0 -1 0 0 2160 2160 10080 8280 0 "title" "Arial" 320 "left" 0 0 0 yes
        "COMMAND LINE"
        ""
        "You can tell me some things to do, even before I start.  Most people click an "
@@ -6527,36 +6527,43 @@ ream cal-3024
        "If you don't like using command line options, that's OK. After I start, "
        "you can use the menus and the finder to do anything that the command line options can do."
        ""
-       "Here are my first three command line options:"
+       "Here are my first six command line options:"
        ""
        ""
     end
-    text -1 0 0 -1 0 0 2160 9000 2880 13680 0 "" "Arial" 320 "left" 0 0 0 yes
+    text -1 0 0 -1 0 0 2160 8460 3600 13680 0 "" "Arial" 320 "left" 0 0 0 yes
+       "/full"
+       ""
        "/left"
        ""
        "/right"
        ""
        ""
        ""
+       "/font"
        ""
-       "/tt"
+       ""
+       "/controlfont="
+       ""
+       ""
+       "/edfont="
     end
-    text -1 0 0 -1 0 0 2880 9000 10440 13680 0 "" "Arial" 320 "left" 0 0 0 yes
+    text -1 0 0 -1 0 0 3600 8460 10080 13680 0 "" "Arial" 320 "left" 0 0 0 yes
+       "tells me to cover the whole screen.  I will have ten tabs."
+       ""
        "tells me to start on the left half-screen.  I will have eight tabs."
        ""
        "tells me to start on the right half-screen.  I will have eight tabs."
        ""
-       "If you don't say either /left or /right, I will cover the whole screen,"
-       "and I will have ten tabs."
+       "If you don't say either /full or /right, I will assume you want   /left"
        ""
-       "tells my editor to use a fixed-width font, like Courier New,"
-       "with a 2/9 inch height.  By the way, /tt is short for teletype."
-       "Teletype machines were an old-fashioned way of sending messages."
+       "tells me what font to use.  If you don't say what font to use,"
+       "I will assume you want   /font=""Arial"""
        ""
-       "If you don't say /tt, my editor will use my regular font, like Arial, with a 1/4 inch height."
-    end
-    text -1 0 0 -1 0 0 10800 14760 11520 15120 0 "page number" "Arial" 320 "right" 0 0 0 yes
-       "66"
+       "tells me what font to use in my buttons and tabs.  If you don't tell me a control font, I will use the regular font."
+       ""
+       "tells me what font to use in my editor.  If you don't tell me"
+       "an editor font, I will assume you want   /font=""Courier New"""
     end
   end
   page 12240 15840 1 1440
@@ -8430,7 +8437,9 @@ ream cal-3024
        "MAKE a roundy box WITH a left AND top AND right AND bottom AND radius."
        "MAKE a roundy box FROM a box AND a radius."
        ""
-       "I can, of course, DRAW a roundy box. And I have functions to get a roundy box's WIDTH, HEIGHT, and CENTER, among other things. I can even tell  whether or not a certain spot IS IN a roundy box or IS ON the edge of a roundy box. Not to mention all the usual ""Graphic Transformations""."
+       "I can, of course, DRAW a roundy box. And I have functions to get a roundy box's WIDTH, HEIGHT, and CENTER, among other things. I can even tell  whether"
+       "or not a certain spot IS IN a roundy box or IS ON the edge of a roundy box."
+       "Not to mention all the usual ""Graphic Transformations""."
     end
     text -1 0 0 -1 0 0 10800 14760 11520 15120 0 "page number" "Arial" 320 "right" 0 0 0 yes
        "109"
@@ -8508,22 +8517,24 @@ ream cal-3024
        "by choosing ""Running Options..."" from my menu."
        ""
        "I try to make the baby program the same size as me.  If I got to start with "
-       "a full screen, I don't put either /left or /right in the running options."
+       "a full screen, I put /full in the running options."
        ""
-       "If I started with a half-screen, I try to make the baby program fit side-by-side with me.  If I was started with /left, I put /right in the running options.  "
+       "If I started with a half-screen, I try to make the baby program fit side-by-side with me.  If I was started in the left half-screen, I put /right in the running options.  "
        "If I was started with /right, I put /left in the running options."
        ""
        "I try to make the baby program use the same fonts as me."
-       "If I was started with /tt, I put /tt in the running options."
+       "If needed, I put /font, /controlfont, and /edfont in the running options."
        ""
        "I don't put /compile or /list or /test in the running options."
        ""
        "My /runfolder command line option tells me what to put in the /folder and /runfolder running options.  If I was started with /runfolder=/folder"
        "I copy the /folder option from my command line to the running options."
-       "Otherwise, I copy my /runfolder command line option to the /folder running option.  If my /folder command line option happens to match the /runfolder running option, I put /runfolder=/folder in the running options."
+       "Otherwise, I copy my /runfolder command line option to the /folder running option."
+       "If my /folder command line option happens to match the /runfolder running option,"
+       "I put /runfolder=/folder in the running options."
        ""
        "Similarly, my /runfiles command line option tells me what to put in "
-       "the /files running option."
+       "the /files and /runfiles running options."
     end
     text -1 0 0 -1 0 0 10800 14760 11520 15120 0 "page number" "Arial" 320 "right" 0 0 0 yes
        "111"
