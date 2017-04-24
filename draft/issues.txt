@@ -56,12 +56,8 @@ The following requests have been demonstrated,
 but do not have test plans yet.
 These items should occasionally be moved to demoed fixes.txt.
 
-  
-\ ======================================   
-The following requests have been partially demonstrated.
-
 155.  Add a /full command line option for full-screen mode. 
-  Status:   Designed. 
+  Status:   Demonstrated. 
   Benefit.  Minor. 
   Implementation difficulty:  Easy. 
   Demoing difficulty:  Medium. 
@@ -69,7 +65,7 @@ The following requests have been partially demonstrated.
   Requested by:  Jasper Paulsen on March 13, 2017. 
 
 151.  Change default height from 1/4 inch to 2/9 inch. 
-  Status:   Request. 
+  Status:   Demonstrated. 
   Benefit:  Important.  Would make menus, status, and tab strip 
             easier to read. 
   Implementation difficulty:  Medium. 
@@ -106,7 +102,7 @@ The following requests have been partially demonstrated.
   Requested by:  Jasper Paulsen on March 13, 2017. 
  
 152.  Only load/unload/preview the Osmosian font when needed. 
-  Status:   Request. 
+  Status:   Demonstrated. 
   Benefit:  Minor. 
   Implementation difficulty:  Medium. 
   Demoing difficulty:  Medium. 
@@ -114,13 +110,32 @@ The following requests have been partially demonstrated.
   Requested by:  Jasper Paulsen on March 13, 2017. 
 
 156.  Add a 1/9 inch yank setting when 2/9 inch high fonts are present. 
-  Status:   Request. 
+  Status:   Demonstrated. 
   Benefit:  Minor. 
   Implementation difficulty:  Medium. 
   Demoing difficulty:  Medium. 
   Testing difficulty:  Medium. 
   Requested by:  Jasper Paulsen on March 13, 2017. 
  
+168.  Add scrollbar to writer's page menu. 
+  Status:   Demonstrated. 
+  Benefit:  Medium. 
+  Implementation difficulty:  Medium. 
+  Demoing difficulty:  Medium. 
+  Testing difficulty:  Medium. 
+  Requested by Jasper Paulsen on March 13, 2014. 
+  
+169.  Add mouse scrolling to writer's page menu. 
+  Status:   Demonstrated. 
+  Benefit:  Medium. 
+  Implementation difficulty:  Medium. 
+  Demoing difficulty:  Medium. 
+  Testing difficulty:  Medium. 
+  Requested by Jasper Paulsen on March 13, 2014. 
+  
+  
+\ ======================================   
+The following requests have been partially demonstrated.
 
 
 \ ======================================   
@@ -718,22 +733,6 @@ Unsorted requests:
   Testing difficulty:  Medium. 
   Requested by Jasper Paulsen on March 13, 2014. 
  
-168.  Add scrollbar to writer's page menu. 
-  Status:   Request. 
-  Benefit:  Medium. 
-  Implementation difficulty:  Medium. 
-  Demoing difficulty:  Medium. 
-  Testing difficulty:  Medium. 
-  Requested by Jasper Paulsen on March 13, 2014. 
-  
-169.  Add mouse scrolling to writer's page menu. 
-  Status:   Request. 
-  Benefit:  Medium. 
-  Implementation difficulty:  Medium. 
-  Demoing difficulty:  Medium. 
-  Testing difficulty:  Medium. 
-  Requested by Jasper Paulsen on March 13, 2014. 
-  
 170.  Add scrollbar to writer's page editing feature. 
   Status:   Request. 
   Benefit:  Medium. 

@@ -14,8 +14,11 @@ to add a string to a submenu (font height name):
   put the prefix then the string in a handler.
   get a height from the handler given the prefix.
   add the string and the handler to the submenu.
-  if the height is less than the submenu's commands' last's font's height,
+  put the tall menu font height in another height.
+  if the height is less than the other height,
     put the height in the submenu's commands' last's font's height.
+  if the height is at least the command height,
+    put the other height in the submenu's commands' last's font's height.
   get a font.
   put the font's name in the submenu's commands' last's font's name.
 
@@ -277,6 +280,10 @@ to make sure a font name is loaded (custom):
   sort the standard font names. 
   remove the font name from the custom font names. 
 
+to put the tall menu font height in a height:
+  put the command height in the height.
+  scale the height by 13/15.
+
 to remove a font name from some font name things: 
   loop. 
     get a font name thing from the font name things. 
@@ -285,6 +292,12 @@ to remove a font name from some font name things:
       remove the font name thing from the font name things; 
       destroy the font name thing. 
   repeat. 
+
+to scale a height by a ratio:
+  put the height in another ratio.
+  scale the other ratio given the ratio.
+  divide the other ratio's numerator
+    by the other ratio's denominator giving the height and a remainder.
 
 to sort some string things (by height):
   if the string things' first is the string things' last, exit.
@@ -435,11 +448,8 @@ to test (font menus - heights followed by other):
   destroy the submenu.
 
 to test (font menus - large heights are not wysiwyg):
-  put the current tab's node's text's font's height and the tpi in a ratio. 
-  reduce the ratio. 
-  put the ratio then " Inch" in a string.   
   create a test result about "font heights" and "1/2 Inch is not wysiwyg"
-    and expecting the string. 
+    and expecting "13/45 Inch".  \ 0.2888... inches
   create a submenu (font heights).
   get a command from the submenu given "1/2 Inch".
   if the command is not nil,

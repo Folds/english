@@ -2290,7 +2290,8 @@ to switch a tab to a node:
   format the tab's name to fit in the tab's box given the requested control font. 
   put "finder" into the tab's mode.
   if the node's source is not nil, put "editor" into the tab's mode.
-  if the node's document is not nil, put "docster" into the tab's mode.
+  if the node's document is not nil,
+    put "docster" into the tab's mode.
   if the node's page is not nil, put "writer" into the tab's mode.
 
 a tab is a thing with
