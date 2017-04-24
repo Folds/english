@@ -2143,7 +2143,8 @@ to populate a submenu given a mode (x):
 to populate a submenu given a mode (y):
   if the mode is not "writer", exit.
   add "Yank 1/8"  and "handle yank 1/8 inch"  to the submenu.
-  add "Yank 1/12" and "handle yank 1/12 inch" to the submenu.
+  add "Yank 1/9"  and "handle yank 1/9 inch"  to the submenu. 
+\  add "Yank 1/12" and "handle yank 1/12 inch" to the submenu.
   add "Yank 1/16" and "handle yank 1/16 inch" to the submenu.
   add "Yank 1/24" and "handle yank 1/24 inch" to the submenu.
   add "Yank 1/32" and "handle yank 1/32 inch" to the submenu.
