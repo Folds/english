@@ -151,16 +151,9 @@ to get a font:
   if the current tab's mode is "editor",
     get the font given the current tab's node's source; exit.
   if the current tab's mode is "writer",
-    get the font given the current tab's node's page; exit.
+    update the current font; 
+    put the current font in the font; exit. 
   put the default font in the font.
-
-to get a font given a page:
-  if the page is nil, put the default font in the font; exit.
-  get first selected text from the page returning a text.
-  if the text is nil, put the default font in the font; exit.
-  get first text from the page returning the text.
-  if the text is nil, put the default font in the font; exit.
-  get the font given the text.
 
 to get a font given a source:
   if the source is nil, put the default font in the font; exit.
@@ -279,6 +272,8 @@ to make sure a font name is loaded (custom):
   add the font name to the standard font names. 
   sort the standard font names. 
   remove the font name from the custom font names. 
+
+the manual font is a font. 
 
 to put the tall menu font height in a height:
   put the command height in the height.
