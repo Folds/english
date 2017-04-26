@@ -776,7 +776,7 @@ Automated tests make debugging easier.
   Testing difficulty:  Not applicable. 
  
 175.  Propagate font options from command line to running options. 
-  Status:    Designed. 
+  Status:    Done. 
   Audience:  Programmers. 
   Benefit:   Minor. 
   Implementation difficulty:  Easy. 

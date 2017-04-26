@@ -46,13 +46,289 @@ The following requests have been partially demonstrated.
 The following requests are roughly sorted
 from higher priority to lower priority.
 
-157.  Support multiple headers per routine, a la CAL-4700. 
+205.  In compiler, make "can't" negate "can", instead of "ca". 
+  Status:  Designed. 
+  Audience:  Designed. 
+  Benefit:  Medium. 
+  Implementation difficulty:  Medium. 
+  Demoing difficulty:  Medium. 
+  Testing difficulty:  Medium. 
+  Requested by Gerry Rzeppa on March 13, 2017. 
+ 
+207.  In compiler, don't compile the documentation source code files. 
+  Status:  Designed. 
+  Audience:  Turtle programmers. 
+  Benefit:  Medium. 
+  Implementation difficulty:  Medium. 
+  Demoing difficulty:  Easy. 
+  Testing difficulty:  Medium. 
+  Requested by Gerry Rzeppa on March 13, 2017. 
+ 
+157.  In compiler, support multiple headers per routine, a la CAL-4700. 
   Status:   Designed. 
   Benefit:  Permissions requirement. 
   Implementation difficulty:  Medium. 
   Demoing difficulty:  Medium. 
   Testing difficulty:  Medium. 
   Requested by Gerry Rzeppa on March 13, 2017. 
+ 
+200.  In compiler, allow multi-line routine headers. 
+  Status:  Designed. 
+  Audience:  Programmers. 
+  Benefit:  Medium. 
+  Implementation difficulty:  Medium. 
+  Demoing difficulty:  Medium. 
+  Testing difficulty:  Medium. 
+  Requested by Gerry Rzeppa on March 13, 2017. 
+ 
+202.  In editor, change sorting to accommodate multi-line routine headers. 
+  Status:  Designed. 
+  Audience:  Programmers. 
+  Benefit:  Medium. 
+  Implementation difficulty:  Medium. 
+  Demoing difficulty:  Medium. 
+  Testing difficulty:  Medium. 
+  Requested by Gerry Rzeppa on March 13, 2017. 
+ 
+203.  In compiler, create synonyms for backwards/counter-clockwise. 
+  Status:  Designed. 
+  Audience:  Turtle programmers. 
+  Benefit:  Medium. 
+  Implementation difficulty:  Medium. 
+  Demoing difficulty:  Medium. 
+  Testing difficulty:  Medium. 
+  Requested by Gerry Rzeppa on March 13, 2017. 
+ 
+204.  In compiler, create synonyms for at/on. 
+  Status:  Designed. 
+  Audience:  Turtle programmers. 
+  Benefit:  Medium. 
+  Implementation difficulty:  Medium. 
+  Demoing difficulty:  Medium. 
+  Testing difficulty:  Medium. 
+  Requested by Gerry Rzeppa on March 13, 2017. 
+ 
+206.  In compiler, handle similes differently from other "as" statements. 
+  Status:  Designed. 
+  Audience:  Turtle programmers. 
+  Benefit:  Medium. 
+  Implementation difficulty:  Medium. 
+  Demoing difficulty:  Medium. 
+  Testing difficulty:  Medium. 
+  Requested by Gerry Rzeppa on March 13, 2017. 
+ 
+208.  In compiler, add new prepositions. 
+  Status:  Designed. 
+  Audience:  Turtle programmers. 
+  Benefit:  Medium. 
+  Implementation difficulty:  Medium. 
+  Demoing difficulty:  Medium. 
+  Testing difficulty:  Medium. 
+  Requested by Gerry Rzeppa on March 13, 2017. 
+ 
+209.  In characters, add nicknames for `~<>\[]{}| 
+  Status:  Designed. 
+  Audience:  Turtle programmers. 
+  Benefit:  Medium. 
+  Implementation difficulty:  Medium. 
+  Demoing difficulty:  Medium. 
+  Testing difficulty:  Medium. 
+  Requested by Jasper Paulsen on April 4, 2017. 
+ 
+196.  In writer, get title of a page from first non-blank line, if possible. 
+  Status:  Designed. 
+  Audience:  Application users. 
+  Benefit:  Minor. 
+  Implementation difficulty:  Easy. 
+  Demoing difficulty:  Medium. 
+  Testing difficulty:  Medium. 
+  Requested by Gerry Rzeppa on March 13, 2017. 
+ 
+210.  In colors, add a "pen" alias for each color. 
+  Status:  Designed. 
+  Audience:  Turtle programmers. 
+  Benefit:  Medium. 
+  Implementation difficulty:  Medium. 
+  Demoing difficulty:  Medium. 
+  Testing difficulty:  Medium. 
+  Requested by Gerry Rzeppa on March 13, 2017. 
+ 
+211.  In colors, add a "brightness" alias for "lightness". 
+  Status:  Designed. 
+  Audience:  Turtle programmers. 
+  Benefit:  Medium. 
+  Implementation difficulty:  Medium. 
+  Demoing difficulty:  Medium. 
+  Testing difficulty:  Medium. 
+  Requested by Gerry Rzeppa on March 13, 2017. 
+ 
+214.  Create color aliases:  brown, sky blue, pink, tan. 
+  Status:  Designed. 
+  Audience:  Turtle programmers. 
+  Benefit:  Medium. 
+  Implementation difficulty:  Medium. 
+  Demoing difficulty:  Medium. 
+  Testing difficulty:  Medium. 
+  Requested by Gerry Rzeppa on March 13, 2017. 
+ 
+215.  Add "gold" color name. 
+  Status:  Designed. 
+  Audience:  Turtle programmers. 
+  Benefit:  Medium. 
+  Implementation difficulty:  Medium. 
+  Demoing difficulty:  Medium. 
+  Testing difficulty:  Medium. 
+  Requested by Gerry Rzeppa on March 13, 2017. 
+ 
+213.  Make "reverse a color" get complement, not opposite saturation. 
+  Status:  Designed. 
+  Audience:  Turtle programmers. 
+  Benefit:  Medium. 
+  Implementation difficulty:  Medium. 
+  Demoing difficulty:  Medium. 
+  Testing difficulty:  Medium. 
+  Requested by Gerry Rzeppa on March 13, 2017. 
+ 
+212.  In colors, add a rainbow color pen. 
+  Status:  Designed. 
+  Audience:  Turtle programmers. 
+  Benefit:  Medium. 
+  Implementation difficulty:  Medium. 
+  Demoing difficulty:  Medium. 
+  Testing difficulty:  Medium. 
+  Requested by Gerry Rzeppa on March 13, 2017. 
+ 
+192.  Normalize degrees to between 0 and 359. 
+  Status:  Designed. 
+  Audience:  Programmers. 
+  Benefit:  Medium. 
+  Implementation difficulty:  Easy. 
+  Demoing difficulty:  Medium. 
+  Testing difficulty:  Easy. 
+  Requested by Jasper Paulsen on March 25, 2017. 
+ 
+193.  Normalize arc minutes to between 0 and 21599. 
+  Status:  Designed. 
+  Audience:  Programmers. 
+  Benefit:  Medium. 
+  Implementation difficulty:  Easy. 
+  Demoing difficulty:  Medium. 
+  Testing difficulty:  Easy. 
+  Requested by Jasper Paulsen on March 25, 2017. 
+ 
+194.  Convert from degrees to arc minutes. 
+  Status:  Designed. 
+  Audience:  Programmers. 
+  Benefit:  Medium. 
+  Implementation difficulty:  Easy. 
+  Demoing difficulty:  Medium. 
+  Testing difficulty:  Easy. 
+  Requested by Jasper Paulsen on March 25, 2017. 
+ 
+184.  Round a number up to nearest factor of another number. 
+  If the number is more than the other number, 
+  rescale by the other number. 
+  Status:  Designed. 
+  Audience:  Programmers. 
+  Benefit:  Medium. 
+  Implementation difficulty:  Hard. 
+  Demoing difficulty:  Medium. 
+  Testing difficulty:  Easy. 
+  Requested by Jasper Paulsen on March 31, 2017. 
+ 
+185.  Round a number down to nearest factor of another number. 
+  If the number is more than the other number, 
+  rescale by the other number on March 13, 2017. 
+ 
+190.  Calculate tau. 
+  Status:  Designed. 
+  Audience:  Programmers. 
+  Benefit:  Medium. 
+  Implementation difficulty:  Hard. 
+  Demoing difficulty:  Medium. 
+  Testing difficulty:  Easy. 
+  Requested by Jasper Paulsen on April 2, 2017. 
+ 
+191.  Normalize radians to between 0 and tau. 
+  Status:  Designed. 
+  Audience:  Programmers. 
+  Benefit:  Medium. 
+  Implementation difficulty:  Hard. 
+  Demoing difficulty:  Medium. 
+  Testing difficulty:  Easy. 
+  Requested by Jasper Paulsen on March 25, 2017. 
+ 
+195.  Convert from arc minutes to radians. 
+  Status:  Designed. 
+  Audience:  Programmers. 
+  Benefit:  Medium. 
+  Implementation difficulty:  Hard. 
+  Demoing difficulty:  Medium. 
+  Testing difficulty:  Easy. 
+  Requested by Jasper Paulsen on March 25, 2017. 
+
+183.  Calculate square roots. 
+  Status:  Designed. 
+  Audience:  Programmers. 
+  Benefit:  Medium. 
+  Implementation difficulty:  Hard. 
+  Demoing difficulty:  Medium. 
+  Testing difficulty:  Easy. 
+  Requested by Jasper Paulsen on March 25, 2017. 
+ 
+181.  Calculate sine. 
+  Status:  Designed. 
+  Audience:  Programmers. 
+  Benefit:  Medium. 
+  Implementation difficulty:  Hard. 
+  Demoing difficulty:  Medium. 
+  Testing difficulty:  Easy. 
+  Requested by Jasper Paulsen on March 25, 2017. 
+ 
+182.  Calculate cosine. 
+  Status:  Designed. 
+  Audience:  Programmers. 
+  Benefit:  Medium. 
+  Implementation difficulty:  Hard. 
+  Demoing difficulty:  Medium. 
+  Testing difficulty:  Easy. 
+  Requested by Jasper Paulsen on March 25, 2017. 
+ 
+186.  Calculate arcsine. 
+  Status:  Designed. 
+  Audience:  Programmers. 
+  Benefit:  Medium. 
+  Implementation difficulty:  Medium. 
+  Demoing difficulty:  Medium. 
+  Testing difficulty:  Easy. 
+  Requested by Jasper Paulsen on April 4, 2017. 
+ 
+187.  Calculate arccosine. 
+  Status:  Designed. 
+  Audience:  Programmers. 
+  Benefit:  Medium. 
+  Implementation difficulty:  Medium. 
+  Demoing difficulty:  Medium. 
+  Testing difficulty:  Easy. 
+  Requested by Jasper Paulsen on April 4, 2017. 
+ 
+188.  Calculate tangent. 
+  Status:  Designed. 
+  Audience:  Programmers. 
+  Benefit:  Medium. 
+  Implementation difficulty:  Medium. 
+  Demoing difficulty:  Medium. 
+  Testing difficulty:  Easy. 
+  Requested by Jasper Paulsen on April 4, 2017. 
+ 
+189.  Calculate arctangent. 
+  Status:  Designed. 
+  Audience:  Programmers. 
+  Benefit:  Medium. 
+  Implementation difficulty:  Medium. 
+  Demoing difficulty:  Medium. 
+  Testing difficulty:  Easy. 
+  Requested by Jasper Paulsen on April 4, 2017. 
  
 159.  Incorporate CAL-4700's turtle graphics features. 
   Status:   Request. 
@@ -82,6 +358,20 @@ from higher priority to lower priority.
   Testing difficulty:  Profound.
   Requested by Jasper Paulsen on March 15, 2014.
 
+201.  Allow compiling sources in multiple folders.
+  Perhaps a subtree starting with the active source's folder?
+  Perhaps directories containing designated files?
+  Status:    Request.
+  Audience:  Programmers.
+  Benefit:   Major.  Would make it easier to organize
+             large numbers of source files, and thereby
+             encourage refactoring large source files
+             into multiple small source files.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Easy.
+  Testing difficulty:  Medium.
+  Requested by Jasper Paulsen on April 25, 2017.
+  
 021.  Make it easy to search all files that are open,
 regardless of whether the file's tab is visible.
   Status:  request.
@@ -123,6 +413,28 @@ open the files that are found.
   Demoing difficulty:  Easy.
   Testing difficulty:  Medium.
   Requested by Jasper Paulsen on March 7, 2014.
+
+217.  Allow drawing a Unicode string on-screen.
+  Status:    Request.
+  Audience:  Windows programmers.
+  Benefit:   Minor.
+  Implementation difficulty:  Hard.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Medium.
+  Requested by Jasper Paulsen on April 25, 2017.
+
+218.  Change the tabstrip's ellipsis character in proportional fonts.
+  If there is not enough space in a tab for a full descriptor,
+  the descriptor is abbreviated.  In fixed-width fonts,
+  the ellipsis character is "…".  To save space, proportional
+  fonts use "„".  The unicode "modifier letter low tilde" (U+02F7)
+  would look better, and be less confusing, in proportional fonts.
+  Status:    Request.
+  Benefit:   Minor.
+  Implementation difficulty:  Easy, if can draw Unicode strings on-screen.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Medium.
+  Requested by Jasper Paulsen on April 25, 2017.
 
 126.  A way to export CAL's tabs' source names and labels.
   Benefit:  Medium.  Would make it easier to test some features.
@@ -211,9 +523,14 @@ err:ole:CoGetClassObject no class object {96749377-3391-11d2-9ee3-00c04f797396} 
   can have different pixel densities,
   such as 72, 96, 120, 144, 150, et cetera pixels per inch.
   Benefit:  Minor.
-  Implementation difficulty:  Hard.  It needs a short procedure,
-    but the procedure will need to make a Windows API call.
-    Also, there are several places in the code that implicitly use 96 ppi. 
+  Implementation difficulty:  Profound.  Windows lies about
+    the screen resolution to any program that is not
+    registered as understanding screen resolutions.
+    Even when Windows does not lie by saying 96 dpi,
+    it approximates the answer to 96 dpi, 120 dpi, or 144 dpi.
+    It needs a short procedure, but the procedure
+    will need to make a Windows API call.  Also, there are
+    several places in the code that implicitly use 96 ppi. 
   Audience:  Windows programmers.  (specifically, those who
     have pixel densities other than 96 pixels per inch.)
   Demoing difficulty:  Hard.  Changing the Windows pixel density
@@ -518,6 +835,67 @@ while a letter's menu is visible.
   Test difficulty:  not applicable.
   Requested by Jasper Paulsen on March 7, 2014.
 
+179.  Use more precise and accurate timing ticks. 
+  Status:  request. 
+  Audience:  Programmers. 
+  Benefit:  Important. 
+  Implementation difficulty:  Profound.  Requires support for 64-bit numbers. 
+  Demoing difficulty:  Easy. 
+  Testing difficulty:  Medium. 
+  Requested by Jasper Paulsen on April 4, 2017. 
+ 
+178.  Time each test, from test creation to stashing of result. 
+  Status:  request. 
+  Audience:  Programmers. 
+  Benefit:  Important. 
+  Implementation difficulty:  Profound.  Requires support for 64-bit numbers. 
+  Demoing difficulty:  Easy. 
+  Testing difficulty:  Medium. 
+  Requested by Jasper Paulsen on April 4, 2017. 
+ 
+180.  If tests pass, show the tests that took the longest amounts of time. 
+  Status:  request. 
+  Audience:  Programmers. 
+  Benefit:  Important.  Would be a simple profiling tool. 
+  Implementation difficulty:  Profound.  Requires support for 64-bit numbers. 
+  Demoing difficulty:  Easy. 
+  Testing difficulty:  Medium. 
+  Requested by Jasper Paulsen on April 4, 2017. 
+ 
+197.  In finder, allow running a .exe file. 
+  Status:  Designed. 
+  Audience:  Application users. 
+  Benefit:  Medium. 
+  Implementation difficulty:  Easy. 
+  Demoing difficulty:  Medium. 
+  Testing difficulty:  Medium. 
+  Requested by Gerry Rzeppa on March 13, 2017. 
+ 
+177.  Let user create shell shortcuts. 
+  Status:  request. 
+  Implementation difficulty:  Hard. 
+  Demoing difficulty:  medium. 
+  Testing difficulty:  Medium. 
+  Requested by Jasper Paulsen on April 4, 2017. 
+   
+198.  In finder, allow running a .lnk file. 
+  Status:  Designed. 
+  Audience:  Application users. 
+  Benefit:  Medium. 
+  Implementation difficulty:  Easy. 
+  Demoing difficulty:  Medium. 
+  Testing difficulty:  Medium. 
+  Requested by Jasper Paulsen on April 4, 2017. 
+ 
+199.  In finder, allow creating a .lnk file. 
+  Status:  Designed. 
+  Audience:  Application users. 
+  Benefit:  Medium. 
+  Implementation difficulty:  Easy. 
+  Demoing difficulty:  Medium. 
+  Testing difficulty:  Medium. 
+  Requested by Jasper Paulsen on April 4, 2017. 
+
 059  Implement enumerated types.
   For example, it would be nice to have
     an enumerated type of difficulty rating levels.
@@ -546,6 +924,15 @@ while a letter's menu is visible.
   Testing difficulty:  Medium.
   Requested by Jasper Paulsen on March 7, 2014.
   
+216.  Fillet the top corner(s) of the active tab.
+  Status:    Request.
+  Audience:  Application users.
+  Benefit:   Minor.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Easy.
+  Testing difficulty:  Medium.
+  Requested by Jasper Paulsen on April 25, 2017.
+
 060.  Allow the user to change fonts of user interface features.
   For example, the menus, the status bar, and the tab-strip.
   This can be a configuration file Easter egg.
@@ -621,6 +1008,7 @@ with an adjustable slider between them.
 \ ======================================   
 Unsorted requests:
 
-Next item number:  177. 
+ 
+Next item number:  219.
 
 

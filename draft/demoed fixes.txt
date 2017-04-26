@@ -605,7 +605,7 @@ next to the first instance, instead of covering the first instance.
   Requested by Jasper Paulsen on February 24, 2017
 
 164.  In writer, make font name menu highlight match selected text. 
-  Status:   Request. 
+  Status:   Demonstrated. 
   Benefit:  Medium. 
   Implementation difficulty:  Medium. 
   Demoing difficulty:  Medium. 
@@ -613,7 +613,7 @@ next to the first instance, instead of covering the first instance.
   Requested by Jasper Paulsen on March 13, 2014. 
   
 165.  In writer, make font height menu highlight match selected text. 
-  Status:   Request. 
+  Status:   Demonstrated. 
   Benefit:  Medium. 
   Implementation difficulty:  Medium. 
   Demoing difficulty:  Medium. 
@@ -621,7 +621,7 @@ next to the first instance, instead of covering the first instance.
   Requested by Jasper Paulsen on March 13, 2014. 
  
 162.  In writer, make font name choice affect new texts. 
-  Status:   Request. 
+  Status:   Demonstrated. 
   Benefit:  Medium. 
   Implementation difficulty:  Medium. 
   Demoing difficulty:  Medium. 
@@ -629,7 +629,7 @@ next to the first instance, instead of covering the first instance.
   Requested by Jasper Paulsen on March 13, 2014. 
   
 163.  In writer, make font height choice affect new texts. 
-  Status:   Request. 
+  Status:   Demonstrated. 
   Benefit:  Medium. 
   Implementation difficulty:  Medium. 
   Demoing difficulty:  Medium. 
@@ -637,7 +637,7 @@ next to the first instance, instead of covering the first instance.
   Requested by Jasper Paulsen on March 13, 2014. 
  
 166.  In writer, open doc with font name based on contents of doc. 
-  Status:   Request. 
+  Status:   Demonstrated. 
   Benefit:  Medium. 
   Implementation difficulty:  Medium. 
   Demoing difficulty:  Medium. 
@@ -645,7 +645,7 @@ next to the first instance, instead of covering the first instance.
   Requested by Jasper Paulsen on March 13, 2014. 
  
 167.  In writer, open doc with font height based on contents of doc. 
-  Status:   Request. 
+  Status:   Demonstrated. 
   Benefit:  Medium. 
   Implementation difficulty:  Medium. 
   Demoing difficulty:  Medium. 
@@ -653,7 +653,7 @@ next to the first instance, instead of covering the first instance.
   Requested by Jasper Paulsen on March 13, 2014. 
  
 173.  Allow font name other to work in writer when nothing is selected. 
-  Status:    designed. 
+  Status:    Demonstrated. 
   Audience:  ordinary users. 
   Benefit:   medium. 
   Implementation difficulty:  Easy. 
@@ -662,7 +662,7 @@ next to the first instance, instead of covering the first instance.
   Requested by Jasper Paulsen on March 21, 2017. 
  
 174.  Allow font height other to work in writer when nothing is selected. 
-  Status:    designed. 
+  Status:    Demonstrated. 
   Audience:  ordinary users. 
   Benefit:   medium. 
   Implementation difficulty:  Easy. 
