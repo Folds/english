@@ -1,5 +1,7 @@
 \ The portions of this file that are from CAL-3040
 \ are copyright 2006 by the Osmosian Order.
+\ The portions of this file that are from CAL-4700 
+\ are copyright 2017 by the Osmosian Order. 
 \ The remainder is copyright 2014, 2017 by Jasper Paulsen.
 
 \ firstparam=esp+4/ebp+8, secondparam=esp+8/ebp+12, etc...
@@ -3691,12 +3693,20 @@ to remove any negatives from some monikettes returning a flag:
     put the other monikettes' first into a monikette.
     if the monikette is nil, exit.
     remove the monikette from the other monikettes.
-    if the monikette's string is "not", reverse the flag; destroy the monikette; repeat.
+    if the monikette's string is "not",
+      reverse the flag; destroy the monikette; repeat.
     append the monikette to the monikettes.
-    if the monikette's string is "cannot", reverse the flag; put "can" into the monikette's string; repeat.
-    if the monikette's string is "nothing", reverse the flag; put "something" into the monikette's string; repeat.
-    if the monikette's string is "won't", reverse the flag; put "will" into the monikette's string; repeat.
-    if the monikette's string ends with "n't", reverse the flag; remove trailing bytes from the monikette's string given 3; repeat.
+    if the monikette's string is "can't",  
+      reverse the flag; put "can" into the monikette's string; repeat. 
+    if the monikette's string is "cannot",
+      reverse the flag; put "can" into the monikette's string; repeat.
+    if the monikette's string is "nothing",
+      reverse the flag; put "something" into the monikette's string; repeat.
+    if the monikette's string is "won't",
+      reverse the flag; put "will" into the monikette's string; repeat.
+    if the monikette's string ends with "n't",
+      reverse the flag;
+      remove trailing bytes from the monikette's string given 3; repeat.
   repeat.
 
 the repeat tag is a tag equal to 21.

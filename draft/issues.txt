@@ -41,11 +41,6 @@ These items should occasionally be moved to demoed fixes.txt.
 \ ======================================   
 The following requests have been partially demonstrated.
 
-
-\ ======================================   
-The following requests are roughly sorted
-from higher priority to lower priority.
-
 205.  In compiler, make "can't" negate "can", instead of "ca". 
   Status:  Designed. 
   Audience:  Designed. 
@@ -55,6 +50,11 @@ from higher priority to lower priority.
   Testing difficulty:  Medium. 
   Requested by Gerry Rzeppa on March 13, 2017. 
  
+
+\ ======================================   
+The following requests are roughly sorted
+from higher priority to lower priority.
+
 207.  In compiler, don't compile the documentation source code files. 
   Status:  Designed. 
   Audience:  Turtle programmers. 
