@@ -1677,6 +1677,7 @@ to compile a term given a rider:
   clear the term.
   if the compiler's abort flag is set, exit.
   compile the term given the rider (common part).
+  if the rider is on any simile, exit. \ added for invisible turtle project *** 
   if the rider's token is "AS", compile the term given the rider (as part).
   if the rider's token is "/", compile the term given the rider (runtime ratio).
 
@@ -2160,6 +2161,14 @@ to decide if a rider is on any possessive (type 2 - preceding s, single-quote, n
   if the rider's source is blank, say yes.
   if the rider's source's first's target is not any glom byte, say yes.
   say no.
+
+to decide if a rider is on any simile: \ added for invisible turtle project *** 
+  privatize the rider. 
+  if the rider's token is "LIKE", say yes. 
+  if the rider's token is not "AS", say no. 
+  move the rider (compiler rules). 
+  if the rider's token is any indefinite article, say no. 
+  say yes. 
 
 to decide if a rider is the start of any function:
   if the compiler's abort flag is set, say no.
