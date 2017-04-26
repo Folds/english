@@ -10947,7 +10947,7 @@ a wave file is a path.
 a wave is a hex string.
 
 a wide string is a string.
-
+\
 \to widen a window:
 \  initialize a window placement.
 \  call "User32.dll" "GetWindowPlacement"

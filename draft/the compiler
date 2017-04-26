@@ -499,7 +499,7 @@ an address is a number.
 to address a routine given an address:
   if the compiler's abort flag is set, exit.
   if the routine is nil, exit.
-  if the routine's employs moniker is not blank, exit.
+  if the routine's employs moniker is not blank, exit. \ employs are addressed later 
   if the routine's compiled flag is not set, exit.
   put the routine into the current routine.
   put the image base plus the address into the routine's address.
@@ -888,8 +888,12 @@ to compile the body of a routine:
   set the routine's compiled flag.
   slap a rider on the routine's routine body.
   move the rider (compiler rules).
+  if the rider's token is the semi-colon byte,  
+    compile the body of the routine  
+      given the rider (alternate wording); exit. \ *** alternate wording 
   if the rider's token is "employ",
-    compile the body of the routine given the rider (employ); exit.
+    compile the body of the routine  
+      given the rider (employ); exit. 
   put the current routine into a saved routine.
   put the routine into the current routine.
   create the routine's nickname index given 101.
@@ -905,6 +909,7 @@ to compile the body of a routine:
   put the saved routine into the current routine.
 
 to compile the body of a routine (epilog):
+  if the compiler's abort flag is set, exit. 
   if the routine is nil, exit.
   if the compiler's abort flag is set, exit.
   add a fragment given the finalize tag.
@@ -933,7 +938,19 @@ to compile the body of the routine called a string:
     abort with "I need a routine to '" then the string then "'."; exit.
   compile the body of the routine.
 
+to compile the body of a routine given a rider (alternate wording): \ *** alternate wording 
+  if the compiler's abort flag is set, exit. 
+  move the rider (compiler rules). \ *** do we need this? 
+  put the routine's next into a target routine. 
+  if the target routine is nil,  
+    abort with "You've defined an alternate wording here, "  
+      then "but I'm not sure what you're rewording."  
+      and the rider; exit. 
+  put the target routine's moniker into the routine's employs moniker. 
+  compile the body of the target routine. 
+
 to compile the body of a routine given a rider (employ):
+  if the compiler's abort flag is set, exit. 
   move the rider (compiler rules).
   compile a routine reference given the rider.
   convert the routine reference to the routine's employs moniker.
@@ -944,7 +961,8 @@ to compile the body of a routine given a rider (employ):
   move the rider (compiler rules).
   if the rider's token is not blank,
     abort with "Once an employ, only an employ" and the rider; exit.
-  find another routine given the routine's employs moniker and the routine index.
+  find another routine given the routine's employs moniker
+    and the routine index.
   if the other routine is nil,
     abort with "I can't find the '" then the routine's employs moniker
     then "' routine you're trying to employ." and the routine's locus; exit.
@@ -4111,9 +4129,24 @@ to scan a routine given a rider:
   add the routine to the routines given the rider's token's first.
   move the rider (compiler rules).
   scan the routine's routine header given the rider.
-  if the rider's token is not the colon byte, abort with "This routine header is improperly formulated." and the routine's locus; exit.
+  if the rider's token is the semi-colon byte,  
+    scan the routine given the rider (alternate wording); exit.  \ *** for alternate wordings 
+  if the rider's token is not the colon byte,
+    abort with "This routine header is improperly formulated."
+    and the routine's locus; exit.
   move the rider (compiler rules).
   scan the routine's routine body given the rider.
+
+To scan a routine given a rider (alternate wording):  \ *** for alternate wordings 
+  privatize the rider. 
+  move the rider (compiler rules). 
+  if the rider's token is not "to",  
+    abort with "I think that there semi-colon is misplaced."  
+      and the original rider; 
+    exit. 
+  put the original rider's token's first into the routine's routine body's first. 
+  put the original rider's token's last  into the routine's routine body's last. 
+  move the original rider (compiler rules). 
 
 to scan a routine header given a rider:
   if the compiler's abort flag is set, exit.

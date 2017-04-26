@@ -1,5 +1,7 @@
 \ The portions of this file that are from CAL-3040
 \ are copyright 2006 by the Osmosian Order.
+\ The portions of this file that are from CAL-4700 
+\ are copyright 2017 by the Osmosian Order. 
 \ The remainder is copyright 2014, 2017 by Jasper Paulsen.
 
 to add to some blocks:
@@ -58,12 +60,16 @@ to create a block:
   allocate memory for the block.
 
 to create some blocks given some rows:
-  get a row from the rows.
-  if the row is nil, exit.
-  if the row's string starts with any definition starter, add to the blocks.
-  if the blocks are empty, add to the blocks.
-  copy the row into another row.
-  append the other row to the blocks' last's rows.
+  loop. 
+    get a row from the rows. 
+    if the row is nil, exit. 
+    \The following line did not handle multi-line record definitions: 
+    \if the row's string starts with any definition starter, add to the blocks. 
+    \The following line makes blank lines significant during sorting: 
+    if the row's string has neither code nor comment on it, add to the blocks. 
+    if the blocks are empty, add to the blocks. 
+    copy the row into another row. 
+    append the other row to the blocks' last's rows. 
   repeat.
 
 to create a source given a buffer:
@@ -132,6 +138,13 @@ to decide if a string does start with any definite article: employ a string star
 to decide if a string does start with any indefinite article: employ a string starts with any indefinite article.
 
 to decide if a string does start with any routine starter: employ a string starts with any routine starter.
+
+to decide if a string has neither code nor comment on it: 
+  privatize the string. 
+  remove any leading noise from the string. 
+  remove any trailing noise from the string. 
+  if the string is blank, say yes. 
+  say no. 
 
 to decide if a string starts with any definite article:
   if the string starts with "the ", say yes.
@@ -817,15 +830,30 @@ to scroll a source given an event:
   repeat.
 
 to scrub a block:
-  if the block is nil, exit.
-  put the block's last row into a row.
-  if the row is nil, break.
-  if the row is not blank, break.
-  remove the row from the block's rows.
-  destroy the row.
+  scrub the block (forward). 
+  scrub the block (backward). 
+
+to scrub a block (backward): 
+  loop. 
+    if the block is nil, exit. 
+    put the block's last row into a row. 
+    if the row is nil, break. 
+    if the row is not blank, break. 
+    remove the row from the block's rows. 
+    destroy the row. 
   repeat.
   create another row given the return byte.
   append the other row to the block's rows.
+
+to scrub a block (forward): 
+  loop. 
+    if the block is nil, exit. 
+    put the block's first row into a row. 
+    if the row is nil, break. 
+    if the row is not blank, break. 
+    remove the row from the block's rows. 
+    destroy the row. 
+  repeat. 
 
 to scrub a block for extracting:
   if the block is nil, exit.
