@@ -282,6 +282,9 @@ to add a monikette to some monikettes given a string:
   if the string is "counter-clockwise", put "backward" into the monikette's string; exit. 
   if the string is "anticlockwise",     put "backward" into the monikette's string; exit. 
   if the string is "anti-clockwise",    put "backward" into the monikette's string; exit. 
+  \ at/on 
+  if the string is "at", put "at/on" into the monikette's string; exit. 
+  if the string is "on", put "at/on" into the monikette's string; exit. 
   \ other
   put the string into the monikette's string.
 

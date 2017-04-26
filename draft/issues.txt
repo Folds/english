@@ -94,11 +94,6 @@ The following requests have been partially demonstrated.
   Testing difficulty:  Medium. 
   Requested by Gerry Rzeppa on March 13, 2017. 
  
-
-\ ======================================   
-The following requests are roughly sorted
-from higher priority to lower priority.
-
 204.  In compiler, create synonyms for at/on. 
   Status:  Designed. 
   Audience:  Turtle programmers. 
@@ -108,6 +103,11 @@ from higher priority to lower priority.
   Testing difficulty:  Medium. 
   Requested by Gerry Rzeppa on March 13, 2017. 
  
+
+\ ======================================   
+The following requests are roughly sorted
+from higher priority to lower priority.
+
 206.  In compiler, handle similes differently from other "as" statements. 
   Status:  Designed. 
   Audience:  Turtle programmers. 
