@@ -275,6 +275,13 @@ to add a monikette to some monikettes given a string:
   \ aren't/isn't
   if the string is "isn't", put "is/aren't" into the monikette's string; exit.
   if the string is "aren't", put "is/aren't" into the monikette's string; exit.
+  \ backward/backwards/counterclockwise/counter-clockwise/anticlockwise/anti-clockwise 
+  if the string is "backward",          put "backward" into the monikette's string; exit. 
+  if the string is "backwards",         put "backward" into the monikette's string; exit. 
+  if the string is "counterclockwise",  put "backward" into the monikette's string; exit. 
+  if the string is "counter-clockwise", put "backward" into the monikette's string; exit. 
+  if the string is "anticlockwise",     put "backward" into the monikette's string; exit. 
+  if the string is "anti-clockwise",    put "backward" into the monikette's string; exit. 
   \ other
   put the string into the monikette's string.
 
