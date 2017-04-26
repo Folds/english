@@ -121,13 +121,8 @@ The following requests have been partially demonstrated.
   Testing difficulty:  Medium. 
   Requested by Gerry Rzeppa on March 13, 2017. 
  
-
-\ ======================================   
-The following requests are roughly sorted
-from higher priority to lower priority.
-
 209.  In characters, add nicknames for `~<>\[]{}| 
-  Status:  Designed. 
+  Status:  Implemented. 
   Audience:  Turtle programmers. 
   Benefit:  Medium. 
   Implementation difficulty:  Medium. 
@@ -135,6 +130,11 @@ from higher priority to lower priority.
   Testing difficulty:  Medium. 
   Requested by Jasper Paulsen on April 4, 2017. 
  
+
+\ ======================================   
+The following requests are roughly sorted
+from higher priority to lower priority.
+
 196.  In writer, get title of a page from first non-blank line, if possible. 
   Status:  Designed. 
   Audience:  Application users. 

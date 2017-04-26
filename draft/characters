@@ -1,5 +1,7 @@
 \ The portions of this file that are from CAL-3040
 \ are copyright 2006 by the Osmosian Order.
+\ The portions of this file that are from CAL-4700 
+\ are copyright 2017 by the Osmosian Order. 
 \ The remainder is copyright 2014, 2017 by Jasper Paulsen.
 
 \ this file defines and manipulates the bytes and the keys,
@@ -48,6 +50,10 @@ the b-key is a key equal to 66.
 the backslash byte is a byte equal to 92.
 
 the backspace key is a key equal to 8.
+
+the backtick byte is a byte equal to 96. 
+
+the bang byte is a byte equal to 33. 
 
 the bar byte is a byte equal to 124.
 
@@ -227,6 +233,12 @@ to clear a byte:
   put the null byte into the byte.
 
 the clear key is a key equal to 12.
+
+the close-angle byte is a byte equal to 62. 
+
+the close-bracket byte is a byte equal to 93. 
+
+the close-curly byte is a byte equal to 125. 
 
 the colon byte is a byte equal to 58.
 
@@ -532,6 +544,8 @@ the equal-sign byte is a byte equal to 61.
 
 the equal-sign key is a key equal to 187.
 
+the esc key is a key equal to 27. 
+
 the escape byte is a byte equal to 27.
 
 the escape key is a key equal to 27.
@@ -539,6 +553,8 @@ the escape key is a key equal to 27.
 the euro-sign byte is a byte equal to 128.
 
 the exclamation byte is a byte equal to 33.
+
+the exclamation-mark byte is a byte equal to 33. 
 
 the f-key is a key equal to 70.
 
@@ -582,9 +598,15 @@ the four key is a key equal to 52.
 
 the g-key is a key equal to 71.
 
+the greater-than-sign byte is a byte equal to 62. 
+
 the group-separator byte is a byte equal to 29.
 
 the h-key is a key equal to 72.
+
+the hash-tag byte is a byte equal to 163. 
+
+the hashtag byte is a byte equal to 163. 
 
 the home key is a key equal to 36.
 
@@ -623,6 +645,10 @@ the left-paren byte is a byte equal to 40.
 the left-single-quote byte is a byte equal to 145.
 
 the left-window key is a key equal to 91.
+
+the less-than-sign byte is a byte equal to 60. 
+
+a letter is a byte. 
 
 the linefeed byte is a byte equal to 10.
 
@@ -771,6 +797,8 @@ the menu key is a key equal to 93.
 
 the micro byte is a byte equal to 181.
 
+the minus-sign byte is a byte equal to 45. 
+
 the multiplication-symbol byte is a byte equal to 215.
 
 the n-key is a key equal to 78.
@@ -831,6 +859,12 @@ the one-half byte is a byte equal to 189.
 
 the one-quarter byte is a byte equal to 188.
 
+the open-angle byte is a byte equal to 60. 
+
+the open-bracket byte is a byte equal to 91. 
+
+the open-curly byte is a byte equal to 123. 
+
 the p-key is a key equal to 80.
 
 the page-down key is a key equal to 34.
@@ -850,6 +884,8 @@ the period byte is a byte equal to 46.
 the pipe byte is a byte equal to 124.
 
 the plus-or-minus byte is a byte equal to 177.
+
+the plus-sign byte is a byte equal to 43. 
 
 the pound-sign byte is a byte equal to 163.
 
@@ -981,6 +1017,8 @@ the tilde byte is a byte equal to 126.
 
 the trade-mark byte is a byte equal to 153.
 
+the twiddle byte is a byte equal to 126. 
+
 the two byte is a byte equal to 50.
 
 the two key is a key equal to 50.
@@ -1006,9 +1044,13 @@ the upperscore byte is a byte equal to 175.
 
 the v-key is a key equal to 86.
 
+the vertical-bar byte is a byte equal to 124. 
+
 the vertical-tab byte is a byte equal to 11.
 
 the w-key is a key equal to 87.
+
+the whack byte is a byte equal to 92. 
 
 the x-key is a key equal to 88.
 
