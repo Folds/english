@@ -2320,14 +2320,18 @@ to decide if a string is any preposition:
   if the string is "across", say yes.
   if the string is "after", say yes.
   if the string is "against", say yes.
+  if the string is "all", say yes. 
   if the string is "along", say yes.
   if the string is "among", say yes.
+  if the string is "any", say yes. 
   if the string is "anywhere", say yes.
+  if the string is "away", say yes. 
   if the string is "around", say yes.
   if the string is "as", say yes.
   if the string is "at", say yes.
   if the string is "back", say yes.
   if the string is "backward", say yes.
+  if the string is "backwards", say yes. 
   if the string is "before", say yes.
   if the string is "beginning", say yes.
   if the string is "behind", say yes.
@@ -2336,35 +2340,62 @@ to decide if a string is any preposition:
   if the string is "beside", say yes.
   if the string is "between", say yes.
   if the string is "beyond", say yes.
+  if the string is "bigger", say yes. 
   if the string is "by", say yes.
+  if the string is "close", say yes. 
+  if the string is "deep", say yes. 
+  if the string is "diagonally", say yes. 
   if the string is "down", say yes.
   if the string is "downward", say yes.
   if the string is "ending", say yes.
+  if the string is "everywhere", say yes. 
   if the string is "except", say yes.
+  if the string is "facing", say yes. 
   if the string is "finishing", say yes.
   if the string is "for", say yes.
   if the string is "forward", say yes.
   if the string is "from", say yes.
   if the string is "given", say yes.
   if the string is "giving", say yes.
+  if the string is "high", say yes. 
   if the string is "in", say yes.
   if the string is "inside", say yes.
   if the string is "into", say yes.
+  if the string is "larger", say yes. 
+  if the string is "leaning", say yes. 
   if the string is "left", say yes.
   if the string is "leftward", say yes.
+  if the string is "leftways", say yes. 
+  if the string is "like", say yes. 
+  if the string is "limiting", say yes. 
+  if the string is "long", say yes. 
   if the string is "near", say yes.
   if the string is "of", say yes.
   if the string is "off", say yes.
   if the string is "on", say yes.
+  if the string is "only", say yes. 
+  if the string is "onto", say yes. 
   if the string is "out", say yes.
   if the string is "outside", say yes.
   if the string is "over", say yes.
   if the string is "past", say yes.
+  if the string is "pointing", say yes. 
   if the string is "returning", say yes.
   if the string is "right", say yes.
   if the string is "rightward", say yes.
+  if the string is "rightways", say yes. 
+  if the string is "shorter", say yes. 
+  if the string is "sideway", say yes. 
+  if the string is "sideways", say yes. 
+  if the string is "similar", say yes. 
+  if the string is "smaller", say yes. 
   if the string is "somewhere", say yes.
+  if the string is "slantwise", say yes. 
+  if the string is "slantway", say yes. 
+  if the string is "slantways", say yes. 
   if the string is "starting", say yes.
+  if the string is "tall", say yes. 
+  if the string is "taller", say yes. 
   if the string is "thru", say yes.
   if the string is "through", say yes.
   if the string is "throughout", say yes.
@@ -2381,6 +2412,7 @@ to decide if a string is any preposition:
   if the string is "using", say yes.
   if the string is "via", say yes.
   if the string is "while", say yes.
+  if the string is "wide", say yes. 
   if the string is "with", say yes.
   if the string is "within", say yes.
   if the string is "without", say yes.

@@ -42,7 +42,7 @@ These items should occasionally be moved to demoed fixes.txt.
 The following requests have been partially demonstrated.
 
 205.  In compiler, make "can't" negate "can", instead of "ca". 
-  Status:  Designed. 
+  Status:  Implemented. 
   Audience:  Designed. 
   Benefit:  Medium. 
   Implementation difficulty:  Medium. 
@@ -51,7 +51,7 @@ The following requests have been partially demonstrated.
   Requested by Gerry Rzeppa on March 13, 2017. 
  
 207.  In compiler, don't compile the documentation source code files. 
-  Status:  Designed. 
+  Status:  Implemented. 
   Audience:  Turtle programmers. 
   Benefit:  Medium. 
   Implementation difficulty:  Medium. 
@@ -60,7 +60,7 @@ The following requests have been partially demonstrated.
   Requested by Gerry Rzeppa on March 13, 2017. 
  
 157.  In compiler, support multiple headers per routine, a la CAL-4700. 
-  Status:   Designed. 
+  Status:   Implemented. 
   Benefit:  Permissions requirement. 
   Implementation difficulty:  Medium. 
   Demoing difficulty:  Medium. 
@@ -68,7 +68,7 @@ The following requests have been partially demonstrated.
   Requested by Gerry Rzeppa on March 13, 2017. 
  
 200.  In compiler, allow multi-line routine headers. 
-  Status:  Designed. 
+  Status:  Implemented. 
   Audience:  Programmers. 
   Benefit:  Medium. 
   Implementation difficulty:  Medium. 
@@ -77,7 +77,7 @@ The following requests have been partially demonstrated.
   Requested by Gerry Rzeppa on March 13, 2017. 
  
 202.  In editor, change sorting to accommodate multi-line routine headers. 
-  Status:  Designed. 
+  Status:  Implemented. 
   Audience:  Programmers. 
   Benefit:  Medium. 
   Implementation difficulty:  Medium. 
@@ -86,7 +86,7 @@ The following requests have been partially demonstrated.
   Requested by Gerry Rzeppa on March 13, 2017. 
  
 203.  In compiler, create synonyms for backwards/counter-clockwise. 
-  Status:  Designed. 
+  Status:  Implemented. 
   Audience:  Turtle programmers. 
   Benefit:  Medium. 
   Implementation difficulty:  Medium. 
@@ -95,7 +95,7 @@ The following requests have been partially demonstrated.
   Requested by Gerry Rzeppa on March 13, 2017. 
  
 204.  In compiler, create synonyms for at/on. 
-  Status:  Designed. 
+  Status:  Implemented. 
   Audience:  Turtle programmers. 
   Benefit:  Medium. 
   Implementation difficulty:  Medium. 
@@ -104,7 +104,16 @@ The following requests have been partially demonstrated.
   Requested by Gerry Rzeppa on March 13, 2017. 
  
 206.  In compiler, handle similes differently from other "as" statements. 
-  Status:  Designed. 
+  Status:  Implemented. 
+  Audience:  Turtle programmers. 
+  Benefit:  Medium. 
+  Implementation difficulty:  Medium. 
+  Demoing difficulty:  Medium. 
+  Testing difficulty:  Medium. 
+  Requested by Gerry Rzeppa on March 13, 2017. 
+ 
+208.  In compiler, add new prepositions. 
+  Status:  Implemented. 
   Audience:  Turtle programmers. 
   Benefit:  Medium. 
   Implementation difficulty:  Medium. 
@@ -117,15 +126,6 @@ The following requests have been partially demonstrated.
 The following requests are roughly sorted
 from higher priority to lower priority.
 
-208.  In compiler, add new prepositions. 
-  Status:  Designed. 
-  Audience:  Turtle programmers. 
-  Benefit:  Medium. 
-  Implementation difficulty:  Medium. 
-  Demoing difficulty:  Medium. 
-  Testing difficulty:  Medium. 
-  Requested by Gerry Rzeppa on March 13, 2017. 
- 
 209.  In characters, add nicknames for `~<>\[]{}| 
   Status:  Designed. 
   Audience:  Turtle programmers. 
