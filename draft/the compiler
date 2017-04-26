@@ -2064,6 +2064,12 @@ to decide if a global is twin of another global:
   if the global's global body is not the other global's global body, say no.
   say yes.
 
+to decide if an item looks reamish: 
+  put 100 in a size. \ don't read more than 100 bytes. 
+  read the item's path into a buffer given the size. 
+  if the buffer starts with "ream cal", say yes. 
+  say no. 
+
 to decide if listing failed:
   if list was not requested, say no.
   if the i/o error is blank, say no.
@@ -3640,6 +3646,7 @@ to read some source files:
     if the item is not found, break.
     if the item's kind is not "file", repeat.
     if the item's extension is not blank, repeat.
+    if the item looks reamish, repeat. 
     add a source file to the source files given the item's path.
     read the source file.
   repeat.

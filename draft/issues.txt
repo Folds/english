@@ -50,11 +50,6 @@ The following requests have been partially demonstrated.
   Testing difficulty:  Medium. 
   Requested by Gerry Rzeppa on March 13, 2017. 
  
-
-\ ======================================   
-The following requests are roughly sorted
-from higher priority to lower priority.
-
 207.  In compiler, don't compile the documentation source code files. 
   Status:  Designed. 
   Audience:  Turtle programmers. 
@@ -64,6 +59,11 @@ from higher priority to lower priority.
   Testing difficulty:  Medium. 
   Requested by Gerry Rzeppa on March 13, 2017. 
  
+
+\ ======================================   
+The following requests are roughly sorted
+from higher priority to lower priority.
+
 157.  In compiler, support multiple headers per routine, a la CAL-4700. 
   Status:   Designed. 
   Benefit:  Permissions requirement. 

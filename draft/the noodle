@@ -8448,21 +8448,34 @@ to read a number:
   convert the string to the number.
 
 to read a path into a buffer:
-  clear the i/o error.
-  privatize the path.
-  null terminate the path.
-  if the path is not in the file system, put "File '" then the path then "' doesn't exist." into the i/o error; exit.
-\  set the path to read-write mode.
-  call "kernel32.dll" "CreateFileA" with the path's first
-    and -2147483648 [generic_read] and 3 [file_share_read+file_share_write] and 0 
-    and 3 [open_existing] and 0 and 0 returning a handle.
-  if the handle is -1 [invalid_handle_value], put "Error opening file '" then the path then "'." into the i/o error; exit.
-  call "kernel32.dll" "GetFileSize" with the handle and nil returning a size.
-  reassign the buffer's first given the size.
-  put the buffer's first plus the size minus 1 into the buffer's last.
-  call "kernel32.dll" "ReadFile" with the handle and the buffer's first and the size
-    and a number's whereabouts and 0 returning the number.
-  call "kernel32.dll" "CloseHandle" with the handle.
+  put the largest number in a size called max bytes. 
+  read the path into the buffer given the max bytes. 
+
+to read a path into a buffer given a size called max bytes: 
+  clear the i/o error. 
+  privatize the path. 
+  privatize the max bytes. 
+  null terminate the path. 
+  if the path is not in the file system,  
+    put "File '" then the path then "' doesn't exist."  
+    into the i/o error; exit. 
+\  set the path to read-write mode. 
+  call "kernel32.dll" "CreateFileA" with the path's first 
+    and -2147483648 [generic_read]  
+    and 3 [file_share_read+file_share_write] and 0  
+    and 3 [open_existing] and 0 and 0 returning a handle. 
+  if the handle is -1 [invalid_handle_value],  
+    put "Error opening file '" then the path then "'."  
+    into the i/o error; exit. 
+  call "kernel32.dll" "GetFileSize" with the handle and nil returning a size. 
+  if the size is less than the max bytes, 
+    put the size in the max bytes. 
+  reassign the buffer's first given the max bytes. 
+  put the buffer's first plus the max bytes minus 1 into the buffer's last. 
+  call "kernel32.dll" "ReadFile"  
+    with the handle and the buffer's first and the max bytes 
+    and a number's whereabouts and 0 returning the number. 
+  call "kernel32.dll" "CloseHandle" with the handle. 
   if the number is not 0, exit.
   put "Error reading file '" then the path then "'." into the i/o error.
 
