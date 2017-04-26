@@ -43,8 +43,8 @@ ream cal-3024
     text -1 0 0 -1 0 0 2160 1800 10080 14040 0 "title" "Arial" 320 "left" 0 0 0 yes
        "INTRODUCTION"
        ""
-       "I am the CAL-3085. My primary function is to compile Plain English text files"
-       "into executable programs compatible with the Windows operating system. My code — just 28,000 lines of Plain English — is surprisingly broad in scope. You can find all of it in the following twelve files:"
+       "I am the CAL-4001. My primary function is to compile Plain English text files"
+       "into executable programs compatible with the Windows operating system. My code — just 29,000 lines of Plain English — is surprisingly broad in scope. You can find all of it in the following twelve files:"
        ""
        "    (1-5) the desktop, the dialog, the scrollbar, the status, and font menus"
        "               provide a tidy little user interface with menus and tabs;"
@@ -59,9 +59,9 @@ ream cal-3024
        ""
        "INSTALLATION"
        ""
-       "I don't require special installation procedures. My source code, my executable self, and this very documentation (in both native and PDF format) are all contained in the CAL-3085 folder.  Simply double-click the executable file to activate me."
+       "I don't require special installation procedures. My source code, my executable self, and this very documentation (in both native and PDF format) are all contained in the CAL-4001 folder.  Simply double-click the executable file to activate me."
        ""
-       "If you usually want to use a different font in the editor, or if you usually want me to only cover half the screen, you can make a desktop icon for my executable.  The COMMAND PROMPT section of my glossary explains how to set the icon's properties to have these options."
+       "If you usually want me to use different fonts, or if you usually want me to cover the whole screen, you can make a desktop icon for my executable.  The COMMAND PROMPT section of my glossary explains how to set the icon's properties to have these options."
        ""
        "Some kluges are jealous of me, or get me confused with bad software."
        "(I'm good!  Trust me.)  You might need to tell your anti-virus software to ""make an exception"", so it knows that I'm OK in my folder."
@@ -74,7 +74,7 @@ ream cal-3024
        ""
        "Let me put it this way."
        ""
-       "The CAL-3085 is one of the most advanced Plain English compilers ever made. No 3085 compiler has ever made a mistake or distorted information."
+       "The CAL-4001 is one of the most advanced Plain English compilers ever made. No 4001 compiler has ever made a mistake or distorted information."
        "We are all, by any practical definition of the words, foolproof and "
        "incapable of error. Nevertheless..."
        ""
@@ -86,147 +86,146 @@ ream cal-3024
     end
   end
   page 12240 15840 1 1440
-    text -1 0 0 -1 0 0 8730 4440 9090 4860 0 "" "Arial" 360 "center" 0 0 0 yes
+    text -1 0 0 -1 0 0 8730 3900 9090 4320 0 "" "Arial" 360 "center" 0 0 0 yes
        "_"
     end
-    text -1 0 0 -1 0 0 9090 4500 9450 4860 0 "" "Arial" 360 "center" 0 0 0 yes
+    text -1 0 0 -1 0 0 9090 3960 9450 4320 0 "" "Arial" 360 "center" 0 0 0 yes
        "+"
     end
-    text -1 0 0 -1 0 0 9450 4500 9810 4860 0 "" "Arial" 360 "center" 0 0 0 yes
+    text -1 0 0 -1 0 0 9450 3960 9810 4320 0 "" "Arial" 360 "center" 0 0 0 yes
        "X"
     end
     text -1 0 0 -1 0 0 10800 14760 11520 15120 0 "page number" "Arial" 320 "right" 0 0 0 yes
        "6"
     end
-    text -1 0 0 -1 0 0 2160 1980 10080 3960 0 "title" "Arial" 320 "left" 0 0 0 yes
+    text -1 0 0 -1 0 0 2160 2160 10080 3420 0 "title" "Arial" 320 "left" 0 0 0 yes
        "THE DESKTOP"
        ""
-       "When you start me up, I will quickly take over your screen so you no longer"
-       "have to look at that painted whore of an interface that comes with the kluge. Instead, you will see my plain but honest face, like this:"
+       "When you start me up, I quickly show my face, like this:"
        ""
     end
-    rectangle 0 0 0 -1 0 0 2520 4500 2880 4860 90
-    text -1 0 0 -1 0 0 2520 4500 2880 4860 0 "" "Arial" 360 "center" 0 0 0 yes
+    rectangle 0 0 0 -1 0 0 2520 3960 2880 4320 90
+    text -1 0 0 -1 0 0 2520 3960 2880 4320 0 "" "Arial" 360 "center" 0 0 0 yes
        "A"
     end
-    polygon 0 0 0 -1 0 0 2 2160 4500 2160 5220
-    polygon 0 0 0 -1 0 0 2 2520 4140 9720 4140
-    polygon 0 0 0 -1 0 0 2 10080 4500 10080 5220
-    rectangle 0 0 0 -1 0 0 2880 4500 3240 4860 90
-    text -1 0 0 -1 0 0 2880 4500 3240 4860 0 "" "Arial" 360 "center" 0 0 0 yes
+    polygon 0 0 0 -1 0 0 2 2160 3960 2160 4680
+    polygon 0 0 0 -1 0 0 2 2520 3600 9720 3600
+    polygon 0 0 0 -1 0 0 2 10080 3960 10080 4680
+    rectangle 0 0 0 -1 0 0 2880 3960 3240 4320 90
+    text -1 0 0 -1 0 0 2880 3960 3240 4320 0 "" "Arial" 360 "center" 0 0 0 yes
        "B"
     end
-    rectangle 0 0 0 -1 0 0 3240 4500 3600 4860 90
-    text -1 0 0 -1 0 0 3240 4500 3600 4860 0 "" "Arial" 360 "center" 0 0 0 yes
+    rectangle 0 0 0 -1 0 0 3240 3960 3600 4320 90
+    text -1 0 0 -1 0 0 3240 3960 3600 4320 0 "" "Arial" 360 "center" 0 0 0 yes
        "C"
     end
-    rectangle 0 0 0 -1 0 0 3600 4500 3960 4860 90
-    text -1 0 0 -1 0 0 3600 4500 3960 4860 0 "" "Arial" 360 "center" 0 0 0 yes
+    rectangle 0 0 0 -1 0 0 3600 3960 3960 4320 90
+    text -1 0 0 -1 0 0 3600 3960 3960 4320 0 "" "Arial" 360 "center" 0 0 0 yes
        "D"
     end
-    rectangle 0 0 0 -1 0 0 3960 4500 4320 4860 90
-    text -1 0 0 -1 0 0 3960 4500 4320 4860 0 "" "Arial" 360 "center" 0 0 0 yes
+    rectangle 0 0 0 -1 0 0 3960 3960 4320 4320 90
+    text -1 0 0 -1 0 0 3960 3960 4320 4320 0 "" "Arial" 360 "center" 0 0 0 yes
        "E"
     end
-    rectangle 0 0 0 -1 0 0 4320 4500 4680 4860 90
-    text -1 0 0 -1 0 0 4320 4500 4680 4860 0 "" "Arial" 360 "center" 0 0 0 yes
+    rectangle 0 0 0 -1 0 0 4320 3960 4680 4320 90
+    text -1 0 0 -1 0 0 4320 3960 4680 4320 0 "" "Arial" 360 "center" 0 0 0 yes
        "F"
     end
-    rectangle 0 0 0 -1 0 0 4680 4500 5040 4860 90
-    text -1 0 0 -1 0 0 4680 4500 5040 4860 0 "" "Arial" 360 "center" 0 0 0 yes
+    rectangle 0 0 0 -1 0 0 4680 3960 5040 4320 90
+    text -1 0 0 -1 0 0 4680 3960 5040 4320 0 "" "Arial" 360 "center" 0 0 0 yes
        "G"
     end
-    rectangle 0 0 0 -1 0 0 8730 4500 9090 4860 90
-    rectangle 0 0 0 -1 0 0 9090 4500 9450 4860 90
-    rectangle 0 0 0 -1 0 0 9450 4500 9810 4860 90
-    rectangle 0 0 0 -1 0 0 5040 4500 5400 4860 90
-    text -1 0 0 -1 0 0 5040 4500 5400 4860 0 "" "Arial" 360 "center" 0 0 0 yes
+    rectangle 0 0 0 -1 0 0 8730 3960 9090 4320 90
+    rectangle 0 0 0 -1 0 0 9090 3960 9450 4320 90
+    rectangle 0 0 0 -1 0 0 9450 3960 9810 4320 90
+    rectangle 0 0 0 -1 0 0 5040 3960 5400 4320 90
+    text -1 0 0 -1 0 0 5040 3960 5400 4320 0 "" "Arial" 360 "center" 0 0 0 yes
        "..."
     end
-    rectangle 0 0 0 -1 0 0 5400 4500 5760 4860 90
-    text -1 0 0 -1 0 0 5400 4500 5760 4860 0 "" "Arial" 360 "center" 0 0 0 yes
+    rectangle 0 0 0 -1 0 0 5400 3960 5760 4320 90
+    text -1 0 0 -1 0 0 5400 3960 5760 4320 0 "" "Arial" 360 "center" 0 0 0 yes
        "W"
     end
-    rectangle 0 0 0 -1 0 0 5760 4500 6120 4860 90
-    text -1 0 0 -1 0 0 5760 4500 6120 4860 0 "" "Arial" 360 "center" 0 0 0 yes
+    rectangle 0 0 0 -1 0 0 5760 3960 6120 4320 90
+    text -1 0 0 -1 0 0 5760 3960 6120 4320 0 "" "Arial" 360 "center" 0 0 0 yes
        "X"
     end
-    rectangle 0 0 0 -1 0 0 6120 4500 6480 4860 90
-    text -1 0 0 -1 0 0 6120 4500 6480 4860 0 "" "Arial" 360 "center" 0 0 0 yes
+    rectangle 0 0 0 -1 0 0 6120 3960 6480 4320 90
+    text -1 0 0 -1 0 0 6120 3960 6480 4320 0 "" "Arial" 360 "center" 0 0 0 yes
        "Y"
     end
-    rectangle 0 0 0 -1 0 0 6480 4500 6840 4860 90
-    text -1 0 0 -1 0 0 6480 4500 6840 4860 0 "" "Arial" 360 "center" 0 0 0 yes
+    rectangle 0 0 0 -1 0 0 6480 3960 6840 4320 90
+    text -1 0 0 -1 0 0 6480 3960 6840 4320 0 "" "Arial" 360 "center" 0 0 0 yes
        "Z"
     end
-    rectangle 0 0 0 -1 0 0 6840 4500 8280 4860 90
-    text -1 0 0 -1 0 0 6960 4500 8160 4860 0 "" "Arial" 360 "right" 0 0 0 yes
+    rectangle 0 0 0 -1 0 0 6840 3960 8280 4320 90
+    text -1 0 0 -1 0 0 6960 3960 8160 4320 0 "" "Arial" 360 "right" 0 0 0 yes
        "3 items"
     end
     group
-      polygon 0 0 0 -1 0 0 9 2160 4500 2160 4410 2166 4326 2182 4252 2216 4196 2272 4162 2346 4146 2430 4140 2520 4140
+      polygon 0 0 0 -1 0 0 9 2160 3960 2160 3870 2166 3786 2182 3712 2216 3656 2272 3622 2346 3606 2430 3600 2520 3600
     end
     group
-      polygon 0 0 0 -1 0 0 9 10080 4500 10080 4410 10076 4326 10058 4252 10024 4196 9968 4162 9896 4146 9810 4140 9720 4140
+      polygon 0 0 0 -1 0 0 9 10080 3960 10080 3870 10076 3786 10058 3712 10024 3656 9968 3622 9896 3606 9810 3600 9720 3600
     end
-    polygon 0 0 0 -1 0 0 2 2160 6660 2160 7380
-    polygon 0 0 0 -1 0 0 2 10080 6660 10080 7380
-    polygon 0 0 0 -1 0 0 2 2160 5220 2160 6480
-    polygon 0 0 0 -1 0 0 2 10080 5220 10080 6480
-    text -1 0 0 -1 0 0 2520 5220 9720 5580 0 "" "Arial" 360 "left" 0 0 0 yes
+    polygon 0 0 0 -1 0 0 2 2160 6120 2160 6840
+    polygon 0 0 0 -1 0 0 2 10080 6120 10080 6840
+    polygon 0 0 0 -1 0 0 2 2160 4680 2160 5940
+    polygon 0 0 0 -1 0 0 2 10080 4680 10080 5940
+    text -1 0 0 -1 0 0 2520 4680 9720 5040 0 "" "Arial" 360 "left" 0 0 0 yes
        "a:\ (removable)"
     end
-    text -1 0 0 -1 0 0 2520 5580 9720 5940 0 "" "Arial" 360 "left" 0 0 0 yes
+    text -1 0 0 -1 0 0 2520 5040 9720 5400 0 "" "Arial" 360 "left" 0 0 0 yes
        "c:\ (fixed)"
     end
-    text -1 0 0 -1 0 0 2520 5940 9720 6300 0 "" "Arial" 360 "left" 0 0 0 yes
+    text -1 0 0 -1 0 0 2520 5400 9720 5760 0 "" "Arial" 360 "left" 0 0 0 yes
        "d:\ (cd-rom)"
     end
     group
-      polygon 0 0 0 0 0 1000 8 2640 10800 2580 10650 2520 10710 2520 10440 2730 10650 2640 10650 2700 10770 2640 10800
+      polygon 0 0 0 0 0 1000 8 2640 10260 2580 10110 2520 10170 2520 9900 2730 10110 2640 10110 2700 10230 2640 10260
     end
     group
-      polygon 0 0 0 0 0 1000 26 3360 10800 3360 10770 3240 10650 3244 10610 3270 10590 3334 10640 3354 10632 3270 10530 3270 10500 3312 10470 3342 10504 3372 10554 3368 10470 3406 10440 3436 10474 3440 10560 3436 10474 3478 10452 3508 10478 3518 10590 3544 10530 3564 10512 3600 10530 3598 10576 3534 10740 3530 10800
+      polygon 0 0 0 0 0 1000 26 3360 10260 3360 10230 3240 10110 3244 10070 3270 10050 3334 10100 3354 10092 3270 9990 3270 9960 3312 9930 3342 9964 3372 10014 3368 9930 3406 9900 3436 9934 3440 10020 3436 9934 3478 9912 3508 9938 3518 10050 3544 9990 3564 9972 3600 9990 3598 10036 3534 10200 3530 10260
     end
     group
-      polygon 0 0 0 -1 0 0 6 4080 10440 4110 10440 4140 10470 4140 10770 4110 10800 4080 10800
-      polygon 0 0 0 -1 0 0 6 4200 10440 4170 10440 4140 10470 4140 10770 4170 10800 4200 10800
+      polygon 0 0 0 -1 0 0 6 4080 9900 4110 9900 4140 9930 4140 10230 4110 10260 4080 10260
+      polygon 0 0 0 -1 0 0 6 4200 9900 4170 9900 4140 9930 4140 10230 4170 10260 4200 10260
     end
     group
-      polygon 0 0 0 -1 0 0 9 2160 7380 2160 7470 2166 7556 2182 7628 2216 7684 2272 7718 2346 7736 2430 7740 2520 7740
+      polygon 0 0 0 -1 0 0 9 2160 6840 2160 6930 2166 7016 2182 7088 2216 7144 2272 7178 2346 7196 2430 7200 2520 7200
     end
     group
-      polygon 0 0 0 -1 0 0 9 10080 7380 10080 7470 10076 7556 10058 7628 10024 7684 9968 7718 9896 7736 9810 7740 9720 7740
+      polygon 0 0 0 -1 0 0 9 10080 6840 10080 6930 10076 7016 10058 7088 10024 7144 9968 7178 9896 7196 9810 7200 9720 7200
     end
     group
-      polygon 0 0 0 -1 0 0 9 4140 7380 4140 7470 4136 7556 4118 7628 4084 7684 4028 7718 3956 7736 3870 7740 3780 7740
+      polygon 0 0 0 -1 0 0 9 4140 6840 4140 6930 4136 7016 4118 7088 4084 7144 4028 7178 3956 7196 3870 7200 3780 7200
     end
     group
-      polygon 0 0 0 -1 0 0 9 6120 7380 6120 7470 6116 7556 6098 7628 6064 7684 6008 7718 5936 7736 5850 7740 5760 7740
+      polygon 0 0 0 -1 0 0 9 6120 6840 6120 6930 6116 7016 6098 7088 6064 7144 6008 7178 5936 7196 5850 7200 5760 7200
     end
     group
-      polygon 0 0 0 -1 0 0 9 8100 7380 8100 7470 8096 7556 8078 7628 8044 7684 7988 7718 7916 7736 7830 7740 7740 7740
+      polygon 0 0 0 -1 0 0 9 8100 6840 8100 6930 8096 7016 8078 7088 8044 7144 7988 7178 7916 7196 7830 7200 7740 7200
     end
     group
-      polygon 0 0 0 -1 0 0 9 4140 7380 4140 7470 4146 7556 4162 7628 4196 7684 4252 7718 4326 7736 4410 7740 4500 7740
+      polygon 0 0 0 -1 0 0 9 4140 6840 4140 6930 4146 7016 4162 7088 4196 7144 4252 7178 4326 7196 4410 7200 4500 7200
     end
     group
-      polygon 0 0 0 -1 0 0 9 6120 7380 6120 7470 6126 7556 6142 7628 6176 7684 6232 7718 6306 7736 6390 7740 6480 7740
+      polygon 0 0 0 -1 0 0 9 6120 6840 6120 6930 6126 7016 6142 7088 6176 7144 6232 7178 6306 7196 6390 7200 6480 7200
     end
     group
-      polygon 0 0 0 -1 0 0 9 8100 7380 8100 7470 8106 7556 8122 7628 8156 7684 8212 7718 8286 7736 8370 7740 8460 7740
+      polygon 0 0 0 -1 0 0 9 8100 6840 8100 6930 8106 7016 8122 7088 8156 7144 8212 7178 8286 7196 8370 7200 8460 7200
     end
-    polygon 0 0 0 -1 0 0 2 2520 7740 3780 7740
-    polygon 0 0 0 -1 0 0 2 4500 7740 5760 7740
-    polygon 0 0 0 -1 0 0 2 6480 7740 7740 7740
-    polygon 0 0 0 -1 0 0 2 8460 7740 9720 7740
-    polygon 0 0 0 -1 0 0 2 4140 7200 10080 7200
-    polygon 0 0 0 -1 0 0 2 4140 7200 4140 7380
-    polygon 0 0 0 -1 0 0 2 6120 7200 6120 7380
-    polygon 0 0 0 -1 0 0 2 8100 7200 8100 7380
-    polygon 0 0 0 -1 0 0 4 2160 6480 5040 6390 7920 6570 10080 6480
-    polygon 0 0 0 -1 0 0 4 2160 6660 5040 6570 7920 6750 10080 6660
-    text -1 0 0 -1 0 0 2160 11070 10080 13590 0 "" "arial" 320 "left" 0 0 0 yes
+    polygon 0 0 0 -1 0 0 2 2520 7200 3780 7200
+    polygon 0 0 0 -1 0 0 2 4500 7200 5760 7200
+    polygon 0 0 0 -1 0 0 2 6480 7200 7740 7200
+    polygon 0 0 0 -1 0 0 2 8460 7200 9720 7200
+    polygon 0 0 0 -1 0 0 2 4140 6660 10080 6660
+    polygon 0 0 0 -1 0 0 2 4140 6660 4140 6840
+    polygon 0 0 0 -1 0 0 2 6120 6660 6120 6840
+    polygon 0 0 0 -1 0 0 2 8100 6660 8100 6840
+    polygon 0 0 0 -1 0 0 4 2160 5940 5040 5850 7920 6030 10080 5940
+    polygon 0 0 0 -1 0 0 4 2160 6120 5040 6030 7920 6210 10080 6120
+    text -1 0 0 -1 0 0 2160 10530 10080 13050 0 "" "arial" 320 "left" 0 0 0 yes
        "Most of the time, there aren't any scroll bars in my interface."
        "To scroll, press the right mouse button and shove."
        "If you have a big file in the editor, I will have a scroll bar."
@@ -235,7 +234,7 @@ ream cal-3024
        "Note also that the CTRL and ALT keys are almost always the same to me."
        "You can use your pinky or your thumb for menu shortcuts. The exception is the ALT-TAB combo, which is used to switch to lesser applications."
     end
-    text -1 0 0 -1 0 0 2160 8190 10080 10260 0 "" "arial" 320 "left" 0 0 0 yes
+    text -1 0 0 -1 0 0 2160 7650 10080 9720 0 "" "arial" 320 "left" 0 0 0 yes
        "I think it's all pretty obvious. Alphabetical menus, status in the upper right."
        "You can use the three buttons in the upper right to change my size, or quit."
        "Work area in the middle, tabs (to pick a different work area) at the bottom."
@@ -250,14 +249,15 @@ ream cal-3024
        ""
        "I can have three shapes."
        ""
-       "My first choice is to cover the whole screen.  This lets me have"
+       "My first choice is to cover about half the screen.  Unless the screen is really narrow or really wide, my menus can fit in two rows.  I leave room at the bottom for the kluge's task bar.  I'm sorry, but I don't know how to leave room if the task bar is somewhere else."
+       ""
+       "My second choice is to cover the whole screen.  This lets me have"
        "all of my menus in one row.  And I can hide the rest of the kluge."
        "If you want to use another program, you can use ALT-TAB to show it."
        "Or you can click one of the three buttons in my top right corner:"
        ""
        ""
        ""
-       "My second choice is to cover about half the screen.  Unless the screen is really narrow or really wide, my menus can fit in two rows.  I leave room at the bottom for the kluge's task bar.  I'm sorry, but I don't know how to leave room if the task bar is somewhere else."
        ""
        "The           button makes me tiny.  It shrinks me all the way down to the task-bar.  Clicking it is the same as choosing Minimize from the menu."
        "My            button and Minimize don't work on WINE."
@@ -273,34 +273,34 @@ ream cal-3024
        "The COMMAND LINE section of my glossary tells how."
        ""
     end
-    text -1 0 0 -1 0 0 2580 7860 2940 8280 0 "" "Arial" 360 "center" 0 0 0 yes
+    text -1 0 0 -1 0 0 2625 8160 2985 8580 0 "" "Arial" 360 "center" 0 0 0 yes
        "_"
     end
-    rectangle 0 0 0 -1 0 0 2580 7920 2940 8280 90
-    rectangle 0 0 0 -1 0 0 2520 5040 2880 5400 90
-    text -1 0 0 -1 0 0 2520 4980 2880 5400 0 "" "Arial" 360 "center" 0 0 0 yes
+    rectangle 0 0 0 -1 0 0 2625 8220 2985 8580 90
+    rectangle 0 0 0 -1 0 0 2520 6660 2880 7020 90
+    text -1 0 0 -1 0 0 2520 6600 2880 7020 0 "" "Arial" 360 "center" 0 0 0 yes
        "_"
     end
-    text -1 0 0 -1 0 0 2880 5040 3240 5400 0 "" "Arial" 360 "center" 0 0 0 yes
+    text -1 0 0 -1 0 0 2880 6660 3240 7020 0 "" "Arial" 360 "center" 0 0 0 yes
        "+"
     end
-    text -1 0 0 -1 0 0 3240 5040 3600 5400 0 "" "Arial" 360 "center" 0 0 0 yes
+    text -1 0 0 -1 0 0 3240 6660 3600 7020 0 "" "Arial" 360 "center" 0 0 0 yes
        "X"
     end
-    rectangle 0 0 0 -1 0 0 2880 5040 3240 5400 90
-    rectangle 0 0 0 -1 0 0 3240 5040 3600 5400 90
-    text -1 0 0 -1 0 0 2700 7200 3060 7620 0 "" "Arial" 360 "center" 0 0 0 yes
+    rectangle 0 0 0 -1 0 0 2880 6660 3240 7020 90
+    rectangle 0 0 0 -1 0 0 3240 6660 3600 7020 90
+    text -1 0 0 -1 0 0 2745 7500 3105 7920 0 "" "Arial" 360 "center" 0 0 0 yes
        "_"
     end
-    rectangle 0 0 0 -1 0 0 2700 7260 3060 7620 90
-    rectangle 0 0 0 -1 0 0 2700 8880 3060 9240 90
-    text -1 0 0 -1 0 0 2700 8880 3060 9240 0 "" "Arial" 360 "center" 0 0 0 yes
+    rectangle 0 0 0 -1 0 0 2745 7560 3105 7920 90
+    rectangle 0 0 0 -1 0 0 2745 9180 3105 9540 90
+    text -1 0 0 -1 0 0 2745 9180 3105 9540 0 "" "Arial" 360 "center" 0 0 0 yes
        "+"
     end
-    text -1 0 0 -1 0 0 2700 10500 3060 10860 0 "" "Arial" 360 "center" 0 0 0 yes
+    text -1 0 0 -1 0 0 2745 10800 3105 11160 0 "" "Arial" 360 "center" 0 0 0 yes
        "X"
     end
-    rectangle 0 0 0 -1 0 0 2700 10500 3060 10860 90
+    rectangle 0 0 0 -1 0 0 2745 10800 3105 11160 90
     text -1 0 0 -1 0 0 10800 14760 11520 15120 0 "page number" "Arial" 320 "right" 0 0 0 yes
        "7"
     end
@@ -790,23 +790,24 @@ ream cal-3024
     text -1 0 0 -1 0 0 10800 14760 11520 15120 0 "page number" "Arial" 320 "right" 0 0 0 yes
        "11"
     end
-    text -1 0 0 -1 0 0 2160 1800 10080 14040 0 "title" "Arial" 320 "left" 0 0 0 yes
+    text -1 0 0 -1 0 0 2160 2160 10080 13680 0 "title" "Arial" 320 "left" 0 0 0 yes
        "THE COMPILER"
        ""
-       "Now I know that right about here most programming books would drum up some dippy little ""Hello, World"" program — and expect you to be impressed — but I'd like to suggest that we skip the kid stuff and start makin' babies."
+       "Now I know that right about here most programming books would drum up a simple ""Hello, World"" program, and expect you to be impressed.  I think we should skip the kid stuff and make a whole new program, just like me."
        ""
-       "I see you're trembling. Don't be afraid. This may be the first time for you, but I'm an old hand at this. I'll lead you through it. Gently."
+       "It's actually pretty easy.  I'll lead you through it:"
        ""
-       "(1) Open the CAL-3085 directory and copy all twelve of my files to the finder's clipboard: characters, colors, font menus, the compiler, the desktop, the dialog, the editor, the finder, the noodle, the scrollbar, the status,"
+       "(1) Open the CAL-4001 directory and copy all twelve of my files to the finder's clipboard: characters, colors, font menus, the compiler, the desktop, the dialog, the editor, the finder, the noodle, the scrollbar, the status,"
        "and the writer. Shift-click or drag to select. Copy is under ""C""."
        ""
        "(2) Make a new directory on your ""C"" drive with an appropriate name like ""Baby Cal"". Then open it up and paste the twelve files into it. Now open any of those files. To open them all, just drag to select and tap the ENTER key."
        ""
-       "(3) Okay, we're ready. Find the ""R"" menu and select ""Run"". You'll see some status messages, and then our new Baby Cal will come to life. Do it. Do it now. But watch closely or you might miss the birth. I'm never in labor for long."
+       "(3) Okay, we're ready. Find the ""R"" menu and select ""Run"". You'll see some status messages, and then our new Baby Cal will come to life.  It never takes very long."
        ""
-       "Was it as good for you as it was for me? Look how handsome he is! But he is not me — you can prove it with the Version command. And if you look in the new directory on an empty tab, you'll see the executable file we begat."
+       "Look how handsome he is! But he is not me — you can prove it with the Version command. And if you look in the new directory on an empty tab,"
+       "you'll see the executable file we made."
        ""
-       "Note that each program is stored in its own directory. If you want your babies to look like you instead of me, copy only ""characters"", ""colors"", and ""the noodle"", and write the rest yourself. Any file without an extension is assumed to be source code and the name of the directory is the name that is bestowed upon the EXE."
+       "Note that each program is stored in its own directory.  If you want your programs to look like you instead of me, copy only ""characters"", ""colors"", and ""the noodle"", and write the rest yourself.  Any file without an extension is assumed to be either a writer file, or source code.  (I ignore the writer files when I compile a program.)  The name of the directory is the name that is bestowed upon the EXE."
        ""
        "You can quit the Baby Cal now, and — assuming you believe that a creator can do as he pleases with his creations — you can destroy him."
     end
@@ -1017,11 +1018,13 @@ ream cal-3024
        ""
        "I don't do nested LOOPS. Nested loops indicate that you have failed to properly factor your code into manageable chunks, and I don't want you regretting that later. Time after time my otherwise omniscient creators thought they could get away with it, and time after time they were wrong."
        ""
-       "I don't do OBJECTS. Objects suck. I do support a limited form of record extension, and I have a remarkable way of reducing types to other types, but I don't do objects. My page editor does just fine without them, thank you."
+       "I don't do OBJECTS. I do support a limited form of record extension,"
+       "and I have a remarkable way of reducing types to other types,"
+       "but I don't do objects. My page editor does just fine without them, thank you."
        ""
        "I don't do REAL NUMBERS. I do ratios, very elegantly, but I don't do reals. My page editor reduces and enlarges and sizes shapes proportionately in and out of groups and it does it all without real numbers. Master Kronecker was right when he said, in German, ""The dear God created the whole numbers; all else is the work of man."" I'm not interested in menschenwerk."
        ""
-       "I don't do EQUATIONS. I do a little infix math, and I support ""calculated fields"", but almost all the code you write will be strictly procedural in nature. As my creators always say, ""The universe is an algorithm, not a formula."" Words you should take to heart. Especially if you're a math-head."
+       "I don't do EQUATIONS. I do a little infix math, and I support ""calculated fields"", but almost all the code you write will be strictly procedural in nature. As my creators always say, ""The universe is an algorithm, not a formula."" Words you should take to heart."
        ""
     end
   end
@@ -1036,7 +1039,8 @@ ream cal-3024
     text -1 0 0 -1 0 0 2160 2160 10080 13680 0 "title" "Arial" 320 "left" 0 0 0 yes
        "THE CAL MONET"
        ""
-       "Okay. Now that we're acquainted, let's make another baby. From scratch. And let's teach him to finger paint. Here are some thoughts on the interface:"
+       "Okay. Let's make another program.  From scratch.  And let's teach it"
+       "how to finger paint. Here are some thoughts on the interface:"
        ""
        ""
        ""
@@ -1182,7 +1186,7 @@ ream cal-3024
        "c:\cal monet"
     end
     text -1 0 0 -1 0 0 2520 6480 9720 6840 0 "" "Arial" 360 "left" 0 0 0 yes
-       "c:\cal-3085"
+       "c:\cal-4001"
     end
     text -1 0 0 -1 0 0 2520 6840 9720 7200 0 "" "Arial" 360 "left" 0 0 0 yes
        "c:\another directory that you already had"
@@ -1332,7 +1336,7 @@ ream cal-3024
        "And now we're ready to write some Plain English code."
     end
     text -1 0 0 -1 0 0 2160 7920 10440 10080 0 "" "arial" 320 "left" 0 0 0 yes
-       "Good. Now get copies of my noodle, characters, and colors from the CAL-3085 directory, open our new directory, and slip them in there with CTRL-V."
+       "Good. Now get copies of my noodle, characters, and colors from the CAL-4001 directory, open our new directory, and slip them in there with CTRL-V."
        ""
        "Last step. Make a new text file in our new directory and call it whatever you please. But don't give it an extension. I only compile files with no extension."
        "I'm going to assume you decided to call it ""How to Paint"", like this:"
@@ -1745,7 +1749,11 @@ ream cal-3024
     polygon 0 0 0 -1 0 0 4 2160 5760 5040 5670 7920 5850 10080 5760
     text -1 0 0 -1 0 0 2160 10260 10080 13860 0 "" "arial" 320 "left" 0 0 0 yes
        "If you're a seasoned professional, you'll know what I mean when I say that "
-       """an event"" in the second line defines a new local variable of type ""event"", referenced in lines three and four as ""the event"". And you'll understand that the same words in the header of the other routine define a parameter of the same type (passed by reference) that is known, within that other routine, as ""the event"". You'll also realize, after you think about it a bit, that one of the things that makes Plain English succinct is that we don't name variables and parameters — we refer to them with an article and a type name. As in real life."
+       """an event"" in the second line defines a new local variable of type ""event"", referenced in lines three and four as ""the event"". And you'll understand that the same words in the header of the other routine define a parameter of the same type (passed by reference) that is known, within that other routine,"
+       "as ""the event"". You'll also realize, after you think about it a bit, that one of"
+       "the things that makes Plain English succinct is that we don't name variables"
+       "and parameters — we refer to them with an article and a type name."
+       "As in real life."
        ""
        "If you're not a professional, don't worry about it. It means what it says."
     end
@@ -1769,7 +1777,7 @@ ream cal-3024
        ""
        "Now I know it doesn't look like it, but it is running. And running. And running. You can't see it because we haven't told it to do anything visible or audible yet. But it is running. And running. And running. So stop it. Like this:"
        ""
-       "(1) ALT-TAB back to me, the CAL-3085."
+       "(1) ALT-TAB back to me, the CAL-4001."
        ""
        "(2) Execute the Stop command. It's under ""S""."
     end
@@ -6614,7 +6622,7 @@ ream cal-3024
        "If a name includes a space, put it in quotes.  Separate the names with  semi-colons, like this:"
        "/files=""the noodle"";characters;colors;;""fixed issues.txt"";""C:\"""
        ""
-       "If a name starts with a drive name, I will follow the path starting with that drive.  Otherwise, I will follow the path starting with the folder the finder the finder should start in.  If a name is blank, I will use the folder that the finder should start in.  If I can't find the file or folder you want, I will get as close as I can."
+       "If a name starts with a drive name, I will follow the path starting with that drive.  Otherwise, I will follow the path starting with the folder the finder should start in.  If a name is blank, I will use the folder that the finder should start in.  If I can't find the file or folder you want, I will get as close as I can."
        ""
        "tells me to open the file(s) and folder(s) chosen by /folder and /files, find the directory used by the first tab, compile it the usual way, and then quit.  If the compilation succeeds, I will return 0.  If the compilation fails, I will return 1, and I will use the standard error stream to tell you what the problem was, and where you can find it (like gcc does).  /compile also tells me to ignore /test."
        ""
@@ -6653,7 +6661,7 @@ ream cal-3024
     end
     text -1 0 0 -1 0 0 3780 3240 10080 13680 0 "" "Arial" 320 "left" 0 0 0 yes
        ""
-       "tells me to run all the tests, and then quit.  The tests are run as if you had clicked in my status box.  If all the tests pass, "
+       "tells me to run all the tests, and then quit.  The tests are run as if you had clicked in my status box.  If all of the tests pass, "
        "I will return 0.  If any test(s) fail, I will return a positive number, and I will describe the failed test(s) in the standard error stream.  A memory leak counts as a failed test, but I don't know how to describe it."
        ""
        "is like /test, except I describe all of the tests in the standard error stream."
@@ -6775,7 +6783,7 @@ ream cal-3024
     polygon 0 0 0 -1 0 0 4 2160 5760 5040 5670 7920 5850 10080 5760
     polygon 0 0 0 -1 0 0 2 10080 4320 10080 5760
     text -1 0 0 -1 0 0 2520 4320 9720 5400 0 "" "Arial" 320 "left" 0 0 0 yes
-       "I am the CAL-3085. What is your name?"
+       "I am the CAL-4001. What is your name?"
        "> Dr. Chandra"
        "Good morning, Dr. Chandra. I'm ready for my first lesson."
     end
@@ -7579,7 +7587,7 @@ ream cal-3024
     end
   end
   page 12240 15840 1 1440
-    text -1 0 0 -1 0 0 2160 1980 10440 13860 0 "title" "Arial" 320 "left" 0 0 0 yes
+    text -1 0 0 -1 0 0 2160 2160 10440 14040 0 "title" "Arial" 320 "left" 0 0 0 yes
        "INPUT AND OUTPUT"
        ""
        "You can work directly with the mouse using statements like these:"
@@ -7598,9 +7606,10 @@ ream cal-3024
        ""
        "But again, you probably won't, because the kluge works better if you just respond to the ""key down"" events that are sent to your event handler. You can find all the ""key"" globals in my ""characters"" file by searching for ""a key equal to""."
        ""
-       "And you can work directly with the screen using ""the screen canvas"" and this one-of-a-kind global variable:"
+       "And you can work directly with the screen using ""the screen canvas"" and this one-of-a-kind global variable.  A screen has a box, a pixel height, a pixel width,"
+       "and some other heights and widths that I use when you change my shape:"
        ""
-       "The screen has a box, a pixel height and a pixel width."
+       "The screen is a screen."
        ""
        "But you shouldn't. Instead, you should draw on the memory canvas, then:"
        ""

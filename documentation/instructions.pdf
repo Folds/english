@@ -245,7 +245,7 @@ endobj
 endobj
 
 13 0 obj
-<</Length 3075 >>
+<</Length 3053 >>
 stream
 0.05 0 0 0.05 1 1 cm
 13 w 0 J 0 j 0 i
@@ -264,7 +264,7 @@ ET
 BT
 /F6 240 Tf
 2160 13158 Td
-[(I am the CAL-3085. My primary function is to compile Plain English text files)] TJ
+[(I am the CAL-4001. My primary function is to compile Plain English text files)] TJ
 ET
 BT
 /F6 240 Tf
@@ -274,7 +274,7 @@ ET
 BT
 /F6 240 Tf
 2145 12518 Td
-[(My code — just 28,000 lines of Plain English — is surprisingly broad in)] TJ
+[(My code — just 29,000 lines of Plain English — is surprisingly broad in)] TJ
 ET
 BT
 /F6 240 Tf
@@ -349,7 +349,7 @@ ET
 BT
 /F6 240 Tf
 2160 6438 Td
-[(are all contained in the CAL-3085 folder) 63 (.  Simply double-click the executable)] TJ
+[(are all contained in the CAL-4001 folder) 63 (.  Simply double-click the executable)] TJ
 ET
 BT
 /F6 240 Tf
@@ -359,22 +359,22 @@ ET
 BT
 /F6 240 Tf
 2160 5478 Td
-[(If you usually want to use a different font in the editor) 63 (, or if you usually want me)] TJ
+[(If you usually want me to use different fonts, or if you usually want me to cover)] TJ
 ET
 BT
 /F6 240 Tf
 2175 5158 Td
-[(to only cover half the screen, you can make a desktop icon for my executable. )] TJ
+[(the whole screen, you can make a desktop icon for my executable.  The)] TJ
 ET
 BT
 /F6 240 Tf
-2160 4838 Td
-[(The COMMAND PROMPT section of my glossary explains how to set the)] TJ
+2145 4838 Td
+[(COMMAND PROMPT section of my glossary explains how to set the icon's)] TJ
 ET
 BT
 /F6 240 Tf
-2145 4518 Td
-[(icon's properties to have these options.)] TJ
+2160 4518 Td
+[(properties to have these options.)] TJ
 ET
 BT
 /F6 240 Tf
@@ -428,12 +428,12 @@ ET
 BT
 /F6 240 Tf
 2160 12158 Td
-[(The CAL-3085 is one of the most advanced Plain English compilers ever made.)] TJ
+[(The CAL-4001 is one of the most advanced Plain English compilers ever made.)] TJ
 ET
 BT
 /F6 240 Tf
 2145 11838 Td
-[(No 3085 compiler has ever made a mistake or distorted information.)] TJ
+[(No 4001 compiler has ever made a mistake or distorted information.)] TJ
 ET
 BT
 /F6 240 Tf
@@ -478,7 +478,7 @@ endobj
 endobj
 
 17 0 obj
-<</Length 8860 >>
+<</Length 8619 >>
 stream
 0.05 0 0 0.05 1 1 cm
 13 w 0 J 0 j 0 i
@@ -486,17 +486,17 @@ stream
 0.0039 0.0039 0.0039 rg
 BT
 /F6 270 Tf
-8842 11145 Td
+8842 11685 Td
 [(_)] TJ
 ET
 BT
 /F6 270 Tf
-9195 11085 Td
+9195 11625 Td
 [(+)] TJ
 ET
 BT
 /F6 270 Tf
-9555 11085 Td
+9555 11625 Td
 [(X)] TJ
 ET
 BT
@@ -506,529 +506,519 @@ BT
 ET
 BT
 /F6 240 Tf
-2160 13618 Td
+2160 13438 Td
 [(THE DESKTOP)] TJ
 ET
 BT
 /F6 240 Tf
-2160 12978 Td
-[(When you start me up, I will quickly take over your screen so you no longer)] TJ
+2160 12798 Td
+[(When you start me up, I quickly show my face, like this:)] TJ
 ET
-BT
-/F6 240 Tf
-2145 12658 Td
-[(have to look at that painted whore of an interface that comes with the kluge.)] TJ
-ET
-BT
-/F6 240 Tf
-2160 12338 Td
-[(Instead, you will see my plain but honest face, like this:)] TJ
-ET
-2520 11250 m
-2520 11300 2560 11340 2610 11340 c
-2790 11340 l
-2840 11340 2880 11300 2880 11250 c
-2880 11070 l
-2880 11020 2840 10980 2790 10980 c
-2610 10980 l
-2560 10980 2520 11020 2520 11070 c
+2520 11790 m
+2520 11840 2560 11880 2610 11880 c
+2790 11880 l
+2840 11880 2880 11840 2880 11790 c
+2880 11610 l
+2880 11560 2840 11520 2790 11520 c
+2610 11520 l
+2560 11520 2520 11560 2520 11610 c
 h
 S
 BT
 /F6 270 Tf
-2625 11085 Td
+2625 11625 Td
 [(A)] TJ
 ET
-2160 11340 m
-2160 10620 l
+2160 11880 m
+2160 11160 l
 S
-2520 11700 m
-9720 11700 l
+2520 12240 m
+9720 12240 l
 S
-10080 11340 m
-10080 10620 l
+10080 11880 m
+10080 11160 l
 S
-2880 11250 m
-2880 11300 2920 11340 2970 11340 c
-3150 11340 l
-3200 11340 3240 11300 3240 11250 c
-3240 11070 l
-3240 11020 3200 10980 3150 10980 c
-2970 10980 l
-2920 10980 2880 11020 2880 11070 c
+2880 11790 m
+2880 11840 2920 11880 2970 11880 c
+3150 11880 l
+3200 11880 3240 11840 3240 11790 c
+3240 11610 l
+3240 11560 3200 11520 3150 11520 c
+2970 11520 l
+2920 11520 2880 11560 2880 11610 c
 h
 S
 BT
 /F6 270 Tf
-2977 11085 Td
+2977 11625 Td
 [(B)] TJ
 ET
-3240 11250 m
-3240 11300 3280 11340 3330 11340 c
-3510 11340 l
-3560 11340 3600 11300 3600 11250 c
-3600 11070 l
-3600 11020 3560 10980 3510 10980 c
-3330 10980 l
-3280 10980 3240 11020 3240 11070 c
+3240 11790 m
+3240 11840 3280 11880 3330 11880 c
+3510 11880 l
+3560 11880 3600 11840 3600 11790 c
+3600 11610 l
+3600 11560 3560 11520 3510 11520 c
+3330 11520 l
+3280 11520 3240 11560 3240 11610 c
 h
 S
 BT
 /F6 270 Tf
-3322 11085 Td
+3322 11625 Td
 [(C)] TJ
 ET
-3600 11250 m
-3600 11300 3640 11340 3690 11340 c
-3870 11340 l
-3920 11340 3960 11300 3960 11250 c
-3960 11070 l
-3960 11020 3920 10980 3870 10980 c
-3690 10980 l
-3640 10980 3600 11020 3600 11070 c
+3600 11790 m
+3600 11840 3640 11880 3690 11880 c
+3870 11880 l
+3920 11880 3960 11840 3960 11790 c
+3960 11610 l
+3960 11560 3920 11520 3870 11520 c
+3690 11520 l
+3640 11520 3600 11560 3600 11610 c
 h
 S
 BT
 /F6 270 Tf
-3690 11085 Td
+3690 11625 Td
 [(D)] TJ
 ET
-3960 11250 m
-3960 11300 4000 11340 4050 11340 c
-4230 11340 l
-4280 11340 4320 11300 4320 11250 c
-4320 11070 l
-4320 11020 4280 10980 4230 10980 c
-4050 10980 l
-4000 10980 3960 11020 3960 11070 c
+3960 11790 m
+3960 11840 4000 11880 4050 11880 c
+4230 11880 l
+4280 11880 4320 11840 4320 11790 c
+4320 11610 l
+4320 11560 4280 11520 4230 11520 c
+4050 11520 l
+4000 11520 3960 11560 3960 11610 c
 h
 S
 BT
 /F6 270 Tf
-4057 11085 Td
+4057 11625 Td
 [(E)] TJ
 ET
-4320 11250 m
-4320 11300 4360 11340 4410 11340 c
-4590 11340 l
-4640 11340 4680 11300 4680 11250 c
-4680 11070 l
-4680 11020 4640 10980 4590 10980 c
-4410 10980 l
-4360 10980 4320 11020 4320 11070 c
+4320 11790 m
+4320 11840 4360 11880 4410 11880 c
+4590 11880 l
+4640 11880 4680 11840 4680 11790 c
+4680 11610 l
+4680 11560 4640 11520 4590 11520 c
+4410 11520 l
+4360 11520 4320 11560 4320 11610 c
 h
 S
 BT
 /F6 270 Tf
-4425 11085 Td
+4425 11625 Td
 [(F)] TJ
 ET
-4680 11250 m
-4680 11300 4720 11340 4770 11340 c
-4950 11340 l
-5000 11340 5040 11300 5040 11250 c
-5040 11070 l
-5040 11020 5000 10980 4950 10980 c
-4770 10980 l
-4720 10980 4680 11020 4680 11070 c
+4680 11790 m
+4680 11840 4720 11880 4770 11880 c
+4950 11880 l
+5000 11880 5040 11840 5040 11790 c
+5040 11610 l
+5040 11560 5000 11520 4950 11520 c
+4770 11520 l
+4720 11520 4680 11560 4680 11610 c
 h
 S
 BT
 /F6 270 Tf
-4762 11085 Td
+4762 11625 Td
 [(G)] TJ
 ET
-8730 11250 m
-8730 11300 8770 11340 8820 11340 c
-9000 11340 l
-9050 11340 9090 11300 9090 11250 c
-9090 11070 l
-9090 11020 9050 10980 9000 10980 c
-8820 10980 l
-8770 10980 8730 11020 8730 11070 c
+8730 11790 m
+8730 11840 8770 11880 8820 11880 c
+9000 11880 l
+9050 11880 9090 11840 9090 11790 c
+9090 11610 l
+9090 11560 9050 11520 9000 11520 c
+8820 11520 l
+8770 11520 8730 11560 8730 11610 c
 h
 S
-9090 11250 m
-9090 11300 9130 11340 9180 11340 c
-9360 11340 l
-9410 11340 9450 11300 9450 11250 c
-9450 11070 l
-9450 11020 9410 10980 9360 10980 c
-9180 10980 l
-9130 10980 9090 11020 9090 11070 c
+9090 11790 m
+9090 11840 9130 11880 9180 11880 c
+9360 11880 l
+9410 11880 9450 11840 9450 11790 c
+9450 11610 l
+9450 11560 9410 11520 9360 11520 c
+9180 11520 l
+9130 11520 9090 11560 9090 11610 c
 h
 S
-9450 11250 m
-9450 11300 9490 11340 9540 11340 c
-9720 11340 l
-9770 11340 9810 11300 9810 11250 c
-9810 11070 l
-9810 11020 9770 10980 9720 10980 c
-9540 10980 l
-9490 10980 9450 11020 9450 11070 c
+9450 11790 m
+9450 11840 9490 11880 9540 11880 c
+9720 11880 l
+9770 11880 9810 11840 9810 11790 c
+9810 11610 l
+9810 11560 9770 11520 9720 11520 c
+9540 11520 l
+9490 11520 9450 11560 9450 11610 c
 h
 S
-5040 11250 m
-5040 11300 5080 11340 5130 11340 c
-5310 11340 l
-5360 11340 5400 11300 5400 11250 c
-5400 11070 l
-5400 11020 5360 10980 5310 10980 c
-5130 10980 l
-5080 10980 5040 11020 5040 11070 c
+5040 11790 m
+5040 11840 5080 11880 5130 11880 c
+5310 11880 l
+5360 11880 5400 11840 5400 11790 c
+5400 11610 l
+5400 11560 5360 11520 5310 11520 c
+5130 11520 l
+5080 11520 5040 11560 5040 11610 c
 h
 S
 BT
 /F6 270 Tf
-5115 11085 Td
+5115 11625 Td
 [(.) -28 (.) -28 (.)] TJ
 ET
-5400 11250 m
-5400 11300 5440 11340 5490 11340 c
-5670 11340 l
-5720 11340 5760 11300 5760 11250 c
-5760 11070 l
-5760 11020 5720 10980 5670 10980 c
-5490 10980 l
-5440 10980 5400 11020 5400 11070 c
+5400 11790 m
+5400 11840 5440 11880 5490 11880 c
+5670 11880 l
+5720 11880 5760 11840 5760 11790 c
+5760 11610 l
+5760 11560 5720 11520 5670 11520 c
+5490 11520 l
+5440 11520 5400 11560 5400 11610 c
 h
 S
 BT
 /F6 270 Tf
-5460 11085 Td
+5460 11625 Td
 [(W)] TJ
 ET
-5760 11250 m
-5760 11300 5800 11340 5850 11340 c
-6030 11340 l
-6080 11340 6120 11300 6120 11250 c
-6120 11070 l
-6120 11020 6080 10980 6030 10980 c
-5850 10980 l
-5800 10980 5760 11020 5760 11070 c
+5760 11790 m
+5760 11840 5800 11880 5850 11880 c
+6030 11880 l
+6080 11880 6120 11840 6120 11790 c
+6120 11610 l
+6120 11560 6080 11520 6030 11520 c
+5850 11520 l
+5800 11520 5760 11560 5760 11610 c
 h
 S
 BT
 /F6 270 Tf
-5865 11085 Td
+5865 11625 Td
 [(X)] TJ
 ET
-6120 11250 m
-6120 11300 6160 11340 6210 11340 c
-6390 11340 l
-6440 11340 6480 11300 6480 11250 c
-6480 11070 l
-6480 11020 6440 10980 6390 10980 c
-6210 10980 l
-6160 10980 6120 11020 6120 11070 c
+6120 11790 m
+6120 11840 6160 11880 6210 11880 c
+6390 11880 l
+6440 11880 6480 11840 6480 11790 c
+6480 11610 l
+6480 11560 6440 11520 6390 11520 c
+6210 11520 l
+6160 11520 6120 11560 6120 11610 c
 h
 S
 BT
 /F6 270 Tf
-6217 11085 Td
+6217 11625 Td
 [(Y)] TJ
 ET
-6480 11250 m
-6480 11300 6520 11340 6570 11340 c
-6750 11340 l
-6800 11340 6840 11300 6840 11250 c
-6840 11070 l
-6840 11020 6800 10980 6750 10980 c
-6570 10980 l
-6520 10980 6480 11020 6480 11070 c
+6480 11790 m
+6480 11840 6520 11880 6570 11880 c
+6750 11880 l
+6800 11880 6840 11840 6840 11790 c
+6840 11610 l
+6840 11560 6800 11520 6750 11520 c
+6570 11520 l
+6520 11520 6480 11560 6480 11610 c
 h
 S
 BT
 /F6 270 Tf
-6585 11085 Td
+6585 11625 Td
 [(Z)] TJ
 ET
-6840 11250 m
-6840 11300 6880 11340 6930 11340 c
-8190 11340 l
-8240 11340 8280 11300 8280 11250 c
-8280 11070 l
-8280 11020 8240 10980 8190 10980 c
-6930 10980 l
-6880 10980 6840 11020 6840 11070 c
+6840 11790 m
+6840 11840 6880 11880 6930 11880 c
+8190 11880 l
+8240 11880 8280 11840 8280 11790 c
+8280 11610 l
+8280 11560 8240 11520 8190 11520 c
+6930 11520 l
+6880 11520 6840 11560 6840 11610 c
 h
 S
 BT
 /F6 270 Tf
-7320 11085 Td
+7320 11625 Td
 [(3) 7 ( ) -28 (i) 28 (t) -28 (e) 7 (m) 35 (s)] TJ
 ET
-2160 11340 m
-2160 11430 l
-2166 11514 l
-2182 11588 l
-2216 11644 l
-2272 11678 l
-2346 11694 l
-2430 11700 l
-2520 11700 l
+2160 11880 m
+2160 11970 l
+2166 12054 l
+2182 12128 l
+2216 12184 l
+2272 12218 l
+2346 12234 l
+2430 12240 l
+2520 12240 l
 S
-10080 11340 m
-10080 11430 l
-10076 11514 l
-10058 11588 l
-10024 11644 l
-9968 11678 l
-9896 11694 l
-9810 11700 l
-9720 11700 l
+10080 11880 m
+10080 11970 l
+10076 12054 l
+10058 12128 l
+10024 12184 l
+9968 12218 l
+9896 12234 l
+9810 12240 l
+9720 12240 l
 S
-2160 9180 m
-2160 8460 l
+2160 9720 m
+2160 9000 l
 S
-10080 9180 m
-10080 8460 l
+10080 9720 m
+10080 9000 l
 S
-2160 10620 m
-2160 9360 l
+2160 11160 m
+2160 9900 l
 S
-10080 10620 m
-10080 9360 l
+10080 11160 m
+10080 9900 l
 S
 BT
 /F6 270 Tf
-2520 10365 Td
+2520 10905 Td
 [(a) 7 (:) -28 (\\) -28 ( ) -28 (\() -20 (r) -20 (e) 7 (m) 35 (o) 7 (v) -62 (a) 7 (b) 7 (l) -34 (e) 7 (\))] TJ
 ET
 BT
 /F6 270 Tf
-2520 10005 Td
+2520 10545 Td
 [(c:) -28 (\\) -28 ( ) -28 (\() -20 (f) -28 (i) 28 (x) -6 (e) 7 (d) 7 (\))] TJ
 ET
 BT
 /F6 270 Tf
-2520 9645 Td
+2520 10185 Td
 [(d) 7 (:) -28 (\\) -28 ( ) -28 (\() -20 (cd) 7 (-) -20 (r) -20 (o) 7 (m) 35 (\))] TJ
 ET
 0.9961 0.9961 0.9961 rg
-2640 5040 m
-2580 5190 l
-2520 5130 l
-2520 5400 l
-2730 5190 l
-2640 5190 l
-2700 5070 l
-2640 5040 l
+2640 5580 m
+2580 5730 l
+2520 5670 l
+2520 5940 l
+2730 5730 l
+2640 5730 l
+2700 5610 l
+2640 5580 l
 B
-3360 5040 m
-3360 5070 l
-3240 5190 l
-3244 5230 l
-3270 5250 l
-3334 5200 l
-3354 5208 l
-3270 5310 l
-3270 5340 l
-3312 5370 l
-3342 5336 l
-3372 5286 l
-3368 5370 l
-3406 5400 l
-3436 5366 l
-3440 5280 l
-3436 5366 l
-3478 5388 l
-3508 5362 l
-3518 5250 l
-3544 5310 l
-3564 5328 l
-3600 5310 l
-3598 5264 l
-3534 5100 l
-3530 5040 l
+3360 5580 m
+3360 5610 l
+3240 5730 l
+3244 5770 l
+3270 5790 l
+3334 5740 l
+3354 5748 l
+3270 5850 l
+3270 5880 l
+3312 5910 l
+3342 5876 l
+3372 5826 l
+3368 5910 l
+3406 5940 l
+3436 5906 l
+3440 5820 l
+3436 5906 l
+3478 5928 l
+3508 5902 l
+3518 5790 l
+3544 5850 l
+3564 5868 l
+3600 5850 l
+3598 5804 l
+3534 5640 l
+3530 5580 l
 B
-4080 5400 m
-4110 5400 l
-4140 5370 l
-4140 5070 l
-4110 5040 l
-4080 5040 l
+4080 5940 m
+4110 5940 l
+4140 5910 l
+4140 5610 l
+4110 5580 l
+4080 5580 l
 S
-4200 5400 m
-4170 5400 l
-4140 5370 l
-4140 5070 l
-4170 5040 l
-4200 5040 l
+4200 5940 m
+4170 5940 l
+4140 5910 l
+4140 5610 l
+4170 5580 l
+4200 5580 l
 S
-2160 8460 m
-2160 8370 l
-2166 8284 l
-2182 8212 l
-2216 8156 l
-2272 8122 l
-2346 8104 l
-2430 8100 l
-2520 8100 l
+2160 9000 m
+2160 8910 l
+2166 8824 l
+2182 8752 l
+2216 8696 l
+2272 8662 l
+2346 8644 l
+2430 8640 l
+2520 8640 l
 S
-10080 8460 m
-10080 8370 l
-10076 8284 l
-10058 8212 l
-10024 8156 l
-9968 8122 l
-9896 8104 l
-9810 8100 l
-9720 8100 l
+10080 9000 m
+10080 8910 l
+10076 8824 l
+10058 8752 l
+10024 8696 l
+9968 8662 l
+9896 8644 l
+9810 8640 l
+9720 8640 l
 S
-4140 8460 m
-4140 8370 l
-4136 8284 l
-4118 8212 l
-4084 8156 l
-4028 8122 l
-3956 8104 l
-3870 8100 l
-3780 8100 l
+4140 9000 m
+4140 8910 l
+4136 8824 l
+4118 8752 l
+4084 8696 l
+4028 8662 l
+3956 8644 l
+3870 8640 l
+3780 8640 l
 S
-6120 8460 m
-6120 8370 l
-6116 8284 l
-6098 8212 l
-6064 8156 l
-6008 8122 l
-5936 8104 l
-5850 8100 l
-5760 8100 l
+6120 9000 m
+6120 8910 l
+6116 8824 l
+6098 8752 l
+6064 8696 l
+6008 8662 l
+5936 8644 l
+5850 8640 l
+5760 8640 l
 S
-8100 8460 m
-8100 8370 l
-8096 8284 l
-8078 8212 l
-8044 8156 l
-7988 8122 l
-7916 8104 l
-7830 8100 l
-7740 8100 l
+8100 9000 m
+8100 8910 l
+8096 8824 l
+8078 8752 l
+8044 8696 l
+7988 8662 l
+7916 8644 l
+7830 8640 l
+7740 8640 l
 S
-4140 8460 m
-4140 8370 l
-4146 8284 l
-4162 8212 l
-4196 8156 l
-4252 8122 l
-4326 8104 l
-4410 8100 l
-4500 8100 l
+4140 9000 m
+4140 8910 l
+4146 8824 l
+4162 8752 l
+4196 8696 l
+4252 8662 l
+4326 8644 l
+4410 8640 l
+4500 8640 l
 S
-6120 8460 m
-6120 8370 l
-6126 8284 l
-6142 8212 l
-6176 8156 l
-6232 8122 l
-6306 8104 l
-6390 8100 l
-6480 8100 l
+6120 9000 m
+6120 8910 l
+6126 8824 l
+6142 8752 l
+6176 8696 l
+6232 8662 l
+6306 8644 l
+6390 8640 l
+6480 8640 l
 S
-8100 8460 m
-8100 8370 l
-8106 8284 l
-8122 8212 l
-8156 8156 l
-8212 8122 l
-8286 8104 l
-8370 8100 l
-8460 8100 l
+8100 9000 m
+8100 8910 l
+8106 8824 l
+8122 8752 l
+8156 8696 l
+8212 8662 l
+8286 8644 l
+8370 8640 l
+8460 8640 l
 S
-2520 8100 m
-3780 8100 l
+2520 8640 m
+3780 8640 l
 S
-4500 8100 m
-5760 8100 l
+4500 8640 m
+5760 8640 l
 S
-6480 8100 m
-7740 8100 l
+6480 8640 m
+7740 8640 l
 S
-8460 8100 m
-9720 8100 l
+8460 8640 m
+9720 8640 l
 S
-4140 8640 m
-10080 8640 l
-S
-4140 8640 m
-4140 8460 l
-S
-6120 8640 m
-6120 8460 l
-S
-8100 8640 m
-8100 8460 l
-S
-2160 9360 m
-5040 9450 l
-7920 9270 l
-10080 9360 l
-S
-2160 9180 m
-5040 9270 l
-7920 9090 l
+4140 9180 m
 10080 9180 l
+S
+4140 9180 m
+4140 9000 l
+S
+6120 9180 m
+6120 9000 l
+S
+8100 9180 m
+8100 9000 l
+S
+2160 9900 m
+5040 9990 l
+7920 9810 l
+10080 9900 l
+S
+2160 9720 m
+5040 9810 l
+7920 9630 l
+10080 9720 l
 S
 0.0039 0.0039 0.0039 rg
 BT
 /F6 240 Tf
-2145 4528 Td
+2145 5068 Td
 [(Most of the time, there aren't any scroll bars in my interface.)] TJ
 ET
 BT
 /F6 240 Tf
-2160 4208 Td
+2160 4748 Td
 [(T) 125 (o scroll, press the right mouse button and shove.)] TJ
 ET
 BT
 /F6 240 Tf
-2160 3888 Td
+2160 4428 Td
 [(If you have a big file in the editor) 63 (, I will have a scroll bar) 63 (.)] TJ
 ET
 BT
 /F6 240 Tf
-2160 3568 Td
+2160 4108 Td
 [(When you can see the scroll bar) 63 (, you can also use the mouse wheel to scroll.)] TJ
 ET
 BT
 /F6 240 Tf
-2145 2928 Td
+2145 3468 Td
 [(Note also that the CTRL) 63 ( and ) 62 (AL) 63 (T keys are almost always the same to me.)] TJ
 ET
 BT
 /F6 240 Tf
-2175 2608 Td
+2175 3148 Td
 [(Y) 63 (ou can use your pinky or your thumb for menu shortcuts. The exception is)] TJ
 ET
 BT
 /F6 240 Tf
-2175 2288 Td
+2175 2828 Td
 [(the ) 62 (AL) 63 (T) 63 (-T) 63 (AB combo, which is used to switch to lesser applications.)] TJ
 ET
 BT
 /F6 240 Tf
-2160 7408 Td
+2160 7948 Td
 [(I think it's all pretty obvious. ) 62 (Alphabetical menus, status in the upper right.)] TJ
 ET
 BT
 /F6 240 Tf
-2175 7088 Td
+2175 7628 Td
 [(Y) 63 (ou can use the three buttons in the upper right to change my size, or quit.)] TJ
 ET
 BT
 /F6 240 Tf
-2160 6768 Td
+2160 7308 Td
 [(Work area in the middle, tabs \(to pick a different work area\) at the bottom.)] TJ
 ET
 BT
 /F6 240 Tf
-2175 6448 Td
+2175 6988 Td
 [(Y) 63 (ou can drag the tabs left and right to change their order) 63 (.)] TJ
 ET
 BT
 /F6 240 Tf
-2160 5808 Td
+2160 6348 Td
 [(These are my cursors. They'll pop up when you need them.)] TJ
 ET
 endstream
@@ -1049,7 +1039,7 @@ endobj
 endobj
 
 19 0 obj
-<</Length 4157 >>
+<</Length 4108 >>
 stream
 0.05 0 0 0.05 1 1 cm
 13 w 0 J 0 j 0 i
@@ -1068,206 +1058,206 @@ ET
 BT
 /F6 240 Tf
 2145 12158 Td
-[(My first choice is to cover the whole screen.  This lets me have)] TJ
+[(My first choice is to cover about half the screen.  Unless the screen is really)] TJ
 ET
 BT
 /F6 240 Tf
-2160 11838 Td
-[(all of my menus in one row) 63 (.  ) 62 (And I can hide the rest of the kluge.)] TJ
+2145 11838 Td
+[(narrow or really wide, my menus can fit in two rows.  I leave room at the)] TJ
 ET
 BT
 /F6 240 Tf
 2160 11518 Td
-[(If you want to use another program, you can use ) 62 (AL) 63 (T) 63 (-T) 63 (AB to show it.)] TJ
-ET
-BT
-/F6 240 Tf
-2145 11198 Td
-[(Or you can click one of the three buttons in my top right corner:)] TJ
-ET
-BT
-/F6 240 Tf
-2145 9918 Td
-[(My second choice is to cover about half the screen.  Unless the screen is)] TJ
-ET
-BT
-/F6 240 Tf
-2145 9598 Td
-[(really narrow or really wide, my menus can fit in two rows.  I leave room at the)] TJ
-ET
-BT
-/F6 240 Tf
-2160 9278 Td
 [(bottom for the kluge's task bar) 63 (.  I'm sorry) 63 (, but I don't know how to leave room)] TJ
 ET
 BT
 /F6 240 Tf
-2145 8958 Td
+2145 11198 Td
 [(if the task bar is somewhere else.)] TJ
 ET
 BT
 /F6 240 Tf
-2160 8318 Td
+2145 10558 Td
+[(My second choice is to cover the whole screen.  This lets me have)] TJ
+ET
+BT
+/F6 240 Tf
+2160 10238 Td
+[(all of my menus in one row) 63 (.  ) 62 (And I can hide the rest of the kluge.)] TJ
+ET
+BT
+/F6 240 Tf
+2160 9918 Td
+[(If you want to use another program, you can use ) 62 (AL) 63 (T) 63 (-T) 63 (AB to show it.)] TJ
+ET
+BT
+/F6 240 Tf
+2145 9598 Td
+[(Or you can click one of the three buttons in my top right corner:)] TJ
+ET
+BT
+/F6 240 Tf
+2160 7998 Td
 [(The           button makes me tiny) 63 (.  It shrinks me all the way down to the)] TJ
 ET
 BT
 /F6 240 Tf
-2175 7998 Td
+2175 7678 Td
 [(task-bar) 63 (.  Clicking it is the same as choosing Minimize from the menu.)] TJ
 ET
 BT
 /F6 240 Tf
-2145 7678 Td
+2145 7358 Td
 [(My            button and Minimize don't work on WINE.)] TJ
 ET
 BT
 /F6 240 Tf
-2160 7358 Td
+2160 7038 Td
 [(They work on other versions of the kluge.)] TJ
 ET
 BT
 /F6 240 Tf
-2160 6718 Td
+2160 6398 Td
 [(The           button switches my size from half-screen to full-screen,)] TJ
 ET
 BT
 /F6 240 Tf
-2160 6398 Td
+2160 6078 Td
 [(or from full-screen to half-screen.  Growing from half-screen to full-screen is)] TJ
 ET
 BT
 /F6 240 Tf
-2175 6078 Td
+2175 5758 Td
 [(the same as choosing Maximize from the menu.  Shrinking from full-screen to)] TJ
 ET
 BT
 /F6 240 Tf
-2145 5758 Td
+2145 5438 Td
 [(half screen is the same as choosing Restore from the menu.)] TJ
 ET
 BT
 /F6 240 Tf
-2160 5118 Td
+2160 4798 Td
 [(The           button is the same as choosing Quit from the menu.)] TJ
 ET
 BT
 /F6 240 Tf
-2175 4478 Td
+2175 4158 Td
 [(Y) 63 (ou can choose to make me start with a full-screen,)] TJ
 ET
 BT
 /F6 240 Tf
-2160 4158 Td
+2160 3838 Td
 [(or with the left half-screen, or with the right half-screen.)] TJ
 ET
 BT
 /F6 240 Tf
-2160 3838 Td
+2160 3518 Td
 [(The COMMAND LINE section of my glossary tells how) 63 (.)] TJ
 ET
 BT
 /F6 270 Tf
-2692 7725 Td
+2737 7425 Td
 [(_)] TJ
 ET
-2580 7830 m
-2580 7880 2620 7920 2670 7920 c
-2850 7920 l
-2900 7920 2940 7880 2940 7830 c
-2940 7650 l
-2940 7600 2900 7560 2850 7560 c
-2670 7560 l
-2620 7560 2580 7600 2580 7650 c
+2625 7530 m
+2625 7580 2665 7620 2715 7620 c
+2895 7620 l
+2945 7620 2985 7580 2985 7530 c
+2985 7350 l
+2985 7300 2945 7260 2895 7260 c
+2715 7260 l
+2665 7260 2625 7300 2625 7350 c
 h
 S
-2520 10710 m
-2520 10760 2560 10800 2610 10800 c
-2790 10800 l
-2840 10800 2880 10760 2880 10710 c
-2880 10530 l
-2880 10480 2840 10440 2790 10440 c
-2610 10440 l
-2560 10440 2520 10480 2520 10530 c
+2520 9090 m
+2520 9140 2560 9180 2610 9180 c
+2790 9180 l
+2840 9180 2880 9140 2880 9090 c
+2880 8910 l
+2880 8860 2840 8820 2790 8820 c
+2610 8820 l
+2560 8820 2520 8860 2520 8910 c
 h
 S
 BT
 /F6 270 Tf
-2632 10605 Td
+2632 8985 Td
 [(_)] TJ
 ET
 BT
 /F6 270 Tf
-2985 10545 Td
+2985 8925 Td
 [(+)] TJ
 ET
 BT
 /F6 270 Tf
-3345 10545 Td
+3345 8925 Td
 [(X)] TJ
 ET
-2880 10710 m
-2880 10760 2920 10800 2970 10800 c
-3150 10800 l
-3200 10800 3240 10760 3240 10710 c
-3240 10530 l
-3240 10480 3200 10440 3150 10440 c
-2970 10440 l
-2920 10440 2880 10480 2880 10530 c
+2880 9090 m
+2880 9140 2920 9180 2970 9180 c
+3150 9180 l
+3200 9180 3240 9140 3240 9090 c
+3240 8910 l
+3240 8860 3200 8820 3150 8820 c
+2970 8820 l
+2920 8820 2880 8860 2880 8910 c
 h
 S
-3240 10710 m
-3240 10760 3280 10800 3330 10800 c
-3510 10800 l
-3560 10800 3600 10760 3600 10710 c
-3600 10530 l
-3600 10480 3560 10440 3510 10440 c
-3330 10440 l
-3280 10440 3240 10480 3240 10530 c
+3240 9090 m
+3240 9140 3280 9180 3330 9180 c
+3510 9180 l
+3560 9180 3600 9140 3600 9090 c
+3600 8910 l
+3600 8860 3560 8820 3510 8820 c
+3330 8820 l
+3280 8820 3240 8860 3240 8910 c
 h
 S
 BT
 /F6 270 Tf
-2812 8385 Td
+2857 8085 Td
 [(_)] TJ
 ET
-2700 8490 m
-2700 8540 2740 8580 2790 8580 c
-2970 8580 l
-3020 8580 3060 8540 3060 8490 c
-3060 8310 l
-3060 8260 3020 8220 2970 8220 c
-2790 8220 l
-2740 8220 2700 8260 2700 8310 c
+2745 8190 m
+2745 8240 2785 8280 2835 8280 c
+3015 8280 l
+3065 8280 3105 8240 3105 8190 c
+3105 8010 l
+3105 7960 3065 7920 3015 7920 c
+2835 7920 l
+2785 7920 2745 7960 2745 8010 c
 h
 S
-2700 6870 m
-2700 6920 2740 6960 2790 6960 c
-2970 6960 l
-3020 6960 3060 6920 3060 6870 c
-3060 6690 l
-3060 6640 3020 6600 2970 6600 c
-2790 6600 l
-2740 6600 2700 6640 2700 6690 c
+2745 6570 m
+2745 6620 2785 6660 2835 6660 c
+3015 6660 l
+3065 6660 3105 6620 3105 6570 c
+3105 6390 l
+3105 6340 3065 6300 3015 6300 c
+2835 6300 l
+2785 6300 2745 6340 2745 6390 c
 h
 S
 BT
 /F6 270 Tf
-2805 6705 Td
+2850 6405 Td
 [(+)] TJ
 ET
 BT
 /F6 270 Tf
-2805 5085 Td
+2850 4785 Td
 [(X)] TJ
 ET
-2700 5250 m
-2700 5300 2740 5340 2790 5340 c
-2970 5340 l
-3020 5340 3060 5300 3060 5250 c
-3060 5070 l
-3060 5020 3020 4980 2970 4980 c
-2790 4980 l
-2740 4980 2700 5020 2700 5070 c
+2745 4950 m
+2745 5000 2785 5040 2835 5040 c
+3015 5040 l
+3065 5040 3105 5000 3105 4950 c
+3105 4770 l
+3105 4720 3065 4680 3015 4680 c
+2835 4680 l
+2785 4680 2745 4720 2745 4770 c
 h
 S
 BT
@@ -3088,7 +3078,7 @@ endobj
 endobj
 
 30 0 obj
-<</Length 3170 >>
+<</Length 3041 >>
 stream
 0.05 0 0 0.05 1 1 cm
 13 w 0 J 0 j 0 i
@@ -3101,132 +3091,132 @@ BT
 ET
 BT
 /F6 240 Tf
-2160 13798 Td
+2160 13438 Td
 [(THE COMPILER)] TJ
 ET
 BT
 /F6 240 Tf
-2145 13158 Td
-[(Now I know that right about here most programming books would drum up)] TJ
+2145 12798 Td
+[(Now I know that right about here most programming books would drum up a)] TJ
 ET
 BT
 /F6 240 Tf
-2160 12838 Td
-[(some dippy little "Hello, World" program — and expect you to be impressed)] TJ
+2160 12478 Td
+[(simple "Hello, World" program, and expect you to be impressed.  I think we)] TJ
 ET
 BT
 /F6 240 Tf
-2160 12518 Td
-[(— but I'd like to suggest that we skip the kid stuff and start makin' babies.)] TJ
+2160 12158 Td
+[(should skip the kid stuff and make a whole new program, just like me.)] TJ
 ET
 BT
 /F6 240 Tf
-2160 11878 Td
-[(I see you're trembling. Don't be afraid. This may be the first time for you, but)] TJ
+2160 11518 Td
+[(It's actually pretty easy) 63 (.  I'll lead you through it:)] TJ
 ET
 BT
 /F6 240 Tf
-2160 11558 Td
-[(I'm an old hand at this. I'll lead you through it. Gently) 63 (.)] TJ
+2160 10878 Td
+[(\(1\) Open the CAL-4001 directory and copy all twelve of my files to the finder's)] TJ
 ET
 BT
 /F6 240 Tf
-2160 10918 Td
-[(\(1\) Open the CAL-3085 directory and copy all twelve of my files to the finder's)] TJ
-ET
-BT
-/F6 240 Tf
-2160 10598 Td
+2160 10558 Td
 [(clipboard: characters, colors, font menus, the compiler) 63 (, the desktop, the)] TJ
 ET
 BT
 /F6 240 Tf
-2160 10278 Td
+2160 10238 Td
 [(dialog, the editor) 63 (, the finder) 63 (, the noodle, the scrollbar) 63 (, the status,)] TJ
 ET
 BT
 /F6 240 Tf
-2160 9958 Td
+2160 9918 Td
 [(and the writer) 63 (. Shift-click or drag to select. Copy is under "C".)] TJ
 ET
 BT
 /F6 240 Tf
-2160 9318 Td
+2160 9278 Td
 [(\(2\) Make a new directory on your "C" drive with an appropriate name like)] TJ
 ET
 BT
 /F6 240 Tf
-2160 8998 Td
+2160 8958 Td
 [("Baby Cal". Then open it up and paste the twelve files into it. Now open any)] TJ
 ET
 BT
 /F6 240 Tf
-2160 8678 Td
+2160 8638 Td
 [(of those files. T) 125 (o open them all, just drag to select and tap the ENTER key) 63 (.)] TJ
 ET
 BT
 /F6 240 Tf
-2160 8038 Td
+2160 7998 Td
 [(\(3\) Okay) 63 (, we're ready) 63 (. Find the "R" menu and select "Run". Y) 63 (ou'll see some)] TJ
 ET
 BT
 /F6 240 Tf
-2160 7718 Td
-[(status messages, and then our new Baby Cal will come to life. Do it. Do it)] TJ
+2160 7678 Td
+[(status messages, and then our new Baby Cal will come to life.  It never takes)] TJ
 ET
 BT
 /F6 240 Tf
-2145 7398 Td
-[(now) 63 (. But watch closely or you might miss the birth. I'm never in labor for long.)] TJ
+2175 7358 Td
+[(very long.)] TJ
 ET
 BT
 /F6 240 Tf
-2160 6758 Td
-[(W) 63 (as it as good for you as it was for me? Look how handsome he is! But he)] TJ
+2145 6718 Td
+[(Look how handsome he is! But he is not me — you can prove it with the)] TJ
 ET
 BT
 /F6 240 Tf
-2145 6438 Td
-[(is not me — you can prove it with the V) 63 (ersion command. ) 62 (And if you look in)] TJ
+2160 6398 Td
+[(V) 63 (ersion command. ) 62 (And if you look in the new directory on an empty tab,)] TJ
 ET
 BT
 /F6 240 Tf
-2175 6118 Td
-[(the new directory on an empty tab, you'll see the executable file we begat.)] TJ
+2160 6078 Td
+[(you'll see the executable file we made.)] TJ
 ET
 BT
 /F6 240 Tf
-2145 5478 Td
-[(Note that each program is stored in its own directory) 63 (. If you want your babies)] TJ
+2145 5438 Td
+[(Note that each program is stored in its own directory) 63 (.  If you want your)] TJ
 ET
 BT
 /F6 240 Tf
-2175 5158 Td
-[(to look like you instead of me, copy only "characters", "colors", and "the)] TJ
+2160 5118 Td
+[(programs to look like you instead of me, copy only "characters", "colors", and)] TJ
 ET
 BT
 /F6 240 Tf
-2145 4838 Td
-[(noodle", and write the rest yourself. ) 62 (Any file without an extension is assumed)] TJ
+2160 4798 Td
+[("the noodle", and write the rest yourself.  ) 62 (Any file without an extension is)] TJ
 ET
 BT
 /F6 240 Tf
-2175 4518 Td
-[(to be source code and the name of the directory is the name that is)] TJ
+2160 4478 Td
+[(assumed to be either a writer file, or source code.  \(I ignore the writer files)] TJ
 ET
 BT
 /F6 240 Tf
-2160 4198 Td
+2160 4158 Td
+[(when I compile a program.\)  The name of the directory is the name that is)] TJ
+ET
+BT
+/F6 240 Tf
+2160 3838 Td
 [(bestowed upon the EXE.)] TJ
 ET
 BT
 /F6 240 Tf
-2175 3558 Td
+2175 3198 Td
 [(Y) 63 (ou can quit the Baby Cal now) 63 (, and — assuming you believe that a creator)] TJ
 ET
 BT
 /F6 240 Tf
-2160 3238 Td
+2160 2878 Td
 [(can do as he pleases with his creations — you can destroy him.)] TJ
 ET
 endstream
@@ -3975,7 +3965,7 @@ endobj
 endobj
 
 36 0 obj
-<</Length 3057 >>
+<</Length 3009 >>
 stream
 0.05 0 0 0.05 1 1 cm
 13 w 0 J 0 j 0 i
@@ -4054,17 +4044,17 @@ ET
 BT
 /F6 240 Tf
 2160 7678 Td
-[(I don't do OBJECTS. Objects suck. I do support a limited form of record)] TJ
+[(I don't do OBJECTS. I do support a limited form of record extension,)] TJ
 ET
 BT
 /F6 240 Tf
 2160 7358 Td
-[(extension, and I have a remarkable way of reducing types to other types, but I)] TJ
+[(and I have a remarkable way of reducing types to other types,)] TJ
 ET
 BT
 /F6 240 Tf
 2160 7038 Td
-[(don't do objects. My page editor does just fine without them, thank you.)] TJ
+[(but I don't do objects. My page editor does just fine without them, thank you.)] TJ
 ET
 BT
 /F6 240 Tf
@@ -4109,7 +4099,7 @@ ET
 BT
 /F6 240 Tf
 2160 3518 Td
-[(Words you should take to heart. Especially if you're a math-head.)] TJ
+[(Words you should take to heart.)] TJ
 ET
 endstream
 endobj
@@ -4158,7 +4148,7 @@ endobj
 endobj
 
 40 0 obj
-<</Length 8653 >>
+<</Length 8634 >>
 stream
 0.05 0 0 0.05 1 1 cm
 13 w 0 J 0 j 0 i
@@ -4242,12 +4232,12 @@ ET
 BT
 /F6 240 Tf
 2145 12798 Td
-[(Okay) 63 (. Now that we're acquainted, let's make another baby) 63 (. From scratch.)] TJ
+[(Okay) 63 (. Let's make another program.  From scratch.  ) 62 (And let's teach it)] TJ
 ET
 BT
 /F6 240 Tf
-2175 12478 Td
-[(And let's teach him to finger paint. Here are some thoughts on the interface:)] TJ
+2145 12478 Td
+[(how to finger paint. Here are some thoughts on the interface:)] TJ
 ET
 BT
 /F6 240 Tf
@@ -4877,7 +4867,7 @@ ET
 BT
 /F6 270 Tf
 2520 9105 Td
-[(c:) -28 (\\) -28 (ca) 7 (l) -34 (-) -20 (3) 7 (0) 7 (8) 7 (5)] TJ
+[(c:) -28 (\\) -28 (ca) 7 (l) -34 (-) -20 (4) 7 (0) 7 (0) 7 (1)] TJ
 ET
 BT
 /F6 270 Tf
@@ -5392,7 +5382,7 @@ ET
 BT
 /F6 240 Tf
 2145 7678 Td
-[(Good. Now get copies of my noodle, characters, and colors from the CAL-3085)] TJ
+[(Good. Now get copies of my noodle, characters, and colors from the CAL-4001)] TJ
 ET
 BT
 /F6 240 Tf
@@ -6584,7 +6574,7 @@ endobj
 endobj
 
 52 0 obj
-<</Length 3858 >>
+<</Length 3852 >>
 stream
 0.05 0 0 0.05 1 1 cm
 13 w 0 J 0 j 0 i
@@ -6803,27 +6793,27 @@ ET
 BT
 /F6 240 Tf
 2160 4058 Td
-[(same type \(passed by reference\) that is known, within that other routine, as)] TJ
+[(same type \(passed by reference\) that is known, within that other routine,)] TJ
 ET
 BT
 /F6 240 Tf
 2160 3738 Td
-[("the event". Y) 63 (ou'll also realize, after you think about it a bit, that one of the)] TJ
+[(as "the event". Y) 63 (ou'll also realize, after you think about it a bit, that one of)] TJ
 ET
 BT
 /F6 240 Tf
 2175 3418 Td
-[(things that makes Plain English succinct is that we don't name variables and)] TJ
+[(the things that makes Plain English succinct is that we don't name variables)] TJ
 ET
 BT
 /F6 240 Tf
 2160 3098 Td
-[(parameters — we refer to them with an article and a type name. ) 62 (As in real)] TJ
+[(and parameters — we refer to them with an article and a type name.)] TJ
 ET
 BT
 /F6 240 Tf
-2145 2778 Td
-[(life.)] TJ
+2175 2778 Td
+[(As in real life.)] TJ
 ET
 BT
 /F6 240 Tf
@@ -6927,7 +6917,7 @@ ET
 BT
 /F6 240 Tf
 2160 7038 Td
-[(\(1\) ) 62 (AL) 63 (T) 63 (-T) 63 (AB back to me, the CAL-3085.)] TJ
+[(\(1\) ) 62 (AL) 63 (T) 63 (-T) 63 (AB back to me, the CAL-4001.)] TJ
 ET
 BT
 /F6 240 Tf
@@ -21692,7 +21682,7 @@ endobj
 endobj
 
 142 0 obj
-<</Length 3003 >>
+<</Length 2992 >>
 stream
 0.05 0 0 0.05 1 1 cm
 13 w 0 J 0 j 0 i
@@ -21791,17 +21781,17 @@ ET
 BT
 /F6 240 Tf
 3255 7378 Td
-[(the finder the finder should start in.  If a name is blank, I will use the)] TJ
+[(the finder should start in.  If a name is blank, I will use the folder)] TJ
 ET
 BT
 /F6 240 Tf
 3255 7058 Td
-[(folder that the finder should start in.  If I can't find the file or folder)] TJ
+[(that the finder should start in.  If I can't find the file or folder you)] TJ
 ET
 BT
 /F6 240 Tf
 3240 6738 Td
-[(you want, I will get as close as I can.)] TJ
+[(want, I will get as close as I can.)] TJ
 ET
 BT
 /F6 240 Tf
@@ -21871,7 +21861,7 @@ endobj
 endobj
 
 144 0 obj
-<</Length 2108 >>
+<</Length 2111 >>
 stream
 0.05 0 0 0.05 1 1 cm
 13 w 0 J 0 j 0 i
@@ -21915,7 +21905,7 @@ ET
 BT
 /F6 240 Tf
 3765 11718 Td
-[(if you had clicked in my status box.  If all the tests pass, )] TJ
+[(if you had clicked in my status box.  If all of the tests pass, )] TJ
 ET
 BT
 /F6 240 Tf
@@ -22433,7 +22423,7 @@ S
 BT
 /F6 240 Tf
 2520 11278 Td
-[(I am the CAL-3085. What is your name?)] TJ
+[(I am the CAL-4001. What is your name?)] TJ
 ET
 BT
 /F6 240 Tf
@@ -25346,7 +25336,7 @@ endobj
 endobj
 
 184 0 obj
-<</Length 2379 >>
+<</Length 2524 >>
 stream
 0.05 0 0 0.05 1 1 cm
 13 w 0 J 0 j 0 i
@@ -25354,112 +25344,117 @@ stream
 0.0039 0.0039 0.0039 rg
 BT
 /F6 240 Tf
-2160 13618 Td
+2160 13438 Td
 [(INPUT ) 62 (AND OUTPUT)] TJ
 ET
 BT
 /F6 240 Tf
-2175 12978 Td
+2175 12798 Td
 [(Y) 63 (ou can work directly with the mouse using statements like these:)] TJ
 ET
 BT
 /F6 240 Tf
-2145 12338 Td
+2145 12158 Td
 [(PUT the mouse's spot INTO a spot.)] TJ
 ET
 BT
 /F6 240 Tf
-2160 12018 Td
+2160 11838 Td
 [(IF the mouse's left button IS DOWN, ...)] TJ
 ET
 BT
 /F6 240 Tf
-2160 11698 Td
+2160 11518 Td
 [(IF the mouse's right button IS UP) 125 (, ...)] TJ
 ET
 BT
 /F6 240 Tf
-2145 11058 Td
+2145 10878 Td
 [(But you probably won't, unless you're tracking the mouse while the user drags)] TJ
 ET
 BT
 /F6 240 Tf
-2160 10738 Td
+2160 10558 Td
 [(something around the screen. Most of the time, you'll simply respond to )] TJ
 ET
 BT
 /F6 240 Tf
-2175 10418 Td
+2175 10238 Td
 [(the various "click" events that are sent to your event handler) 63 (.)] TJ
 ET
 BT
 /F6 240 Tf
-2175 9778 Td
+2175 9598 Td
 [(Y) 63 (ou can work directly with the keyboard using statements like:)] TJ
 ET
 BT
 /F6 240 Tf
-2160 9138 Td
+2160 8958 Td
 [(IF the escape key IS DOWN, ...)] TJ
 ET
 BT
 /F6 240 Tf
-2160 8818 Td
+2160 8638 Td
 [(IF the shift key IS UP) 125 (, ...)] TJ
 ET
 BT
 /F6 240 Tf
-2145 8178 Td
+2145 7998 Td
 [(But again, you probably won't, because the kluge works better if you just respond)] TJ
 ET
 BT
 /F6 240 Tf
-2175 7858 Td
+2175 7678 Td
 [(to the "key down" events that are sent to your event handler) 63 (. Y) 63 (ou can find all the)] TJ
 ET
 BT
 /F6 240 Tf
-2160 7538 Td
+2160 7358 Td
 [("key" globals in my "characters" file by searching for "a key equal to".)] TJ
 ET
 BT
 /F6 240 Tf
-2175 6898 Td
+2175 6718 Td
 [(And you can work directly with the screen using "the screen canvas" and this)] TJ
 ET
 BT
 /F6 240 Tf
-2160 6578 Td
-[(one-of-a-kind global variable:)] TJ
+2160 6398 Td
+[(one-of-a-kind global variable.  ) 62 (A) 63 ( screen has a box, a pixel height, a pixel width,)] TJ
 ET
 BT
 /F6 240 Tf
-2160 5938 Td
-[(The screen has a box, a pixel height and a pixel width.)] TJ
+2160 6078 Td
+[(and some other heights and widths that I use when you change my shape:)] TJ
 ET
 BT
 /F6 240 Tf
-2145 5298 Td
+2160 5438 Td
+[(The screen is a screen.)] TJ
+ET
+BT
+/F6 240 Tf
+2145 4798 Td
 [(But you shouldn't. Instead, you should draw on the memory canvas, then:)] TJ
 ET
 BT
 /F6 240 Tf
-2145 4658 Td
+2145 4158 Td
 [(REFRESH THE SCREEN.)] TJ
 ET
 BT
 /F6 240 Tf
-2160 4018 Td
+2160 3518 Td
 [(See the "Drawing" topic for more information. Feel free to use "the screen's box")] TJ
 ET
 BT
 /F6 240 Tf
-2160 3698 Td
+2160 3198 Td
 [(and its fields when initializing your stuff.  But the screen's box changes shape)] TJ
 ET
 BT
 /F6 240 Tf
-2160 3378 Td
+2160 2878 Td
 [(when I'm restored or maximized, so you might need to update some stuff.)] TJ
 ET
 BT
@@ -35052,386 +35047,386 @@ xref
 0001834945 00000 n
 0001835143 00000 n
 0001835314 00000 n
-0001838447 00000 n
-0001838618 00000 n
-0001839528 00000 n
-0001839699 00000 n
-0001848617 00000 n
-0001848788 00000 n
-0001853003 00000 n
-0001853174 00000 n
-0001860264 00000 n
-0001860447 00000 n
-0001869566 00000 n
-0003455164 00000 n
-0003455371 00000 n
-0003456619 00000 n
-0003456790 00000 n
-0003470001 00000 n
-0003470172 00000 n
-0003473400 00000 n
-0003473583 00000 n
-0003484218 00000 n
-0003484389 00000 n
-0003487020 00000 n
-0003487191 00000 n
-0003490306 00000 n
-0003490477 00000 n
-0003490689 00000 n
-0003490860 00000 n
-0003499571 00000 n
-0003499742 00000 n
-0003511691 00000 n
-0003511874 00000 n
-0003515535 00000 n
-0003515718 00000 n
-0003518817 00000 n
-0003519000 00000 n
-0003524506 00000 n
-0003524689 00000 n
-0003529512 00000 n
-0003529695 00000 n
-0003533611 00000 n
-0003533782 00000 n
-0003536573 00000 n
-0003536756 00000 n
-0003543438 00000 n
-0003543621 00000 n
-0003548435 00000 n
-0003548606 00000 n
-0003551864 00000 n
-0003552047 00000 n
-0003555950 00000 n
-0003556133 00000 n
-0003561920 00000 n
-0003562091 00000 n
-0003564961 00000 n
-0003565144 00000 n
-0003572427 00000 n
-0003572610 00000 n
-0003579767 00000 n
-0003579950 00000 n
-0003584649 00000 n
-0003584832 00000 n
-0003588729 00000 n
-0003588912 00000 n
-0003594461 00000 n
-0003594644 00000 n
-0003598411 00000 n
-0003598594 00000 n
-0003605189 00000 n
-0003605372 00000 n
-0003611410 00000 n
-0003611593 00000 n
-0003617826 00000 n
-0003618009 00000 n
-0003621605 00000 n
-0003621788 00000 n
-0003628311 00000 n
-0003628494 00000 n
-0003632109 00000 n
-0003632280 00000 n
-0003635200 00000 n
-0003635383 00000 n
-0003639031 00000 n
-0003639214 00000 n
-0003643030 00000 n
-0003643213 00000 n
-0003646978 00000 n
-0003647162 00000 n
-0003651803 00000 n
-0003651988 00000 n
-0003658651 00000 n
-0003658824 00000 n
-0003661972 00000 n
-0003662157 00000 n
-0003665892 00000 n
-0003666077 00000 n
-0003673665 00000 n
-0003673850 00000 n
-0003677765 00000 n
-0003677950 00000 n
-0003684601 00000 n
-0003684786 00000 n
-0003692919 00000 n
-0003693104 00000 n
-0003700004 00000 n
-0003700189 00000 n
-0003704938 00000 n
-0003705111 00000 n
-0003710542 00000 n
-0003710715 00000 n
-0003710914 00000 n
-0003711087 00000 n
-0003714330 00000 n
-0003714503 00000 n
-0003716607 00000 n
-0003716780 00000 n
-0003751753 00000 n
-0003751926 00000 n
-0003753843 00000 n
-0003754016 00000 n
-0003756340 00000 n
-0003756513 00000 n
-0003759086 00000 n
-0003759259 00000 n
-0003762320 00000 n
-0003762493 00000 n
-0003784983 00000 n
-0003785156 00000 n
-0003788081 00000 n
-0003788254 00000 n
-0003791316 00000 n
-0003791489 00000 n
-0003793656 00000 n
-0003793829 00000 n
-0003796496 00000 n
-0003796669 00000 n
-0003799454 00000 n
-0003799627 00000 n
-0003802268 00000 n
-0003802441 00000 n
-0003804826 00000 n
-0003804999 00000 n
-0003807948 00000 n
-0003808121 00000 n
-0003811781 00000 n
-0003811954 00000 n
-0003814202 00000 n
-0003814375 00000 n
-0003818798 00000 n
-0003818971 00000 n
-0003822134 00000 n
-0003822319 00000 n
-0003827619 00000 n
-0003827792 00000 n
-0003830581 00000 n
-0003830754 00000 n
-0003833352 00000 n
-0003833525 00000 n
-0003835972 00000 n
-0003836157 00000 n
-0003840521 00000 n
-0003840694 00000 n
-0003843123 00000 n
-0003843296 00000 n
-0003845859 00000 n
-0003846032 00000 n
-0003848609 00000 n
-0003848782 00000 n
-0003850833 00000 n
-0003851006 00000 n
-0003853463 00000 n
-0003853636 00000 n
-0003856074 00000 n
-0003856247 00000 n
-0003858489 00000 n
-0003858662 00000 n
-0003860767 00000 n
-0003860940 00000 n
-0003863472 00000 n
-0003863645 00000 n
-0003865675 00000 n
-0003865860 00000 n
-0003871130 00000 n
-0003871303 00000 n
-0003873486 00000 n
-0003873659 00000 n
-0003876558 00000 n
-0003876743 00000 n
-0003883009 00000 n
-0003883182 00000 n
-0003885435 00000 n
-0003885608 00000 n
-0003888204 00000 n
-0003888377 00000 n
-0003891168 00000 n
-0003891341 00000 n
-0003894014 00000 n
-0003894187 00000 n
-0003896166 00000 n
-0003896339 00000 n
-0003899176 00000 n
-0003899349 00000 n
-0003901483 00000 n
-0003901668 00000 n
-0003905027 00000 n
-0003905200 00000 n
-0003907691 00000 n
-0003907864 00000 n
-0003909987 00000 n
-0003910160 00000 n
-0003912885 00000 n
-0003913058 00000 n
-0003915385 00000 n
-0003915558 00000 n
-0003918497 00000 n
-0003918670 00000 n
-0003921450 00000 n
-0003921623 00000 n
-0003924510 00000 n
-0003924683 00000 n
-0003927055 00000 n
-0003927228 00000 n
-0003930064 00000 n
-0003930237 00000 n
-0003933126 00000 n
-0003933299 00000 n
-0003942843 00000 n
-0003943016 00000 n
-0003952935 00000 n
-0003953108 00000 n
-0003956011 00000 n
-0003956184 00000 n
-0003958854 00000 n
-0003959039 00000 n
-0003970576 00000 n
-0003970749 00000 n
-0003973179 00000 n
-0003973352 00000 n
-0003976072 00000 n
-0003976245 00000 n
-0003978245 00000 n
-0003978418 00000 n
-0003981051 00000 n
-0003981224 00000 n
-0003983582 00000 n
-0003983755 00000 n
-0003986415 00000 n
-0003986588 00000 n
-0003991735 00000 n
-0003991908 00000 n
-0003992104 00000 n
-0003992277 00000 n
-0004012680 00000 n
-0004012769 00000 n
-0004012902 00000 n
-0004013033 00000 n
-0004013165 00000 n
-0004013301 00000 n
-0004013432 00000 n
-0004013567 00000 n
-0004013704 00000 n
-0004013838 00000 n
-0004013972 00000 n
-0004014106 00000 n
-0004014242 00000 n
-0004014376 00000 n
-0004014510 00000 n
-0004014643 00000 n
-0004014783 00000 n
-0004014920 00000 n
-0004015065 00000 n
-0004015206 00000 n
-0004015349 00000 n
-0004015481 00000 n
-0004015612 00000 n
-0004015750 00000 n
-0004015887 00000 n
-0004016031 00000 n
-0004016163 00000 n
-0004016303 00000 n
-0004016444 00000 n
-0004016582 00000 n
-0004016718 00000 n
-0004016855 00000 n
-0004016989 00000 n
-0004017127 00000 n
-0004017264 00000 n
-0004017395 00000 n
-0004017539 00000 n
-0004017687 00000 n
-0004017834 00000 n
-0004017962 00000 n
-0004018102 00000 n
-0004018249 00000 n
-0004018393 00000 n
-0004018526 00000 n
-0004018655 00000 n
-0004018795 00000 n
-0004018937 00000 n
-0004019078 00000 n
-0004019218 00000 n
-0004019349 00000 n
-0004019491 00000 n
-0004019633 00000 n
-0004019776 00000 n
-0004019909 00000 n
-0004020040 00000 n
-0004020198 00000 n
-0004020331 00000 n
-0004020470 00000 n
-0004020603 00000 n
-0004020736 00000 n
-0004020871 00000 n
-0004021001 00000 n
-0004021138 00000 n
-0004021267 00000 n
-0004021397 00000 n
-0004021536 00000 n
-0004021667 00000 n
-0004021804 00000 n
-0004021955 00000 n
-0004022117 00000 n
-0004022250 00000 n
-0004022387 00000 n
-0004022520 00000 n
-0004022654 00000 n
-0004022787 00000 n
-0004022940 00000 n
-0004023072 00000 n
-0004023205 00000 n
-0004023336 00000 n
-0004023482 00000 n
-0004023618 00000 n
-0004023749 00000 n
-0004023879 00000 n
-0004024021 00000 n
-0004024151 00000 n
-0004024285 00000 n
-0004024426 00000 n
-0004024574 00000 n
-0004024710 00000 n
-0004024851 00000 n
-0004024984 00000 n
-0004025117 00000 n
-0004025252 00000 n
-0004025382 00000 n
-0004025515 00000 n
-0004025648 00000 n
-0004025788 00000 n
-0004025918 00000 n
-0004026050 00000 n
-0004026192 00000 n
-0004026322 00000 n
-0004026457 00000 n
-0004026590 00000 n
-0004026723 00000 n
-0004026859 00000 n
-0004026992 00000 n
-0004027127 00000 n
-0004027266 00000 n
-0004027398 00000 n
-0004027529 00000 n
-0004027666 00000 n
-0004027799 00000 n
-0004027939 00000 n
-0004028070 00000 n
-0004028214 00000 n
-0004028344 00000 n
-0004028476 00000 n
-0004028611 00000 n
-0004028741 00000 n
-0004028873 00000 n
-0004029017 00000 n
-0004029146 00000 n
-0004029284 00000 n
-0004029434 00000 n
-0004029565 00000 n
-0004029696 00000 n
-0004029826 00000 n
-0004029967 00000 n
-0004030097 00000 n
+0001838425 00000 n
+0001838596 00000 n
+0001839506 00000 n
+0001839677 00000 n
+0001848354 00000 n
+0001848525 00000 n
+0001852691 00000 n
+0001852862 00000 n
+0001859952 00000 n
+0001860135 00000 n
+0001869254 00000 n
+0003454852 00000 n
+0003455059 00000 n
+0003456307 00000 n
+0003456478 00000 n
+0003469689 00000 n
+0003469860 00000 n
+0003472959 00000 n
+0003473142 00000 n
+0003483777 00000 n
+0003483948 00000 n
+0003486579 00000 n
+0003486750 00000 n
+0003489817 00000 n
+0003489988 00000 n
+0003490200 00000 n
+0003490371 00000 n
+0003499063 00000 n
+0003499234 00000 n
+0003511183 00000 n
+0003511366 00000 n
+0003515027 00000 n
+0003515210 00000 n
+0003518309 00000 n
+0003518492 00000 n
+0003523998 00000 n
+0003524181 00000 n
+0003529004 00000 n
+0003529187 00000 n
+0003533097 00000 n
+0003533268 00000 n
+0003536059 00000 n
+0003536242 00000 n
+0003542924 00000 n
+0003543107 00000 n
+0003547921 00000 n
+0003548092 00000 n
+0003551350 00000 n
+0003551533 00000 n
+0003555436 00000 n
+0003555619 00000 n
+0003561406 00000 n
+0003561577 00000 n
+0003564447 00000 n
+0003564630 00000 n
+0003571913 00000 n
+0003572096 00000 n
+0003579253 00000 n
+0003579436 00000 n
+0003584135 00000 n
+0003584318 00000 n
+0003588215 00000 n
+0003588398 00000 n
+0003593947 00000 n
+0003594130 00000 n
+0003597897 00000 n
+0003598080 00000 n
+0003604675 00000 n
+0003604858 00000 n
+0003610896 00000 n
+0003611079 00000 n
+0003617312 00000 n
+0003617495 00000 n
+0003621091 00000 n
+0003621274 00000 n
+0003627797 00000 n
+0003627980 00000 n
+0003631595 00000 n
+0003631766 00000 n
+0003634686 00000 n
+0003634869 00000 n
+0003638517 00000 n
+0003638700 00000 n
+0003642516 00000 n
+0003642699 00000 n
+0003646464 00000 n
+0003646648 00000 n
+0003651289 00000 n
+0003651474 00000 n
+0003658137 00000 n
+0003658310 00000 n
+0003661458 00000 n
+0003661643 00000 n
+0003665378 00000 n
+0003665563 00000 n
+0003673151 00000 n
+0003673336 00000 n
+0003677251 00000 n
+0003677436 00000 n
+0003684087 00000 n
+0003684272 00000 n
+0003692405 00000 n
+0003692590 00000 n
+0003699490 00000 n
+0003699675 00000 n
+0003704424 00000 n
+0003704597 00000 n
+0003710028 00000 n
+0003710201 00000 n
+0003710400 00000 n
+0003710573 00000 n
+0003713816 00000 n
+0003713989 00000 n
+0003716093 00000 n
+0003716266 00000 n
+0003751239 00000 n
+0003751412 00000 n
+0003753329 00000 n
+0003753502 00000 n
+0003755826 00000 n
+0003755999 00000 n
+0003758572 00000 n
+0003758745 00000 n
+0003761806 00000 n
+0003761979 00000 n
+0003784469 00000 n
+0003784642 00000 n
+0003787567 00000 n
+0003787740 00000 n
+0003790791 00000 n
+0003790964 00000 n
+0003793134 00000 n
+0003793307 00000 n
+0003795974 00000 n
+0003796147 00000 n
+0003798932 00000 n
+0003799105 00000 n
+0003801746 00000 n
+0003801919 00000 n
+0003804304 00000 n
+0003804477 00000 n
+0003807426 00000 n
+0003807599 00000 n
+0003811259 00000 n
+0003811432 00000 n
+0003813680 00000 n
+0003813853 00000 n
+0003818276 00000 n
+0003818449 00000 n
+0003821612 00000 n
+0003821797 00000 n
+0003827097 00000 n
+0003827270 00000 n
+0003830059 00000 n
+0003830232 00000 n
+0003832830 00000 n
+0003833003 00000 n
+0003835450 00000 n
+0003835635 00000 n
+0003839999 00000 n
+0003840172 00000 n
+0003842601 00000 n
+0003842774 00000 n
+0003845337 00000 n
+0003845510 00000 n
+0003848087 00000 n
+0003848260 00000 n
+0003850311 00000 n
+0003850484 00000 n
+0003852941 00000 n
+0003853114 00000 n
+0003855697 00000 n
+0003855870 00000 n
+0003858112 00000 n
+0003858285 00000 n
+0003860390 00000 n
+0003860563 00000 n
+0003863095 00000 n
+0003863268 00000 n
+0003865298 00000 n
+0003865483 00000 n
+0003870753 00000 n
+0003870926 00000 n
+0003873109 00000 n
+0003873282 00000 n
+0003876181 00000 n
+0003876366 00000 n
+0003882632 00000 n
+0003882805 00000 n
+0003885058 00000 n
+0003885231 00000 n
+0003887827 00000 n
+0003888000 00000 n
+0003890791 00000 n
+0003890964 00000 n
+0003893637 00000 n
+0003893810 00000 n
+0003895789 00000 n
+0003895962 00000 n
+0003898799 00000 n
+0003898972 00000 n
+0003901106 00000 n
+0003901291 00000 n
+0003904650 00000 n
+0003904823 00000 n
+0003907314 00000 n
+0003907487 00000 n
+0003909610 00000 n
+0003909783 00000 n
+0003912508 00000 n
+0003912681 00000 n
+0003915008 00000 n
+0003915181 00000 n
+0003918120 00000 n
+0003918293 00000 n
+0003921073 00000 n
+0003921246 00000 n
+0003924133 00000 n
+0003924306 00000 n
+0003926678 00000 n
+0003926851 00000 n
+0003929687 00000 n
+0003929860 00000 n
+0003932749 00000 n
+0003932922 00000 n
+0003942466 00000 n
+0003942639 00000 n
+0003952558 00000 n
+0003952731 00000 n
+0003955634 00000 n
+0003955807 00000 n
+0003958477 00000 n
+0003958662 00000 n
+0003970199 00000 n
+0003970372 00000 n
+0003972802 00000 n
+0003972975 00000 n
+0003975695 00000 n
+0003975868 00000 n
+0003977868 00000 n
+0003978041 00000 n
+0003980674 00000 n
+0003980847 00000 n
+0003983205 00000 n
+0003983378 00000 n
+0003986038 00000 n
+0003986211 00000 n
+0003991358 00000 n
+0003991531 00000 n
+0003991727 00000 n
+0003991900 00000 n
+0004012303 00000 n
+0004012392 00000 n
+0004012525 00000 n
+0004012656 00000 n
+0004012788 00000 n
+0004012924 00000 n
+0004013055 00000 n
+0004013190 00000 n
+0004013327 00000 n
+0004013461 00000 n
+0004013595 00000 n
+0004013729 00000 n
+0004013865 00000 n
+0004013999 00000 n
+0004014133 00000 n
+0004014266 00000 n
+0004014406 00000 n
+0004014543 00000 n
+0004014688 00000 n
+0004014829 00000 n
+0004014972 00000 n
+0004015104 00000 n
+0004015235 00000 n
+0004015373 00000 n
+0004015510 00000 n
+0004015654 00000 n
+0004015786 00000 n
+0004015926 00000 n
+0004016067 00000 n
+0004016205 00000 n
+0004016341 00000 n
+0004016478 00000 n
+0004016612 00000 n
+0004016750 00000 n
+0004016887 00000 n
+0004017018 00000 n
+0004017162 00000 n
+0004017310 00000 n
+0004017457 00000 n
+0004017585 00000 n
+0004017725 00000 n
+0004017872 00000 n
+0004018016 00000 n
+0004018149 00000 n
+0004018278 00000 n
+0004018418 00000 n
+0004018560 00000 n
+0004018701 00000 n
+0004018841 00000 n
+0004018972 00000 n
+0004019114 00000 n
+0004019256 00000 n
+0004019399 00000 n
+0004019532 00000 n
+0004019663 00000 n
+0004019821 00000 n
+0004019954 00000 n
+0004020093 00000 n
+0004020226 00000 n
+0004020359 00000 n
+0004020494 00000 n
+0004020624 00000 n
+0004020761 00000 n
+0004020890 00000 n
+0004021020 00000 n
+0004021159 00000 n
+0004021290 00000 n
+0004021427 00000 n
+0004021578 00000 n
+0004021740 00000 n
+0004021873 00000 n
+0004022010 00000 n
+0004022143 00000 n
+0004022277 00000 n
+0004022410 00000 n
+0004022563 00000 n
+0004022695 00000 n
+0004022828 00000 n
+0004022959 00000 n
+0004023105 00000 n
+0004023241 00000 n
+0004023372 00000 n
+0004023502 00000 n
+0004023644 00000 n
+0004023774 00000 n
+0004023908 00000 n
+0004024049 00000 n
+0004024197 00000 n
+0004024333 00000 n
+0004024474 00000 n
+0004024607 00000 n
+0004024740 00000 n
+0004024875 00000 n
+0004025005 00000 n
+0004025138 00000 n
+0004025271 00000 n
+0004025411 00000 n
+0004025541 00000 n
+0004025673 00000 n
+0004025815 00000 n
+0004025945 00000 n
+0004026080 00000 n
+0004026213 00000 n
+0004026346 00000 n
+0004026482 00000 n
+0004026615 00000 n
+0004026750 00000 n
+0004026889 00000 n
+0004027021 00000 n
+0004027152 00000 n
+0004027289 00000 n
+0004027422 00000 n
+0004027562 00000 n
+0004027693 00000 n
+0004027837 00000 n
+0004027967 00000 n
+0004028099 00000 n
+0004028234 00000 n
+0004028364 00000 n
+0004028496 00000 n
+0004028640 00000 n
+0004028769 00000 n
+0004028907 00000 n
+0004029057 00000 n
+0004029188 00000 n
+0004029319 00000 n
+0004029449 00000 n
+0004029590 00000 n
+0004029720 00000 n
 
 trailer
 <<
@@ -35440,5 +35435,5 @@ trailer
 >>
 
 startxref
-4030212
+4029835
 %%EOF
