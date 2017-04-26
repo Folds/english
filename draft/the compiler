@@ -261,19 +261,19 @@ to add a monikette to some monikettes given a string:
   create the monikette.
   append the monikette to the monikettes.
   \ from/given/with/using
-  if the string is "from", put "from/given/with/using" into the monikette's string; exit.
-  if the string is "given", put "from/given/with/using" into the monikette's string; exit.
-  if the string is "with", put "from/given/with/using" into the monikette's string; exit.
-  if the string is "using", put "from/given/with/using" into the monikette's string; exit.
+  if the string is "from",   put "from/given/with/using" into the monikette's string; exit.
+  if the string is "given",  put "from/given/with/using" into the monikette's string; exit.
+  if the string is "with",   put "from/given/with/using" into the monikette's string; exit.
+  if the string is "using",  put "from/given/with/using" into the monikette's string; exit.
   \ in/into/to
-  if the string is "in", put "in/into/to" into the monikette's string; exit.
-  if the string is "into", put "in/into/to" into the monikette's string; exit.
-  if the string is "to", put "in/into/to" into the monikette's string; exit.
+  if the string is "in",     put "in/into/to" into the monikette's string; exit.
+  if the string is "into",   put "in/into/to" into the monikette's string; exit.
+  if the string is "to",     put "in/into/to" into the monikette's string; exit.
   \ is/are
-  if the string is "are", put "is/are" into the monikette's string; exit.
-  if the string is "is", put "is/are" into the monikette's string; exit.
+  if the string is "are",    put "is/are" into the monikette's string; exit.
+  if the string is "is",     put "is/are" into the monikette's string; exit.
   \ aren't/isn't
-  if the string is "isn't", put "is/aren't" into the monikette's string; exit.
+  if the string is "isn't",  put "is/aren't" into the monikette's string; exit.
   if the string is "aren't", put "is/aren't" into the monikette's string; exit.
   \ backward/backwards/counterclockwise/counter-clockwise/anticlockwise/anti-clockwise 
   if the string is "backward",          put "backward" into the monikette's string; exit. 
@@ -3013,11 +3013,11 @@ to initialize the compiler given a directory:
   clear the compiler's abort path.
   put 0 into the compiler's abort row#.
   void the current routine.
-  create the type index given 4027.
-  create the global index given 4027.
-  create the literal index given 4027.
-  create the routine index given 7919.
-  create the utility index given 4027.
+  create the type index    given 4027 [buckets].
+  create the global index  given 4027 [buckets].
+  create the literal index given 4027 [buckets].
+  create the routine index given 7919 [buckets].
+  create the utility index given 4027 [buckets].
 
 to initialize a dos header:
   put 23117 [$5A4D] into the dos header's signature.

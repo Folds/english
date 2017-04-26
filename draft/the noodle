@@ -10453,7 +10453,7 @@ to test (command line - parsing):
 \ CAL interprets a pair of double-quotes
 \   (in the source code that defines a string)
 \   as one double-quote (in the defined string).
-\ When parsing command lines, the Windows NT shell scripting language:
+\ When parsing command lines in the Windows NT shell scripting language:
 \  * One or more consecutive unquoted white-space characters
 \    are treated as a single token delimiter.
 \  * Treats single-quotes as ordinary characters.
