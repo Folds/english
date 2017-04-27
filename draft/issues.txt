@@ -36,11 +36,22 @@ These items should occasionally be moved to demoed fixes.txt.
 The following requests have been demonstrated,
 but do not have test plans yet.
 These items should occasionally be moved to demoed fixes.txt.
-
+ 
   
 \ ======================================   
 The following requests have been partially demonstrated.
 
+209.  In characters, add nicknames for `~<>\[]{}| 
+  Status:  Implemented. 
+  Audience:  Turtle programmers. 
+  Benefit:  Medium. 
+  Implementation difficulty:  Medium. 
+  Demoing difficulty:  Medium. 
+  Testing difficulty:  Easy.  Construct a string comprised
+    of the nicknamed bytes, and verify that it equals
+    a literal string with the same contents.
+  Requested by Jasper Paulsen on April 4, 2017. 
+ 
 205.  In compiler, make "can't" negate "can", instead of "ca". 
   Status:  Implemented. 
   Audience:  Designed. 
@@ -49,86 +60,6 @@ The following requests have been partially demonstrated.
   Demoing difficulty:  Medium. 
   Testing difficulty:  Medium. 
   Requested by Gerry Rzeppa on March 13, 2017. 
- 
-207.  In compiler, don't compile the documentation source code files. 
-  Status:  Implemented. 
-  Audience:  Turtle programmers. 
-  Benefit:  Medium. 
-  Implementation difficulty:  Medium. 
-  Demoing difficulty:  Easy. 
-  Testing difficulty:  Medium. 
-  Requested by Gerry Rzeppa on March 13, 2017. 
- 
-157.  In compiler, support multiple headers per routine, a la CAL-4700. 
-  Status:   Implemented. 
-  Benefit:  Permissions requirement. 
-  Implementation difficulty:  Medium. 
-  Demoing difficulty:  Medium. 
-  Testing difficulty:  Medium. 
-  Requested by Gerry Rzeppa on March 13, 2017. 
- 
-200.  In compiler, allow multi-line routine headers. 
-  Status:  Implemented. 
-  Audience:  Programmers. 
-  Benefit:  Medium. 
-  Implementation difficulty:  Medium. 
-  Demoing difficulty:  Medium. 
-  Testing difficulty:  Medium. 
-  Requested by Gerry Rzeppa on March 13, 2017. 
- 
-202.  In editor, change sorting to accommodate multi-line routine headers. 
-  Status:  Implemented. 
-  Audience:  Programmers. 
-  Benefit:  Medium. 
-  Implementation difficulty:  Medium. 
-  Demoing difficulty:  Medium. 
-  Testing difficulty:  Medium. 
-  Requested by Gerry Rzeppa on March 13, 2017. 
- 
-203.  In compiler, create synonyms for backwards/counter-clockwise. 
-  Status:  Implemented. 
-  Audience:  Turtle programmers. 
-  Benefit:  Medium. 
-  Implementation difficulty:  Medium. 
-  Demoing difficulty:  Medium. 
-  Testing difficulty:  Medium. 
-  Requested by Gerry Rzeppa on March 13, 2017. 
- 
-204.  In compiler, create synonyms for at/on. 
-  Status:  Implemented. 
-  Audience:  Turtle programmers. 
-  Benefit:  Medium. 
-  Implementation difficulty:  Medium. 
-  Demoing difficulty:  Medium. 
-  Testing difficulty:  Medium. 
-  Requested by Gerry Rzeppa on March 13, 2017. 
- 
-206.  In compiler, handle similes differently from other "as" statements. 
-  Status:  Implemented. 
-  Audience:  Turtle programmers. 
-  Benefit:  Medium. 
-  Implementation difficulty:  Medium. 
-  Demoing difficulty:  Medium. 
-  Testing difficulty:  Medium. 
-  Requested by Gerry Rzeppa on March 13, 2017. 
- 
-208.  In compiler, add new prepositions. 
-  Status:  Implemented. 
-  Audience:  Turtle programmers. 
-  Benefit:  Medium. 
-  Implementation difficulty:  Medium. 
-  Demoing difficulty:  Medium. 
-  Testing difficulty:  Medium. 
-  Requested by Gerry Rzeppa on March 13, 2017. 
- 
-209.  In characters, add nicknames for `~<>\[]{}| 
-  Status:  Implemented. 
-  Audience:  Turtle programmers. 
-  Benefit:  Medium. 
-  Implementation difficulty:  Medium. 
-  Demoing difficulty:  Medium. 
-  Testing difficulty:  Medium. 
-  Requested by Jasper Paulsen on April 4, 2017. 
  
 196.  In writer, get title of a page from first non-blank line, if possible. 
   Status:  Implemented. 
@@ -352,6 +283,24 @@ from higher priority to lower priority.
   Testing difficulty:  Medium. 
   Requested by Jasper Paulsen on March 23, 2017. 
 
+172.  From "the noodle", factor out command-line parsing into a "commands" file. 
+  Status:  request. 
+  Audience:  Programmers. 
+  Benefit:   minor. 
+  Implementation difficulty:  Easy. 
+  Demoing difficulty:  Not applicable. 
+  Testing difficulty:  Not applicable. 
+  Requested by Jasper Paulsen on March 20, 2017. 
+ 
+219.  From "the editor", factor out blocks and sorting code into a "text sorter" file.
+  Status:    Designed.  Do after project can handle multiple folders.
+  Audience:  Programmers.
+  Benefit:   Minor.
+  Implementation difficulty:  Easy.
+  Demoing difficulty:  Not applicable.
+  Testing difficulty:  Not applicable.
+  Requested by Jasper Paulsen on April 27, 2017.
+ 
 094.  Document "Plain English programming idioms",
   and how they compare to other common programming languages.
   Implementation difficulty:  Hard.
@@ -767,15 +716,6 @@ while a letter's menu is visible.
   Testing difficulty:  Medium.
   Requested by Jasper Paulsen on March 7, 2014.
 
-172.  Factor out command-line parsing into a "commands" file. 
-  Status:  request. 
-  Audience:  Programmers. 
-  Benefit:   minor. 
-  Implementation difficulty:  Easy. 
-  Demoing difficulty:  Not applicable. 
-  Testing difficulty:  Not applicable. 
-  Requested by Jasper Paulsen on March 20, 2017. 
- 
 170.  Add scrollbar to writer's page editing feature. 
   Status:   Request. 
   Benefit:  Medium. 
@@ -1008,7 +948,6 @@ with an adjustable slider between them.
 \ ======================================   
 Unsorted requests:
 
- 
-Next item number:  219.
+Next item number:  220.
 
 

@@ -65,6 +65,7 @@ to create some blocks given some rows:
     if the row is nil, exit. 
     \The following line did not handle multi-line record definitions: 
     \if the row's string starts with any definition starter, add to the blocks. 
+    \
     \The following line makes blank lines significant during sorting: 
     if the row's string has neither code nor comment on it, add to the blocks. 
     if the blocks are empty, add to the blocks. 
@@ -888,7 +889,8 @@ to sort some blocks:
     put the right blocks' first into a right block.
     if the left block is nil, append the right blocks to the blocks; exit.
     if the right block is nil, append the left blocks to the blocks; exit.
-    if the left block's name is greater than the right block's name, move the right block from the right blocks to the blocks; repeat.
+    if the left block's name is greater than the right block's name,
+      move the right block from the right blocks to the blocks; repeat.
     move the left block from the left blocks to the blocks.
   repeat.
 

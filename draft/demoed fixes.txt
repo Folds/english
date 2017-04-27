@@ -746,4 +746,74 @@ next to the first instance, instead of covering the first instance.
   Audience:  Windows and Linux programmers.
   Requested by Jasper Paulsen on February 26, 2017.
 
+207.  In compiler, don't compile the documentation source code files. 
+  Status:   Demonstrated.
+  Audience: Turtle programmers. 
+  Benefit:  Medium. 
+  Implementation difficulty:  Medium. 
+  Demoing difficulty:  Easy. 
+  Testing difficulty:  Medium. 
+  Requested by Gerry Rzeppa on March 13, 2017. 
+ 
+157.  In compiler, support multiple headers per routine, a la CAL-4700. 
+  Status:   Demonstrated. 
+  Benefit:  Permissions requirement. 
+  Implementation difficulty:  Medium. 
+  Demoing difficulty:  Medium. 
+  Testing difficulty:  Medium. 
+  Requested by Gerry Rzeppa on March 13, 2017. 
+ 
+200.  In compiler, allow multi-line routine headers. 
+  Status:   Demonstrated. 
+  Audience: Programmers. 
+  Benefit:  Medium. 
+  Implementation difficulty:  Medium. 
+  Demoing difficulty:  Medium. 
+  Testing difficulty:  Medium. 
+  Requested by Gerry Rzeppa on March 13, 2017. 
+ 
+203.  In compiler, create synonyms for backwards/counter-clockwise. 
+  Status:   Demonstrated. 
+  Audience: Turtle programmers. 
+  Benefit:  Medium. 
+  Implementation difficulty:  Medium. 
+  Demoing difficulty:  Medium. 
+  Testing difficulty:  Medium. 
+  Requested by Gerry Rzeppa on March 13, 2017. 
+ 
+204.  In compiler, create synonyms for at/on. 
+  Status:   Demonstrated. 
+  Audience: Turtle programmers. 
+  Benefit:  Medium. 
+  Implementation difficulty:  Medium. 
+  Demoing difficulty:  Medium. 
+  Testing difficulty:  Medium. 
+  Requested by Gerry Rzeppa on March 13, 2017. 
+ 
+206.  In compiler, handle similes differently from other "as" statements. 
+  Status:   Demonstrated. 
+  Audience: Turtle programmers. 
+  Benefit:  Medium. 
+  Implementation difficulty:  Medium. 
+  Demoing difficulty:  Medium. 
+  Testing difficulty:  Medium. 
+  Requested by Gerry Rzeppa on March 13, 2017. 
+ 
+208.  In compiler, add new prepositions. 
+  Status:   Demonstrated. 
+  Audience: Turtle programmers. 
+  Benefit:  Medium. 
+  Implementation difficulty:  Medium. 
+  Demoing difficulty:  Medium. 
+  Testing difficulty:  Medium. 
+  Requested by Gerry Rzeppa on March 13, 2017. 
+ 
+202.  In editor, change sorting to accommodate multi-line routine headers. 
+  Status:  Implemented. 
+  Audience:  Programmers. 
+  Benefit:  Medium. 
+  Implementation difficulty:  Medium. 
+  Demoing difficulty:  Medium. 
+  Testing difficulty:  Medium. 
+  Requested by Gerry Rzeppa on March 13, 2017. 
 

@@ -1228,9 +1228,12 @@ to compile the header of a routine:
   if the compiler's abort flag is set, exit.
   slap a rider on the routine's routine header.
   move the rider (compiler rules).
-  if the rider's token is "decide", compile the header of the routine given the rider (decider); exit.
-  if the rider is the start of any function, compile the header of the routine given the rider (function); exit.
-  if the rider's token is "compatibly", compile the header of the routine given the rider (callback); exit.
+  if the rider's token is "decide",
+    compile the header of the routine given the rider (decider); exit.
+  if the rider is the start of any function,
+    compile the header of the routine given the rider (function); exit.
+  if the rider's token is "compatibly",
+    compile the header of the routine given the rider (callback); exit.
   compile the header of the routine given the rider (procedure).
 
 to compile the header of a routine given a rider (callback):
@@ -1246,7 +1249,8 @@ to compile the header of a routine given a rider (callback):
 to compile the header of a routine given a rider (decider):
   if the compiler's abort flag is set, exit.
   move the rider (compiler rules).
-  if the rider's token is not "if", abort with "It's 'Decide IF.' We always say, 'Decide IF'. Got it?" and the rider; exit.
+  if the rider's token is not "if",
+    abort with "It's 'Decide IF.' We always say, 'Decide IF'. Got it?" and the rider; exit.
   move the rider (compiler rules).
   set the routine's decider flag.
   compile the routine's monikettes and the routine's parameters given the rider.
@@ -1383,10 +1387,17 @@ to compile a literal given a rider (string):
 to compile some monikettes and some parameters given a rider:
   if the compiler's abort flag is set, exit.
   if the rider's token is blank, exit.
-  if the rider's token is "the", compile the monikettes and the parameters given the rider (definite article); repeat.
-  if the rider's token is any indefinite article, compile the monikettes and the parameters given the rider (indefinite article); repeat.
-  if the rider's token is any monikette string, compile the monikettes and the parameters given the rider (monikette string); repeat.
-  abort with "'" then the rider's token then "' is not valid in a routine header." and the rider.
+  if the rider's token is "the",
+    compile the monikettes and the parameters
+      given the rider (definite article); repeat.
+  if the rider's token is any indefinite article,
+    compile the monikettes and the parameters
+      given the rider (indefinite article); repeat.
+  if the rider's token is any monikette string,
+    compile the monikettes and the parameters
+      given the rider (monikette string); repeat.
+  abort with "'" then the rider's token then "'"
+    then " is not valid in a routine header." and the rider.
 
 to compile some monikettes and some parameters given a rider (definite article):
   if the compiler's abort flag is set, exit.
@@ -1619,17 +1630,27 @@ to compile the next statement given a rider returning a term (call - returning p
   if the term's type is not value pushable, abort with "A simple 1, 2, or 4-byte variable is required in the 'returning' clause." and the rider.
 
 to compile a routine reference given a rider:
-  if the rider's token is "to", move the rider (compiler rules).
-  if the rider is the start of any function, compile the routine reference given the rider (function); exit.
-  if the rider's token is "decide", compile the routine reference given the rider (decide).
+  if the rider's token is "to",
+    move the rider (compiler rules).
+  if the rider is the start of any function,
+    compile the routine reference given the rider (function); exit.
+  if the rider's token is "decide",
+    compile the routine reference given the rider (decide).
   loop.
   if the compiler's abort flag is set, exit.
   if the rider's token is blank, exit.
   if the rider's token is ".", exit.
-  if the rider's token is "the", compile the routine reference given the rider (definite article); repeat.
-  if the rider's token is any indefinite article, compile the routine reference given the rider (indefinite article); repeat.
-  if the rider's token is any monikette string, compile the routine reference given the rider (monikette string); repeat.
-  abort with "'" then the rider's token then "' is not valid in an employ statement." and the rider.
+  if the rider's token is "the",
+    compile the routine reference
+      given the rider (definite article); repeat.
+  if the rider's token is any indefinite article,
+    compile the routine reference
+      given the rider (indefinite article); repeat.
+  if the rider's token is any monikette string,
+    compile the routine reference
+      given the rider (monikette string); repeat.
+  abort with "'" then the rider's token then "'"
+    then " is not valid in an employ statement." and the rider.
 
 to compile a routine reference given a rider (decide):
   move the rider (compiler rules).
@@ -3797,8 +3818,11 @@ to resolve a field:
 to resolve a global:
   if the global is nil, exit.
   if the compiler's abort flag is set, exit.
-  if the global's global body is not blank, resolve the global (compile body).
-  if the global's type name is blank, abort with "Invalid global '" then the global's name then "'." and the global's locus; exit.
+  if the global's global body is not blank,
+    resolve the global (compile body).
+  if the global's type name is blank,
+    abort with "Invalid global '" then the global's name then "'."
+      and the global's locus; exit.
   resolve the global as a variable.
 
 to resolve a global (compile body):
@@ -3806,11 +3830,15 @@ to resolve a global (compile body):
   if the compiler's abort flag is set, exit.
   slap a rider on the global's global body.
   move the rider (compiler rules).
-  if the rider's token is not any literal, abort with "I need a literal here, but I found '" then the rider's token then "'." and the rider; exit.
+  if the rider's token is not any literal,
+    abort with "I need a literal here, but I found '" 
+      then the rider's token then "'." and the rider; exit.
   compile a literal given the rider.
   if the compiler's abort flag is set, exit.
-  if the rider's token is not blank, abort with "Is a period missing around here?" and the rider; exit.
-  if the global's type name is blank, put the literal's type's name into the global's type name.
+  if the rider's token is not blank,
+    abort with "Is a period missing around here?" and the rider; exit.
+  if the global's type name is blank,
+    put the literal's type's name into the global's type name.
   put the literal into the global's literal.
   index the literal.
 
@@ -3826,9 +3854,13 @@ to resolve a type (base type):
   if the type is nil, exit.
   if the type's base type is not nil, exit.
   find the type's base type given the type's base name and the type index.
-  if the type's base type is nil, abort with "Invalid base type '" then the type's base name then "'." and the type's locus; exit.
+  if the type's base type is nil,
+    abort with "Invalid base type '" then the type's base name then "'."
+      and the type's locus; exit.
   set the type's cooking flag.
-  if the type's base type's cooking flag is set, abort with "Recursive definition with '" then the type's base name then "'." and the type's locus; exit.
+  if the type's base type's cooking flag is set,
+    abort with "Recursive definition with '" then the type's base name then "'."
+      and the type's locus; exit.
   resolve the type's base type (base type).
   clear the type's cooking flag.
 
@@ -3843,17 +3875,24 @@ to resolve a type (expand thing): \ type's base type is not resolved yet
   put the type's name then " record" into a name.
   put the type's name then " records" into a plural name.
   put the base type's name then " record" into a base name.
-  add a record type to the types given the name and the plural name and the base name.
-  add a field to the record type's fields given "next " then the type's name and "next" and the type's name and yes.
-  add another field to the record type's fields given "previous " then the type's name and "previous" and the type's name and yes.
-  if the type's fields are not empty, append the type's fields to the record type's fields.
+  add a record type to the types
+    given the name and the plural name and the base name.
+  add a field to the record type's fields
+    given "next " then the type's name and "next" and the type's name and yes.
+  add another field to the record type's fields
+    given "previous " then the type's name and "previous" and the type's name and yes.
+  if the type's fields are not empty,
+    append the type's fields to the record type's fields.
   index the record type.
   \ fix up original type to look like a pointer
   put the record type's name into the type's target name.
   \ add chain type
-  add a chain type to the types given the type's plural name and "" and the base type's plural name.
-  add a third field to the chain type's fields given "first " then the type's name and "first" and the type's name and yes.
-  add a fourth field to the chain type's fields given "last " then the type's name and "last" and the type's name and yes.
+  add a chain type to the types
+    given the type's plural name and "" and the base type's plural name.
+  add a third field to the chain type's fields
+    given "first " then the type's name and "first" and the type's name and yes.
+  add a fourth field to the chain type's fields
+    given "last " then the type's name and "last" and the type's name and yes.
   index the chain type.
 
 to resolve a type (index plural):
@@ -3866,24 +3905,35 @@ to resolve a type (index plural):
 to resolve a type (optional info - pointer):
   if the compiler's abort flag is set, exit.
   if the type's target type is not nil, exit.
-  if the type's target name is blank, put the type's base type's target type into the type's target type; exit.
+  if the type's target name is blank,
+    put the type's base type's target type into the type's target type; exit.
   find the type's target type given the type's target name and the type index.
-  if the type's target type is nil, abort with "I can't quite see what you're pointing at. Please clarify." and the type's locus; exit.
+  if the type's target type is nil,
+    abort with "I can't quite see what you're pointing at. Please clarify." and the type's locus; exit.
 
 to resolve a type (optional info - record):
   if the compiler's abort flag is set, exit.
-  if the type's fields are empty, copy the type's base type's fields into the type's fields; exit.
+  if the type's fields are empty,
+    copy the type's base type's fields into the type's fields; exit.
   loop.
     if the compiler's abort flag is set, exit.
     get a field from the type's fields (backwards).
     if the field is nil, break.
-    if the field is duplicated in the type's fields, abort with "The '" then the field's name then "' field is defined more than once." and the field's locus; exit.
+    if the field is duplicated in the type's fields,
+      abort with "The '" then the field's name then "' field"
+      then " is defined more than once." and the field's locus; exit.
     resolve the field.
     if the compiler's abort flag is set, exit.
-    if the field's type's cooking flag is set, abort with "Recursive definition with '" then the field's type's name then "'." and the field's locus; exit.
+    if the field's type's cooking flag is set,
+      abort with "Recursive definition with " 
+        then "'" then the field's type's name then "'."
+        and the field's locus; exit.
     resolve the field's type (optional info).
     if the field's reference flag is not set, repeat.
-    if the field's type cannot be reduced to "pointer", abort with "Exactly what do you mean by '(reference)' here on this '" then the field's name then "'?" and the field's locus; exit.
+    if the field's type cannot be reduced to "pointer",
+      abort with "Exactly what do you mean by '(reference)' here" 
+        then " on this '" then the field's name then "'?"
+        and the field's locus; exit.
   repeat.
   eliminate duplicate nicknames from the type's fields.
   if the type cannot be reduced to "thing record", exit.
@@ -3893,7 +3943,8 @@ to resolve a type (optional info - record):
 to resolve a type (optional info - scale):
   if the compiler's abort flag is set, exit.
   put the type's base type into a base type.
-  if the type's scale is 0, put the type's base type's scale into the type's scale; exit.
+  if the type's scale is 0,
+    put the type's base type's scale into the type's scale; exit.
   if the base type's scale is 0, exit.
   multiply the type's scale by the base type's scale.
   put the base type's base type into the type's base type.
@@ -4207,6 +4258,7 @@ to scan a routine header given a rider:
   loop.
     if the compiler's abort flag is set, exit.
     if the rider's token is blank, exit.
+    if the rider's token is the semi-colon byte, exit. \ *** alternate wordings
     if the rider's token is the colon byte, exit.
     if the rider's token is the period byte, exit.
     put the rider's token's last into the routine header's last.
