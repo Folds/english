@@ -23,7 +23,6 @@ with the language syntax of the Osmosian Order's official releases.
 Future issues include:
 * Choosing an open-source license.
 * Deciding how to organize source code files and/or folders.
-* Choosing whether to compile or interpret the source code.
-* Choosing what language to emit
-  (such as C, CLR, Java byte code, x86 assembly, or something else).
+* The compiler can be run from the command line.
+  Can it be packaged as an IDE plug-in?
 
