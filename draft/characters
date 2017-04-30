@@ -803,6 +803,10 @@ the micro byte is a byte equal to 181.
 
 the minus-sign byte is a byte equal to 45. 
 
+the minute-symbol byte is a byte equal to 146.  \ Should be U+2032
+\ the minute symbol byte is not ', to match the second-symbol byte.
+\ the second symbol byte is not ", to avoid string-quoting problems.
+
 the multiplication-symbol byte is a byte equal to 215.
 
 the n-key is a key equal to 78.
@@ -944,6 +948,9 @@ the right-window key is a key equal to 92.
 the s-key is a key equal to 83.
 
 the scrolllock key is a key equal to 145.
+
+the second-symbol byte is a byte equal to 148.  \ Should be U+2033
+\ not ", to avoid string-quoting problems.
 
 the sector byte is a byte equal to 167.
 

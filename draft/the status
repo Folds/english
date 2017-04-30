@@ -421,6 +421,7 @@ to test (all):
   test (font menus).
   test (the status).
   test (the noodle).
+  test (trig).
   test (the finder).
   stop the status' all test results' timer.
   test (the testing time).

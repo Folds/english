@@ -1,0 +1,205 @@
+\ Copyright 2017 by Jasper Paulsen.
+
+to convert a precise angle to a string:
+  put the precise angle's degrees
+    then the degree-symbol byte in the string.
+  if the precise angle is just degrees, exit.
+  append the precise angle's minutes
+    then the minute-symbol byte to the string.
+  if the precise angle is just degrees and minutes, exit.
+  if the precise angle's hundredths are 0,
+    append the precise angle's seconds
+      then the second-symbol byte to the string;
+    exit.
+  if the precise angle's hundredths are negative,
+    append the precise angle's seconds
+      then the second-symbol byte
+      then the precise angle's hundredths
+      then "cas" to the string;
+    exit.
+  if the precise angle's hundredths are at least 100,
+    append the precise angle's seconds
+      then the second-symbol byte
+      then the precise angle's hundredths
+      then "cas" to the string;
+    exit.
+  if the precise angle's hundredths are less than 10,
+    append the precise angle's seconds
+      then ".0" then the precise angle's hundredths
+      then the second-symbol byte to the string;
+    exit.
+    append the precise angle's seconds
+      then the period byte
+      then the precise angle's hundredths
+      then the second-symbol byte to the string.
+
+to decide if a number is wrapped given a number called alpha and a number called omega:
+ privatize the alpha.
+ privatize the omega.
+ if the alpha is more than the omega,
+   swap the alpha with the omega.
+ if the number is less than the alpha, say no.
+ if the number is more than the omega, say no.
+ say yes.
+
+to decide if a precise angle is just degrees:
+  if the precise angle's minutes are not 0, say no.
+  if the precise angle's seconds are not 0, say no.
+  if the precise angle's hundredths are not 0, say no.
+  say yes.
+
+to decide if a precise angle is just degrees and minutes:
+  if the precise angle's seconds are not 0, say no.
+  if the precise angle's hundredths are not 0, say no.
+  say yes.
+
+to make a precise angle given a number called degrees:
+  make the precise angle with the degrees and 0 and 0 and 0.
+
+to make a precise angle given a number called degrees and a number called minutes and a number called seconds and a number called hundredths:
+  put the degrees in the precise angle's degrees.
+  put the minutes in the precise angle's minutes.
+  put the seconds in the precise angle's seconds.
+  put the hundredths in the precise angle's hundredths.
+
+to normalize a precise angle:
+  wrap the precise angle's degrees    given 0 and 359.
+  wrap the precise angle's minutes    given 0 and  59 and the precise angle's degrees.
+  wrap the precise angle's seconds    given 0 and  59 and the precise angle's minutes.
+  wrap the precise angle's hundredths given 0 and  99 and the precise angle's seconds.
+  wrap the precise angle's seconds    given 0 and  59 and the precise angle's minutes.
+  wrap the precise angle's minutes    given 0 and  59 and the precise angle's degrees.
+  wrap the precise angle's degrees    given 0 and 359.
+
+A precise angle has             \ normalized ranges
+  a number called degrees,      \   0° - 359°
+  a number called minutes,      \   0’ -  59’
+  a number called seconds, and  \   0” -  59”
+  a number called hundredths.   \   0  -  99 cas
+
+to stash a test result using a precise angle:
+  convert the precise angle to a string.
+  stash the test result using the string.
+
+to test (trig - -1 is not wrapped between 0 and 99):
+  create a test result about "trig"
+    and "-1 is not wrapped between 0 and 99"
+    and expecting "unwrapped".
+  put "unwrapped" in a string called actual.
+  if -1 is wrapped given 0 and 99,
+    put "wrapped" in the actual.
+  stash the test result using the actual.
+
+to test (trig - normalize -123°-45’-6”-78cas to 236°14’53.22”):
+  create a test result about "trig"
+    and "normalize -123°-45’-6”-78cas to 236°14’53.22”"
+    and expecting "236°14’53.22”".
+  make a precise angle called actual with -123 and -45 and -6 and -78.
+  normalize the actual.
+  stash the test result using the actual.
+
+to test (trig - normalize 0° to 0°):
+  create a test result about "trig"
+    and "normalize 0° to 0°"
+    and expecting "0°".
+  make a precise angle called actual with 0.
+  normalize the actual.
+  stash the test result using the actual.
+
+to test (trig - normalize 0°0’0”-1cas to 359°59’59.99”):
+  create a test result about "trig"
+    and "normalize 0°0’0”-1cas to 359°59’59.99”"
+    and expecting "359°59’59.99”".
+  make a precise angle called actual with 0 and 0 and 0 and -1.
+  normalize the actual.
+  stash the test result using the actual.
+
+to test (trig - normalize 360°60’60”100cas to 1°1’1”):
+  create a test result about "trig"
+    and "normalize 360°60’60”100cas to 1°1’1”"
+    and expecting "1°1’1”".
+  make a precise angle called actual with 360 and 60 and 60 and 100.
+  normalize the actual.
+  stash the test result using the actual.
+
+to test (trig - normalize 432°10’54.32” to 72°10’54.32”):
+  create a test result about "trig"
+    and "normalize 432°10’54.32” to 72°10’54.32”"
+    and expecting "72°10’54.32”".
+  make a precise angle called actual with 72 and 10 and 54 and 32.
+  normalize the actual.
+  stash the test result using the actual.
+
+to test (trig - normalize largest angle to 169°35’3.47”):
+  create a test result about "trig"
+    and "normalize largest angle to 169°35’3.47”"
+    and expecting "169°35’3.47”".
+  make a precise angle called actual with the largest number
+    and the largest number and the largest number and the largest number.
+  normalize the actual.
+  stash the test result using the actual.
+
+to test (trig - normalize precise angle):
+  test (trig - normalize 360°60’60”100cas to 1°1’1”).
+  test (trig - normalize 0° to 0°).
+  test (trig - normalize 0°0’0”-1cas to 359°59’59.99”).
+  test (trig - normalize largest angle to 169°35’3.47”).   \each place has largest number
+  test (trig - normalize smallest angle to 189°23’55.52”). \each place has smallest number
+  test (trig - normalize -123°-45’-6”-78cas to 236°14’53.22”).
+  test (trig - normalize 432°10’54.32” to 72°10’54.32”).
+
+to test (trig - normalize smallest angle to 189°23’55.52”):
+  create a test result about "trig"
+    and "normalize smallest angle to 189°23’55.52”"
+    and expecting "189°23’55.52”".
+  make a precise angle called actual with the smallest number
+    and the smallest number and the smallest number and the smallest number.
+  normalize the actual.
+  stash the test result using the actual.
+
+to test (trig - wrap -1 between 0 and 99):
+  create a test result about "trig"
+    and "wrap -1 between 0 and 99"
+    and expecting "99".
+  put -1 in a number called actual.
+  wrap the actual given 0 and 99.
+  stash the test result using the actual.
+
+to test (trig - wrap):
+  test (trig - -1 is not wrapped between 0 and 99).
+  test (trig - wrap -1 between 0 and 99).
+
+to test (trig):
+  test (trig - wrap).
+  test (trig - normalize precise angle).
+
+to wrap a number given a number called alpha and a number called omega:
+  wrap the number given the alpha and the omega and 0.
+
+to wrap a number given a number called alpha and a number called omega and another number:
+  if the number is wrapped given the alpha and the omega, exit.
+  if the alpha is the omega,
+    put the alpha in the number; exit.
+  put the omega minus the alpha in a number called period.
+  add 1 to the period.
+  put the number minus the alpha in a number called shifted.
+  if the shifted is the smallest number,
+    add the period to the shifted;
+    subtract 1 from the other number.
+  if the shifted is at least 0,
+    divide the shifted by the period giving a quotient and a remainder;
+    add the quotient to the other number;
+    add the alpha to the remainder;
+    put the remainder in the number;
+    exit.
+  negate the shifted.
+  divide the shifted by the period giving the quotient and the remainder.
+  negate the quotient.
+  negate the remainder.
+  if the remainder is 0,
+    add the quotient to the other number;
+    put the remainder in the number; exit.
+  add the period to the remainder.
+  subtract 1 from the quotient.
+  add the quotient to the other number.
+  put the remainder in the number.
