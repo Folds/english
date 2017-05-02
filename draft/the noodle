@@ -1171,7 +1171,7 @@ to convert a ratio to a string:
   if the mixed's whole number is not 0,
     append the mixed's whole number to the string.
   if the mixed's ratio is 0, exit.
-  if the string is not blank,
+  if the mixed's whole number is not 0,
     append the dash byte to the string.
   append the mixed's numerator then "/" then the mixed's denominator
     to the string.
@@ -7123,6 +7123,11 @@ to multiply a number by another number:
   intel $8B9D08000000. \ mov ebx,[ebp+8] \ the number
   intel $8903. \ mov [ebx],eax
 
+to multiply a number by another number returning a number called result:
+  privatize the number.
+  multiply the number by the other number.
+  put the number in the result.
+
 to multiply a number by a ratio: employ scale a number given a ratio.
 
 to multiply a pair by another pair:
@@ -7204,10 +7209,16 @@ to normalize a picture:
   normalize the picture's uncropped box.
 
 to normalize a ratio and another ratio:
+  reduce the ratio.
+  reduce the other ratio.
   get a lcm given the ratio's denominator and the other ratio's denominator.
-  multiply the ratio's numerator by the lcm divided by the ratio's denominator.
+  call "kernel32.dll" "MulDiv" with the ratio's numerator and the lcm
+    and the ratio's denominator returning a number.
+  put the number in the ratio's numerator.
   put the lcm into the ratio's denominator.
-  multiply the other ratio's numerator by the lcm divided by the other ratio's denominator.
+  call "kernel32.dll" "MulDiv" with the other ratio's numerator and the lcm
+    and the other ratio's denominator returning the number.
+  put the number in the other ratio's numerator.
   put the lcm into the other ratio's denominator.
 
 to normalize a selection:
@@ -8588,6 +8599,9 @@ to receive the response from a winhttp request:
 a recipient is a string.
 
 to reduce a ratio:
+  if the ratio's denominator is 0, exit.
+  if the ratio's numerator is 0,
+    put 1 in the ratio's denominator; exit.
   get a gcd given the ratio's numerator and the ratio's denominator.
   divide the ratio's numerator by the gcd.
   divide the ratio's denominator by the gcd.
@@ -10232,6 +10246,22 @@ a talker vtable record is a record with
 
 the temp path is a path.
 
+to test (basic math - 6 plus 0/1):
+  create a test result about "the noodle" and "6 plus 0/1"
+    and expecting "6".
+  put 0 / 1 in a ratio.
+  add 6 to the ratio.
+  convert the ratio to a string.
+  stash the test result given the string.
+
+to test (basic math - 6 plus 0/1866240000):
+  create a test result about "the noodle" and "6 plus 0/1866240000"
+    and expecting "6".
+  put 0/1866240000 in a ratio.
+  add 6 to the ratio.
+  convert the ratio to a string.
+  stash the test result given the string.
+
 to test (basic math - add numbers):
   create a test result about "the noodle" and "3 plus 7" and expecting "10".
   put 7 in a number.
@@ -10334,6 +10364,15 @@ to test (basic math - negate number):
   negate the number.
   stash the test result given the number.
 
+to test (basic math - reduce 0 trifles):
+  create a test result about "the noodle" and "reduce 0 trifles"
+    and expecting "0/1".
+  put 0/1866240000 in a ratio.
+  reduce the ratio.
+  put the ratio's numerator then "/"
+    then the ratio's denominator in a string.
+  stash the test result given the string.
+
 to test (basic math - rightshift number):
   create a test result about "the noodle" and "12345 rightshifted 3 bits"
     and expecting "1543".
@@ -10387,6 +10426,9 @@ to test (basic math):
   test (basic math - divide 1 by 3 with remainder).
   test (basic math - divide 24 by 3 with remainder).
   test (basic math - divide 25 by 3 with remainder).
+  test (basic math - 6 plus 0/1).
+  test (basic math - reduce 0 trifles).
+  test (basic math - 6 plus 0/1866240000).
 
 to test (command line - get missing parameter):
   create a test result about "the noodle" and "get missing parameter"

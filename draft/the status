@@ -129,6 +129,12 @@ to finalize the status:
   finalize the status' failures.
   destroy the status' command.
 
+a fuzzy test has 
+  a string called context, 
+  a string called test name,   
+  a bullseye mixio, and 
+  some tolerance trifles. \ implied denominator of 43,200 * 43,200.
+
 to handle a command (copy test result):
   put the command's handler in a handler.
   put "handle test result " in a prefix.
@@ -272,12 +278,40 @@ to linger the status:
 
 the lingering status string is a string.
 
+to make a fuzzy test about a string and another string and targeting a mixio with tight tolerance: 
+  make the fuzzy test about the string and the other string  
+    and targeting the mixio with tolerance 4 trifles. 
+
+to make a fuzzy test about a string and another string and targeting a mixio with tolerance some trifles: 
+  put the string in the fuzzy test's context. 
+  put the other string in the fuzzy test's test name. 
+  put the mixio in the fuzzy test's bullseye. 
+  put the trifles in the fuzzy test's tolerance trifles. 
+
+to make a fuzzy test about a string and another string and targeting a ratio with tight tolerance: 
+  convert the ratio to a mixio.
+  make the fuzzy test about the string and the other string
+    and targeting the mixio with tight tolerance.
+
 the maximum test quota is a quota equal to 15.
 
 to pass a test result given a string called actual:
   \ assumes that the test result's expectation is already populated.
   put the actual in the test result's actual value.
   put the test result's expectation in the test result's interpretation.
+
+to put a fuzzy test's maximum into a mixio: 
+  put the fuzzy test's bullseye mixio in the mixio. 
+  add the fuzzy test's tolerance trifles to the mixio. 
+
+to put a fuzzy test's minimum into a mixio: 
+  put the fuzzy test's bullseye mixio in the mixio. 
+  subtract the fuzzy test's tolerance trifles from the mixio. 
+
+to put a fuzzy test's tolerance ratio into a ratio:
+  put the fuzzy test's tolerance trifles / the trifle denominator
+    into the ratio.
+  reduce the ratio.
 
 a quota is a number.
 
@@ -319,6 +353,24 @@ to show status a number and a string or another string:
 to show status a string:
   put the string into the status' string.
   show the status.
+
+to stash a fuzzy test given a mixio: 
+  create a test result. 
+  put the fuzzy test's context in the test result's context. 
+  put the fuzzy test's test name in the test result's test name. 
+  if the fuzzy test's tolerance trifles are 0,
+    put the fuzzy test's bullseye in the test result's expectation.
+  if the fuzzy test's tolerance trifles are not 0,
+    put the fuzzy test's bullseye  
+      then " ± " then the fuzzy test's tolerance ratio
+      in the test result's expectation. 
+  put the mixio in a string. 
+  pass the test result given the string. 
+  if the mixio is greater than the fuzzy test's maximum, 
+    fail the test result given the string. 
+  if the mixio is less than the fuzzy test's minimum, 
+    fail the test result given the string. 
+  append the test result to the status' all test results. 
 
 to stash a test result given a number:
   put the number in a string called actual.

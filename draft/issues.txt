@@ -75,6 +75,47 @@ The following requests have been partially demonstrated.
 The following requests are roughly sorted
 from higher priority to lower priority.
 
+220.  Fix intermittent crashing bug(s) in editor.
+  The editor can crash when attempting to scroll the scrollbar upward.
+  This bug is very hard to reproduce.
+  Status:  request.
+  Audience:  All users.
+  Benefit:   Critical.
+  Implementation difficulty:  Hard.
+  Demoing difficulty:  n/a.
+  Testing difficulty:  n/a.
+  Requested by Jasper Paulsen on April 30, 2017.
+
+222.  Remove the editor's Capitalize feature.
+  It does not work the way its authors intended.
+  It is supposed to just capitalize the first words of sentences.
+  It is not supposed to capitalize the first words of lines
+  that are part of sentences started on earlier lines.
+  Status:    Designed.
+  Audience:  Programmers.
+  Benefit:   Medium.
+  Implementation difficulty:  Easy.
+  Demoing difficulty:  Easy.
+  Testing difficulty:  n/a.
+  Requested by Gerry Rzeppa on April 30, 2017.
+
+221.  Make editor's sort definitions feature not add extra lines.
+  When editing a source, the Sort Definitions feature
+  adds a blank line after the comments at the top,
+  and before the first definition.
+  Each sorting adds another blank line.
+  Status:  Request.  (cal-4700 also has this bug; the bug
+           has been reported to its cal-4700's maintainers)
+  Audience:  Programmers.
+  Benefit:  Medium.  The bug requires either manual clean-up
+            after sorting, or invalidates how source code
+            control systems use diff to verify that files
+            have not changed.
+  Implementation difficulty:  Unknown.
+  Demoing difficulty:  Easy.
+  Testing difficulty:  Medium.
+  Requested by Jasper Paulsen on April 30, 2017.
+
 210.  In colors, add a "pen" alias for each color. 
   Status:  Designed. 
   Audience:  Turtle programmers. 
@@ -129,33 +170,6 @@ from higher priority to lower priority.
   Testing difficulty:  Medium. 
   Requested by Gerry Rzeppa on March 13, 2017. 
  
-192.  Normalize degrees to between 0 and 359. 
-  Status:  Designed. 
-  Audience:  Programmers. 
-  Benefit:  Medium. 
-  Implementation difficulty:  Easy. 
-  Demoing difficulty:  Medium. 
-  Testing difficulty:  Easy. 
-  Requested by Jasper Paulsen on March 25, 2017. 
- 
-193.  Normalize arc minutes to between 0 and 21599. 
-  Status:  Designed. 
-  Audience:  Programmers. 
-  Benefit:  Medium. 
-  Implementation difficulty:  Easy. 
-  Demoing difficulty:  Medium. 
-  Testing difficulty:  Easy. 
-  Requested by Jasper Paulsen on March 25, 2017. 
- 
-194.  Convert from degrees to arc minutes. 
-  Status:  Designed. 
-  Audience:  Programmers. 
-  Benefit:  Medium. 
-  Implementation difficulty:  Easy. 
-  Demoing difficulty:  Medium. 
-  Testing difficulty:  Easy. 
-  Requested by Jasper Paulsen on March 25, 2017. 
- 
 184.  Round a number up to nearest factor of another number. 
   If the number is more than the other number, 
   rescale by the other number. 
@@ -170,24 +184,6 @@ from higher priority to lower priority.
 185.  Round a number down to nearest factor of another number. 
   If the number is more than the other number, 
   rescale by the other number on March 13, 2017. 
- 
-190.  Calculate tau. 
-  Status:  Designed. 
-  Audience:  Programmers. 
-  Benefit:  Medium. 
-  Implementation difficulty:  Hard. 
-  Demoing difficulty:  Medium. 
-  Testing difficulty:  Easy. 
-  Requested by Jasper Paulsen on April 2, 2017. 
- 
-191.  Normalize radians to between 0 and tau. 
-  Status:  Designed. 
-  Audience:  Programmers. 
-  Benefit:  Medium. 
-  Implementation difficulty:  Hard. 
-  Demoing difficulty:  Medium. 
-  Testing difficulty:  Easy. 
-  Requested by Jasper Paulsen on March 25, 2017. 
  
 195.  Convert from arc minutes to radians. 
   Status:  Designed. 
@@ -517,6 +513,19 @@ err:ole:CoInitializeEx Attempt to change threading model of this apartment from 
   Demoing difficulty:  Medium.
   Testing difficulty:  Medium.
   Requested by Jasper Paulsen on March 7, 2014.
+
+223.  Make the editor's Capitalize feature generate sentence case.
+  The Capitalize feature does not work the way its authors intended.
+  It is supposed to just capitalize the first words of sentences.
+  It is not supposed to capitalize the first words of lines
+  that are part of sentences started on earlier lines.
+  Status:    Request.
+  Audience:  Programmers.
+  Benefit:   Minor.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Easy.
+  Testing difficulty:  Medium.
+  Requested by Gerry Rzeppa on April 30, 2017.
 
 133.  Allow marking comments in the vertical scroll bar.
   Benefit:  Medium.  Would make it easier to find
@@ -948,6 +957,6 @@ with an adjustable slider between them.
 \ ======================================   
 Unsorted requests:
 
-Next item number:  220.
+Next item number:  224.
 
 

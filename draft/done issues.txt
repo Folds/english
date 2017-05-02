@@ -784,3 +784,50 @@ Automated tests make debugging easier.
   Testing difficulty:  Medium. 
   Requested by Jasper Paulsen on March 22, 2017. 
  
+192.  Normalize degrees to between 0 and 359. 
+  Implemented as a field of precise angle. 
+  Status:  Tested. 
+  Audience:  Programmers. 
+  Benefit:  Medium. 
+  Implementation difficulty:  Easy. 
+  Demoing difficulty:  Medium. 
+  Testing difficulty:  Easy. 
+  Requested by Jasper Paulsen on March 25, 2017. 
+ 
+193.  Normalize arc minutes to between 0 and 21599.
+  Implemented as degree and minute fields of precise angle. 
+  Status:  Tested. 
+  Audience:  Programmers. 
+  Benefit:  Medium. 
+  Implementation difficulty:  Easy. 
+  Demoing difficulty:  Medium. 
+  Testing difficulty:  Easy. 
+  Requested by Jasper Paulsen on March 25, 2017. 
+ 
+194.  Convert from degrees to arc minutes.
+  Implemented as degree and minute fields of precise angle.
+  Status:  Tested. 
+  Audience:  Programmers. 
+  Benefit:  Medium. 
+  Implementation difficulty:  Easy. 
+  Demoing difficulty:  Medium. 
+  Testing difficulty:  Easy. 
+  Requested by Jasper Paulsen on March 25, 2017. 
+ 
+190.  Calculate tau. 
+  Status:  Tested. 
+  Audience:  Programmers. 
+  Benefit:  Medium. 
+  Implementation difficulty:  Hard. 
+  Demoing difficulty:  Medium. 
+  Testing difficulty:  Easy. 
+  Requested by Jasper Paulsen on April 2, 2017. 
+ 
+191.  Normalize radians to between 0 and tau. 
+  Status:  Tested. 
+  Audience:  Programmers. 
+  Benefit:  Medium. 
+  Implementation difficulty:  Hard. 
+  Demoing difficulty:  Medium. 
+  Testing difficulty:  Easy. 
+  Requested by Jasper Paulsen on March 25, 2017.  

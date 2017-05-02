@@ -1,5 +1,76 @@
 \ Copyright 2017 by Jasper Paulsen.
 
+to add a mixio to another mixio:
+  privatize the mixio.
+  normalize the mixio.
+  normalize the other mixio.
+  add the mixio's whole number to the other mixio's whole number.
+  add the mixio's nips to the other mixio's nips.
+  add the mixio's trifles to the other mixio's trifles.
+  normalize the other mixio.
+
+to add tau to some radians:
+  get tau returning some other radians.
+  add the other radians to the radians.
+
+to add some trifles to a mixio:
+  add the trifles to the mixio's trifles.
+  normalize the mixio.
+
+to convert a mixio to a ratio:
+  privatize the mixio.
+  convert the mixio to a string.
+  put the mixio's trifles in the ratio.
+  reduce the ratio.
+  put the mixio's nips / the trifle root in another ratio.
+  add the other ratio to the ratio.
+  reduce the ratio.
+  add the mixio's whole number to the ratio.
+  reduce the ratio.
+
+to convert a mixio to a string:
+  privatize the mixio.
+  normalize the mixio.
+  if the mixio is 0,
+    put "0" in the string; exit.
+  if the mixio's whole number is not 0,
+    put the mixio's whole number in the string.
+  put the mixio's nips in a number.
+  multiply the number by the trifle root.
+  add the mixio's trifles to the number.
+  if the number is 0, exit.
+  put the number / the trifle denominator in a ratio.
+  reduce the ratio.
+  append the dash byte to the string.
+  append the ratio's numerator then "/" then the ratio's denominator
+    to the string.
+
+to convert a mixio to a string (long):
+  privatize the mixio.
+  if the mixio is negative,
+    put "-" into the string;
+    negate the mixio.
+  put the mixio's whole number in the string.
+  if the mixio's nips are negative,
+    negate the mixio's nips;
+    append " - " then the mixio's nips
+      then "/" then the trifle root to the string;
+    negate the mixio's nips.
+  if the mixio's nips are positive,
+    append " + " then the mixio's nips
+      then "/" then the trifle root to the string.
+  if the mixio's trifles are negative,
+    negate the mixio's trifles;
+    append " - " then the mixio's trifles
+      then "/" then the trifle denominator to the string;
+    negate the mixio's trifles.
+  if the mixio's trifles are positive,
+    append " + " then the mixio's trifles
+      then "/" then the trifle denominator to the string.
+
+to convert a number to a mixio:
+  put the number in the mixio.
+
 to convert a precise angle to a string:
   put the precise angle's degrees
     then the degree-symbol byte in the string.
@@ -33,6 +104,56 @@ to convert a precise angle to a string:
       then the precise angle's hundredths
       then the second-symbol byte to the string.
 
+to convert a ratio to a mixio:
+  privatize the ratio.
+  convert the ratio to a mixed.
+  put the mixed's whole number in the mixio's whole number.
+  scale the mixed's ratio's numerator
+    given the trifle denominator / the mixed's denominator.
+  divide the mixed's ratio's numerator by the trifle root
+    giving the mixio's nips and the mixio's trifles.
+
+to debug a mixio:
+  convert the mixio to a string.
+  debug the string.
+
+to decide if a mixio is greater than another mixio:
+  privatize the mixio.
+  privatize the other mixio.
+  normalize the mixio.
+  normalize the other mixio.
+  if the mixio's whole number is greater than the other mixio's whole number, say yes.
+  if the mixio's whole number is less    than the other mixio's whole number, say no.
+  if the mixio's nips are greater than the other mixio's nips, say yes.
+  if the mixio's nips are less    than the other mixio's nips, say no.
+  if the mixio's trifles are greater than the other mixio's trifles, say yes.
+  say no.
+
+to decide if a mixio is less than another mixio:
+  privatize the mixio.
+  privatize the other mixio.
+  normalize the mixio.
+  normalize the other mixio.
+  if the mixio's whole number is less than    the other mixio's whole number, say yes.
+  if the mixio's whole number is greater than the other mixio's whole number, say no.
+  if the mixio's nips are less    than the other mixio's nips, say yes.
+  if the mixio's nips are greater than the other mixio's nips, say no.
+  if the mixio's trifles are less than the other mixio's trifles, say yes.
+  say no.
+
+to decide if a mixio is negative:
+  convert 0 to another mixio.
+  if the mixio is less than the other mixio, say yes.
+  say no.
+
+to decide if a mixio is a number:
+  privatize the mixio.
+  normalize the mixio.
+  if the mixio's whole number is not the number, say no.
+  if the mixio's nips are not 0, say no.
+  if the mixio's trifles are not 0, say no.
+  say yes.
+
 to decide if a number is wrapped given a number called alpha and a number called omega:
  privatize the alpha.
  privatize the omega.
@@ -53,6 +174,9 @@ to decide if a precise angle is just degrees and minutes:
   if the precise angle's hundredths are not 0, say no.
   say yes.
 
+to get tau returning some radians:
+  put tau in the radians.
+
 to make a precise angle given a number called degrees:
   make the precise angle with the degrees and 0 and 0 and 0.
 
@@ -61,6 +185,43 @@ to make a precise angle given a number called degrees and a number called minute
   put the minutes in the precise angle's minutes.
   put the seconds in the precise angle's seconds.
   put the hundredths in the precise angle's hundredths.
+
+a mixio has
+  a whole number,
+  a number called nips, and  \ implied denominator = trifle root
+  some trifles.              \ implied denominator = trifle denominator
+
+to multiply a mixio by a number returning another mixio:
+  privatize the mixio.
+  normalize the mixio.
+  multiply the mixio's whole number by the number.
+  divide the number by the trifle root
+    giving a quotient and a remainder.
+  put the mixio's nips in a number called nips.
+  multiply the nips by the quotient.
+  add the nips to the mixio's whole number.
+  multiply the mixio's nips by the remainder.
+  put the mixio's trifles in a number called trifles.
+  multiply the trifles by the quotient.
+  add the trifles to the mixio's nips.
+  multiply the mixio's trifles by the remainder.
+  normalize the mixio.
+  put the mixio in the other mixio.
+
+to negate a mixio:
+  normalize the mixio.
+  negate the mixio's whole number.
+  negate the mixio's nips.
+  negate the mixio's trifles.
+  normalize the mixio.
+
+to normalize a mixio:
+  put the trifle root in a number.
+  subtract 1 from the number.
+  wrap the mixio's trifles
+    given 0 and the number and the mixio's nips.
+  wrap the mixio's nips
+    given 0 and the number and the mixio's whole number.
 
 to normalize a precise angle:
   wrap the precise angle's degrees    given 0 and 359.
@@ -71,15 +232,80 @@ to normalize a precise angle:
   wrap the precise angle's minutes    given 0 and  59 and the precise angle's degrees.
   wrap the precise angle's degrees    given 0 and 359.
 
-A precise angle has             \ normalized ranges
+to normalize some radians: 
+  if the radians are negative, 
+    normalize the radians (negative); exit. 
+  normalize the radians (positive). 
+
+to normalize some radians (negative): 
+  negate the radians. 
+  normalize the radians (positive). 
+  negate the radians. 
+  if the radians are not negative, exit. 
+  add tau to the radians. 
+
+to normalize some radians (positive):
+  put tau into some radians called tau radians.
+  loop.
+    if the radians are less than the tau radians, 
+      exit.
+    if the radians's whole number is 6,
+      subtract the tau radians from the radians;
+      exit.
+    divide the radians's whole number by 7 giving a quotient and a remainder.
+    multiply the quotient by 7 returning a number.
+    multiply the tau radians by the quotient returning some other radians.
+    subtract the other radians from the radians.
+  repeat.
+
+a precise angle has             \ normalized ranges
   a number called degrees,      \   0° - 359°
   a number called minutes,      \   0’ -  59’
   a number called seconds, and  \   0” -  59”
   a number called hundredths.   \   0  -  99 cas
 
+to put a mixio in another mixio:
+  put the mixio's whole number in the other mixio's whole number.
+  put the mixio's nips in the other mixio's nips.
+  put the mixio's trifles in the other mixio's trifles.
+
+to put a mixio in a string:
+  convert the mixio to the string.
+
+to put a number in a mixio:
+  put the number in the mixio's whole number.
+  put 0 in the mixio's nips.
+  put 0 in the mixio's trifles.
+
+to put tau into some radians:
+  put 6 into the radians' whole number.
+  put 12233 into the radians' nips.
+  put 26148 into the radians' trifles.
+
+to put some trifles in a ratio:
+  put the trifles / the trifle denominator in the ratio.
+
+some radians are a mixio.
+
 to stash a test result using a precise angle:
   convert the precise angle to a string.
   stash the test result using the string.
+
+to subtract a mixio from another mixio:
+  privatize the mixio.
+  normalize the mixio.
+  normalize the other mixio.
+  convert the mixio to a string (long).
+  convert the other mixio to another string (long).
+  subtract the mixio's whole number from the other mixio's whole number.
+  subtract the mixio's nips from the other mixio's nips.
+  subtract the mixio's trifles from the other mixio's trifles.
+  convert the other mixio to the other string (long).
+  normalize the other mixio.
+
+to subtract some trifles from a mixio:
+  subtract the trifles from the mixio's trifles.
+  normalize the mixio.
 
 to test (trig - -1 is not wrapped between 0 and 99):
   create a test result about "trig"
@@ -148,6 +374,61 @@ to test (trig - normalize precise angle):
   test (trig - normalize -123°-45’-6”-78cas to 236°14’53.22”).
   test (trig - normalize 432°10’54.32” to 72°10’54.32”).
 
+to test (trig - normalize radians -84821 to about 2): 
+  make a fuzzy test about "trig" 
+    and "normalize radians -84821 to 2" 
+    and targeting 23059/11520 with tight tolerance. 
+  put -84821 in some radians called actual. 
+  normalize the actual. 
+  stash the fuzzy test given the actual. 
+
+to test (trig - normalize radians -84822 to about 1): 
+  make a fuzzy test about "trig" 
+    and "normalize radians -84822 to 1" 
+    and targeting 11539/11520 with tight tolerance. 
+  put -84822 in some radians called actual. 
+  normalize the actual. 
+  stash the fuzzy test given the actual. 
+
+to test (trig - normalize radians 0 to 0): 
+  make a fuzzy test about "trig" and "normalize radians 0 to 0" 
+    and targeting 0/1 with tight tolerance. 
+  put 0 in some radians called actual. 
+  normalize the actual. 
+  stash the fuzzy test given the actual. 
+
+to test (trig - normalize radians 6 to 6): 
+  make a fuzzy test about "trig" 
+    and "normalize radians 6 to 6" 
+    and targeting 6/1 with tight tolerance. 
+  put 6 in some radians called actual. 
+  normalize the actual. 
+  stash the fuzzy test given the actual. 
+
+to test (trig - normalize radians 7): 
+  make a fuzzy test about "trig" 
+    and "normalize radians 7" 
+    and targeting 111479021/155520000 with tight tolerance. 
+  put 7 in some radians called actual. 
+  normalize the actual. 
+  stash the fuzzy test given the actual. 
+
+to test (trig - normalize radians 977160980 to 1): 
+  make a fuzzy test about "trig" 
+    and "normalize radians 977160980 to 1" 
+    and targeting 1/1 with tight tolerance. 
+  put 977160980 in some radians called actual. 
+  normalize the actual. 
+  stash the fuzzy test given the actual. 
+
+to test (trig - normalize radians): 
+  test (trig - normalize radians 0 to 0). 
+  test (trig - normalize radians 977160980 to 1). 
+  test (trig - normalize radians -84822 to about 1). 
+  test (trig - normalize radians -84821 to about 2). 
+  test (trig - normalize radians 6 to 6). 
+  test (trig - normalize radians 7). 
+
 to test (trig - normalize smallest angle to 189°23’55.52”):
   create a test result about "trig"
     and "normalize smallest angle to 189°23’55.52”"
@@ -172,6 +453,13 @@ to test (trig - wrap):
 to test (trig):
   test (trig - wrap).
   test (trig - normalize precise angle).
+  test (trig - normalize radians).
+
+the trifle denominator is a number equal to 1866240000. \ 43,200 * 43,200
+
+the trifle root is 43200.
+
+some trifles are a number. \ divided by trifle denominator.
 
 to wrap a number given a number called alpha and a number called omega:
   wrap the number given the alpha and the omega and 0.
