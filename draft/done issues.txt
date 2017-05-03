@@ -831,3 +831,17 @@ Automated tests make debugging easier.
   Demoing difficulty:  Medium. 
   Testing difficulty:  Easy. 
   Requested by Jasper Paulsen on March 25, 2017.  
+
+222.  Removed the editor's Capitalize feature.
+  It does not work the way its authors intended.
+  It is supposed to just capitalize the first words of sentences.
+  It is not supposed to capitalize the first words of lines
+  that are part of sentences started on earlier lines.
+  Status:    Demonstrated.
+  Audience:  Programmers.
+  Benefit:   Medium.
+  Implementation difficulty:  Easy.
+  Demoing difficulty:  Easy.
+  Testing difficulty:  n/a.
+  Requested by Gerry Rzeppa on April 30, 2017.
+

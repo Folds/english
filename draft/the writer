@@ -192,27 +192,6 @@ to bring any selected shapes on a page forward:
   repeat.
   append the other shapes to the page's shapes.
 
-to capitalize any selected shapes on a page:
-  if the page is nil, exit.
-  loop.
-    get a shape from the page's shapes.
-    if the shape is nil, exit.
-    if the shape is not selected, repeat.
-    capitalize the shape.
-  repeat.
-
-to capitalize a shape:
-  if the shape is nil, exit.
-  if the shape's kind is "group", capitalize the shape's shapes; exit.
-  if the shape's kind is not "text", exit.
-  capitalize the shape's text.
-
-to capitalize some shapes:
-  get a shape from the shapes.
-  if the shape is nil, exit.
-  capitalize the shape.
-  repeat.  
-
 to center a page:
   if the page is nil, exit.
   center the page (horizontally).
@@ -2121,21 +2100,6 @@ to handle bring to front given a page:
   remember the page.
   show status "Bringing...".
   bring any selected shapes on the page forward.
-  show the desktop with status.
-
-to handle capitalize given a page:
-  if the page is being edited, handle capitalize given the page (editing); exit.
-  if nothing is selected on the page, cluck; exit.
-  show status "Capitalizing...".
-  remember the page.
-  capitalize any selected shapes on the page.
-  show the desktop with status.
-
-to handle capitalize given a page (editing):
-  if nothing is selected in the page's edit shape's text, cluck; exit.
-  show status "Capitalizing...".
-  set the current tab's node's document's modified flag.
-  handle capitalize given the page's edit shape's text.
   show the desktop with status.
 
 to handle check spelling given a page (current page only):

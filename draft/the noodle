@@ -511,34 +511,6 @@ to buzz:
 
 a canvas is an hdc.
 
-to capitalize any selected rows in a text:
-  if the text is nil, exit.
-  loop.
-    get a row from the text's rows.
-    if the row is nil, exit.
-    if the row of the text is not selected, repeat.
-    if the row is blank, repeat.
-    capitalize the row's string.
-  repeat.
-
-to capitalize a string:
-  slap a substring on the string.
-  loop.
-    if the substring is blank, exit.
-    if the substring's first's target is not noise, break.
-    add 1 to the substring's first.
-  repeat.
-  uppercase the substring's first's target.
-
-to capitalize a text:
-  if the text is nil, exit.
-  loop.
-    get a row from the text's rows.
-    if the row is nil, break.
-    capitalize the row's string.
-  repeat.
-  wrap the text.
-
 a caret is a position.
 
 to center a box in another box:
@@ -5412,14 +5384,6 @@ to handle any wm-settingchange:
   enque the event.
 
 to handle any wm-syskeydown with a w-param and an l-param: employ handle any wm-keydown with a w-param and an l-param.
-
-to handle capitalize given a text:
-  if the text is nil, exit.
-  if nothing is selected in the text, exit.
-  remember the text with "capitalize".
-  capitalize any selected rows in the text.
-  square up any selection in the text.
-  wrap the text.
 
 to handle copy given a text:
   if the text is nil, exit.

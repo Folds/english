@@ -86,19 +86,6 @@ from higher priority to lower priority.
   Testing difficulty:  n/a.
   Requested by Jasper Paulsen on April 30, 2017.
 
-222.  Remove the editor's Capitalize feature.
-  It does not work the way its authors intended.
-  It is supposed to just capitalize the first words of sentences.
-  It is not supposed to capitalize the first words of lines
-  that are part of sentences started on earlier lines.
-  Status:    Designed.
-  Audience:  Programmers.
-  Benefit:   Medium.
-  Implementation difficulty:  Easy.
-  Demoing difficulty:  Easy.
-  Testing difficulty:  n/a.
-  Requested by Gerry Rzeppa on April 30, 2017.
-
 221.  Make editor's sort definitions feature not add extra lines.
   When editing a source, the Sort Definitions feature
   adds a blank line after the comments at the top,

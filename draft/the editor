@@ -264,12 +264,6 @@ to get a substring given a row and a source (commented part):
   repeat.
   subtract 1 from the substring's last. \ so we don't draw the return byte
 
-to handle capitalize given a source:
-  if nothing is selected in the source, cluck; exit.
-  show status "Capitalizing...".
-  handle capitalize given the source's text.
-  show the desktop with "Capitalizeds".
-
 to handle check spelling given a source:
   load the lexicon.
   if the lexicon is nil, show error "I can't find any lecksicon."; exit.

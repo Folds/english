@@ -721,13 +721,6 @@ to handle bring to front:
     handle bring to front given the current tab's node's page; exit.
   cluck.
 
-to handle capitalize:
-  if the current tab's mode is "editor",
-    handle capitalize given the current tab's node's source; exit.
-  if the current tab's mode is "writer",
-    handle capitalize given the current tab's node's page; exit.
-  cluck.
-
 to handle check spelling:
   if the current tab's mode is "editor",
     handle check spelling given the current tab's node's source; exit.
@@ -821,7 +814,6 @@ to handle a command:
   if the handler is "handle font name other", handle font name other; exit.
   if the handler is "handle radius", handle radius; exit.
   if the handler is "handle pen", handle pen given the command's color; exit.
-  if the handler is "handle capitalize", handle capitalize; exit.
   if the handler is "handle check spelling", handle check spelling; exit.
   if the handler is "handle check spelling (entire document)",
     handle check spelling (entire document); exit.
@@ -1969,8 +1961,6 @@ to populate a submenu given a mode (b):
     add "Bring to Front" and "handle bring to front" to the submenu.
 
 to populate a submenu given a mode (c):
-  if the mode is "editor", add "Capitalize" to the submenu.
-  if the mode is "writer", add "Capitalize" to the submenu.
   if the mode is "editor", add "Check Spelling" to the submenu.
   if the mode is "writer",
     add "Check Spelling..." and "check spelling..." to the submenu.
