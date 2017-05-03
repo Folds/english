@@ -7656,10 +7656,12 @@ to prepend a thing to some things:
   put the thing into the things' first.
 
 to prepend some things to some other things:
-  get a thing from the things (backwards).
-  if the thing is nil, exit.
-  remove the thing from the things.
-  prepend the thing to the other things.
+  loop.
+    if the things are empty, exit.
+    put the things' last into a thing.
+    if the thing is nil, exit.
+    remove the thing from the things.
+    prepend the thing to the other things.
   repeat.
 
 a printdlgex is a record with

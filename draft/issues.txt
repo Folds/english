@@ -86,23 +86,78 @@ from higher priority to lower priority.
   Testing difficulty:  n/a.
   Requested by Jasper Paulsen on April 30, 2017.
 
-221.  Make editor's sort definitions feature not add extra lines.
-  When editing a source, the Sort Definitions feature
-  adds a blank line after the comments at the top,
-  and before the first definition.
-  Each sorting adds another blank line.
-  Status:  Request.  (cal-4700 also has this bug; the bug
-           has been reported to its cal-4700's maintainers)
-  Audience:  Programmers.
-  Benefit:  Medium.  The bug requires either manual clean-up
-            after sorting, or invalidates how source code
-            control systems use diff to verify that files
-            have not changed.
-  Implementation difficulty:  Unknown.
-  Demoing difficulty:  Easy.
-  Testing difficulty:  Medium.
-  Requested by Jasper Paulsen on April 30, 2017.
+195.  Convert from arc minutes to radians. 
+  Status:  Designed. 
+  Audience:  Programmers. 
+  Benefit:  Medium. 
+  Implementation difficulty:  Hard. 
+  Demoing difficulty:  Medium. 
+  Testing difficulty:  Easy. 
+  Requested by Jasper Paulsen on March 25, 2017. 
 
+181.  Calculate sine. 
+  Status:  Designed. 
+  Audience:  Programmers. 
+  Benefit:  Medium. 
+  Implementation difficulty:  Hard. 
+  Demoing difficulty:  Medium. 
+  Testing difficulty:  Easy. 
+  Requested by Jasper Paulsen on March 25, 2017. 
+ 
+182.  Calculate cosine. 
+  Status:  Designed. 
+  Audience:  Programmers. 
+  Benefit:  Medium. 
+  Implementation difficulty:  Hard. 
+  Demoing difficulty:  Medium. 
+  Testing difficulty:  Easy. 
+  Requested by Jasper Paulsen on March 25, 2017. 
+ 
+188.  Calculate tangent. 
+  Status:  Designed. 
+  Audience:  Programmers. 
+  Benefit:  Medium. 
+  Implementation difficulty:  Medium. 
+  Demoing difficulty:  Medium. 
+  Testing difficulty:  Easy. 
+  Requested by Jasper Paulsen on April 4, 2017. 
+ 
+186.  Calculate arcsine. 
+  Status:  Designed. 
+  Audience:  Programmers. 
+  Benefit:  Medium. 
+  Implementation difficulty:  Medium. 
+  Demoing difficulty:  Medium. 
+  Testing difficulty:  Easy. 
+  Requested by Jasper Paulsen on April 4, 2017. 
+ 
+187.  Calculate arccosine. 
+  Status:  Designed. 
+  Audience:  Programmers. 
+  Benefit:  Medium. 
+  Implementation difficulty:  Medium. 
+  Demoing difficulty:  Medium. 
+  Testing difficulty:  Easy. 
+  Requested by Jasper Paulsen on April 4, 2017. 
+ 
+189.  Calculate arctangent. 
+  Status:  Designed. 
+  Audience:  Programmers. 
+  Benefit:  Medium. 
+  Implementation difficulty:  Medium. 
+  Demoing difficulty:  Medium. 
+  Testing difficulty:  Easy. 
+  Requested by Jasper Paulsen on April 4, 2017. 
+ 
+183.  Calculate square roots. 
+  Status:  Designed. 
+  Audience:  Programmers. 
+  Benefit:  Medium. 
+  Implementation difficulty:  Hard. 
+  Demoing difficulty:  Medium. 
+  Testing difficulty:  Easy. 
+  Requested by Jasper Paulsen on March 25, 2017. 
+ 
 210.  In colors, add a "pen" alias for each color. 
   Status:  Designed. 
   Audience:  Turtle programmers. 
@@ -171,78 +226,6 @@ from higher priority to lower priority.
 185.  Round a number down to nearest factor of another number. 
   If the number is more than the other number, 
   rescale by the other number on March 13, 2017. 
- 
-195.  Convert from arc minutes to radians. 
-  Status:  Designed. 
-  Audience:  Programmers. 
-  Benefit:  Medium. 
-  Implementation difficulty:  Hard. 
-  Demoing difficulty:  Medium. 
-  Testing difficulty:  Easy. 
-  Requested by Jasper Paulsen on March 25, 2017. 
-
-183.  Calculate square roots. 
-  Status:  Designed. 
-  Audience:  Programmers. 
-  Benefit:  Medium. 
-  Implementation difficulty:  Hard. 
-  Demoing difficulty:  Medium. 
-  Testing difficulty:  Easy. 
-  Requested by Jasper Paulsen on March 25, 2017. 
- 
-181.  Calculate sine. 
-  Status:  Designed. 
-  Audience:  Programmers. 
-  Benefit:  Medium. 
-  Implementation difficulty:  Hard. 
-  Demoing difficulty:  Medium. 
-  Testing difficulty:  Easy. 
-  Requested by Jasper Paulsen on March 25, 2017. 
- 
-182.  Calculate cosine. 
-  Status:  Designed. 
-  Audience:  Programmers. 
-  Benefit:  Medium. 
-  Implementation difficulty:  Hard. 
-  Demoing difficulty:  Medium. 
-  Testing difficulty:  Easy. 
-  Requested by Jasper Paulsen on March 25, 2017. 
- 
-186.  Calculate arcsine. 
-  Status:  Designed. 
-  Audience:  Programmers. 
-  Benefit:  Medium. 
-  Implementation difficulty:  Medium. 
-  Demoing difficulty:  Medium. 
-  Testing difficulty:  Easy. 
-  Requested by Jasper Paulsen on April 4, 2017. 
- 
-187.  Calculate arccosine. 
-  Status:  Designed. 
-  Audience:  Programmers. 
-  Benefit:  Medium. 
-  Implementation difficulty:  Medium. 
-  Demoing difficulty:  Medium. 
-  Testing difficulty:  Easy. 
-  Requested by Jasper Paulsen on April 4, 2017. 
- 
-188.  Calculate tangent. 
-  Status:  Designed. 
-  Audience:  Programmers. 
-  Benefit:  Medium. 
-  Implementation difficulty:  Medium. 
-  Demoing difficulty:  Medium. 
-  Testing difficulty:  Easy. 
-  Requested by Jasper Paulsen on April 4, 2017. 
- 
-189.  Calculate arctangent. 
-  Status:  Designed. 
-  Audience:  Programmers. 
-  Benefit:  Medium. 
-  Implementation difficulty:  Medium. 
-  Demoing difficulty:  Medium. 
-  Testing difficulty:  Easy. 
-  Requested by Jasper Paulsen on April 4, 2017. 
  
 159.  Incorporate CAL-4700's turtle graphics features. 
   Status:   Request. 
@@ -944,6 +927,6 @@ with an adjustable slider between them.
 \ ======================================   
 Unsorted requests:
 
-Next item number:  224.
+Next item number:  225.
 
 

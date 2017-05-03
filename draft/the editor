@@ -42,6 +42,7 @@ to bump a substring (past a string):
 
 to comment any selected rows in a source:
   if the source is nil, exit.
+  if the source's text is nil, exit.
   loop.
     get a row from the source's text's rows.
     if the row is nil, exit.
@@ -54,6 +55,7 @@ the comment color is a color.
 
 to convert a source to a buffer:
   if the source is nil, clear the buffer; exit.
+  if the source's text is nil, clear the buffer; exit.
   extract the buffer from the source's text.
 
 to create a block:
@@ -177,6 +179,8 @@ to decide if a string starts with any routine starter:
   say no.
 
 to draw the right margin of a source given a color:
+  if the source is nil, exit.
+  if the source's text is nil, exit.
   put 80 in a count.
   fill a string with the big-w byte given the count.
   get a width given the string and the memory canvas and the source's text's font.
@@ -900,12 +904,19 @@ to sort some blocks:
 
 to sort definitions given a source:
   if the source is nil, exit.
+  if the source's text is nil, exit.
+  count the source's text's rows returning a count.
   create some blocks given the source's text's rows.
   scrub the blocks.
   name the blocks.
   sort the blocks.
   destroy the source's text's rows.
   append the blocks to the source's text's rows.
+  count the source's text's rows returning another count.
+  subtract the count from the other count.
+  if the other count is positive,
+    try removing extra blank rows
+      from the source's text's rows given the other count.
   reset the origin of the source's text.
   reset the caret of the source's text.
   deselect the source's text.
@@ -916,6 +927,22 @@ a source is a thing with
   a read-only flag,
   a colorized flag,
   a text.
+
+to split out some preamble rows from some rows:
+  loop.
+    if the rows are empty, void a row; exit.
+    put the rows' first in the row.
+    if the row is nil, exit.
+    if the row is any comment,
+      remove the row from the rows;
+      append the row to the preamble rows;
+      repeat.
+    if the row's string has neither code nor comment on it,
+      remove the row from the rows;
+      append the row to the preamble rows;
+      repeat.
+    exit.
+  repeat.
 
 to track a source given an event:
   if the source is nil, exit.
@@ -933,6 +960,22 @@ to track a source given an event:
     set the flag.
     put the source's text's selection into the selection.
   repeat.
+
+to try removing extra blank rows from some rows given a count:
+  if the count is at most 0, exit.
+  split out some preamble rows from the rows.
+  loop.
+    if the count is at most 0, break.
+    if the preamble rows are empty, break.
+    put the preamble rows' last in a row.
+    if the row is nil, break.
+    if the row is any comment, break.
+    remove the row from the preamble rows.
+    destroy the row.
+    count the preamble rows returning a number.
+    subtract 1 from the count.
+  repeat.
+  prepend the preamble rows to the rows.
 
 to uncomment any selected rows in a source:
   if the source is nil, exit.

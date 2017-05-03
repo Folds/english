@@ -167,6 +167,32 @@ but do not have test plans yet.
   Audience:  Programmers.
   Requested by Jasper Paulsen on March 1, 2017.
 
+224.  Fix prepend some things to some other things.
+  Status:    Demonstrated.
+  Audience:  Programmers.
+  Benefit:   Medium.
+  Implementation difficulty:  Easy.
+  Demoing difficulty:  Easy.
+  Testing difficulty:  Medium.
+  Requested by Jasper Paulsen on May 3, 2017.
+
+221.  Make editor's sort definitions feature not add extra lines.
+  When editing a source, the Sort Definitions feature
+  adds a blank line after the comments at the top,
+  and before the first definition.
+  Each sorting adds another blank line.
+  Status:  Demonstrated.  (cal-4700 also has this bug; the bug
+           has been reported to its cal-4700's maintainers)
+  Audience:  Programmers.
+  Benefit:  Medium.  The bug requires either manual clean-up
+            after sorting, or invalidates how source code
+            control systems use diff to verify that files
+            have not changed.
+  Implementation difficulty:  Hard.
+  Demoing difficulty:  Easy.
+  Testing difficulty:  Medium.
+  Requested by Jasper Paulsen on April 30, 2017.
+
 144.  Allow viewing result of running a program.
   Add a menu item to review the run's result.
   259 means the program is still active.
