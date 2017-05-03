@@ -69,10 +69,12 @@ to convert a height to a count given a source (scrollbar drag):
   scale the count given the ratio.
 
 to count the invisible rows of a text returning a number:
+  if the text is nil, put 0 in the number; exit.
   count the visible rows of the text returning another number.
   put the text's row count minus the other number in the number.
 
 to count the visible rows of a text returning a number:
+  if the text is nil, put 0 in the number; exit.
   put the text's box's y-extent divided by the text's row height
     in the number.
 \
@@ -105,8 +107,8 @@ to decide if a mode is never scrollable:
   say yes. 
 
 to decide if a mode is sometimes scrollable: 
-  if the current tab's mode is "editor", say yes. 
-  if the current tab's mode is "docster", say yes. 
+  if the mode is "editor", say yes. 
+  if the mode is "docster", say yes. 
   say no. 
 
 to decide if a roundy box is wafer thin:  
@@ -124,7 +126,8 @@ to decide if the scrollbar is needed:
   say no. 
 
 to decide if the scrollbar is needed (docster): 
-  if the current tab's mode is not "docster", say no. 
+  if the current tab's mode is not "docster", say no.
+  if the current tab's node is nil, say no.
   get a count of leading invisible pages given the current tab's node's document. 
   if the count is positive, say yes. 
   get another count of trailing invisible pages given the current tab's node's document. 
@@ -204,6 +207,11 @@ to find a command given a scrollbar and a spot:
   if the spot is in the scrollbar's downtick,
     put the scrollbar's downtick in the command; exit.
 
+to get a count of invisible pages given a document: 
+  get a count called top of leading invisible pages given the document. 
+  get a count called bottom of trailing invisible pages given the document. 
+  put the top plus the bottom in the count. 
+
 to get a count of leading invisible pages given a document: 
   put 0 in the count. 
   if the document is nil, exit. 
@@ -215,6 +223,18 @@ to get a count of leading invisible pages given a document:
     if the box's top is at least the document's top, exit. 
     add 1 to the count. 
   repeat. 
+
+to get a count of trailing invisible pages given a document: 
+  put 0 in the count.
+  if the document is nil, exit.
+  loop.
+    get a page from the document's pages (backwards).
+    if the page is nil, exit.
+    put the page's edge into a box.
+    globalize the box given the document's origin.
+    if the document's bottom is at least the box's bottom, exit.
+    add 1 to the count.
+  repeat.
 
 to get the default fast horizontal scroll speed returning a number:
   put 3 in the number.
@@ -305,6 +325,14 @@ to get the horizontal scroll speed returning a number (from windows):
 \
 \ https://msdn.microsoft.com/en-us/library/windows/desktop/ms724947(v=vs.85).aspx
 \ lists the System Parameters Info (SPI) constants.
+
+to get a ratio of invisible pages given a document:
+  get a count called top of leading invisible pages given the document.
+  get a count called bottom of trailing invisible pages given the document.
+  put the top plus the bottom in a number called invisible.
+  if the invisible is less than the top,
+    put the top and the top in the ratio; exit.
+  put the top and the invisible in the ratio.
 
 to get a ratio of invisible rows:
   put 1 and 2 in the ratio.

@@ -139,6 +139,7 @@ to boldly format a command given a color:
   put the color into the command's font color.
 
 to choose a color for a command (temporary color):
+  if the command is nil, exit.
   put the command's color into the color.
   if the color is clear, put the white color into the color.
   if the command is pointless,
@@ -247,6 +248,7 @@ to debug a trio:
   debug the string.
 
 to decide if a command is pointless:
+  if the command is nil, say yes.
   if the command's handler's length is not 1, say no.
   if the command's handler has a letter menu, say no.
   say yes.
@@ -433,8 +435,10 @@ to draw a menu:
 to draw the pad:
   mask only outside the pad's box.
   draw the pad's box with the desktop color and the desktop color.
+  if the current tab is nil, exit.
   put the current tab's mode in a mode.
   if the mode is "finder", draw the current tab's node; exit.
+  if the current tab's node is nil, exit.
   if the mode is "editor", draw the current tab's node's source; exit.
   if the mode is "docster", draw the current tab's node's document; exit.
   if the mode is "writer", draw the current tab's node's page; exit.
@@ -2221,8 +2225,10 @@ to show the desktop:
 
 to show the desktop with status:
   clear the status' string.
+  if the current tab is nil, show the desktop; exit.
   put the current tab's mode in a mode.
   if the mode is "finder",  get the status for the current tab's node.
+  if the current tab's node is nil, show the desktop; exit.
   if the mode is "editor",  get the status for the current tab's node's source.
   if the mode is "docster", get the status for the current tab's node's document.
   if the mode is "writer",  get the status for the current tab's node's page.

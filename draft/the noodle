@@ -1467,6 +1467,7 @@ to copy a row into another row:
   put the row's string into the other row's string.
 
 to copy some rows into some other rows:
+  \ to-do:  validate all uses of this routine.
   destroy the other rows.
   loop.
     get a row from the rows.
@@ -4646,7 +4647,10 @@ to get a box given a row and a text:
   if the text is nil, clear the box; exit.
   if the row is nil, clear the box; exit.
   put the text's globalized origin into the box's left-top.
-  add the row's row# minus 1 times the text's row height to the box's top.
+  put the row's row# in a number.
+  subtract 1 from the number.
+  multiply the number by the text's row height.
+  add the number to the box's top.
   put the text's right into the box's right.
   put the box's top plus the text's row height into the box's bottom.
 
@@ -6311,14 +6315,16 @@ to limit a number to another number and a third number:
 to limit the origin of a text:
   if the text is nil, exit.
   limit the text's x to the smallest number and the text's margin.
-  put the text's row count minus 1 times the text's row height into a number.
+  put the text's row count minus 1 into a count.
+  put the count times the text's row height into a number.
   limit the text's y to - the number and 0.
 
 to limit the origin of a text (scrolling):
   if the text is nil, exit.
   limit the text's x to the smallest number and the text's margin.
   put the text's rows/box minus 3 into a count.
-  put the text's row count minus the count times the text's row height into a number.
+  put the text's row count minus the count into another count.
+  put the other count times the text's row height into a number.
   limit the text's y to - the number and 0.
 
 to limit a spot to a box:
@@ -7187,8 +7193,10 @@ to normalize a ratio and another ratio:
 
 to normalize a selection:
   if the selection's anchor row# is less than the selection's caret row#, exit.
-  if the selection's anchor row# is greater than the selection's caret row#, swap the selection's anchor with the selection's caret; exit.
-  if the selection's anchor column# is greater than the selection's caret column#, swap the selection's anchor column# with the selection's caret column#.
+  if the selection's anchor row# is greater than the selection's caret row#,
+    swap the selection's anchor with the selection's caret; exit.
+  if the selection's anchor column# is greater than the selection's caret column#,
+    swap the selection's anchor column# with the selection's caret column#.
 
 to normalize a text:
   if the text is nil, exit.
@@ -9433,6 +9441,7 @@ to seed the random number generator:
 
 to select every byte in a text:
   if the text is nil, exit.
+  if the text's rows are empty, exit. \ What is the right thing to do in this situation?
   put 1 and 1 into the text's anchor.
   put the text's rows' last's string's length and the text's row count into the text's caret.
 
@@ -9773,7 +9782,8 @@ a socket is a pointer.
 
 to sort any selected rows in a text:
   if the text is nil, exit.
-  split the rows of the text into some rows and some selected rows and some other rows.
+  split the rows of the text into some rows
+    and some selected rows and some other rows.
   sort the selected rows.
   append the rows to the text's rows.
   append the selected rows to the text's rows.

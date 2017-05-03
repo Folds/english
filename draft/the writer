@@ -1823,23 +1823,6 @@ to get a box of the selected shapes on a page:
     if the shape's bottom is greater than the box's bottom, put the shape's bottom into the box's bottom.
   repeat.
 
-to get a count of invisible pages given a document: 
-  get a count called top of leading invisible pages given the document. 
-  get a count called bottom of trailing invisible pages given the document. 
-  put the top plus the bottom in the count. 
-
-to get a count of trailing invisible pages given a document: 
-  put 0 in the count. 
-  if the document is nil, exit. 
-  loop. 
-    get a page from the document's pages (backwards). 
-    if the page is nil, exit. 
-    put the page's edge into a box. 
-    globalize the box given the document's origin. 
-    if the document's bottom is at least the box's bottom, exit. 
-    add 1 to the count. 
-  repeat. 
-
 to get a difference between a spot and another spot given a sizer:
   get the difference between the spot and the other spot.
   if the sizer's kind starts with "left-", negate the difference's x.
@@ -1971,14 +1954,6 @@ to get a radius given a page:
   if the shape's kind is "rectangle", put the shape's rectangle's radius into the radius.
   if the shape's kind is "text", put the shape's text rectangle's radius into the radius.
   divide the radius by the page's scale.
-
-to get a ratio of invisible pages given a document: 
-  get a count called top of leading invisible pages given the document. 
-  get a count called bottom of trailing invisible pages given the document. 
-  put the top plus the bottom in a number called invisible. 
-  if the invisible is less than the top, 
-    put the top and the top in the ratio; exit. 
-  put the top and the invisible in the ratio. 
 
 to get a shape refer with which to start finding given a page:
   if the page is nil, void the shape refer; exit.

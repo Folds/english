@@ -108,10 +108,11 @@ to decide if a row is any comment:
   if the row is nil, say no.
   slap a substring on the row's string.
   loop.
-  if the substring is blank, say no.
-  if the substring's first's target is the backslash byte, say yes.
-  if the substring's first's target is noise, add 1 to the substring's first; repeat.
-  say no.
+    if the substring is blank, say no.
+    if the substring's first's target is the backslash byte, say yes.
+    if the substring's first's target is not noise, say no.
+    add 1 to the substring's first.
+  repeat.
 
 to decide if something is selected in a source:
   if the source is nil, say no.
@@ -127,6 +128,12 @@ to decide if a source is modified:
 to decide if a source is read-only:
   if the source is nil, say no.
   if the source's read-only flag is set, say yes.
+  say no.
+
+to decide if a source is using fixed-width font:
+  if the source is nil, say no.
+  if the source's text is nil, say no.
+  if the source's text's font is fixed-width, say yes.
   say no.
 
 to decide if a spot is in a source:
@@ -201,17 +208,20 @@ to draw a source:
   \ the shoving lets the scrollbar have the (default) arrow cursor,
   \ instead of the source's i-beam cursor.  
   if the scrollbar is needed,
-    put the pad's right minus 1/4 inch in the source's text's right.
+    put the pad's right minus 1/4 inch in a number.
   if the scrollbar is not needed,
-    put the pad's right in the source's text's right.
-  mask only outside the source's text's box.
-  if the source's text's font is fixed-width,
+    put the pad's right in the number.
+  if the source's text is not nil,
+    put the number in the source's text's right;
+    mask only outside the source's text's box.
+  if the source is using fixed-width font,
     draw the right margin of the source using the white color.
   if the source's colorized flag is set, draw the source (colorized); exit.
   draw the source (not colorized).
 
 to draw a source (colorized):
   if the source is nil, exit.
+  if the source's text is nil, exit.
   loop.
     get a row from the source's text's rows.
     if the row is nil, break.
