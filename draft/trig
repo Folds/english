@@ -71,6 +71,33 @@ to convert a mixio to a string (long):
 to convert a number to a mixio:
   put the number in the mixio.
 
+to convert a precise angle to a mixio:
+  put the precise angle's degrees in the mixio's whole number.
+  put 60 times the precise angle's minutes in a number.
+  multiply the number by 60.
+  add the precise angle's seconds to the number.
+  multiply the number by 100.
+  add the precise angle's hundredths to the number.
+  scale the number by the trifle denominator / 360000.
+  put the number in the mixio's trifles.
+  normalize the mixio.
+
+to convert a precise angle to some radians:
+  put the precise angle's degrees in a mixio's whole number.
+  put the precise angle's minutes in the mixio's nips.
+  multiply the mixio's nips by the trifle root / 60.
+  put the precise angle's seconds in the mixio's trifles.
+  multiply the mixio's trifles by the trifle denominator / 3600.
+  put the precise angle's hundredths in a number.
+  multiply the number by the trifle denominator / 360000.
+  add the number to the mixio's trifles.
+  normalize the mixio.
+  divide the mixio by 10.
+  put tau in some tau radians.
+  multiply the mixio by the tau radians.
+  divide the mixio by 36.
+  put the mixio in the radians.
+
 to convert a precise angle to a string:
   put the precise angle's degrees
     then the degree-symbol byte in the string.
@@ -104,6 +131,34 @@ to convert a precise angle to a string:
       then the precise angle's hundredths
       then the second-symbol byte to the string.
 
+to convert some radians to a precise angle:
+  put the radians in a mixio.
+  multiply the mixio by 6.
+  put tau in some tau radians.
+  divide the mixio by the tau radians.
+  multiply the mixio by 60.
+  normalize the mixio.
+  put the mixio's whole number in the precise angle's degrees.
+  put 0 in the mixio's whole number.
+  multiply the mixio by 60.
+  normalize the mixio.
+  put the mixio's whole number in the precise angle's minutes.
+  put 0 in the mixio's whole number.
+  multiply the mixio by 60.
+  normalize the mixio.
+  put the mixio's whole number in the precise angle's seconds.
+  put 0 in the mixio's whole number.
+  multiply the mixio by 100.
+  normalize the mixio.
+  put the mixio's whole number in the precise angle's hundredths.
+  put the trifle root in a number called threshold.
+  divide the threshold by 2.
+  if the mixio's nips are at least the threshold,
+    add 1 to the precise angle's hundredths.
+  subtract the trifle root from the threshold.
+  if the mixio's nips are less than the threshold,
+    subtract 1 from the precise angle's hundredths.
+
 to convert a ratio to a mixio:
   privatize the ratio.
   convert the ratio to a mixed.
@@ -116,6 +171,24 @@ to convert a ratio to a mixio:
 to debug a mixio:
   convert the mixio to a string.
   debug the string.
+
+to debug a mixio (long):
+  convert the mixio to a string (long).
+  debug the string.
+
+to debug a precise angle:
+  convert the precise angle to a string.
+  debug the string.
+
+to decide if a mixio is another mixio:
+  privatize the mixio.
+  privatize the other mixio.
+  normalize the mixio.
+  normalize the other mixio.
+  if the mixio's whole number is not the other mixio's whole number, say no.
+  if the mixio's nips are not the other mixio's nips, say no.
+  if the mixio's trifles are not the other mixio's trifles, say no.
+  say yes.
 
 to decide if a mixio is greater than another mixio:
   privatize the mixio.
@@ -174,8 +247,226 @@ to decide if a precise angle is just degrees and minutes:
   if the precise angle's hundredths are not 0, say no.
   say yes.
 
+to divide a mixio by another mixio:
+  divide the mixio by the other mixio returning a mixio called result.
+  put the result in the mixio.
+
+to divide a mixio by a mixio called divisor returning a mixio called result:
+  privatize the mixio.
+  privatize the divisor.
+  put 0 in the result.
+  normalize the mixio.
+  normalize the result.
+  if the divisor is 0,
+    put the largest number in the result; exit.
+  if the mixio is negative,
+    set a sign flag;
+    negate the mixio;
+    normalize the mixio.
+  if the divisor is negative,
+    reverse the sign flag;
+    negate the divisor;
+    normalize the divisor.
+  put the mixio in a mixio called temp.
+  divide the temp by the trifle root.
+  divide the temp by the divisor
+    returning a number and a mixio called remainder mixio.
+  multiply the number by the trifle root.
+  put the divisor in the temp.
+  multiply the temp by the number.
+  subtract the temp from the mixio.
+  put the number in the result's whole number.
+  divide the mixio by the divisor
+    returning the number and the remainder mixio.
+  add the number to the result's whole number.
+  put the remainder mixio in the mixio.
+  multiply the mixio by the trifle root.
+  divide the mixio by the divisor
+    returning the number and the remainder mixio.
+  put the number in the result's nips.
+  put the remainder mixio in the mixio.  
+  multiply the mixio by the trifle root.
+  divide the mixio by the divisor
+    returning the number and the remainder mixio.
+  put the number in the result's trifles.
+  put the remainder mixio in the mixio.  
+  multiply the mixio by the trifle root.
+  divide the mixio by the divisor
+    returning the number and the remainder mixio.
+  put the trifle root in a number called threshold.
+  divide the threshold by 2.
+  if the number is at least the threshold,
+    add 1 to the result's trifles.
+  if the number is less than the threshold,
+    subtract the trifle root from the threshold.
+  if the sign flag is set,
+    negate the result.
+  normalize the result.
+
+to divide a mixio by a mixio called divisor returning a number called quotient and a mixio called remnant:
+  if the divisor is 0,
+    put the largest number in the quotient;
+    put 0 in the remnant;
+    exit.
+  privatize the mixio.
+  privatize the divisor.
+  put the mixio in the remnant.
+  normalize the remnant.
+  put the divisor in another mixio.
+  normalize the other mixio.
+  if the mixio is negative,
+    set a sign flag;
+    negate the mixio.
+  if the divisor is negative,
+    reverse the sign flag;
+    negate the divisor.
+  normalize the mixio.
+  normalize the divisor.
+  if the mixio is less than the divisor,
+    put 0 in the quotient; break.
+  if the mixio is the divisor,
+    put 1 in the quotient; break.
+  if the divisor's whole number is not 0,
+    divide the mixio's whole number by the divisor's whole number
+      giving the quotient and a remainder;
+    break.
+  \ to get here, the divisor's whole number is 0.
+  multiply the divisor by the trifle root.
+  put 1 in a count.
+  if the divisor's whole number is 0,
+    multiply the divisor by the trifle root;
+    add 1 to the count.
+  if the mixio's whole number is at least the trifle root,
+    divide the mixio's whole number by the divisor's whole number
+      giving the quotient and the remainder;
+    break.
+  multiply the mixio's whole number by the trifle root.
+  subtract 1 from the count.
+  if the mixio's whole number is at least the trifle root,
+    divide the mixio's whole number by the divisor's whole number
+      giving the quotient and the remainder;
+    break.
+  multiply the mixio's whole number by the trifle root.
+  subtract 1 from the count.
+  divide the mixio's whole number by the divisor's whole number
+    giving the quotient and the remainder.
+  break.
+  repeat. \ a go-to label.
+  if the count is 2,
+    multiply the quotient by the trifle root;
+    multiply the quotient by the trifle root;
+    put 0 in the count.
+  if the count is 1,
+    multiply the quotient by the trifle root;
+    put 0 in the count.
+  if the sign flag is set,
+    negate the quotient.
+  multiply the other mixio by the quotient.
+  normalize the other mixio.
+  subtract the other mixio from the remnant.
+  normalize the remnant.
+
+to divide a mixio by a number:
+  divide the mixio by the number returning another mixio.
+  put the other mixio in the mixio.
+
+to divide a mixio by a number returning another mixio:
+  if the number is 0,
+    put the largest number in the mixio; exit.
+  put the number in another number.
+  de-sign the other number.
+  if the other number is at most the trifle root,
+    divide the mixio by the number
+      returning the other mixio (modest divisor);
+    exit.
+  get a gcd given the number and the trifle root.
+  if the gcd is at most 1,
+    divide the mixio by the number
+      returning the other mixio (large divisor);
+    exit.
+  divide the mixio by the gcd
+    returning a mixio called temp (modest divisor).
+  put the number in a number called remnant.
+  divide the temp by the remnant returning the mixio.
+
+to divide a mixio by a number returning another mixio (large divisor):
+  if the number is 0,
+    put the largest number in the mixio; exit.
+  privatize the mixio.
+  normalize the mixio.
+  divide the mixio's whole number by the number
+    giving a quotient and a remainder.
+  put the quotient in the other mixio's whole number.
+  put the remainder in another number.
+  multiply the other number by the trifle root / the number.
+  put the other number in the other mixio's nips.
+  \ the other mixio's nips have been rounded to the nearest nip.
+  normalize the other mixio.
+  divide the mixio's nips by the number
+    giving the quotient and the remainder.
+  add the quotient to the other mixio's nips.
+  put the remainder in the other number.
+  multiply the other number by the trifle root / the number.
+  put the other number in the other mixio's trifles.
+  normalize the other mixio.
+  divide the mixio's trifles by the number
+    giving the quotient and the remainder.
+  add the quotient to the other mixio's trifles.
+  put the remainder in the other number.
+  multiply the other number by the trifle root / the number.
+  divide the other number by the trifle root
+    giving the quotient and the remainder.
+  add the quotient to the other mixio's trifles.
+  put the trifle root in a number called threshold.
+  divide the threshold by 2.
+  if the other number is at least the threshold,
+    add 1 to the other mixio's trifles.
+  subtract the trifle root from the threshold.
+  if the other number is less than the threshold,
+    subtract 1 from the other mixio's trifles.
+  normalize the other mixio.
+
+to divide a mixio by a number returning another mixio (modest divisor):
+  if the number is 0,
+    put the largest number in the mixio; exit.
+  privatize the mixio.
+  normalize the mixio.
+  divide the mixio's whole number by the number
+    giving a quotient and a remainder.
+  put the quotient in the other mixio's whole number.
+  put the remainder in another number.
+  multiply the other number by the trifle root.
+  add the mixio's nips to the other number.
+  divide the other number by the number
+    giving the quotient and the remainder.
+  put the quotient in the other mixio's nips.
+  put the remainder in the other number.
+  multiply the other number by the trifle root.
+  add the mixio's trifles to the other number.
+  divide the other number by the number
+    giving the quotient and the remainder.
+  put the quotient in the other mixio's trifles.
+  put the remainder in the other number.
+  multiply the other number by the trifle root.
+  divide the other number by the number
+    giving the quotient and the remainder.
+  put the quotient in the other number.
+  put the trifle root in a number called threshold.
+  divide the threshold by 2.
+  if the other number is at least the threshold,
+    add 1 to the other mixio's trifles.
+  subtract the trifle root from the threshold.
+  if the other number is less than the threshold,
+    subtract 1 from the other mixio's trifles.
+  normalize the other mixio.
+
 to get tau returning some radians:
   put tau in the radians.
+
+to make a mixio given a number and a number called nips and some trifles:
+  put the number in the mixio's whole number.
+  put the nips in the mixio's nips.
+  put the trifles in the mixio's trifles.
 
 to make a precise angle given a number called degrees:
   make the precise angle with the degrees and 0 and 0 and 0.
@@ -190,6 +481,48 @@ a mixio has
   a whole number,
   a number called nips, and  \ implied denominator = trifle root
   some trifles.              \ implied denominator = trifle denominator
+
+to multiply a mixio by another mixio:
+  multiply the mixio by the other mixio returning a mixio called result.
+  put the result in the mixio.
+
+to multiply a mixio by another mixio returning a mixio called result:
+  privatize the mixio.
+  privatize the other mixio.
+  normalize the mixio.
+  normalize the other mixio.
+  put the other mixio in the result.
+  multiply the result by the mixio's whole number.
+  normalize the result.
+  put the other mixio in a mixio called nippy.
+  put the nippy's nips in the nippy's trifles.
+  divide the nippy's whole number by the trifle root
+    giving a quotient and a remainder.
+  put the quotient in the nippy's whole number.
+  put the remainder in the nippy's nips.
+  multiply the nippy by the mixio's nips.
+  normalize the nippy.
+  add the nippy to the result.
+  make a mixio called trifly with 0 and 0 and the other mixio's whole number.
+  normalize the trifly.
+  multiply the trifly by the mixio's trifles.
+  add the trifly to the result.
+  make a mixio called scrappy
+    given 0 and the mixio's nips and the mixio's trifles.
+  multiply the scrappy by the other mixio's trifles.
+  normalize the scrappy.
+  put the mixio's trifles in a number.
+  multiply the number by the other mixio's nips.
+  add the number to the scrappy's nips.
+  normalize the scrappy.
+  divide the scrappy by the trifle root.
+  divide the scrappy by the trifle root.
+  add the scrappy to the result.
+  normalize the result.
+
+to multiply a mixio by a number:
+  multiply the mixio by the number returning a mixio called result.
+  put the result in the mixio.
 
 to multiply a mixio by a number returning another mixio:
   privatize the mixio.
@@ -315,6 +648,68 @@ to test (trig - -1 is not wrapped between 0 and 99):
   if -1 is wrapped given 0 and 99,
     put "wrapped" in the actual.
   stash the test result using the actual.
+
+to test (trig - convert from 0 radians to 0°): 
+  make a fuzzy test about "trig" 
+    and "convert from 0 radians to 0°" 
+    and targeting 0/1 with tight tolerance. 
+  put 0 in some radians.
+  convert the radians to a precise angle.
+  convert the precise angle to a mixio. 
+  stash the fuzzy test given the mixio.
+
+to test (trig - convert from 0° to 0 radians): 
+  make a fuzzy test about "trig" 
+    and "convert from 0° to 0 radians" 
+    and targeting 0/1 with tight tolerance. 
+  make a precise angle given 0. 
+  convert the precise angle to some radians called actual. 
+  stash the fuzzy test given the actual. 
+
+to test (trig - convert from 225° to radians): 
+  make a fuzzy test about "trig" 
+    and "convert from 225° to radians" 
+    and targeting 366435367/93312000 with tight tolerance. 
+  make a precise angle given 225. 
+  convert the precise angle to some radians called actual. 
+  stash the fuzzy test given the actual. 
+
+to test (trig - convert from 359°59’59.99” to radians): 
+  make a fuzzy test about "trig" 
+    and "convert from 359°59’59.99” to radians" 
+    and targeting 1954321943/311040000 with tight tolerance. 
+  make a precise angle given 359 and 59 and 59 and 99. 
+  convert the precise angle to some radians called actual. 
+  stash the fuzzy test given the actual.
+
+to test (trig - convert from degrees to radians):
+  test (trig - convert from 225° to radians).
+  test (trig - convert from 0° to 0 radians).
+  test (trig - convert from 359°59’59.99” to radians).
+
+to test (trig - convert from pi radians to 180°): 
+  make a fuzzy test about "trig" 
+    and "convert from pi radians to 180°" 
+    and targeting 180/1 with tight tolerance. 
+  put tau in some radians.
+  divide the radians by 2.
+  convert the radians to a precise angle.
+  convert the precise angle to a mixio. 
+  stash the fuzzy test given the mixio.
+
+to test (trig - convert from radians to degrees):
+  test (trig - convert from pi radians to 180°).
+  test (trig - convert from 0 radians to 0°).
+
+to test (trig - multiply mixios):
+  create a test result about "trig"
+    and "multiply mixios"
+    and expecting "142 + 21600/43200 + 23/1866240000".
+  make a mixio given 22 and 21600 and 0.
+  make another mixio given 6 and 14400 and 1.
+  multiply the mixio by the other mixio returning a mixio called result.
+  convert the result to a string (long).
+  stash the test result using the string.
 
 to test (trig - normalize -123°-45’-6”-78cas to 236°14’53.22”):
   create a test result about "trig"
@@ -454,6 +849,9 @@ to test (trig):
   test (trig - wrap).
   test (trig - normalize precise angle).
   test (trig - normalize radians).
+  test (trig - multiply mixios).
+  test (trig - convert from degrees to radians).
+  test (trig - convert from radians to degrees).
 
 the trifle denominator is a number equal to 1866240000. \ 43,200 * 43,200
 
