@@ -845,3 +845,31 @@ Automated tests make debugging easier.
   Testing difficulty:  n/a.
   Requested by Gerry Rzeppa on April 30, 2017.
 
+195.  Convert from arc minutes to radians.
+  Implemented using precise angles, like 72°10’54.32”.
+  Status:  Tested. 
+  Audience:  Programmers. 
+  Benefit:  Medium. 
+  Implementation difficulty:  Hard. 
+  Demoing difficulty:  Medium. 
+  Testing difficulty:  Easy. 
+  Requested by Jasper Paulsen on March 25, 2017. 
+
+181.  Calculate sine. 
+  Status:  Tested. 
+  Audience:  Programmers. 
+  Benefit:  Medium. 
+  Implementation difficulty:  Hard. 
+  Demoing difficulty:  Medium. 
+  Testing difficulty:  Easy. 
+  Requested by Jasper Paulsen on March 25, 2017. 
+ 
+182.  Calculate cosine. 
+  Status:  Tested. 
+  Audience:  Programmers. 
+  Benefit:  Medium. 
+  Implementation difficulty:  Hard. 
+  Demoing difficulty:  Medium. 
+  Testing difficulty:  Easy. 
+  Requested by Jasper Paulsen on March 25, 2017. 
+ 

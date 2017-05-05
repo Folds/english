@@ -19,7 +19,7 @@ to add some trifles to a mixio:
 
 to convert a mixio to a ratio:
   privatize the mixio.
-  convert the mixio to a string.
+  normalize the mixio.
   put the mixio's trifles in the ratio.
   reduce the ratio.
   put the mixio's nips / the trifle root in another ratio.
@@ -29,11 +29,18 @@ to convert a mixio to a ratio:
   reduce the ratio.
 
 to convert a mixio to a string:
-  privatize the mixio.
-  normalize the mixio.
   if the mixio is 0,
     put "0" in the string; exit.
-  if the mixio's whole number is not 0,
+  privatize the mixio.
+  normalize the mixio.
+  if the mixio's whole number is -1,
+    subtract the trifle root from the mixio's nips;
+    put 0 in the mixio's whole number.
+  if the mixio's whole number is negative,
+    negate the mixio;
+    normalize the mixio;
+    put "-" into the string.
+  if the mixio's whole number is positive,
     put the mixio's whole number in the string.
   put the mixio's nips in a number.
   multiply the number by the trifle root.
@@ -41,15 +48,13 @@ to convert a mixio to a string:
   if the number is 0, exit.
   put the number / the trifle denominator in a ratio.
   reduce the ratio.
-  append the dash byte to the string.
+  if the mixio's whole number is not 0,
+    append the dash byte to the string.
   append the ratio's numerator then "/" then the ratio's denominator
     to the string.
 
 to convert a mixio to a string (long):
   privatize the mixio.
-  if the mixio is negative,
-    put "-" into the string;
-    negate the mixio.
   put the mixio's whole number in the string.
   if the mixio's nips are negative,
     negate the mixio's nips;
@@ -131,6 +136,9 @@ to convert a precise angle to a string:
       then the precise angle's hundredths
       then the second-symbol byte to the string.
 
+to convert some radians to a mixio:
+  put the radians in the mixio.
+
 to convert some radians to a precise angle:
   put the radians in a mixio.
   multiply the mixio by 6.
@@ -161,12 +169,22 @@ to convert some radians to a precise angle:
 
 to convert a ratio to a mixio:
   privatize the ratio.
+  if the ratio is -1/2, set a flag.
   convert the ratio to a mixed.
   put the mixed's whole number in the mixio's whole number.
+  if the mixed's ratio is negative,
+    set a sign flag;
+    de-sign the mixed's ratio.
   scale the mixed's ratio's numerator
     given the trifle denominator / the mixed's denominator.
   divide the mixed's ratio's numerator by the trifle root
     giving the mixio's nips and the mixio's trifles.
+  if the sign flag is set,
+    negate the mixio's nips;
+    negate the mixio's trifles.
+  normalize the mixio.
+
+a cosine is a ratio.
 
 to debug a mixio:
   convert the mixio to a string.
@@ -189,6 +207,15 @@ to decide if a mixio is another mixio:
   if the mixio's nips are not the other mixio's nips, say no.
   if the mixio's trifles are not the other mixio's trifles, say no.
   say yes.
+
+to decide if a mixio is at least another mixio:
+  if the mixio is less than the other mixio, say no.
+  say yes.
+
+to decide if a mixio is at least a ratio:
+  convert the ratio to another mixio.
+  if the mixio is at least the other mixio, say yes.
+  say no.
 
 to decide if a mixio is greater than another mixio:
   privatize the mixio.
@@ -548,6 +575,9 @@ to negate a mixio:
   negate the mixio's trifles.
   normalize the mixio.
 
+to negate a ratio given a flag:
+  if the flag is set, negate the ratio.
+
 to normalize a mixio:
   put the trifle root in a number.
   subtract 1 from the number.
@@ -597,6 +627,10 @@ a precise angle has             \ normalized ranges
   a number called seconds, and  \   0” -  59”
   a number called hundredths.   \   0  -  99 cas
 
+to put half pi into some radians:
+  put tau into the radians.
+  divide the radians by 4.
+
 to put a mixio in another mixio:
   put the mixio's whole number in the other mixio's whole number.
   put the mixio's nips in the other mixio's nips.
@@ -610,6 +644,94 @@ to put a number in a mixio:
   put 0 in the mixio's nips.
   put 0 in the mixio's trifles.
 
+to put pi into some radians:
+  put tau into the radians.
+  divide the radians by 2.
+
+to put a precise angle's cosine into a cosine:
+  convert the precise angle to some radians.
+  put the radians' cosine into the cosine.
+
+to put a precise angle's sine into a sine:
+  convert the precise angle to some radians.
+  put the radians' sine into the sine.
+
+to put some radians' cosine into a cosine:
+  if the radians are 0,
+    put 1 in the cosine; exit.
+  privatize the radians.
+  normalize the radians.
+  put tau into some radians called tau.
+  put pi into some radians called pi.
+  if the radians are greater than the pi,
+    subtract the tau from the radians;
+    negate the radians.
+  put half pi into some radians called half pi.
+  if the radians are greater than the half pi,
+    subtract the pi from the radians;
+    set a sign flag;
+    negate the radians.
+  if the radians are at least 85 / 108, \ slightly more than pi / 4
+    subtract the half pi from the radians;
+    negate the radians;
+    put the radians' sine into the cosine;
+    negate the cosine given the sign flag;
+    exit.
+  put 1 in a mixio.
+  multiply the radians by the radians returning a mixio called square mixio.
+  put 0 in a count called power.
+  loop.
+    add the mixio to a mixio called result.
+    if the power is at least 12, break.
+    negate the mixio.
+    multiply the mixio by the square mixio.
+    add 1 to the power.
+    put the power in a number.
+    add 1 to the power.
+    multiply the number by the power.
+    divide the mixio by the number.
+  repeat.
+  convert the result to the cosine.
+  negate the cosine given the sign flag.
+
+to put some radians' sine into a sine:
+  if the radians are 0,
+    put 0 in the sine; exit.
+  privatize the radians.
+  normalize the radians.
+  put tau into some radians called tau.
+  put pi into some radians called pi.
+  if the radians are greater than the pi,
+    subtract the tau from the radians;
+    negate the radians;
+    set a sign flag.
+  put half pi into some radians called half pi.
+  if the radians are greater than the half pi,
+    subtract the pi from the radians;
+    negate the radians.
+  if the radians are at least 85 / 108, \ slightly more than pi / 4
+    subtract the half pi from the radians;
+    negate the radians;
+    put the radians' cosine into the sine;
+    negate the sine given the sign flag;
+    exit.
+  put the radians in a mixio.
+  multiply the mixio by the mixio returning a mixio called square mixio.
+  put 1 in a count called power.
+  loop.
+    add the mixio to a mixio called result.
+    if the power is at least 11, break.
+    negate the mixio.
+    multiply the mixio by the square mixio.
+    add 1 to the power.
+    put the power in a number.
+    add 1 to the power.
+    multiply the number by the power.
+    divide the mixio by the number.
+  repeat.
+  convert the result to the sine.
+  negate the sine given the sign flag.
+
 to put tau into some radians:
   put 6 into the radians' whole number.
   put 12233 into the radians' nips.
@@ -619,6 +741,12 @@ to put some trifles in a ratio:
   put the trifles / the trifle denominator in the ratio.
 
 some radians are a mixio.
+
+a sine is a ratio.
+
+to stash a fuzzy test given a ratio:
+  convert the ratio to a mixio.
+  stash the fuzzy test given the mixio.
 
 to stash a test result using a precise angle:
   convert the precise angle to a string.
@@ -700,6 +828,73 @@ to test (trig - convert from pi radians to 180°):
 to test (trig - convert from radians to degrees):
   test (trig - convert from pi radians to 180°).
   test (trig - convert from 0 radians to 0°).
+
+to test (trig - cosine of -240°): 
+  make a fuzzy test about "trig" and "cosine of -240°" 
+    and targeting -1/2 with tight tolerance. 
+  make a precise angle given -240. 
+  put the precise angle's cosine in a cosine called actual. 
+  stash the fuzzy test given the actual. 
+
+to test (trig - cosine of 0°): 
+  make a fuzzy test about "trig" and "cosine of 0°" 
+    and targeting 1/1 with tight tolerance. 
+  make a precise angle given 0. 
+  put the precise angle's cosine in a cosine called actual. 
+  stash the fuzzy test given the actual. 
+
+to test (trig - cosine of 1/2 radian): 
+  make a fuzzy test about "trig" and "cosine of 1/2 radian" 
+    and targeting 1137347/1296000 with tight tolerance. 
+  make a mixio given 0 and 21600 and 0.
+  put the mixio in some radians. 
+  put the radians' cosine in a cosine called actual. 
+  stash the fuzzy test given the actual. 
+
+to test (trig - cosine of 30°): 
+  make a fuzzy test about "trig" and "cosine of 30°" 
+    and targeting 1292969/1492992 with tight tolerance. 
+  make a precise angle given 30. 
+  put the precise angle's cosine in a cosine called actual. 
+  stash the fuzzy test given the actual. 
+
+to test (trig - cosine of 360°): 
+  make a fuzzy test about "trig" and "cosine of 360°" 
+    and targeting 1/1 with tight tolerance. 
+  make a precise angle given 360. 
+  put the precise angle's cosine in a cosine called actual. 
+  stash the fuzzy test given the actual. 
+
+to test (trig - cosine of 41°15’): 
+  make a fuzzy test about "trig" and "cosine of 41°15’" 
+    and targeting 1403113522/1866240000 with tight tolerance. 
+  make a precise angle given 41 and 15 and 0 and 0. 
+  put the precise angle's cosine in a cosine called actual. 
+  stash the fuzzy test given the actual. 
+
+to test (trig - cosine of 45°): 
+  make a fuzzy test about "trig" and "cosine of 45°" 
+    and targeting 16495387/23328000 with tight tolerance. 
+  make a precise angle given 45. 
+  put the precise angle's cosine in a cosine called actual. 
+  stash the fuzzy test given the actual. 
+
+to test (trig - cosine of 90°): 
+  make a fuzzy test about "trig" and "cosine of 90°" 
+    and targeting 0/1 with tight tolerance. 
+  make a precise angle given 90. 
+  put the precise angle's cosine in a cosine called actual. 
+  stash the fuzzy test given the actual. 
+
+to test (trig - cosine): 
+  test (trig - cosine of -240°). 
+  test (trig - cosine of 0°). 
+  test (trig - cosine of 1/2 radian).
+  test (trig - cosine of 30°). 
+  test (trig - cosine of 41°15’). 
+  test (trig - cosine of 45°). 
+  test (trig - cosine of 90°). 
+  test (trig - cosine of 360°). 
 
 to test (trig - multiply mixios):
   create a test result about "trig"
@@ -833,6 +1028,64 @@ to test (trig - normalize smallest angle to 189°23’55.52”):
   normalize the actual.
   stash the test result using the actual.
 
+to test (trig - sine of -240°): 
+  make a fuzzy test about "trig" and "sine of -240°" 
+    and targeting 1292969/1492992 with tight tolerance. 
+  make a precise angle given -240. 
+  put the precise angle's sine in a sine called actual. 
+  stash the fuzzy test given the actual. 
+
+to test (trig - sine of 0°): 
+  make a fuzzy test about "trig" and "sine of 0°" 
+    and targeting 0/1 with tight tolerance. 
+  make a precise angle given 0. 
+  put the precise angle's sine in a sine called actual. 
+  stash the fuzzy test given the actual. 
+
+to test (trig - sine of 30°): 
+  make a fuzzy test about "trig" and "sine of 30°" 
+    and targeting 1/2 with tight tolerance. 
+  make a precise angle given 30. 
+  put the precise angle's sine in a sine called actual. 
+  stash the fuzzy test given the actual. 
+
+to test (trig - sine of 360°): 
+  make a fuzzy test about "trig" and "sine of 360°" 
+    and targeting 0/14400 with tight tolerance. 
+  make a precise angle given 360. 
+  put the precise angle's sine in a sine called actual. 
+  stash the fuzzy test given the actual. 
+
+to test (trig - sine of 41°15’): 
+  make a fuzzy test about "trig" and "sine of 41°15’" 
+    and targeting 18457463/27993600 with tight tolerance. 
+  make a precise angle given 41 and 15 and 0 and 0. 
+  put the precise angle's sine in a sine called actual. 
+  stash the fuzzy test given the actual. 
+
+to test (trig - sine of 45°): 
+  make a fuzzy test about "trig" and "sine of 45°" 
+    and targeting 16495387/23328000 with tight tolerance. 
+  make a precise angle given 45. 
+  put the precise angle's sine in a sine called actual. 
+  stash the fuzzy test given the actual. 
+
+to test (trig - sine of 90°): 
+  make a fuzzy test about "trig" and "sine of 90°" 
+    and targeting 1/1 with tight tolerance. 
+  make a precise angle given 90. 
+  put the precise angle's sine in a sine called actual. 
+  stash the fuzzy test given the actual. 
+
+to test (trig - sine): 
+  test (trig - sine of -240°). 
+  test (trig - sine of 0°). 
+  test (trig - sine of 30°). 
+  test (trig - sine of 41°15’). 
+  test (trig - sine of 45°). 
+  test (trig - sine of 90°). 
+  test (trig - sine of 360°). 
+
 to test (trig - wrap -1 between 0 and 99):
   create a test result about "trig"
     and "wrap -1 between 0 and 99"
@@ -852,6 +1105,8 @@ to test (trig):
   test (trig - multiply mixios).
   test (trig - convert from degrees to radians).
   test (trig - convert from radians to degrees).
+  test (trig - sine).
+  test (trig - cosine).
 
 the trifle denominator is a number equal to 1866240000. \ 43,200 * 43,200
 

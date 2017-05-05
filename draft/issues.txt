@@ -23,15 +23,6 @@ The program's change log is implicit
 in the source code repository's change log.
 These items should occasionally be moved to done issues.txt.
 
-195.  Convert from arc minutes to radians. 
-  Status:  Tested. 
-  Audience:  Programmers. 
-  Benefit:  Medium. 
-  Implementation difficulty:  Hard. 
-  Demoing difficulty:  Medium. 
-  Testing difficulty:  Easy. 
-  Requested by Jasper Paulsen on March 25, 2017. 
-
  
 \ ======================================
    
@@ -95,24 +86,6 @@ from higher priority to lower priority.
   Testing difficulty:  n/a.
   Requested by Jasper Paulsen on April 30, 2017.
 
-181.  Calculate sine. 
-  Status:  Designed. 
-  Audience:  Programmers. 
-  Benefit:  Medium. 
-  Implementation difficulty:  Hard. 
-  Demoing difficulty:  Medium. 
-  Testing difficulty:  Easy. 
-  Requested by Jasper Paulsen on March 25, 2017. 
- 
-182.  Calculate cosine. 
-  Status:  Designed. 
-  Audience:  Programmers. 
-  Benefit:  Medium. 
-  Implementation difficulty:  Hard. 
-  Demoing difficulty:  Medium. 
-  Testing difficulty:  Easy. 
-  Requested by Jasper Paulsen on March 25, 2017. 
- 
 188.  Calculate tangent. 
   Status:  Designed. 
   Audience:  Programmers. 
