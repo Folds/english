@@ -263,6 +263,13 @@ to decide if a number is wrapped given a number called alpha and a number called
  if the number is more than the omega, say no.
  say yes.
 
+to decide if a precise angle is another precise angle:
+  if the precise angle's degrees are not the other precise angle's degrees, say no.
+  if the precise angle's minutes are not the other precise angle's minutes, say no.
+  if the precise angle's seconds are not the other precise angle's seconds, say no.
+  if the precise angle's hundredths are not the other precise angle's hundredths, say no.
+  say yes.
+
 to decide if a precise angle is just degrees:
   if the precise angle's minutes are not 0, say no.
   if the precise angle's seconds are not 0, say no.
@@ -648,6 +655,12 @@ to put pi into some radians:
   put tau into the radians.
   divide the radians by 2.
 
+to put a precise angle into another precise angle:
+  put the precise angle's degrees into the other precise angle's degrees.
+  put the precise angle's minutes into the other precise angle's minutes.
+  put the precise angle's seconds into the other precise angle's seconds.
+  put the precise angle's hundredths into the other precise angle's hundredths.
+
 to put a precise angle's cosine into a cosine:
   convert the precise angle to some radians.
   put the radians' cosine into the cosine.
@@ -655,6 +668,25 @@ to put a precise angle's cosine into a cosine:
 to put a precise angle's sine into a sine:
   convert the precise angle to some radians.
   put the radians' sine into the sine.
+
+to put a precise angle's tangent into a tangent:
+  privatize the precise angle.
+  normalize the precise angle.
+  make a precise angle called up angle given 90.
+  make a precise angle called down angle given 270.
+  if the precise angle is the up angle,
+    put the largest number / 1 in the tangent; exit.
+  if the precise angle is the down angle,
+    put the largest number / 1 in the tangent; exit.
+  put the precise angle's sine into a sine.
+  put the precise angle's cosine into a cosine.
+  put the sine's numerator in the tangent's numerator.
+  multiply the tangent's numerator
+    by the trifle denominator / the sine's denominator.
+  put the cosine's numerator in the tangent's denominator.
+  multiply the tangent's denominator
+    by the trifle denominator / the cosine's denominator.
+  reduce the tangent.
 
 to put some radians' cosine into a cosine:
   if the radians are 0,
@@ -767,6 +799,8 @@ to subtract a mixio from another mixio:
 to subtract some trifles from a mixio:
   subtract the trifles from the mixio's trifles.
   normalize the mixio.
+
+a tangent is a ratio.
 
 to test (trig - -1 is not wrapped between 0 and 99):
   create a test result about "trig"
@@ -1086,6 +1120,72 @@ to test (trig - sine):
   test (trig - sine of 90°). 
   test (trig - sine of 360°). 
 
+to test (trig - tangent of -240°): 
+  make a fuzzy test about "trig" and "tangent of -240°" 
+    and targeting -1292969/746496 with tight tolerance. 
+  make a precise angle given -240. 
+  put the precise angle's tangent in a tangent called actual. 
+  stash the fuzzy test given the actual. 
+
+to test (trig - tangent of -90°): 
+  make a fuzzy test about "trig" and "tangent of -90°" 
+    and targeting the largest number / 1 with tight tolerance. 
+  make a precise angle given 90. 
+  put the precise angle's tangent in a tangent called actual. 
+  stash the fuzzy test given the actual. 
+
+to test (trig - tangent of 0°): 
+  make a fuzzy test about "trig" and "tangent of 0°" 
+    and targeting 0/1 with tight tolerance. 
+  make a precise angle given 0. 
+  put the precise angle's tangent in a tangent called actual. 
+  stash the fuzzy test given the actual. 
+
+to test (trig - tangent of 30°): 
+  make a fuzzy test about "trig" and "tangent of 30°" 
+    and targeting 14964919/25920000 with tight tolerance. 
+  make a precise angle given 30. 
+  put the precise angle's tangent in a tangent called actual. 
+  stash the fuzzy test given the actual. 
+
+to test (trig - tangent of 360°): 
+  make a fuzzy test about "trig" and "tangent of 360°" 
+    and targeting 0/1 with tight tolerance. 
+  make a precise angle given 360. 
+  put the precise angle's tangent in a tangent called actual. 
+  stash the fuzzy test given the actual. 
+
+to test (trig - tangent of 41°15’): 
+  make a fuzzy test about "trig" and "tangent of 41°15’" 
+    and targeting 272774759/311040000 with tight tolerance. 
+  make a precise angle given 41 and 15 and 0 and 0. 
+  put the precise angle's tangent in a tangent called actual. 
+  stash the fuzzy test given the actual. 
+
+to test (trig - tangent of 45°): 
+  make a fuzzy test about "trig" and "sine of 45°" 
+    and targeting 1/1 with tight tolerance. 
+  make a precise angle given 45. 
+  put the precise angle's tangent in a tangent called actual. 
+  stash the fuzzy test given the actual. 
+
+to test (trig - tangent of 90°): 
+  make a fuzzy test about "trig" and "tangent of 90°" 
+    and targeting the largest number / 1 with tight tolerance. 
+  make a precise angle given 90. 
+  put the precise angle's tangent in a tangent called actual. 
+  stash the fuzzy test given the actual. 
+
+to test (trig - tangent): 
+  test (trig - tangent of -240°). 
+  test (trig - tangent of 0°). 
+  test (trig - tangent of 30°). 
+  test (trig - tangent of 41°15’). 
+  test (trig - tangent of 45°). 
+  test (trig - tangent of 90°). 
+  test (trig - tangent of -90°). 
+  test (trig - tangent of 360°). 
+
 to test (trig - wrap -1 between 0 and 99):
   create a test result about "trig"
     and "wrap -1 between 0 and 99"
@@ -1107,6 +1207,7 @@ to test (trig):
   test (trig - convert from radians to degrees).
   test (trig - sine).
   test (trig - cosine).
+  test (trig - tangent).
 
 the trifle denominator is a number equal to 1866240000. \ 43,200 * 43,200
 
