@@ -874,7 +874,6 @@ Automated tests make debugging easier.
   Requested by Jasper Paulsen on March 25, 2017. 
  
 188.  Calculate tangent.
-  Implemented for precise angles, like 72°10’54.32”, not radians. 
   Status:  Tested. 
   Audience:  Programmers. 
   Benefit:  Medium. 

@@ -764,6 +764,28 @@ to put some radians' sine into a sine:
   convert the result to the sine.
   negate the sine given the sign flag.
 
+to put some radians' tangent into a tangent:
+  privatize the radians.
+  normalize the radians.
+  put tau in some radians called up angle.
+  divide the up angle by 4.
+  put the up angle in some radians called down angle.
+  negate the down angle.
+  normalize the down angle.
+  if the radians are the up angle,
+    put the largest number / 1 in the tangent; exit.
+  if the radians are the down angle,
+    put the largest number / 1 in the tangent; exit.
+  put the radians' sine into a sine.
+  put the radians' cosine into a cosine.
+  put the sine's numerator in the tangent's numerator.
+  multiply the tangent's numerator
+    by the trifle denominator / the sine's denominator.
+  put the cosine's numerator in the tangent's denominator.
+  multiply the tangent's denominator
+    by the trifle denominator / the cosine's denominator.
+  reduce the tangent.
+
 to put tau into some radians:
   put 6 into the radians' whole number.
   put 12233 into the radians' nips.
@@ -1176,12 +1198,21 @@ to test (trig - tangent of 90°):
   put the precise angle's tangent in a tangent called actual. 
   stash the fuzzy test given the actual. 
 
+to test (trig - tangent of pi/4 radians): 
+  make a fuzzy test about "trig" and "sine of pi/4 radians" 
+    and targeting 1/1 with tight tolerance. 
+  put tau in some radians.
+  divide the radians by 8. 
+  put the radians' tangent in a tangent called actual. 
+  stash the fuzzy test given the actual. 
+
 to test (trig - tangent): 
   test (trig - tangent of -240°). 
   test (trig - tangent of 0°). 
   test (trig - tangent of 30°). 
   test (trig - tangent of 41°15’). 
   test (trig - tangent of 45°). 
+  test (trig - tangent of pi/4 radians). 
   test (trig - tangent of 90°). 
   test (trig - tangent of -90°). 
   test (trig - tangent of 360°). 
