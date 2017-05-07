@@ -882,3 +882,29 @@ Automated tests make debugging easier.
   Testing difficulty:  Easy. 
   Requested by Jasper Paulsen on April 4, 2017. 
  
+186.  Calculate arcsine. 
+  Status:  Tested. 
+  Audience:  Programmers. 
+  Benefit:  Medium. 
+  Implementation difficulty:  Medium. 
+  Demoing difficulty:  Medium. 
+  Testing difficulty:  Easy. 
+  Requested by Jasper Paulsen on April 4, 2017. 
+ 
+187.  Calculate arccosine. 
+  Status:  Tested. 
+  Audience:  Programmers. 
+  Benefit:  Medium. 
+  Implementation difficulty:  Medium. 
+  Demoing difficulty:  Medium. 
+  Testing difficulty:  Easy. 
+  Requested by Jasper Paulsen on April 4, 2017. 
+ 
+189.  Calculate arctangent. 
+  Status:  Tested. 
+  Audience:  Programmers. 
+  Benefit:  Medium. 
+  Implementation difficulty:  Medium. 
+  Demoing difficulty:  Medium. 
+  Testing difficulty:  Easy. 
+  Requested by Jasper Paulsen on April 4, 2017. 

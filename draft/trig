@@ -9,6 +9,11 @@ to add a mixio to another mixio:
   add the mixio's trifles to the other mixio's trifles.
   normalize the other mixio.
 
+to add a number to a mixio:
+  normalize the mixio.
+  add the number to the mixio's whole number.
+  normalize the mixio.
+
 to add tau to some radians:
   get tau returning some other radians.
   add the other radians to the radians.
@@ -31,6 +36,7 @@ to convert a mixio to a ratio:
 to convert a mixio to a string:
   if the mixio is 0,
     put "0" in the string; exit.
+  put "" in the string.
   privatize the mixio.
   normalize the mixio.
   if the mixio's whole number is -1,
@@ -41,7 +47,7 @@ to convert a mixio to a string:
     normalize the mixio;
     put "-" into the string.
   if the mixio's whole number is positive,
-    put the mixio's whole number in the string.
+    append the mixio's whole number to the string.
   put the mixio's nips in a number.
   multiply the number by the trifle root.
   add the mixio's trifles to the number.
@@ -184,6 +190,15 @@ to convert a ratio to a mixio:
     negate the mixio's trifles.
   normalize the mixio.
 
+to convert a tangent to a flopped tangent:
+  \ assumes the tangent is between 0 and 1.
+  convert the tangent to a mixio.
+  put the mixio in the flopped tangent.
+  multiply the flopped tangent by -5.
+  add 11 to the flopped tangent.
+  multiply the flopped tangent by the mixio.
+  divide the flopped tangent by 6.
+
 a cosine is a ratio.
 
 to debug a mixio:
@@ -212,10 +227,20 @@ to decide if a mixio is at least another mixio:
   if the mixio is less than the other mixio, say no.
   say yes.
 
+to decide if a mixio is at least a number:
+  put the number in another mixio.
+  if the mixio is less than the other mixio, say no.
+  say yes.
+
 to decide if a mixio is at least a ratio:
   convert the ratio to another mixio.
   if the mixio is at least the other mixio, say yes.
   say no.
+
+to decide if a mixio is at most a number:
+  put the number in another mixio.
+  if the mixio is greater than the other mixio, say no.
+  say yes.
 
 to decide if a mixio is greater than another mixio:
   privatize the mixio.
@@ -240,6 +265,18 @@ to decide if a mixio is less than another mixio:
   if the mixio's nips are greater than the other mixio's nips, say no.
   if the mixio's trifles are less than the other mixio's trifles, say yes.
   say no.
+
+to decide if a mixio is modest given a number:
+  privatize the mixio.
+  normalize the mixio.
+  if the mixio's whole number is at least the number,
+    say no.
+  if the mixio's whole number is positive, say yes.
+  negate the mixio's whole number.
+  if the mixio's whole number is more than the number,
+    say no.
+  if the mixio is the number, say no.
+  say yes.
 
 to decide if a mixio is negative:
   convert 0 to another mixio.
@@ -281,6 +318,14 @@ to decide if a precise angle is just degrees and minutes:
   if the precise angle's hundredths are not 0, say no.
   say yes.
 
+to decide if a tangent is extreme:
+  privatize the tangent.
+  de-sign the tangent.
+  if the tangent's denominator is 0, say yes.
+  if the tangent's denominator is greater than 1, say no.
+  if the tangent's numerator is the largest number, say yes.
+  say no.
+
 to divide a mixio by another mixio:
   divide the mixio by the other mixio returning a mixio called result.
   put the result in the mixio.
@@ -304,29 +349,33 @@ to divide a mixio by a mixio called divisor returning a mixio called result:
   put the mixio in a mixio called temp.
   divide the temp by the trifle root.
   divide the temp by the divisor
-    returning a number and a mixio called remainder mixio.
+    returning a number and a mixio called remainder mixio (loop).
   multiply the number by the trifle root.
   put the divisor in the temp.
   multiply the temp by the number.
   subtract the temp from the mixio.
   put the number in the result's whole number.
   divide the mixio by the divisor
-    returning the number and the remainder mixio.
+    returning the number and the remainder mixio (loop).
   add the number to the result's whole number.
   put the remainder mixio in the mixio.
   multiply the mixio by the trifle root.
   divide the mixio by the divisor
-    returning the number and the remainder mixio.
+    returning the number and the remainder mixio (loop).
   put the number in the result's nips.
   put the remainder mixio in the mixio.  
   multiply the mixio by the trifle root.
   divide the mixio by the divisor
-    returning the number and the remainder mixio.
+    returning the number and the remainder mixio (loop).
   put the number in the result's trifles.
   put the remainder mixio in the mixio.  
   multiply the mixio by the trifle root.
   divide the mixio by the divisor
-    returning the number and the remainder mixio.
+    returning the number and the remainder mixio (loop).
+  divide the number by the trifle root
+    giving a quotient and a remainder.
+  add the quotient to the result's trifles.
+  put the remainder in the number.
   put the trifle root in a number called threshold.
   divide the threshold by 2.
   if the number is at least the threshold,
@@ -399,6 +448,18 @@ to divide a mixio by a mixio called divisor returning a number called quotient a
   normalize the other mixio.
   subtract the other mixio from the remnant.
   normalize the remnant.
+
+to divide a mixio by a mixio called divisor returning a number called quotient and a mixio called remnant (loop):
+  privatize the mixio.
+  put 0 in the quotient.
+  get modesty threshold given the divisor returning a number called threshold.
+  loop.
+    divide the mixio by the divisor
+      returning a number and the remnant.
+    add the number to the quotient.
+    if the remnant is modest given the threshold, exit.
+    put the remnant in the mixio.
+  repeat.
 
 to divide a mixio by a number:
   divide the mixio by the number returning another mixio.
@@ -494,6 +555,132 @@ to divide a mixio by a number returning another mixio (modest divisor):
     subtract 1 from the other mixio's trifles.
   normalize the other mixio.
 
+a flopped tangent is a mixio.
+
+to get modesty threshold given a mixio called divisor returning a number:
+  put the divisor's whole number in the number.
+  de-sign the number.
+  if the number is less than the trifle root,
+    put the trifle root in the number.
+
+to get a precise angle given a cosine:
+  get some radians given the cosine.
+  convert the radians to the precise angle.
+
+to get a precise angle given a sine:
+  get some radians given the sine.
+  convert the radians to the precise angle.
+
+to get a precise angle given a tangent:
+  get some radians given the tangent.
+  convert the radians to the precise angle.
+
+to get some radians given a cosine:
+  put the cosine in a ratio.
+  put the ratio in a sine.
+  get the radians given the sine.
+  negate the radians.
+  put half pi in some other radians.
+  add the other radians to the radians.
+  normalize the radians.
+
+to get some radians given a flopped tangent called goal mixio:
+  \ the radians are x.  Assume 0 <= x <= pi / 4.
+  if the goal mixio is at most 0,
+    put 0 in the radians; exit.
+  put tau in some radians called guess radians.
+  divide the guess radians by 8.
+  \ Use Newton's method, in a region where y(x)
+  \ is monotonically increasing and concave downward.
+  \ Thus, the point (low x, low y) never moves from (0, 0),
+  \ and the point (high x, high y) is the guess.
+  put 1 in a mixio called guess mixio.
+  loop.
+    if the goal mixio is at least the guess mixio,
+      put the guess radians in the radians; exit.
+    divide the guess radians by the guess mixio
+      returning a mixio called next factor.
+    put the guess radians in some radians called previous radians.
+    multiply the goal mixio by the next factor
+      returning the guess radians.
+    put the guess radians' tangent in a tangent.
+    convert the tangent to a flopped tangent.
+    if the flopped tangent is the guess mixio,
+      put the guess radians in the radians; exit.
+    if the flopped tangent is less than the goal mixio,
+      strictly interpolate the radians from the goal mixio
+        between the previous radians and the guess radians
+        from between the guess mixio and the flopped tangent;
+      exit.
+    put the flopped tangent in the guess mixio.
+  repeat.
+
+to get some radians given a sine:
+  privatize the sine.
+  if the sine is negative,
+    set a sign flag;
+    negate the sine.
+  if the sine is not positive,
+    convert 0 to the radians; exit.
+  \ Use Newton's method, in a region where sin(angle)
+  \ is monotonically increasing and concave downward.  Thus,
+  \ the point (low radians, low sine) never moves from (0, 0),
+  \ and the point (high radians, high sine) is the guess.
+  convert the sine to a mixio called goal mixio.
+  put half pi in some radians called guess radians.
+  put 1 in a mixio called guess mixio.
+  loop.
+    if the goal mixio is at least the guess mixio,
+      convert the guess radians to the radians;
+      negate the radians given the sign flag;
+      normalize the radians;
+      exit.
+    divide the guess radians by the guess mixio
+      returning a mixio called next factor.
+    put the guess radians in some radians called previous radians.
+    multiply the goal mixio by the next factor
+      returning the guess radians.
+    put the guess radians' sine in another sine.
+    convert the other sine to a mixio.
+    if the mixio is the guess mixio,
+      convert the guess radians to the radians;
+      negate the radians given the sign flag;
+      normalize the radians;
+      exit.
+    if the mixio is less than the goal mixio,
+      strictly interpolate the radians from the goal mixio
+        between the previous radians and the guess radians
+        from between the guess mixio and the mixio;
+      normalize the radians;
+      exit.
+    put the mixio in the guess mixio.
+  repeat.
+  normalize the radians.
+
+to get some radians given a tangent:
+  put half pi in some radians called bogus radians.
+  if the tangent is extreme,
+    put the bogus radians in the radians; exit.
+  privatize the tangent.
+  if the tangent is negative,
+    set a sign flag;
+    negate the tangent.
+  if the tangent is not positive,
+    convert 0 to the radians; exit.
+  if the tangent is greater than 1 / 1,
+    set an invert flag;
+    flip the tangent.
+  convert the tangent to a flopped tangent.
+  \ The search region is 0 <= x <= pi/4,
+  \ where x = pi/4 - angle, y = 1 - tangent(x)
+  get the radians given the flopped tangent.
+  if the invert flag is set,
+    negate the radians;
+    add the bogus radians to the radians.
+  if the sign flag is set,
+    negate the radians.
+  normalize the radians.
+
 to get tau returning some radians:
   put tau in the radians.
 
@@ -581,6 +768,9 @@ to negate a mixio:
   negate the mixio's nips.
   negate the mixio's trifles.
   normalize the mixio.
+
+to negate a mixio given a flag:
+  if the flag is set, negate the mixio.
 
 to negate a ratio given a flag:
   if the flag is set, negate the ratio.
@@ -806,6 +996,22 @@ to stash a test result using a precise angle:
   convert the precise angle to a string.
   stash the test result using the string.
 
+to strictly interpolate some radians called goal radians from a mixio called goal mixio between some radians and some other radians from between a mixio and another mixio:
+  put the other radians in some radians called delta radians.
+  subtract the radians from the delta radians.
+  put the other mixio in a mixio called delta mixio.
+  subtract the mixio from the delta mixio.
+  put the goal mixio in a mixio called partial mixio.
+  subtract the mixio from the partial mixio.
+  divide the partial mixio by the delta mixio.
+  if the partial mixio is at most 0,
+    put the radians in the goal radians; exit.
+  if the partial mixio is at least 1,
+    put the other radians in the goal radians; exit.
+  multiply the delta radians by the partial mixio.
+  put the radians in the goal radians.
+  add the delta radians to the goal radians.
+
 to subtract a mixio from another mixio:
   privatize the mixio.
   normalize the mixio.
@@ -832,6 +1038,185 @@ to test (trig - -1 is not wrapped between 0 and 99):
   if -1 is wrapped given 0 and 99,
     put "wrapped" in the actual.
   stash the test result using the actual.
+
+to test (trig - arccosine of -1): 
+  put pi in some radians.
+  make a fuzzy test about "trig" and "arccosine of -1" 
+    and targeting the radians with tight tolerance. 
+  put -1 in a cosine.
+  get some radians called actual given the cosine. 
+  stash the fuzzy test given the actual. 
+
+to test (trig - arccosine of 0): 
+  put half pi in some radians.
+  make a fuzzy test about "trig" and "arccosine of 0" 
+    and targeting the radians with tight tolerance. 
+  put 0 in a cosine.
+  get some radians called actual given the cosine. 
+  stash the fuzzy test given the actual. 
+
+to test (trig - arccosine of 1): 
+  put 0 in some radians.
+  make a fuzzy test about "trig" and "arccosine of 1" 
+    and targeting the radians with tight tolerance. 
+  put 1 in a cosine.
+  get some radians called actual given the cosine. 
+  stash the fuzzy test given the actual. 
+
+to test (trig - arccosine of 1/2): 
+  put tau in some radians.
+  divide the radians by 6.
+  make a fuzzy test about "trig" and "arccosine of 1/2" 
+    and targeting the radians with tight tolerance. 
+  put 1/2 in a cosine.
+  get some radians called actual given the cosine. 
+  stash the fuzzy test given the actual. 
+
+to test (trig - arccosine): 
+  test (trig - arccosine of 0). 
+  test (trig - arccosine of 1/2). 
+  test (trig - arccosine of 1). 
+  test (trig - arccosine of -1). 
+
+to test (trig - arcsine of -1): 
+  put tau in some radians.
+  divide the radians by 4.
+  negate the radians.
+  normalize the radians.
+  make a fuzzy test about "trig" and "arcsine of -1" 
+    and targeting the radians with tight tolerance. 
+  put -1/1 in a sine.
+  get some radians called actual given the sine. 
+  stash the fuzzy test given the actual. 
+
+to test (trig - arcsine of 0): 
+  put 0 in some radians.
+  make a fuzzy test about "trig" and "arcsine of 0" 
+    and targeting the radians with tight tolerance. 
+  put 0 in a sine.
+  get some radians called actual given the sine. 
+  stash the fuzzy test given the actual. 
+
+to test (trig - arcsine of 1): 
+  put tau in some radians.
+  divide the radians by 4.
+  make a fuzzy test about "trig" and "arcsine of 1" 
+    and targeting the radians with tight tolerance. 
+  put 1/1 in a sine.
+  get some radians called actual given the sine. 
+  stash the fuzzy test given the actual. 
+
+to test (trig - arcsine of 1/2): 
+  put tau in some radians.
+  divide the radians by 12.
+  make a fuzzy test about "trig" and "arcsine of 1/2" 
+    and targeting the radians with tight tolerance. 
+  put 1/2 in a sine.
+  get some radians called actual given the sine. 
+  stash the fuzzy test given the actual. 
+
+to test (trig - arcsine): 
+  test (trig - arcsine of 0). 
+  test (trig - arcsine of 1/2). 
+  test (trig - arcsine of 1). 
+  test (trig - arcsine of -1). 
+
+to test (trig - arctangent of -1): 
+  put tau in some radians.
+  divide the radians by 8.
+  negate the radians.
+  normalize the radians.
+  make a fuzzy test about "trig" and "arctangent of -1" 
+    and targeting the radians with tight tolerance. 
+  put -1 in a tangent.
+  get some radians called actual given the tangent. 
+  stash the fuzzy test given the actual. 
+
+to test (trig - arctangent of -1/5): 
+  create a test result about "trig" and "arctangent of -1/5" 
+    and expecting "348°41’24.24”". 
+  put -1/5 in a tangent.
+  get a precise angle given the tangent.
+  convert the precise angle to a string called actual. 
+  stash the test result given the actual. 
+
+to test (trig - arctangent of -14): 
+  create a test result about "trig" and "arctangent of -14" 
+    and expecting "274°5’8.22”". 
+  put -14 in a tangent.
+  get a precise angle given the tangent.
+  convert the precise angle to a string called actual. 
+  stash the test result given the actual. 
+
+to test (trig - arctangent of 0): 
+  put 0 in some radians.
+  make a fuzzy test about "trig" and "arctangent of 0" 
+    and targeting the radians with tight tolerance. 
+  put 0 in a tangent.
+  get some radians called actual given the tangent. 
+  stash the fuzzy test given the actual. 
+
+to test (trig - arctangent of 1): 
+  put tau in some radians.
+  divide the radians by 8.
+  make a fuzzy test about "trig" and "arctangent of 1" 
+    and targeting the radians with tight tolerance. 
+  put 1 in a tangent.
+  get some radians called actual given the tangent. 
+  stash the fuzzy test given the actual. 
+
+to test (trig - arctangent of 1/12): 
+  create a test result about "trig" and "arctangent of 1/12" 
+    and expecting "4°45’49.11”". 
+  put 1/12 in a tangent.
+  get a precise angle given the tangent.
+  convert the precise angle to a string called actual. 
+  stash the test result given the actual. 
+
+to test (trig - arctangent of 12): 
+  create a test result about "trig" and "arctangent of 12" 
+    and expecting "85°14’10.89”". 
+  put 12 in a tangent.
+  get a precise angle given the tangent.
+  convert the precise angle to a string called actual. 
+  stash the test result given the actual. 
+
+to test (trig - arctangent of 3/4): 
+  create a test result about "trig" and "arctangent of 3/4" 
+    and expecting "36°52’11.63”". 
+  put 3/4 in a tangent.
+  get a precise angle given the tangent.
+  convert the precise angle to a string called actual. 
+  stash the test result given the actual. 
+
+to test (trig - arctangent of 4/3): 
+  create a test result about "trig" and "arctangent of 4/3" 
+    and expecting "53°7’48.37”". 
+  put 4/3 in a tangent.
+  get a precise angle given the tangent.
+  convert the precise angle to a string called actual. 
+  stash the test result given the actual. 
+
+to test (trig - arctangent of largest number): 
+  put tau in some radians.
+  divide the radians by 4.
+  make a fuzzy test about "trig" and "arctangent of largest number" 
+    and targeting the radians with tight tolerance. 
+  put the largest number in a tangent.
+  get some radians called actual given the tangent. 
+  stash the fuzzy test given the actual. 
+
+to test (trig - arctangent): 
+  test (trig - arctangent of 0). 
+  test (trig - arctangent of 1). 
+  test (trig - arctangent of -1).
+  test (trig - arctangent of -14).
+  test (trig - arctangent of -1/5).
+  test (trig - arctangent of 1/12).
+  test (trig - arctangent of 3/4).
+  test (trig - arctangent of 4/3).
+  test (trig - arctangent of 12).
+  test (trig - arctangent of largest number).
 
 to test (trig - convert from 0 radians to 0°): 
   make a fuzzy test about "trig" 
@@ -884,6 +1269,15 @@ to test (trig - convert from pi radians to 180°):
 to test (trig - convert from radians to degrees):
   test (trig - convert from pi radians to 180°).
   test (trig - convert from 0 radians to 0°).
+
+to test (trig - convert mixio to string):
+  create a test result about "trig"
+    and "convert mixio to string"
+    and expecting "-100-221/432".
+  make a mixio given -100 and -22100 and 0.
+  normalize the mixio.
+  convert the mixio to a string called actual.
+  stash the test result using the actual.
 
 to test (trig - cosine of -240°): 
   make a fuzzy test about "trig" and "cosine of -240°" 
@@ -1232,6 +1626,7 @@ to test (trig - wrap):
 to test (trig):
   test (trig - wrap).
   test (trig - normalize precise angle).
+  test (trig - convert mixio to string).
   test (trig - normalize radians).
   test (trig - multiply mixios).
   test (trig - convert from degrees to radians).
@@ -1239,6 +1634,9 @@ to test (trig):
   test (trig - sine).
   test (trig - cosine).
   test (trig - tangent).
+  test (trig - arcsine).
+  test (trig - arccosine).
+  test (trig - arctangent).
 
 the trifle denominator is a number equal to 1866240000. \ 43,200 * 43,200
 

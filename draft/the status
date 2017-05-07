@@ -367,8 +367,15 @@ to stash a fuzzy test given a mixio:
   put the mixio in a string. 
   pass the test result given the string. 
   if the mixio is greater than the fuzzy test's maximum,
+\    debug the mixio then " is greater than " then the fuzzy test's maximum;
     fail the test result given the string. 
   if the mixio is less than the fuzzy test's minimum, 
+\    debug the fuzzy test's bullseye
+\      then " ± " then the fuzzy test's tolerance ratio
+\      then "; expected " then the test result's expectation
+\      then "; " then the mixio then " is less than " then the fuzzy test's minimum;
+\    debug the mixio (long);
+\    debug the fuzzy test's minimum (long);
     fail the test result given the string. 
   append the test result to the status' all test results. 
 
