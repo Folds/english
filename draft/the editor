@@ -261,7 +261,8 @@ to get a first row and an last row given a sheet number and a source:
 
 to get the status for a source:
   if the source is nil, clear the status' string; exit.
-  put the source's text's status string into the status's string.
+  if the source's text is not nil,
+    put the source's text's status string into the status's string.
   if the source's read-only flag is set, append " (r)" to the status's string.
 
 to get a substring given a row and a source (commented part):
@@ -446,20 +447,35 @@ to handle an event given a source (key down - up-arrow key):
   show the desktop with status.
 
 to handle an event given a source (key down):
-  if the event's byte is printable, handle the event given the source (key down - printable key); exit.
-  if the event's key is the backspace key, handle the event given the source (key down - backspace key); exit.
-  if the event's key is the delete key, handle the event given the source (key down - delete key); exit.
-  if the event's key is the down-arrow key, handle the event given the source (key down - down-arrow key); exit.
-  if the event's key is the end key, handle the event given the source (key down - end key); exit.
-  if the event's key is the enter key, handle the event given the source (key down - enter key); exit.
-  if the event's key is the escape key, handle the event given the source (key down - escape key); exit.
-  if the event's key is the home key, handle the event given the source (key down - home key); exit.
-  if the event's key is the left-arrow key, handle the event given the source (key down - left-arrow key); exit.
-  if the event's key is the page-down key, handle the event given the source (key down - page-down key); exit.
-  if the event's key is the page-up key, handle the event given the source (key down - page-up key); exit.
-  if the event's key is the right-arrow key, handle the event given the source (key down - right-arrow key); exit.
-  if the event's key is the tab key, handle the event given the source (key down - tab key); exit.
-  if the event's key is the up-arrow key, handle the event given the source (key down - up-arrow key); exit.
+  if the event is nil, exit.
+  if the event's byte is printable,
+    handle the event given the source (key down - printable key); exit.
+  if the event's key is the backspace key,
+    handle the event given the source (key down - backspace key); exit.
+  if the event's key is the delete key,
+    handle the event given the source (key down - delete key); exit.
+  if the event's key is the down-arrow key,
+    handle the event given the source (key down - down-arrow key); exit.
+  if the event's key is the end key,
+    handle the event given the source (key down - end key); exit.
+  if the event's key is the enter key,
+    handle the event given the source (key down - enter key); exit.
+  if the event's key is the escape key,
+    handle the event given the source (key down - escape key); exit.
+  if the event's key is the home key,
+    handle the event given the source (key down - home key); exit.
+  if the event's key is the left-arrow key,
+    handle the event given the source (key down - left-arrow key); exit.
+  if the event's key is the page-down key,
+    handle the event given the source (key down - page-down key); exit.
+  if the event's key is the page-up key,
+    handle the event given the source (key down - page-up key); exit.
+  if the event's key is the right-arrow key,
+    handle the event given the source (key down - right-arrow key); exit.
+  if the event's key is the tab key,
+    handle the event given the source (key down - tab key); exit.
+  if the event's key is the up-arrow key,
+    handle the event given the source (key down - up-arrow key); exit.
 
 to handle an event given a source (left click):
   if the event's spot is not in the source, exit.

@@ -2631,7 +2631,10 @@ to decide if a row of a text is visible:
 to decide if a row of a text is visible given a box: 
   if the row of the text is not visible, say no. 
   privatize the box. 
-  get another box given the row and the text. 
+  get another box given the row and the text.
+  if the current tab is nil, say no.
+  if the current tab's node is nil, say no.
+  if the current tab's node's page is nil, say no.
   put the current tab's node's page's origin in a spot. 
   adjust the box given 0 and the tpp and 0 and - the tpp. 
   adjust the box given the spot's x and the spot's y and the spot's x and the spot's y. 
@@ -2673,6 +2676,7 @@ to decide if shift is implied by a mouse wyrd:
   say no.
 
 to decide if something is selected in a text:
+  if the text is nil, say no.
   if the text's anchor is the text's caret, say no.
   say yes.
 
@@ -3076,6 +3080,7 @@ to decide if there is something to remove in a text:
   if something is selected in the text, say yes.
   if the text's caret row# is not the text's row count, say yes.
   get a row given the text's caret row# and the text.
+  if the row is nil, say no.
   if the text's caret column# is not the row's string's length, say yes.
   say no.
 
@@ -4964,6 +4969,7 @@ to get a selection box given a row and a text:
   get the selection box given the row and the text (right side).
 
 to get a selection box given a row and a text (left side):
+  \ to-do:  what if the row and/or text is nil?
   put the text's normalized selection into a selection.
   put the text's globalized origin's x into the selection box's left.
   if the selection's anchor row# is the row's row#,
@@ -4972,6 +4978,7 @@ to get a selection box given a row and a text (left side):
   limit the selection box's left to the text's left and the text's right.
 
 to get a selection box given a row and a text (right side):
+  \ to-do:  what if the row and/or text is nil?
   put the text's normalized selection into a selection.
   put the text's right into the selection box's right.
   if the selection's caret row# is the row's row#,
@@ -6121,6 +6128,7 @@ to insert a string into another string before a byte#:
 to insert a string into a text:
   if the text is nil, exit.
   get a row given the text's caret row# and the text.
+  if the row is nil, exit. \ should this error trap also deselect the text?
   put the row's string's length minus the text's caret column# into a number.
   put the row's string into another string.
   insert the string into the other string before the text's caret column#.
@@ -6130,6 +6138,8 @@ to insert a string into a text:
   remove the row from the text's rows.
   destroy the row.
   renumber the text's rows.
+  if the other row is nil,
+    deselect the text; exit.
   put the other row's row# into the text's caret row#.
   put the other row's string's length minus the number into the text's caret column#.
   deselect the text.
@@ -6255,6 +6265,9 @@ to jump the caret left in a text:
   move the caret left to any non-noise byte in the text.
   if the text's caret column# is 1, exit.
   get a row given the text's caret row# and the text.
+  if the row is nil,
+    move the caret left to any non-noise byte in the text;
+    exit.
   put the row's string's first plus the text's caret column# minus 2 into a byte pointer.
   if the byte pointer's target is alphanumeric,
     move the caret left to any non-alphanumeric byte in the text.
@@ -6266,6 +6279,9 @@ to jump the caret right in a text:
   if the text is nil, exit.
   move the caret right to any non-noise byte in the text.
   get a row given the text's caret row# and the text.
+  if the row is nil,
+    move the caret right to any non-noise byte in the text;
+    exit.
   if the text's caret column# is the row's string's length, exit.
   put the row's string's first plus the text's caret column# minus 1 into a byte pointer.
   if the byte pointer's target is alphanumeric,
@@ -6304,6 +6320,7 @@ to limit the caret in a text:
   if the text is nil, exit.
   limit the text's caret row# to 1 and the text's row count.
   get a row given the text's caret row# and the text.
+  if the row is nil, exit.
   limit the text's caret column# to 1 and the row's string's length.
 
 to limit a number to another number and a third number:
@@ -6707,17 +6724,20 @@ to move the caret to the first byte of a text:
 to move the caret to the last byte of the current row of a text:
   if the text is nil, exit.
   get a row given the text's caret row# and the text.
+  if the row is nil, exit.
   put the row's string's length into the text's caret column#.
 
 to move the caret to the last byte of a text:
   if the text is nil, exit.
   put the text's row count into the text's caret row#.
   get a row given the text's caret row# and the text.
+  if the row is nil, exit.
   put the row's string's length into the text's caret column#.
 
 to move the caret left to any non-alphanumeric byte in a text:
   if the text is nil, exit.
   get a row given the text's caret row# and the text.
+  if the row is nil, exit.
   loop.
     if the text's caret column# is 1, exit.
     put the row's string's first plus the text's caret column# minus 2 into a byte pointer.
@@ -6728,6 +6748,7 @@ to move the caret left to any non-alphanumeric byte in a text:
 to move the caret left to any non-noise byte in a text:
   if the text is nil, exit.
   get a row given the text's caret row# and the text.
+  if the row is nil, exit.
   loop.
     if the text's caret column# is 1, exit.
     put the row's string's first plus the text's caret column# minus 2 into a byte pointer.
@@ -6738,6 +6759,7 @@ to move the caret left to any non-noise byte in a text:
 to move the caret left to any non-symbolic byte in a text:
   if the text is nil, exit.
   get a row given the text's caret row# and the text.
+  if the row is nil, exit.
   loop.
     if the text's caret column# is 1, exit.
     put the row's string's first plus the text's caret column# minus 2 into a byte pointer.
@@ -6753,6 +6775,7 @@ to move the caret left in a text:
 to move the caret right to any non-alphanumeric byte in a text:
   if the text is nil, exit.
   get a row given the text's caret row# and the text.
+  if the row is nil, exit.
   loop.
     if the text's caret column# is the row's string's length, exit.
     put the row's string's first plus the text's caret column# minus 1 into a byte pointer.
@@ -6763,6 +6786,7 @@ to move the caret right to any non-alphanumeric byte in a text:
 to move the caret right to any non-noise byte in a text:
   if the text is nil, exit.
   get a row given the text's caret row# and the text.
+  if the row is nil, exit.
   loop.
     if the text's caret column# is the row's string's length, exit.
     put the row's string's first plus the text's caret column# minus 1 into a byte pointer.
@@ -6773,6 +6797,7 @@ to move the caret right to any non-noise byte in a text:
 to move the caret right to any non-symbolic byte in a text:
   if the text is nil, exit.
   get a row given the text's caret row# and the text.
+  if the row is nil, exit.
   loop.
     if the text's caret column# is the row's string's length, exit.
     put the row's string's first plus the text's caret column# minus 1 into a byte pointer.
@@ -8639,9 +8664,11 @@ to remove any selected bytes in a text:
   put the text's selection into a selection.
   normalize the selection.
   get a row given the selection's anchor row# and the text.
+  if the row is nil, exit. \ should this error trap also perform the end-of-routine clean-up?
   slap a substring on the row's string.
   put the substring's first plus the selection's anchor column# minus 2 into the substring's last.
   get another row given the selection's caret row# and the text.
+  if the other row is nil, exit. \ should this error trap also perform the end-of-routine clean-up?
   slap another substring on the other row's string.
   put the other substring's first plus the selection's caret column# minus 1 into the other substring's first.
   put the substring then the other substring into the row's string.
@@ -9717,6 +9744,7 @@ to slap a rider on a string:
 to slap a substring on any selected bytes in a row of a text:
   clear the substring.
   if the text is nil, exit.
+  if the row is nil, exit.
   if the row of the text is not selected, exit.
   slap the substring on the row's string.
   put the text's normalized selection into a selection.
@@ -9959,6 +9987,7 @@ to square up any selection in a text:
   if nothing is selected in the text, exit.
   normalize the text's selection.
   get a row given the text's caret row# and the text.
+  if the row is nil, exit.
   put 1 into the text's anchor column#.
   if the text's caret column# is not 1,
     add 1 to the text's caret row#; put 1 into the text's caret column#.

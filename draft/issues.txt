@@ -77,8 +77,12 @@ from higher priority to lower priority.
 
 220.  Fix intermittent crashing bug(s) in editor.
   The editor can crash when attempting to scroll the scrollbar upward.
+  The editor can crash when attempting to add characters
+  within a row of text.  This problem has been observed
+  both when the row was exactly the pad width,
+  and when the row was much shorter than the pad width.
   This bug is very hard to reproduce.
-  Status:  request.
+  Status:  Partially implemented.
   Audience:  All users.
   Benefit:   Critical.
   Implementation difficulty:  Hard.

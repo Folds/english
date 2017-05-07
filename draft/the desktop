@@ -1195,8 +1195,10 @@ to handle an event (key down - shortcut):
 to handle an event (key down):
   if the event is any shortcut, handle the event (key down - shortcut); exit.
   if the event is ctrl-tab, handle the event (key down - ctrl-tab); exit.
+  if the current tab is nil, exit.
   if the current tab's mode is "finder",
     handle the event given the current tab's node (key down); exit.
+  if the current tab's node is nil, exit.
   if the current tab's mode is "editor",
     handle the event given the current tab's node's source (key down); exit.
   if the current tab's mode is "docster",
