@@ -9,6 +9,11 @@ to add a mixio to another mixio:
   add the mixio's trifles to the other mixio's trifles.
   normalize the other mixio.
 
+to add a mixio to another mixio returning a mixio called result:
+  privatize the other mixio.
+  add the mixio to the other mixio.
+  put the other mixio in the result.
+
 to add a number to a mixio:
   normalize the mixio.
   add the number to the mixio's whole number.
@@ -213,6 +218,11 @@ to debug a precise angle:
   convert the precise angle to a string.
   debug the string.
 
+to debug a string and a mixio and another string and another mixio (long):
+  convert the mixio to a string called description (long).
+  convert the other mixio to a string called other description (long).
+  debug the string then the description then the other string then the other description.
+
 to decide if a mixio is another mixio:
   privatize the mixio.
   privatize the other mixio.
@@ -236,6 +246,10 @@ to decide if a mixio is at least a ratio:
   convert the ratio to another mixio.
   if the mixio is at least the other mixio, say yes.
   say no.
+
+to decide if a mixio is at most another mixio:
+  if the mixio is greater than the other mixio, say no.
+  say yes.
 
 to decide if a mixio is at most a number:
   put the number in another mixio.
@@ -316,6 +330,45 @@ to decide if a precise angle is just degrees:
 to decide if a precise angle is just degrees and minutes:
   if the precise angle's seconds are not 0, say no.
   if the precise angle's hundredths are not 0, say no.
+  say yes.
+
+to decide if square root nips are close given a mixio and a mixio called result:
+  privatize the result.
+  add 1 to the result's nips.
+  multiply the result by the result returning a mixio called bigger product.
+  if the bigger product is less than the mixio, say no.
+  subtract 2 from the result's nips.
+  multiply the result by the result returning a mixio called smaller product.
+  if the smaller product is greater than the mixio, say no.
+  say yes.
+
+to decide if square root trifles are close given a mixio and a mixio called result:
+  privatize the result.
+  add 1 to the result's trifles.
+  multiply the result by the result returning a mixio called bigger product.
+  if the bigger product is less than the mixio, say no.
+  subtract 2 from the result's trifles.
+  multiply the result by the result returning a mixio called smaller product.
+  if the smaller product is greater than the mixio, say no.
+  say yes.
+
+to decide if square root trifles should be decreased given a mixio and a mixio called result:
+  privatize the result.
+  subtract 1 from the result's trifles.
+  if square root trifles should be increased given the mixio and the result,
+    say no.
+  say yes.
+
+to decide if square root trifles should be increased given a mixio and a mixio called result:
+  privatize the result.
+  multiply the result by the result returning a mixio called product.
+  if the product is at least the mixio, say no.
+  subtract the product from the mixio returning a mixio called shortage.
+  add 1 to the result's trifles.
+  multiply the result by the result returning the product.
+  if the product is at most the mixio, say yes.
+  subtract the mixio from the product returning a mixio called complement.
+  if the shortage is less than the complement, say no.
   say yes.
 
 to decide if a tangent is extreme:
@@ -482,7 +535,8 @@ to divide a mixio by a number returning another mixio:
   divide the mixio by the gcd
     returning a mixio called temp (modest divisor).
   put the number in a number called remnant.
-  divide the temp by the remnant returning the mixio.
+  divide the remnant by the gcd.
+  divide the temp by the remnant returning the other mixio.
 
 to divide a mixio by a number returning another mixio (large divisor):
   if the number is 0,
@@ -681,6 +735,31 @@ to get some radians given a tangent:
     negate the radians.
   normalize the radians.
 
+to get square root nips given a mixio and a mixio called result:
+  \ assumes that the result is already within 1 of correct answer.
+  if the mixio's whole number is the largest number,
+    put 41040 in the result's nips; exit.
+  loop.
+    if square root nips are close given the mixio and the result,
+      exit.
+    refine square root nips given the mixio and the result.
+  repeat.
+
+to get square root trifles given a mixio and a mixio called result:
+  if the mixio's whole number is the largest number,
+    put 1007 in the result's trifles;
+    put the mixio's nips in a number called bonus nips;
+    divide the bonus nips by 2;
+    scale the bonus nips by the trifle root / the largest square root;
+    add the bonus nips to the result's trifles;
+    exit.
+  \ assumes that the result is already within 2 nips of correct answer.
+  loop.
+    if square root trifles are close given the mixio and the result,
+      exit.
+    refine square root trifles given the mixio and the result.
+  repeat.
+
 to get tau returning some radians:
   put tau in the radians.
 
@@ -836,6 +915,29 @@ to put a mixio in another mixio:
 to put a mixio in a string:
   convert the mixio to the string.
 
+to put a mixio's square root into a mixio called result:
+  \ Finds magnitude of the square root.
+  privatize the mixio.
+  put 0 in the result.
+  if the mixio is 0, exit.
+  if the mixio is negative,
+    negate the mixio.  \ similar to cal-4700's behavior.
+  if the mixio is 1,
+    put 1 into the result; exit.
+  normalize the mixio.
+  put the square root of the mixio's whole number in the result's whole number.
+  put the result's whole number times the result's whole number in a number.
+  if the mixio is the number, exit.
+  get square root nips given the mixio and the result.
+  get square root trifles given the mixio and the result.
+  if square root trifles should be increased given the mixio and the result,
+    add 1 to the result's trifles;
+    normalize the result;
+    exit.
+  if square root trifles should be decreased given the mixio and the result,
+    subtract 1 from the result's trifles.
+  normalize the result.
+
 to put a number in a mixio:
   put the number in the mixio's whole number.
   put 0 in the mixio's nips.
@@ -986,6 +1088,35 @@ to put some trifles in a ratio:
 
 some radians are a mixio.
 
+to refine square root nips given a mixio and a mixio called result:
+  \ assumes that the result is already within 1 of correct answer.
+  if the result's whole number is 0,
+    put the mixio's nips in a number;
+    multiply the number by the trifle root;
+    add the mixio's trifles to the number;
+    put the square root of the number in the result's nips;
+    exit.
+  privatize the mixio.
+  multiply the result by the result returning a mixio called product.
+  subtract the product from the mixio.
+  divide the mixio by 2.
+  put the result's whole number in the number.
+  multiply the number by the trifle root.
+  add the result's nips to the number.
+  multiply the mixio by the trifle root.
+  divide the mixio by the number.
+  add the mixio to the result.
+
+to refine square root trifles given a mixio and a mixio called result:
+  \ assumes that the result is already within 2 nips of correct answer.
+  if the result's whole number is 0, exit.
+  privatize the mixio.
+  multiply the result by the result returning a mixio called product.
+  subtract the product from the mixio.
+  divide the mixio by 2.
+  divide the mixio by the result.
+  add the mixio to the result.
+
 a sine is a ratio.
 
 to stash a fuzzy test given a ratio:
@@ -1024,11 +1155,144 @@ to subtract a mixio from another mixio:
   convert the other mixio to the other string (long).
   normalize the other mixio.
 
+to subtract a mixio from another mixio returning a mixio called result:
+  privatize the mixio.
+  negate the mixio.
+  add the mixio to the other mixio returning the result.
+
 to subtract some trifles from a mixio:
   subtract the trifles from the mixio's trifles.
   normalize the mixio.
 
 a tangent is a ratio.
+
+to test (mixio square root of 0):
+  create a test result about "trig"
+    and "mixio square root of 0" and expecting "0".
+  put 0 in a mixio.
+  put the mixio's square root in another mixio.
+  convert the other mixio to a string called actual.
+  stash the test result given the actual.
+
+to test (mixio square root of 1):
+  create a test result about "trig"
+    and "mixio square root of 1" and expecting "1".
+  put 1 in a mixio.
+  put the mixio's square root in another mixio.
+  convert the other mixio to a string called actual.
+  stash the test result given the actual.
+
+to test (mixio square root of 100):
+  create a test result about "trig"
+    and "mixio square root of 100" and expecting "10".
+  put 100 in a mixio.
+  put the mixio's square root in another mixio.
+  convert the other mixio to a string called actual.
+  stash the test result given the actual.
+
+to test (mixio square root of 1000000):
+  create a test result about "trig"
+    and "mixio square root of 1000000" and expecting "1000".
+  put 1000000 in a mixio.
+  put the mixio's square root in another mixio.
+  convert the other mixio to a string called actual.
+  stash the test result given the actual.
+
+to test (mixio square root of 1002000):
+  make a fuzzy test about "trig"
+    and "mixio square root of 1002000"
+    and targeting 2004001/2002 with tight tolerance.
+  put 1002000 in a mixio.
+  put the mixio's square root in a mixio called actual.
+  stash the fuzzy test given the actual.
+
+to test (mixio square root of 1002001):
+  create a test result about "trig"
+    and "mixio square root of 1002001" and expecting "1001".
+  put 1002001 in a mixio.
+  put the mixio's square root in another mixio.
+  convert the other mixio to a string called actual.
+  stash the test result given the actual.
+
+to test (mixio square root of 121):
+  create a test result about "trig"
+    and "mixio square root of 121" and expecting "11".
+  put 121 in a mixio.
+  put the mixio's square root in another mixio.
+  convert the other mixio to a string called actual.
+  stash the test result given the actual.
+
+to test (mixio square root of 1866240000):
+  create a test result about "trig"
+    and "mixio square root of 1866240000" and expecting "43200".
+  put 1866240000 in a mixio.
+  put the mixio's square root in another mixio.
+  convert the other mixio to a string called actual.
+  stash the test result given the actual.
+
+to test (mixio square root of 2147395600):
+  create a test result about "trig"
+    and "mixio square root of 2147395600" and expecting "46340".
+  put 2147395600 in a mixio.
+  put the mixio's square root in another mixio.
+  convert the other mixio to a string called actual.
+  stash the test result given the actual.
+
+to test (mixio square root of 2147483647):
+  make a fuzzy test about "trig"
+    and "mixio square root of 2147483647"
+    and targeting 926819/20 with tolerance 21600 trifles.
+  put 2147483647 in a mixio.
+  put the mixio's square root in a mixio called actual.
+  stash the fuzzy test given the actual.
+
+to test (mixio square root of 3):
+  make a fuzzy test about "trig"
+    and "mixio square root of 3"
+    and targeting 1292969/746496 with tight tolerance.
+  put 3 in a mixio.
+  put the mixio's square root in a mixio called actual.
+  stash the fuzzy test given the actual.
+
+to test (mixio square root of 81):
+  create a test result about "trig"
+    and "mixio square root of 81" and expecting "9".
+  put 81 in a mixio.
+  put the mixio's square root in another mixio.
+  convert the other mixio to a string called actual.
+  stash the test result given the actual.
+
+to test (mixio square root of 99):
+  make a fuzzy test about "trig"
+    and "mixio square root of 99"
+    and targeting 41264119/4147200 with tolerance 5 trifles.
+  put 99 in a mixio.
+  put the mixio's square root in a mixio called actual.
+  stash the fuzzy test given the actual.
+
+to test (mixio square root of 999999):
+  make a fuzzy test about "trig"
+    and "mixio square root of 999999"
+    and targeting 1999999/2000 with tight tolerance.
+  put 999999 in a mixio.
+  put the mixio's square root in a mixio called actual.
+  stash the fuzzy test given the actual.
+
+to test (mixio square root):
+  test (mixio square root of 0).
+  test (mixio square root of 1).
+  test (mixio square root of 3).
+  test (mixio square root of 81).
+  test (mixio square root of 99).
+  test (mixio square root of 100).
+  test (mixio square root of 121).
+  test (mixio square root of 999999).
+  test (mixio square root of 1000000).
+  test (mixio square root of 1002000).
+  test (mixio square root of 1002001).
+  test (mixio square root of 1866240000).
+  test (mixio square root of 2147395600).
+  test (mixio square root of 2147483647).
 
 to test (trig - -1 is not wrapped between 0 and 99):
   create a test result about "trig"
@@ -1346,6 +1610,13 @@ to test (trig - cosine):
   test (trig - cosine of 90°). 
   test (trig - cosine of 360°). 
 
+to test (trig - mixio / 388800): 
+  make a fuzzy test about "trig" and "mixio / 388800" 
+    and targeting 1 / 1 with tight tolerance. 
+  put 388800 in a mixio called actual.
+  divide the actual by 388800. 
+  stash the fuzzy test given the actual. 
+
 to test (trig - multiply mixios):
   create a test result about "trig"
     and "multiply mixios"
@@ -1637,6 +1908,8 @@ to test (trig):
   test (trig - arcsine).
   test (trig - arccosine).
   test (trig - arctangent).
+  test (trig - mixio / 388800).
+  test (mixio square root).
 
 the trifle denominator is a number equal to 1866240000. \ 43,200 * 43,200
 

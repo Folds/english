@@ -90,15 +90,6 @@ from higher priority to lower priority.
   Testing difficulty:  n/a.
   Requested by Jasper Paulsen on April 30, 2017.
 
-183.  Calculate square roots. 
-  Status:  Designed. 
-  Audience:  Programmers. 
-  Benefit:  Medium. 
-  Implementation difficulty:  Hard. 
-  Demoing difficulty:  Medium. 
-  Testing difficulty:  Easy. 
-  Requested by Jasper Paulsen on March 25, 2017. 
- 
 210.  In colors, add a "pen" alias for each color. 
   Status:  Designed. 
   Audience:  Turtle programmers. 
@@ -868,6 +859,6 @@ with an adjustable slider between them.
 \ ======================================   
 Unsorted requests:
 
-Next item number:  225.
+Next item number:  226.
 
 

@@ -1,5 +1,7 @@
 \ The portions of this file that are from CAL-3040
 \ are copyright 2006 by the Osmosian Order.
+\ The portions of this file that are from CAL-4700
+\ are copyright 2017 by the Osmosian Order.
 \ The remainder is copyright 2014, 2017 by Jasper Paulsen.
 
 \ here are the text rules:
@@ -6300,6 +6302,10 @@ a landscape sheet is a sheet.
 
 the largest number is 2147483647.
 
+the largest square is a number equal to 2147395600.  \ 46,340 * 46,340
+
+the largest square root is a number equal to 46340.
+
 an lcm is a number.
 
 a length is a number.
@@ -8185,6 +8191,79 @@ to put a spot and another spot into an ellipse:
 to put a spot and another spot into a line:
   put the spot into the line's start.
   put the other spot into the line's end.
+
+to put the square root of a number in a number called result:
+  \ Rounds down.  Finds magnitude of the square root.
+  privatize the number.
+  if the number is 0, put 0 into the result; exit.
+  if the number is negative,
+    negate the number.  \ similar to cal-4700's behavior.
+  if the number is 1, put 1 into the result; exit.
+  if the number is at most 100,
+    put the square root of the number in the result (close); exit.
+  if the number is at least the largest square,
+    put the largest square root into the result; exit.
+  \40971 * 40971 is 1678622841
+  if the number is at least 1678622841,
+    put 40971 into a number called lower bound;
+    put the largest square root minus 1 into a number called upper bound;
+    put the square root of the number in the result
+      given the lower bound and the upper bound; 
+    exit.
+  \Perform binary search on the possible answers, 
+  \to narrow down the answer to ten possibilities 
+  \that are checked linearly. 
+  \4096 = 12 binary splits. 
+  \10 + 1         =    11 = lower bound 
+  \10 + 10 * 4096 = 40970 = upper bound 
+  put 11 into the lower bound. 
+  put 40970 into the upper bound. 
+  put the square root of the number into the result 
+    given the lower bound and the upper bound. 
+
+to put the square root of a number in a number called result (close): 
+  if the number is at most 0, 
+    put 0 into the result; exit. 
+  put the result times the result into a number called square. 
+  if the square is at least the number, exit. 
+  put the result plus the result in a number called margin. 
+  add 1 to the margin. 
+  put the square plus the margin in a number called next square. 
+  loop. 
+    if the next square is more than the number, exit. 
+    add 1 to the result. 
+    put the next square in the square. 
+    add 2 to the margin. 
+    add the margin to the next square. 
+  repeat. 
+
+to put the square root of a number in a number called result given a number called lower bound and a number called upper bound: 
+  \uses binary search.  The bounds are inclusive. 
+  privatize the lower bound. 
+  privatize the upper bound. 
+  if the upper bound is greater than the largest square root, 
+    put the largest square root in the upper bound. 
+  if the upper bound times the upper bound is less than the number, 
+    put the upper bound in the result; exit. 
+  if the lower bound times the lower bound is at least the number, 
+    put the lower bound in the result; exit. 
+  loop. 
+    put the lower bound plus 10 in a number called threshold. 
+    if the upper bound is less than the threshold, 
+      put the lower bound into the result; 
+      put the square root of the number into the result (close);
+      exit. 
+    put the lower bound in a number called midpoint. 
+    add the upper bound to the midpoint. 
+    add 1 to the midpoint. 
+    divide the midpoint by 2. 
+    put the midpoint times the midpoint in a number called mid square. 
+    if the number is less than the mid square, 
+      subtract 1 from the midpoint; 
+      put the midpoint in the upper bound; 
+      repeat. 
+    put the midpoint in the lower bound. 
+  repeat.
 
 to put a string into another string:
   put the string's length into a saved length.
@@ -10551,6 +10630,120 @@ to test (command line):
   test (command line - get quoted parameter).
   test (command line - get unquoted parameter).
 
+to test (square root of 0 is 0):
+  create a test result about "the noodle"
+    and "square root of 0 is 0" and expecting "0".
+  put the square root of 0 in a number called actual.
+  stash the test result given the actual.
+
+to test (square root of 1 is 1):
+  create a test result about "the noodle"
+    and "square root of 1 is 1" and expecting "1".
+  put the square root of 1 in a number called actual.
+  stash the test result given the actual.
+
+to test (square root of 100 is 10):
+  create a test result about "the noodle"
+    and "square root of 100 is 10" and expecting "10".
+  put the square root of 100 in a number called actual.
+  stash the test result given the actual.
+
+to test (square root of 1000000 is 1000):
+  create a test result about "the noodle"
+    and "square root of 1000000 is 1000" and expecting "1000".
+  put the square root of 1000000 in a number called actual.
+  stash the test result given the actual.
+
+to test (square root of 1002000 is 1000):
+  create a test result about "the noodle"
+    and "square root of 1002000 is 1000" and expecting "1000".
+  put the square root of 1002000 in a number called actual.
+  stash the test result given the actual.
+
+to test (square root of 1002001 is 1001):
+  create a test result about "the noodle"
+    and "square root of 1002001 is 1001" and expecting "1001".
+  put the square root of 1002001 in a number called actual.
+  stash the test result given the actual.
+
+to test (square root of 121 is 11):
+  create a test result about "the noodle"
+    and "square root of 121 is 11" and expecting "11".
+  put the square root of 121 in a number called actual.
+  stash the test result given the actual.
+
+to test (square root of 1866239999 is 43199):
+  create a test result about "the noodle"
+    and "square root of 1866239999 is 43199" and expecting "43199".
+  put the square root of 1866239999 in a number called actual.
+  stash the test result given the actual.
+
+to test (square root of 1866240000 is 43200):
+  create a test result about "the noodle"
+    and "square root of 1866240000 is 43200" and expecting "43200".
+  put the square root of 1866240000 in a number called actual.
+  stash the test result given the actual.
+
+to test (square root of 2147395599 is 46339):
+  create a test result about "the noodle"
+    and "square root of 2147395599 is 46339" and expecting "46339".
+  put the square root of 2147395599 in a number called actual.
+  stash the test result given the actual.
+
+to test (square root of 2147395600 is 46340):
+  create a test result about "the noodle"
+    and "square root of 2147395600 is 46340" and expecting "46340".
+  put the square root of 2147395600 in a number called actual.
+  stash the test result given the actual.
+
+to test (square root of 2147483647 is 46340):
+  create a test result about "the noodle"
+    and "square root of 2147483647 is 46340" and expecting "46340".
+  put the square root of 2147483647 in a number called actual.
+  stash the test result given the actual.
+
+to test (square root of 3 is 1):
+  create a test result about "the noodle"
+    and "square root of 3 is 1" and expecting "1".
+  put the square root of 3 in a number called actual.
+  stash the test result given the actual.
+
+to test (square root of 81 is 9):
+  create a test result about "the noodle"
+    and "square root of 81 is 9" and expecting "9".
+  put the square root of 81 in a number called actual.
+  stash the test result given the actual.
+
+to test (square root of 99 is 9):
+  create a test result about "the noodle"
+    and "square root of 99 is 9" and expecting "9".
+  put the square root of 99 in a number called actual.
+  stash the test result given the actual.
+
+to test (square root of 999999 is 999):
+  create a test result about "the noodle"
+    and "square root of 999999 is 999" and expecting "999".
+  put the square root of 999999 in a number called actual.
+  stash the test result given the actual.
+
+to test (square root):
+  test (square root of 0 is 0).
+  test (square root of 1 is 1).
+  test (square root of 3 is 1).
+  test (square root of 81 is 9).
+  test (square root of 99 is 9).
+  test (square root of 100 is 10).
+  test (square root of 121 is 11).
+  test (square root of 999999 is 999).
+  test (square root of 1000000 is 1000).
+  test (square root of 1002000 is 1000).
+  test (square root of 1002001 is 1001).
+  test (square root of 1866239999 is 43199).
+  test (square root of 1866240000 is 43200).
+  test (square root of 2147395599 is 46339).
+  test (square root of 2147395600 is 46340).
+  test (square root of 2147483647 is 46340).
+
 to test (the noodle - deduplication):
   create a test result about "the noodle" and "deduplication"
     and expecting "al, betsy, betty, carl".
@@ -10686,6 +10879,7 @@ to test (the noodle):
   test (the talker).
   test (basic math).
   test (command line).
+  test (square root).
   test (the noodle - dll not found).
   test (the noodle - dll found).
   test (the noodle - dll procedure not found).

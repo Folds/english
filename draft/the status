@@ -293,6 +293,11 @@ to make a fuzzy test about a string and another string and targeting a ratio wit
   make the fuzzy test about the string and the other string
     and targeting the mixio with tight tolerance.
 
+to make a fuzzy test about a string and another string and targeting a ratio with tolerance some trifles: 
+  convert the ratio to a mixio.
+  make the fuzzy test about the string and the other string
+    and targeting the mixio with tolerance the trifles.
+
 the maximum test quota is a quota equal to 15.
 
 to pass a test result given a string called actual:
