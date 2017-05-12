@@ -300,7 +300,7 @@ to autoscroll a text given a spot and a flag:
 
 a baseline is a number.
 
-to beep: 
+to beep:
   \ MessageBeep() is asynchronous.
   \ The program continues immediately, 
   \ and Windows may or may not beep when it feels like it.
@@ -405,7 +405,7 @@ to begin a sheet given a box and a title string:
 to begin a sheet given a box and a title string (pdf style - start the current page):
   add the pdf state's current page given "page".
   append the pdf state's current page's number then " 0 obj" to the pdf state's current page.
-  append "<<" to the pdf state's current page.  
+  append "<<" to the pdf state's current page. 
   append "/Type /Page" to the pdf state's current page.
   append "/Parent " then the pdf state's parent's number then " 0 R" to the pdf state's current page.
   put the box's width minus the tpp times 72 / the tpi into a width.
@@ -445,33 +445,33 @@ a bitmapdata is a record with
 
 to bitwise and a number with another number:
   intel $8B850C000000. \ mov eax,[ebp+12] \ the other number
-  intel $8B00. \ mov eax,[eax]
+  intel $8B00.         \ mov eax,[eax]
   intel $8B9D08000000. \ mov ebx,[ebp+8] \ the number
-  intel $2103. \ and [ebx],eax
+  intel $2103.         \ and [ebx],eax
 
 to bitwise or a number with another number:
   intel $8B850C000000. \ mov eax,[ebp+12] \ the other number
-  intel $8B00. \ mov eax,[eax]
+  intel $8B00.         \ mov eax,[eax]
   intel $8B9D08000000. \ mov ebx,[ebp+8] \ the number
-  intel $0903. \ or [ebx],eax
+  intel $0903.         \ or [ebx],eax
 
 to bitwise xor a byte with another byte:
   intel $8B850C000000. \ mov eax,[ebp+12] \ the other byte
-  intel $8A00. \ mov al,[eax]
+  intel $8A00.         \ mov al,[eax]
   intel $8B9D08000000. \ mov ebx,[ebp+8] \ the byte
-  intel $3003. \ xor [ebx],al
+  intel $3003.         \ xor [ebx],al
 
 to bitwise xor a byte with a number:
   intel $8B850C000000. \ mov eax,[ebp+12] \ the number
-  intel $8B00. \ mov eax,[eax]
+  intel $8B00.         \ mov eax,[eax]
   intel $8B9D08000000. \ mov ebx,[ebp+8] \ the byte
-  intel $3003. \ or [ebx],al
+  intel $3003.         \ or [ebx],al
 
 to bitwise xor a number with another number:
   intel $8B850C000000. \ mov eax,[ebp+12] \ the other number
-  intel $8B00. \ mov eax,[eax]
+  intel $8B00.         \ mov eax,[eax]
   intel $8B9D08000000. \ mov ebx,[ebp+8] \ the number
-  intel $3103. \ xor [ebx],eax
+  intel $3103.         \ xor [ebx],eax
 
 a box has
   a left coord, a top coord, a right coord, a bottom coord,
@@ -494,9 +494,9 @@ to bump a rider:
 
 to bump a rider by a number:
   add the number to the rider's token's last.
-  add the number to the rider's source's first.  
+  add the number to the rider's source's first. 
 
-to buzz: 
+to buzz:
   \ Ever since Windows XP, many Windows versions
   \ have not included Beep() in kernel32.dll.
   \ Even before then, many hardware vendors did not support it.
@@ -744,41 +744,41 @@ a column# is a number.
 a command line is a string.
 
 to compare a string to another string given a length and another length (equal only):
-  intel $8BB508000000. \ mov esi,[ebp+8] \ the string
-  intel $8B36. \ mov esi,[esi] \ the string's first
+  intel $8BB508000000. \ mov esi,[ebp+8]  \ the string
+  intel $8B36.         \ mov esi,[esi]    \ the string's first
   intel $8BBD0C000000. \ mov edi,[ebp+12] \ the other string
-  intel $8B3F. \ mov edi,[edi] \ the other string's first
+  intel $8B3F.         \ mov edi,[edi]    \ the other string's first
   intel $8B8510000000. \ mov eax,[ebp+16] \ the string's length
-  intel $8B00. \ mov eax,[eax]
+  intel $8B00.         \ mov eax,[eax]
   intel $8B9514000000. \ mov edx,[ebp+20] \ the other string's length
-  intel $8B12. \ mov edx,[edx]
-  intel $3BD0. \ cmp eax,edx \ if the length's differ, say no
+  intel $8B12.         \ mov edx,[edx]
+  intel $3BD0.         \ cmp eax,edx      \ if the length's differ, say no
   intel $0F8548000000. \ jne sayno
-  intel $8BC8. \ mov ecx,eax \ put length into ecx
+  intel $8BC8.         \ mov ecx,eax      \ put length into ecx
   \L3: \ loop:
-  intel $85C9. \ test ecx,ecx
+  intel $85C9.         \ test ecx,ecx
   intel $0F8449000000. \ jz say yes
   \ uppercase current byte in the string
-  intel $8A1E. \ mov bl,[esi]
-  intel $80FB61. \ cmp bl,'a'
+  intel $8A1E.         \ mov bl,[esi]
+  intel $80FB61.       \ cmp bl,'a'
   intel $0F820C000000. \ jb L4
-  intel $80FB7A. \ cmp bl,'z'
+  intel $80FB7A.       \ cmp bl,'z'
   intel $0F8703000000. \ ja L4
-  intel $80EB20. \ sub bl,$20
+  intel $80EB20.       \ sub bl,$20
   \L4: \ uppercase current byte in the other string
-  intel $8A3F. \ mov bh,[edi]
-  intel $80FF61. \ cmp bh,'a'
+  intel $8A3F.         \ mov bh,[edi]
+  intel $80FF61.       \ cmp bh,'a'
   intel $0F820C000000. \ jb L5
-  intel $80FF7A. \ cmp bh,'z'
+  intel $80FF7A.       \ cmp bh,'z'
   intel $0F8703000000. \ ja L5
-  intel $80EF20. \ sub bh,$20
+  intel $80EF20.       \ sub bh,$20
   \L5: \ compare the two uppercased bytes
-  intel $3ADF. \ cmp bl,bh
+  intel $3ADF.         \ cmp bl,bh
   intel $0F8508000000. \ jne say no
-  intel $46. \ inc esi
-  intel $47. \ inc edi
-  intel $49. \ dec ecx
-  intel $E9BAFFFFFF. \ jmp L3
+  intel $46.           \ inc esi
+  intel $47.           \ inc edi
+  intel $49.           \ dec ecx
+  intel $E9BAFFFFFF.   \ jmp L3
   \SAY NO:
   intel $C7C000000000. \ mov eax,0
   intel $E906000000. \ jmp end
@@ -786,50 +786,50 @@ to compare a string to another string given a length and another length (equal o
   intel $C7C001000000. \ mov eax,1
 
 to compare a string to another string given a length and another length returning a number:
-  intel $8BB508000000. \ mov esi,[ebp+8] \ the string
-  intel $8B36. \ mov esi,[esi] \ the string's first
+  intel $8BB508000000. \ mov esi,[ebp+8]  \ the string
+  intel $8B36.         \ mov esi,[esi]    \ the string's first
   intel $8BBD0C000000. \ mov edi,[ebp+12] \ the other string
-  intel $8B3F. \ mov edi,[edi] \ the other string's first
+  intel $8B3F.         \ mov edi,[edi]    \ the other string's first
   intel $8B8510000000. \ mov eax,[ebp+16] \ the string's length
-  intel $8B00. \ mov eax,[eax]
+  intel $8B00.         \ mov eax,[eax]
   intel $8B9514000000. \ mov edx,[ebp+20] \ the other string's length
-  intel $8B12. \ mov edx,[edx]
+  intel $8B12.         \ mov edx,[edx]
   \ get the minimum length
-  intel $8BC8. \ mov ecx,eax
-  intel $3BCA. \ cmp ecx,edx
+  intel $8BC8.         \ mov ecx,eax
+  intel $3BCA.         \ cmp ecx,edx
   intel $0F8602000000. \ jbe L2
-  intel $8BCA. \ mov ecx,edx
+  intel $8BCA.         \ mov ecx,edx
   \L3: \ loop:
-  intel $85C9. \ test ecx,ecx
+  intel $85C9.         \ test ecx,ecx
   intel $0F8444000000. \ jz L6
   \ uppercase current byte in the string
-  intel $8A1E. \ mov bl,[esi]
-  intel $80FB61. \ cmp bl,'a'
+  intel $8A1E.         \ mov bl,[esi]
+  intel $80FB61.       \ cmp bl,'a'
   intel $0F820C000000. \ jb L4
-  intel $80FB7A. \ cmp bl,'z'
+  intel $80FB7A.       \ cmp bl,'z'
   intel $0F8703000000. \ ja L4
-  intel $80EB20. \ sub bl,$20
+  intel $80EB20.       \ sub bl,$20
   \L4: \ uppercase current byte in the other string
-  intel $8A3F. \ mov bh,[edi]
-  intel $80FF61. \ cmp bh,'a'
+  intel $8A3F.         \ mov bh,[edi]
+  intel $80FF61.       \ cmp bh,'a'
   intel $0F820C000000. \ jb L5
-  intel $80FF7A. \ cmp bh,'z'
+  intel $80FF7A.       \ cmp bh,'z'
   intel $0F8703000000. \ ja L5
-  intel $80EF20. \ sub bh,$20
+  intel $80EF20.       \ sub bh,$20
   \L5: \ compare the two uppercased bytes
-  intel $3ADF. \ cmp bl,bh
+  intel $3ADF.         \ cmp bl,bh
   intel $0F8508000000. \ jne L5a
-  intel $46. \ inc esi
-  intel $47. \ inc edi
-  intel $49. \ dec ecx
-  intel $E9BAFFFFFF. \ jmp L3
+  intel $46.           \ inc esi
+  intel $47.           \ inc edi
+  intel $49.           \ dec ecx
+  intel $E9BAFFFFFF.   \ jmp L3
   \L5a: \ load bytes into eax and edx for final compare
-  intel $0FB6C3. \ movzx eax,bl
-  intel $0FB6D7. \ movzx edx,bh
+  intel $0FB6C3.       \ movzx eax,bl
+  intel $0FB6D7.       \ movzx edx,bh
   \L6: \ subtract either the lengths or the last two bytes to set the eax to <0, =0, >0
-  intel $2BC2. \ sub eax,edx
+  intel $2BC2.         \ sub eax,edx
   intel $8B9D18000000. \ mov ebx,[ebp+24] \ the number
-  intel $8903. \ mov [ebx],eax
+  intel $8903.         \ mov [ebx],eax
 
 to compatibly handle any message with a window a message number a w-param and an l-param:
   if the message is 006, handle any wm-activate with the w-param; put 0 into eax; exit.
@@ -870,7 +870,7 @@ a console is a thing with
   a grid,
   a reply string.
 
-a control font is a font. 
+a control font is a font.
 
 to convert an absolute position to a position given a text:
   if the text is nil, clear the position; exit.
@@ -907,8 +907,8 @@ to convert a byte to a nibble string:
   append the other nibble string to the nibble string.
 
 to convert a byte to a query byte:
-  if the byte is between 48 and 57, put the byte into the query byte; exit. \ 0-9
-  if the byte is between 65 and 90, put the byte into the query byte; exit. \ A-Z
+  if the byte is between 48 and  57, put the byte into the query byte; exit. \ 0-9
+  if the byte is between 65 and  90, put the byte into the query byte; exit. \ A-Z
   if the byte is between 97 and 122, put the byte into the query byte; exit. \ a-z
   if the byte is 32, put "+" into the query byte; exit. \ space
   convert the byte to a nibble string.
@@ -1371,40 +1371,40 @@ a coord is some twips.
 
 to copy bytes from a pointer to another pointer for a byte count: \ copy handling overlap with 1 byte moves
   intel $8BB508000000. \ mov esi,[ebp+8] \ the pointer
-  intel $8B36. \ mov esi,[esi]
+  intel $8B36.         \ mov esi,[esi]
   intel $8BBD0C000000. \ mov edi,[ebp+12] \ the other pointer
-  intel $8B3F. \ mov edi,[edi]
+  intel $8B3F.         \ mov edi,[edi]
   intel $8B8D10000000. \ mov ecx,[ebp+16] \ the number
-  intel $8B09. \ mov ecx,[ecx]
+  intel $8B09.         \ mov ecx,[ecx]
   \ check for something to copy
   intel $81F900000000. \ cmp ecx,0
   intel $0F8E39000000. \ jle end
   \ check for no overlap
-  intel $3BF7. \ cmp esi,edi
+  intel $3BF7.         \ cmp esi,edi
   intel $0F8D24000000. \ jge forward
-  intel $8BC6. \ mov eax,esi
-  intel $03C1. \ add eax,ecx
-  intel $3BC7. \ cmp eax,edi
+  intel $8BC6.         \ mov eax,esi
+  intel $03C1.         \ add eax,ecx
+  intel $3BC7.         \ cmp eax,edi
   intel $0F8E18000000. \ jle forward
   \ copy backward
-  intel $03F1. \ add esi,ecx
-  intel $4E. \ dec esi
-  intel $03F9. \ add edi,ecx
-  intel $4F. \ dec esi
+  intel $03F1.         \ add esi,ecx
+  intel $4E.           \ dec esi
+  intel $03F9.         \ add edi,ecx
+  intel $4F.           \ dec esi
   \ backward
-  intel $8A16. \ mov dl,[esi]
-  intel $8817. \ mov [edi],dl
-  intel $4E. \ dec esi
-  intel $4F. \ dec edi
-  intel $49. \ dec ecx
+  intel $8A16.         \ mov dl,[esi]
+  intel $8817.         \ mov [edi],dl
+  intel $4E.           \ dec esi
+  intel $4F.           \ dec edi
+  intel $49.           \ dec ecx
   intel $0F85F3FFFFFF. \ jnz backward
-  intel $E90D000000. \ jmp end
+  intel $E90D000000.   \ jmp end
   \ forward: copy forward
-  intel $8A16. \ mov dl,[esi]
-  intel $8817. \ mov [edi],dl
-  intel $46. \ inc esi
-  intel $47. \ inc edi
-  intel $49. \ dec ecx
+  intel $8A16.         \ mov dl,[esi]
+  intel $8817.         \ mov [edi],dl
+  intel $46.           \ inc esi
+  intel $47.           \ inc edi
+  intel $49.           \ dec ecx
   intel $0F85F3FFFFFF. \ jnz forward
 
 to copy an event into another event:
@@ -1685,7 +1685,7 @@ to create a gpimageattributes (grayscale):
 
 to create the hbrush of a canvas given a color:
   convert the color to a colorref.
-  if the color is clear, put the null hbrush into an hbrush. 
+  if the color is clear, put the null hbrush into an hbrush.
   if the color is not clear, call "gdi32.dll" "CreateSolidBrush" with the colorref returning the hbrush.
   call "gdi32.dll" "SelectObject" with the canvas and the hbrush.
 
@@ -1698,7 +1698,8 @@ to create the hpen of a canvas given a color:
   if the color is clear, put the null hpen into an hpen.
   put the tpp into a number. \ one pixel on screen always
   if the canvas is the printer canvas, put 1/96 inch into the number.
-  if the color is not clear, call "gdi32.dll" "CreatePen" with 0 [ps_solid] and the number and the colorref returning the hpen. 
+  if the color is not clear,
+    call "gdi32.dll" "CreatePen" with 0 [ps_solid] and the number and the colorref returning the hpen.
   call "gdi32.dll" "SelectObject" with the canvas and the hpen.
 
 to create an hrgn given a box:
@@ -1926,7 +1927,7 @@ the current canvas is a canvas.
 
 the current event is an event.
 
-the current font is a font. 
+the current font is a font.
 
 a cursor is a handle.
 
@@ -2222,20 +2223,20 @@ to decide if a flag is set:
   if the flag is yes, say yes.
   say no.
 
-to decide if a font is another font: 
-  if the font's name is not the other font's name, say no. 
-  if the font's height is the other font's height, say yes. 
-  say no. 
+to decide if a font is another font:
+  if the font's name is not the other font's name, say no.
+  if the font's height is the other font's height, say yes.
+  say no.
 
-to decide if full [screen] was requested: 
-  get a string (command line). 
-  put the string in a command line. 
-  if full [screen] was requested in the command line, say yes. 
-  say no. 
+to decide if full [screen] was requested:
+  get a string (command line).
+  put the string in a command line.
+  if full [screen] was requested in the command line, say yes.
+  say no.
 
-to decide if full [screen] was requested in a command line: 
-  if "/full" is important in the command line, say yes. 
-  say no. 
+to decide if full [screen] was requested in a command line:
+  if "/full" is important in the command line, say yes.
+  say no.
 
 to decide if an index is empty:
 \  if the index is nil, say yes. \ to make compiler faster
@@ -2295,15 +2296,15 @@ to decide if left is implied by a mouse wyrd:
   if 1 [mk_left] is bitwise included in the number, say yes.
   say no.
 
-to decide if left [half screen] was requested: 
+to decide if left [half screen] was requested:
   get a string (command line).
-  if left [half screen] was requested in the command line, say yes. 
+  if left [half screen] was requested in the command line, say yes.
   say no.
 
-to decide if left [half screen] was requested in a command line: 
-  if right [half screen] was requested in the command line, say no. 
-  if full [screen] was requested in the command line, say no. 
-  say yes. 
+to decide if left [half screen] was requested in a command line:
+  if right [half screen] was requested in the command line, say no.
+  if full [screen] was requested in the command line, say no.
+  say yes.
 
 to decide if a library is loadable:
   call "kernel32.dll" "LoadLibraryA"
@@ -2350,13 +2351,13 @@ to decide if a number and another number are similarly signed:
   say no.
 
 to decide if a number is another number:
-  intel $C7C001000000. \ mov eax,1 \ assume true
-  intel $8B9D08000000. \ mov ebx,[ebp+8] \ the number
-  intel $8B1B. \ mov ebx,[ebx]
+  intel $C7C001000000. \ mov eax,1        \ assume true
+  intel $8B9D08000000. \ mov ebx,[ebp+8]  \ the number
+  intel $8B1B.         \ mov ebx,[ebx]
   intel $8B8D0C000000. \ mov ecx,[ebp+12] \ the other number
-  intel $3B19. \ cmp ebx,[ecx]
+  intel $3B19.         \ cmp ebx,[ecx]
   intel $0F8406000000. \ je over the next 1 statement
-  intel $C7C000000000. \ mov eax,0 \ now it's false
+  intel $C7C000000000. \ mov eax,0        \ now it's false
 
 to decide if a number is another number and a string is another string:
   if the number is not the other number, say no.
@@ -2395,36 +2396,36 @@ to decide if a number is evenly divisible by another number:
 to decide if a number is greater than another number:
   intel $C7C001000000. \ mov eax,1 \ assume true
   intel $8B9D08000000. \ mov ebx,[ebp+8] \ the number
-  intel $8B1B. \ mov ebx,[ebx]
+  intel $8B1B.         \ mov ebx,[ebx]
   intel $8B8D0C000000. \ mov ecx,[ebp+12] \ the other number
-  intel $3B19. \ cmp ebx,[ecx]
+  intel $3B19.         \ cmp ebx,[ecx]
   intel $0F8F06000000. \ jg over the next 1 statement
   intel $C7C000000000. \ mov eax,0 \ now it's false
 
 to decide if a number is greater than or equal to another number:
   intel $C7C001000000. \ mov eax,1 \ assume true
   intel $8B9D08000000. \ mov ebx,[ebp+8] \ the number
-  intel $8B1B. \ mov ebx,[ebx]
+  intel $8B1B.         \ mov ebx,[ebx]
   intel $8B8D0C000000. \ mov ecx,[ebp+12] \ the other number
-  intel $3B19. \ cmp ebx,[ecx]
+  intel $3B19.         \ cmp ebx,[ecx]
   intel $0F8D06000000. \ jge over the next 1 statement
   intel $C7C000000000. \ mov eax,0 \ now it's false
 
 to decide if a number is less than another number:
   intel $C7C001000000. \ mov eax,1 \ assume true
   intel $8B9D08000000. \ mov ebx,[ebp+8] \ the number
-  intel $8B1B. \ mov ebx,[ebx]
+  intel $8B1B.         \ mov ebx,[ebx]
   intel $8B8D0C000000. \ mov ecx,[ebp+12] \ the other number
-  intel $3B19. \ cmp ebx,[ecx]
+  intel $3B19.         \ cmp ebx,[ecx]
   intel $0F8C06000000. \ jl over the next 1 statement
   intel $C7C000000000. \ mov eax,0 \ now it's false
 
 to decide if a number is less than or equal to another number:
   intel $C7C001000000. \ mov eax,1 \ assume true
   intel $8B9D08000000. \ mov ebx,[ebp+8] \ the number
-  intel $8B1B. \ mov ebx,[ebx]
+  intel $8B1B.         \ mov ebx,[ebx]
   intel $8B8D0C000000. \ mov ecx,[ebp+12] \ the other number
-  intel $3B19. \ cmp ebx,[ecx]
+  intel $3B19.         \ cmp ebx,[ecx]
   intel $0F8E06000000. \ jle over the next 1 statement
   intel $C7C000000000. \ mov eax,0 \ now it's false
 
@@ -2446,9 +2447,9 @@ to decide if a number is positive:
   if the number is greater than 0, say yes.
   say no.
 
-to decide if the osmosian font is loaded: 
-  if the osmosian font resource is 0, say no. 
-  say yes. 
+to decide if the osmosian font is loaded:
+  if the osmosian font resource is 0, say no.
+  say yes.
 
 to decide if a pair is another pair:
   if the pair's x is not the other pair's x, say no.
@@ -2591,15 +2592,15 @@ to decide if right is implied by a mouse wyrd:
   if 2 [mk_right] is bitwise included in the number, say yes.
   say no.
 
-to decide if right [half screen] was requested: 
+to decide if right [half screen] was requested:
   get a string (command line).
-  put the string in a command line. 
-  if right [half screen] was requested in the command line, say yes. 
+  put the string in a command line.
+  if right [half screen] was requested in the command line, say yes.
   say no.
 
-to decide if right [half screen] was requested in a command line: 
-  if "/right" is important in the command line, say yes. 
-  say no. 
+to decide if right [half screen] was requested in a command line:
+  if "/right" is important in the command line, say yes.
+  say no.
 
 to decide if a row is blank:
   if the row is nil, say yes.
@@ -2630,18 +2631,18 @@ to decide if a row of a text is visible:
   if the box is touching the other box, say yes.
   say no.
 
-to decide if a row of a text is visible given a box: 
-  if the row of the text is not visible, say no. 
-  privatize the box. 
+to decide if a row of a text is visible given a box:
+  if the row of the text is not visible, say no.
+  privatize the box.
   get another box given the row and the text.
   if the current tab is nil, say no.
   if the current tab's node is nil, say no.
   if the current tab's node's page is nil, say no.
-  put the current tab's node's page's origin in a spot. 
-  adjust the box given 0 and the tpp and 0 and - the tpp. 
-  adjust the box given the spot's x and the spot's y and the spot's x and the spot's y. 
-  if the box is touching the other box, say yes. 
-  say no. 
+  put the current tab's node's page's origin in a spot.
+  adjust the box given 0 and the tpp and 0 and - the tpp.
+  adjust the box given the spot's x and the spot's y and the spot's x and the spot's y.
+  if the box is touching the other box, say yes.
+  say no.
 
 to decide if running on wine:
   \ http://www.winehq.org/pipermail/wine-devel/2008-September/069387.html
@@ -2900,17 +2901,17 @@ to decide if a string is any word:
 
 to decide if a string is blank:
   \ assume true
-  intel $B801000000. \ mov eax,1
+  intel $B801000000.   \ mov eax,1
   intel $8B9D08000000. \ mov ebx,[ebp+8] \ the string
   \ if first is 0, exit
-  intel $833B00. \ cmp [ebx],0
+  intel $833B00.       \ cmp [ebx],0
   intel $0F8410000000. \ je end
   \ if last is less than first, exit
-  intel $8B5304. \ mov edx,[ebx+4] \ last pointer
-  intel $3B13. \ cmp edx,[ebx]
+  intel $8B5304.       \ mov edx,[ebx+4] \ last pointer
+  intel $3B13.         \ cmp edx,[ebx]
   intel $0F8C05000000. \ jl end
   \ SAY NO:
-  intel $B800000000. \ mov eax,0
+  intel $B800000000.   \ mov eax,0
   \ END:
 
 to decide if a string is a byte:
@@ -3061,14 +3062,14 @@ to decide if a text is modified:
   if the text's modified flag is set, say yes.
   say no.
 
-to decide if a text is visible given a box: 
-  if the text is nil, say no. 
-  loop. 
-    get a row from the text's rows. 
-    if the row is nil, say no. 
-    \debug the row's string. 
-    if the row of the text is visible given the box, say yes. 
-  repeat. 
+to decide if a text is visible given a box:
+  if the text is nil, say no.
+  loop.
+    get a row from the text's rows.
+    if the row is nil, say no.
+    \debug the row's string.
+    if the row of the text is visible given the box, say yes.
+  repeat.
 
 to decide if there is something to backspace in a text:
   if the text is nil, say no.
@@ -3312,26 +3313,26 @@ a distance is a number.
 
 to divide a number by another number:
   if the other number is 0, put the largest number into the number; exit.
-  intel $8B8508000000. \ mov eax,[ebp+8] \ the number
+  intel $8B8508000000. \ mov eax,[ebp+8]  \ the number
   intel $8B9D0C000000. \ mov ebx,[ebp+12] \ the other number
-  intel $8B00. \ mov eax,[eax]
-  intel $99. \ cdq
-  intel $F73B. \ div [ebx] \ means div eax,[ebx] but is weird form
-  intel $8B9D08000000. \ mov ebx,[ebp+8] \ the number
-  intel $8903. \ mov [ebx],eax
+  intel $8B00.         \ mov eax,[eax]
+  intel $99.           \ cdq
+  intel $F73B.         \ div [ebx]        \ means div eax,[ebx] but is weird form
+  intel $8B9D08000000. \ mov ebx,[ebp+8]  \ the number
+  intel $8903.         \ mov [ebx],eax
 
 to divide a number by another number giving a quotient and a remainder:
   if the other number is 0,
     put the largest number into the number; put 0 into the remainder; exit.
-  intel $8B8508000000. \ mov eax,[ebp+8] \ the number
+  intel $8B8508000000. \ mov eax,[ebp+8]  \ the number
   intel $8B9D0C000000. \ mov ebx,[ebp+12] \ the other number
-  intel $8B00. \ mov eax,[eax]
-  intel $99. \ cdq
-  intel $F73B. \ idiv [ebx] \ means idiv eax,[ebx] but is weird form
+  intel $8B00.         \ mov eax,[eax]
+  intel $99.           \ cdq
+  intel $F73B.         \ idiv [ebx]       \ means idiv eax,[ebx] but is weird form
   intel $8B9D10000000. \ mov ebx,[ebp+16] \ the quotient
-  intel $8903. \ mov [ebx],eax
+  intel $8903.         \ mov [ebx],eax
   intel $8B9D14000000. \ mov ebx,[ebp+20] \ the remainder
-  intel $8913. \ mov [ebx],edx
+  intel $8913.         \ mov [ebx],edx
 
 to divide a number by another number returning a ratio:
   put the number and the other number into the ratio.
@@ -3388,7 +3389,7 @@ to draw any visible rows of a text (editing):
   loop.
     get a row from the text's rows.
     if the row is nil, exit.
-\    if the row of the text is not visible given the screen's box, repeat. 
+\    if the row of the text is not visible given the screen's box, repeat.
     if the row of the text is not visible, repeat.
     draw the row of the text (editing).
   repeat.
@@ -3747,7 +3748,7 @@ to draw a string at a spot with a color and a font:
 
 to draw a string at a spot with a color and a font (pdf style):
   if the string is blank, exit.
-  privatize the spot.  
+  privatize the spot. 
   include the font in the current pdf.
   include the font in the pdf state's current page.
   find a definition pdf object given the font's name and the pdf state's font index.
@@ -3861,7 +3862,7 @@ a dyad is a thing with
   a name,
   a value string.
 
-an editor font is a font. 
+an editor font is a font.
 
 an ellipse has a box.
 
@@ -4261,13 +4262,13 @@ a filetime is a record with
 
 to fill bytes with a byte starting at a pointer for a byte count:
   intel $8BBD0C000000. \ mov edi,[ebp+12] \ the pointer
-  intel $8B3F. \ mov edi,[edi]
+  intel $8B3F.         \ mov edi,[edi]
   intel $8B8D10000000. \ mov ecx,[ebp+16] \ the count
-  intel $8B09. \ mov ecx,[ecx]
+  intel $8B09.         \ mov ecx,[ecx]
   intel $8B8508000000. \ mov eax,[ebp+8] \ the byte
-  intel $8A00. \ mov al,[eax]
-  intel $FC. \ cld
-  intel $F3AA. \ rep stosb
+  intel $8A00.         \ mov al,[eax]
+  intel $FC.           \ cld
+  intel $F3AA.         \ rep stosb
 
 to fill a string with a byte given a count:
   reassign the string's first given the count.
@@ -4573,7 +4574,7 @@ a font info is a thing with \ used for pdf conversion
 
 a font resource is a handle.
 
-a font source is a hex string. 
+a font source is a hex string.
 
 some font widths is a thing with \ used for pdf conversion
   a font,
@@ -4730,24 +4731,24 @@ to get a column# given a row and a spot and a text:
   put the substring's last minus the row's string's first plus 1 into the column#.
   destroy the hfont of the memory canvas.
 
-to get a control font given a command line: 
+to get a control font given a command line:
   if "/controlfont" is not important in the command line, 
     get a font given the command line; 
     put the font in the control font; 
-    exit. 
-  get a string from the command line given "/controlfont". 
-  unquote the string. 
-  trim the string. 
+    exit.
+  get a string from the command line given "/controlfont".
+  unquote the string.
+  trim the string.
   if the string is "", 
     get another font given the command line; 
     put the other font in the control font; 
-    exit. 
-  put the string in the control font's name. 
+    exit.
+  put the string in the control font's name.
   if the string is "Osmosian", 
     make sure the osmosian font is loaded; 
     put 1/4 inch in the control font's height; 
-    exit. 
-  put 2/9 inch in the control font's height. 
+    exit.
+  put 2/9 inch in the control font's height.
 
 to get a count of items in a path in the file system:
   put 0 into the count.
@@ -4785,21 +4786,21 @@ to get a drive kind for a path:
   if the number is 6 [drive_ramdisk], put "ram disk" into the drive kind; exit.
   put "" into the drive kind.
 
-to get an editor font given a command line: 
-  put 2/9 inch in the editor font's height. 
+to get an editor font given a command line:
+  put 2/9 inch in the editor font's height.
   \ if "/tt" is important in the command line, 
-  put "Courier New" in the editor font's name. 
+  put "Courier New" in the editor font's name.
   if "/edfont" is important in the command line, 
-    get the editor font's name from the command line given "/edfont". 
-  unquote the editor font's name. 
-  trim the editor font's name. 
+    get the editor font's name from the command line given "/edfont".
+  unquote the editor font's name.
+  trim the editor font's name.
   if the editor font's name is "", 
     get a font from the command line; 
     put the font in the editor font; 
-    exit. 
+    exit.
   if the editor font's name is "Osmosian", 
     make sure the osmosian font is loaded; 
-    put 1/4 inch in the editor font's height. 
+    put 1/4 inch in the editor font's height.
 
 to get an environment variable given an environment variable name:
   find a value string given the environment variables and the environment variable name.
@@ -4809,17 +4810,17 @@ to get an environment variable given a string:
   put the string in an environment variable name.
   get the environment variable given the environment variable name.
 
-to get a font given a command line: 
-  put 2/9 inch in the font's height. 
+to get a font given a command line:
+  put 2/9 inch in the font's height.
   if "/font" is not important in the command line, 
-    put "Arial" in the font's name; exit. 
-  get the font's name from the command line given "/font". 
-  unquote the font's name. 
-  trim the font's name. 
-  if the font's name is "", put "Arial" in the font's name. 
+    put "Arial" in the font's name; exit.
+  get the font's name from the command line given "/font".
+  unquote the font's name.
+  trim the font's name.
+  if the font's name is "", put "Arial" in the font's name.
   if the font's name is "Osmosian", 
     make sure the osmosian font is loaded; 
-    put 1/4 inch in the font's height. 
+    put 1/4 inch in the font's height.
 
 to get a gcd given a number and another number:
   put the number into a dividend number.
@@ -4912,7 +4913,7 @@ to get requested leaf directory path given a command line returning a path:
   trim the requested folder.
   if the requested folder is wrapped in double-quotes,
     remove the first byte from the requested folder;
-    remove the  last byte from the requested folder.    
+    remove the  last byte from the requested folder.   
   put the requested folder in the path.
   if the path is blank, exit.
   if the path is not directory-format,
@@ -5762,7 +5763,7 @@ a iid is a uuid.
 
 an inch is 1440 twips.
 
-to include a font in the current pdf: 
+to include a font in the current pdf:
   find a pdf object given the font's name and the pdf state's font index.
   if the pdf object is not nil, exit.
   create a font info given the font.
@@ -5946,15 +5947,15 @@ to initialize the cursors (i-beam cursor):
 to initialize the fonts:
   call "gdi32.dll" "GetStockObject" with 11 [ansi_fixed_font]
     returning the null hfont.
-  get a string (command line). 
-  put the string in a command line. 
-  get the requested font given the command line. 
-  get the requested control font given the command line. 
-  get the requested editor font given the command line. 
-  put the requested font in the default font. 
+  get a string (command line).
+  put the string in a command line.
+  get the requested font given the command line.
+  get the requested control font given the command line.
+  get the requested editor font given the command line.
+  put the requested font in the default font.
 \  debug change given the current font and the requested font 
-\    and "Initializing fonts.". 
-  put the requested font in the current font. 
+\    and "Initializing fonts.".
+  put the requested font in the current font.
 \  debug "The requested font is "  
 \    then the requested font's name  
 \    then " (" then the requested font's height then ");" 
@@ -5966,7 +5967,7 @@ to initialize the fonts:
 \    then " (" then the requested editor font's height then ");" 
 \    then " the default font is "  
 \    then the default font's name  
-\    then " (" then the default font's height then ").". 
+\    then " (" then the default font's height then ").".
 
 to initialize gdi+:
   put 1 into a gdiplusstartupinput's gdiplusversion.
@@ -6368,15 +6369,15 @@ to limit some texts to a count:
 
 a line has a start spot and an end spot.
 
-to load a font source returning a font resource: 
-  \ to-do: 
-  \ put 1 in a number. \ the number of fonts in the resource. 
-  \ use the number's whereabouts in the following call: 
-  call "gdi32.dll" "AddFontMemResourceEx" 
-    with the font source's first 
-    and the font source's length 
-    and 0 and a number's whereabouts 
-    returning the font resource. 
+to load a font source returning a font resource:
+  \ to-do:
+  \ put 1 in a number. \ the number of fonts in the resource.
+  \ use the number's whereabouts in the following call:
+  call "gdi32.dll" "AddFontMemResourceEx"
+    with the font source's first
+    and the font source's length
+    and 0 and a number's whereabouts
+    returning the font resource.
 
 to load the lexicon:
   if the lexicon is not nil, exit.
@@ -6433,7 +6434,7 @@ to lowercase any selected bytes in a text:
     get a row from the text's rows.
     if the row is nil, exit.
     if the row of the text is not selected, repeat.
-    slap a substring on any selected bytes in the row of the text.  
+    slap a substring on any selected bytes in the row of the text. 
     lowercase the substring.
   repeat.
 
@@ -7118,11 +7119,11 @@ a msg is a record with
 
 to multiply a number by another number:
   intel $8B8508000000. \ mov eax,[ebp+8] \ the number
-  intel $8B00. \ mov eax,[eax]
+  intel $8B00.         \ mov eax,[eax]
   intel $8B9D0C000000. \ mov ebx,[ebp+12] \ the other number
-  intel $F72B.\ mul [ebx] \ means mul eax,[ebx] but is weird form
+  intel $F72B.         \ mul [ebx] \ means mul eax,[ebx] but is weird form
   intel $8B9D08000000. \ mov ebx,[ebp+8] \ the number
-  intel $8903. \ mov [ebx],eax
+  intel $8903.         \ mov [ebx],eax
 
 to multiply a number by another number returning a number called result:
   privatize the number.
@@ -7359,7 +7360,7 @@ to output the arc of an ellipse given a string:
   put the ellipse's x-extent times the ratio into an x offset.
   put the ellipse's y-extent times the ratio into a y offset.
   \ control point 1
-  if the string is "left-top", put the ellipse's left and the center's y minus the y offset into a first control spot. 
+  if the string is "left-top", put the ellipse's left and the center's y minus the y offset into a first control spot.
   if the string is "right-top", put the center's x plus the x offset and the ellipse's top into the first control spot.
   if the string is "right-bottom", put the ellipse's right and the center's y plus the y offset into the first control spot.
   if the string is "left-bottom", put the center's x minus the x offset and the ellipse's bottom into the first control spot.
@@ -7428,7 +7429,7 @@ to output a string without advancing:
 
 to output stroke and fill given a border color and a fill color:
   put "B" into a string. \ stroke and fill
-  if the fill is clear, put "S" into the string. \ stroke
+  if the fill is clear,   put "S" into the string. \ stroke
   if the border is clear, put "f" into the string. \ fill
   output the string.
 
@@ -7555,7 +7556,7 @@ a pdf string is a string.
 a percent is a number. \ a scale with 100 in the denominator
 
 to pick a number:
-  pick the number between 0 and the largest number. 
+  pick the number between 0 and the largest number.
 
 to pick a number within an amount of another number:
   pick the number between the other number minus the amount
@@ -7564,24 +7565,24 @@ to pick a number within an amount of another number:
 to pick a random number between a min number and a max number:
   put the seed's whereabouts into eax.
   \ put address of randseed into ecx
-  intel $8BC8. \ mov ecx,eax
+  intel $8BC8.         \ mov ecx,eax
   \ calculate zero based max
   intel $8B8510000000. \ mov eax,[ebp+16] \ the max
-  intel $8B00. \ mov eax,[eax]
+  intel $8B00.         \ mov eax,[eax]
   intel $8B9D0C000000. \ mov ebx,[ebp+12] \ the min
-  intel $2B03. \ sub eax,[ebx]
-  intel $40. \ inc eax
+  intel $2B03.         \ sub eax,[ebx]
+  intel $40.           \ inc eax
   \ adjust randseed
   intel $691105840808. \ imul edx,[ecx],134775813
-  intel $42. \ inc edx
-  intel $8911. \ mov [ecx],edx
+  intel $42.           \ inc edx
+  intel $8911.         \ mov [ecx],edx
   \ mul adjusted randseed by the zero based max
-  intel $F7E2. \ mul edx
+  intel $F7E2.         \ mul edx
   \ add the min to un-zero base the number
-  intel $0313. \ add edx,[ebx] the min
+  intel $0313.         \ add edx,[ebx] the min
   \ store the result
   intel $8B9D08000000. \ mov ebx,[ebp+08] \ the random number
-  intel $8913. \ mov [ebx],edx
+  intel $8913.         \ mov [ebx],edx
 
 to pick a spot anywhere in a box:
   pick the spot's x between the box's left and the box's right.
@@ -7638,7 +7639,7 @@ to position a substring on a string:
   intel $8B8B00000000. \ mov ecx,[ebx+0] \ the string's first
   intel $898800000000. \ mov [eax+0],ecx \ the substring's first
   \ put the string's first minus 1 into the substring's last
-  intel $49. \ dec ecx
+  intel $49.           \ dec ecx
   intel $898804000000. \ mov [eax+4],ecx \ the substring's last
 
 to post a data string to a url and receive a response string:
@@ -7825,9 +7826,9 @@ to put a byte and a number into a ratio:
 
 to put a byte into a number:
   intel $8B8508000000. \ mov eax,[ebp+8] \ the byte
-  intel $0FB600. \ movzx eax,byte ptr [eax]
+  intel $0FB600.       \ movzx eax,byte ptr [eax]
   intel $8B9D0C000000. \ mov ebx,[ebp+12] \ the number
-  intel $8903. \ mov [ebx],eax
+  intel $8903.         \ mov [ebx],eax
 
 to put a byte into a string:
   put 1 into a length.
@@ -7837,9 +7838,9 @@ to put a byte into a string:
 
 to put a byte into a wyrd:
   intel $8B8508000000. \ mov eax,[ebp+8] \ the byte
-  intel $660FB600. \ movzx eax,byte ptr [eax]
+  intel $660FB600.     \ movzx eax,byte ptr [eax]
   intel $8B9D0C000000. \ mov ebx,[ebp+12] \ the wyrd
-  intel $668903. \ mov [ebx],ah
+  intel $668903.       \ mov [ebx],ah
 
 to put the character under a finger into a character:
   if the finger is nil, clear the character; exit.
@@ -7873,19 +7874,19 @@ to put a date/time's string into a string:
 
 to put eax into a byte:
   intel $8B9D08000000. \ mov ebx,[ebp+8] \ the number
-  intel $8803. \ mov [ebx],al
+  intel $8803.         \ mov [ebx],al
 
 to put eax into a flag: employ put eax into a number.
 
 to put eax into a number:
   intel $8B9D08000000. \ mov ebx,[ebp+8] \ the number
-  intel $8903. \ mov [ebx],eax
+  intel $8903.         \ mov [ebx],eax
 
 to put eax into a pointer: employ put eax into a number.
 
 to put eax into a wyrd:
   intel $8B9D08000000. \ mov ebx,[ebp+8] \ the wyrd
-  intel $668903. \ mov [ebx],ax
+  intel $668903.       \ mov [ebx],ax
 
 to put an ellipse into another ellipse:
   put the ellipse's box into the other ellipse's box.
@@ -7902,7 +7903,7 @@ to put a flag into a number: employ put a number into another number.
 to put a flag into a string: employ convert a flag to a string.
 
 to put a font into another font:
-  if the font is the other font, exit. 
+  if the font is the other font, exit.
   put the font's name into the other font's name.
   put the font's height into the other font's height.
 
@@ -8014,9 +8015,9 @@ to put a number and another number into a ratio:
 
 to put a number into another number:
   intel $8B8508000000. \ mov eax,[ebp+8] \ the number
-  intel $8B00. \ mov eax,[eax]
+  intel $8B00.         \ mov eax,[eax]
   intel $8B9D0C000000. \ mov ebx,[ebp+12] \ the other number
-  intel $8903. \ mov [ebx],eax
+  intel $8903.         \ mov [ebx],eax
 
 to put a number into a big-endian unsigned wyrd:
   put the number into a wyrd.
@@ -8024,13 +8025,13 @@ to put a number into a big-endian unsigned wyrd:
 
 to put a number into a byte:
   intel $8B8508000000. \ mov eax,[ebp+8] \ the number
-  intel $8B00. \ mov eax,[eax]
+  intel $8B00.         \ mov eax,[eax]
   intel $8B9D0C000000. \ mov ebx,[ebp+12] \ the byte
-  intel $8803. \ mov [ebx],al
+  intel $8803.         \ mov [ebx],al
 
 to put a number into eax:
   intel $8B9D08000000. \ mov ebx,[ebp+8] \ the number
-  intel $8B03. \ mov eax,[ebx]
+  intel $8B03.         \ mov eax,[ebx]
 
 to put a number into a flag: employ put a number into another number.
 
@@ -8048,9 +8049,9 @@ to put a number into a string: employ convert a number to a string.
 
 to put a number into a wyrd:
   intel $8B8508000000. \ mov eax,[ebp+8] \ the number
-  intel $8B00. \ mov eax,[eax]
+  intel $8B00.         \ mov eax,[eax]
   intel $8B9D0C000000. \ mov ebx,[ebp+12] \ the wyrd
-  intel $668903. \ mov [ebx],ax
+  intel $668903.       \ mov [ebx],ax
 
 to put a number's absolute value into another number:
   put the number into the other number.
@@ -8212,57 +8213,57 @@ to put the square root of a number in a number called result:
     exit.
   \Perform binary search on the possible answers, 
   \to narrow down the answer to ten possibilities 
-  \that are checked linearly. 
-  \4096 = 12 binary splits. 
+  \that are checked linearly.
+  \4096 = 12 binary splits.
   \10 + 1         =    11 = lower bound 
   \10 + 10 * 4096 = 40970 = upper bound 
-  put 11 into the lower bound. 
-  put 40970 into the upper bound. 
+  put 11 into the lower bound.
+  put 40970 into the upper bound.
   put the square root of the number into the result 
-    given the lower bound and the upper bound. 
+    given the lower bound and the upper bound.
 
 to put the square root of a number in a number called result (close): 
   if the number is at most 0, 
-    put 0 into the result; exit. 
-  put the result times the result into a number called square. 
-  if the square is at least the number, exit. 
-  put the result plus the result in a number called margin. 
-  add 1 to the margin. 
-  put the square plus the margin in a number called next square. 
-  loop. 
-    if the next square is more than the number, exit. 
-    add 1 to the result. 
-    put the next square in the square. 
-    add 2 to the margin. 
-    add the margin to the next square. 
-  repeat. 
+    put 0 into the result; exit.
+  put the result times the result into a number called square.
+  if the square is at least the number, exit.
+  put the result plus the result in a number called margin.
+  add 1 to the margin.
+  put the square plus the margin in a number called next square.
+  loop.
+    if the next square is more than the number, exit.
+    add 1 to the result.
+    put the next square in the square.
+    add 2 to the margin.
+    add the margin to the next square.
+  repeat.
 
-to put the square root of a number in a number called result given a number called lower bound and a number called upper bound: 
-  \uses binary search.  The bounds are inclusive. 
-  privatize the lower bound. 
-  privatize the upper bound. 
+to put the square root of a number in a number called result given a number called lower bound and a number called upper bound:
+  \uses binary search.  The bounds are inclusive.
+  privatize the lower bound.
+  privatize the upper bound.
   if the upper bound is greater than the largest square root, 
-    put the largest square root in the upper bound. 
+    put the largest square root in the upper bound.
   if the upper bound times the upper bound is less than the number, 
-    put the upper bound in the result; exit. 
+    put the upper bound in the result; exit.
   if the lower bound times the lower bound is at least the number, 
-    put the lower bound in the result; exit. 
-  loop. 
-    put the lower bound plus 10 in a number called threshold. 
+    put the lower bound in the result; exit.
+  loop.
+    put the lower bound plus 10 in a number called threshold.
     if the upper bound is less than the threshold, 
       put the lower bound into the result; 
       put the square root of the number into the result (close);
-      exit. 
-    put the lower bound in a number called midpoint. 
-    add the upper bound to the midpoint. 
-    add 1 to the midpoint. 
-    divide the midpoint by 2. 
-    put the midpoint times the midpoint in a number called mid square. 
+      exit.
+    put the lower bound in a number called midpoint.
+    add the upper bound to the midpoint.
+    add 1 to the midpoint.
+    divide the midpoint by 2.
+    put the midpoint times the midpoint in a number called mid square.
     if the number is less than the mid square, 
       subtract 1 from the midpoint; 
       put the midpoint in the upper bound; 
-      repeat. 
-    put the midpoint in the lower bound. 
+      repeat.
+    put the midpoint in the lower bound.
   repeat.
 
 to put a string into another string:
@@ -8298,21 +8299,21 @@ to put a string on the windows clipboard:
 to put a string's length into a length:
   intel $8B9D08000000. \ mov ebx,[ebp+8] \ the string
   \ load default result
-  intel $B900000000. \ mov ecx,0
+  intel $B900000000.   \ mov ecx,0
   \ if first is 0, store 0
-  intel $833B00. \ cmp [ebx],0
+  intel $833B00.       \ cmp [ebx],0
   intel $0F8414000000. \ je store it
   \ if last is less than first, store 0
-  intel $8B5304. \ mov edx,[ebx+4] \ last pointer
-  intel $3B13. \ cmp edx,[ebx]
+  intel $8B5304.       \ mov edx,[ebx+4] \ last pointer
+  intel $3B13.         \ cmp edx,[ebx]
   intel $0F8C09000000. \ jl store it
   \ calc length
   intel $8B8B04000000. \ mov ecx,[ebx+4] \ last pointer
-  intel $2B0B. \ sub ecx,[ebx] \ subtract first
-  intel $41. \ inc ecx \ add 1
+  intel $2B0B.         \ sub ecx,[ebx]   \ subtract first
+  intel $41.           \ inc ecx         \ add 1
   \ STORE IT:
   intel $8B950C000000. \ mov edx,[ebp+12] \ the number
-  intel $890A. \ mov [edx],ecx
+  intel $890A.         \ mov [edx],ecx
 
 to put a string's width into a width:
   get the width given the string and the memory canvas and the default font.
@@ -8432,33 +8433,33 @@ to put a timer's ticks into some ticks:
   add the other ticks to the ticks.
 
 to put a wyrd into another wyrd:
-  intel $8B8508000000. \ mov eax,[ebp+8] \ the wyrd
-  intel $668B00. \ mov ax,[eax]
+  intel $8B8508000000. \ mov eax,[ebp+8]  \ the wyrd
+  intel $668B00.       \ mov ax,[eax]
   intel $8B9D0C000000. \ mov ebx,[ebp+12] \ the other wyrd
-  intel $668903. \ mov [ebx],ax
+  intel $668903.       \ mov [ebx],ax
 
 to put a wyrd into a big-endian unsigned wyrd:
-  intel $8B8508000000. \ mov eax,[ebp+8] \ the wyrd
-  intel $668B00. \ mov ax,word ptr [eax]
-  intel $86E0. \ xchg al,ah
+  intel $8B8508000000. \ mov eax,[ebp+8]  \ the wyrd
+  intel $668B00.       \ mov ax,word ptr [eax]
+  intel $86E0.         \ xchg al,ah
   intel $8B9D0C000000. \ mov ebx,[ebp+12] \ the big-endian unsigned wyrd
-  intel $668903. \ mov word ptr [ebx],ax
+  intel $668903.       \ mov word ptr [ebx],ax
 
 to put a wyrd into a byte:
-  intel $8B8508000000. \ mov eax,[ebp+8] \ the wyrd
-  intel $668B00. \ mov ax,[eax]
+  intel $8B8508000000. \ mov eax,[ebp+8]  \ the wyrd
+  intel $668B00.       \ mov ax,[eax]
   intel $8B9D0C000000. \ mov ebx,[ebp+12] \ the byte
-  intel $8803. \ mov [ebx],al
+  intel $8803.         \ mov [ebx],al
 
 to put a wyrd into eax:
-  intel $8B9D08000000. \ mov ebx,[ebp+8] \ the wyrd
-  intel $0FBF03. \ movsx eax,word ptr [ebx]
+  intel $8B9D08000000. \ mov ebx,[ebp+8]  \ the wyrd
+  intel $0FBF03.       \ movsx eax,word ptr [ebx]
 
 to put a wyrd into a number:
-  intel $8B8508000000. \ mov eax,[ebp+8] \ the wyrd
-  intel $0FBF00. \ movsx eax,wyrd ptr [eax]
+  intel $8B8508000000. \ mov eax,[ebp+8]  \ the wyrd
+  intel $0FBF00.       \ movsx eax,wyrd ptr [eax]
   intel $8B9D0C000000. \ mov ebx,[ebp+12] \ the number
-  intel $8903. \ mov [ebx],eax
+  intel $8903.         \ mov [ebx],eax
 
 to put an x coord and a y coord and another x coord and another y coord into a line:
   put the x into the line's start's x.
@@ -8537,34 +8538,34 @@ to read a number:
   convert the string to the number.
 
 to read a path into a buffer:
-  put the largest number in a size called max bytes. 
-  read the path into the buffer given the max bytes. 
+  put the largest number in a size called max bytes.
+  read the path into the buffer given the max bytes.
 
-to read a path into a buffer given a size called max bytes: 
-  clear the i/o error. 
-  privatize the path. 
-  privatize the max bytes. 
-  null terminate the path. 
+to read a path into a buffer given a size called max bytes:
+  clear the i/o error.
+  privatize the path.
+  privatize the max bytes.
+  null terminate the path.
   if the path is not in the file system,  
     put "File '" then the path then "' doesn't exist."  
-    into the i/o error; exit. 
-\  set the path to read-write mode. 
+    into the i/o error; exit.
+\  set the path to read-write mode.
   call "kernel32.dll" "CreateFileA" with the path's first 
     and -2147483648 [generic_read]  
     and 3 [file_share_read+file_share_write] and 0  
-    and 3 [open_existing] and 0 and 0 returning a handle. 
+    and 3 [open_existing] and 0 and 0 returning a handle.
   if the handle is -1 [invalid_handle_value],  
     put "Error opening file '" then the path then "'."  
-    into the i/o error; exit. 
-  call "kernel32.dll" "GetFileSize" with the handle and nil returning a size. 
+    into the i/o error; exit.
+  call "kernel32.dll" "GetFileSize" with the handle and nil returning a size.
   if the size is less than the max bytes, 
-    put the size in the max bytes. 
-  reassign the buffer's first given the max bytes. 
-  put the buffer's first plus the max bytes minus 1 into the buffer's last. 
+    put the size in the max bytes.
+  reassign the buffer's first given the max bytes.
+  put the buffer's first plus the max bytes minus 1 into the buffer's last.
   call "kernel32.dll" "ReadFile"  
     with the handle and the buffer's first and the max bytes 
-    and a number's whereabouts and 0 returning the number. 
-  call "kernel32.dll" "CloseHandle" with the handle. 
+    and a number's whereabouts and 0 returning the number.
+  call "kernel32.dll" "CloseHandle" with the handle.
   if the number is not 0, exit.
   put "Error reading file '" then the path then "'." into the i/o error.
 
@@ -8582,7 +8583,7 @@ to read a response string from a winhttp request:
   clear the response.
   put 8 kilobytes into a buffer size.
   loop.
-    put 0 into a size.  
+    put 0 into a size. 
     call "winhttp.dll" "WinHttpQueryDataAvailable"
       with the winhttp request's request and the size's whereabouts returning a result number.
     if the result is 0, put "Unable to query data available." into the i/o error; clear the response; break.
@@ -8654,7 +8655,7 @@ to receive a buffer from a socket:
   clear the buffer.
   put 8 kilobytes into a buffer size.
   loop.
-    put 0 into a size.  
+    put 0 into a size. 
     put the buffer's length into a saved length.
     reassign the buffer's first given the saved length plus the buffer size.
     put the buffer's first plus the saved length into a  pointer.
@@ -8946,9 +8947,9 @@ to reque an event:
   copy the event into another event.
   enque the other event.
 
-the requested control font is a control font. 
+the requested control font is a control font.
 
-the requested editor font is an editor font. 
+the requested editor font is an editor font.
 
 the requested font is a font.
 
@@ -9242,7 +9243,7 @@ to rotate a text:
   rotate the text's box.
   wrap the text.
 
-to round a number to another number: 
+to round a number to another number:
   round the number to the nearest multiple of the other number.
 
 to round a number down to the nearest multiple of another number:
@@ -9265,16 +9266,16 @@ to round a number up to the nearest multiple of another number:
 
 to round a number up to the nearest power of two:
   intel $8B8D08000000. \ mov ecx,[ebp+8] \ the number
-  intel $8B09. \ mov ecx,[ecx]
-  intel $49. \ dec ecx
-  intel $0FBDC9. \ bsr ecx,ecx
-  intel $41. \ inc ecx
+  intel $8B09.         \ mov ecx,[ecx]
+  intel $49.           \ dec ecx
+  intel $0FBDC9.       \ bsr ecx,ecx
+  intel $41.           \ inc ecx
   intel $81F904000000. \ cmp ecx,4
   intel $0F8F05000000. \ jg over the next 1 statement
-  intel $B904000000. \ mov ecx,4
+  intel $B904000000.   \ mov ecx,4
   intel $8B8508000000. \ mov eax,[ebp+8] \ the number
   intel $C70001000000. \ mov [eax],1
-  intel $D320. \ shl [eax],ecx  
+  intel $D320.         \ shl [eax],ecx  
 
 to round a pair to another pair:
   round the pair to the nearest multiple of the other pair.
@@ -9336,7 +9337,7 @@ to scale a font given a ratio:
 to scale a line given a ratio:
   if the ratio is 1/1, exit.
   scale the line's start given the ratio.
-  scale the line's end given the ratio.  
+  scale the line's end given the ratio. 
 
 to scale a line to a percent:
   put the percent / 100 into a ratio.
@@ -9717,39 +9718,39 @@ a sheet is a box.
 
 to shift a byte left some bits:
   intel $8B8D0C000000. \ mov ecx,[ebp+12] \ the bits
-  intel $8B09. \ mov ecx,[ecx]
+  intel $8B09.         \ mov ecx,[ecx]
   intel $8B8508000000. \ mov eax,[ebp+8] \ the byte
-  intel $D220. \ shl byte pointer [eax],ecx
+  intel $D220.         \ shl byte pointer [eax],ecx
 
 to shift a byte right some bits:
   intel $8B8D0C000000. \ mov ecx,[ebp+12] \ the bits
-  intel $8B09. \ mov ecx,[ecx]
+  intel $8B09.         \ mov ecx,[ecx]
   intel $8B8508000000. \ mov eax,[ebp+8] \ the byte
-  intel $D228. \ shr byte pointer [eax],ecx
+  intel $D228.         \ shr byte pointer [eax],ecx
 
 to shift a number left some bits:
   intel $8B8D0C000000. \ mov ecx,[ebp+12] \ the bits
-  intel $8B09. \ mov ecx,[ecx]
+  intel $8B09.         \ mov ecx,[ecx]
   intel $8B8508000000. \ mov eax,[ebp+8] \ the number
-  intel $D320. \ shl [eax],ecx
+  intel $D320.         \ shl [eax],ecx
 
 to shift a number right some bits:
   intel $8B8D0C000000. \ mov ecx,[ebp+12] \ the bits
-  intel $8B09. \ mov ecx,[ecx]
+  intel $8B09.         \ mov ecx,[ecx]
   intel $8B8508000000. \ mov eax,[ebp+8] \ the number
-  intel $D328. \ shr [eax],ecx
+  intel $D328.         \ shr [eax],ecx
 
 to shift a wyrd left some bits:
   intel $8B8D0C000000. \ mov ecx,[ebp+12] \ the bits
-  intel $8B09. \ mov ecx,[ecx]
+  intel $8B09.         \ mov ecx,[ecx]
   intel $8B8508000000. \ mov eax,[ebp+8] \ the wyrd
-  intel $66D320. \ shl word ptr [eax],ecx
+  intel $66D320.       \ shl word ptr [eax],ecx
 
 to shift a wyrd right some bits:
   intel $8B8D0C000000. \ mov ecx,[ebp+12] \ the bits
-  intel $8B09. \ mov ecx,[ecx]
+  intel $8B09.         \ mov ecx,[ecx]
   intel $8B8508000000. \ mov eax,[ebp+8] \ the wyrd
-  intel $66D328. \ shr word ptr [eax],ecx
+  intel $66D328.       \ shr word ptr [eax],ecx
 
 to show a console:
   if the console is nil, exit.
@@ -9843,14 +9844,14 @@ to slap a substring on the last byte of a string:
   put the string's last into the substring's first.
 
 to slap a substring on a string:
-  intel $8B8508000000. \ mov eax,[ebp+8] \ the substring
+  intel $8B8508000000. \ mov eax,[ebp+8]  \ the substring
   intel $8B9D0C000000. \ mov ebx,[ebp+12] \ the string
   \ put the string's first into the substring's first
-  intel $8B8B00000000. \ mov ecx,[ebx+0] \ the string's first
-  intel $898800000000. \ mov [eax+0],ecx \ the substring's first
+  intel $8B8B00000000. \ mov ecx,[ebx+0]  \ the string's first
+  intel $898800000000. \ mov [eax+0],ecx  \ the substring's first
   \ put the string's last into the substring's last
-  intel $8B8B04000000. \ mov ecx,[ebx+4] \ the string's last
-  intel $898804000000. \ mov [eax+4],ecx \ the substring's last
+  intel $8B8B04000000. \ mov ecx,[ebx+4]  \ the string's last
+  intel $898804000000. \ mov [eax+4],ecx  \ the substring's last
 
 the smallest number is -2147483648.
 
@@ -9959,7 +9960,7 @@ to split a buffer into some dyads:
   loop.
     move the rider given the ampersand byte.
     if the rider's token is blank, exit.
-    create a dyad. 
+    create a dyad.
     append the dyad to the dyads.
     split the rider's token into a name substring and a query substring given the equal-sign byte.
     put the name substring into the dyad's name.
@@ -9976,7 +9977,7 @@ to split a line into another line and a third line:
   privatize the line.
   put the line's center into a center spot.
   put the line's start and the center into the other line.
-  put the center and the line's end into the third line. 
+  put the center and the line's end into the third line.
 
 to split a number into a wyrd and another wyrd:
   privatize the number.
@@ -10033,7 +10034,7 @@ to split some things into some left things and some right things:
     if the count is 0, break.
     subtract 1 from the count.
   repeat.
-  split the things into the left things and the right things at the thing. 
+  split the things into the left things and the right things at the thing.
 
 to split some things into some left things and some right things at a thing:
   clear the left things.
@@ -10176,7 +10177,7 @@ to stop a process:
 
 to stop a timer:
   if the timer's count is 0, exit.
-  subtract 1 from the timer's count.  
+  subtract 1 from the timer's count. 
   if the timer's count is not 0, exit.
   put the system's tick count into some ticks.
   subtract the timer's start ticks from the ticks.
@@ -10197,18 +10198,18 @@ to subtract a number and another number from a pair:
   subtract the other number from the pair's y.
 
 to subtract a number from another number:
-  intel $8B8508000000. \ mov eax,[ebp+8] \ the number
-  intel $8B00. \ mov eax,[eax]
+  intel $8B8508000000. \ mov eax,[ebp+8]  \ the number
+  intel $8B00.         \ mov eax,[eax]
   intel $8B9D0C000000. \ mov ebx,[ebp+12] \ the other number
-  intel $2903. \ sub [ebx],eax
+  intel $2903.         \ sub [ebx],eax
 
 to subtract a number from a byte:
-  intel $8B8508000000. \ mov eax,[ebp+8] \ the number
-  intel $8B00. \ mov eax,[eax]
+  intel $8B8508000000. \ mov eax,[ebp+8]  \ the number
+  intel $8B00.         \ mov eax,[eax]
   intel $8B9D0C000000. \ mov ebx,[ebp+12] \ the byte
-  intel $0FB60B. \ movzx ecx,[ebx]
-  intel $2BC8. \ sub ecx,eax
-  intel $880B. \ mov [ebx],cl
+  intel $0FB60B.       \ movzx ecx,[ebx]
+  intel $2BC8.         \ sub ecx,eax
+  intel $880B.         \ mov [ebx],cl
 
 to subtract a number from a pair:
   subtract the number from the pair's x.
@@ -10856,7 +10857,7 @@ to test (the noodle - trim length from end of string):
   trim the length from the actual.
   stash the test result given the actual.
 
-to test (the noodle - user profile is a directory path):  
+to test (the noodle - user profile is a directory path):
   get an environment variable called user profile given "USERPROFILE".
   put the user profile in a path.
   if the path is not directory-format,
@@ -11002,7 +11003,7 @@ to transcribe a uuid to a string:
 
 to trim a length from a string:
   slap a substring on the string.
-  put the substring's first plus the string's length minus 1 minus the length into the substring's last.    
+  put the substring's first plus the string's length minus 1 minus the length into the substring's last.   
   if the substring's first is greater than the substring's last,
     put "" in the string; exit.
   put the substring in the string.
@@ -11104,7 +11105,7 @@ to uppercase any selected bytes in a text:
     get a row from the text's rows.
     if the row is nil, exit.
     if the row of the text is not selected, repeat.
-    slap a substring on any selected bytes in the row of the text.  
+    slap a substring on any selected bytes in the row of the text. 
     uppercase the substring.
   repeat.
 
@@ -11155,7 +11156,7 @@ a urlcomponents is a record with
   a pchar called lpszurlpath,
   a number called dwurlpathlength,
   a pchar called lpszextrainfo,
-  a number called dwextrainfolength.  
+  a number called dwextrainfolength. 
 
 a uuid is a record with
   a number called d1,

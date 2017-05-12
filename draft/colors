@@ -31,7 +31,7 @@ to convert a color to a colorref:
 
 to convert a color to a rgb:
   convert the color to a colorref.
-  convert the colorref to the rgb. 
+  convert the colorref to the rgb.
 
 to convert a colorref to a color:
   call "shlwapi.dll" "ColorRGBToHLS"

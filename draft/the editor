@@ -1,7 +1,7 @@
 \ The portions of this file that are from CAL-3040
 \ are copyright 2006 by the Osmosian Order.
 \ The portions of this file that are from CAL-4700 
-\ are copyright 2017 by the Osmosian Order. 
+\ are copyright 2017 by the Osmosian Order.
 \ The remainder is copyright 2014, 2017 by Jasper Paulsen.
 
 to add to some blocks:
@@ -20,7 +20,7 @@ to bump a substring (past a qualifier):
   if the substring's first's target is the return byte, exit.
   if the substring's first's target is the left-paren byte, add 1 to a count.
   if the substring's first's target is the right-paren byte, subtract 1 from the count.
-  add 1 to the substring's first.  
+  add 1 to the substring's first.
   if the count is 0, exit.
   repeat.
 
@@ -28,7 +28,7 @@ to bump a substring (past a remark):
   if the substring's first's target is the return byte, exit.
   if the substring's first's target is the left-bracket byte, add 1 to a count.
   if the substring's first's target is the right-bracket byte, subtract 1 from the count.
-  add 1 to the substring's first.  
+  add 1 to the substring's first.
   if the count is 0, exit.
   repeat.
 
@@ -62,30 +62,30 @@ to create a block:
   allocate memory for the block.
 
 to create some blocks given some rows:
-  loop. 
-    get a row from the rows. 
-    if the row is nil, exit. 
-    \The following line did not handle multi-line record definitions: 
-    \if the row's string starts with any definition starter, add to the blocks. 
+  loop.
+    get a row from the rows.
+    if the row is nil, exit.
+    \The following line did not handle multi-line record definitions:
+    \if the row's string starts with any definition starter, add to the blocks.
     \
-    \The following line makes blank lines significant during sorting: 
-    if the row's string has neither code nor comment on it, add to the blocks. 
-    if the blocks are empty, add to the blocks. 
-    copy the row into another row. 
-    append the other row to the blocks' last's rows. 
+    \The following line makes blank lines significant during sorting:
+    if the row's string has neither code nor comment on it, add to the blocks.
+    if the blocks are empty, add to the blocks.
+    copy the row into another row.
+    append the other row to the blocks' last's rows.
   repeat.
 
 to create a source given a buffer:
   allocate memory for the source.
   put the pad's box into a box.
   put the box's height divided by the requested editor font's height 
-    times the requested editor font's height into a height. 
+    times the requested editor font's height into a height.
   put the box's top plus the height into the box's bottom.
   center the box in the pad's box (vertically).
   create the source's text.
   put the box into the source's text's box.
   put the black color into the source's text's pen.
-  put the requested editor font into the source's text's font. 
+  put the requested editor font into the source's text's font.
   put 1/4 inch into the source's text's margin.
   put the buffer into the source's text.
   set the source's text's horizontal scroll flag.
@@ -149,12 +149,12 @@ to decide if a string does start with any indefinite article: employ a string st
 
 to decide if a string does start with any routine starter: employ a string starts with any routine starter.
 
-to decide if a string has neither code nor comment on it: 
-  privatize the string. 
-  remove any leading noise from the string. 
-  remove any trailing noise from the string. 
-  if the string is blank, say yes. 
-  say no. 
+to decide if a string has neither code nor comment on it:
+  privatize the string.
+  remove any leading noise from the string.
+  remove any trailing noise from the string.
+  if the string is blank, say yes.
+  say no.
 
 to decide if a string starts with any definite article:
   if the string starts with "the ", say yes.
@@ -210,7 +210,7 @@ to draw a source:
   if the source is nil, exit.
   \ the scrollbar overlaps with the pad, but shoves the source's text.
   \ the shoving lets the scrollbar have the (default) arrow cursor,
-  \ instead of the source's i-beam cursor.  
+  \ instead of the source's i-beam cursor.
   if the scrollbar is needed,
     put the pad's right minus 1/4 inch in a number.
   if the scrollbar is not needed,
@@ -599,10 +599,10 @@ to handle font height given a source and a font height:
   put the box's top plus the height into the box's bottom.
   center the box in the pad's box (vertically).
   if the source's text is not modified, 
-    set a flag. 
+    set a flag.
   handle font height given the source's text and the box and the font height.
   if the flag is set, 
-    clear the source's text's modified flag. 
+    clear the source's text's modified flag.
   show the desktop with status.
 
 to handle font height other given a source:
@@ -621,18 +621,18 @@ to handle font height other given a source:
 to handle font name given a source and a string:
   show the desktop.
   if the source's text is not modified, 
-    set a flag. 
+    set a flag.
   handle font name given the source's text and the string.
   if the flag is set, 
-    clear the source's text's modified flag. 
+    clear the source's text's modified flag.
   show the desktop with status.
 
 to handle font name other given a source:
   ask "Name?" with the source's text's font's name.
   if the answer is blank, exit.
-  put the answer in a font name. 
+  put the answer in a font name.
   if the font name is in the custom font names, 
-    make sure the font name is loaded (custom). 
+    make sure the font name is loaded (custom).
   if the answer is not standard (font name),
     cache the answer (font name).
   handle font name given the source and the answer.
@@ -855,30 +855,30 @@ to scroll a source given an event:
   repeat.
 
 to scrub a block:
-  scrub the block (forward). 
-  scrub the block (backward). 
+  scrub the block (forward).
+  scrub the block (backward).
 
-to scrub a block (backward): 
-  loop. 
-    if the block is nil, exit. 
-    put the block's last row into a row. 
-    if the row is nil, break. 
-    if the row is not blank, break. 
-    remove the row from the block's rows. 
-    destroy the row. 
+to scrub a block (backward):
+  loop.
+    if the block is nil, exit.
+    put the block's last row into a row.
+    if the row is nil, break.
+    if the row is not blank, break.
+    remove the row from the block's rows.
+    destroy the row.
   repeat.
   create another row given the return byte.
   append the other row to the block's rows.
 
-to scrub a block (forward): 
-  loop. 
-    if the block is nil, exit. 
-    put the block's first row into a row. 
-    if the row is nil, break. 
-    if the row is not blank, break. 
-    remove the row from the block's rows. 
-    destroy the row. 
-  repeat. 
+to scrub a block (forward):
+  loop.
+    if the block is nil, exit.
+    put the block's first row into a row.
+    if the row is nil, break.
+    if the row is not blank, break.
+    remove the row from the block's rows.
+    destroy the row.
+  repeat.
 
 to scrub a block for extracting:
   if the block is nil, exit.
@@ -1000,5 +1000,5 @@ to uncomment any selected rows in a source:
     if the row is nil, exit.
     if the row of the source's text is not selected, repeat.
     if the row's string's first's target is not the backslash byte, repeat.
-    remove the first byte from the row's string.  
+    remove the first byte from the row's string.
   repeat.

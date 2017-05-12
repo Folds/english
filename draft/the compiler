@@ -1,7 +1,7 @@
 \ The portions of this file that are from CAL-3040
 \ are copyright 2006 by the Osmosian Order.
 \ The portions of this file that are from CAL-4700 
-\ are copyright 2017 by the Osmosian Order. 
+\ are copyright 2017 by the Osmosian Order.
 \ The remainder is copyright 2014, 2017 by Jasper Paulsen.
 
 \ firstparam=esp+4/ebp+8, secondparam=esp+8/ebp+12, etc...
@@ -276,21 +276,21 @@ to add a monikette to some monikettes given a string:
   if the string is "isn't",  put "is/aren't" into the monikette's string; exit.
   if the string is "aren't", put "is/aren't" into the monikette's string; exit.
   \ backward/backwards/counterclockwise/counter-clockwise/anticlockwise/anti-clockwise 
-  if the string is "backward",          put "backward" into the monikette's string; exit. 
-  if the string is "backwards",         put "backward" into the monikette's string; exit. 
-  if the string is "counterclockwise",  put "backward" into the monikette's string; exit. 
-  if the string is "counter-clockwise", put "backward" into the monikette's string; exit. 
-  if the string is "anticlockwise",     put "backward" into the monikette's string; exit. 
-  if the string is "anti-clockwise",    put "backward" into the monikette's string; exit. 
+  if the string is "backward",          put "backward" into the monikette's string; exit.
+  if the string is "backwards",         put "backward" into the monikette's string; exit.
+  if the string is "counterclockwise",  put "backward" into the monikette's string; exit.
+  if the string is "counter-clockwise", put "backward" into the monikette's string; exit.
+  if the string is "anticlockwise",     put "backward" into the monikette's string; exit.
+  if the string is "anti-clockwise",    put "backward" into the monikette's string; exit.
   \ at/on 
-  if the string is "at", put "at/on" into the monikette's string; exit. 
-  if the string is "on", put "at/on" into the monikette's string; exit. 
+  if the string is "at", put "at/on" into the monikette's string; exit.
+  if the string is "on", put "at/on" into the monikette's string; exit.
   \ other
   put the string into the monikette's string.
 
 to add a monikette to some monikettes given a type:
   create the monikette.
-  append the monikette to the monikettes. 
+  append the monikette to the monikettes.
   put the type into the monikette's type.
 
 to add push fragments given some monikettes:
@@ -546,7 +546,7 @@ to advance a buffer:
   append the linefeed byte to the buffer.
 
 to advance a buffer (twice):
-  advance the buffer. 
+  advance the buffer.
   advance the buffer.
 
 to append an entry to a buffer (with separator):
@@ -902,8 +902,8 @@ to compile the body of a routine:
     compile the body of the routine  
       given the rider (alternate wording); exit. \ *** alternate wording 
   if the rider's token is "employ",
-    compile the body of the routine  
-      given the rider (employ); exit. 
+    compile the body of the routine
+      given the rider (employ); exit.
   put the current routine into a saved routine.
   put the routine into the current routine.
   create the routine's nickname index given 101.
@@ -919,7 +919,7 @@ to compile the body of a routine:
   put the saved routine into the current routine.
 
 to compile the body of a routine (epilog):
-  if the compiler's abort flag is set, exit. 
+  if the compiler's abort flag is set, exit.
   if the routine is nil, exit.
   if the compiler's abort flag is set, exit.
   add a fragment given the finalize tag.
@@ -949,18 +949,18 @@ to compile the body of the routine called a string:
   compile the body of the routine.
 
 to compile the body of a routine given a rider (alternate wording): \ *** alternate wording 
-  if the compiler's abort flag is set, exit. 
+  if the compiler's abort flag is set, exit.
   move the rider (compiler rules). \ *** do we need this? 
-  put the routine's next into a target routine. 
+  put the routine's next into a target routine.
   if the target routine is nil,  
     abort with "You've defined an alternate wording here, "  
       then "but I'm not sure what you're rewording."  
-      and the rider; exit. 
-  put the target routine's moniker into the routine's employs moniker. 
-  compile the body of the target routine. 
+      and the rider; exit.
+  put the target routine's moniker into the routine's employs moniker.
+  compile the body of the target routine.
 
 to compile the body of a routine given a rider (employ):
-  if the compiler's abort flag is set, exit. 
+  if the compiler's abort flag is set, exit.
   move the rider (compiler rules).
   compile a routine reference given the rider.
   convert the routine reference to the routine's employs moniker.
@@ -1498,7 +1498,7 @@ to compile the next statement given a rider (call):
   if the compiler's abort flag is set, exit.
   move the rider (compiler rules).
   if the rider's token is any string literal, compile the next statement given the rider (call - external); exit.
-  compile the next statement given the rider (call - indirect).  
+  compile the next statement given the rider (call - indirect).
 
 to compile the next statement given a rider (exit):
   if the current routine's decider flag is set, abort with "What does 'exit' mean here? Yes? No? Maybe?" and the rider; exit.
@@ -1805,7 +1805,7 @@ to compile a term given a rider (possessive - target):
 to compile a term given a rider (possessive - whereabouts):
   if the compiler's abort flag is set, exit.
   if the term's variable is nil, abort with "Invalid use of whereabouts, I don't understand the variable '" then the term's phrase then "'." and the rider; exit.
-  add an intermediate given "pointer" and the rider's token's first. 
+  add an intermediate given "pointer" and the rider's token's first.
   add a fragment given the load address tag and the term's variable and the intermediate.
   put the intermediate into the term's variable.
   clear the term's phrase.
@@ -1824,7 +1824,7 @@ to compile a term given a rider (possessives):
   if the compiler's abort flag is set, exit.
   if the rider's token is not any possessive, exit.
   compile the term given the rider (possessive).
-  repeat.  
+  repeat.
 
 to compile a term given a rider (runtime ratio):
   if the compiler's abort flag is set, exit.
@@ -1851,7 +1851,7 @@ to compile a term given a rider (variable):
 
 to compile a term given a rider and a field term:
   if the compiler's abort flag is set, exit.
-  if the field term's dereference flag is set, compile the term given the rider (dereference).  
+  if the field term's dereference flag is set, compile the term given the rider (dereference).
   if the field term's function is not nil, compile the term given the rider and the field term (function); exit.
   if the term's kind is "scratch", compile the term given the rider and the field term (in place); exit.
   put the field term's field into a field.
@@ -2114,11 +2114,11 @@ to decide if a global is twin of another global:
   if the global's global body is not the other global's global body, say no.
   say yes.
 
-to decide if an item looks reamish: 
-  put 100 in a size. \ don't read more than 100 bytes. 
-  read the item's path into a buffer given the size. 
-  if the buffer starts with "ream cal", say yes. 
-  say no. 
+to decide if an item looks reamish:
+  put 100 in a size. \ don't read more than 100 bytes.
+  read the item's path into a buffer given the size.
+  if the buffer starts with "ream cal", say yes.
+  say no.
 
 to decide if listing failed:
   if list was not requested, say no.
@@ -2184,12 +2184,12 @@ to decide if a rider is on any possessive (type 2 - preceding s, single-quote, n
   say no.
 
 to decide if a rider is on any simile: \ added for invisible turtle project *** 
-  privatize the rider. 
-  if the rider's token is "LIKE", say yes. 
-  if the rider's token is not "AS", say no. 
-  move the rider (compiler rules). 
-  if the rider's token is any indefinite article, say no. 
-  say yes. 
+  privatize the rider.
+  if the rider's token is "LIKE", say yes.
+  if the rider's token is not "AS", say no.
+  move the rider (compiler rules).
+  if the rider's token is any indefinite article, say no.
+  say yes.
 
 to decide if a rider is the start of any function:
   if the compiler's abort flag is set, say no.
@@ -2199,7 +2199,7 @@ to decide if a rider is the start of any function:
   if the rider's token is not any article, say no.
   move the rider (compiler rules).
   scan a name given the rider.
-  if the rider's token is any possessive, say yes.  
+  if the rider's token is any possessive, say yes.
 
 to decide if a string ends with any consonant and another string:
   slap a substring on the string.
@@ -2341,18 +2341,18 @@ to decide if a string is any preposition:
   if the string is "across", say yes.
   if the string is "after", say yes.
   if the string is "against", say yes.
-  if the string is "all", say yes. 
+  if the string is "all", say yes.
   if the string is "along", say yes.
   if the string is "among", say yes.
-  if the string is "any", say yes. 
+  if the string is "any", say yes.
   if the string is "anywhere", say yes.
-  if the string is "away", say yes. 
+  if the string is "away", say yes.
   if the string is "around", say yes.
   if the string is "as", say yes.
   if the string is "at", say yes.
   if the string is "back", say yes.
   if the string is "backward", say yes.
-  if the string is "backwards", say yes. 
+  if the string is "backwards", say yes.
   if the string is "before", say yes.
   if the string is "beginning", say yes.
   if the string is "behind", say yes.
@@ -2361,62 +2361,62 @@ to decide if a string is any preposition:
   if the string is "beside", say yes.
   if the string is "between", say yes.
   if the string is "beyond", say yes.
-  if the string is "bigger", say yes. 
+  if the string is "bigger", say yes.
   if the string is "by", say yes.
-  if the string is "close", say yes. 
-  if the string is "deep", say yes. 
-  if the string is "diagonally", say yes. 
+  if the string is "close", say yes.
+  if the string is "deep", say yes.
+  if the string is "diagonally", say yes.
   if the string is "down", say yes.
   if the string is "downward", say yes.
   if the string is "ending", say yes.
-  if the string is "everywhere", say yes. 
+  if the string is "everywhere", say yes.
   if the string is "except", say yes.
-  if the string is "facing", say yes. 
+  if the string is "facing", say yes.
   if the string is "finishing", say yes.
   if the string is "for", say yes.
   if the string is "forward", say yes.
   if the string is "from", say yes.
   if the string is "given", say yes.
   if the string is "giving", say yes.
-  if the string is "high", say yes. 
+  if the string is "high", say yes.
   if the string is "in", say yes.
   if the string is "inside", say yes.
   if the string is "into", say yes.
-  if the string is "larger", say yes. 
-  if the string is "leaning", say yes. 
+  if the string is "larger", say yes.
+  if the string is "leaning", say yes.
   if the string is "left", say yes.
   if the string is "leftward", say yes.
-  if the string is "leftways", say yes. 
-  if the string is "like", say yes. 
-  if the string is "limiting", say yes. 
-  if the string is "long", say yes. 
+  if the string is "leftways", say yes.
+  if the string is "like", say yes.
+  if the string is "limiting", say yes.
+  if the string is "long", say yes.
   if the string is "near", say yes.
   if the string is "of", say yes.
   if the string is "off", say yes.
   if the string is "on", say yes.
-  if the string is "only", say yes. 
-  if the string is "onto", say yes. 
+  if the string is "only", say yes.
+  if the string is "onto", say yes.
   if the string is "out", say yes.
   if the string is "outside", say yes.
   if the string is "over", say yes.
   if the string is "past", say yes.
-  if the string is "pointing", say yes. 
+  if the string is "pointing", say yes.
   if the string is "returning", say yes.
   if the string is "right", say yes.
   if the string is "rightward", say yes.
-  if the string is "rightways", say yes. 
-  if the string is "shorter", say yes. 
-  if the string is "sideway", say yes. 
-  if the string is "sideways", say yes. 
-  if the string is "similar", say yes. 
-  if the string is "smaller", say yes. 
+  if the string is "rightways", say yes.
+  if the string is "shorter", say yes.
+  if the string is "sideway", say yes.
+  if the string is "sideways", say yes.
+  if the string is "similar", say yes.
+  if the string is "smaller", say yes.
   if the string is "somewhere", say yes.
-  if the string is "slantwise", say yes. 
-  if the string is "slantway", say yes. 
-  if the string is "slantways", say yes. 
+  if the string is "slantwise", say yes.
+  if the string is "slantway", say yes.
+  if the string is "slantways", say yes.
   if the string is "starting", say yes.
-  if the string is "tall", say yes. 
-  if the string is "taller", say yes. 
+  if the string is "tall", say yes.
+  if the string is "taller", say yes.
   if the string is "thru", say yes.
   if the string is "through", say yes.
   if the string is "throughout", say yes.
@@ -2433,7 +2433,7 @@ to decide if a string is any preposition:
   if the string is "using", say yes.
   if the string is "via", say yes.
   if the string is "while", say yes.
-  if the string is "wide", say yes. 
+  if the string is "wide", say yes.
   if the string is "with", say yes.
   if the string is "within", say yes.
   if the string is "without", say yes.
@@ -2455,35 +2455,35 @@ to decide if a string is any symbol:
   say no.
 
 to decide if a string is any verb:
-  if the string is "are", say yes. \ are not \ aren't
-  if the string is "be", say yes. \
-  if the string is "can", say yes. \ cannot \ can't
-  if the string is "cannot", say yes. 
-  if the string is "could", say yes. \ could not \ couldn't
-  if the string is "do", say yes. \ do not \ don't
-  if the string is "does", say yes. \ does not \ doesn't
-  if the string is "is", say yes. \ is not \ isn't
-  if the string is "may", say yes. \ may not \ mayn't
+  if the string is "are",    say yes. \ are not \ aren't
+  if the string is "be",     say yes. \
+  if the string is "can",    say yes. \ cannot \ can't
+  if the string is "cannot", say yes.
+  if the string is "could",  say yes. \ could not \ couldn't
+  if the string is "do",     say yes. \ do not \ don't
+  if the string is "does",   say yes. \ does not \ doesn't
+  if the string is "is",     say yes. \ is not \ isn't
+  if the string is "may",    say yes. \ may not \ mayn't
   if the string is "should", say yes. \ should not \ shouldn't
-  if the string is "was", say yes. \ was not \ wasn't
-  if the string is "will", say yes. \ will not \ won't
-  if the string is "would", say yes. \ would not \ wouldn't
-  if the string is "has", say yes. \ used in type definitions
-  if the string is "have", say yes. \ used in type definitions
+  if the string is "was",    say yes. \ was not \ wasn't
+  if the string is "will",   say yes. \ will not \ won't
+  if the string is "would",  say yes. \ would not \ wouldn't
+  if the string is "has",    say yes. \ used in type definitions
+  if the string is "have",   say yes. \ used in type definitions
   if the string ends with "n't", say yes.
   \ trouble makers
   if the string is "begins", say yes. \ does not begin \ doesn't begin
-  if the string is "ends", say yes. \ does not end \ doesn't end
-  if the string is "looks", say yes. \ does not look \ doesn't look
-  if the string is "needs", say yes. \ does not need \ doesn't need
+  if the string is "ends",   say yes. \ does not end \ doesn't end
+  if the string is "looks",  say yes. \ does not look \ doesn't look
+  if the string is "needs",  say yes. \ does not need \ doesn't need
   if the string is "starts", say yes. \ does not start \ doesn't start
   say no.
 
 to decide if a string is the start of any definition:
-  if the string is "to", say yes.
-  if the string is "a", say yes.
-  if the string is "an", say yes.
-  if the string is "the", say yes.
+  if the string is "to",   say yes.
+  if the string is "a",    say yes.
+  if the string is "an",   say yes.
+  if the string is "the",  say yes.
   if the string is "some", say yes.
   say no.
 
@@ -3466,7 +3466,7 @@ to move a rider (code rules - remark):
   if the rider's source's first's target is the right-bracket byte, subtract 1 from the count.
   bump the rider.
   if the count is 0, break.
-  repeat.  
+  repeat.
 
 to move a rider (code rules - string):
   bump the rider.
@@ -3736,7 +3736,7 @@ to read some source files:
     if the item is not found, break.
     if the item's kind is not "file", repeat.
     if the item's extension is not blank, repeat.
-    if the item looks reamish, repeat. 
+    if the item looks reamish, repeat.
     add a source file to the source files given the item's path.
     read the source file.
   repeat.
@@ -3794,7 +3794,7 @@ to remove any negatives from some monikettes returning a flag:
       reverse the flag; destroy the monikette; repeat.
     append the monikette to the monikettes.
     if the monikette's string is "can't",  
-      reverse the flag; put "can" into the monikette's string; repeat. 
+      reverse the flag; put "can" into the monikette's string; repeat.
     if the monikette's string is "cannot",
       reverse the flag; put "can" into the monikette's string; repeat.
     if the monikette's string is "nothing",
@@ -4052,7 +4052,8 @@ to scan any optional info for a type given a rider:
 
 to scan any optional info for a type given a rider (pointer):
   move the rider (compiler rules).
-  if the rider's token is not any indefinite article, abort with "The 'to' here needs to be followed by an indefinite article, not '" then the rider's token then "'." and the rider; exit. 
+  if the rider's token is not any indefinite article,
+    abort with "The 'to' here needs to be followed by an indefinite article, not '" then the rider's token then "'." and the rider; exit.
   move the rider (compiler rules).
   scan the type's target name given the rider.
 
@@ -4150,20 +4151,20 @@ to scan a global given a rider:
   move the rider (compiler rules).
   if the rider's token is not any indefinite article, scan the global given the rider (literal term); exit.
   move the rider (compiler rules).
-  scan the global's type name given the rider.  
+  scan the global's type name given the rider.
   if the rider's token is the start of any optional info, scan the global given the rider (optional info); exit.
   if the rider's token is "equal", scan the global given the rider (data part); exit.
-  if the rider's token is not the period byte, abort with "All global definitions must end with a period. Including this one." and the rider; exit. 
+  if the rider's token is not the period byte, abort with "All global definitions must end with a period. Including this one." and the rider; exit.
   move the rider (compiler rules).
   index the global.
 
 to scan a global given a rider (data part):
   if the compiler's abort flag is set, exit.
   move the rider (compiler rules).
-  if the rider's token is not "to", abort with "I need the word 'to' after the word 'equal', not '" then the rider's token then "'." and the rider; exit. 
+  if the rider's token is not "to", abort with "I need the word 'to' after the word 'equal', not '" then the rider's token then "'." and the rider; exit.
   move the rider (compiler rules).
   scan the global's global body given the rider.
-  if the rider's token is not the period byte, abort with "All global definitions must end with a period. Including this one." and the rider; exit. 
+  if the rider's token is not the period byte, abort with "All global definitions must end with a period. Including this one." and the rider; exit.
   move the rider (compiler rules).
   index the global.
 
@@ -4176,14 +4177,14 @@ to scan a global given a rider (has or have):
   index the type.
   put the type's name into the global's type name.
   scan the type's fields given the rider.
-  if the rider's token is not the period byte, abort with "Your punctuation is bad here." and the rider; exit. 
+  if the rider's token is not the period byte, abort with "Your punctuation is bad here." and the rider; exit.
   move the rider (compiler rules).
   index the global.
 
 to scan a global given a rider (literal term):
   if the compiler's abort flag is set, exit.
   scan the global's global body given the rider.
-  if the rider's token is not the period byte, abort with "All global definitions must end with a period. Including this one." and the rider; exit. 
+  if the rider's token is not the period byte, abort with "All global definitions must end with a period. Including this one." and the rider; exit.
   move the rider (compiler rules).
   index the global.
 
@@ -4195,7 +4196,7 @@ to scan a global given a rider (optional info):
   index the type.
   put the type's name into the global's type name.
   scan any optional info for the type given the rider.
-  if the rider's token is not the period byte, abort with "All global definitions must end with a period. Including this one." and the rider; exit. 
+  if the rider's token is not the period byte, abort with "All global definitions must end with a period. Including this one." and the rider; exit.
   move the rider (compiler rules).
   index the global.
 
@@ -4240,15 +4241,15 @@ to scan a routine given a rider:
   scan the routine's routine body given the rider.
 
 To scan a routine given a rider (alternate wording):  \ *** for alternate wordings 
-  privatize the rider. 
-  move the rider (compiler rules). 
+  privatize the rider.
+  move the rider (compiler rules).
   if the rider's token is not "to",  
     abort with "I think that there semi-colon is misplaced."  
       and the original rider; 
-    exit. 
-  put the original rider's token's first into the routine's routine body's first. 
-  put the original rider's token's last  into the routine's routine body's last. 
-  move the original rider (compiler rules). 
+    exit.
+  put the original rider's token's first into the routine's routine body's first.
+  put the original rider's token's last  into the routine's routine body's last.
+  move the original rider (compiler rules).
 
 to scan a routine header given a rider:
   if the compiler's abort flag is set, exit.
@@ -4297,7 +4298,7 @@ to scan a type given a rider:
   if the rider's token is not "is" or "are", abort with "I was expecting an 'is' or 'are', but I found '" then the rider's token then "'." and the rider; exit.
   move the rider (compiler rules).
   if the rider's token is any numeric literal, scan the type given the rider (unit of measure); exit.
-  if the rider's token is not any indefinite article, abort with "I was expecting an indefinte article, but I found '" then the rider's token then "'." and the rider; exit. 
+  if the rider's token is not any indefinite article, abort with "I was expecting an indefinte article, but I found '" then the rider's token then "'." and the rider; exit.
   move the rider (compiler rules).
   scan the type's base name given the rider.
   scan any optional info for the type given the rider.

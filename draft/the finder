@@ -289,7 +289,7 @@ to destutter a path (remove a back-and-forth):
     if the substring's first's target is the backslash byte,
       add 1 to the substring's first;
       remove bytes from the path given the substring;
-      exit.    
+      exit.
   repeat.
   put the path's last minus the substring's last into a length called suffix length.
 
@@ -379,7 +379,7 @@ to dump a substring of a buffer into another buffer (hex bytes):
   repeat.
   append the space byte to the other buffer.
   put 16 minus the substring's length times 3 into a count.
-  append the space byte to the other buffer given the count.    
+  append the space byte to the other buffer given the count.
 
 to duplicate a nodette in a node and in the file system given a path returning a new nodette:
   void the new nodette.
@@ -658,7 +658,7 @@ to handle extract nibble literal given a node:
   convert the buffer to a nibble string.
   prepend "$" to the nibble string.
   put the nibble string on the windows clipboard.
-  show status "Copied".  
+  show status "Copied".
 
 to handle get size given a node:
   if the node is root-level, cluck; exit.
@@ -853,7 +853,7 @@ to open a node (root):
 to open a node given a buffer (file as document):
   create the node's document given the buffer.
   if the node's document needs a font name to be loaded (custom), 
-    make sure the font name is loaded (custom). 
+    make sure the font name is loaded (custom).
 
 to open a node given a buffer (file as dump):
   dump the buffer into another buffer.
@@ -889,7 +889,7 @@ to open a node given a path (from root):
   loop.
     choose a nodette given the node's nodettes and the path.
     if the nodette is nil, break.
-    open the nodette.    
+    open the nodette.
     focus on the nodette in the node.
     put the nodette into the node.
   repeat.
@@ -1117,7 +1117,7 @@ to select some nodettes given a node selection:
     put the nodette's previously selected flag into the nodette's selected flag.
     if the nodette's box is not touching the box, repeat.
     reverse the nodette's selected flag.
-  repeat.  
+  repeat.
 
 some selected path links are some path links.
 
@@ -1214,7 +1214,7 @@ to test (the finder - destutter a path):
   stash the test result given the actual.
 
 to test (the finder):
-  test (the finder - destutter a path). 
+  test (the finder - destutter a path).
 
 a total count is a count.
 

@@ -416,12 +416,12 @@ to divide a mixio by a mixio called divisor returning a mixio called result:
   divide the mixio by the divisor
     returning the number and the remainder mixio (loop).
   put the number in the result's nips.
-  put the remainder mixio in the mixio.  
+  put the remainder mixio in the mixio.
   multiply the mixio by the trifle root.
   divide the mixio by the divisor
     returning the number and the remainder mixio (loop).
   put the number in the result's trifles.
-  put the remainder mixio in the mixio.  
+  put the remainder mixio in the mixio.
   multiply the mixio by the trifle root.
   divide the mixio by the divisor
     returning the number and the remainder mixio (loop).
@@ -871,17 +871,17 @@ to normalize a precise angle:
   wrap the precise angle's minutes    given 0 and  59 and the precise angle's degrees.
   wrap the precise angle's degrees    given 0 and 359.
 
-to normalize some radians: 
+to normalize some radians:
   if the radians are negative, 
-    normalize the radians (negative); exit. 
-  normalize the radians (positive). 
+    normalize the radians (negative); exit.
+  normalize the radians (positive).
 
-to normalize some radians (negative): 
-  negate the radians. 
-  normalize the radians (positive). 
-  negate the radians. 
-  if the radians are not negative, exit. 
-  add tau to the radians. 
+to normalize some radians (negative):
+  negate the radians.
+  normalize the radians (positive).
+  negate the radians.
+  if the radians are not negative, exit.
+  add tau to the radians.
 
 to normalize some radians (positive):
   put tau into some radians called tau radians.
@@ -1303,176 +1303,176 @@ to test (trig - -1 is not wrapped between 0 and 99):
     put "wrapped" in the actual.
   stash the test result using the actual.
 
-to test (trig - arccosine of -1): 
+to test (trig - arccosine of -1):
   put pi in some radians.
   make a fuzzy test about "trig" and "arccosine of -1" 
-    and targeting the radians with tight tolerance. 
+    and targeting the radians with tight tolerance.
   put -1 in a cosine.
-  get some radians called actual given the cosine. 
-  stash the fuzzy test given the actual. 
+  get some radians called actual given the cosine.
+  stash the fuzzy test given the actual.
 
-to test (trig - arccosine of 0): 
+to test (trig - arccosine of 0):
   put half pi in some radians.
   make a fuzzy test about "trig" and "arccosine of 0" 
-    and targeting the radians with tight tolerance. 
+    and targeting the radians with tight tolerance.
   put 0 in a cosine.
-  get some radians called actual given the cosine. 
-  stash the fuzzy test given the actual. 
+  get some radians called actual given the cosine.
+  stash the fuzzy test given the actual.
 
-to test (trig - arccosine of 1): 
+to test (trig - arccosine of 1):
   put 0 in some radians.
   make a fuzzy test about "trig" and "arccosine of 1" 
-    and targeting the radians with tight tolerance. 
+    and targeting the radians with tight tolerance.
   put 1 in a cosine.
-  get some radians called actual given the cosine. 
-  stash the fuzzy test given the actual. 
+  get some radians called actual given the cosine.
+  stash the fuzzy test given the actual.
 
-to test (trig - arccosine of 1/2): 
+to test (trig - arccosine of 1/2):
   put tau in some radians.
   divide the radians by 6.
   make a fuzzy test about "trig" and "arccosine of 1/2" 
-    and targeting the radians with tight tolerance. 
+    and targeting the radians with tight tolerance.
   put 1/2 in a cosine.
-  get some radians called actual given the cosine. 
-  stash the fuzzy test given the actual. 
+  get some radians called actual given the cosine.
+  stash the fuzzy test given the actual.
 
-to test (trig - arccosine): 
-  test (trig - arccosine of 0). 
-  test (trig - arccosine of 1/2). 
-  test (trig - arccosine of 1). 
-  test (trig - arccosine of -1). 
+to test (trig - arccosine):
+  test (trig - arccosine of 0).
+  test (trig - arccosine of 1/2).
+  test (trig - arccosine of 1).
+  test (trig - arccosine of -1).
 
-to test (trig - arcsine of -1): 
+to test (trig - arcsine of -1):
   put tau in some radians.
   divide the radians by 4.
   negate the radians.
   normalize the radians.
   make a fuzzy test about "trig" and "arcsine of -1" 
-    and targeting the radians with tight tolerance. 
+    and targeting the radians with tight tolerance.
   put -1/1 in a sine.
-  get some radians called actual given the sine. 
-  stash the fuzzy test given the actual. 
+  get some radians called actual given the sine.
+  stash the fuzzy test given the actual.
 
-to test (trig - arcsine of 0): 
+to test (trig - arcsine of 0):
   put 0 in some radians.
   make a fuzzy test about "trig" and "arcsine of 0" 
-    and targeting the radians with tight tolerance. 
+    and targeting the radians with tight tolerance.
   put 0 in a sine.
-  get some radians called actual given the sine. 
-  stash the fuzzy test given the actual. 
+  get some radians called actual given the sine.
+  stash the fuzzy test given the actual.
 
-to test (trig - arcsine of 1): 
+to test (trig - arcsine of 1):
   put tau in some radians.
   divide the radians by 4.
   make a fuzzy test about "trig" and "arcsine of 1" 
-    and targeting the radians with tight tolerance. 
+    and targeting the radians with tight tolerance.
   put 1/1 in a sine.
-  get some radians called actual given the sine. 
-  stash the fuzzy test given the actual. 
+  get some radians called actual given the sine.
+  stash the fuzzy test given the actual.
 
-to test (trig - arcsine of 1/2): 
+to test (trig - arcsine of 1/2):
   put tau in some radians.
   divide the radians by 12.
   make a fuzzy test about "trig" and "arcsine of 1/2" 
-    and targeting the radians with tight tolerance. 
+    and targeting the radians with tight tolerance.
   put 1/2 in a sine.
-  get some radians called actual given the sine. 
-  stash the fuzzy test given the actual. 
+  get some radians called actual given the sine.
+  stash the fuzzy test given the actual.
 
-to test (trig - arcsine): 
-  test (trig - arcsine of 0). 
-  test (trig - arcsine of 1/2). 
-  test (trig - arcsine of 1). 
-  test (trig - arcsine of -1). 
+to test (trig - arcsine):
+  test (trig - arcsine of 0).
+  test (trig - arcsine of 1/2).
+  test (trig - arcsine of 1).
+  test (trig - arcsine of -1).
 
-to test (trig - arctangent of -1): 
+to test (trig - arctangent of -1):
   put tau in some radians.
   divide the radians by 8.
   negate the radians.
   normalize the radians.
   make a fuzzy test about "trig" and "arctangent of -1" 
-    and targeting the radians with tight tolerance. 
+    and targeting the radians with tight tolerance.
   put -1 in a tangent.
-  get some radians called actual given the tangent. 
-  stash the fuzzy test given the actual. 
+  get some radians called actual given the tangent.
+  stash the fuzzy test given the actual.
 
-to test (trig - arctangent of -1/5): 
+to test (trig - arctangent of -1/5):
   create a test result about "trig" and "arctangent of -1/5" 
-    and expecting "348°41’24.24”". 
+    and expecting "348°41’24.24”".
   put -1/5 in a tangent.
   get a precise angle given the tangent.
-  convert the precise angle to a string called actual. 
-  stash the test result given the actual. 
+  convert the precise angle to a string called actual.
+  stash the test result given the actual.
 
-to test (trig - arctangent of -14): 
+to test (trig - arctangent of -14):
   create a test result about "trig" and "arctangent of -14" 
-    and expecting "274°5’8.22”". 
+    and expecting "274°5’8.22”".
   put -14 in a tangent.
   get a precise angle given the tangent.
-  convert the precise angle to a string called actual. 
-  stash the test result given the actual. 
+  convert the precise angle to a string called actual.
+  stash the test result given the actual.
 
-to test (trig - arctangent of 0): 
+to test (trig - arctangent of 0):
   put 0 in some radians.
   make a fuzzy test about "trig" and "arctangent of 0" 
-    and targeting the radians with tight tolerance. 
+    and targeting the radians with tight tolerance.
   put 0 in a tangent.
-  get some radians called actual given the tangent. 
-  stash the fuzzy test given the actual. 
+  get some radians called actual given the tangent.
+  stash the fuzzy test given the actual.
 
-to test (trig - arctangent of 1): 
+to test (trig - arctangent of 1):
   put tau in some radians.
   divide the radians by 8.
   make a fuzzy test about "trig" and "arctangent of 1" 
-    and targeting the radians with tight tolerance. 
+    and targeting the radians with tight tolerance.
   put 1 in a tangent.
-  get some radians called actual given the tangent. 
-  stash the fuzzy test given the actual. 
+  get some radians called actual given the tangent.
+  stash the fuzzy test given the actual.
 
-to test (trig - arctangent of 1/12): 
+to test (trig - arctangent of 1/12):
   create a test result about "trig" and "arctangent of 1/12" 
-    and expecting "4°45’49.11”". 
+    and expecting "4°45’49.11”".
   put 1/12 in a tangent.
   get a precise angle given the tangent.
-  convert the precise angle to a string called actual. 
-  stash the test result given the actual. 
+  convert the precise angle to a string called actual.
+  stash the test result given the actual.
 
-to test (trig - arctangent of 12): 
+to test (trig - arctangent of 12):
   create a test result about "trig" and "arctangent of 12" 
-    and expecting "85°14’10.89”". 
+    and expecting "85°14’10.89”".
   put 12 in a tangent.
   get a precise angle given the tangent.
-  convert the precise angle to a string called actual. 
-  stash the test result given the actual. 
+  convert the precise angle to a string called actual.
+  stash the test result given the actual.
 
-to test (trig - arctangent of 3/4): 
+to test (trig - arctangent of 3/4):
   create a test result about "trig" and "arctangent of 3/4" 
-    and expecting "36°52’11.63”". 
+    and expecting "36°52’11.63”".
   put 3/4 in a tangent.
   get a precise angle given the tangent.
-  convert the precise angle to a string called actual. 
-  stash the test result given the actual. 
+  convert the precise angle to a string called actual.
+  stash the test result given the actual.
 
-to test (trig - arctangent of 4/3): 
+to test (trig - arctangent of 4/3):
   create a test result about "trig" and "arctangent of 4/3" 
-    and expecting "53°7’48.37”". 
+    and expecting "53°7’48.37”".
   put 4/3 in a tangent.
   get a precise angle given the tangent.
-  convert the precise angle to a string called actual. 
-  stash the test result given the actual. 
+  convert the precise angle to a string called actual.
+  stash the test result given the actual.
 
-to test (trig - arctangent of largest number): 
+to test (trig - arctangent of largest number):
   put tau in some radians.
   divide the radians by 4.
   make a fuzzy test about "trig" and "arctangent of largest number" 
-    and targeting the radians with tight tolerance. 
+    and targeting the radians with tight tolerance.
   put the largest number in a tangent.
-  get some radians called actual given the tangent. 
-  stash the fuzzy test given the actual. 
+  get some radians called actual given the tangent.
+  stash the fuzzy test given the actual.
 
-to test (trig - arctangent): 
-  test (trig - arctangent of 0). 
-  test (trig - arctangent of 1). 
+to test (trig - arctangent):
+  test (trig - arctangent of 0).
+  test (trig - arctangent of 1).
   test (trig - arctangent of -1).
   test (trig - arctangent of -14).
   test (trig - arctangent of -1/5).
@@ -1482,37 +1482,37 @@ to test (trig - arctangent):
   test (trig - arctangent of 12).
   test (trig - arctangent of largest number).
 
-to test (trig - convert from 0 radians to 0°): 
+to test (trig - convert from 0 radians to 0°):
   make a fuzzy test about "trig" 
     and "convert from 0 radians to 0°" 
-    and targeting 0/1 with tight tolerance. 
+    and targeting 0/1 with tight tolerance.
   put 0 in some radians.
   convert the radians to a precise angle.
-  convert the precise angle to a mixio. 
+  convert the precise angle to a mixio.
   stash the fuzzy test given the mixio.
 
-to test (trig - convert from 0° to 0 radians): 
+to test (trig - convert from 0° to 0 radians):
   make a fuzzy test about "trig" 
     and "convert from 0° to 0 radians" 
-    and targeting 0/1 with tight tolerance. 
-  make a precise angle given 0. 
-  convert the precise angle to some radians called actual. 
-  stash the fuzzy test given the actual. 
+    and targeting 0/1 with tight tolerance.
+  make a precise angle given 0.
+  convert the precise angle to some radians called actual.
+  stash the fuzzy test given the actual.
 
-to test (trig - convert from 225° to radians): 
+to test (trig - convert from 225° to radians):
   make a fuzzy test about "trig" 
     and "convert from 225° to radians" 
-    and targeting 366435367/93312000 with tight tolerance. 
-  make a precise angle given 225. 
-  convert the precise angle to some radians called actual. 
-  stash the fuzzy test given the actual. 
+    and targeting 366435367/93312000 with tight tolerance.
+  make a precise angle given 225.
+  convert the precise angle to some radians called actual.
+  stash the fuzzy test given the actual.
 
-to test (trig - convert from 359°59’59.99” to radians): 
+to test (trig - convert from 359°59’59.99” to radians):
   make a fuzzy test about "trig" 
     and "convert from 359°59’59.99” to radians" 
-    and targeting 1954321943/311040000 with tight tolerance. 
-  make a precise angle given 359 and 59 and 59 and 99. 
-  convert the precise angle to some radians called actual. 
+    and targeting 1954321943/311040000 with tight tolerance.
+  make a precise angle given 359 and 59 and 59 and 99.
+  convert the precise angle to some radians called actual.
   stash the fuzzy test given the actual.
 
 to test (trig - convert from degrees to radians):
@@ -1520,14 +1520,14 @@ to test (trig - convert from degrees to radians):
   test (trig - convert from 0° to 0 radians).
   test (trig - convert from 359°59’59.99” to radians).
 
-to test (trig - convert from pi radians to 180°): 
+to test (trig - convert from pi radians to 180°):
   make a fuzzy test about "trig" 
     and "convert from pi radians to 180°" 
-    and targeting 180/1 with tight tolerance. 
+    and targeting 180/1 with tight tolerance.
   put tau in some radians.
   divide the radians by 2.
   convert the radians to a precise angle.
-  convert the precise angle to a mixio. 
+  convert the precise angle to a mixio.
   stash the fuzzy test given the mixio.
 
 to test (trig - convert from radians to degrees):
@@ -1543,79 +1543,79 @@ to test (trig - convert mixio to string):
   convert the mixio to a string called actual.
   stash the test result using the actual.
 
-to test (trig - cosine of -240°): 
+to test (trig - cosine of -240°):
   make a fuzzy test about "trig" and "cosine of -240°" 
-    and targeting -1/2 with tight tolerance. 
-  make a precise angle given -240. 
-  put the precise angle's cosine in a cosine called actual. 
-  stash the fuzzy test given the actual. 
+    and targeting -1/2 with tight tolerance.
+  make a precise angle given -240.
+  put the precise angle's cosine in a cosine called actual.
+  stash the fuzzy test given the actual.
 
-to test (trig - cosine of 0°): 
+to test (trig - cosine of 0°):
   make a fuzzy test about "trig" and "cosine of 0°" 
-    and targeting 1/1 with tight tolerance. 
-  make a precise angle given 0. 
-  put the precise angle's cosine in a cosine called actual. 
-  stash the fuzzy test given the actual. 
+    and targeting 1/1 with tight tolerance.
+  make a precise angle given 0.
+  put the precise angle's cosine in a cosine called actual.
+  stash the fuzzy test given the actual.
 
-to test (trig - cosine of 1/2 radian): 
+to test (trig - cosine of 1/2 radian):
   make a fuzzy test about "trig" and "cosine of 1/2 radian" 
-    and targeting 1137347/1296000 with tight tolerance. 
+    and targeting 1137347/1296000 with tight tolerance.
   make a mixio given 0 and 21600 and 0.
-  put the mixio in some radians. 
-  put the radians' cosine in a cosine called actual. 
-  stash the fuzzy test given the actual. 
+  put the mixio in some radians.
+  put the radians' cosine in a cosine called actual.
+  stash the fuzzy test given the actual.
 
-to test (trig - cosine of 30°): 
+to test (trig - cosine of 30°):
   make a fuzzy test about "trig" and "cosine of 30°" 
-    and targeting 1292969/1492992 with tight tolerance. 
-  make a precise angle given 30. 
-  put the precise angle's cosine in a cosine called actual. 
-  stash the fuzzy test given the actual. 
+    and targeting 1292969/1492992 with tight tolerance.
+  make a precise angle given 30.
+  put the precise angle's cosine in a cosine called actual.
+  stash the fuzzy test given the actual.
 
-to test (trig - cosine of 360°): 
+to test (trig - cosine of 360°):
   make a fuzzy test about "trig" and "cosine of 360°" 
-    and targeting 1/1 with tight tolerance. 
-  make a precise angle given 360. 
-  put the precise angle's cosine in a cosine called actual. 
-  stash the fuzzy test given the actual. 
+    and targeting 1/1 with tight tolerance.
+  make a precise angle given 360.
+  put the precise angle's cosine in a cosine called actual.
+  stash the fuzzy test given the actual.
 
-to test (trig - cosine of 41°15’): 
+to test (trig - cosine of 41°15’):
   make a fuzzy test about "trig" and "cosine of 41°15’" 
-    and targeting 1403113522/1866240000 with tight tolerance. 
-  make a precise angle given 41 and 15 and 0 and 0. 
-  put the precise angle's cosine in a cosine called actual. 
-  stash the fuzzy test given the actual. 
+    and targeting 1403113522/1866240000 with tight tolerance.
+  make a precise angle given 41 and 15 and 0 and 0.
+  put the precise angle's cosine in a cosine called actual.
+  stash the fuzzy test given the actual.
 
-to test (trig - cosine of 45°): 
+to test (trig - cosine of 45°):
   make a fuzzy test about "trig" and "cosine of 45°" 
-    and targeting 16495387/23328000 with tight tolerance. 
-  make a precise angle given 45. 
-  put the precise angle's cosine in a cosine called actual. 
-  stash the fuzzy test given the actual. 
+    and targeting 16495387/23328000 with tight tolerance.
+  make a precise angle given 45.
+  put the precise angle's cosine in a cosine called actual.
+  stash the fuzzy test given the actual.
 
-to test (trig - cosine of 90°): 
+to test (trig - cosine of 90°):
   make a fuzzy test about "trig" and "cosine of 90°" 
-    and targeting 0/1 with tight tolerance. 
-  make a precise angle given 90. 
-  put the precise angle's cosine in a cosine called actual. 
-  stash the fuzzy test given the actual. 
+    and targeting 0/1 with tight tolerance.
+  make a precise angle given 90.
+  put the precise angle's cosine in a cosine called actual.
+  stash the fuzzy test given the actual.
 
-to test (trig - cosine): 
-  test (trig - cosine of -240°). 
-  test (trig - cosine of 0°). 
+to test (trig - cosine):
+  test (trig - cosine of -240°).
+  test (trig - cosine of 0°).
   test (trig - cosine of 1/2 radian).
-  test (trig - cosine of 30°). 
-  test (trig - cosine of 41°15’). 
-  test (trig - cosine of 45°). 
-  test (trig - cosine of 90°). 
-  test (trig - cosine of 360°). 
+  test (trig - cosine of 30°).
+  test (trig - cosine of 41°15’).
+  test (trig - cosine of 45°).
+  test (trig - cosine of 90°).
+  test (trig - cosine of 360°).
 
-to test (trig - mixio / 388800): 
+to test (trig - mixio / 388800):
   make a fuzzy test about "trig" and "mixio / 388800" 
-    and targeting 1 / 1 with tight tolerance. 
+    and targeting 1 / 1 with tight tolerance.
   put 388800 in a mixio called actual.
-  divide the actual by 388800. 
-  stash the fuzzy test given the actual. 
+  divide the actual by 388800.
+  stash the fuzzy test given the actual.
 
 to test (trig - multiply mixios):
   create a test result about "trig"
@@ -1685,60 +1685,60 @@ to test (trig - normalize precise angle):
   test (trig - normalize -123°-45’-6”-78cas to 236°14’53.22”).
   test (trig - normalize 432°10’54.32” to 72°10’54.32”).
 
-to test (trig - normalize radians -84821 to about 2): 
+to test (trig - normalize radians -84821 to about 2):
   make a fuzzy test about "trig" 
     and "normalize radians -84821 to 2" 
-    and targeting 23059/11520 with tight tolerance. 
-  put -84821 in some radians called actual. 
-  normalize the actual. 
-  stash the fuzzy test given the actual. 
+    and targeting 23059/11520 with tight tolerance.
+  put -84821 in some radians called actual.
+  normalize the actual.
+  stash the fuzzy test given the actual.
 
-to test (trig - normalize radians -84822 to about 1): 
+to test (trig - normalize radians -84822 to about 1):
   make a fuzzy test about "trig" 
     and "normalize radians -84822 to 1" 
-    and targeting 11539/11520 with tight tolerance. 
-  put -84822 in some radians called actual. 
-  normalize the actual. 
-  stash the fuzzy test given the actual. 
+    and targeting 11539/11520 with tight tolerance.
+  put -84822 in some radians called actual.
+  normalize the actual.
+  stash the fuzzy test given the actual.
 
-to test (trig - normalize radians 0 to 0): 
+to test (trig - normalize radians 0 to 0):
   make a fuzzy test about "trig" and "normalize radians 0 to 0" 
-    and targeting 0/1 with tight tolerance. 
-  put 0 in some radians called actual. 
-  normalize the actual. 
-  stash the fuzzy test given the actual. 
+    and targeting 0/1 with tight tolerance.
+  put 0 in some radians called actual.
+  normalize the actual.
+  stash the fuzzy test given the actual.
 
-to test (trig - normalize radians 6 to 6): 
+to test (trig - normalize radians 6 to 6):
   make a fuzzy test about "trig" 
     and "normalize radians 6 to 6" 
-    and targeting 6/1 with tight tolerance. 
-  put 6 in some radians called actual. 
-  normalize the actual. 
-  stash the fuzzy test given the actual. 
+    and targeting 6/1 with tight tolerance.
+  put 6 in some radians called actual.
+  normalize the actual.
+  stash the fuzzy test given the actual.
 
-to test (trig - normalize radians 7): 
+to test (trig - normalize radians 7):
   make a fuzzy test about "trig" 
     and "normalize radians 7" 
-    and targeting 111479021/155520000 with tight tolerance. 
-  put 7 in some radians called actual. 
-  normalize the actual. 
-  stash the fuzzy test given the actual. 
+    and targeting 111479021/155520000 with tight tolerance.
+  put 7 in some radians called actual.
+  normalize the actual.
+  stash the fuzzy test given the actual.
 
-to test (trig - normalize radians 977160980 to 1): 
+to test (trig - normalize radians 977160980 to 1):
   make a fuzzy test about "trig" 
     and "normalize radians 977160980 to 1" 
-    and targeting 1/1 with tight tolerance. 
-  put 977160980 in some radians called actual. 
-  normalize the actual. 
-  stash the fuzzy test given the actual. 
+    and targeting 1/1 with tight tolerance.
+  put 977160980 in some radians called actual.
+  normalize the actual.
+  stash the fuzzy test given the actual.
 
-to test (trig - normalize radians): 
-  test (trig - normalize radians 0 to 0). 
-  test (trig - normalize radians 977160980 to 1). 
-  test (trig - normalize radians -84822 to about 1). 
-  test (trig - normalize radians -84821 to about 2). 
-  test (trig - normalize radians 6 to 6). 
-  test (trig - normalize radians 7). 
+to test (trig - normalize radians):
+  test (trig - normalize radians 0 to 0).
+  test (trig - normalize radians 977160980 to 1).
+  test (trig - normalize radians -84822 to about 1).
+  test (trig - normalize radians -84821 to about 2).
+  test (trig - normalize radians 6 to 6).
+  test (trig - normalize radians 7).
 
 to test (trig - normalize smallest angle to 189°23’55.52”):
   create a test result about "trig"
@@ -1749,138 +1749,138 @@ to test (trig - normalize smallest angle to 189°23’55.52”):
   normalize the actual.
   stash the test result using the actual.
 
-to test (trig - sine of -240°): 
+to test (trig - sine of -240°):
   make a fuzzy test about "trig" and "sine of -240°" 
-    and targeting 1292969/1492992 with tight tolerance. 
-  make a precise angle given -240. 
-  put the precise angle's sine in a sine called actual. 
-  stash the fuzzy test given the actual. 
+    and targeting 1292969/1492992 with tight tolerance.
+  make a precise angle given -240.
+  put the precise angle's sine in a sine called actual.
+  stash the fuzzy test given the actual.
 
-to test (trig - sine of 0°): 
+to test (trig - sine of 0°):
   make a fuzzy test about "trig" and "sine of 0°" 
-    and targeting 0/1 with tight tolerance. 
-  make a precise angle given 0. 
-  put the precise angle's sine in a sine called actual. 
-  stash the fuzzy test given the actual. 
+    and targeting 0/1 with tight tolerance.
+  make a precise angle given 0.
+  put the precise angle's sine in a sine called actual.
+  stash the fuzzy test given the actual.
 
-to test (trig - sine of 30°): 
+to test (trig - sine of 30°):
   make a fuzzy test about "trig" and "sine of 30°" 
-    and targeting 1/2 with tight tolerance. 
-  make a precise angle given 30. 
-  put the precise angle's sine in a sine called actual. 
-  stash the fuzzy test given the actual. 
+    and targeting 1/2 with tight tolerance.
+  make a precise angle given 30.
+  put the precise angle's sine in a sine called actual.
+  stash the fuzzy test given the actual.
 
-to test (trig - sine of 360°): 
+to test (trig - sine of 360°):
   make a fuzzy test about "trig" and "sine of 360°" 
-    and targeting 0/14400 with tight tolerance. 
-  make a precise angle given 360. 
-  put the precise angle's sine in a sine called actual. 
-  stash the fuzzy test given the actual. 
+    and targeting 0/14400 with tight tolerance.
+  make a precise angle given 360.
+  put the precise angle's sine in a sine called actual.
+  stash the fuzzy test given the actual.
 
-to test (trig - sine of 41°15’): 
+to test (trig - sine of 41°15’):
   make a fuzzy test about "trig" and "sine of 41°15’" 
-    and targeting 18457463/27993600 with tight tolerance. 
-  make a precise angle given 41 and 15 and 0 and 0. 
-  put the precise angle's sine in a sine called actual. 
-  stash the fuzzy test given the actual. 
+    and targeting 18457463/27993600 with tight tolerance.
+  make a precise angle given 41 and 15 and 0 and 0.
+  put the precise angle's sine in a sine called actual.
+  stash the fuzzy test given the actual.
 
-to test (trig - sine of 45°): 
+to test (trig - sine of 45°):
   make a fuzzy test about "trig" and "sine of 45°" 
-    and targeting 16495387/23328000 with tight tolerance. 
-  make a precise angle given 45. 
-  put the precise angle's sine in a sine called actual. 
-  stash the fuzzy test given the actual. 
+    and targeting 16495387/23328000 with tight tolerance.
+  make a precise angle given 45.
+  put the precise angle's sine in a sine called actual.
+  stash the fuzzy test given the actual.
 
-to test (trig - sine of 90°): 
+to test (trig - sine of 90°):
   make a fuzzy test about "trig" and "sine of 90°" 
-    and targeting 1/1 with tight tolerance. 
-  make a precise angle given 90. 
-  put the precise angle's sine in a sine called actual. 
-  stash the fuzzy test given the actual. 
+    and targeting 1/1 with tight tolerance.
+  make a precise angle given 90.
+  put the precise angle's sine in a sine called actual.
+  stash the fuzzy test given the actual.
 
-to test (trig - sine): 
-  test (trig - sine of -240°). 
-  test (trig - sine of 0°). 
-  test (trig - sine of 30°). 
-  test (trig - sine of 41°15’). 
-  test (trig - sine of 45°). 
-  test (trig - sine of 90°). 
-  test (trig - sine of 360°). 
+to test (trig - sine):
+  test (trig - sine of -240°).
+  test (trig - sine of 0°).
+  test (trig - sine of 30°).
+  test (trig - sine of 41°15’).
+  test (trig - sine of 45°).
+  test (trig - sine of 90°).
+  test (trig - sine of 360°).
 
-to test (trig - tangent of -240°): 
+to test (trig - tangent of -240°):
   make a fuzzy test about "trig" and "tangent of -240°" 
-    and targeting -1292969/746496 with tight tolerance. 
-  make a precise angle given -240. 
-  put the precise angle's tangent in a tangent called actual. 
-  stash the fuzzy test given the actual. 
+    and targeting -1292969/746496 with tight tolerance.
+  make a precise angle given -240.
+  put the precise angle's tangent in a tangent called actual.
+  stash the fuzzy test given the actual.
 
-to test (trig - tangent of -90°): 
+to test (trig - tangent of -90°):
   make a fuzzy test about "trig" and "tangent of -90°" 
-    and targeting the largest number / 1 with tight tolerance. 
-  make a precise angle given 90. 
-  put the precise angle's tangent in a tangent called actual. 
-  stash the fuzzy test given the actual. 
+    and targeting the largest number / 1 with tight tolerance.
+  make a precise angle given 90.
+  put the precise angle's tangent in a tangent called actual.
+  stash the fuzzy test given the actual.
 
-to test (trig - tangent of 0°): 
+to test (trig - tangent of 0°):
   make a fuzzy test about "trig" and "tangent of 0°" 
-    and targeting 0/1 with tight tolerance. 
-  make a precise angle given 0. 
-  put the precise angle's tangent in a tangent called actual. 
-  stash the fuzzy test given the actual. 
+    and targeting 0/1 with tight tolerance.
+  make a precise angle given 0.
+  put the precise angle's tangent in a tangent called actual.
+  stash the fuzzy test given the actual.
 
-to test (trig - tangent of 30°): 
+to test (trig - tangent of 30°):
   make a fuzzy test about "trig" and "tangent of 30°" 
-    and targeting 14964919/25920000 with tight tolerance. 
-  make a precise angle given 30. 
-  put the precise angle's tangent in a tangent called actual. 
-  stash the fuzzy test given the actual. 
+    and targeting 14964919/25920000 with tight tolerance.
+  make a precise angle given 30.
+  put the precise angle's tangent in a tangent called actual.
+  stash the fuzzy test given the actual.
 
-to test (trig - tangent of 360°): 
+to test (trig - tangent of 360°):
   make a fuzzy test about "trig" and "tangent of 360°" 
-    and targeting 0/1 with tight tolerance. 
-  make a precise angle given 360. 
-  put the precise angle's tangent in a tangent called actual. 
-  stash the fuzzy test given the actual. 
+    and targeting 0/1 with tight tolerance.
+  make a precise angle given 360.
+  put the precise angle's tangent in a tangent called actual.
+  stash the fuzzy test given the actual.
 
-to test (trig - tangent of 41°15’): 
+to test (trig - tangent of 41°15’):
   make a fuzzy test about "trig" and "tangent of 41°15’" 
-    and targeting 272774759/311040000 with tight tolerance. 
-  make a precise angle given 41 and 15 and 0 and 0. 
-  put the precise angle's tangent in a tangent called actual. 
-  stash the fuzzy test given the actual. 
+    and targeting 272774759/311040000 with tight tolerance.
+  make a precise angle given 41 and 15 and 0 and 0.
+  put the precise angle's tangent in a tangent called actual.
+  stash the fuzzy test given the actual.
 
-to test (trig - tangent of 45°): 
+to test (trig - tangent of 45°):
   make a fuzzy test about "trig" and "sine of 45°" 
-    and targeting 1/1 with tight tolerance. 
-  make a precise angle given 45. 
-  put the precise angle's tangent in a tangent called actual. 
-  stash the fuzzy test given the actual. 
+    and targeting 1/1 with tight tolerance.
+  make a precise angle given 45.
+  put the precise angle's tangent in a tangent called actual.
+  stash the fuzzy test given the actual.
 
-to test (trig - tangent of 90°): 
+to test (trig - tangent of 90°):
   make a fuzzy test about "trig" and "tangent of 90°" 
-    and targeting the largest number / 1 with tight tolerance. 
-  make a precise angle given 90. 
-  put the precise angle's tangent in a tangent called actual. 
-  stash the fuzzy test given the actual. 
+    and targeting the largest number / 1 with tight tolerance.
+  make a precise angle given 90.
+  put the precise angle's tangent in a tangent called actual.
+  stash the fuzzy test given the actual.
 
-to test (trig - tangent of pi/4 radians): 
+to test (trig - tangent of pi/4 radians):
   make a fuzzy test about "trig" and "sine of pi/4 radians" 
-    and targeting 1/1 with tight tolerance. 
+    and targeting 1/1 with tight tolerance.
   put tau in some radians.
-  divide the radians by 8. 
-  put the radians' tangent in a tangent called actual. 
-  stash the fuzzy test given the actual. 
+  divide the radians by 8.
+  put the radians' tangent in a tangent called actual.
+  stash the fuzzy test given the actual.
 
-to test (trig - tangent): 
-  test (trig - tangent of -240°). 
-  test (trig - tangent of 0°). 
-  test (trig - tangent of 30°). 
-  test (trig - tangent of 41°15’). 
-  test (trig - tangent of 45°). 
-  test (trig - tangent of pi/4 radians). 
-  test (trig - tangent of 90°). 
-  test (trig - tangent of -90°). 
-  test (trig - tangent of 360°). 
+to test (trig - tangent):
+  test (trig - tangent of -240°).
+  test (trig - tangent of 0°).
+  test (trig - tangent of 30°).
+  test (trig - tangent of 41°15’).
+  test (trig - tangent of 45°).
+  test (trig - tangent of pi/4 radians).
+  test (trig - tangent of 90°).
+  test (trig - tangent of -90°).
+  test (trig - tangent of 360°).
 
 to test (trig - wrap -1 between 0 and 99):
   create a test result about "trig"

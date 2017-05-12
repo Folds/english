@@ -51,12 +51,12 @@ to add a name to a submenu:
   put the name into a string.
   lowercase the string.
   if the string ends with "…",
-    remove the last byte from the string.  
+    remove the last byte from the string.
   if the string ends with "...",
-    remove the last three bytes from the string.  
+    remove the last three bytes from the string.
   put "handle " then the string in a handler.
   put "" in a shortcut.
-  add the name and the shortcut and the handler to the submenu. 
+  add the name and the shortcut and the handler to the submenu.
 
 to add swatches to a submenu given a handler:
   if the submenu is nil, exit.
@@ -132,7 +132,7 @@ the bar has a height, a box, a display box and a mode.
 to boldly format a command:
   put "center" into the command's alignment.
   put "arial" into the command's font's name.
-  put 1/4 inch into the command's font's height. 
+  put 1/4 inch into the command's font's height.
 
 to boldly format a command given a color:
   boldly format the command.
@@ -165,7 +165,7 @@ to count menu rows returning a count:
 to create a command:
   allocate memory for the command.
   put the clear color into the command's color.
-  put the requested control font into the command's font. 
+  put the requested control font into the command's font.
   put the black color into the command's font color.
   put 1/12 inch into the command's roundy box's radius.
   put "left" into the command's alignment.
@@ -195,7 +195,7 @@ to create a tab:
 
 to create a trio:
   allocate memory for the trio.
-  put the underscore byte in a string. 
+  put the underscore byte in a string.
   add the string and "handle minimize" to the trio.
   boldly format the trio's commands' last.
   if running on wine,
@@ -281,8 +281,8 @@ to decide if a font is fixed-width:
   say no.
 
 to decide if half screen was requested:
-  if full was requested, say no. 
-  say yes. 
+  if full was requested, say no.
+  say yes.
 
 to decide if a handler has a letter menu:
   if the handler's length is not 1, say no.
@@ -461,7 +461,7 @@ to draw a tab:
   if the tab is not the current tab,
     draw the tab's box's top line with the black color.
   draw the tab's name in the center of the tab's box
-    with the black color and the requested control font. 
+    with the black color and the requested control font.
 
 to draw some tabs:
   get a tab from the tabs.
@@ -479,7 +479,7 @@ to fill some tabs:
     if the flag is not set,
       get a string thing from the string things.
     if the string thing is nil,
-      set the flag. \ran out of requested paths. 
+      set the flag. \ran out of requested paths.
     if the tab is nil,
       destroy the string things; exit.
     put "finder" into the tab's mode.
@@ -582,7 +582,7 @@ to format a string to fit in a box given a font:
       put the little-t byte then the abbreviation byte
         then the string in the string;
       repeat.
-    remove the last two bytes from the string. 
+    remove the last two bytes from the string.
     append the abbreviation byte to the string.
   repeat.
 
@@ -643,20 +643,20 @@ to get requested run folder returning a string given a command line:
     put "" in the string; exit.
   get the string from the command line given "/folder".
 
-to get running option given a command line and a string returning another string: 
-  put "" in the other string. 
-  if the string is not important in the command line, exit. 
-  put the string in the other string. 
-  get a string called value from the command line given the string. 
-  if the value is "", exit. 
-  append "=" to the other string. 
+to get running option given a command line and a string returning another string:
+  put "" in the other string.
+  if the string is not important in the command line, exit.
+  put the string in the other string.
+  get a string called value from the command line given the string.
+  if the value is "", exit.
+  append "=" to the other string.
   if the value does not contain " ", 
-    append the value to the other string; exit. 
+    append the value to the other string; exit.
   if the value is wrapped in double-quotes, 
-    append the value to the other string; exit. 
-  append the double-quote byte to the other string. 
-  append the value to the other string.   
-  append the double-quote byte to the other string. 
+    append the value to the other string; exit.
+  append the double-quote byte to the other string.
+  append the value to the other string.
+  append the double-quote byte to the other string.
 
 to get running options given a command line returning a string:
   if left was requested in the command line, 
@@ -664,21 +664,21 @@ to get running options given a command line returning a string:
   if right was requested in the command line, 
     put "/left" in the string.
   if full was requested in the command line, 
-    put "/full" in the string. 
+    put "/full" in the string.
   if "/tt" [fixed-width] is important in the command line,
     append " /tt" to the string.
   if "/font" is important in the command line, 
     get running option given the command line and "/font"  
       returning a string called font option; 
-    append " " then the font option to the string. 
+    append " " then the font option to the string.
   if "/controlfont" is important in the command line, 
     get running option given the command line and "/controlfont"  
       returning a string called control font option; 
-    append " " then the control font option to the string. 
+    append " " then the control font option to the string.
   if "/edfont" is important in the command line, 
     get running option given the command line and "/edfont"  
       returning a string called editor font option; 
-    append " " then the editor font option to the string. 
+    append " " then the editor font option to the string.
   put "" in a string called run folder.
   if "/runfolder" is important in the command line,
     get requested run folder returning the run folder given the command line.
@@ -693,12 +693,12 @@ to get running options given a command line returning a string:
   if "/folder" is important in the command line,
     get the folder from the command line given "/folder".
   if the folder is full and is the run folder,
-    append " /runfolder=/folder" to the string.    
+    append " /runfolder=/folder" to the string.
   put "" in a string called files.
   if "/files" are important in the command line,
     get the files from the command line given "/files".
   if the files are full and are the run files,
-    append " /runfiles=/files" to the string.    
+    append " /runfiles=/files" to the string.
 
 to get a thread status of a thread handle:
   clear the thread status' error flag.
@@ -1505,7 +1505,7 @@ to handle open:
 to handle open (docster):
   handle open without drawing (docster).
   show the desktop with status.
-\  set the current font given the current tab's node's page. 
+\  set the current font given the current tab's node's page.
   flush the event queue.
   refresh the cursor.
 
@@ -1658,7 +1658,7 @@ to handle restore:
 
 to handle result:
   if the recent process is 0, cluck;
-    show status "I haven't run anything."; exit.  
+    show status "I haven't run anything."; exit.
 \  get a process status of the recent process.
   get a thread status of the recent thread handle.
 \  get another thread status of the recent twin thread handle.
@@ -2134,7 +2134,7 @@ to populate a submenu given a mode (x):
 to populate a submenu given a mode (y):
   if the mode is not "writer", exit.
   add "Yank 1/8"  and "handle yank 1/8 inch"  to the submenu.
-  add "Yank 1/9"  and "handle yank 1/9 inch"  to the submenu. 
+  add "Yank 1/9"  and "handle yank 1/9 inch"  to the submenu.
 \  add "Yank 1/12" and "handle yank 1/12 inch" to the submenu.
   add "Yank 1/16" and "handle yank 1/16 inch" to the submenu.
   add "Yank 1/24" and "handle yank 1/24 inch" to the submenu.
@@ -2280,7 +2280,7 @@ to switch a tab to a node:
   put the node into the tab's node.
   put the node's designator into the tab's name.
   lowercase the tab's name.
-  format the tab's name to fit in the tab's box given the requested control font. 
+  format the tab's name to fit in the tab's box given the requested control font.
   put "finder" into the tab's mode.
   if the node's source is not nil, put "editor" into the tab's mode.
   if the node's document is not nil,
@@ -2517,4 +2517,4 @@ to unquote some string things:
     get a string thing from the string things.
     if the string thing is nil, exit.
     unquote the string thing's string.
-  repeat. 
+  repeat.
