@@ -1,0 +1,90 @@
+\ The portions of this file that are from CAL-4700
+\ are copyright 2017 by the Osmosian Order.
+\ The remainder is copyright 2017 by Jasper Paulsen.
+
+to darken the current color about some percent:
+  darken the context's color by the percent.
+
+to lighten the current color about some percent:
+  lighten the context's color by the percent.
+
+to pick a brightness between a percent and another percent;
+to vary a lightness between a percent and another percent;
+to pick a lightness between a percent and another percent:
+  pick a number between the percent and the other percent.
+  put the number times 10 into the lightness.
+  put the lightness into the context's lightness.
+
+to pick a brownish color:
+  make a brownish color.
+  put the brownish color into the context's color.
+
+to pick a brownish color about some percent of the time:
+  pick a number between 1 and 100.
+  if the number is greater than the percent, exit.
+  pick the brownish color.
+  put the brownish color into the context's color.
+
+to pick a color:
+  make the color.
+  put the color into the context's color.
+
+to pick a color like another color:
+  make a color like the other color.
+  put the color into the context's color.
+
+to pick a dark color:
+  pick the dark color's hue.
+  make the dark color be dark.
+  put the dark color into the context's color.
+
+to pick a greenish color:
+  make a greenish color.
+  put the greenish color into the context's color.
+
+to pick a greenish color about some percent of the time:
+  pick a number between 1 and 100.
+  if the number is greater than the percent, exit.
+  pick the greenish color.
+  put the greenish color into the context's color.
+
+to pick a light color:
+  pick the light color's hue.
+  make the light color be light.
+  put the light color into the context's color.
+
+to pick a pastel color:
+  pick the pastel color's hue.
+  make the pastel color be pastel.
+  put the pastel color into the context's color.
+
+to pick a rainbow color:
+  add 1 to the current rainbow color number.
+  if the current rainbow color number is greater than 6,
+    put 1 into the current rainbow color number.
+  interpret the rainbow color. [using the rainbow color number]
+  put the rainbow color into the context's color.
+
+to pick a very dark color;
+to pick a really dark color:
+  pick the really dark color's hue.
+  make the really dark color be very dark.
+  put the really dark color into the context's color.
+
+to pick a very light color;
+to pick a really light color:
+  pick the really light color's hue.
+  make the really light color be very light.
+  put the really light color into the context's color.
+
+to pick a very very dark color;
+to pick a really really dark color:
+  pick the really really dark color's hue.
+  make the really really dark color be very very dark.
+  put the really really dark color into the context's color.
+
+to pick a very very light color;
+to pick a really really light color:
+  pick the really really light color's hue.
+  make the really really light color be very very light.
+  put the really really light color into the context's color.

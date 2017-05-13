@@ -1,17 +1,33 @@
 \ The portions of this file that are from CAL-3040
 \ are copyright 2006 by the Osmosian Order.
+\ The portions of this file that are from CAL-4700
+\ are copyright 2017 by the Osmosian Order.
 \ The remainder is copyright 2014, 2017 by Jasper Paulsen.
 
 the black color is a color.
 
+the black pen is a pen.
+
 the blue color is a color.
+
+the blue pen is a pen.
+
+a brightness is a lightness.
+
+the brown color is a color.
+
+the brown pen is a pen.
+
+a brownish color is a color.
 
 to clear a color:
   put 0 and 0 and 0 into the color.
 
 the clear color is a color.
 
-a color has a hue, a saturation, and a lightness.
+the clear pen is a pen.
+
+a color has a hue, a saturation, a lightness, and a brightness at the lightness.
 
 a colorref is a number [like $00BBGGRR].
 
@@ -56,85 +72,208 @@ to convert a colorref to a rgb:
   shift the colorref right 8 bits.
   put the colorref into the rgb's blue byte.
 
+the current rainbow color number is a number [1 to 6 indicating, respectively, red, orange, yellow, green, blue, purple].
+
 the cyan color is a color.
+
+the cyan pen is a pen.
 
 the dark blue color is a color.
 
+the dark blue pen is a pen.
+
+the dark brown color is a color.
+
+the dark brown pen is a pen.
+
+a dark color is a color.
+
 the dark cyan color is a color.
+
+the dark cyan pen is a pen.
 
 the dark gray color is a color.
 
+the dark gray pen is a pen.
+
 the dark green color is a color.
+
+the dark green pen is a pen.
 
 the dark lime color is a color.
 
+the dark lime pen is a pen.
+
 the dark magenta color is a color.
+
+the dark magenta pen is a pen.
 
 the dark orange color is a color.
 
+the dark orange pen is a pen.
+
+the dark pink color is a color.
+
+the dark pink pen is a pen.
+
 the dark purple color is a color.
+
+the dark purple pen is a pen.
 
 the dark red color is a color.
 
+the dark red pen is a pen.
+
+the dark sky blue color is a color.
+
+the dark sky blue pen is a pen.
+
 the dark sky color is a color.
+
+the dark sky pen is a pen.
 
 the dark teal color is a color.
 
+the dark teal pen is a pen.
+
 the dark violet color is a color.
+
+the dark violet pen is a pen.
 
 the dark yellow color is a color.
 
+the dark yellow pen is a pen.
+
+to darken a color by an amount:
+  subtract the amount from the color's lightness.
+  limit the color's lightness to 0 and 1000.
+
+to darken a color by some percent;
+to darken a color about some percent;
+to darken a color by about some percent;
+to darken a color some percent:
+  put the color's lightness minus the percent into the color's lightness.
+  limit the color's lightness to 0 and 1000.
+
 the darker blue color is a color.
+
+the darker blue pen is a pen.
+
+the darker brown color is a color.
+
+the darker brown pen is a pen.
 
 the darker cyan color is a color.
 
+the darker cyan pen is a pen.
+
 the darker gray color is a color.
+
+the darker gray pen is a pen.
 
 the darker green color is a color.
 
+the darker green pen is a pen.
+
 the darker lime color is a color.
+
+the darker lime pen is a pen.
 
 the darker magenta color is a color.
 
+the darker magenta pen is a pen.
+
 the darker orange color is a color.
+
+the darker orange pen is a pen.
 
 the darker purple color is a color.
 
+the darker purple pen is a pen.
+
 the darker red color is a color.
+
+the darker red pen is a pen.
+
+the darker sky blue color is a color.
+
+the darker sky blue pen is a pen.
 
 the darker sky color is a color.
 
+the darker sky pen is a pen.
+
 the darker teal color is a color.
+
+the darker teal pen is a pen.
 
 the darker violet color is a color.
 
+the darker violet pen is a pen.
+
 the darker yellow color is a color.
+
+the darker yellow pen is a pen.
 
 the darkest blue color is a color.
 
+the darkest blue pen is a pen.
+
+the darkest brown color is a color.
+
+The darkest brown pen is a pen.
+
 the darkest cyan color is a color.
+
+the darkest cyan pen is a pen.
 
 the darkest gray color is a color.
 
+the darkest gray pen is a pen.
+
 the darkest green color is a color.
+
+the darkest green pen is a pen.
 
 the darkest lime color is a color.
 
+the darkest lime pen is a pen.
+
 the darkest magenta color is a color.
+
+the darkest magenta pen is a pen.
 
 the darkest orange color is a color.
 
+the darkest orange pen is a pen.
+
 the darkest purple color is a color.
+
+the darkest purple pen is a pen.
 
 the darkest red color is a color.
 
+the darkest red pen is a pen.
+
+the darkest sky blue color is a color.
+
+the darkest sky blue pen is a pen.
+
 the darkest sky color is a color.
+
+the darkest sky pen is a pen.
 
 the darkest teal color is a color.
 
+the darkest teal pen is a pen.
+
 the darkest violet color is a color.
 
+the darkest violet pen is a pen.
+
 the darkest yellow color is a color.
+
+the darkest yellow pen is a pen.
 
 to debug a color:
   put the color in a string.
@@ -185,19 +324,35 @@ to decide if a color is very very light:
 
 to finalize the colors:
 
+the gold color is a color.
+
+the gold pen is a pen.
+
 the gray color is a color.
+
+the gray pen is a pen.
 
 the grayscale color matrix is a hex string equal to $8716993E8716993E8716993E0000000000000000A245163FA245163FA245163F0000000000000000D578E93DD578E93DD578E93D00000000000000000000000000000000000000000000803F00000000000000000000000000000000000000000000803F.
 
 the green color is a color.
 
+the green pen is a pen.
+
+a greenish color is a color.
+
 the hilite color is a color.
 
 a hue is an angle [0 to 3600].
 
+to imagine a color from a hue and a saturation and a lightness;
+to make a color from a hue and a saturation and a lightness:
+  put the hue and the saturation and the lightness into the color.
+
 to initialize the colors:
-  call "gdi32.dll" "GetStockObject" with 8 [null_pen] returning the null hpen.
-  call "gdi32.dll" "GetStockObject" with 5 [null_brush] returning the null hbrush.
+  call "gdi32.dll" "GetStockObject"
+    with 8 [null_pen] returning the null hpen.
+  call "gdi32.dll" "GetStockObject"
+    with 5 [null_brush] returning the null hbrush.
   put -1 and 0 and 0 into the clear color.
   put 0 and 0 and 1000 into the white color.
   put 0 and 0 and 925 into the pale color.
@@ -294,95 +449,408 @@ to initialize the colors:
   put 3300 and 1000 and 250 into the darker violet color.
   put 3300 and 1000 and 125 into the darkest violet color.
   put 0 and 0 and 800 into the hilite color.
+  \ special colors
+  put the lightest orange color into the tan color.
+  put the dark orange color into the brown color.
+  put the darker orange color into the dark brown color.
+  put the darkest orange color into the darker brown color.
+  put the darkest orange color into the darkest brown color.
+  put the lightest red color into the pink color.
+  put the lighter red color into the dark pink color.
+  put 500 and 1000 and 500 into the gold color.
+  \ colors as pens
+  put the clear color into the clear pen.
+  put the white color into the white pen.
+  put the black color into the black pen.
+  put the lightest gray color into the lightest gray pen.
+  put the lighter gray color into the lighter gray pen.
+  put the light gray color into the light gray pen.
+  put the gray color into the gray pen.
+  put the dark gray color into the dark gray pen.
+  put the darker gray color into the darker gray pen.
+  put the darkest gray color into the darkest gray pen.
+  put the lightest red color into the lightest red pen.
+  put the lighter red color into the lighter red pen.
+  put the light red color into the light red pen.
+  put the red color into the red pen.
+  put the dark red color into the dark red pen.
+  put the darker red color into the darker red pen.
+  put the darkest red color into the darkest red pen.
+  put the lightest orange color into the lightest orange pen.
+  put the lighter orange color into the lighter orange pen.
+  put the light orange color into the light orange pen.
+  put the orange color into the orange pen.
+  put the dark orange color into the dark orange pen.
+  put the darker orange color into the darker orange pen.
+  put the darkest orange color into the darkest orange pen.
+  put the lightest yellow color into the lightest yellow pen.
+  put the lighter yellow color into the lighter yellow pen.
+  put the light yellow color into the light yellow pen.
+  put the yellow color into the yellow pen.
+  put the dark yellow color into the dark yellow pen.
+  put the darker yellow color into the darker yellow pen.
+  put the darkest yellow color into the darkest yellow pen.
+  put the lightest lime color into the lightest lime pen.
+  put the lighter lime color into the lighter lime pen.
+  put the light lime color into the light lime pen.
+  put the lime color into the lime pen.
+  put the dark lime color into the dark lime pen.
+  put the darker lime color into the darker lime pen.
+  put the darkest lime color into the darkest lime pen.
+  put the lightest green color into the lightest green pen.
+  put the lighter green color into the lighter green pen.
+  put the light green color into the light green pen.
+  put the green color into the green pen.
+  put the dark green color into the dark green pen.
+  put the darker green color into the darker green pen.
+  put the darkest green color into the darkest green pen.
+  put the lightest teal color into the lightest teal pen.
+  put the lighter teal color into the lighter teal pen.
+  put the light teal color into the light teal pen.
+  put the teal color into the teal pen.
+  put the dark teal color into the dark teal pen.
+  put the darker teal color into the darker teal pen.
+  put the darkest teal color into the darkest teal pen.
+  put the lightest cyan color into the lightest cyan pen.
+  put the lighter cyan color into the lighter cyan pen.
+  put the light cyan color into the light cyan pen.
+  put the cyan color into the cyan pen.
+  put the dark cyan color into the dark cyan pen.
+  put the darker cyan color into the darker cyan pen.
+  put the darkest cyan color into the darkest cyan pen.
+  put the lightest sky color into the lightest sky pen.
+  put the lighter sky color into the lighter sky pen.
+  put the light sky color into the light sky pen.
+  put the sky color into the sky pen.
+  put the dark sky color into the dark sky pen.
+  put the darker sky color into the darker sky pen.
+  put the darkest sky color into the darkest sky pen.
+  put the lightest blue color into the lightest blue pen.
+  put the lighter blue color into the lighter blue pen.
+  put the light blue color into the light blue pen.
+  put the blue color into the blue pen.
+  put the dark blue color into the dark blue pen.
+  put the darker blue color into the darker blue pen.
+  put the darkest blue color into the darkest blue pen.
+  put the lightest purple color into the lightest purple pen.
+  put the lighter purple color into the lighter purple pen.
+  put the light purple color into the light purple pen.
+  put the purple color into the purple pen.
+  put the dark purple color into the dark purple pen.
+  put the darker purple color into the darker purple pen.
+  put the darkest purple color into the darkest purple pen.
+  put the lightest magenta color into the lightest magenta pen.
+  put the lighter magenta color into the lighter magenta pen.
+  put the light magenta color into the light magenta pen.
+  put the magenta color into the magenta pen.
+  put the dark magenta color into the dark magenta pen.
+  put the darker magenta color into the darker magenta pen.
+  put the darkest magenta color into the darkest magenta pen.
+  put the lightest violet color into the lightest violet pen.
+  put the lighter violet color into the lighter violet pen.
+  put the light violet color into the light violet pen.
+  put the violet color into the violet pen.
+  put the dark violet color into the dark violet pen.
+  put the darker violet color into the darker violet pen.
+  put the darkest violet color into the darkest violet pen.
+  \ special color pens
+  put the tan color into the tan pen.
+  put the brown color into the brown pen.
+  put the dark brown color into the dark brown pen.
+  put the darker brown color into the darker brown pen.
+  put the darkest brown color into the darkest brown pen.
+  put the pink color into the pink pen.
+  put the dark pink color into the dark pink pen.
+  put the gold color in the gold pen.
+  \ "sky" renamed "sky blue"
+  put the lightest sky color into the lightest sky blue color.
+  put the lighter sky color into the lighter sky blue color.
+  put the light sky color into the light sky blue color.
+  put the sky color into the sky blue color.
+  put the dark sky color into the dark sky blue color.
+  put the darker sky color into the darker sky blue color.
+  put the darkest sky color into the darkest sky blue color.
+  put the lightest sky color into the lightest sky blue pen.
+  put the lighter sky color into the lighter sky blue pen.
+  put the light sky color into the light sky blue pen.
+  put the sky color into the sky blue pen.
+  put the dark sky color into the dark sky blue pen.
+  put the darker sky color into the darker sky blue pen.
+  put the darkest sky color into the darkest sky blue pen.
+
+to interpret a rainbow color:
+  divide the current rainbow color number by 6
+    giving a quotient and a remainder.
+  if the remainder is 1, put the red    color into the rainbow color.
+  if the remainder is 2, put the orange color into the rainbow color.
+  if the remainder is 3, put the yellow color into the rainbow color.
+  if the remainder is 4, put the green  color into the rainbow color.
+  if the remainder is 5, put the blue   color into the rainbow color.
+  if the remainder is 6, put the purple color into the rainbow color.
 
 the light blue color is a color.
 
+the light blue pen is a pen.
+
+a light color is a color.
+
 the light cyan color is a color.
+
+the light cyan pen is a pen.
 
 the light gray color is a color.
 
+the light gray pen is a pen.
+
 the light green color is a color.
+
+the light green pen is a pen.
 
 the light lime color is a color.
 
+the light lime pen is a pen.
+
 the light magenta color is a color.
+
+the light magenta pen is a pen.
 
 the light orange color is a color.
 
+the light orange pen is a pen.
+
 the light purple color is a color.
+
+the light purple pen is a pen.
 
 the light red color is a color.
 
+the light red pen is a pen.
+
+the light sky blue color is a color.
+
+the light sky blue pen is a pen.
+
 the light sky color is a color.
+
+the light sky pen is a pen.
 
 the light teal color is a color.
 
+the light teal pen is a pen.
+
 the light violet color is a color.
+
+the light violet pen is a pen.
 
 the light yellow color is a color.
 
+the light yellow pen is a pen.
+
+to lighten a color by an amount:
+  add the amount to the color's lightness.
+  limit the color's lightness to 0 and 1000.
+
+to lighten a color by some percent;
+to lighten a color about some percent;
+to lighten a color by about some percent;
+to lighten a color some percent:
+  put the color's lightness plus the percent into the color's lightness.
+  limit the color's lightness to 0 and 1000.
+
 the lighter blue color is a color.
+
+the lighter blue pen is a pen.
 
 the lighter cyan color is a color.
 
+the lighter cyan pen is a pen.
+
 the lighter gray color is a color.
+
+the lighter gray pen is a pen.
 
 the lighter green color is a color.
 
+the lighter green pen is a pen.
+
 the lighter lime color is a color.
+
+the lighter lime pen is a pen.
 
 the lighter magenta color is a color.
 
+the lighter magenta pen is a pen.
+
 the lighter orange color is a color.
+
+the lighter orange pen is a pen.
 
 the lighter purple color is a color.
 
+the lighter purple pen is a pen.
+
 the lighter red color is a color.
+
+the lighter red pen is a pen.
+
+the lighter sky blue color is a color.
+
+the lighter sky blue pen is a pen.
 
 the lighter sky color is a color.
 
+the lighter sky pen is a pen.
+
 the lighter teal color is a color.
+
+the lighter teal pen is a pen.
 
 the lighter violet color is a color.
 
+the lighter violet pen is a pen.
+
 the lighter yellow color is a color.
+
+the lighter yellow pen is a pen.
 
 the lightest blue color is a color.
 
+the lightest blue pen is a pen.
+
 the lightest cyan color is a color.
+
+the lightest cyan pen is a pen.
 
 the lightest gray color is a color.
 
+the lightest gray pen is a pen.
+
 the lightest green color is a color.
+
+the lightest green pen is a pen.
 
 the lightest lime color is a color.
 
+The lightest lime pen is a pen.
+
 the lightest magenta color is a color.
+
+the lightest magenta pen is a pen.
 
 the lightest orange color is a color.
 
+the lightest orange pen is a pen.
+
 the lightest purple color is a color.
+
+the lightest purple pen is a pen.
 
 the lightest red color is a color.
 
+the lightest red pen is a pen.
+
+the lightest sky blue color is a color.
+
+the lightest sky blue pen is a pen.
+
 the lightest sky color is a color.
+
+the lightest sky pen is a pen.
 
 the lightest teal color is a color.
 
+the lightest teal pen is a pen.
+
 the lightest violet color is a color.
 
+the lightest violet pen is a pen.
+
 the lightest yellow color is a color.
+
+the lightest yellow pen is a pen.
 
 a lightness is a number [0 to 1000].
 
 the lime color is a color.
 
+the lime pen is a pen.
+
 the magenta color is a color.
 
-to make a color from a hue and a saturation and a lightness:
-  put the hue and the saturation and the lightness into the color.
+the magenta pen is a pen.
+
+to make a brownish color:
+  \ To-do:  update "make a color like another color"
+  \ by inverting the dE-2000 formula,
+  \ and pass it a brown color as a starting color.
+  pick the brownish color's hue between 250 and 350.
+  pick the brownish color's saturation between 500 and 1000.
+  pick the brownish color's brightness between 125 and 375.
+
+to make a color:
+  pick the color's hue between 0 and 3600.
+  pick the color's saturation between 0 and 1000.
+  pick the color's lightness between 0 and 1000.
+
+to make a color be dark:
+  put 1000 into the color's saturation.
+  put 375 into the color's lightness.
+
+to make a color be light:
+  put 1000 into the light color's saturation.
+  put 625 into the light color's lightness.
+
+to make a color be pastel:
+  put 1000 into the color's saturation.
+  put 875 into the color's lightness.
+
+to make a color be solid:
+  put 1000 into the color's saturation.
+  put 500 into the color's lightness.
+
+to make a color be very dark:
+  put 500 into the color's saturation.
+  put 250 into the color's lightness.
+
+to make a color be very light:
+  put 1000 into the color's saturation.
+  put 750 into the color's lightness.
+
+to make a color be very very dark:
+  put 500 into the color's saturation.
+  put 125 into the color's lightness.
+
+to make a color be very very light:
+  put 1000 into the color's saturation.
+  put 875 into the color's lightness.
+
+to make a color like another color:
+  \ To-do:  Invert the dE-2000 formula to choose a similar looking color.
+  \ http://www.colorwiki.com/wiki/Delta_E:_The_Color_Difference
+  \ http://www.ece.rochester.edu/~gsharma/ciede2000/ciede2000noteCRNA.pdf
+  put the other color into the color.
+  pick a number between -100 and 100.
+  add the number to the color's hue.
+  normalize the color's hue.
+  set the color's saturation to something between 100 and 1000.
+  set the color's lightness to something between 0 and 800.
+
+to make a greenish color:
+  \ To-do:  update "make a color like another color"
+  \ by inverting the dE-2000 formula,
+  \ and pass it a green color as a starting color.
+  pick the greenish color's hue between 900 and 1200.
+  pick the greenish color's saturation between 500 and 1000.
+  pick the greenish color's brightness between 250 and 875.
+
+to normalize a hue:
+  divide the hue by 3600 giving a quotient and a remainder.
+  put the remainder into the hue.
+  if the hue is less than 0, add 3600 to the hue.
 
 the orange color is a color.
+
+the orange pen is a pen.
 
 to output a color without advancing:
   convert the color to a rgb.
@@ -397,6 +865,12 @@ to output a color without advancing:
 
 the pale color is a color.
 
+a pastel color is a color.
+
+an pen is a color.
+
+the pen size is a number.
+
 to pick a color between another color and a third color:
   pick the color's hue
     between the other color's hue and the third color's hue.
@@ -405,7 +879,21 @@ to pick a color between another color and a third color:
   pick the color's lightness
     between the other color's lightness and the third color's lightness.
 
+to pick a hue:
+  pick the hue between 0 and 3599.
+
+to pick a solid color:
+  pick the solid color's hue.
+  make the solid color solid.
+  put the solid color into the context's color.
+
+the pink color is a color.
+
+the pink pen is a pen.
+
 the purple color is a color.
+
+the purple pen is a pen.
 
 to put a color in a string:
   clear the string.
@@ -430,7 +918,29 @@ to put a hue and a saturation and a lightness into a color:
   put the lightness into the color's lightness.
   limit the color's lightness to 0 and 1000.
 
+a rainbow color is a color.
+
+a really dark color is a color.
+
+a really light color is a color.
+
+a really really dark color is a color.
+
+a really really light color is a color.
+
 the red color is a color.
+
+the red pen is a pen.
+
+to reset the rainbow colors:
+  put 0 into the current rainbow color number.
+
+to reverse a color:
+  if the color is the black color, put the white color into the color; exit.
+  if the color is the white color, put the black color into the color; exit.
+  put 1000 minus the color's lightness into the color's lightness.
+  add 1800 to the color's hue.
+  normalize the color's hue.
 
 a rgb is a record with
   a byte called blue byte,
@@ -441,17 +951,45 @@ a rgb pointer is a pointer to a rgb.
 
 a saturation is a number [0 to 1000].
 
+the sky blue color is a color.
+
+the sky blue pen is a pen.
+
 the sky color is a color.
+
+The sky pen is a pen.
+
+a solid color is a color.
 
 to swap a color with another color:
   swap the color's hue with the other color's hue.
   swap the color's saturation with the other color's saturation.
   swap the color's lightness with the other color's lightness.
 
+the tan color is a color.
+
+the tan pen is a pen.
+
 the teal color is a color.
+
+the teal pen is a pen.
+
+a very dark color is a color.
+
+a very light color is a color.
+
+a very very dark color is a color.
+
+a very very light color is a color.
 
 the violet color is a color.
 
+the violet pen is a pen.
+
 the white color is a color.
 
+the white pen is a pen.
+
 the yellow color is a color.
+
+the yellow pen is a pen.
