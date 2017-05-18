@@ -149,7 +149,7 @@ an anchor is a position.
 
 an and-mask is a mask.
 
-an angle is a number [0 to 3600].
+an angle is a number [0 through 3599].
 
 to append a buffer to a file:
   clear the i/o error.
@@ -475,7 +475,8 @@ to bitwise xor a number with another number:
 
 a box has
   a left coord, a top coord, a right coord, a bottom coord,
-  a left-top spot at the left, and a right-bottom spot at the right.
+  a left-top spot at the left, a right-bottom spot at the right,
+  a top-left spot at the left, and a bottom-right spot at the right.
 
 a bucket count is a count.
 
@@ -674,6 +675,7 @@ to change a text given a font name:
   wrap the text.
 
 to clear a box:
+  \ writer depends on this routine.
   put 0 into the box's left.
   put 0 into the box's top.
   put 0 into the box's right.
@@ -861,6 +863,8 @@ to compatibly wait for a process pointer:
   call "user32.dll" "ShowWindow" with the main window and 6 [sw_minimize].
   call "user32.dll" "ShowWindow" with the main window and 9 [sw_restore].
   put 0 into eax. \ set return value of thread
+
+the console is a console.
 
 a console is a thing with 
   a box,
@@ -1696,8 +1700,13 @@ to create the hfont of a canvas given a font:
 to create the hpen of a canvas given a color:
   convert the color to a colorref.
   if the color is clear, put the null hpen into an hpen.
-  put the tpp into a number. \ one pixel on screen always
-  if the canvas is the printer canvas, put 1/96 inch into the number.
+  \ put the tpp into a number. \ one pixel on screen always
+  if the pen size is at most 0, put 1 into the pen size.
+  put the tpp times the pen size into a number.
+  \ if the canvas is the printer canvas,
+  \   put 1/96 inch into the number.
+  if the canvas is the printer canvas,
+    put 1/96 inch times the pen size into the number.
   if the color is not clear,
     call "gdi32.dll" "CreatePen" with 0 [ps_solid] and the number and the colorref returning the hpen.
   call "gdi32.dll" "SelectObject" with the canvas and the hpen.
@@ -2098,6 +2107,8 @@ to decide if a box is another box:
   if the box's bottom is not the other box's bottom, say no.
   say yes.
 
+to decide if a box is still in another box;
+to decide if a box is in another box;
 to decide if a box is inside another box:
   if the box's left is less than the other box's left, say no.
   if the box's top is less than the other box's top, say no.
@@ -2683,13 +2694,6 @@ to decide if something is selected in a text:
   if the text's anchor is the text's caret, say no.
   say yes.
 
-to decide if a spot is in a box:
-  if the spot's x is less than the box's left, say no.
-  if the spot's y is less than the box's top, say no.
-  if the spot's x is greater than the box's right, say no.
-  if the spot's y is greater than the box's bottom, say no.
-  say yes.
-
 to decide if a spot is in an ellipse:
   create an hrgn given the ellipse.
   privatize the spot.
@@ -2739,6 +2743,15 @@ to decide if a spot is in a text:
   if the text is nil, say no.
   if the spot is in the text's box, say yes.
   say no.
+
+to decide if a spot is inside a box;
+to decide if a spot is within a box;
+to decide if a spot is in a box:
+  if the spot's x is less than the box's left, say no.
+  if the spot's y is less than the box's top, say no.
+  if the spot's x is greater than the box's right, say no.
+  if the spot's y is greater than the box's bottom, say no.
+  say yes.
 
 to decide if a spot is on a box:
   put the box into another box.
@@ -3149,8 +3162,6 @@ to deduplicate some string things:
     put the current string in the previous string.
   repeat.
 
-the default console is a console.
-
 the default font is a font.
 
 the default smtp server is "localhost".
@@ -3510,9 +3521,6 @@ to draw a gpbitmap at a spot (pdf style):
   output the width then " 0 0 " then the height then " " then the x then " " then the y then " cm".
   output "/" then the name then " Do".
   output "Q".
-
-to draw a line:
-  draw the line with the black color.
 
 to draw a line with a color:
   if the pdf state's page flag is set, draw the line with the color (pdf style); exit.
@@ -4105,6 +4113,8 @@ the event queue is an event queue.
 
 an event queue is some events.
 
+an expectation is a string.
+
 to extend any selection in a text given a spot:
   if the text is nil, exit.
   get the text's caret given the spot and the text.
@@ -4589,7 +4599,7 @@ to format a number and a singular string or a plural string into a string:
   if the number is 1, append the singular to the string.
   if the number is not 1, append the plural to the string.
 
-a gcd is a number.
+a gcd is a number. \ greatest common denominator.
 
 a gcpresults is a record with
   a number called lstructsize,
@@ -5205,6 +5215,8 @@ the gptoken is a gptoken.
 
 a gptoken is a number.
 
+a grain is 10 milliseconds.
+
 a grid is a pair.
 
 to guarantee one row in a text:
@@ -5761,6 +5773,13 @@ the i/o error is a string.
 
 a iid is a uuid.
 
+to imagine a box some twips by some other twips;
+to make a box some twips by some other twips:
+  put 0 into the box's left.
+  put 0 into the box's top.
+  put the twips into the box's right.
+  put the other twips into the box's bottom.
+
 an inch is 1440 twips.
 
 to include a font in the current pdf:
@@ -5870,6 +5889,7 @@ to index a string in an index:
   index nil given the string and the index.
 
 to initialize before run:
+  call "user32.dll" "DisableProcessWindowsGhosting".
   call "kernel32.dll" "GetProcessHeap" returning the heap pointer.
   call "kernel32.dll" "LoadLibraryA" with "kernel32.dll"'s first
     returning a handle.
@@ -5968,6 +5988,10 @@ to initialize the fonts:
 \    then " the default font is "  
 \    then the default font's name  
 \    then " (" then the default font's height then ").".
+  \ stroked fonts below
+  put 1/8 inch into the small letter height.
+  put 1/4 inch into the medium letter height.
+  put 1/2 inch into the large letter height.
 
 to initialize gdi+:
   put 1 into a gdiplusstartupinput's gdiplusversion.
@@ -6198,6 +6222,8 @@ to insert a vertex into a polygon before another vertex:
   if the vertex is nil, exit.
   insert the vertex into the polygon's vertices before the other vertex.
 
+an interpretation is a string.
+
 to intersect a box with another box giving a third box:
   \ boxes do not touch
   clear the third box.
@@ -6301,6 +6327,8 @@ a l-param is a number.
 
 a landscape sheet is a sheet.
 
+the large letter height is a letter height.
+
 the largest number is 2147483647.
 
 the largest square is a number equal to 2147395600.  \ 46,340 * 46,340
@@ -6310,6 +6338,8 @@ the largest square root is a number equal to 46340.
 an lcm is a number.
 
 a length is a number.
+
+a letter height is some twips. \ indicates actual height of a typical uppercase letter
 
 the lexicon is a thing with an index.
 
@@ -6462,12 +6492,6 @@ to lowercase a text:
 
 the main window is a window.
 
-to make a box some twips by some other twips:
-  put 0 into the box's left.
-  put 0 into the box's top.
-  put the twips into the box's right.
-  put the other twips into the box's bottom.
-
 to make a box with a left coord and a top coord and a right coord and a bottom coord:
   put the left coord and the top coord and the right coord and the bottom coord into the box.
 
@@ -6611,6 +6635,8 @@ the max text undos is a count equal to 32.
 to maximize a screen:
   resize the screen given the screen's maximum pixel width
     and the screen's maximum pixel height.
+
+the medium letter height is a letter height.
 
 a megabyte is 1024 kilobytes.
 
@@ -7187,7 +7213,8 @@ to non-destructively resize a picture given a twip pair:
   make a ratio pair given the box and the picture's box.
   non-destructively resize the picture given the ratio pair.
 
-to normalize an angle: divide the angle by 3600 giving a quotient and the angle.
+to normalize an angle:
+  divide the angle by 3600 giving a quotient and the angle.
 
 to normalize a box:
   if the box's right is less than the box's left, swap the box's left with the box's right.
@@ -7553,6 +7580,8 @@ a pdf string is a string.
    \ string surrounded by ( )
    \ and has \( for left paren, \) for right paren, \\ for backslash
 
+the pen size is a number.
+
 a percent is a number. \ a scale with 100 in the denominator
 
 to pick a number:
@@ -7562,7 +7591,7 @@ to pick a number within an amount of another number:
   pick the number between the other number minus the amount
     and the other number plus the amount.
 
-to pick a random number between a min number and a max number:
+to pick a random number between a min number and a max number (guts):
   put the seed's whereabouts into eax.
   \ put address of randseed into ecx
   intel $8BC8.         \ mov ecx,eax
@@ -9167,6 +9196,10 @@ to reverse a flag:
   if the flag is yes, put no into the flag; exit.
   put yes into the flag.
 
+to reverse a number;
+to invert a number:
+  multiply the number by -1.
+
 to reverse some things:
   swap the things with some other things.
   loop.
@@ -9766,8 +9799,12 @@ to show a cursor:
   repeat.
 
 to shut down:
+\  destroy the bible.
+\  destroy the stack.
   destroy the lexicon.
-  destroy the default console.
+\  destroy the default console.
+  destroy the console.
+\  destroy the terminal.
   finalize the canvases.
   finalize the mouse.
   finalize the cursors.
@@ -9787,6 +9824,8 @@ to shut down the cgi:
   finalize winsock.
 
 the silent flag is a flag.
+
+a size is a number.
 
 to skip any leading linefeed byte in a substring:
   if the substring is blank, exit.
@@ -9852,6 +9891,8 @@ to slap a substring on a string:
   \ put the string's last into the substring's last
   intel $8B8B04000000. \ mov ecx,[ebx+4]  \ the string's last
   intel $898804000000. \ mov [eax+4],ecx  \ the substring's last
+
+the small letter height is a letter height.
 
 the smallest number is -2147483648.
 
@@ -10127,7 +10168,9 @@ to start up:
   initialize the cursors.
   initialize the mouse.
   initialize the canvases.
-  create the default console.
+\  create the default console.
+\  initialize the terminal.
+  create the console.
 
 to start up the cgi:
   initialize winsock.
@@ -10937,6 +10980,13 @@ to test (the talker):
   test (the talker - find winmm).
   test (the talker - find sapi).
 
+a test result is a thing with
+  a string called context,
+  a string called test name,
+  an expectation,
+  a string called actual value, and
+  an interpretation.
+
 the text cutoff is a number equal to 500.
 
 a text is a thing with 
@@ -11156,7 +11206,7 @@ a urlcomponents is a record with
   a pchar called lpszurlpath,
   a number called dwurlpathlength,
   a pchar called lpszextrainfo,
-  a number called dwextrainfolength. 
+  a number called dwextrainfolength.
 
 a uuid is a record with
   a number called d1,
@@ -11176,8 +11226,12 @@ to void a pointer:
 
 a w-param is a number.
 
+to wait for some grains of sand;
+to wait for some grains of sand to fall;
+to wait for some grains of sand to fall in the hourglass;
+to wait some milliseconds;
 to wait for some milliseconds:
-  if the milliseconds are 0, exit.
+  if the milliseconds are at most 0, exit.
   call "kernel32.dll" "Sleep" with the milliseconds.
 
 to wait until speaking is done:
@@ -11353,9 +11407,6 @@ to write a ratio:
 to write a ratio without advancing:
   convert the ratio to a string.
   write the string without advancing.
-
-to write a string:
-  write the string on the default console.
 
 to write a string on a console:
   if the console is nil, exit.

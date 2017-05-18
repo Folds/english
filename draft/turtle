@@ -2,89 +2,275 @@
 \ are copyright 2017 by the Osmosian Order.
 \ The remainder is copyright 2017 by Jasper Paulsen.
 
-to darken the current color about some percent:
-  darken the context's color by the percent.
+\ The "keeper" file has routines that use the context,
+\ but leave the context in the same state they found it,
+\ and do not refresh the screen.
 
-to lighten the current color about some percent:
-  lighten the context's color by the percent.
+\ The "modder" file has routines that change the context.
 
-to pick a brightness between a percent and another percent;
-to vary a lightness between a percent and another percent;
-to pick a lightness between a percent and another percent:
-  pick a number between the percent and the other percent.
-  put the number times 10 into the lightness.
-  put the lightness into the context's lightness.
+to add a line to a figure:
+  if the figure is nil,
+    create the figure;
+    append the figure to the figures.
+  add the line's start to the figure.
+  add the line's end to the figure.
 
-to pick a brownish color:
-  make a brownish color.
-  put the brownish color into the context's color.
+to add a spot to a figure:
+  append the spot to the figure.
 
-to pick a brownish color about some percent of the time:
-  pick a number between 1 and 100.
-  if the number is greater than the percent, exit.
-  pick the brownish color.
-  put the brownish color into the context's color.
+a choice is a thing with a name and a box.
 
-to pick a color:
-  make the color.
-  put the color into the context's color.
+the choices are some choices.
 
-to pick a color like another color:
-  make a color like the other color.
-  put the color into the context's color.
+the context is a context.
 
-to pick a dark color:
-  pick the dark color's hue.
-  make the dark color be dark.
-  put the dark color into the context's color.
+a context is a thing with
+  a spot, a box, a heading, a letter height,
+  a color, a number, a pen size,
+  a letter size at the letter height,
+  a pen at the color,
+  and a pen width at the pen size.
 
-to pick a greenish color:
-  make a greenish color.
-  put the greenish color into the context's color.
+the context stack is some contexts.
 
-to pick a greenish color about some percent of the time:
-  pick a number between 1 and 100.
-  if the number is greater than the percent, exit.
-  pick the greenish color.
-  put the greenish color into the context's color.
+to convert a heading to a trig angle:
+  privatize the heading.
+  normalize the heading.
+  put the heading / 3840 in a ratio.
+  multiply the ratio by 360.
+  negate the ratio.
+  add 450 / 1 to the ratio.
+  convert the ratio to a mixio.
+  normalize the mixio.
+  if the mixio is at least 360,
+    subtract 360 from the mixio.
+  put the mixio's whole number in a number called degrees.
+  put 0 in the mixio's whole number.
+  multiply the mixio by 60.
+  put the mixio's whole number in a number called minutes.
+  put 0 in the mixio's whole number.
+  multiply the mixio by 60.
+  put the mixio's whole number in a number called seconds.
+  put 0 in the mixio's whole number.
+  convert the mixio to another ratio.
+  put 100 in a number called hundredths.
+  scale the hundredths given the other ratio.
+  make the trig angle given the degrees and the minutes and the seconds and the hundredths.
 
-to pick a light color:
-  pick the light color's hue.
-  make the light color be light.
-  put the light color into the context's color.
+to decide if the current spot is above or below a box:
+  if the context's spot is above or below the box, say yes.
+  say no.
 
-to pick a pastel color:
-  pick the pastel color's hue.
-  make the pastel color be pastel.
-  put the pastel color into the context's color.
+to decide if the current spot is left or right of a box:
+  if the context's spot is left or right of the box, say yes.
+  say no.
 
-to pick a rainbow color:
-  add 1 to the current rainbow color number.
-  if the current rainbow color number is greater than 6,
-    put 1 into the current rainbow color number.
-  interpret the rainbow color. [using the rainbow color number]
-  put the rainbow color into the context's color.
+to decide if the current spot is within some twips of a box:
+  if the context's spot is within the twips of the box, say yes.
+  say no.
 
-to pick a very dark color;
-to pick a really dark color:
-  pick the really dark color's hue.
-  make the really dark color be very dark.
-  put the really dark color into the context's color.
+to decide if a line is above a coord:
+  if the line's start's y is greater than or equal to the coord, say no.
+  if the line's end's y is greater than or equal to the coord, say no.
+  say yes.
 
-to pick a very light color;
-to pick a really light color:
-  pick the really light color's hue.
-  make the really light color be very light.
-  put the really light color into the context's color.
+to decide if a line is below a coord:
+  if the line's start's y is less than or equal to the coord, say no.
+  if the line's end's y is less than or equal to the coord, say no.
+  say yes.
 
-to pick a very very dark color;
-to pick a really really dark color:
-  pick the really really dark color's hue.
-  make the really really dark color be very very dark.
-  put the really really dark color into the context's color.
+to decide if a spot is above a box:
+  if the spot's y is less than the box's top, say yes.
+  say no.
 
-to pick a very very light color;
-to pick a really really light color:
-  pick the really really light color's hue.
-  make the really really light color be very very light.
-  put the really really light color into the context's color.
+to decide if a spot is above or below a box:
+  if the spot is above the box, say yes.
+  if the spot is below the box, say yes.
+  say no.
+
+to decide if a spot is below a box:
+  if the spot's y is greater than the box's bottom, say yes.
+  say no.
+
+to decide if a spot is to the left of a box:
+  if the spot's x is less than the box's left, say yes.
+  say no.
+
+to decide if a spot is left or right of a box:
+  if the spot is to the left of the box, say yes.
+  if the spot is to the right of the box, say yes.
+  say no.
+
+to decide if a spot is to the right of a box:
+  if the spot's x is greater than the box's right, say yes.
+  say no.
+
+to decide if a spot is within some twips of a box:
+  privatize the box.
+  outdent the box given the twips.
+  if the spot is within the box, say yes.
+  say no.
+
+to decide if we're still in a box;
+to decide if we're in a box:
+  if the context's spot is in the box, say yes.
+  say no.
+
+a dot is an ellipse.
+
+to draw and fill a box with a color:
+  draw the box with the color and the color.
+
+to draw a figure with a color:
+  draw the figure with the color and the clear color.
+
+a figure is a polygon.
+a circle is a  figure.
+a desert landscape is a thing.
+a fancy arrow is a figure.
+a fractal forest is a thing.
+a triangle is a figure.
+a half circle is a figure.
+a quarter circle is a figure.
+a spiral is a figure.
+a tree is a figure.
+
+the figures are some polygons.
+
+to get a byte from a string:
+  if the string is blank, put the null byte into the byte; exit.
+  put the string's first's target into the byte.
+  remove the first byte from the string.
+
+to get a rise and a run given a heading: \ see Madhava's Numbers
+  convert the heading to a trig angle.
+  put the rise denominator in the rise.
+  scale the rise given the trig angle's sine.
+  negate the rise. \ screen coordinates increase going down, not up.
+  put the rise denominator in the run.
+  scale the run given the trig angle's cosine.
+
+a heading is some points.  \ [0-3839, clockwise from up or north]
+
+to imagine a box some twips smaller than another box;
+to make a box some twips smaller than another box:
+  put the other box into the box.
+  indent the box by the twips divided by 2.
+
+to imagine a box some twips wide by some other twips high;
+  to make a box some twips wide by some other twips high:
+  put 0 and 0 and the twips and the other twips into the box.
+
+to imagine a dot about some twips wide;
+to make a dot about some twips wide;
+to make a dot some twips wide:
+  make the dot the twips by the twips.
+
+to imagine a dot between some twips and some other twips wide;
+to make a dot between some twips and some other twips wide:
+  pick some third twips between the twips and the other twips.
+  make the dot the third twips wide.
+
+to imagine a line across the top of a box;
+to make a line across the top of a box;
+to imagine a line along the top of a box;
+to make a line along the top of a box:
+  put the box's top line into the line.
+
+to imagine a line in the middle of a box;
+to make a line in the middle of a box;
+to imagine a line across the middle of a box;
+to make a line across the middle of a box;
+to imagine a line in the center of a box;
+to make a line in the center of a box;
+to imagine a line across the center of a box;
+to make a line across the center of a box:
+  put the box's left into the line's start's x.
+  put the box's right into the line's end's x.
+  put the box's center's y into the line's start's y.
+  put the box's center's y into the line's end's y.
+
+to move a box close to the left side of another box;
+to move a box close to the left of another box:
+  move the box to the left of the other box.
+  pick a length between 0 and the box's width times 3/4.
+  move the box right the length.
+
+to move a box to the left side of another box;
+to move a box to the left of another box:
+  move the box left the box's left minus the other box's left.
+
+to move a box to the top left corner of another box:
+  move the box to the other box's left-top.
+
+to move a line down one pixel:
+  move the line down the tpp.
+
+to move a line up one pixel:
+  move the line up the tpp.
+
+to pick a spot anywhere on a horizontal line;
+to pick a spot on a horizontal line:
+  pick the spot's x between the horizontal line's start's x and the horizontal line's end's x.
+  put the horizontal line's y into the spot's y.
+
+to pick a spot in a box about some twips above the middle;
+to pick a spot in a box about some twips above the center:
+  put the box into a bounding box.
+  put the twips divided by 2 into some other twips.
+  put the box's center's y minus the other twips into the bounding box's bottom.
+  put the bounding box's bottom minus the twips into the bounding box's top.
+  pick the spot anywhere in the bounding box.
+
+the pizza pie is a ratio equal to 45239/14400.
+\ error is 8,526 trifles = 8,526 / (43,200 * 43,200)
+\ deliberately changed from 355/113.
+
+a point is a number [0 to 3839; for dividing a circle into compass points; 0 is noon; 960 points per quarter].
+
+to put a box some twips by some other twips in the center of another box;
+to center a box some twips by some other twips in another box:
+  make the box the twips by the other twips.
+  center the box in the other box.
+
+a rise is a number.
+a run is a number.
+the rise denominator is a number equal to 10000.
+
+to shrink a box by some twips;
+to indent a box some twips;
+to indent a box by some twips;
+to indent a box some twips on every side;
+to indent a box given some twips:
+  add the twips to the box's left.
+  add the twips to the box's top.
+  subtract the twips from the box's right.
+  subtract the twips from the box's bottom.
+
+a side is 1 unit.
+
+a square is 1440 units.
+\ arbitrary number high enough for precision divides
+
+the square size is some twips.
+
+the squirt o' two is a ratio equal to 61094/43200.
+\ error is about 1,119 trifles = 1,119 / (43,200 * 43,200)
+
+to wait for a key to come back up:
+  if the key is not up, repeat.
+
+to wait for a key to come up:
+  if the key is not up, repeat.
+
+to wait for a key to go down:
+  if the key is not down, repeat.
+
+to wait on that there key with the esc on it:
+  wait for the escape key.
+
+to wait until we hit a key;
+to wait for a key:
+  wait for the key to go down.
+  wait for the key to come up.
+  flush all events.

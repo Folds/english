@@ -87,96 +87,37 @@ to convert a mixio to a string (long):
 to convert a number to a mixio:
   put the number in the mixio.
 
-to convert a precise angle to a mixio:
-  put the precise angle's degrees in the mixio's whole number.
-  put 60 times the precise angle's minutes in a number.
-  multiply the number by 60.
-  add the precise angle's seconds to the number.
-  multiply the number by 100.
-  add the precise angle's hundredths to the number.
-  scale the number by the trifle denominator / 360000.
-  put the number in the mixio's trifles.
-  normalize the mixio.
-
-to convert a precise angle to some radians:
-  put the precise angle's degrees in a mixio's whole number.
-  put the precise angle's minutes in the mixio's nips.
-  multiply the mixio's nips by the trifle root / 60.
-  put the precise angle's seconds in the mixio's trifles.
-  multiply the mixio's trifles by the trifle denominator / 3600.
-  put the precise angle's hundredths in a number.
-  multiply the number by the trifle denominator / 360000.
-  add the number to the mixio's trifles.
-  normalize the mixio.
-  divide the mixio by 10.
-  put tau in some tau radians.
-  multiply the mixio by the tau radians.
-  divide the mixio by 36.
-  put the mixio in the radians.
-
-to convert a precise angle to a string:
-  put the precise angle's degrees
-    then the degree-symbol byte in the string.
-  if the precise angle is just degrees, exit.
-  append the precise angle's minutes
-    then the minute-symbol byte to the string.
-  if the precise angle is just degrees and minutes, exit.
-  if the precise angle's hundredths are 0,
-    append the precise angle's seconds
-      then the second-symbol byte to the string;
-    exit.
-  if the precise angle's hundredths are negative,
-    append the precise angle's seconds
-      then the second-symbol byte
-      then the precise angle's hundredths
-      then "cas" to the string;
-    exit.
-  if the precise angle's hundredths are at least 100,
-    append the precise angle's seconds
-      then the second-symbol byte
-      then the precise angle's hundredths
-      then "cas" to the string;
-    exit.
-  if the precise angle's hundredths are less than 10,
-    append the precise angle's seconds
-      then ".0" then the precise angle's hundredths
-      then the second-symbol byte to the string;
-    exit.
-    append the precise angle's seconds
-      then the period byte
-      then the precise angle's hundredths
-      then the second-symbol byte to the string.
-
 to convert some radians to a mixio:
   put the radians in the mixio.
 
-to convert some radians to a precise angle:
+to convert some radians to a trig angle:
+  \ both are counter-clockwise from right / east
   put the radians in a mixio.
   multiply the mixio by 6.
   put tau in some tau radians.
   divide the mixio by the tau radians.
   multiply the mixio by 60.
   normalize the mixio.
-  put the mixio's whole number in the precise angle's degrees.
+  put the mixio's whole number in the trig angle's degrees.
   put 0 in the mixio's whole number.
   multiply the mixio by 60.
   normalize the mixio.
-  put the mixio's whole number in the precise angle's minutes.
+  put the mixio's whole number in the trig angle's minutes.
   put 0 in the mixio's whole number.
   multiply the mixio by 60.
   normalize the mixio.
-  put the mixio's whole number in the precise angle's seconds.
+  put the mixio's whole number in the trig angle's seconds.
   put 0 in the mixio's whole number.
   multiply the mixio by 100.
   normalize the mixio.
-  put the mixio's whole number in the precise angle's hundredths.
+  put the mixio's whole number in the trig angle's hundredths.
   put the trifle root in a number called threshold.
   divide the threshold by 2.
   if the mixio's nips are at least the threshold,
-    add 1 to the precise angle's hundredths.
+    add 1 to the trig angle's hundredths.
   subtract the trifle root from the threshold.
   if the mixio's nips are less than the threshold,
-    subtract 1 from the precise angle's hundredths.
+    subtract 1 from the trig angle's hundredths.
 
 to convert a ratio to a mixio:
   privatize the ratio.
@@ -204,6 +145,66 @@ to convert a tangent to a flopped tangent:
   multiply the flopped tangent by the mixio.
   divide the flopped tangent by 6.
 
+to convert a trig angle to a mixio:
+  put the trig angle's degrees in the mixio's whole number.
+  put 60 times the trig angle's minutes in a number.
+  multiply the number by 60.
+  add the trig angle's seconds to the number.
+  multiply the number by 100.
+  add the trig angle's hundredths to the number.
+  scale the number by the trifle denominator / 360000.
+  put the number in the mixio's trifles.
+  normalize the mixio.
+
+to convert a trig angle to some radians:
+  put the trig angle's degrees in a mixio's whole number.
+  put the trig angle's minutes in the mixio's nips.
+  multiply the mixio's nips by the trifle root / 60.
+  put the trig angle's seconds in the mixio's trifles.
+  multiply the mixio's trifles by the trifle denominator / 3600.
+  put the trig angle's hundredths in a number.
+  multiply the number by the trifle denominator / 360000.
+  add the number to the mixio's trifles.
+  normalize the mixio.
+  divide the mixio by 10.
+  put tau in some tau radians.
+  multiply the mixio by the tau radians.
+  divide the mixio by 36.
+  put the mixio in the radians.
+
+to convert a trig angle to a string:
+  put the trig angle's degrees
+    then the degree-symbol byte in the string.
+  if the trig angle is just degrees, exit.
+  append the trig angle's minutes
+    then the minute-symbol byte to the string.
+  if the trig angle is just degrees and minutes, exit.
+  if the trig angle's hundredths are 0,
+    append the trig angle's seconds
+      then the second-symbol byte to the string;
+    exit.
+  if the trig angle's hundredths are negative,
+    append the trig angle's seconds
+      then the second-symbol byte
+      then the trig angle's hundredths
+      then "cas" to the string;
+    exit.
+  if the trig angle's hundredths are at least 100,
+    append the trig angle's seconds
+      then the second-symbol byte
+      then the trig angle's hundredths
+      then "cas" to the string;
+    exit.
+  if the trig angle's hundredths are less than 10,
+    append the trig angle's seconds
+      then ".0" then the trig angle's hundredths
+      then the second-symbol byte to the string;
+    exit.
+    append the trig angle's seconds
+      then the period byte
+      then the trig angle's hundredths
+      then the second-symbol byte to the string.
+
 a cosine is a ratio.
 
 to debug a mixio:
@@ -214,14 +215,14 @@ to debug a mixio (long):
   convert the mixio to a string (long).
   debug the string.
 
-to debug a precise angle:
-  convert the precise angle to a string.
-  debug the string.
-
 to debug a string and a mixio and another string and another mixio (long):
   convert the mixio to a string called description (long).
   convert the other mixio to a string called other description (long).
   debug the string then the description then the other string then the other description.
+
+to debug a trig angle:
+  convert the trig angle to a string.
+  debug the string.
 
 to decide if a mixio is another mixio:
   privatize the mixio.
@@ -314,24 +315,6 @@ to decide if a number is wrapped given a number called alpha and a number called
  if the number is more than the omega, say no.
  say yes.
 
-to decide if a precise angle is another precise angle:
-  if the precise angle's degrees are not the other precise angle's degrees, say no.
-  if the precise angle's minutes are not the other precise angle's minutes, say no.
-  if the precise angle's seconds are not the other precise angle's seconds, say no.
-  if the precise angle's hundredths are not the other precise angle's hundredths, say no.
-  say yes.
-
-to decide if a precise angle is just degrees:
-  if the precise angle's minutes are not 0, say no.
-  if the precise angle's seconds are not 0, say no.
-  if the precise angle's hundredths are not 0, say no.
-  say yes.
-
-to decide if a precise angle is just degrees and minutes:
-  if the precise angle's seconds are not 0, say no.
-  if the precise angle's hundredths are not 0, say no.
-  say yes.
-
 to decide if square root nips are close given a mixio and a mixio called result:
   privatize the result.
   add 1 to the result's nips.
@@ -378,6 +361,24 @@ to decide if a tangent is extreme:
   if the tangent's denominator is greater than 1, say no.
   if the tangent's numerator is the largest number, say yes.
   say no.
+
+to decide if a trig angle is another trig angle:
+  if the trig angle's degrees are not the other trig angle's degrees, say no.
+  if the trig angle's minutes are not the other trig angle's minutes, say no.
+  if the trig angle's seconds are not the other trig angle's seconds, say no.
+  if the trig angle's hundredths are not the other trig angle's hundredths, say no.
+  say yes.
+
+to decide if a trig angle is just degrees:
+  if the trig angle's minutes are not 0, say no.
+  if the trig angle's seconds are not 0, say no.
+  if the trig angle's hundredths are not 0, say no.
+  say yes.
+
+to decide if a trig angle is just degrees and minutes:
+  if the trig angle's seconds are not 0, say no.
+  if the trig angle's hundredths are not 0, say no.
+  say yes.
 
 to divide a mixio by another mixio:
   divide the mixio by the other mixio returning a mixio called result.
@@ -611,23 +612,17 @@ to divide a mixio by a number returning another mixio (modest divisor):
 
 a flopped tangent is a mixio.
 
+a fuzzy test has 
+  a string called context, 
+  a string called test name,   
+  a bullseye mixio, and 
+  some tolerance trifles. \ implied denominator of 43,200 * 43,200.
+
 to get modesty threshold given a mixio called divisor returning a number:
   put the divisor's whole number in the number.
   de-sign the number.
   if the number is less than the trifle root,
     put the trifle root in the number.
-
-to get a precise angle given a cosine:
-  get some radians given the cosine.
-  convert the radians to the precise angle.
-
-to get a precise angle given a sine:
-  get some radians given the sine.
-  convert the radians to the precise angle.
-
-to get a precise angle given a tangent:
-  get some radians given the tangent.
-  convert the radians to the precise angle.
 
 to get some radians given a cosine:
   put the cosine in a ratio.
@@ -763,19 +758,31 @@ to get square root trifles given a mixio and a mixio called result:
 to get tau returning some radians:
   put tau in the radians.
 
+to get a trig angle given a cosine:
+  get some radians given the cosine.
+  convert the radians to the trig angle.
+
+to get a trig angle given a sine:
+  get some radians given the sine.
+  convert the radians to the trig angle.
+
+to get a trig angle given a tangent:
+  get some radians given the tangent.
+  convert the radians to the trig angle.
+
 to make a mixio given a number and a number called nips and some trifles:
   put the number in the mixio's whole number.
   put the nips in the mixio's nips.
   put the trifles in the mixio's trifles.
 
-to make a precise angle given a number called degrees:
-  make the precise angle with the degrees and 0 and 0 and 0.
+to make a trig angle given a number called degrees:
+  make the trig angle with the degrees and 0 and 0 and 0.
 
-to make a precise angle given a number called degrees and a number called minutes and a number called seconds and a number called hundredths:
-  put the degrees in the precise angle's degrees.
-  put the minutes in the precise angle's minutes.
-  put the seconds in the precise angle's seconds.
-  put the hundredths in the precise angle's hundredths.
+to make a trig angle given a number called degrees and a number called minutes and a number called seconds and a number called hundredths:
+  put the degrees in the trig angle's degrees.
+  put the minutes in the trig angle's minutes.
+  put the seconds in the trig angle's seconds.
+  put the hundredths in the trig angle's hundredths.
 
 a mixio has
   a whole number,
@@ -862,15 +869,6 @@ to normalize a mixio:
   wrap the mixio's nips
     given 0 and the number and the mixio's whole number.
 
-to normalize a precise angle:
-  wrap the precise angle's degrees    given 0 and 359.
-  wrap the precise angle's minutes    given 0 and  59 and the precise angle's degrees.
-  wrap the precise angle's seconds    given 0 and  59 and the precise angle's minutes.
-  wrap the precise angle's hundredths given 0 and  99 and the precise angle's seconds.
-  wrap the precise angle's seconds    given 0 and  59 and the precise angle's minutes.
-  wrap the precise angle's minutes    given 0 and  59 and the precise angle's degrees.
-  wrap the precise angle's degrees    given 0 and 359.
-
 to normalize some radians:
   if the radians are negative, 
     normalize the radians (negative); exit.
@@ -897,11 +895,14 @@ to normalize some radians (positive):
     subtract the other radians from the radians.
   repeat.
 
-a precise angle has             \ normalized ranges
-  a number called degrees,      \   0° - 359°
-  a number called minutes,      \   0’ -  59’
-  a number called seconds, and  \   0” -  59”
-  a number called hundredths.   \   0  -  99 cas
+to normalize a trig angle:
+  wrap the trig angle's degrees    given 0 and 359.
+  wrap the trig angle's minutes    given 0 and  59 and the trig angle's degrees.
+  wrap the trig angle's seconds    given 0 and  59 and the trig angle's minutes.
+  wrap the trig angle's hundredths given 0 and  99 and the trig angle's seconds.
+  wrap the trig angle's seconds    given 0 and  59 and the trig angle's minutes.
+  wrap the trig angle's minutes    given 0 and  59 and the trig angle's degrees.
+  wrap the trig angle's degrees    given 0 and 359.
 
 to put half pi into some radians:
   put tau into the radians.
@@ -946,39 +947,6 @@ to put a number in a mixio:
 to put pi into some radians:
   put tau into the radians.
   divide the radians by 2.
-
-to put a precise angle into another precise angle:
-  put the precise angle's degrees into the other precise angle's degrees.
-  put the precise angle's minutes into the other precise angle's minutes.
-  put the precise angle's seconds into the other precise angle's seconds.
-  put the precise angle's hundredths into the other precise angle's hundredths.
-
-to put a precise angle's cosine into a cosine:
-  convert the precise angle to some radians.
-  put the radians' cosine into the cosine.
-
-to put a precise angle's sine into a sine:
-  convert the precise angle to some radians.
-  put the radians' sine into the sine.
-
-to put a precise angle's tangent into a tangent:
-  privatize the precise angle.
-  normalize the precise angle.
-  make a precise angle called up angle given 90.
-  make a precise angle called down angle given 270.
-  if the precise angle is the up angle,
-    put the largest number / 1 in the tangent; exit.
-  if the precise angle is the down angle,
-    put the largest number / 1 in the tangent; exit.
-  put the precise angle's sine into a sine.
-  put the precise angle's cosine into a cosine.
-  put the sine's numerator in the tangent's numerator.
-  multiply the tangent's numerator
-    by the trifle denominator / the sine's denominator.
-  put the cosine's numerator in the tangent's denominator.
-  multiply the tangent's denominator
-    by the trifle denominator / the cosine's denominator.
-  reduce the tangent.
 
 to put some radians' cosine into a cosine:
   if the radians are 0,
@@ -1086,6 +1054,39 @@ to put tau into some radians:
 to put some trifles in a ratio:
   put the trifles / the trifle denominator in the ratio.
 
+to put a trig angle into another trig angle:
+  put the trig angle's degrees into the other trig angle's degrees.
+  put the trig angle's minutes into the other trig angle's minutes.
+  put the trig angle's seconds into the other trig angle's seconds.
+  put the trig angle's hundredths into the other trig angle's hundredths.
+
+to put a trig angle's cosine into a cosine:
+  convert the trig angle to some radians.
+  put the radians' cosine into the cosine.
+
+to put a trig angle's sine into a sine:
+  convert the trig angle to some radians.
+  put the radians' sine into the sine.
+
+to put a trig angle's tangent into a tangent:
+  privatize the trig angle.
+  normalize the trig angle.
+  make a trig angle called up angle given 90.
+  make a trig angle called down angle given 270.
+  if the trig angle is the up angle,
+    put the largest number / 1 in the tangent; exit.
+  if the trig angle is the down angle,
+    put the largest number / 1 in the tangent; exit.
+  put the trig angle's sine into a sine.
+  put the trig angle's cosine into a cosine.
+  put the sine's numerator in the tangent's numerator.
+  multiply the tangent's numerator
+    by the trifle denominator / the sine's denominator.
+  put the cosine's numerator in the tangent's denominator.
+  multiply the tangent's denominator
+    by the trifle denominator / the cosine's denominator.
+  reduce the tangent.
+
 some radians are a mixio.
 
 to refine square root nips given a mixio and a mixio called result:
@@ -1123,8 +1124,8 @@ to stash a fuzzy test given a ratio:
   convert the ratio to a mixio.
   stash the fuzzy test given the mixio.
 
-to stash a test result using a precise angle:
-  convert the precise angle to a string.
+to stash a test result using a trig angle:
+  convert the trig angle to a string.
   stash the test result using the string.
 
 to strictly interpolate some radians called goal radians from a mixio called goal mixio between some radians and some other radians from between a mixio and another mixio:
@@ -1400,16 +1401,16 @@ to test (trig - arctangent of -1/5):
   create a test result about "trig" and "arctangent of -1/5" 
     and expecting "348°41’24.24”".
   put -1/5 in a tangent.
-  get a precise angle given the tangent.
-  convert the precise angle to a string called actual.
+  get a trig angle given the tangent.
+  convert the trig angle to a string called actual.
   stash the test result given the actual.
 
 to test (trig - arctangent of -14):
   create a test result about "trig" and "arctangent of -14" 
     and expecting "274°5’8.22”".
   put -14 in a tangent.
-  get a precise angle given the tangent.
-  convert the precise angle to a string called actual.
+  get a trig angle given the tangent.
+  convert the trig angle to a string called actual.
   stash the test result given the actual.
 
 to test (trig - arctangent of 0):
@@ -1433,32 +1434,32 @@ to test (trig - arctangent of 1/12):
   create a test result about "trig" and "arctangent of 1/12" 
     and expecting "4°45’49.11”".
   put 1/12 in a tangent.
-  get a precise angle given the tangent.
-  convert the precise angle to a string called actual.
+  get a trig angle given the tangent.
+  convert the trig angle to a string called actual.
   stash the test result given the actual.
 
 to test (trig - arctangent of 12):
   create a test result about "trig" and "arctangent of 12" 
     and expecting "85°14’10.89”".
   put 12 in a tangent.
-  get a precise angle given the tangent.
-  convert the precise angle to a string called actual.
+  get a trig angle given the tangent.
+  convert the trig angle to a string called actual.
   stash the test result given the actual.
 
 to test (trig - arctangent of 3/4):
   create a test result about "trig" and "arctangent of 3/4" 
     and expecting "36°52’11.63”".
   put 3/4 in a tangent.
-  get a precise angle given the tangent.
-  convert the precise angle to a string called actual.
+  get a trig angle given the tangent.
+  convert the trig angle to a string called actual.
   stash the test result given the actual.
 
 to test (trig - arctangent of 4/3):
   create a test result about "trig" and "arctangent of 4/3" 
     and expecting "53°7’48.37”".
   put 4/3 in a tangent.
-  get a precise angle given the tangent.
-  convert the precise angle to a string called actual.
+  get a trig angle given the tangent.
+  convert the trig angle to a string called actual.
   stash the test result given the actual.
 
 to test (trig - arctangent of largest number):
@@ -1487,32 +1488,32 @@ to test (trig - convert from 0 radians to 0°):
     and "convert from 0 radians to 0°" 
     and targeting 0/1 with tight tolerance.
   put 0 in some radians.
-  convert the radians to a precise angle.
-  convert the precise angle to a mixio.
+  convert the radians to a trig angle.
+  convert the trig angle to a mixio.
   stash the fuzzy test given the mixio.
 
 to test (trig - convert from 0° to 0 radians):
   make a fuzzy test about "trig" 
     and "convert from 0° to 0 radians" 
     and targeting 0/1 with tight tolerance.
-  make a precise angle given 0.
-  convert the precise angle to some radians called actual.
+  make a trig angle given 0.
+  convert the trig angle to some radians called actual.
   stash the fuzzy test given the actual.
 
 to test (trig - convert from 225° to radians):
   make a fuzzy test about "trig" 
     and "convert from 225° to radians" 
     and targeting 366435367/93312000 with tight tolerance.
-  make a precise angle given 225.
-  convert the precise angle to some radians called actual.
+  make a trig angle given 225.
+  convert the trig angle to some radians called actual.
   stash the fuzzy test given the actual.
 
 to test (trig - convert from 359°59’59.99” to radians):
   make a fuzzy test about "trig" 
     and "convert from 359°59’59.99” to radians" 
     and targeting 1954321943/311040000 with tight tolerance.
-  make a precise angle given 359 and 59 and 59 and 99.
-  convert the precise angle to some radians called actual.
+  make a trig angle given 359 and 59 and 59 and 99.
+  convert the trig angle to some radians called actual.
   stash the fuzzy test given the actual.
 
 to test (trig - convert from degrees to radians):
@@ -1526,8 +1527,8 @@ to test (trig - convert from pi radians to 180°):
     and targeting 180/1 with tight tolerance.
   put tau in some radians.
   divide the radians by 2.
-  convert the radians to a precise angle.
-  convert the precise angle to a mixio.
+  convert the radians to a trig angle.
+  convert the trig angle to a mixio.
   stash the fuzzy test given the mixio.
 
 to test (trig - convert from radians to degrees):
@@ -1546,15 +1547,15 @@ to test (trig - convert mixio to string):
 to test (trig - cosine of -240°):
   make a fuzzy test about "trig" and "cosine of -240°" 
     and targeting -1/2 with tight tolerance.
-  make a precise angle given -240.
-  put the precise angle's cosine in a cosine called actual.
+  make a trig angle given -240.
+  put the trig angle's cosine in a cosine called actual.
   stash the fuzzy test given the actual.
 
 to test (trig - cosine of 0°):
   make a fuzzy test about "trig" and "cosine of 0°" 
     and targeting 1/1 with tight tolerance.
-  make a precise angle given 0.
-  put the precise angle's cosine in a cosine called actual.
+  make a trig angle given 0.
+  put the trig angle's cosine in a cosine called actual.
   stash the fuzzy test given the actual.
 
 to test (trig - cosine of 1/2 radian):
@@ -1568,36 +1569,36 @@ to test (trig - cosine of 1/2 radian):
 to test (trig - cosine of 30°):
   make a fuzzy test about "trig" and "cosine of 30°" 
     and targeting 1292969/1492992 with tight tolerance.
-  make a precise angle given 30.
-  put the precise angle's cosine in a cosine called actual.
+  make a trig angle given 30.
+  put the trig angle's cosine in a cosine called actual.
   stash the fuzzy test given the actual.
 
 to test (trig - cosine of 360°):
   make a fuzzy test about "trig" and "cosine of 360°" 
     and targeting 1/1 with tight tolerance.
-  make a precise angle given 360.
-  put the precise angle's cosine in a cosine called actual.
+  make a trig angle given 360.
+  put the trig angle's cosine in a cosine called actual.
   stash the fuzzy test given the actual.
 
 to test (trig - cosine of 41°15’):
   make a fuzzy test about "trig" and "cosine of 41°15’" 
     and targeting 1403113522/1866240000 with tight tolerance.
-  make a precise angle given 41 and 15 and 0 and 0.
-  put the precise angle's cosine in a cosine called actual.
+  make a trig angle given 41 and 15 and 0 and 0.
+  put the trig angle's cosine in a cosine called actual.
   stash the fuzzy test given the actual.
 
 to test (trig - cosine of 45°):
   make a fuzzy test about "trig" and "cosine of 45°" 
     and targeting 16495387/23328000 with tight tolerance.
-  make a precise angle given 45.
-  put the precise angle's cosine in a cosine called actual.
+  make a trig angle given 45.
+  put the trig angle's cosine in a cosine called actual.
   stash the fuzzy test given the actual.
 
 to test (trig - cosine of 90°):
   make a fuzzy test about "trig" and "cosine of 90°" 
     and targeting 0/1 with tight tolerance.
-  make a precise angle given 90.
-  put the precise angle's cosine in a cosine called actual.
+  make a trig angle given 90.
+  put the trig angle's cosine in a cosine called actual.
   stash the fuzzy test given the actual.
 
 to test (trig - cosine):
@@ -1631,7 +1632,7 @@ to test (trig - normalize -123°-45’-6”-78cas to 236°14’53.22”):
   create a test result about "trig"
     and "normalize -123°-45’-6”-78cas to 236°14’53.22”"
     and expecting "236°14’53.22”".
-  make a precise angle called actual with -123 and -45 and -6 and -78.
+  make a trig angle called actual with -123 and -45 and -6 and -78.
   normalize the actual.
   stash the test result using the actual.
 
@@ -1639,7 +1640,7 @@ to test (trig - normalize 0° to 0°):
   create a test result about "trig"
     and "normalize 0° to 0°"
     and expecting "0°".
-  make a precise angle called actual with 0.
+  make a trig angle called actual with 0.
   normalize the actual.
   stash the test result using the actual.
 
@@ -1647,7 +1648,7 @@ to test (trig - normalize 0°0’0”-1cas to 359°59’59.99”):
   create a test result about "trig"
     and "normalize 0°0’0”-1cas to 359°59’59.99”"
     and expecting "359°59’59.99”".
-  make a precise angle called actual with 0 and 0 and 0 and -1.
+  make a trig angle called actual with 0 and 0 and 0 and -1.
   normalize the actual.
   stash the test result using the actual.
 
@@ -1655,7 +1656,7 @@ to test (trig - normalize 360°60’60”100cas to 1°1’1”):
   create a test result about "trig"
     and "normalize 360°60’60”100cas to 1°1’1”"
     and expecting "1°1’1”".
-  make a precise angle called actual with 360 and 60 and 60 and 100.
+  make a trig angle called actual with 360 and 60 and 60 and 100.
   normalize the actual.
   stash the test result using the actual.
 
@@ -1663,7 +1664,7 @@ to test (trig - normalize 432°10’54.32” to 72°10’54.32”):
   create a test result about "trig"
     and "normalize 432°10’54.32” to 72°10’54.32”"
     and expecting "72°10’54.32”".
-  make a precise angle called actual with 72 and 10 and 54 and 32.
+  make a trig angle called actual with 72 and 10 and 54 and 32.
   normalize the actual.
   stash the test result using the actual.
 
@@ -1671,19 +1672,10 @@ to test (trig - normalize largest angle to 169°35’3.47”):
   create a test result about "trig"
     and "normalize largest angle to 169°35’3.47”"
     and expecting "169°35’3.47”".
-  make a precise angle called actual with the largest number
+  make a trig angle called actual with the largest number
     and the largest number and the largest number and the largest number.
   normalize the actual.
   stash the test result using the actual.
-
-to test (trig - normalize precise angle):
-  test (trig - normalize 360°60’60”100cas to 1°1’1”).
-  test (trig - normalize 0° to 0°).
-  test (trig - normalize 0°0’0”-1cas to 359°59’59.99”).
-  test (trig - normalize largest angle to 169°35’3.47”).   \each place has largest number
-  test (trig - normalize smallest angle to 189°23’55.52”). \each place has smallest number
-  test (trig - normalize -123°-45’-6”-78cas to 236°14’53.22”).
-  test (trig - normalize 432°10’54.32” to 72°10’54.32”).
 
 to test (trig - normalize radians -84821 to about 2):
   make a fuzzy test about "trig" 
@@ -1744,58 +1736,67 @@ to test (trig - normalize smallest angle to 189°23’55.52”):
   create a test result about "trig"
     and "normalize smallest angle to 189°23’55.52”"
     and expecting "189°23’55.52”".
-  make a precise angle called actual with the smallest number
+  make a trig angle called actual with the smallest number
     and the smallest number and the smallest number and the smallest number.
   normalize the actual.
   stash the test result using the actual.
 
+to test (trig - normalize trig angle):
+  test (trig - normalize 360°60’60”100cas to 1°1’1”).
+  test (trig - normalize 0° to 0°).
+  test (trig - normalize 0°0’0”-1cas to 359°59’59.99”).
+  test (trig - normalize largest angle to 169°35’3.47”).   \each place has largest number
+  test (trig - normalize smallest angle to 189°23’55.52”). \each place has smallest number
+  test (trig - normalize -123°-45’-6”-78cas to 236°14’53.22”).
+  test (trig - normalize 432°10’54.32” to 72°10’54.32”).
+
 to test (trig - sine of -240°):
   make a fuzzy test about "trig" and "sine of -240°" 
     and targeting 1292969/1492992 with tight tolerance.
-  make a precise angle given -240.
-  put the precise angle's sine in a sine called actual.
+  make a trig angle given -240.
+  put the trig angle's sine in a sine called actual.
   stash the fuzzy test given the actual.
 
 to test (trig - sine of 0°):
   make a fuzzy test about "trig" and "sine of 0°" 
     and targeting 0/1 with tight tolerance.
-  make a precise angle given 0.
-  put the precise angle's sine in a sine called actual.
+  make a trig angle given 0.
+  put the trig angle's sine in a sine called actual.
   stash the fuzzy test given the actual.
 
 to test (trig - sine of 30°):
   make a fuzzy test about "trig" and "sine of 30°" 
     and targeting 1/2 with tight tolerance.
-  make a precise angle given 30.
-  put the precise angle's sine in a sine called actual.
+  make a trig angle given 30.
+  put the trig angle's sine in a sine called actual.
   stash the fuzzy test given the actual.
 
 to test (trig - sine of 360°):
   make a fuzzy test about "trig" and "sine of 360°" 
     and targeting 0/14400 with tight tolerance.
-  make a precise angle given 360.
-  put the precise angle's sine in a sine called actual.
+  make a trig angle given 360.
+  put the trig angle's sine in a sine called actual.
   stash the fuzzy test given the actual.
 
 to test (trig - sine of 41°15’):
   make a fuzzy test about "trig" and "sine of 41°15’" 
     and targeting 18457463/27993600 with tight tolerance.
-  make a precise angle given 41 and 15 and 0 and 0.
-  put the precise angle's sine in a sine called actual.
+  make a trig angle given 41 and 15 and 0 and 0.
+  put the trig angle's sine in a sine called actual.
   stash the fuzzy test given the actual.
 
 to test (trig - sine of 45°):
   make a fuzzy test about "trig" and "sine of 45°" 
     and targeting 16495387/23328000 with tight tolerance.
-  make a precise angle given 45.
-  put the precise angle's sine in a sine called actual.
+  make a trig angle given 45.
+  put the trig angle's sine in a sine called actual.
   stash the fuzzy test given the actual.
 
 to test (trig - sine of 90°):
   make a fuzzy test about "trig" and "sine of 90°" 
     and targeting 1/1 with tight tolerance.
-  make a precise angle given 90.
-  put the precise angle's sine in a sine called actual.
+  make a trig angle given 90.
+  put the trig angle's sine in a sine called actual.
   stash the fuzzy test given the actual.
 
 to test (trig - sine):
@@ -1810,57 +1811,57 @@ to test (trig - sine):
 to test (trig - tangent of -240°):
   make a fuzzy test about "trig" and "tangent of -240°" 
     and targeting -1292969/746496 with tight tolerance.
-  make a precise angle given -240.
-  put the precise angle's tangent in a tangent called actual.
+  make a trig angle given -240.
+  put the trig angle's tangent in a tangent called actual.
   stash the fuzzy test given the actual.
 
 to test (trig - tangent of -90°):
   make a fuzzy test about "trig" and "tangent of -90°" 
     and targeting the largest number / 1 with tight tolerance.
-  make a precise angle given 90.
-  put the precise angle's tangent in a tangent called actual.
+  make a trig angle given 90.
+  put the trig angle's tangent in a tangent called actual.
   stash the fuzzy test given the actual.
 
 to test (trig - tangent of 0°):
   make a fuzzy test about "trig" and "tangent of 0°" 
     and targeting 0/1 with tight tolerance.
-  make a precise angle given 0.
-  put the precise angle's tangent in a tangent called actual.
+  make a trig angle given 0.
+  put the trig angle's tangent in a tangent called actual.
   stash the fuzzy test given the actual.
 
 to test (trig - tangent of 30°):
   make a fuzzy test about "trig" and "tangent of 30°" 
     and targeting 14964919/25920000 with tight tolerance.
-  make a precise angle given 30.
-  put the precise angle's tangent in a tangent called actual.
+  make a trig angle given 30.
+  put the trig angle's tangent in a tangent called actual.
   stash the fuzzy test given the actual.
 
 to test (trig - tangent of 360°):
   make a fuzzy test about "trig" and "tangent of 360°" 
     and targeting 0/1 with tight tolerance.
-  make a precise angle given 360.
-  put the precise angle's tangent in a tangent called actual.
+  make a trig angle given 360.
+  put the trig angle's tangent in a tangent called actual.
   stash the fuzzy test given the actual.
 
 to test (trig - tangent of 41°15’):
   make a fuzzy test about "trig" and "tangent of 41°15’" 
     and targeting 272774759/311040000 with tight tolerance.
-  make a precise angle given 41 and 15 and 0 and 0.
-  put the precise angle's tangent in a tangent called actual.
+  make a trig angle given 41 and 15 and 0 and 0.
+  put the trig angle's tangent in a tangent called actual.
   stash the fuzzy test given the actual.
 
 to test (trig - tangent of 45°):
   make a fuzzy test about "trig" and "sine of 45°" 
     and targeting 1/1 with tight tolerance.
-  make a precise angle given 45.
-  put the precise angle's tangent in a tangent called actual.
+  make a trig angle given 45.
+  put the trig angle's tangent in a tangent called actual.
   stash the fuzzy test given the actual.
 
 to test (trig - tangent of 90°):
   make a fuzzy test about "trig" and "tangent of 90°" 
     and targeting the largest number / 1 with tight tolerance.
-  make a precise angle given 90.
-  put the precise angle's tangent in a tangent called actual.
+  make a trig angle given 90.
+  put the trig angle's tangent in a tangent called actual.
   stash the fuzzy test given the actual.
 
 to test (trig - tangent of pi/4 radians):
@@ -1896,7 +1897,7 @@ to test (trig - wrap):
 
 to test (trig):
   test (trig - wrap).
-  test (trig - normalize precise angle).
+  test (trig - normalize trig angle).
   test (trig - convert mixio to string).
   test (trig - normalize radians).
   test (trig - multiply mixios).
@@ -1916,6 +1917,12 @@ the trifle denominator is a number equal to 1866240000. \ 43,200 * 43,200
 the trifle root is 43200.
 
 some trifles are a number. \ divided by trifle denominator.
+
+a trig angle has             \ normalized ranges.  counter-clockwise from right/east.
+  a number called degrees,      \   0° - 359°
+  a number called minutes,      \   0’ -  59’
+  a number called seconds, and  \   0” -  59”
+  a number called hundredths.   \   0  -  99 cas
 
 to wrap a number given a number called alpha and a number called omega:
   wrap the number given the alpha and the omega and 0.

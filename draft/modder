@@ -1,0 +1,523 @@
+\ The portions of this file that are from CAL-4700
+\ are copyright 2017 by the Osmosian Order.
+\ The remainder is copyright 2017 by Jasper Paulsen.
+
+\ Only include routines in this file that:
+\  * Use the context, and
+\  * Make change(s) to the context.
+\ In other words, these routines modify the turtle's context.
+
+\ The "keeper" file has routines that use the context,
+\ but leave the context in the same state they found it,
+\ and do not refresh the screen.
+
+to add some horizontal twips and some vertical twips to the current spot:
+  add the horizontal twips to the context's spot's x.
+  add the vertical twips to the context's spot's y.
+
+to darken the current color about some percent:
+  darken the context's color by the percent.
+
+to draw a fancy arrow some twips long with a color;
+to stroke a fancy arrow some twips long with a color:
+  put the color into the context's color.
+  save the context.
+  stroke the twips.
+  turn around.
+  move the twips divided by 8.
+  save the context.
+  turn left 1/8 of the way.
+  draw a spiral starting with the twips divided by 4.
+  restore the context.
+  turn right 1/8 of the way.
+  draw another spiral backwards starting with the twips divided by 4.
+  restore the context.
+
+to draw a figure with some sides some twips long using a color;
+to draw a figure with some sides and some twips using a color:
+  put the color into the context's color.
+  draw the figure with the sides and the twips.
+
+to draw a half circle about some twips wide;
+to draw a half circle given a size:
+  put the size times the pizza pie divided by 48 into a segment length.
+  add 1 to the segment length.
+  put the segment length in some other twips.
+  loop.
+    stroke the other twips.
+    turn right 1/48 of the way.
+    add 1 to a count.
+    if the count is 24, exit.
+  repeat.
+
+to draw a half circle given a size (backwards);
+to draw a half circle given a size (counterclockwise):
+  put the size times the pizza pie divided by 48 into a segment length.
+  add 1 to the segment length.
+  put the segment length in some twips.
+  loop.
+    stroke the twips.
+    turn left 1/48 of the way.
+    add 1 to a count.
+    if the count is 24, exit.
+  repeat.
+
+to draw a line as high as a box with a color;
+to draw a line as tall as a box with a color:
+  put the color into the context's color.
+  stroke the box's height.
+
+to draw a line between some twips and some other twips long;
+to draw a line between some twips to some other twips long;
+to draw a line some twips to some other twips long;
+to stroke a line some twips to some other twips long:
+  pick some third twips between the twips and the other twips.
+  stroke the line the third twips long.
+
+to draw a line some twips long;
+to stroke a line some twips long:
+  \wait for the delay. ***
+  put the context's spot into the line's start.
+  put the context's spot into the line's end.
+  get a rise and a run given the context's heading.
+  add the run times the twips divided by the rise denominator to the line's end's x.
+  add the rise times the twips divided by the rise denominator to the line's end's y.
+  put the line's end into the context's spot.
+  draw the line with the context's color.
+  \if the delay is positive, refresh the screen.
+
+to draw a line using some twips as the length;
+to draw a line using some twips for the length:
+  stroke the twips.
+
+to draw a quarter circle about some twips wide;
+to draw a quarter circle given a size:
+  put the size times the pizza pie divided by 48 into a segment length.
+  add 1 to the segment length.
+  put the segment length in some twips.
+  loop.
+    stroke the twips.
+    turn right 1/48 of the way.
+    add 1 to a count.
+    if the count is 12, exit.
+  repeat.
+
+to draw a spiral backward given some twips;
+to draw a spiral backward starting with some twips;
+to draw a spiral given a size (backwards):
+  privatize the size.
+  loop.
+    draw a half circle given the size (backwards).
+    divide the size by 2.
+    add 1 to a count.
+    if the count is 5, break.
+  repeat.
+
+to draw a spiral starting with some twips;
+to draw a spiral given a size:
+  privatize the size.
+  loop.
+    draw a half circle given the size.
+    divide the size by 2.
+    add 1 to a count. if the count is 5, break.
+  repeat.
+
+to erase the screen;
+to blank out the screen;
+to wipe off the screen;
+to clear the screen:
+  unmask everything.
+  draw the screen's box with the black color and the black color.
+  refresh the screen.
+  put the screen's box into the context's box.
+
+to face east:
+  put 960 into the context's heading.
+
+to face north:
+  put 0 into the context's heading.
+
+to face west:
+  put 2880 into the context's heading.
+
+to finalize a context:
+  destroy the choices.
+  destroy the figures.
+  destroy the context stack.
+  destroy the context.
+
+to go back to where we were:
+  restore the context.
+
+to initialize a context:
+  allocate memory for the context.
+  put the screen's center into the context's spot.
+  put 0 into the context's heading.
+  put the green color into the context's color.
+  put the small letter height into the context's letter height.
+  \put 1/60 second into the delay. ***
+  seed the random number generator.
+
+to lighten the current color about some percent:
+  lighten the context's color by the percent.
+
+to move to the left some twips and down some other twips;
+to move left some twips and down some other twips:
+to move some twips to the left and some other twips down;
+to move some twips left and some other twips down:
+  move the context's spot left the twips.
+  move the context's spot down the other twips.
+
+to move to the middle of a box;
+to start in the middle of a box;
+to move to the center of a box;
+to start in the center of a box:
+  put the box's center into the context's spot.
+
+to move one pixel:
+  move the tpp.
+
+to move to a spot:
+  put the spot into the context's spot.
+
+to move a spot about some twips in any direction:
+  pick another spot within the twips of the spot.
+  put the other spot into the spot.
+
+to move some squares:
+  move the square size times the squares divided by 1 square. \ squares are scaled up for precision hence the division at the end
+
+to move some twips:
+  \wait for the delay. ***
+  put the context's spot into a line's start.
+  put the context's spot into the line's end.
+  get a rise and a run given the context's heading.
+  add the run times the twips divided by the rise denominator to the line's end's x.
+  add the rise times the twips divided by the rise denominator to the line's end's y.
+  put the line's end into the context's spot.
+
+to move some twips down;
+to move down some twips:
+  add the twips to the context's y.
+
+to move some twips to the left;
+to move some twips left;
+to move left some twips:
+  subtract the twips from the context's x.
+
+to move some twips up;
+to move up some twips: 
+  subtract the twips from the context's y.
+
+to normalize a heading:
+  divide the heading by 3840 giving a quotient and a remainder.
+  put the remainder into the heading.
+  if the heading is less than 0, add 3840 to the heading.
+
+to pick a brightness between a percent and another percent;
+to vary a lightness between a percent and another percent;
+to pick a lightness between a percent and another percent:
+  pick a number between the percent and the other percent.
+  put the number times 10 into the lightness.
+  put the lightness into the context's lightness.
+
+to pick a brownish color:
+  make the brownish color.
+  put the brownish color into the context's color.
+
+to pick a brownish color about some percent of the time:
+  pick a number between 1 and 100.
+  if the number is greater than the percent, exit.
+  pick the brownish color.
+  put the brownish color into the context's color.
+
+to pick a color:
+  make the color.
+  put the color into the context's color.
+
+to pick a color like another color:
+  make the color like the other color.
+  put the color into the context's color.
+
+to pick a dark color:
+  pick the dark color's hue.
+  make the dark color be dark.
+  put the dark color into the context's color.
+
+to pick a greenish color:
+  make the greenish color.
+  put the greenish color into the context's color.
+
+to pick a greenish color about some percent of the time:
+  pick a number between 1 and 100.
+  if the number is greater than the percent, exit.
+  pick the greenish color.
+  put the greenish color into the context's color.
+
+to pick a light color:
+  pick the light color's hue.
+  make the light color be light.
+  put the light color into the context's color.
+
+to pick a pastel color:
+  pick the pastel color's hue.
+  make the pastel color be pastel.
+  put the pastel color into the context's color.
+
+to pick a rainbow color:
+  add 1 to the current rainbow color number.
+  if the current rainbow color number is greater than 6,
+    put 1 into the current rainbow color number.
+  interpret the rainbow color. [using the rainbow color number]
+  put the rainbow color into the context's color.
+
+to pick a spot anywhere in the top middle a ratio of a box;
+to pick a spot in the top middle a ratio of a box:
+  privatize the box.
+  put the box's center's y into a coord.
+  put the box's height times the ratio into a number.
+  put the coord minus the number into the box's top.
+  put the coord into the box's bottom.
+  pick the spot in the box.
+
+to pick a spot in a box:
+  pick the spot's x between the box's left and the box's right.
+  pick the spot's y between the box's top and the box's bottom.
+  put the spot into the context's spot.
+
+to pick some twips between some min twips and some other twips; \ are all these necessary? ***
+to pick a number between some min twips and some other twips;
+to pick a number between a min number and a max number;
+to pick a number from a min number to a max number;
+to set a number to something between another number and a third number;
+to pick a random number between a min number and a max number:
+  pick the random number between the min number and the max number (guts).
+  put the random number into the context's number.
+
+to pick a very dark color;
+to pick a really dark color:
+  pick the really dark color's hue.
+  make the really dark color be very dark.
+  put the really dark color into the context's color.
+
+to pick a very light color;
+to pick a really light color:
+  pick the really light color's hue.
+  make the really light color be very light.
+  put the really light color into the context's color.
+
+to pick a very very dark color;
+to pick a really really dark color:
+  pick the really really dark color's hue.
+  make the really really dark color be very very dark.
+  put the really really dark color into the context's color.
+
+to pick a very very light color;
+to pick a really really light color:
+  pick the really really light color's hue.
+  make the really really light color be very very light.
+  put the really really light color into the context's color.
+
+to remember where we are:
+  save the context.
+
+to reset the context:
+  restore the context.
+  save the context.
+
+to restore a context:
+  get a saved context from the context stack.
+  if the saved context is nil, exit.
+  put the saved context's spot into the context's spot.
+  put the saved context's heading into the context's heading.
+  put the saved context's letter height into the context's letter height.
+  put the saved context's color into the context's color.
+  put the saved context's number into the context's number.
+  put the saved context's pen width into the context's pen width.
+  remove the saved context from the context stack.
+  destroy the saved context.
+  put the context's pen width into the pen size.
+
+to save a context:
+  allocate memory for a saved context.
+  put the context's spot into the saved context's spot.
+  put the context's heading into the saved context's heading.
+  put the context's letter height into the saved context's letter height.
+  put the context's color into the saved context's color.
+  put the context's number into the saved context's number.
+  put the pen size into the context's pen width.
+  put the context's pen width into the saved context's pen width.
+  prepend the saved context to the context stack.
+
+to space between glyphs:
+  turn right. move 3 squares. turn left.
+
+to start anywhere on a horizontal line:
+  pick a spot on the horizontal line.
+  put the spot into the context's spot.
+
+to start at the bottom left corner of a box facing north:
+  put the box's left-bottom into the context's spot.
+  face north.
+
+to start at the middle of the bottom of a box;
+to start in the middle of the bottom of a box;
+to start at the center of the bottom of a box;
+to start in the center of the bottom of a box:
+  put the box's center's x into the context's spot's x.
+  put the box's bottom into the context's spot's y.
+
+to start at a spot:
+  put the spot into the context's spot.
+
+to start in the middle of a box facing north minus some points;
+to start in the center of a box facing north minus some points:
+  put the box's center into the context's spot.
+  face north.
+  turn left the points.
+
+to start in the middle of a box facing west;
+to start at the middle of a box facing west;
+to move to the middle of a box facing west;
+to move to the middle of a box and face west;
+to start in the center of a box facing west;
+to start at the center of a box facing west;
+to move to the center of a box facing west;
+to move to the center of a box and face west:
+  put the box's center into the context's spot.
+  face west.
+
+to stroke a length:
+  stroke a line the length long.
+
+to stroke one pixel:
+  stroke the tpp.
+
+to stroke some squares diagonally;
+to stroke some squares slantways:
+  stroke the square size times the squares times the squirt o' two divided by 1 square. \ squares are scaled up for precision hence the division at the end
+
+to turn around:
+  turn right 1/2.
+
+to turn left:
+  turn -1/4.
+
+to turn left some points:
+  put the points / 3840 into a ratio.
+  turn left the ratio.
+
+to turn left a ratio of the way;
+to turn left a ratio of the way around;
+to turn left a ratio:
+  privatize the ratio.
+  negate the ratio.
+  turn the ratio.
+
+to turn a ratio of the way;
+to turn a ratio of the way around;
+to turn a ratio:
+  if the ratio is 1/1, exit.
+  put 3840 times the ratio plus the context's heading into the context's heading.
+  normalize the context's heading.
+
+to turn right:
+  turn 1/4.
+
+To turn right a ratio of the way;
+To turn right a ratio of the way around;
+To turn right a ratio:
+Turn the ratio.
+
+to use the fat pen:
+  put 3 into the pen size.
+
+to use a pen:
+  put the pen into the context's pen.
+
+to write a string;
+to stroke a string:
+  privatize the string.
+  loop.
+    if the string is blank, exit.
+    get a byte from the string.
+    stroke the byte.
+    if the string is not blank, space between glyphs.
+  repeat.
+
+to write a string around a center spot at a radius;
+to write a string given a center spot and a radius;
+to stroke a string around a center spot at a radius;
+to stroke a string given a center spot and a radius:
+  privatize the string.
+  put 1 / the string's length into a ratio.
+  loop.
+    if the string is blank, exit.
+    get a byte from the string.
+    start at the center spot.
+    move the radius.
+    stroke the byte.
+    turn the ratio.
+  repeat.
+
+to write a string a radius away from a center spot;
+to write a string a radius around a center spot;
+to write a string about a radius from a center spot;
+to write a string a radius from a center spot;
+to stroke a string a radius away from a center spot;
+to stroke a string a radius around a center spot;
+to stroke a string about a radius from a center spot;
+to stroke a string a radius from a center spot:
+  stroke the string given the center spot and the radius.
+
+to write a string with a color;
+to stroke a string with a color:
+  put the color into the context's color.
+  stroke the string.
+
+to write a string with a color at the bottom of a box;
+to stroke a string with a color at the bottom of a box:
+  put the context's letter height divided by 4 into a square size. \ ***
+  \ glyphs are two squares wide plus one square of intercharacter spacing. no spacing at the end.
+  put the string's length times the square size times 3 minus the square size into a width.
+  divide the width by 2.
+  start in the middle of the bottom of the box.
+  move up the context's letter height times 2. \ was without the times 2 ***
+  move left the width.
+  face north.
+  stroke the string with the color.
+
+to write a string with a color in the middle of a box;
+to stroke a string with a color in the middle of a box:
+  put the context's letter height divided by 4 into a square size. \ was 4 ***
+  \ glyphs are two squares wide plus one square of intercharacter spacing. no spacing at the end.
+  put the string's length times the square size times 3 minus the square size into a width.
+  divide the width by 2.
+  start in the middle of the box.
+  move down the context's letter height divided by 2. \ was 2 ***
+  move left the width.
+  face north.
+  stroke the string with the color.
+
+to write a string with a color a radius away from a center spot;
+to write a string with a color a radius around a center spot;
+to write a string with a color about a radius from a center spot;
+to write a string with a color a radius from a center spot;
+to stroke a string with a color a radius away from a center spot;
+to stroke a string with a color a radius around a center spot;
+to stroke a string with a color about a radius from a center spot;
+to stroke a string with a color a radius from a center spot:
+  put the color into the context's color.
+  stroke the string given the center spot and the radius.
+
+to write with large letters;
+to use large letters:
+  put the large letter height into the context's letter height.
+
+to write with medium letters;
+to use medium size letters;
+to use medium-size letters;
+to use medium sized letters;
+to use medium-sized letters;
+to use medium letters:
+  put the medium letter height into the context's letter height.

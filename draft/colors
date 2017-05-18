@@ -869,8 +869,6 @@ a pastel color is a color.
 
 an pen is a color.
 
-the pen size is a number.
-
 to pick a color between another color and a third color:
   pick the color's hue
     between the other color's hue and the third color's hue.
@@ -884,7 +882,7 @@ to pick a hue:
 
 to pick a solid color:
   pick the solid color's hue.
-  make the solid color solid.
+  make the solid color be solid.
   put the solid color into the context's color.
 
 the pink color is a color.
