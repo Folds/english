@@ -1,0 +1,148 @@
+\ copyright © 2006, 2017 the osmosian order (4700)
+
+\ The terminal is similar to the console,
+\ but designed for use with turtle graphics.
+
+to add a quora to a terminal:
+  create the quora.
+  append the quora to the terminal's quoras.
+  if the terminal is not full, exit.
+  put the terminal's quoras' first into a doomed quora.
+  remove the doomed quora from the terminal's quoras.
+  destroy the doomed quora.
+
+to clear a terminal:
+  destroy the terminal's quoras.
+
+to create a quora:
+  allocate memory for the quora.
+
+to create a terminal in a box:
+  allocate memory for the terminal.
+  put the box into the terminal's box.
+  put the green color into the terminal's output color.
+  put the lightest green color into the terminal's input color.
+
+to decide if a terminal is full:
+  put the terminal's height divided by 1/4 inch into a number.
+  if the terminal's quoras' count is greater than the number, say yes.
+  say no.
+
+to draw a terminal:
+  if the terminal is nil, exit.
+  save the current canvas.
+  mask only outside the terminal's box.
+  draw and fill the terminal's box with the black color.
+  write the terminal's quoras in the terminal's box.
+  restore the current canvas.
+
+to handle an event given a terminal:
+  if the terminal is nil, exit.
+  if the event's kind is "key down", handle the event given the terminal (key down); exit.
+  if the event's kind is "refresh", handle the event given the terminal (refresh); exit.
+  if the event's kind is "set cursor", handle the event given the terminal (set cursor); exit.
+  if the event's kind is "left click", relinquish control. \ *** added for invisible turtle book questionable
+
+to handle an event given a terminal (backspace key):
+  if the terminal's reply is blank, exit.
+  if the event is modified, exit.
+  remove the last byte from the terminal's reply.
+  remove the last byte from the terminal's quoras' last's string.
+  show the terminal.
+
+to handle an event given a terminal (enter key):
+  relinquish control.
+
+to handle an event given a terminal (key down):
+  if the event's key is the backspace key, handle the event given the terminal (backspace key); exit.
+  if the event's key is the enter key, handle the event given the terminal (enter key); exit.
+  if the event's byte is not printable, exit.
+  append the event's byte to the terminal's reply.
+  append the event's byte to the terminal's quoras' last's string.
+  show the terminal.
+
+to handle an event given a terminal (refresh):
+  show the terminal.
+
+to handle an event given a terminal (set cursor):
+  show the arrow cursor.
+
+to handle events given a terminal:
+  if the terminal is nil, exit.
+  loop.
+    deque an event.
+    if the event is nil, exit.
+    handle the event given the terminal.
+  repeat.
+
+to initialize the terminal:
+  create the terminal in the screen's box.
+
+to put a terminal in the middle of a box;
+  to center a terminal in a box:
+  privatize the box.
+  indent the box 1/4 inch.
+  put the box into the terminal's box.
+
+a quora is a thing with a string and a color.
+\ quora is short for "question or answer"
+
+to read a reply from a terminal:
+  if the terminal is nil, clear the reply; exit.
+  flush all events.
+  clear the terminal's reply.
+  add a quora to the terminal.
+  put "> " into the quora's string.
+  put the terminal's input color into the quora's color.
+  show the terminal.
+  handle events given the terminal.
+  \  show the terminal.
+  put the terminal's reply into the reply.
+  remove any leading noise from the reply.
+  remove any trailing noise from the reply.
+  flush all events.
+  \ questionable below
+  create an event.
+  put "left click" into the event's kind.
+  put the mouse's spot into the event's spot.
+  enque the event.
+  refresh the cursor.
+
+to show a terminal:
+  if the terminal is nil, exit.
+  save the current canvas.
+  draw the terminal.
+  refresh the screen given the terminal's box.
+  restore the current canvas.
+
+to skip a line on the terminal:
+  write "" on the terminal.
+
+the terminal is a terminal.
+
+a terminal is a thing with
+  a box,
+  some quoras,
+  an output color,
+  an input color, and
+  a reply string.
+
+to write some quoras in a box:
+  \draw the box with the red color and the clear color. \ temp ***
+  put the box into a quora box.
+  put the quora box's top plus 1/4 inch into the quora box's bottom.
+  loop.
+    get a quora from the quoras.
+    if the quora is nil, break.
+    \draw really fast. ***
+    \ draw the quora box with the yellow color. \ temp ***
+    write the quora's string in the quora box with the quora's color.
+    move the quora box down 1/4 inch.
+  repeat.
+
+to write a string on a terminal:
+  if the terminal is nil, exit.
+  add a quora to the terminal.
+  put the string into the quora's string.
+  put the terminal's output color into the quora's color.
+  show the terminal.

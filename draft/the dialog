@@ -413,8 +413,6 @@ to put the trio allowance into a width:
 
 a question is a string.
 
-a reply is a string.
-
 to show error a string:
   create the dialog.
   put "error" into the dialog's kind.
