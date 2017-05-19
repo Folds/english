@@ -55,39 +55,6 @@ The following requests have been demonstrated,
 but do not have test plans yet.
 These items should occasionally be moved to demoed fixes.txt.
  
-  
-\ ======================================   
-The following requests have been partially demonstrated.
-
-209.  In characters, add nicknames for `~<>\[]{}| 
-  Status:  Implemented.
-  Audience:  Turtle programmers.
-  Benefit:  Medium.
-  Implementation difficulty:  Medium.
-  Demoing difficulty:  Medium.
-  Testing difficulty:  Easy.  Construct a string comprised
-    of the nicknamed bytes, and verify that it equals
-    a literal string with the same contents.
-  Requested by Jasper Paulsen on April 4, 2017.
- 
-205.  In compiler, make "can't" negate "can", instead of "ca".
-  Status:  Implemented.
-  Audience:  Designed.
-  Benefit:  Medium.
-  Implementation difficulty:  Medium.
-  Demoing difficulty:  Medium.
-  Testing difficulty:  Medium.
-  Requested by Gerry Rzeppa on March 13, 2017.
- 
-196.  In writer, get title of a page from first non-blank line, if possible.
-  Status:  Implemented.
-  Audience:  Application users.
-  Benefit:  Minor.
-  Implementation difficulty:  Easy.
-  Demoing difficulty:  Medium.
-  Testing difficulty:  Medium.
-  Requested by Gerry Rzeppa on March 13, 2017.
- 
 210.  In colors, add a "pen" alias for each color.
   Status:  Implemented.
   Audience:  Turtle programmers.
@@ -129,6 +96,39 @@ The following requests have been partially demonstrated.
   Audience:  Turtle programmers.
   Benefit:  Medium.
   Implementation difficulty:  Medium.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Medium.
+  Requested by Gerry Rzeppa on March 13, 2017.
+ 
+  
+\ ======================================   
+The following requests have been partially demonstrated.
+
+209.  In characters, add nicknames for `~<>\[]{}| 
+  Status:  Implemented.
+  Audience:  Turtle programmers.
+  Benefit:  Medium.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Easy.  Construct a string comprised
+    of the nicknamed bytes, and verify that it equals
+    a literal string with the same contents.
+  Requested by Jasper Paulsen on April 4, 2017.
+ 
+205.  In compiler, make "can't" negate "can", instead of "ca".
+  Status:  Implemented.
+  Audience:  Designed.
+  Benefit:  Medium.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Medium.
+  Requested by Gerry Rzeppa on March 13, 2017.
+ 
+196.  In writer, get title of a page from first non-blank line, if possible.
+  Status:  Implemented.
+  Audience:  Application users.
+  Benefit:  Minor.
+  Implementation difficulty:  Easy.
   Demoing difficulty:  Medium.
   Testing difficulty:  Medium.
   Requested by Gerry Rzeppa on March 13, 2017.

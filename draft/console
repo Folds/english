@@ -4,10 +4,150 @@
 \ are copyright 2017 by the Osmosian Order.
 \ The remainder is copyright 2017 by Jasper Paulsen.
 
+\ The console can be used as a debugging tool,
+\ or as a simple text-based user interface.
+\ The console is closely associated with the noodle.
+
+the console is a console.
+
+a console is a thing with 
+  a box,
+  a border color,
+  a fill color,
+  a text,
+  a grid,
+  a reply string.
+
+to create a console:
+  allocate memory for the console.
+  put the lighter gray color into the console's border.
+  put the lighter gray color into the console's fill.
+  put the screen's box into the console's box.
+  put the screen's box into a box.
+  subtract the default font's height from the box's bottom.
+  put the box's height divided by the default font's height
+    times the default font's height into a height.
+  put the box's top plus the height into the box's bottom.
+  center the box in the screen's box (vertically).
+  put the box's top into the box's left.
+  subtract the box's top from the box's right.
+  create the console's text.
+  put the box into the console's text's box.
+  set the console's text's wrap flag.
+  clear the console's text's horizontal scroll flag.
+  set the console's text's vertical scroll flag.
+  put the default font's height into the console's grid.
+  multiply the console's grid's x by 2.
+
+to draw a console:
+  if the console is nil, exit.
+  save the current canvas.
+  mask only outside the console's box.
+  draw the console's box with the console's border and the console's fill.
+  draw the console's text.
+  restore the current canvas.
+
+to handle an event given a console:
+  if the console is nil, exit.
+  if the event's kind is "key down",
+    handle the event given the console (key down); exit.
+  if the event's kind is "refresh",
+    handle the event given the console (refresh); exit.
+  if the event's kind is "right click",
+    handle the event given the console (right click); exit.
+  if the event's kind is "set cursor",
+    handle the event given the console (set cursor); exit.
+
+to handle an event given a console (backspace key):
+  if the console's reply is blank, exit.
+  if the event is modified, exit.
+  handle the event given the console's text (backspace key).
+  remove the last byte from the console's reply.
+  show the console.
+
+to handle an event given a console (down-arrow key):
+  scroll the console's text down one line.
+  show the console.
+
+to handle an event given a console (end key):
+  scroll the console's text to the bottom.
+  show the console.
+
+to handle an event given a console (enter key):
+  handle the event given the console's text (enter key).
+  relinquish control.
+
+to handle an event given a console (home key):
+  scroll the console's text to the top.
+  show the console.
+
+to handle an event given a console (key down):
+  if the event's key is the backspace key,
+    handle the event given the console (backspace key); exit.
+  if the event's key is the down-arrow key,
+    handle the event given the console (down-arrow key); exit.
+  if the event's key is the end key,
+    handle the event given the console (end key); exit.
+  if the event's key is the enter key,
+    handle the event given the console (enter key); exit.
+  if the event's key is the home key,
+    handle the event given the console (home key); exit.
+  if the event's key is the page-down key,
+    handle the event given the console (page-down key); exit.
+  if the event's key is the page-up key,
+    handle the event given the console (page-up key); exit.
+  if the event's key is the up-arrow key,
+    handle the event given the console (up-arrow key); exit.
+  if the event's byte is not printable, exit.
+  append the event's byte to the console's reply.
+  handle the event given the console's text (printable key).
+  show the console.
+
+to handle an event given a console (page-down key):
+  scroll the console's text down one page.
+  show the console.
+
+to handle an event given a console (page-up key):
+  scroll the console's text up one page.
+  show the console.
+
+to handle an event given a console (refresh):
+  show the console.
+
+to handle an event given a console (right click):
+  show the hand cursor.
+  scroll the console given the event.
+  refresh the cursor.
+
+to handle an event given a console (set cursor):
+  show the arrow cursor.
+
+to handle an event given a console (up-arrow key):
+  scroll the console's text up one line.
+  show the console.
+
+to handle events given a console:
+  if the console is nil, exit.
+  loop.
+    deque an event.
+    if the event is nil, exit.
+    handle the event given the console.
+  repeat.
+
 to read a byte from a console:
   read a string from the console.
   if the string is blank, put the null byte into the byte; exit.
   put the string's first's target into the byte.
+
+to read a console into a string:
+  if the console is nil, clear the string; exit.
+  flush all events.
+  clear the console's reply.
+  show the console.
+  handle events given the console.
+  put the console's reply into the string.
+  flush all events.
+  refresh the cursor.
 
 to read a flag from a console:
   read a string from the console.
@@ -17,8 +157,31 @@ to read a number from a console:
   read a string from the console.
   convert the string to the number.
 
+to read a string:
+  read the default console into the string.
+
 to read a string from a console:
   read the console into the string.
+
+to scroll a console given an event:
+  if the console is nil, exit.
+  find a sector given the console's grid and the event's spot.
+  loop.
+    if the mouse's right button is up, exit.
+    find another sector given the console's grid and the mouse's spot.
+    get a difference between the other sector and the sector.
+    if the difference is 0, repeat.
+    scroll the console's text given the difference.
+    show the console.
+    add the difference to the sector.
+  repeat.
+
+to show a console:
+  if the console is nil, exit.
+  save the current canvas.
+  draw the console.
+  refresh the screen given the console's box.
+  restore the current canvas.
 
 to write a string to a console;
 to write a string on a console:
@@ -36,3 +199,6 @@ to write a string on a console without advancing:
   wrap the console's text.
   scroll the console's text to the caret.
   show the console.
+
+to write a string without advancing:
+  write the string on the default console without advancing.

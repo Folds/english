@@ -819,16 +819,6 @@ to compatibly wait for a process pointer:
   call "user32.dll" "ShowWindow" with the main window and 9 [sw_restore].
   put 0 into eax. \ set return value of thread
 
-the console is a console.
-
-a console is a thing with 
-  a box,
-  a border color,
-  a fill color,
-  a text,
-  a grid,
-  a reply string.
-
 a control font is a font.
 
 to convert an absolute position to a position given a text:
@@ -1482,27 +1472,6 @@ to create the connect handle of a winhttp request using a url record:
     returning the winhttp request's connection.
   if the winhttp request's connection is 0,
     put "Could not connect." into the i/o error; exit.
-
-to create a console:
-  allocate memory for the console.
-  put the lighter gray color into the console's border.
-  put the lighter gray color into the console's fill.
-  put the screen's box into the console's box.
-  put the screen's box into a box.
-  subtract the default font's height from the box's bottom.
-  put the box's height divided by the default font's height
-    times the default font's height into a height.
-  put the box's top plus the height into the box's bottom.
-  center the box in the screen's box (vertically).
-  put the box's top into the box's left.
-  subtract the box's top from the box's right.
-  create the console's text.
-  put the box into the console's text's box.
-  set the console's text's wrap flag.
-  clear the console's text's horizontal scroll flag.
-  set the console's text's vertical scroll flag.
-  put the default font's height into the console's grid.
-  multiply the console's grid's x by 2.
 
 to create a crypt session with a passphrase string: \ sets i/o error if failure
   clear the i/o error.
@@ -3517,14 +3486,6 @@ to draw the caret in a text:
   if the box is not touching the text's box, exit.
   put the box's left-top and the box's right-bottom into a line.
   draw the line with the black color.
-
-to draw a console:
-  if the console is nil, exit.
-  save the current canvas.
-  mask only outside the console's box.
-  draw the console's box with the console's border and the console's fill.
-  draw the console's text.
-  restore the current canvas.
 
 to draw a dot some twips wide on the current spot with a color:
   make the dot the twips wide.
@@ -5577,85 +5538,6 @@ to handle cut given a text:
   wrap the text.
   scroll the text to the caret.
 
-to handle an event given a console:
-  if the console is nil, exit.
-  if the event's kind is "key down",
-    handle the event given the console (key down); exit.
-  if the event's kind is "refresh",
-    handle the event given the console (refresh); exit.
-  if the event's kind is "right click",
-    handle the event given the console (right click); exit.
-  if the event's kind is "set cursor",
-    handle the event given the console (set cursor); exit.
-
-to handle an event given a console (backspace key):
-  if the console's reply is blank, exit.
-  if the event is modified, exit.
-  handle the event given the console's text (backspace key).
-  remove the last byte from the console's reply.
-  show the console.
-
-to handle an event given a console (down-arrow key):
-  scroll the console's text down one line.
-  show the console.
-
-to handle an event given a console (end key):
-  scroll the console's text to the bottom.
-  show the console.
-
-to handle an event given a console (enter key):
-  handle the event given the console's text (enter key).
-  relinquish control.
-
-to handle an event given a console (home key):
-  scroll the console's text to the top.
-  show the console.
-
-to handle an event given a console (key down):
-  if the event's key is the backspace key,
-    handle the event given the console (backspace key); exit.
-  if the event's key is the down-arrow key,
-    handle the event given the console (down-arrow key); exit.
-  if the event's key is the end key,
-    handle the event given the console (end key); exit.
-  if the event's key is the enter key,
-    handle the event given the console (enter key); exit.
-  if the event's key is the home key,
-    handle the event given the console (home key); exit.
-  if the event's key is the page-down key,
-    handle the event given the console (page-down key); exit.
-  if the event's key is the page-up key,
-    handle the event given the console (page-up key); exit.
-  if the event's key is the up-arrow key,
-    handle the event given the console (up-arrow key); exit.
-  if the event's byte is not printable, exit.
-  append the event's byte to the console's reply.
-  handle the event given the console's text (printable key).
-  show the console.
-
-to handle an event given a console (page-down key):
-  scroll the console's text down one page.
-  show the console.
-
-to handle an event given a console (page-up key):
-  scroll the console's text up one page.
-  show the console.
-
-to handle an event given a console (refresh):
-  show the console.
-
-to handle an event given a console (right click):
-  show the hand cursor.
-  scroll the console given the event.
-  refresh the cursor.
-
-to handle an event given a console (set cursor):
-  show the arrow cursor.
-
-to handle an event given a console (up-arrow key):
-  scroll the console's text up one line.
-  show the console.
-
 to handle an event given a text (backspace key):
   if the text is nil, exit.
   if there is nothing to backspace in the text, exit.
@@ -5772,14 +5654,6 @@ to handle an event given a text (up-arrow key):
   if the event's shift flag is not set, deselect the text.
   clear the text's last operation.
   scroll the text to the caret.
-
-to handle events given a console:
-  if the console is nil, exit.
-  loop.
-    deque an event.
-    if the event is nil, exit.
-    handle the event given the console.
-  repeat.
 
 to handle font height given a text and a box and a font height:
   if the text is nil, exit.
@@ -9014,16 +8888,6 @@ to read a byte:
   if the string is blank, put the null byte into the byte; exit.
   put the string's first's target into the byte.
 
-to read a console into a string:
-  if the console is nil, clear the string; exit.
-  flush all events.
-  clear the console's reply.
-  show the console.
-  handle events given the console.
-  put the console's reply into the string.
-  flush all events.
-  refresh the cursor.
-
 to read a file into a buffer:
   clear the i/o error.
   call "kernel32.dll" "GetFileSize" with the file and nil returning a size.
@@ -9104,9 +8968,6 @@ to read stdin into a buffer:
     and the buffer's first and the length and a number's whereabouts and nil.
   if the number is not the length, put "Error reading stdin data" into the i/o error; clear the buffer; exit.
   put the buffer's first plus the length minus 1 into the buffer's last.
-
-to read a string:
-  read the default console into the string.
 
 to read a url into a buffer:
   \ prepare
@@ -9968,19 +9829,6 @@ a screen has a box, a pixel height, a pixel width,
 
 the screen is a screen.
 
-to scroll a console given an event:
-  if the console is nil, exit.
-  find a sector given the console's grid and the event's spot.
-  loop.
-    if the mouse's right button is up, exit.
-    find another sector given the console's grid and the mouse's spot.
-    get a difference between the other sector and the sector.
-    if the difference is 0, repeat.
-    scroll the console's text given the difference.
-    show the console.
-    add the difference to the sector.
-  repeat.
-
 to scroll a text to the bottom:
   if the text is nil, exit.
   if the text's vertical scroll flag is not set, exit.
@@ -10287,13 +10135,6 @@ to shift a wyrd right some bits:
   intel $8B8508000000. \ mov eax,[ebp+8] \ the wyrd
   intel $66D328.       \ shr word ptr [eax],ecx
 
-to show a console:
-  if the console is nil, exit.
-  save the current canvas.
-  draw the console.
-  refresh the screen given the console's box.
-  restore the current canvas.
-
 to show a cursor:
   call "user32.dll" "SetCursor" with the cursor.
   call "user32.dll" "ShowCursor" with 1 returning a number.
@@ -10303,7 +10144,6 @@ to show a cursor:
 to shut down:
 \  destroy the bible.
   destroy the lexicon.
-\  destroy the default console.
   destroy the console.
 \  destroy the terminal.
   finalize the canvases.
@@ -10659,7 +10499,6 @@ to start up:
   initialize the cursors.
   initialize the mouse.
   initialize the canvases.
-\  create the default console.
 \  initialize the terminal.
   create the console.
 
@@ -11933,9 +11772,6 @@ to write a string with a font and a size and a color and a spot:
   add the size divided by 2 to the box's bottom.
   draw the string in the box with the color and the font and "center".
   refresh the screen.
-
-to write a string without advancing:
-  write the string on the default console without advancing.
 
 a wsadata is a record with
   a wyrd called wversion,
