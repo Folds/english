@@ -15,6 +15,85 @@
 
 \ The "modder" file has routines that change the context.
 
+to center a dot on the current spot:
+  center the dot on the context's spot.
+
+to decide if the current spot is above or below a box:
+  if the context's spot is above or below the box, say yes.
+  say no.
+
+to decide if the current spot is left or right of a box:
+  if the context's spot is left or right of the box, say yes.
+  say no.
+
+to decide if the current spot is to the right of a box:
+  if the context's spot's x is greater than the box's right, say yes.
+  say no.
+
+to decide if the current spot is within some twips of a box:
+  if the context's spot is within the twips of the box, say yes.
+  say no.
+
+to decide if we're above a box:
+  if the context's y is less than the box's top, say yes.
+  say no.
+
+to decide if we're above a coord:
+  if the context's y is less than the coord, say yes.
+  say no.
+
+to decide if we're above or below a box:
+  if the context's y is less than the box's top, say yes.
+  if the context's y is greater than the box's bottom, say yes.
+  say no.
+
+to decide if we're above a spot:
+  if the context's y is less than the spot's y, say yes.
+  say no.
+
+to decide if we're below a box:
+  if the context's y is greater than the box's bottom, say yes.
+  say no.
+
+to decide if we're below a coord:
+  if the context's y is greater than the coord, say yes.
+  say no.
+
+to decide if we're below a spot:
+  if the context's y is greater than the spot's y, say yes.
+  say no.
+
+to decide if we're facing north: \ *** need east, south, west
+  normalize the context's heading.
+  if the context's heading is 0, say yes.
+  say no.
+
+to decide if we're left of a box:
+  if the context's x is less than the box's left, say yes.
+  say no.
+
+to decide if we're left or right of a box:
+  if the context's x is less than the box's left, say yes.
+  if the context's x is greater than the box's right, say yes.
+  say no.
+
+to decide if we're outside a box:
+  if the context's spot is outside the box, say yes.
+  say no.
+
+to decide if we're right of a box:
+  if the context's x is greater than the box's right, say yes.
+  say no.
+
+to decide if we're still in a box;
+to decide if we're in a box:
+  if the context's spot is in the box, say yes.
+  say no.
+
+to decide if we're within some twips of a box:
+  if the context's spot is within the twips of the box, say yes.
+  say no.
+
 to draw a circle about some twips wide;
 to draw a circle given a width;
 to draw a circle some twips in width;
@@ -52,8 +131,30 @@ to draw a figure with some sides and some twips:
   repeat.
   restore the context.
 
+to draw a hexagon given a side length:
+  save the context.
+  loop.
+    stroke the side length.
+    turn right 1/6 of the way.
+    add 1 to a count. if the count is 6, break.
+  repeat.
+  restore the context.
+
 to draw a line:
   draw the line with the context's color.
+
+to draw a rectangle some twips by some other twips;
+to draw a rectangle some twips wide by some other twips high:
+  save the context.
+  stroke the other twips.
+  turn right.
+  stroke the twips.
+  turn right.
+  stroke the other twips.
+  turn right.
+  stroke the twips.
+  turn right.
+  restore the context.
 
 to stroke the accent glyph:
   save the context.

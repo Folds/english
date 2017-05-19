@@ -516,10 +516,6 @@ a canvas is an hdc.
 
 a caret is a position.
 
-to center a box in another box:
-  center the box in the other box (horizontally).
-  center the box in the other box (vertically).
-
 to center a box in another box (horizontally):
   put the other box's center's x minus the box's center's x into a number.
   round the number to the nearest multiple of the tpp.
@@ -529,11 +525,6 @@ to center a box in another box (vertically):
   put the other box's center's y minus the box's center's y into a number.
   round the number to the nearest multiple of the tpp.
   move the box given 0 and the number.
-
-to center a box on a spot:
-  get a difference between the spot and the box's center.
-  round the difference to the nearest multiple of the tpp.
-  move the box given the difference.
 
 to center an ellipse in a box:
   center the ellipse in the box (horizontally).
@@ -548,10 +539,6 @@ to center an ellipse in a box (vertically):
 to center an ellipse on a spot:
   center the ellipse's box on the spot.
 
-to center a line in a box:
-  center the line in the box (horizontally).
-  center the line in the box (vertically).
-
 to center a line in a box (horizontally):
   put the box's center's x minus the line's center's x into a number.
   round the number to the nearest multiple of the tpp.
@@ -561,11 +548,6 @@ to center a line in a box (vertically):
   put the box's center's y minus the line's center's y into a number.
   round the number to the nearest multiple of the tpp.
   move the line given 0 and the number.
-
-to center a line on a spot:
-  get a difference between the spot and the line's center.
-  round the difference to the nearest multiple of the tpp.
-  move the line given the difference.
 
 to center a picture in a box:
   if the picture is nil, exit.
@@ -711,6 +693,18 @@ to clear a rider:
   clear the rider's original.
   clear the rider's source.
   clear the rider's token.
+
+to clear the screen to a color:
+  unmask everything.
+  draw the screen's box with the color and the color.
+  refresh the screen.
+  put the screen's box into the context's box.
+
+to clear the screen to white:
+  unmask everything.
+  draw the screen's box with the white color and the white color.
+  refresh the screen.
+  put the screen's box into the context's box.
 
 to clear a selection:
   clear the selection's anchor.
@@ -2323,6 +2317,32 @@ to decide if a library is loadable:
   if the handle is 0, say no.
   say yes.
 
+to decide if a line is above a box:
+  if the line's start's y is greater than or equal to the box's top, say no.
+  if the line's end's y is greater than or equal to the box's top, say no.
+  say yes.
+
+to decide if a line is above a coord:
+  if the line's start's y is greater than or equal to the coord, say no.
+  if the line's end's y is greater than or equal to the coord, say no.
+  say yes.
+
+to decide if a line is below a box:
+  if the line's start's y is less than or equal to the box's bottom, say no.
+  if the line's end's y is less than or equal to the box's bottom, say no.
+  say yes.
+
+to decide if a line is below a coord:
+  if the line's start's y is less than or equal to the coord, say no.
+  if the line's end's y is less than or equal to the coord, say no.
+  say yes.
+
+to decide if a line is still in a box;
+to decide if a line is in a box:
+  if the line's start is not in the box, say no.
+  if the line's end is not in the box, say no.
+  say yes.
+
 to decide if list or compile or test was requested:
   if list was requested, say yes.
   if compile was requested, say yes.
@@ -2694,6 +2714,27 @@ to decide if something is selected in a text:
   if the text's anchor is the text's caret, say no.
   say yes.
 
+to decide if a spot is above a box:
+  if the spot's y is less than the box's top, say yes.
+  say no.
+
+to decide if a spot is above a horizontal line:
+  if the spot's y is less than the horizontal line's start's y, say yes.
+  say no.
+
+to decide if a spot is above or below a box:
+  if the spot is above the box, say yes.
+  if the spot is below the box, say yes.
+  say no.
+
+to decide if a spot is below a box:
+  if the spot's y is greater than the box's bottom, say yes.
+  say no.
+
+to decide if a spot is below a horizontal line:
+  if the spot's y is greater than the horizontal line's start's y, say yes.
+  say no.
+
 to decide if a spot is in an ellipse:
   create an hrgn given the ellipse.
   privatize the spot.
@@ -2752,6 +2793,15 @@ to decide if a spot is in a box:
   if the spot's x is greater than the box's right, say no.
   if the spot's y is greater than the box's bottom, say no.
   say yes.
+
+to decide if a spot is to the left of a box:
+  if the spot's x is less than the box's left, say yes.
+  say no.
+
+to decide if a spot is left or right of a box:
+  if the spot is to the left of the box, say yes.
+  if the spot is to the right of the box, say yes.
+  say no.
 
 to decide if a spot is on a box:
   put the box into another box.
@@ -2816,9 +2866,27 @@ to decide if a spot is on a roundy box:
   if the spot is in the third roundy box, say no.
   say yes.
 
+to decide if a spot is outside a box:
+  if the spot is inside the box, say no.
+  say yes.
+
+to decide if a spot is to the right of a box:
+  if the spot's x is greater than the box's right, say yes.
+  say no.
+
+to decide if a spot is touching a box:
+  if the spot is in the box, say yes.
+  say no.
+
 to decide if a spot is within a grid of another spot:
   get a difference between the other spot and the spot.
   if the difference is within the grid, say yes.
+  say no.
+
+to decide if a spot is within some twips of a box:
+  privatize the box.
+  outdent the box given the twips.
+  if the spot is within the box, say yes.
   say no.
 
 to decide if a string does contain another string:
@@ -3116,6 +3184,14 @@ to decide if verbose test was requested:
   if the other string is "verbose", say yes.
   say no.
 
+to decide if we're above a horizontal line:
+  if the context's spot is above the horizontal line, say yes.
+  say no.
+
+to decide if we're below a horizontal line:
+  if the context's spot is below the horizontal line, say yes.
+  say no.
+
 to decide if a window is minimized:
   initialize a window placement.
   call "User32.dll" "GetWindowPlacement"
@@ -3386,6 +3462,11 @@ a docinfo is a record with
   a pointer called lpszdatadtype,
   a number called fwtype.
 
+a dot is an ellipse.
+
+to draw and fill a box with a color:
+  draw the box with the color and the color.
+
 to draw any visible rows of a text:
   if the text is nil, exit.
   loop.
@@ -3457,8 +3538,22 @@ to draw a console:
   draw the console's text.
   restore the current canvas.
 
+to draw a dot some twips wide on the current spot with a color:
+  make the dot the twips wide.
+  center the dot on the context's spot.
+  draw the dot with the color.
+
+to draw a dot some twips wide on a spot with a color:
+  make the dot the twips wide.
+  center the dot on the spot.
+  draw the dot with the color.
+
 to draw an ellipse:
   draw the ellipse with the black color and the clear color.
+
+to draw an ellipse on a spot with a color:
+  center the ellipse on the spot.
+  draw the ellipse with the color and the clear color.
 
 to draw an ellipse with a border color and a fill color:
   if the pdf state's page flag is set, draw the ellipse with the border and the fill (pdf style); exit.
@@ -3537,6 +3632,10 @@ to draw a line with a color (pdf style):
   output moveto given the line's start.
   output lineto given the line's end.
   output stroke and fill given the color and the clear color.
+
+to draw a number in a box with a color:
+  put the number into a string.
+  draw the string in the box with the color and "center".
 
 to draw a picture:
   if the pdf state's page flag is set, draw the picture (pdf style); exit.
@@ -3730,6 +3829,9 @@ to draw a string at the right of a box with a color and a font:
 
 to draw a string at the right of a box with a font:
   draw the string at the right of the box with the black color and the font.
+
+to draw a string at a spot with a color:
+  draw the string at the spot with the color and the default font.
 
 to draw a string at a spot with a color and a font:
   if the pdf state's page flag is set,
@@ -4094,6 +4196,14 @@ to end a sheet (pdf style):
   end the sheet (pdf style - finish the current page).
   end the sheet (pdf style - finish the current contents).
 
+to enlarge a box by some twips:
+  subtract the twips from the box's left-top.
+  add the twips to the box's right-bottom.
+
+to enlarge an ellipse by some twips:
+  subtract the twips from the ellipse's left-top.
+  add the twips to the ellipse's right-bottom.
+
 to enque an event:
   append the event to the event queue.
 
@@ -4270,6 +4380,9 @@ a filetime is a record with
   a number called dwlowdatetime,
   a number called dwhighdatetime.
 
+to fill a box with a color:
+  draw the box with the clear color and the color.
+
 to fill bytes with a byte starting at a pointer for a byte count:
   intel $8BBD0C000000. \ mov edi,[ebp+12] \ the pointer
   intel $8B3F.         \ mov edi,[edi]
@@ -4279,6 +4392,10 @@ to fill bytes with a byte starting at a pointer for a byte count:
   intel $8A00.         \ mov al,[eax]
   intel $FC.           \ cld
   intel $F3AA.         \ rep stosb
+
+to fill an ellipse on a spot with a color:
+  center the ellipse on the spot.
+  draw the ellipse with the clear color and the color.
 
 to fill a string with a byte given a count:
   reassign the string's first given the count.
@@ -4708,6 +4825,16 @@ to get a bucket# given a string and an index: \ based on the djb2 algorithm
   divide the bucket# by the index's bucket count
     giving a quotient and the bucket#.
 
+to get a byte from a string:
+  if the string is blank, put the null byte into the byte; exit.
+  put the string's first's target into the byte.
+  remove the first byte from the string.
+
+to get a byte from a string (backwards):
+  if the string is blank, put the null byte into the byte; exit.
+  put the string's last's target into the byte.
+  remove the last byte from the string.
+
 to get a center spot given a spot and another spot:
   put the spot and the other spot into a line.
   put the line's center into the center.
@@ -4831,6 +4958,11 @@ to get a font given a command line:
   if the font's name is "Osmosian", 
     make sure the osmosian font is loaded; 
     put 1/4 inch in the font's height.
+
+to get fresh random numbers;
+to get new random numbers;
+to seed the random number generator:
+  put the system's tick count into the seed.
 
 to get a gcd given a number and another number:
   put the number into a dividend number.
@@ -5759,6 +5891,8 @@ to hide the cursor:
   if the number is less than 0, exit.
   repeat.
 
+a horizontal line is a line.
+
 an hour is 60 minutes.
 
 an hpen is a handle.
@@ -5779,6 +5913,123 @@ to make a box some twips by some other twips:
   put 0 into the box's top.
   put the twips into the box's right.
   put the other twips into the box's bottom.
+
+to imagine a box some twips high by some other twips wide;
+to make a box some twips high by some other twips wide:
+  put 0 and 0 and the other twips and the twips into the box.
+
+to imagine a box some twips smaller than another box;
+to make a box some twips smaller than another box:
+  put the other box into the box.
+  indent the box by the twips divided by 2.
+
+to imagine a box some twips smaller than another box on every side:
+  put the other box into the box.
+  indent the box by the twips.
+
+to imagine a box some twips wide by some other twips high;
+  to make a box some twips wide by some other twips high:
+  put 0 and 0 and the twips and the other twips into the box.
+
+to imagine a box with a left coord and a top coord and a right coord and a bottom coord;
+to make a box with a left coord and a top coord and a right coord and a bottom coord:
+  put the left coord and the top coord and the right coord and the bottom coord into the box.
+
+to imagine a box with a spot and another spot;
+to make a box with a spot and another spot:
+  put the spot and the other spot into the box.
+
+to imagine a dot about some twips wide;
+to make a dot about some twips wide;
+to make a dot some twips wide:
+  make the dot the twips by the twips.
+
+to imagine a dot between some twips and some other twips wide;
+to make a dot between some twips and some other twips wide:
+  pick some third twips between the twips and the other twips.
+  make the dot the third twips wide.
+
+to imagine an ellipse given a box;
+to make an ellipse given a box:
+  put the box into the ellipse's box.
+
+to imagine an ellipse some twips by some other twips;
+to make an ellipse some twips by some other twips:
+  put 0 into the ellipse's left.
+  put 0 into the ellipse's top.
+  put the twips into the ellipse's right.
+  put the other twips into the ellipse's bottom.
+
+to imagine an ellipse with a left coord and a top coord and a right coord and a bottom coord;
+to make an ellipse with a left coord and a top coord and a right coord and a bottom coord:
+  put the left coord and the top coord and the right coord and the bottom coord into the ellipse.
+
+to imagine an ellipse with a spot and another spot;
+to make an ellipse with a spot and another spot:
+  put the spot and the other spot into the ellipse.
+
+to imagine a line across the bottom of a box;
+to make a line across the bottom of a box;
+to imagine a line along the bottom of a box;
+to make a line along the bottom of a box:
+  put the box's bottom line into the line.
+
+to imagine a line across the top of a box;
+to make a line across the top of a box;
+to imagine a line along the top of a box;
+to make a line along the top of a box:
+  put the box's top line into the line.
+
+to imagine a line in the middle of a box;
+to make a line in the middle of a box;
+to imagine a line across the middle of a box;
+to make a line across the middle of a box;
+to imagine a line in the center of a box;
+to make a line in the center of a box;
+to imagine a line across the center of a box;
+to make a line across the center of a box:
+  put the box's left into the line's start's x.
+  put the box's right into the line's end's x.
+  put the box's center's y into the line's start's y.
+  put the box's center's y into the line's end's y.
+
+to imagine a line some twips up from the bottom of a box;
+to make a line some twips up from the bottom of a box:
+  put the box's left into the line's start's x.
+  put the box's right into the line's end's x.
+  put the box's bottom minus the twips into the line's start's y.
+  put the box's bottom minus the twips into the line's end's y.
+
+to imagine a line with a spot and another spot;
+to make a line with a spot and another spot:
+  put the spot and the other spot into the line.
+
+to imagine a line with an x coord and a y coord and another x coord and another y coord;
+to make a line with an x coord and a y coord and another x coord and another y coord:
+  put the x coord and the y coord and the other x coord and the other y coord into the line.
+
+to imagine a roundy box from a box and a radius;
+to make a roundy box from a box and a radius:
+  put the box and the radius into the roundy box.
+
+to imagine a roundy box some twips by some other twips;
+to make a roundy box some twips by some other twips:
+  put 0 into the roundy box's left.
+  put 0 into the roundy box's top.
+  put the twips into the roundy box's right.
+  put the other twips into the roundy box's bottom.
+
+to imagine a roundy box with a left coord and a top coord and a right coord and a bottom coord and a radius;
+to make a roundy box with a left coord and a top coord and a right coord and a bottom coord and a radius:
+  put the left coord and the top coord and the right coord and the bottom coord and the radius into the roundy box.
+
+to imagine a roundy box with a spot and another spot and a radius;
+to make a roundy box with a spot and another spot and a radius:
+  put the spot and the other spot and the radius into the roundy box.
+
+to imagine a spot with an x coord and a y coord;
+to make a spot with an x coord and a y coord:
+  put the x coord and the y coord into the spot.
 
 an inch is 1440 twips.
 
@@ -6492,56 +6743,11 @@ to lowercase a text:
 
 the main window is a window.
 
-to make a box with a left coord and a top coord and a right coord and a bottom coord:
-  put the left coord and the top coord and the right coord and the bottom coord into the box.
-
-to make a box with a spot and another spot:
-  put the spot and the other spot into the box.
-
-to make an ellipse given a box:
-  put the box into the ellipse's box.
-
-to make an ellipse some twips by some other twips:
-  put 0 into the ellipse's left.
-  put 0 into the ellipse's top.
-  put the twips into the ellipse's right.
-  put the other twips into the ellipse's bottom.
-
-to make an ellipse with a left coord and a top coord and a right coord and a bottom coord:
-  put the left coord and the top coord and the right coord and the bottom coord into the ellipse.
-
-to make an ellipse with a spot and another spot:
-  put the spot and the other spot into the ellipse.
-
-to make a line with a spot and another spot:
-  put the spot and the other spot into the line.
-
-to make a line with an x coord and a y coord and another x coord and another y coord:
-  put the x coord and the y coord and the other x coord and the other y coord into the line.
-
 to make a ratio pair given a box and another box:
   put the box's x-extent into the ratio pair's ratio's numerator.
   put the other box's x-extent into the ratio pair's ratio's denominator.
   put the box's y-extent into the ratio pair's other ratio's numerator.
   put the other box's y-extent into the ratio pair's other ratio's denominator.
-
-to make a roundy box from a box and a radius:
-  put the box and the radius into the roundy box.
-
-to make a roundy box some twips by some other twips:
-  put 0 into the roundy box's left.
-  put 0 into the roundy box's top.
-  put the twips into the roundy box's right.
-  put the other twips into the roundy box's bottom.
-
-to make a roundy box with a left coord and a top coord and a right coord and a bottom coord and a radius:
-  put the left coord and the top coord and the right coord and the bottom coord and the radius into the roundy box.
-
-to make a roundy box with a spot and another spot and a radius:
-  put the spot and the other spot and the radius into the roundy box.
-
-to make a spot with an x coord and a y coord:
-  put the x coord and the y coord into the spot.
 
 to make sure the osmosian font is loaded:
   if the osmosian font is loaded, exit.
@@ -6703,6 +6909,9 @@ to move the anchor left to any non-alphanumeric byte in a text:
     subtract 1 from the text's anchor column#.
   repeat.
 
+to move a box to the bottom of another box:
+  move the box down the other box's bottom minus the box's bottom.
+
 to move a box down some twips:
   move the box given 0 and the twips.
 
@@ -6722,8 +6931,19 @@ to move a box given some x twips and some y twips:
   add the x twips to the box's right.
   add the y twips to the box's bottom.
 
+to move a box left to a coord:
+  move the box left the box's left minus the coord.
+
+to move a box to the left side of another box;
+to move a box to the left of another box:
+  move the box left the box's left minus the other box's left.
+
 to move a box left some twips:
   move the box given - the twips and 0.
+
+to move a box to the right side of another box;
+to move a box to the right of another box:
+  move the box right the other box's right minus the box's right.
 
 to move a box right some twips:
   move the box given the twips and 0.
@@ -6731,6 +6951,12 @@ to move a box right some twips:
 to move a box to a spot:
   get a difference between the spot and the box's left-top.
   move the box given the difference.
+
+to move a box to the top left corner of another box:
+  move the box to the other box's left-top.
+
+to move a box to the top of another box:
+  move the box up the box's top minus the other box's top.
 
 to move a box up some twips:
   move the box given 0 and - the twips.
@@ -6880,6 +7106,9 @@ to move a finger over a number:
   if the finger is nil, exit.
   add 1 to the finger.
 
+to move a line down one pixel:
+  move the line down the tpp.
+
 to move a line down some twips:
   move the line given 0 and the twips.
 
@@ -6901,6 +7130,9 @@ to move a line right some twips:
 to move a line to a spot:
   get a difference between the spot and the line's start.
   move the line given the difference.
+
+to move a line up one pixel:
+  move the line up the tpp.
 
 to move a line up some twips:
   move the line given 0 and - the twips.
@@ -7232,6 +7464,10 @@ to normalize a canvas:
 to normalize an ellipse:
   normalize the ellipse's box.
 
+to normalize a horizontal line:
+  if the line's end is less than the line's start,
+    swap the line's end with the line's start.
+
 to normalize a picture:
   if the picture is nil, exit.
   normalize the picture's box.
@@ -7260,6 +7496,9 @@ to normalize a selection:
 to normalize a text:
   if the text is nil, exit.
   normalize the text's box.
+
+to normalize a vertical line:
+  if the line's end is less than the line's start, swap the line's end with the line's start.
 
 the null hbrush is an hbrush.
 
@@ -7584,12 +7823,12 @@ the pen size is a number.
 
 a percent is a number. \ a scale with 100 in the denominator
 
-to pick a number:
+to pick a number (guts):
   pick the number between 0 and the largest number.
 
-to pick a number within an amount of another number:
+to pick a number within an amount of another number (guts):
   pick the number between the other number minus the amount
-    and the other number plus the amount.
+    and the other number plus the amount (guts).
 
 to pick a random number between a min number and a max number (guts):
   put the seed's whereabouts into eax.
@@ -7613,11 +7852,11 @@ to pick a random number between a min number and a max number (guts):
   intel $8B9D08000000. \ mov ebx,[ebp+08] \ the random number
   intel $8913.         \ mov [ebx],edx
 
-to pick a spot anywhere in a box:
+to pick a spot anywhere in a box (guts):
   pick the spot's x between the box's left and the box's right.
   pick the spot's y between the box's top and the box's bottom.
 
-to pick a spot within a distance of another spot:
+to pick a spot within a distance of another spot (guts):
   pick the spot's x within the distance of the other spot's x.
   pick the spot's y within the distance of the other spot's y.
 
@@ -7773,6 +8012,9 @@ to put the actual data of a font into a buffer:
   put the buffer's first plus the count minus 1 into the buffer's last.
   destroy the hfont of the memory canvas.
 
+to put the bottom of a box into a line:
+  make the line with the box's left-bottom and the box's right-bottom.
+
 to put a box and a radius into a roundy box:
   put the box's left into the roundy box's left.
   put the box's top into the roundy box's top.
@@ -7780,15 +8022,34 @@ to put a box and a radius into a roundy box:
   put the box's bottom into the roundy box's bottom.
   put the radius into the roundy box's radius.
 
+to put a box in the center of another box;
+to center a box in another box:
+  center the box in the other box (horizontally).
+  center the box in the other box (vertically).
+
+to put a box in the center of the screen;
+to center a box on the screen:
+  center the box in the screen's box.
+
 to put a box into another box:
   put the box's left into the other box's left.
   put the box's top into the other box's top.
   put the box's right into the other box's right.
   put the box's bottom into the other box's bottom.
 
-to put a box's bottom line into a line:
-  put the box's left and the box's bottom into the line's start.
-  put the box's right and the box's bottom into the line's end.
+to put a box on a spot;
+to center a box on a spot:
+  get a difference between the spot and the box's center.
+  round the difference to the nearest multiple of the tpp.
+  move the box given the difference.
+
+to put a box's bottom line into a horizontal line: \ and "vertical" for left and right
+  put the box's left and the box's bottom into the horizontal line's start.
+  put the box's right and the box's bottom into the horizontal line's end.
+
+to put a box's bottom-center into a spot: \ *** need these without dashs too
+  put the box's center's x into the spot's x.
+  put the box's bottom into the spot's y.
 
 to put a box's center into a spot:
   put the box's left plus the box's right into the spot's x.
@@ -7835,6 +8096,10 @@ to put a box's right-top into a spot:
 to put a box's top line into a line:
   put the box's left and the box's top into the line's start.
   put the box's right and the box's top into the line's end.
+
+to put a box's top-center into a spot:
+  put the box's center's x into the spot's x.
+  put the box's top into the spot's y.
 
 to put a box's width into a width:
   put the box's right into the width.
@@ -8009,6 +8274,17 @@ to put a left coord and a top coord and a right coord and a bottom coord into an
   put the right into the ellipse's right.
   put the bottom into the ellipse's bottom.
 
+to put the left of a box into a vertical line;
+to put the left edge of a box into a vertical line;
+to put the left side of a box into a vertical line:
+  put the box's left-top into the vertical line's start.
+  put the box's left-bottom into the vertical line's end.
+
+to put a line in the middle of a box;
+to center a line in a box:
+  center the line in the box (horizontally).
+  center the line in the box (vertically).
+
 to put a line into another line:
   put the line's start into the other line's start.
   put the line's end into the other line's end.
@@ -8022,6 +8298,24 @@ to put a line's center into a spot:
   put the line's start's x plus the line's end's x into the spot's x.
   put the line's start's y plus the line's end's y into the spot's y.
   divide the spot by 2.
+
+to put a line's left into a coord:
+  put the line's start's x into the coord.
+  if the line's end's x is less than the line's start's x, put the line's end's x into the coord.
+
+to put a line's right into a coord:
+  put the line's start's x into the coord.
+  if the line's end's x is greater than the line's start's x, put the line's end's x into the coord.
+
+to put a line's top into a coord:
+  put the line's start's y into the coord.
+  if the line's end's y is less than the line's start's y, put the line's end's y into the coord.
+
+to put the middle of a line on a spot;
+to center a line on a spot:
+  get a difference between the spot and the line's center.
+  round the difference to the nearest multiple of the tpp.
+  move the line given the difference.
 
 to put the mouse's spot into a spot:
   call "user32.dll" "GetCursorPos" with the spot's whereabouts.
@@ -8460,6 +8754,12 @@ to put a timer's ticks into some ticks:
   put the system's tick count into some other ticks.
   subtract the timer's start ticks from the other ticks.
   add the other ticks to the ticks.
+
+to put the top of a box into a horizontal line;
+to put the top edge of a box into a horizontal line;
+to put the top side of a box into a horizontal line:
+  put the box's left-top into the horizontal line's start.
+  put the box's right-top into the horizontal line's end.
 
 to put a wyrd into another wyrd:
   intel $8B8508000000. \ mov eax,[ebp+8]  \ the wyrd
@@ -8985,6 +9285,9 @@ the requested font is a font.
 to reset the caret of a text:
   if the text is nil, exit.
   put 1 and 1 into the text's caret.
+
+to reset a count:
+  put 0 into the count.
 
 to reset the drawing origin:
   set the drawing origin to the zero spot.
@@ -9577,9 +9880,6 @@ a second is 1000 milliseconds.
 a sector is a pair with an x coord and an y coord [indicating the left-top of the sector].
 
 the seed is a number.
-
-to seed the random number generator:
-  put the system's tick count into the seed.
 
 to select every byte in a text:
   if the text is nil, exit.
@@ -11427,6 +11727,17 @@ to write a string to stdout:
   call "kernel32.dll" "WriteFile" with the stdout handle
     and the string's first and the string's length
     and a number's whereabouts and nil.
+
+to write a string with a font and a size and a color and a spot:
+  put the size into the font's height.
+  put the string's width into a width.
+  put the spot and the spot into a box.
+  subtract the width divided by 2 from the box's left.
+  add the width divided by 2 to the box's right.
+  subtract the size divided by 2 from the box's top.
+  add the size divided by 2 to the box's bottom.
+  draw the string in the box with the color and the font and "center".
+  refresh the screen.
 
 to write a string without advancing:
   write the string on the default console without advancing.

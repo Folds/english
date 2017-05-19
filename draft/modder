@@ -15,8 +15,26 @@ to add some horizontal twips and some vertical twips to the current spot:
   add the horizontal twips to the context's spot's x.
   add the vertical twips to the context's spot's y.
 
+to change the current hue by some points:
+  change the context's hue by the points.
+
+to clear the screen without refreshing it:
+  unmask everything.
+  draw the screen's box with the black color and the black color.
+  put the screen's box into the context's box.
+
 to darken the current color about some percent:
   darken the context's color by the percent.
+
+to draw a circle some twips wide (backwards);
+to draw a circle some twips wide (counterclockwise):
+  put the twips times the pizza pie divided by 48 into a segment length.
+  add 1 to the segment length.
+  loop.
+    stroke the segment length.
+    turn left 1/48 of the way.
+    add 1 to a count. if the count is 48, break.
+  repeat.
 
 to draw a fancy arrow some twips long with a color;
 to stroke a fancy arrow some twips long with a color:
@@ -62,10 +80,22 @@ to draw a half circle given a size (counterclockwise):
     if the count is 24, exit.
   repeat.
 
+to draw a line around some twips long;   \ "around" is significant here
+to draw a line about some twips long;    \ "about"  is significant here
+to stroke a line around some twips long; \ "around" is significant here
+to stroke a line about some twips long:  \ "about"  is significant here
+  put the twips divided by 2 into some other twips.
+  pick some third twips between the twips minus the other twips and the twips plus the other twips.
+  stroke the line the third twips long.
+
 to draw a line as high as a box with a color;
 to draw a line as tall as a box with a color:
   put the color into the context's color.
   stroke the box's height.
+
+to draw a line as wide as a box with a color:
+  put the color into the context's color.
+  stroke the box's width.
 
 to draw a line between some twips and some other twips long;
 to draw a line between some twips to some other twips long;
@@ -90,6 +120,48 @@ to draw a line using some twips as the length;
 to draw a line using some twips for the length:
   stroke the twips.
 
+to draw a line with a color around some twips long;   \ "around" is significant here
+to draw a line with a color about some twips long;    \ "about"  is significant here
+to stroke a line with a color around some twips long; \ "around" is significant here
+to stroke a line with a color about some twips long:  \ "about"  is significant here
+  put the twips divided by 2 into some other twips.
+  pick some third twips between the twips minus the other twips and the twips plus the other twips.
+  stroke the line with the color the third twips long.
+
+to draw a line with a color some twips long;
+to stroke a line with a color some twips long:
+  put the color into the context's color.
+  put the context's spot into the line's start.
+  stroke the twips.
+  put the context's spot into the line's end.
+
+to draw a line with a color some twips to some other twips long;
+to stroke a line with a color some twips to some other twips long:
+  pick some third twips between the twips and the other twips.
+  stroke the line with the color the third twips long.
+
+to draw only within a box;
+to draw only inside a box;
+to draw only in a box;
+to draw only within a box from now on;
+to draw only inside a box from now on;
+to draw only in a box from now on;
+to only draw within a box from now on;
+to only draw inside a box from now on;
+to only draw in a box from now on;
+to only draw within a box;
+to only draw inside a box;
+to only draw in a box;
+to draw within a box only;
+to draw inside a box only;
+to draw in a box only;
+to put masking tape all around a box;
+to put masking tape around a box: \ note that this masks the box's border as well
+  privatize the box.
+  indent the box 1 pixel.
+  mask outside the box.
+  put the original box into the context's box. \ *** original box? or indented one?
+
 to draw a quarter circle about some twips wide;
 to draw a quarter circle given a size:
   put the size times the pizza pie divided by 48 into a segment length.
@@ -100,6 +172,20 @@ to draw a quarter circle given a size:
     turn right 1/48 of the way.
     add 1 to a count.
     if the count is 12, exit.
+  repeat.
+
+to draw a quarter circle between some twips and some other twips wide:
+  pick some third twips between the twips and the other twips.
+  draw a quarter circle given the third twips.
+
+to draw a quarter circle given a size (counterclockwise):
+  put the size times the pizza pie divided by 48 into a segment length.
+  add 1 to the segment length.
+  loop.
+  stroke the segment length.
+  turn left 1/48 of the way.
+  add 1 to a count.
+  if the count is 12, exit.
   repeat.
 
 to draw a spiral backward given some twips;
@@ -131,11 +217,18 @@ to clear the screen:
   refresh the screen.
   put the screen's box into the context's box.
 
+to face any way you want;
+to face any which way:
+  pick a heading.
+
 to face east:
   put 960 into the context's heading.
 
 to face north:
   put 0 into the context's heading.
+
+to face south:
+  put 1920 into the context's heading.
 
 to face west:
   put 2880 into the context's heading.
@@ -161,12 +254,44 @@ to initialize a context:
 to lighten the current color about some percent:
   lighten the context's color by the percent.
 
+to list some choices in a box;
+to draw some choices in a box:
+  \draw really fast. ***
+  get a [first/next] choice from the choices.
+  if the choice is missing [because we've drawn them all], exit.
+  put the box's left plus 1/4 inch into the choice's left.
+  put the box's right minus 1/4 inch into the choice's right.
+  if the choice is the choices' first, put the box's top plus 1/4 inch into the choice's top.
+  if the choice is not the choices' first, put the choice's previous' bottom into the choice's top.
+  put the choice's top plus 1/4 inch into the choice's bottom.
+  \draw the choice's box with the purple color. \ temp ***
+  stroke the choice's name in the choice's box with the context's color.
+  repeat.
+
+to move back some twips:
+  turn around.
+  move the twips.
+  turn around.
+
 to move to the left some twips and down some other twips;
 to move left some twips and down some other twips:
 to move some twips to the left and some other twips down;
 to move some twips left and some other twips down:
   move the context's spot left the twips.
   move the context's spot down the other twips.
+
+to move to the left some twips and up some other twips;
+to move left some twips and up some other twips;
+to move some twips to the left and some other twips up;
+to move some twips left and some other twips up:
+  move the context's spot left the twips.
+  move the context's spot up the other twips.
+
+to move to the middle;
+to start in the middle;
+to move to the center;
+to start in the center:
+  put the context's box's center into the context's spot.
 
 to move to the middle of a box;
 to start in the middle of a box;
@@ -177,6 +302,20 @@ to start in the center of a box:
 to move one pixel:
   move the tpp.
 
+to move to the right some twips and down some other twips;
+to move right some twips and down some other twips;
+to move some twips to the right and some other twips down;
+to move some twips right and some other twips down:
+  move the context's spot right the twips.
+  move the context's spot down the other twips.
+
+to move to the right some twips and up some other twips;
+to move right some twips and up some other twips;
+to move some twips to the right and some other twips up;
+to move some twips right and some other twips up:
+  move the context's spot right the twips.
+  move the context's spot up the other twips.
+
 to move to a spot:
   put the spot into the context's spot.
 
@@ -186,6 +325,13 @@ to move a spot about some twips in any direction:
 
 to move some squares:
   move the square size times the squares divided by 1 square. \ squares are scaled up for precision hence the division at the end
+
+to move some squares diagonally;
+to move some squares slantways:
+  move the square size times the squares
+    times the squirt o' two divided by 1 square.
+  \ squares are scaled up for precision
+  \ hence the division at the end
 
 to move some twips:
   \wait for the delay. ***
@@ -204,6 +350,11 @@ to move some twips to the left;
 to move some twips left;
 to move left some twips:
   subtract the twips from the context's x.
+
+to move some twips to the right;
+to move some twips right;
+to move right some twips: 
+  add the twips to the context's x.
 
 to move some twips up;
 to move up some twips: 
@@ -235,6 +386,10 @@ to pick a color:
   make the color.
   put the color into the context's color.
 
+to pick a color between another color and a third color:
+  pick the color between the other color and the third color (guts).
+  put the color into the context's color.
+
 to pick a color like another color:
   make the color like the other color.
   put the color into the context's color.
@@ -254,10 +409,27 @@ to pick a greenish color about some percent of the time:
   pick the greenish color.
   put the greenish color into the context's color.
 
+to pick a heading:
+  pick the heading between 0 and 3839.
+  put the heading into the context's heading.
+
+to pick a letter height between some twips and some other twips:
+  pick a random number between the twips and the other twips.
+  put the random number into the letter height.
+  put the random number into the context's letter height.
+
 to pick a light color:
   pick the light color's hue.
   make the light color be light.
   put the light color into the context's color.
+
+to pick a number:
+  pick the number (guts). 
+  put the number into the context's number.
+
+to pick a number within an amount of another number:
+  pick the number within the amount of the other number (guts).
+  put the number into the context's number.
 
 to pick a pastel color:
   pick the pastel color's hue.
@@ -271,6 +443,14 @@ to pick a rainbow color:
   interpret the rainbow color. [using the rainbow color number]
   put the rainbow color into the context's color.
 
+to pick a solid color:
+  pick the solid color (guts).
+  put the solid color into the context's color.
+
+to pick a spot anywhere in a box:
+  pick the spot anywhere in the box (guts).
+  put the spot into the context's spot.
+
 to pick a spot anywhere in the top middle a ratio of a box;
 to pick a spot in the top middle a ratio of a box:
   privatize the box.
@@ -283,6 +463,24 @@ to pick a spot in the top middle a ratio of a box:
 to pick a spot in a box:
   pick the spot's x between the box's left and the box's right.
   pick the spot's y between the box's top and the box's bottom.
+  put the spot into the context's spot.
+
+to pick a spot in a box some twips to some other twips above the middle;
+to pick a spot in a box some twips to some other twips above the center:
+  put the box into a bounding box.
+  put the box's center's y minus the twips into the bounding box's bottom.
+  put the bounding box's bottom minus the other twips into the bounding box's top.
+  pick the spot anywhere in the bounding box.
+
+to pick a spot in a box some twips to some other twips below the middle;
+to pick a spot in a box some twips to some other twips below the center:
+  put the box into a bounding box.
+  put the box's center's y plus the twips into the bounding box's top.
+  put the bounding box's top plus the other twips into the bounding box's bottom.
+  pick the spot anywhere in the bounding box.
+
+to pick a spot within a distance of another spot:
+  pick the spot within the distance of the other spot (guts).
   put the spot into the context's spot.
 
 to pick some twips between some min twips and some other twips; \ are all these necessary? ***
@@ -352,13 +550,50 @@ to save a context:
 to space between glyphs:
   turn right. move 3 squares. turn left.
 
+to start anywhere in a box:
+  pick the context's spot in the box.
+
 to start anywhere on a horizontal line:
   pick a spot on the horizontal line.
   put the spot into the context's spot.
 
+to start at the bottom left corner of a box facing east:
+  put the box's left-bottom into the context's spot.
+  face east.
+
 to start at the bottom left corner of a box facing north:
   put the box's left-bottom into the context's spot.
   face north.
+
+to start at the bottom left corner of a box facing south:
+  put the box's left-bottom into the context's spot.
+  face south.
+
+to start at the bottom left corner of a box facing west:
+  put the box's left-bottom into the context's spot.
+  face west.
+
+to start at the bottom of a horizontal line:
+  put the vertical line's end into the context's spot.
+
+to start at the bottom right corner of a box facing east:
+  put the box's right-bottom into the context's spot.
+  face east.
+
+to start at the bottom right corner of a box facing north:
+  put the box's right-bottom into the context's spot.
+  face north.
+
+to start at the bottom right corner of a box facing south:
+  put the box's right-bottom into the context's spot.
+  face south.
+
+to start at the bottom right corner of a box facing west:
+  put the box's right-bottom into the context's spot.
+  face west.
+
+to start at the left of a horizontal line:
+  put the horizontal line's start into the context's spot.
 
 to start at the middle of the bottom of a box;
 to start in the middle of the bottom of a box;
@@ -367,14 +602,236 @@ to start in the center of the bottom of a box:
   put the box's center's x into the context's spot's x.
   put the box's bottom into the context's spot's y.
 
+to start at the middle of the bottom of a box facing east;
+to start in the middle of the bottom of a box facing east;
+to start at the center of the bottom of a box facing east;
+to start in the center of the bottom of a box facing east:
+  put the box's center's x into the context's spot's x.
+  put the box's bottom into the context's spot's y.
+  face east.
+
+to start at the middle of the bottom of a box facing north;
+to start in the middle of the bottom of a box facing north;
+to start at the center of the bottom of a box facing north;
+to start in the center of the bottom of a box facing north:
+  put the box's center's x into the context's spot's x.
+  put the box's bottom into the context's spot's y.
+  face north.
+
+to start at the middle of the bottom of a box facing south;
+to start in the middle of the bottom of a box facing south;
+to start at the center of the bottom of a box facing south;
+to start in the center of the bottom of a box facing south:
+  put the box's center's x into the context's spot's x.
+  put the box's bottom into the context's spot's y.
+  face south.
+
+to start at the middle of the bottom of a box facing west;
+to start in the middle of the bottom of a box facing west;
+to start at the center of the bottom of a box facing west;
+to start in the center of the bottom of a box facing west:
+  put the box's center's x into the context's spot's x.
+  put the box's bottom into the context's spot's y.
+  face west.
+
+to start at the middle of the left of a box facing east;
+to start in the middle of the left of a box facing east;
+to start at the center of the left of a box facing east;
+to start in the center of the left of a box facing east:
+  put the box's left into the context's spot's x.
+  put the box's center's y into the context's spot's y.
+  face east.
+
+to start at the middle of the left of a box facing north;
+to start in the middle of the left of a box facing north;
+to start at the center of the left of a box facing north;
+to start in the center of the left of a box facing north:
+  put the box's left into the context's spot's x.
+  put the box's center's y into the context's spot's y.
+  face north.
+
+to start at the middle of the left of a box facing south;
+to start in the middle of the left of a box facing south;
+to start at the center of the left of a box facing south;
+to start in the center of the left of a box facing south:
+  put the box's left into the context's spot's x.
+  put the box's center's y into the context's spot's y.
+  face south.
+
+to start at the middle of the left of a box facing west;
+to start in the middle of the left of a box facing west;
+to start at the center of the left of a box facing west;
+to start in the center of the left of a box facing west:
+  put the box's left into the context's spot's x.
+  put the box's center's y into the context's spot's y.
+  face west.
+
+to start at the middle of the right of a box facing east;
+to start in the middle of the right of a box facing east;
+to start at the center of the right of a box facing east;
+to start in the center of the right of a box facing east:
+  put the box's right into the context's spot's x.
+  put the box's center's y into the context's spot's y.
+  face east.
+
+to start at the middle of the right of a box facing north;
+to start in the middle of the right of a box facing north;
+to start at the center of the right of a box facing north;
+to start in the center of the right of a box facing north:
+  put the box's right into the context's spot's x.
+  put the box's center's y into the context's spot's y.
+  face north.
+
+to start at the middle of the right of a box facing south;
+to start in the middle of the right of a box facing south;
+to start at the center of the right of a box facing south;
+to start in the center of the right of a box facing south:
+  put the box's right into the context's spot's x.
+  put the box's center's y into the context's spot's y.
+  face south.
+
+to start at the middle of the right of a box facing west;
+to start in the middle of the right of a box facing west;
+to start at the center of the right of a box facing west;
+to start in the center of the right of a box facing west:
+  put the box's right into the context's spot's x.
+  put the box's center's y into the context's spot's y.
+  face west.
+
+to start at the middle of the top of a box;
+to start in the middle of the top of a box;
+to start at the center of the top of a box;
+to start in the center of the top of a box:
+  put the box's center's x into the context's spot's x.
+  put the box's top into the context's spot's y.
+
+to start at the middle of the top of a box facing east;
+to start in the middle of the top of a box facing east;
+to start at the center of the top of a box facing east;
+to start in the center of the top of a box facing east:
+  put the box's center's x into the context's spot's x.
+  put the box's top into the context's spot's y.
+  face east.
+
+to start at the middle of the top of a box facing north;
+to start in the middle of the top of a box facing north;
+to start at the center of the top of a box facing north;
+to start in the center of the top of a box facing north:
+  put the box's center's x into the context's spot's x.
+  put the box's top into the context's spot's y.
+  face north.
+
+to start at the middle of the top of a box facing south;
+to start in the middle of the top of a box facing south;
+to start at the center of the top of a box facing south;
+to start in the center of the top of a box facing south:
+  put the box's center's x into the context's spot's x.
+  put the box's top into the context's spot's y.
+  face south.
+
+to start at the middle of the top of a box facing west;
+to start in the middle of the top of a box facing west;
+to start at the center of the top of a box facing west;
+to start in the center of the top of a box facing west:
+  put the box's center's x into the context's spot's x.
+  put the box's top into the context's spot's y.
+  face west.
+
+to start at the right of a horizontal line:
+  put the horizontal line's end into the context's spot.
+
 to start at a spot:
   put the spot into the context's spot.
+
+to start at a spot facing east:
+  put the spot into the context's spot.
+  face east.
+
+to start at a spot facing north:
+  put the spot into the context's spot.
+  face north.
+
+to start at a spot facing south:
+  put the spot into the context's spot.
+  face south.
+
+to start at a spot facing west:
+  put the spot into the context's spot.
+  face west.
+
+to start at the top left corner of a box facing east:
+  put the box's left-top into the context's spot.
+  face east.
+
+to start at the top left corner of a box facing north:
+  put the box's left-top into the context's spot.
+  face north.
+
+to start at the top left corner of a box facing south:
+  put the box's left-top into the context's spot.
+  face south.
+
+to start at the top left corner of a box facing west:
+  put the box's left-top into the context's spot.
+  face west.
+
+to start at the top of a vertical line:
+  put the vertical line's start into the context's spot.
+
+to start at the top right corner of a box facing east:
+  put the box's right-top into the context's spot.
+  face east.
+
+to start at the top right corner of a box facing north:
+  put the box's right-top into the context's spot.
+  face north.
+
+to start at the top right corner of a box facing south:
+  put the box's right-top into the context's spot.
+  face south.
+
+to start at the top right corner of a box facing west:
+  put the box's right-top into the context's spot.
+  face west.
+
+to start in the middle of a box facing east;
+to start at the middle of a box facing east;
+to move to the middle of a box facing east;
+to move to the middle of a box and face east;
+to start in the center of a box facing east;
+to start at the center of a box facing east;
+to move to the center of a box facing east;
+to move to the center of a box and face east:
+  put the box's center into the context's spot.
+  face east.
+
+to start in the middle of a box facing north;
+to start at the middle of a box facing north;
+to move to the middle of a box facing north;
+to move to the middle of a box and face north;
+to start in the center of a box facing north;
+to start at the center of a box facing north;
+to move to the center of a box facing north;
+to move to the center of a box and face north:
+  put the box's center into the context's spot.
+  face north.
 
 to start in the middle of a box facing north minus some points;
 to start in the center of a box facing north minus some points:
   put the box's center into the context's spot.
   face north.
   turn left the points.
+
+to start in the middle of a box facing south;
+to start at the middle of a box facing south;
+to move to the middle of a box facing south:
+to move to the middle of a box and face south;
+to start in the center of a box facing south;
+to start at the center of a box facing south;
+to move to the center of a box facing south:
+to move to the center of a box and face south:
+  put the box's center into the context's spot.
+  face south.
 
 to start in the middle of a box facing west;
 to start at the middle of a box facing west;
@@ -387,8 +844,78 @@ to move to the center of a box and face west:
   put the box's center into the context's spot.
   face west.
 
+to start some twips above the middle of the bottom of a box: \ incomplete set of these
+  put the box's center's x into the context's spot's x.
+  put the box's bottom minus the twips into the context's spot's y.
+
+to start some twips down from a spot;
+to start some twips below a spot:
+  put the spot's x into the context's x.
+  put the spot's y plus the twips into the context's y.
+
+to start some twips from the center of a box:
+  put the box's center into the context's spot.
+  move the twips.
+
+to start some twips to the left and some other twips down from a spot;
+to start some twips left and some other twips down from a spot:
+  put the spot's x minus the twips into the context's x.
+  put the spot's y plus the other twips into the context's y.
+
+to start some twips left and some other twips up from a spot:
+  put the spot's x minus the twips into the context's x.
+  put the spot's y minus the other twips into the context's y.
+
+to start some twips to the left and some other twips up from a spot;
+to start some twips to the left of a spot;
+to start some twips left of a spot:
+  put the spot's x minus the twips into the context's x.
+
+to start some twips to the right and some other twips down from a spot;
+to start some twips right and some other twips down from a spot:
+  put the spot's x plus the twips into the context's x.
+  put the spot's y plus the other twips into the context's y.
+
+to start some twips to the right and some other twips up from a spot;
+to start some twips right and some other twips up from a spot:
+  put the spot's x plus the twips into the context's x.
+  put the spot's y minus the other twips into the context's y.
+
+to start some twips up from a coord:
+  put the coord minus the twips into the context's y.
+
+to start some twips up from a spot;
+to start some twips above a spot:
+  put the spot's y into the context's y.
+  subtract the twips from the context's y.
+
+to start with a color:
+  put the color into the context's color.
+
+to stroke a box with a color:
+  put the color into the context's color.
+  put the box's left-bottom into the context's spot.
+  face north.
+  stroke the box's height.
+  turn right.
+  stroke the box's width.
+  turn right.
+  stroke the box's height.
+  turn right.
+  stroke the box's width.
+
 to stroke a length:
   stroke a line the length long.
+
+to stroke a line as high as a box;
+to stroke a line as tall as a box;
+to draw a line as high as a box;
+to draw a line as tall as a box:
+  stroke the box's height.
+
+to stroke a line as wide as a box;
+to draw a line as wide as a box:
+  stroke the box's width.
 
 to stroke one pixel:
   stroke the tpp.
@@ -424,16 +951,39 @@ to turn a ratio:
 to turn right:
   turn 1/4.
 
-To turn right a ratio of the way;
-To turn right a ratio of the way around;
-To turn right a ratio:
-Turn the ratio.
+to turn right some points:
+  put the points and 3840 into a fraction.
+  turn right the fraction.
+
+to turn right a ratio of the way;
+to turn right a ratio of the way around;
+to turn right a ratio:
+  turn the ratio.
+
+to use a color:
+  put the color into the context's color.
 
 to use the fat pen:
   put 3 into the pen size.
 
+to use a letter height:
+  put the letter height into the context's letter height.
+
+to use a letter height of some twips:
+  put the twips into the letter height.
+  put the twips into the context's letter height.
+
 to use a pen:
   put the pen into the context's pen.
+
+to use the skinny pen:
+  \ changing the pen size affects the context
+  \ the next time the context is saved.
+  put 1 into the pen size.
+
+to use small pointy letters:
+  \ as opposed to "roundy letters" not yet implemented
+  use small letters.
 
 to write a string;
 to stroke a string:
@@ -460,6 +1010,38 @@ to stroke a string given a center spot and a radius:
     turn the ratio.
   repeat.
 
+to write a string at a spot with a color;
+to stroke a string at a spot with a color:
+  start at the spot.
+  put the color into the context's color.
+  stroke the string.
+
+to write a string in a box;
+to stroke a string in a box:
+  stroke the string in the box with the context's color.
+
+to write a string in a box with a color;
+to stroke a string in a box with a color:
+  put the color into the context's color.
+  put the box's left-bottom into the context's spot.
+  put the box's height divided by 2 into the context's letter height.
+  \put the box's height into the context's letter height.
+  face north.
+  move the box's height divided by 4. \ was 4 and still is now! ***
+  stroke the string.
+
+to write a string in the middle of a box;
+to stroke a string in the middle of a box:
+  put the context's letter height divided by 4 into a square size. \ was 4 ***
+  \ glyphs are two squares wide plus one square of intercharacter spacing. no spacing at the end.
+  put the string's length times the square size times 3 minus the square size into a width.
+  divide the width by 2.
+  start in the middle of the box.
+  move down the context's letter height divided by 2. \ was 2 ***
+  move left the width.
+  face north.
+  stroke the string.
+
 to write a string a radius away from a center spot;
 to write a string a radius around a center spot;
 to write a string about a radius from a center spot;
@@ -469,6 +1051,16 @@ to stroke a string a radius around a center spot;
 to stroke a string about a radius from a center spot;
 to stroke a string a radius from a center spot:
   stroke the string given the center spot and the radius.
+
+to write a string a radius away from the middle of a box;
+to write a string a radius around the middle of a box;
+to write a string about a radius from the middle of a box;
+to write a string a radius from the middle of a box;
+to stroke a string a radius away from the middle of a box;
+to stroke a string a radius around the middle of a box;
+to stroke a string about a radius from the middle of a box;
+to stroke a string a radius from the middle of a box:
+  stroke the string given the box's center and the radius.
 
 to write a string with a color;
 to stroke a string with a color:
@@ -483,6 +1075,18 @@ to stroke a string with a color at the bottom of a box:
   divide the width by 2.
   start in the middle of the bottom of the box.
   move up the context's letter height times 2. \ was without the times 2 ***
+  move left the width.
+  face north.
+  stroke the string with the color.
+
+to write a string with a color at the top of a box;
+to stroke a string with a color at the top of a box:
+  put the context's letter height divided by 4 into a square size. \ ***
+  \ glyphs are two squares wide plus one square of intercharacter spacing. no spacing at the end.
+  put the string's length times the square size times 3 minus the square size into a width.
+  divide the width by 2.
+  start in the middle of the top of the box.
+  move down the context's letter height times 4. \ was times 2 ***
   move left the width.
   face north.
   stroke the string with the color.
@@ -510,6 +1114,20 @@ to stroke a string with a color a radius from a center spot:
   put the color into the context's color.
   stroke the string given the center spot and the radius.
 
+to write a string with a color some twips down from the top of a box;
+to write a string with a color some twips down from the top center of a box;
+to stroke a string with a color some twips down from the top of a box;
+to stroke a string with a color some twips down from the top center of a box:
+  put the context's letter height divided by 4 into a square size. \ was 4 ***
+  \ glyphs are two squares wide plus one square of intercharacter spacing. no spacing at the end.
+  put the string's length times the square size times 3 minus the square size into a width.
+  divide the width by 2.
+  start in the middle of the top of the box.
+  move down the twips.
+  move left the width.
+  face north.
+  stroke the string with the color.
+
 to write with large letters;
 to use large letters:
   put the large letter height into the context's letter height.
@@ -521,3 +1139,7 @@ to use medium sized letters;
 to use medium-sized letters;
 to use medium letters:
   put the medium letter height into the context's letter height.
+
+to write with small letters;
+  to use small letters:
+  put the small letter height into the context's letter height.

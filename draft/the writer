@@ -65,8 +65,8 @@ to adjust a shape:
   if the shape's kind is "group", put the shape's shapes' box into the shape's box; exit.
   if the shape's kind is "picture", put the shape's picture's box into the shape's box; exit.
   if the shape's kind is "polygon", put the shape's polygon's box into the shape's box; exit.
-  if the shape's kind is "rectangle", put the shape's rectangle into the shape's box; exit.
-  if the shape's kind is "text", put the shape's text rectangle into the shape's box; exit.
+  if the shape's kind is "rectangle", put the shape's rect into the shape's box; exit.
+  if the shape's kind is "text", put the shape's text rect into the shape's box; exit.
   debug "adjust a shape: " then the shape's kind.
 
 to adjust the shape refers given a page:
@@ -79,7 +79,7 @@ to adjust the shape refers given a page:
 to adjust the text in a shape:
   if the shape is nil, exit.
   if the shape's kind is not "text", exit.
-  put the shape's text rectangle into a box.
+  put the shape's text rect into a box.
   put the text margin into a margin.
   scale the margin given the shape's scale.
   if the shape's border is not clear, add the margin to the box's left.
@@ -261,8 +261,8 @@ to change a shape given a font name:
 to change a shape given a radius:
   if the shape is nil, exit.
   if the shape's kind is "group", change the shape's shapes given the radius; exit.
-  if the shape's kind is "rectangle", change the shape's rectangle given the radius; exit.
-  if the shape's kind is "text", change the shape's text rectangle given the radius; exit.
+  if the shape's kind is "rectangle", change the shape's rect given the radius; exit.
+  if the shape's kind is "text", change the shape's text rect given the radius; exit.
 
 to change some shapes given a font height:
   get a shape from the shapes.
@@ -416,8 +416,8 @@ to copy a shape into another shape:
   put the shape's ellipse into the other shape's ellipse.
   copy the shape's picture into the other shape's picture.
   copy the shape's polygon into the other shape's polygon.
-  put the shape's rectangle into the other shape's rectangle.
-  put the shape's text rectangle into the other shape's text rectangle.
+  put the shape's rect into the other shape's rect.
+  put the shape's text rect into the other shape's text rect.
   put the shape's label into the other shape's label.
   copy the shape's text into the other shape's text.
   copy the shape's shapes into the other shape's shapes.
@@ -499,14 +499,14 @@ to create a shape given a kind (default - polygon):
 to create a shape given a kind (default - rectangle):
   create the shape.
   put the kind into the shape's kind.
-  put 0 and 0 and 1/2 inch and 1/2 inch and 0 into the shape's rectangle.
+  put 0 and 0 and 1/2 inch and 1/2 inch and 0 into the shape's rect.
 
 to create a shape given a kind (default - text):
   create the shape.
   put the kind into the shape's kind.
-  put 0 and 0 and 1/2 inch and 1/2 inch and 0 into the shape's text rectangle.
+  put 0 and 0 and 1/2 inch and 1/2 inch and 0 into the shape's text rect.
   create the shape's text.
-  put the shape's text rectangle into the shape's text's box.
+  put the shape's text rect into the shape's text's box.
   put the black color into the shape's text's pen.
   update the current font.
   put the current font into the shape's text's font.
@@ -973,12 +973,12 @@ to decide if a spot is in a shape (polygon):
 to decide if a spot is in a shape (rectangle):
   if the shape's kind is not "rectangle", say no.
   if the shape is clear, say no.
-  if the spot is not in the shape's rectangle, say no.
+  if the spot is not in the shape's rect, say no.
   say yes.
 
 to decide if a spot is in a shape (text):
   if the shape's kind is not "text", say no.
-  if the spot is not in the shape's text rectangle, say no. \ text's box may be indented
+  if the spot is not in the shape's text rect, say no. \ text's box may be indented
   say yes.
 
 to decide if a spot is in a shape on a page:
@@ -1040,12 +1040,12 @@ to decide if a spot is on a shape (polygon):
 
 to decide if a spot is on a shape (rectangle):
   if the shape's kind is not "rectangle", say no.
-  if the spot is on the shape's rectangle, say yes.
+  if the spot is on the shape's rect, say yes.
   say no.
 
 to decide if a spot is on a shape (text):
   if the shape's kind is not "text", say no.
-  if the spot is on the shape's text rectangle, say yes. \ text's box may be indented
+  if the spot is on the shape's text rect, say yes. \ text's box may be indented
   say no.
 
 to decide if a spot is on a shape on a page:
@@ -1209,13 +1209,13 @@ to draw a page:
   mask only outside the pad's box.
   draw the pad's box with the desktop color and the desktop color.
   set the drawing origin to the page's origin.
-  draw the page's rectangle with the white color and the white color.
+  draw the page's rect with the white color and the white color.
   draw the grid on the page.
   draw the page's shapes on the page.
   if the page is not being edited, draw the sizers on the page's shapes.
   if the page is not being edited, draw the vertices on the page's shapes.
   if the page is not being edited, draw the croppers on the page's shapes.
-  draw the page's rectangle with the gray color and the clear color.
+  draw the page's rect with the gray color and the clear color.
   set the drawing origin to the zero spot.
   if the focus box is not the zero box, draw the focus box (focus style).
 
@@ -1242,25 +1242,25 @@ to draw a shape on a page (polygon):
   draw the shape's polygon with the shape's border and the shape's fill.
 
 to draw a shape on a page (rectangle):
-  draw the shape's rectangle with the shape's border and the shape's fill.
+  draw the shape's rect with the shape's border and the shape's fill.
 
 to draw a shape on a page (text - editing):
-  draw the shape's text rectangle with the shape's border and the shape's fill.
+  draw the shape's text rect with the shape's border and the shape's fill.
   save the current canvas.
-  mask outside the shape's text rectangle.
+  mask outside the shape's text rect.
   draw the shape's text (editing).
   restore the current canvas.
   if the shape's border is not clear,
-    draw the shape's text rectangle with the shape's border and the clear color.
+    draw the shape's text rect with the shape's border and the clear color.
 
 to draw a shape on a page (text - not editing):
-  draw the shape's text rectangle with the shape's border and the shape's fill.
+  draw the shape's text rect with the shape's border and the shape's fill.
   save the current canvas.
-  mask outside the shape's text rectangle.
+  mask outside the shape's text rect.
   draw the shape's text.
   restore the current canvas.
   if the shape's border is not clear,
-    draw the shape's text rectangle with the shape's border and the clear color.
+    draw the shape's text rect with the shape's border and the clear color.
 
 to draw a shape on a page (text):
   if the shape is the page's edit shape,
@@ -1483,12 +1483,12 @@ to externalize a ratio given a buffer and an indent:
   externalize the ratio's numerator given the buffer and the indent.
   externalize the ratio's denominator given the buffer and the indent.
 
-to externalize a rectangle given a buffer and an indent:
-  externalize the rectangle's left given the buffer and the indent.
-  externalize the rectangle's top given the buffer and the indent.
-  externalize the rectangle's right given the buffer and the indent.
-  externalize the rectangle's bottom given the buffer and the indent.
-  externalize the rectangle's radius given the buffer and the indent.
+to externalize a rect given a buffer and an indent:
+  externalize the rect's left given the buffer and the indent.
+  externalize the rect's top given the buffer and the indent.
+  externalize the rect's right given the buffer and the indent.
+  externalize the rect's bottom given the buffer and the indent.
+  externalize the rect's radius given the buffer and the indent.
 
 to externalize a shape given a buffer and an indent:
   if the shape is nil, exit.
@@ -1539,7 +1539,7 @@ to externalize a shape given a buffer and an indent (rectangle):
   append "rectangle" to the buffer.
   externalize the shape's border given the buffer and the indent.
   externalize the shape's fill given the buffer and the indent.
-  externalize the shape's rectangle given the buffer and the indent.
+  externalize the shape's rect given the buffer and the indent.
   advance the buffer.
 
 to externalize a shape given a buffer and an indent (text):
@@ -1547,7 +1547,7 @@ to externalize a shape given a buffer and an indent (text):
   append "text" to the buffer.
   externalize the shape's border given the buffer and the indent.
   externalize the shape's fill given the buffer and the indent.
-  externalize the shape's text rectangle given the buffer and the indent.
+  externalize the shape's text rect given the buffer and the indent.
   externalize the shape's label given the buffer and the indent.
   externalize the shape's text given the buffer and the indent.
   append the space byte to the buffer given the indent.
@@ -1951,8 +1951,8 @@ to get a radius given a page:
   put 0 into the radius.
   put the page's first selected shape into a shape.
   if the shape is nil, exit.
-  if the shape's kind is "rectangle", put the shape's rectangle's radius into the radius.
-  if the shape's kind is "text", put the shape's text rectangle's radius into the radius.
+  if the shape's kind is "rectangle", put the shape's rect's radius into the radius.
+  if the shape's kind is "text", put the shape's text rect's radius into the radius.
   divide the radius by the page's scale.
 
 to get a shape refer with which to start finding given a page:
@@ -3223,10 +3223,10 @@ to internalize a ratio given a rider:
   internalize the ratio's numerator given the rider.
   internalize the ratio's denominator given the rider.
 
-to internalize a rectangle given a rider:
+to internalize a rect given a rider:
   if the i/o error is not blank, exit.
-  internalize the rectangle as a box given the rider.
-  internalize the rectangle's radius given the rider.
+  internalize the rect as a box given the rider.
+  internalize the rect's radius given the rider.
 
 to internalize a shape given a rider:
   void the shape.
@@ -3280,7 +3280,7 @@ to internalize a shape given a rider (rectangle):
   move the rider (document rules).
   internalize the shape's border given the rider.
   internalize the shape's fill given the rider.
-  internalize the shape's rectangle given the rider.
+  internalize the shape's rect given the rider.
   adjust the shape.
 
 to internalize a shape given a rider (text):
@@ -3289,7 +3289,7 @@ to internalize a shape given a rider (text):
   move the rider (document rules).
   internalize the shape's border given the rider.
   internalize the shape's fill given the rider.
-  internalize the shape's text rectangle given the rider.
+  internalize the shape's text rect given the rider.
   internalize the shape's label given the rider.
   internalize the shape's text given the rider.
   if the shape's text is nil, exit.
@@ -3514,11 +3514,11 @@ to move a shape given a pair (polygon):
   adjust the shape.
 
 to move a shape given a pair (rectangle):
-  move the shape's rectangle given the pair.
+  move the shape's rect given the pair.
   adjust the shape.
 
 to move a shape given a pair (text):
-  move the shape's text rectangle given the pair.
+  move the shape's text rect given the pair.
   move the shape's text given the pair.
   adjust the shape.
 
@@ -3776,8 +3776,8 @@ to put a page's localized visible box into a box:
   localize the other box given the page's origin.
   intersect the page's box with the other box giving the box.
 
-to put a page's rectangle into a rectangle:
-  put the page's box and 1/12 inch times the page's scale into the rectangle.
+to put a page's rect into a rect:
+  put the page's box and 1/12 inch times the page's scale into the rect.
 
 to put a page's selected shape count into a count:
   put 0 into the count.
@@ -3856,7 +3856,7 @@ to put a text's first non-blank line into a string:
     if the string is not blank, exit.
   repeat.
 
-a rectangle is a roundy box [that may have a 0 radius].
+a rect is a roundy box [that may have a 0 radius].
 
 to remember a page:
   if the page is nil, exit.
@@ -3987,13 +3987,13 @@ to resize a shape given a pair (polygon):
   adjust the shape.
 
 to resize a shape given a pair (rectangle):
-  resize the shape's rectangle given the pair.
-  normalize the shape's rectangle.
+  resize the shape's rect given the pair.
+  normalize the shape's rect.
   adjust the shape.
 
 to resize a shape given a pair (text):
-  resize the shape's text rectangle given the pair.
-  normalize the shape's text rectangle.
+  resize the shape's text rect given the pair.
+  normalize the shape's text rect.
   adjust the text in the shape.
   adjust the shape.
 
@@ -4030,13 +4030,13 @@ to resize a shape given a ratio pair (polygon):
   adjust the shape.
 
 to resize a shape given a ratio pair (rectangle):
-  resize the shape's rectangle given the ratio pair.
-  normalize the shape's rectangle.
+  resize the shape's rect given the ratio pair.
+  normalize the shape's rect.
   adjust the shape.
 
 to resize a shape given a ratio pair (text):
-  resize the shape's text rectangle given the ratio pair.
-  normalize the shape's text rectangle.
+  resize the shape's text rect given the ratio pair.
+  normalize the shape's text rect.
   adjust the text in the shape.
   adjust the shape.
 
@@ -4096,11 +4096,11 @@ to rotate a shape (polygon):
   adjust the shape.
 
 to rotate a shape (rectangle):
-  rotate the shape's rectangle.
+  rotate the shape's rect.
   adjust the shape.
 
 to rotate a shape (text):
-  rotate the shape's text rectangle.
+  rotate the shape's text rect.
   adjust the text in the shape.
   adjust the shape.
 
@@ -4153,11 +4153,11 @@ to scale a shape given a ratio (polygon):
   adjust the shape.
 
 to scale a shape given a ratio (rectangle):
-  scale the shape's rectangle given the ratio.
+  scale the shape's rect given the ratio.
   adjust the shape.
 
 to scale a shape given a ratio (text):
-  scale the shape's text rectangle given the ratio.
+  scale the shape's text rect given the ratio.
   scale the shape's text given the ratio.
   adjust the text in the shape.
   adjust the shape.
@@ -4426,8 +4426,8 @@ a shape is a thing with
   an ellipse [ellipse],
   a picture [picture],
   a polygon [polygon],
-  a rectangle [rectangle],
-  a text rectangle, a label, and a text [text],
+  a rect [rectangle],
+  a text rect, a label, and a text [text],
   some shapes [group].
 
 a shape refer is a thing with a shape (reference) [text].

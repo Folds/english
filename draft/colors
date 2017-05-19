@@ -869,7 +869,7 @@ a pastel color is a color.
 
 an pen is a color.
 
-to pick a color between another color and a third color:
+to pick a color between another color and a third color (guts):
   pick the color's hue
     between the other color's hue and the third color's hue.
   pick the color's saturation
@@ -880,7 +880,7 @@ to pick a color between another color and a third color:
 to pick a hue:
   pick the hue between 0 and 3599.
 
-to pick a solid color:
+to pick a solid color (guts):
   pick the solid color's hue.
   make the solid color be solid.
   put the solid color into the context's color.
