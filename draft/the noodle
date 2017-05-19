@@ -34,17 +34,16 @@ to add a number and another number to a pair:
   add the number to the pair's x.
   add the other number to the pair's y.
 
+to add a number to a pair:
+  add the number to the pair's x.
+  add the number to the pair's y.
+
+to add a number to a pointer;
 to add a number to another number:
   intel $8B8508000000. \ mov eax,[ebp+8] \ the number
   intel $8B00. \ mov eax,[eax]
   intel $8B9D0C000000. \ mov ebx,[ebp+12] \ the other number
   intel $0103. \ add [ebx],eax
-
-to add a number to a pair:
-  add the number to the pair's x.
-  add the number to the pair's y.
-
-to add a number to a pointer: employ add a number to another number.
 
 to add a number to a ratio:
   add the number / 1 to the ratio.
@@ -232,13 +231,6 @@ to append a string to a pdf object: \ this guys adds CRLF
 
 to append a string to a pdf object without advancing:
   append the string to the pdf object's data.
-
-to append a thing to some things:
-  if the thing is nil, exit.
-  put the things' last into the thing's previous.
-  if the things are not empty, put the thing into the things' last's next.
-  if the things are empty, put the thing into the things' first.
-  put the thing into the things' last.
 
 to append some things to some other things:
   put the things' first into a thing.
@@ -526,18 +518,11 @@ to center a box in another box (vertically):
   round the number to the nearest multiple of the tpp.
   move the box given 0 and the number.
 
-to center an ellipse in a box:
-  center the ellipse in the box (horizontally).
-  center the ellipse in the box (vertically).
-
 to center an ellipse in a box (horizontally):
   center the ellipse's box in the box (horizontally).
 
 to center an ellipse in a box (vertically):
   center the ellipse's box in the box (vertically).
-
-to center an ellipse on a spot:
-  center the ellipse's box on the spot.
 
 to center a line in a box (horizontally):
   put the box's center's x minus the line's center's x into a number.
@@ -548,11 +533,6 @@ to center a line in a box (vertically):
   put the box's center's y minus the line's center's y into a number.
   round the number to the nearest multiple of the tpp.
   move the line given 0 and the number.
-
-to center a picture in a box:
-  if the picture is nil, exit.
-  center the picture in the box (horizontally).
-  center the picture in the box (vertically).
 
 to center a picture in a box (horizontally):
   if the picture is nil, exit.
@@ -566,17 +546,6 @@ to center a picture in a box (vertically):
   round the number to the nearest multiple of the tpp.
   move the picture given 0 and the number.
 
-to center a picture on a spot:
-  if the picture is nil, exit.
-  get a difference between the spot and the picture's box's center.
-  round the difference to the nearest multiple of the tpp.
-  move the picture given the difference.
-
-to center a polygon in a box:
-  if the polygon is nil, exit.
-  center the polygon in the box (horizontally).
-  center the polygon in the box (vertically).
-
 to center a polygon in a box (horizontally):
   if the polygon is nil, exit.
   put the box's center's x minus the polygon's box's center's x into a number.
@@ -589,16 +558,6 @@ to center a polygon in a box (vertically):
   round the number to the nearest multiple of the tpp.
   move the polygon given 0 and the number.
 
-to center a polygon on a spot:
-  if the polygon is nil, exit.
-  get a difference between the spot and the polygon's box's center.
-  round the difference to the nearest multiple of the tpp.
-  move the polygon given the difference.
-
-to center a spot in a box:
-  center the spot in the box (horizontally).
-  center the spot in the box (vertically).
-
 to center a spot in a box (horizontally):
   put the box's center's x minus the spot's x into a number.
   round the number to the nearest multiple of the tpp.
@@ -608,11 +567,6 @@ to center a spot in a box (vertically):
   put the box's center's y minus the spot's y into a number.
   round the number to the nearest multiple of the tpp.
   move the spot given 0 and the number.
-
-to center a text in a box:
-  if the text is nil, exit.
-  center the text in the box (horizontally).
-  center the text in the box (vertically).
 
 to center a text in a box (horizontally):
   if the text is nil, exit.
@@ -625,12 +579,6 @@ to center a text in a box (vertically):
   put the box's center's y minus the text's box's center's y into a number.
   round the number to the nearest multiple of the tpp.
   move the text given 0 and the number.
-
-to center a text on a spot:
-  if the text is nil, exit.
-  get a difference between the spot and the text's box's center.
-  round the difference to the nearest multiple of the tpp.
-  move the text given the difference.
 
 to change a roundy box given a radius:
   put the radius into the roundy box's radius.
@@ -917,10 +865,6 @@ to convert a flag to a hex string:
   copy bytes from the flag's whereabouts to the hex string's first for the flag's magnitude.
   put the hex string's first plus the flag's magnitude minus 1 into the hex string's last.
 
-to convert a flag to a string:
-  if the flag is set, put "yes" into the string; exit.
-  put "no" into the string.
-
 to convert a font to an hfont:
   privatize the font.
   null terminate the font's name.
@@ -1033,34 +977,16 @@ to convert a nibble string to a hex string:
     add 1 to the substring's first.
   repeat.
 
-to convert a number to a hex string:
-  reassign the hex string's first given the number's magnitude.
-  copy bytes from the number's whereabouts to the hex string's first for the number's magnitude.
-  put the hex string's first plus the number's magnitude minus 1 into the hex string's last.
-
-to convert a number to a nibble string:
-  split the number into a wyrd and another wyrd.
-  convert the wyrd to the nibble string.
-  convert the other wyrd to another nibble string.
-  append the other nibble string to the nibble string.
+to convert a number to a byte;
+to put a number into a byte:
+  intel $8B8508000000. \ mov eax,[ebp+8] \ the number
+  intel $8B00.         \ mov eax,[eax]
+  intel $8B9D0C000000. \ mov ebx,[ebp+12] \ the byte
+  intel $8803.         \ mov [ebx],al
 
 to convert a number to pdf em units given an emsquare number and a font:
   multiply the number by the emsquare / the font's adjusted height.
   multiply the number by 1000 / the emsquare.
-
-to convert a number to a string:
-  clear the string.
-  privatize the number.
-  de-sign the number.
-  loop.
-    divide the number by 10 giving a quotient and a remainder.
-    add 48 to the remainder.
-    put the remainder into a byte.
-    prepend the byte to the string.
-    if the quotient is 0, break.
-    put the quotient into the number.
-  repeat.
-  if the original number is less than 0, prepend the dash byte to the string.
 
 to convert a pchar to a string:
   clear the string.
@@ -1080,9 +1006,18 @@ to convert a pointer and a length to a string:
   copy bytes from the pointer to the string's first for the length.
   put the string's first plus the length minus 1 into the string's last.
 
-to convert a pointer to a hex string: employ convert a number to a hex string.
+to convert a pointer to a hex string;
+to convert a number to a hex string:
+  reassign the hex string's first given the number's magnitude.
+  copy bytes from the number's whereabouts to the hex string's first for the number's magnitude.
+  put the hex string's first plus the number's magnitude minus 1 into the hex string's last.
 
-to convert a pointer to a nibble string: employ convert a number to a nibble string.
+to convert a pointer to a nibble string;
+to convert a number to a nibble string:
+  split the number into a wyrd and another wyrd.
+  convert the wyrd to the nibble string.
+  convert the other wyrd to another nibble string.
+  append the other nibble string to the nibble string.
 
 to convert a pointer to a string:
   convert the pointer to the string as a nibble string.
@@ -1132,21 +1067,6 @@ to convert a ratio to a mixed:
   divide the ratio's numerator by the ratio's denominator
     giving the mixed's whole number and a remainder.
   put the remainder and the ratio's denominator into the mixed's ratio.
-
-to convert a ratio to a string:
-  clear the string.
-  privatize the ratio.
-  if the ratio is negative, put "-" into the string; de-sign the ratio.
-  reduce the ratio.
-  convert the ratio to a mixed.
-  if the mixed is 0, append "0" to the string; exit.
-  if the mixed's whole number is not 0,
-    append the mixed's whole number to the string.
-  if the mixed's ratio is 0, exit.
-  if the mixed's whole number is not 0,
-    append the dash byte to the string.
-  append the mixed's numerator then "/" then the mixed's denominator
-    to the string.
 
 to convert a ratio to a string given a number:
   \ converts to a decimal representation with "the number" of places
@@ -1340,9 +1260,6 @@ to convert a string to a wide string:
 to convert a string to a wide string and null terminate:
   convert the string to the wide string.
   null terminate the wide string.
-
-to convert a timer to a string:
-  convert the timer's ticks to the string.
 
 to convert a url to a url record:
   privatize the url.
@@ -2222,8 +2139,19 @@ to decide if a finger is past the end of a string:
   if the finger is greater than the string's last, say yes.
   say no.
 
-to decide if a flag is another flag: employ a number is another number.
+to decide if a flag is another flag;
+to decide if a pointer is a number;
+to decide if a pointer is another pointer;
+to decide if a number is another number:
+  intel $C7C001000000. \ mov eax,1        \ assume true
+  intel $8B9D08000000. \ mov ebx,[ebp+8]  \ the number
+  intel $8B1B.         \ mov ebx,[ebx]
+  intel $8B8D0C000000. \ mov ecx,[ebp+12] \ the other number
+  intel $3B19.         \ cmp ebx,[ecx]
+  intel $0F8406000000. \ je over the next 1 statement
+  intel $C7C000000000. \ mov eax,0        \ now it's false
 
+to decide if a flag is on;
 to decide if a flag is set:
   if the flag is yes, say yes.
   say no.
@@ -2250,6 +2178,30 @@ to decide if an index is empty:
     if the bucket is nil, say yes.
     if the bucket's refers are not empty, say no.
   repeat.
+
+to decide if an input is from windows telling us to refresh the cursor;
+to decide if an input is from windows telling us to set the cursor:
+  if the input is nil, say no.
+  if the input's kind is "set cursor", say yes.
+  say no.
+
+to decide if an input is from windows telling us to show all our stuff;
+to decide if an input is from windows telling us to show all of our stuff;
+to decide if an input is from windows telling us to redraw all our stuff;
+to decide if an input is from windows telling us to redraw all of our stuff:
+  if the input is nil, say no.
+  if the input's kind is "refresh", say yes.
+  say no.
+
+to decide if an input is from windows telling us we're done;
+to decide if an input is from windows telling us that we're done;
+to decide if an input is from windows telling us the user has quit:
+  if the input is nil, say yes.
+
+to decide if an input is a left click:
+  void the left click.
+  if the input's kind is not "left click", say no.
+  put the input into the left click.
 
 to decide if an item is found:
   if the item's kind is not blank, say yes.
@@ -2381,26 +2333,9 @@ to decide if a number and another number are similarly signed:
   if the first sign is the other sign, say yes.
   say no.
 
-to decide if a number is another number:
-  intel $C7C001000000. \ mov eax,1        \ assume true
-  intel $8B9D08000000. \ mov ebx,[ebp+8]  \ the number
-  intel $8B1B.         \ mov ebx,[ebx]
-  intel $8B8D0C000000. \ mov ecx,[ebp+12] \ the other number
-  intel $3B19.         \ cmp ebx,[ecx]
-  intel $0F8406000000. \ je over the next 1 statement
-  intel $C7C000000000. \ mov eax,0        \ now it's false
-
 to decide if a number is another number and a string is another string:
   if the number is not the other number, say no.
   if the string is not the other string, say no.
-  say yes.
-
-to decide if a number is at least another number:
-  if the number is less than the other number, say no.
-  say yes.
-
-to decide if a number is at most another number:
-  if the number is greater than the other number, say no.
   say yes.
 
 to decide if a number is between another number and a third number:
@@ -2424,44 +2359,12 @@ to decide if a number is evenly divisible by another number:
   if the remainder is 0, say yes.
   say no.
 
-to decide if a number is greater than another number:
-  intel $C7C001000000. \ mov eax,1 \ assume true
-  intel $8B9D08000000. \ mov ebx,[ebp+8] \ the number
-  intel $8B1B.         \ mov ebx,[ebx]
-  intel $8B8D0C000000. \ mov ecx,[ebp+12] \ the other number
-  intel $3B19.         \ cmp ebx,[ecx]
-  intel $0F8F06000000. \ jg over the next 1 statement
-  intel $C7C000000000. \ mov eax,0 \ now it's false
-
-to decide if a number is greater than or equal to another number:
-  intel $C7C001000000. \ mov eax,1 \ assume true
-  intel $8B9D08000000. \ mov ebx,[ebp+8] \ the number
-  intel $8B1B.         \ mov ebx,[ebx]
-  intel $8B8D0C000000. \ mov ecx,[ebp+12] \ the other number
-  intel $3B19.         \ cmp ebx,[ecx]
-  intel $0F8D06000000. \ jge over the next 1 statement
-  intel $C7C000000000. \ mov eax,0 \ now it's false
-
-to decide if a number is less than another number:
-  intel $C7C001000000. \ mov eax,1 \ assume true
-  intel $8B9D08000000. \ mov ebx,[ebp+8] \ the number
-  intel $8B1B.         \ mov ebx,[ebx]
-  intel $8B8D0C000000. \ mov ecx,[ebp+12] \ the other number
-  intel $3B19.         \ cmp ebx,[ecx]
-  intel $0F8C06000000. \ jl over the next 1 statement
-  intel $C7C000000000. \ mov eax,0 \ now it's false
-
-to decide if a number is less than or equal to another number:
-  intel $C7C001000000. \ mov eax,1 \ assume true
-  intel $8B9D08000000. \ mov ebx,[ebp+8] \ the number
-  intel $8B1B.         \ mov ebx,[ebx]
-  intel $8B8D0C000000. \ mov ecx,[ebp+12] \ the other number
-  intel $3B19.         \ cmp ebx,[ecx]
-  intel $0F8E06000000. \ jle over the next 1 statement
-  intel $C7C000000000. \ mov eax,0 \ now it's false
-
 to decide if a number is more than another number:
   if the number is greater than the other number, say yes.
+  say no.
+
+to decide if a number is a multiple of another number:
+  if the number is evenly divisible by the other number, say yes.
   say no.
 
 to decide if a number is negative:
@@ -2540,21 +2443,68 @@ to decide if a path is read-only:
   if the number is not 0, say yes.
   say no.
 
-to decide if a pointer is another pointer: employ a number is another number.
+to decide if a pointer can be found;
+to decide if a pointer is coming;
+to decide if a pointer is found;
+to decide if a pointer was found;
+to decide if a pointer is there;
+to decide if a pointer does exist:
+if the pointer is nil, say no.
+  say yes.
 
 to decide if a pointer is at least another pointer:
   if the pointer is greater than or equal to the other pointer, say yes.
   say no.
 
-to decide if a pointer is greater than another pointer: employ a number is greater than another number.
+to decide if a pointer is greater than another pointer;
+to decide if a number is greater than another number:
+  intel $C7C001000000. \ mov eax,1 \ assume true
+  intel $8B9D08000000. \ mov ebx,[ebp+8] \ the number
+  intel $8B1B.         \ mov ebx,[ebx]
+  intel $8B8D0C000000. \ mov ecx,[ebp+12] \ the other number
+  intel $3B19.         \ cmp ebx,[ecx]
+  intel $0F8F06000000. \ jg over the next 1 statement
+  intel $C7C000000000. \ mov eax,0 \ now it's false
 
-to decide if a pointer is greater than or equal to another pointer: employ a number is greater than or equal to another number.
+to decide if a pointer is greater than or equal to another pointer;
+to decide if a number is another number or more;
+to decide if a number is at least another number;
+to decide if a number is greater than or equal to another number:
+  intel $C7C001000000. \ mov eax,1 \ assume true
+  intel $8B9D08000000. \ mov ebx,[ebp+8] \ the number
+  intel $8B1B.         \ mov ebx,[ebx]
+  intel $8B8D0C000000. \ mov ecx,[ebp+12] \ the other number
+  intel $3B19.         \ cmp ebx,[ecx]
+  intel $0F8D06000000. \ jge over the next 1 statement
+  intel $C7C000000000. \ mov eax,0 \ now it's false
 
-to decide if a pointer is less than another pointer: employ a number is less than another number.
+to decide if a pointer is less than another pointer;
+to decide if a number is less than another number:
+  intel $C7C001000000. \ mov eax,1 \ assume true
+  intel $8B9D08000000. \ mov ebx,[ebp+8] \ the number
+  intel $8B1B.         \ mov ebx,[ebx]
+  intel $8B8D0C000000. \ mov ecx,[ebp+12] \ the other number
+  intel $3B19.         \ cmp ebx,[ecx]
+  intel $0F8C06000000. \ jl over the next 1 statement
+  intel $C7C000000000. \ mov eax,0 \ now it's false
 
-to decide if a pointer is less than or equal to another pointer: employ a number is less than or equal to another number.
+to decide if a pointer is less than or equal to another pointer;
+to decide if a number is at most another number;
+to decide if a number is another number or less;
+to decide if a number is another number or fewer;
+to decide if a number is less than or equal to another number:
+  intel $C7C001000000. \ mov eax,1 \ assume true
+  intel $8B9D08000000. \ mov ebx,[ebp+8] \ the number
+  intel $8B1B.         \ mov ebx,[ebx]
+  intel $8B8D0C000000. \ mov ecx,[ebp+12] \ the other number
+  intel $3B19.         \ cmp ebx,[ecx]
+  intel $0F8E06000000. \ jle over the next 1 statement
+  intel $C7C000000000. \ mov eax,0 \ now it's false
 
-to decide if a pointer is a number: employ a number is another number.
+to decide if a pointer is missing;
+to decide if a pointer is null and void:
+  if the pointer is nil, say yes.
+  say no.
 
 to decide if a polygon is closed:
   if the polygon is nil, say no.
@@ -2893,17 +2843,26 @@ to decide if a string does contain another string:
   if the other string is in the string, say yes.
   say no.
 
-to decide if a string does end with another string: employ a string ends with another string.
-
-to decide if a string does start with another string: employ a string starts with another string.
-
-to decide if a string does start with a byte: employ a string starts with a byte.
-
+to decide if a string does end with another string;
 to decide if a string ends with another string:
   if the other string's length is greater than the string's length, say no.
   slap a substring on the string.
   put the substring's last minus the other string's length plus 1 into the substring's first.
   if the substring is the other string, say yes.
+  say no.
+
+to decide if a string does start with another string;
+to decide if a string starts with another string:
+  if the other string's length is greater than the string's length, say no.
+  slap a substring on the string.
+  put the substring's first plus the other string's length minus 1 into the substring's last.
+  if the substring is the other string, say yes.
+  say no.
+
+to decide if a string does start with a byte;
+to decide if a string starts with a byte:
+  if the string is blank, say no.
+  if the string's first's target is the byte, say yes.
   say no.
 
 to decide if a string is another string:
@@ -3103,18 +3062,6 @@ to decide if a string is wrapped in double-quotes:
   if the string's  last's target is not the double-quote byte, say no.
   say yes.
 
-to decide if a string starts with another string:
-  if the other string's length is greater than the string's length, say no.
-  slap a substring on the string.
-  put the substring's first plus the other string's length minus 1 into the substring's last.
-  if the substring is the other string, say yes.
-  say no.
-
-to decide if a string starts with a byte:
-  if the string is blank, say no.
-  if the string's first's target is the byte, say yes.
-  say no.
-
 to decide if a substring is on any contraction:
   put the substring's first plus 1 into a byte pointer.
   if the byte pointer is greater than the substring's last, say no.
@@ -3241,15 +3188,6 @@ to deduplicate some string things:
 the default font is a font.
 
 the default smtp server is "localhost".
-
-to deque an event:
-  yield to windows.
-  put the event queue's first into the event.
-  if the event is nil, repeat.
-  remove the event from the event queue.
-  if the event's kind is "done", destroy the event; exit.
-  destroy the current event.
-  put the event into the current event.
 
 to deselect a text:
   if the text is nil, exit.
@@ -3398,29 +3336,6 @@ a directory name w/o backslash is a string.
 
 a distance is a number.
 
-to divide a number by another number:
-  if the other number is 0, put the largest number into the number; exit.
-  intel $8B8508000000. \ mov eax,[ebp+8]  \ the number
-  intel $8B9D0C000000. \ mov ebx,[ebp+12] \ the other number
-  intel $8B00.         \ mov eax,[eax]
-  intel $99.           \ cdq
-  intel $F73B.         \ div [ebx]        \ means div eax,[ebx] but is weird form
-  intel $8B9D08000000. \ mov ebx,[ebp+8]  \ the number
-  intel $8903.         \ mov [ebx],eax
-
-to divide a number by another number giving a quotient and a remainder:
-  if the other number is 0,
-    put the largest number into the number; put 0 into the remainder; exit.
-  intel $8B8508000000. \ mov eax,[ebp+8]  \ the number
-  intel $8B9D0C000000. \ mov ebx,[ebp+12] \ the other number
-  intel $8B00.         \ mov eax,[eax]
-  intel $99.           \ cdq
-  intel $F73B.         \ idiv [ebx]       \ means idiv eax,[ebx] but is weird form
-  intel $8B9D10000000. \ mov ebx,[ebp+16] \ the quotient
-  intel $8903.         \ mov [ebx],eax
-  intel $8B9D14000000. \ mov ebx,[ebp+20] \ the remainder
-  intel $8913.         \ mov [ebx],edx
-
 to divide a number by another number returning a ratio:
   put the number and the other number into the ratio.
   reduce the ratio.
@@ -3442,9 +3357,30 @@ to divide a pair by a number and another number:
   divide the pair's x by the number.
   divide the pair's y by the other number.
 
-to divide a pointer by a number: employ divide a number by another number.
+to divide a pointer by a number;
+to divide a number by another number:
+  if the other number is 0, put the largest number into the number; exit.
+  intel $8B8508000000. \ mov eax,[ebp+8]  \ the number
+  intel $8B9D0C000000. \ mov ebx,[ebp+12] \ the other number
+  intel $8B00.         \ mov eax,[eax]
+  intel $99.           \ cdq
+  intel $F73B.         \ div [ebx]        \ means div eax,[ebx] but is weird form
+  intel $8B9D08000000. \ mov ebx,[ebp+8]  \ the number
+  intel $8903.         \ mov [ebx],eax
 
-to divide a pointer by a number giving a quotient and a remainder: employ to divide a number by another number giving a quotient and a remainder.
+to divide a pointer by a number giving a quotient and a remainder;
+to divide a number by another number giving a quotient and a remainder:
+  if the other number is 0,
+    put the largest number into the number; put 0 into the remainder; exit.
+  intel $8B8508000000. \ mov eax,[ebp+8]  \ the number
+  intel $8B9D0C000000. \ mov ebx,[ebp+12] \ the other number
+  intel $8B00.         \ mov eax,[eax]
+  intel $99.           \ cdq
+  intel $F73B.         \ idiv [ebx]       \ means idiv eax,[ebx] but is weird form
+  intel $8B9D10000000. \ mov ebx,[ebp+16] \ the quotient
+  intel $8903.         \ mov [ebx],eax
+  intel $8B9D14000000. \ mov ebx,[ebp+20] \ the remainder
+  intel $8913.         \ mov [ebx],edx
 
 to divide a ratio by another ratio:
   privatize the other ratio.
@@ -3501,6 +3437,10 @@ to draw a box (focus style):
   call "user32.dll" "DrawFocusRect" with the current canvas and the box's whereabouts.
   normalize the current canvas.
 
+to draw a box in a color;
+to draw a box with a color:
+  draw the box with the color and the clear color.
+
 to draw a box with a border color and a fill color:
   if the pdf state's page flag is set, draw the box with the border and the fill (pdf style); exit.
   privatize the box.
@@ -3519,9 +3459,6 @@ to draw a box with a border color and a fill color (pdf style):
   output the box's y-extent without advancing.
   output "re".
   output stroke and fill given the border and the fill.
-
-to draw a box with a color:
-  draw the box with the color and the color.
 
 to draw the caret in a text:
   if the text is nil, exit.
@@ -4211,6 +4148,11 @@ an environment variable is a string.
 
 an environment variable name is a string.
 
+to erase the insides of a box;
+to erase inside a box;
+to clear inside a box:
+  draw the box with the clear color and the black color.
+
 an event is a thing with
   a kind,
   a shift flag,
@@ -4667,6 +4609,8 @@ to flip a polygon:
 to flip a ratio:
   swap the ratio's numerator with the ratio's denominator.
 
+to flush all input;
+to flush all inputs;
 to flush all events:
   flush any messages.
   flush the event queue.
@@ -5407,18 +5351,6 @@ to handle any wm-create with a window:
 to handle any wm-destroy:
   call "user32.dll" "PostQuitMessage" with 0.
 
-to handle any wm-keydown with a w-param and an l-param:
-  put the w-param into a key.
-  if the key with the l-param is any repeated escape or modifier key, exit.
-  if the key is any wm-char key, exit.
-  create an event.
-  put "key down" into the event's kind.
-  if the   alt key was down, set the event's alt flag.
-  if the  ctrl key was down, set the event's ctrl flag.
-  if the shift key was down, set the event's shift flag.
-  put the key into the event's key.
-  enque the event.
-
 to handle any wm-lbuttondblclk with a l-param:
   create an event.
   put "left double click" into the event's kind.
@@ -5541,7 +5473,18 @@ to handle any wm-settingchange:
   put "setting change" into the event's kind.
   enque the event.
 
-to handle any wm-syskeydown with a w-param and an l-param: employ handle any wm-keydown with a w-param and an l-param.
+to handle any wm-syskeydown with a w-param and an l-param;
+to handle any wm-keydown with a w-param and an l-param:
+  put the w-param into a key.
+  if the key with the l-param is any repeated escape or modifier key, exit.
+  if the key is any wm-char key, exit.
+  create an event.
+  put "key down" into the event's kind.
+  if the   alt key was down, set the event's alt flag.
+  if the  ctrl key was down, set the event's ctrl flag.
+  if the shift key was down, set the event's shift flag.
+  put the key into the event's key.
+  enque the event.
 
 to handle copy given a text:
   if the text is nil, exit.
@@ -6373,6 +6316,8 @@ to initialize a window placement:
 to initialize winsock:
     call "ws2_32.dll" "WSAStartup" with 2 and a wsadata's whereabouts.
 
+an input is an event.
+
 to insert a byte into a text:
   if the text is nil, exit.
   put the byte into a string.
@@ -6588,6 +6533,8 @@ the largest square root is a number equal to 46340.
 
 an lcm is a number.
 
+a left click is an input.
+
 a length is a number.
 
 a letter height is some twips. \ indicates actual height of a typical uppercase letter
@@ -6687,6 +6634,17 @@ to load the lexicon given a path:
   if the i/o error is not blank, repeat.
   load the lexicon given the buffer.
   repeat.
+
+to load a path into a buffer;
+to read a path into a buffer:
+  put the largest number in a size called max bytes.
+  read the path into the buffer given the max bytes.
+
+to load a path into a picture:
+to read a path into a picture:
+  read the path into a buffer.
+  if the i/o error is not blank, void the picture; exit.
+  create the picture given the buffer.
 
 to localize a box given a pair:
   privatize the pair.
@@ -7124,12 +7082,13 @@ to move a line given some x twips and some y twips:
 to move a line left some twips:
   move the line given - the twips and 0.
 
-to move a line right some twips:
-  move the line given the twips and 0.
-
 to move a line to a spot:
   get a difference between the spot and the line's start.
   move the line given the difference.
+
+to move a line some twips to the right;
+to move a line right some twips:
+  move the line given the twips and 0.
 
 to move a line up one pixel:
   move the line up the tpp.
@@ -7271,9 +7230,6 @@ to move a rider given a separator byte:
 to move a spot to another spot:
   put the other spot into the spot.
 
-to move a spot down some twips:
-  move the spot given 0 and the twips.
-
 to move a spot given a pair:
   move the spot given the pair's x and the pair's y.
 
@@ -7281,12 +7237,26 @@ to move a spot given some x twips and some y twips:
   add the x twips to the spot's x.
   add the y twips to the spot's y.
 
+to move a spot some twips down;
+to move a spot down some twips:
+  move the spot given 0 and the twips.
+
+to move a spot some twips to the left;
+to move a spot some twips left;
 to move a spot left some twips:
   move the spot given - the twips and 0.
 
+to move a spot some twips right;
+to move a spot some twips to the right;
 to move a spot right some twips:
   move the spot given the twips and 0.
 
+to move a spot some twips to the right and some other twips down;
+to move a spot some twips right and some other twips down:
+  add the twips to the spot's x.
+  add the other twips to the spot's y.
+
+to move a spot some twips up;
 to move a spot up some twips:
   move the spot given 0 and - the twips.
 
@@ -7375,20 +7345,17 @@ a msg is a record with
   a number called time,
   a spot called pt.
 
-to multiply a number by another number:
-  intel $8B8508000000. \ mov eax,[ebp+8] \ the number
-  intel $8B00.         \ mov eax,[eax]
-  intel $8B9D0C000000. \ mov ebx,[ebp+12] \ the other number
-  intel $F72B.         \ mul [ebx] \ means mul eax,[ebx] but is weird form
-  intel $8B9D08000000. \ mov ebx,[ebp+8] \ the number
-  intel $8903.         \ mov [ebx],eax
+a multiple is a number.
 
 to multiply a number by another number returning a number called result:
   privatize the number.
   multiply the number by the other number.
   put the number in the result.
 
-to multiply a number by a ratio: employ scale a number given a ratio.
+to multiply a number by a ratio;
+to scale a number given a ratio:
+  if the ratio's denominator is 0, exit.
+  call "kernel32.dll" "MulDiv" with the number and the ratio's numerator and the ratio's denominator returning the number.
 
 to multiply a pair by another pair:
   multiply the pair's x by the other pair's x.
@@ -7402,12 +7369,14 @@ to multiply a pair by a number and another number:
   multiply the pair's x by the number.
   multiply the pair's y by the other number.
 
-to multiply a pointer by a number: employ multiply a number by another number.
-
-to multiply a ratio by another ratio:
-  multiply the ratio's numerator by the other ratio's numerator.
-  multiply the ratio's denominator by the other ratio's denominator.
-  reduce the ratio.
+to multiply a pointer by a number;
+to multiply a number by another number:
+  intel $8B8508000000. \ mov eax,[ebp+8] \ the number
+  intel $8B00.         \ mov eax,[eax]
+  intel $8B9D0C000000. \ mov ebx,[ebp+12] \ the other number
+  intel $F72B.         \ mul [ebx] \ means mul eax,[ebx] but is weird form
+  intel $8B9D08000000. \ mov ebx,[ebp+8] \ the number
+  intel $8903.         \ mov [ebx],eax
 
 to multiply a ratio by a number:
   multiply the ratio's numerator by the number.
@@ -7574,6 +7543,8 @@ to outdent any selected rows in a text:
       remove the first byte from the row's string.
   repeat.
 
+to outdent a box some twips;
+to outdent a box given some twips;
 to outdent a box given a number:
   subtract the number from the box's left.
   subtract the number from the box's top.
@@ -8012,6 +7983,12 @@ to put the actual data of a font into a buffer:
   put the buffer's first plus the count minus 1 into the buffer's last.
   destroy the hfont of the memory canvas.
 
+to put the bottom of a box into a horizontal line;
+to put the bottom edge of a box into a horizontal line;
+to put the bottom side of a box into a horizontal line:
+  put the box's left-bottom into the horizontal line's start.
+  put the box's right-bottom into the horizontal line's end.
+
 to put the bottom of a box into a line:
   make the line with the box's left-bottom and the box's right-bottom.
 
@@ -8093,9 +8070,9 @@ to put a box's right-top into a spot:
   put the box's right into the spot's x.
   put the box's top into the spot's y.
 
-to put a box's top line into a line:
-  put the box's left and the box's top into the line's start.
-  put the box's right and the box's top into the line's end.
+to put a box's top line into a horizontal line:
+  put the box's left and the box's top into the horizontal line's start.
+  put the box's right and the box's top into the horizontal line's end.
 
 to put a box's top-center into a spot:
   put the box's center's x into the spot's x.
@@ -8170,31 +8147,35 @@ to put eax into a byte:
   intel $8B9D08000000. \ mov ebx,[ebp+8] \ the number
   intel $8803.         \ mov [ebx],al
 
-to put eax into a flag: employ put eax into a number.
-
+to put eax into a flag;
+to put eax into a pointer;
 to put eax into a number:
   intel $8B9D08000000. \ mov ebx,[ebp+8] \ the number
   intel $8903.         \ mov [ebx],eax
-
-to put eax into a pointer: employ put eax into a number.
 
 to put eax into a wyrd:
   intel $8B9D08000000. \ mov ebx,[ebp+8] \ the wyrd
   intel $668903.       \ mov [ebx],ax
 
+to put an ellipse in the middle of a box;
+to center an ellipse in a box:
+  center the ellipse in the box (horizontally).
+  center the ellipse in the box (vertically).
+
 to put an ellipse into another ellipse:
   put the ellipse's box into the other ellipse's box.
+
+to put an ellipse on a spot;
+to center an ellipse on a spot:
+  center the ellipse's box on the spot.
 
 to put a finger on the first character of a string:
   put the string's first into the finger.
 
-to put a flag into another flag: employ put a number into another number.
-
-to put a flag into eax: employ put a number into eax.
-
-to put a flag into a number: employ put a number into another number.
-
-to put a flag into a string: employ convert a flag to a string.
+to put a flag into a string;
+to convert a flag to a string:
+  if the flag is set, put "yes" into the string; exit.
+  put "no" into the string.
 
 to put a font into another font:
   if the font is the other font, exit.
@@ -8336,39 +8317,32 @@ to put a number and another number into a ratio:
   put the number into the ratio's numerator.
   put the other number into the ratio's denominator.
 
-to put a number into another number:
-  intel $8B8508000000. \ mov eax,[ebp+8] \ the number
-  intel $8B00.         \ mov eax,[eax]
-  intel $8B9D0C000000. \ mov ebx,[ebp+12] \ the other number
-  intel $8903.         \ mov [ebx],eax
-
 to put a number into a big-endian unsigned wyrd:
   put the number into a wyrd.
   put the wyrd into the big-endian unsigned wyrd.
-
-to put a number into a byte:
-  intel $8B8508000000. \ mov eax,[ebp+8] \ the number
-  intel $8B00.         \ mov eax,[eax]
-  intel $8B9D0C000000. \ mov ebx,[ebp+12] \ the byte
-  intel $8803.         \ mov [ebx],al
-
-to put a number into eax:
-  intel $8B9D08000000. \ mov ebx,[ebp+8] \ the number
-  intel $8B03.         \ mov eax,[ebx]
-
-to put a number into a flag: employ put a number into another number.
 
 to put a number into a pair:
   put the number into the pair's x.
   put the number into the pair's y.
 
-to put a number into a pointer: employ put a number into another number.
-
 to put a number into a ratio:
   put the number into the ratio's numerator.
   put 1 into the ratio's denominator.
 
-to put a number into a string: employ convert a number to a string.
+to put a number into a string;
+to convert a number to a string:
+  clear the string.
+  privatize the number.
+  de-sign the number.
+  loop.
+    divide the number by 10 giving a quotient and a remainder.
+    add 48 to the remainder.
+    put the remainder into a byte.
+    prepend the byte to the string.
+    if the quotient is 0, break.
+    put the quotient into the number.
+  repeat.
+  if the original number is less than 0, prepend the dash byte to the string.
 
 to put a number into a wyrd:
   intel $8B8508000000. \ mov eax,[ebp+8] \ the number
@@ -8392,11 +8366,53 @@ to put a pair's absolute value into another pair:
   put the pair into the other pair.
   de-sign the other pair.
 
-to put a pointer into another pointer: employ put a number into another number.
+to put a picture in the middle of a box;
+to center a picture in a box:
+  if the picture is nil, exit.
+  center the picture in the box (horizontally).
+  center the picture in the box (vertically).
 
-to put a pointer into eax: employ put a number into eax.
+to put a picture on a spot;
+to center a picture on a spot:
+  if the picture is nil, exit.
+  get a difference between the spot and the picture's box's center.
+  round the difference to the nearest multiple of the tpp.
+  move the picture given the difference.
 
-to put a pointer into a number: employ put a number into another number.
+to put a pointer into another pointer;
+to put a pointer into a number;
+to put a number into a flag;
+to put a number into a pointer;
+to put a flag into another flag;
+to put a flag into a number;
+to put a number into another number:
+  intel $8B8508000000. \ mov eax,[ebp+8] \ the number
+  intel $8B00.         \ mov eax,[eax]
+  intel $8B9D0C000000. \ mov ebx,[ebp+12] \ the other number
+  intel $8903.         \ mov [ebx],eax
+
+to put a pointer into eax;
+to put a flag into eax;
+to put a number into eax:
+  intel $8B9D08000000. \ mov ebx,[ebp+8] \ the number
+  intel $8B03.         \ mov eax,[ebx]
+
+to put a polygon in the middle of a box;
+to center a polygon in a box:
+  if the polygon is nil, exit.
+  center the polygon in the box (horizontally).
+  center the polygon in the box (vertically).
+
+to put a polygon in the middle of the screen;
+to center a polygon on the screen:
+  center the polygon in the screen's box.
+
+to put a polygon on a spot;
+to center a polygon on a spot:
+  if the polygon is nil, exit.
+  get a difference between the spot and the polygon's box's center.
+  round the difference to the nearest multiple of the tpp.
+  move the polygon given the difference.
 
 to put a polygon's box into a box:
   if the polygon is nil, clear the box; exit.
@@ -8467,7 +8483,21 @@ to put a ratio into another ratio:
   put the ratio's numerator into the other ratio's numerator.
   put the ratio's denominator into the other ratio's denominator.
 
-to put a ratio into a string: employ convert a ratio to a string.
+to put a ratio into a string;
+to convert a ratio to a string:
+  clear the string.
+  privatize the ratio.
+  if the ratio is negative, put "-" into the string; de-sign the ratio.
+  reduce the ratio.
+  convert the ratio to a mixed.
+  if the mixed is 0, append "0" to the string; exit.
+  if the mixed's whole number is not 0,
+    append the mixed's whole number to the string.
+  if the mixed's ratio is 0, exit.
+  if the mixed's whole number is not 0,
+    append the dash byte to the string.
+  append the mixed's numerator then "/" then the mixed's denominator
+    to the string.
 
 to put a ratio pair into another ratio pair:
   put the ratio pair's ratio into the other ratio pair's ratio.
@@ -8479,6 +8509,12 @@ to put a ratio's absolute value into another ratio:
 
 to put a rider into another rider:
   copy bytes from the rider's whereabouts to the other rider's whereabouts for the rider's magnitude.
+
+to put the right of a box into a vertical line;
+to put the right edge of a box into a vertical line;
+to put the right side of a box into a vertical line:
+  put the box's right-top into the vertical line's start.
+  put the box's right-bottom into the vertical line's end.
 
 to put a roundy box into another roundy box:
   put the roundy box's left into the other roundy box's left.
@@ -8515,6 +8551,11 @@ to put a spot and another spot into an ellipse:
 to put a spot and another spot into a line:
   put the spot into the line's start.
   put the other spot into the line's end.
+
+to put a spot in the middle of a box;
+to center a spot in a box:
+  center the spot in the box (horizontally).
+  center the spot in the box (vertically).
 
 to put the square root of a number in a number called result:
   \ Rounds down.  Finds magnitude of the square root.
@@ -8666,6 +8707,19 @@ to put the system's tick count into some ticks: \ wraps every 24.8 days or so
   call "kernel32.dll" "GetTickCount" returning the ticks.
   bitwise and the ticks with the largest number.
 
+to put a text in the middle of a box;
+to center a text in a box:
+  if the text is nil, exit.
+  center the text in the box (horizontally).
+  center the text in the box (vertically).
+
+to put a text on a spot;
+to center a text on a spot:
+  if the text is nil, exit.
+  get a difference between the spot and the text's box's center.
+  round the difference to the nearest multiple of the tpp.
+  move the text given the difference.
+
 to put a text's first line into a string:
   if the text is nil, clear the string; exit.
   put the text's first row's string into the string.
@@ -8731,6 +8785,14 @@ to put a text's status string into a string:
   append ":" to the string.
   append the text's caret column# to the string.
 
+to put a thing at the end of some things;
+to append a thing to some things:
+  if the thing is nil, exit.
+  put the things' last into the thing's previous.
+  if the things are not empty, put the thing into the things' last's next.
+  if the things are empty, put the thing into the things' first.
+  put the thing into the things' last.
+
 to put some things into some other things:
   put the things' first into the other things' first.
   put the things' last into the other things' last.
@@ -8743,7 +8805,9 @@ to put some things' count into a count:
     add 1 to the count.
   repeat.
 
-to put a timer into a string: employ convert a timer to a string.
+to put a timer into a string;
+to convert a timer to a string:
+  convert the timer's ticks to the string.
 
 to put a timer's string into a string:
   convert the timer's ticks to the string.
@@ -8799,6 +8863,14 @@ to put an x coord and a y coord and another x coord and another y coord into a l
 a query byte is a query string.
 
 a query string is a string.
+
+to quit;
+to tell Windows we're done;
+to relinquish control:
+  flush the event queue.
+  create an event.
+  put "done" into the event's kind.
+  enque the event.
 
 to quote a string: \ inserts leading, trailing and nested double-quotes
   put the double-quote byte into another string.
@@ -8866,10 +8938,6 @@ to read a number:
   read a string.
   convert the string to the number.
 
-to read a path into a buffer:
-  put the largest number in a size called max bytes.
-  read the path into the buffer given the max bytes.
-
 to read a path into a buffer given a size called max bytes:
   clear the i/o error.
   privatize the path.
@@ -8897,11 +8965,6 @@ to read a path into a buffer given a size called max bytes:
   call "kernel32.dll" "CloseHandle" with the handle.
   if the number is not 0, exit.
   put "Error reading file '" then the path then "'." into the i/o error.
-
-to read a path into a picture:
-  read the path into a buffer.
-  if the i/o error is not blank, void the picture; exit.
-  create the picture given the buffer.
 
 to read a ratio:
   read a string.
@@ -9025,21 +9088,12 @@ to refresh the cursor:
   put the mouse's spot into the event's spot.
   enque the event.
 
-to refresh the screen:
-  refresh the screen given the screen's box.
-
 to refresh the screen given a box:
   if list or compile or test was requested, 
     exit.
   call "gdi32.dll" "BitBlt" with the screen canvas
    and the box's left and the box's top and the box's width and the box's height 
    and the current canvas and the box's left and the box's top and 13369376 [srccopy].
-
-to relinquish control:
-  flush the event queue.
-  create an event.
-  put "done" into the event's kind.
-  enque the event.
 
 a remainder is a number.
 
@@ -9060,12 +9114,6 @@ to remember a text with an operation:
   put the operation into the text's last operation.
 
 the remembered pdf path is a path.
-
-to remove any leading noise from a string:
-  if the string is blank, exit.
-  if the string's first's target is not noise, exit.
-  remove the first byte from the string.
-  repeat.
 
 to remove any selected bytes in a text:
   if the text is nil, exit.
@@ -9094,12 +9142,6 @@ to remove any trailing linefeed byte from a string:
   if the string is blank, exit.
   if the string's last's target is not the linefeed byte, exit.
   remove the last byte from the string.
-
-to remove any trailing noise from a string:
-  if the string is blank, exit.
-  if the string's last's target is not noise, exit.
-  remove the last byte from the string.
-  repeat.
 
 to remove any trailing return byte from a string:
   if the string is blank, exit.
@@ -9195,6 +9237,13 @@ to remove leading bytes from a string given a count:
   put the substring's first plus the count minus 1 into the substring's last.
   remove bytes from the string given the substring.
 
+to remove leading noise from a string;
+to remove any leading noise from a string:
+  if the string is blank, exit.
+  if the string's first's target is not noise, exit.
+  remove the first byte from the string.
+  repeat.
+
 to remove the rows of a text between a row and another row:
   if the text is nil, exit.
   if the row is nil, exit.
@@ -9226,6 +9275,13 @@ to remove trailing bytes from a string given a count:
   slap a substring on the last byte of the string.
   put the substring's last minus the count plus 1 into the substring's first.
   remove bytes from the string given the substring.
+
+to remove trailing noise from a string;
+to remove any trailing noise from a string:
+  if the string is blank, exit.
+  if the string's last's target is not noise, exit.
+  remove the last byte from the string.
+  repeat.
 
 to rename a path to another path in the file system:
   privatize the path.
@@ -9296,6 +9352,12 @@ to reset the origin of a text:
   if the text is nil, exit.
   put the text's margin into the text's x.
   put 0 into the text's y.
+
+to reset a pointer;
+to reset a pointer for the next time around;
+to void a pointer:
+  intel $8B8508000000. \ mov eax,[ebp+8] \ the pointer
+  intel $C70000000000. \ mov [eax],0
 
 to reset a timer:
   put 0 into the timer's count.
@@ -9643,9 +9705,27 @@ the saved memory hbitmap is a hbitmap.
 
 the saved tpp is a number.
 
-to say a string: employ speak a string.
+to say a string;
+to speak a string:
+  if the silent flag is set, exit.
+  if the talker is nil, exit.
+  if the string is blank, exit.
+  convert the string to a wide string.
+  null terminate the wide string.
+  call the talker's vtable's speak with the talker
+    and the wide string's first
+    and 17 [svsfdefault+svsflagsasyn+svsfisnotxml] and 0.
 
-to say a string and wait: employ speak a string and wait.
+to say a string and wait;
+to speak a string and wait:
+  if the silent flag is set, exit.
+  if the talker is nil, exit.
+  if the string is blank, exit.
+  convert the string to a wide string.
+  null terminate the wide string.
+  call the talker's vtable's speak with the talker
+    and the wide string's first
+    and 16 [svsfdefault+svsfisnotxml] and 0.
 
 to scale a box given a ratio:
   if the ratio is 1/1, exit.
@@ -9678,10 +9758,6 @@ to scale a line given a ratio:
 to scale a line to a percent:
   put the percent / 100 into a ratio.
   scale the line given the ratio.
-
-to scale a number given a ratio:
-  if the ratio's denominator is 0, exit.
-  call "kernel32.dll" "MulDiv" with the number and the ratio's numerator and the ratio's denominator returning the number.
 
 to scale a pair given a ratio:
   if the ratio is 1/1, exit.
@@ -9721,7 +9797,11 @@ to scale a polygon to a percent:
   put the percent / 100 into a ratio.
   scale the polygon given the ratio.
 
-to scale a ratio given another ratio: employ multiply a ratio by another ratio.
+to scale a ratio given another ratio;
+to multiply a ratio by another ratio:
+  multiply the ratio's numerator by the other ratio's numerator.
+  multiply the ratio's denominator by the other ratio's denominator.
+  reduce the ratio.
 
 to scale a roundy box given a ratio:
   if the ratio is 1/1, exit.
@@ -10274,26 +10354,6 @@ to sort some string things:
     move the left string thing from the left string things to the string things.
   repeat.
 
-to speak a string:
-  if the silent flag is set, exit.
-  if the talker is nil, exit.
-  if the string is blank, exit.
-  convert the string to a wide string.
-  null terminate the wide string.
-  call the talker's vtable's speak with the talker
-    and the wide string's first
-    and 17 [svsfdefault+svsflagsasyn+svsfisnotxml] and 0.
-
-to speak a string and wait:
-  if the silent flag is set, exit.
-  if the talker is nil, exit.
-  if the string is blank, exit.
-  convert the string to a wide string.
-  null terminate the wide string.
-  call the talker's vtable's speak with the talker
-    and the wide string's first
-    and 16 [svsfdefault+svsfisnotxml] and 0.
-
 to split a buffer into some dyads:
   destroy the dyads.
   if the buffer is blank, exit.
@@ -10526,6 +10586,40 @@ to stop a timer:
   subtract the timer's start ticks from the ticks.
   add the ticks to the timer's total ticks.
 
+to store a buffer in a file;
+to write a buffer to a file:
+  clear the i/o error.
+  call "kernel32.dll" "SetFilePointer" with the file and 0 and 0 and 0 [file_begin] returning a result number.
+  if the result number is -1, put "Error positioning file pointer." into the i/o error; exit.
+  call "kernel32.dll" "WriteFile" with the file and the buffer's first and the buffer's length
+    and a number's whereabouts and 0 returning the result number.
+  if the result number is 0, put "Error writing file." into the i/o error; exit.
+
+to store a buffer in a path;
+to write a buffer to a path:
+  clear the i/o error.
+  extract a directory from the path.
+  if the directory is not in the file system,
+    put "Directory '" then the directory then "' doesn't exist."
+      into the i/o error;
+    exit.
+  set the path to read-write mode.
+  privatize the path.
+  null terminate the path.
+  call "kernel32.dll" "CreateFileA"
+    with the path's first and 1073741824 [generic_write] 
+    and 0 and 0 and 2 [create_always]
+    and -2147483520 [file_flag_write_through or file_attribute_normal]
+    and 0 returning a handle.
+  if the handle is -1 [invalid_handle_value],
+    put "Error opening file '" then the path then "'." into the i/o error; exit.
+  call "kernel32.dll" "WriteFile"
+    with the handle and the buffer's first and the buffer's length
+    and a number's whereabouts and 0 returning the number.
+  call "kernel32.dll" "CloseHandle" with the handle.
+  if the number is not 0, exit.
+  put "Error writing file '" then the path then "'." into the i/o error.
+
 a string has a first byte pointer and a last byte pointer.
 
 a string thing is a thing with a string.
@@ -10540,12 +10634,6 @@ to subtract a number and another number from a pair:
   subtract the number from the pair's x.
   subtract the other number from the pair's y.
 
-to subtract a number from another number:
-  intel $8B8508000000. \ mov eax,[ebp+8]  \ the number
-  intel $8B00.         \ mov eax,[eax]
-  intel $8B9D0C000000. \ mov ebx,[ebp+12] \ the other number
-  intel $2903.         \ sub [ebx],eax
-
 to subtract a number from a byte:
   intel $8B8508000000. \ mov eax,[ebp+8]  \ the number
   intel $8B00.         \ mov eax,[eax]
@@ -10558,7 +10646,13 @@ to subtract a number from a pair:
   subtract the number from the pair's x.
   subtract the number from the pair's y.
 
-to subtract a number from a pointer: employ subtract a number from another number.
+to subtract a number from a pointer;
+to subtract a pointer from another pointer;
+to subtract a number from another number:
+  intel $8B8508000000. \ mov eax,[ebp+8]  \ the number
+  intel $8B00.         \ mov eax,[eax]
+  intel $8B9D0C000000. \ mov ebx,[ebp+12] \ the other number
+  intel $2903.         \ sub [ebx],eax
 
 to subtract a number from a ratio:
   subtract the number / 1 from the ratio.
@@ -10566,8 +10660,6 @@ to subtract a number from a ratio:
 to subtract a pair from another pair:
   subtract the pair's x from the other pair's x.
   subtract the pair's y from the other pair's y.
-
-to subtract a pointer from another pointer: employ subtract a number from another number.
 
 to subtract a ratio from another ratio:
   privatize the ratio.
@@ -10597,16 +10689,15 @@ to summarize some string things returning a string (tersely):
       append the string thing's string to the string.
   repeat.
 
-to swap a number with another number:
-  put the number into a third number.
-  put the other number into the number.
-  put the third number into the other number.
-
 to swap a pair with another pair:
   swap the pair's x with the other pair's x.
   swap the pair's y with the other pair's y.
 
-to swap a pointer with another pointer: employ swap a number with another number.
+to swap a pointer with another pointer;
+to swap a number with another number:
+  put the number into a third number.
+  put the other number into the number.
+  put the third number into the other number.
 
 to swap some things with some other things:
   swap the things' first with the other things' first.
@@ -11449,6 +11540,13 @@ to unquote a string:
   repeat.
   put the other string into the string.
 
+to update the screen;
+to show it;
+to show it all;
+to show reveal the canvas;
+to refresh the screen:
+  refresh the screen given the screen's box.
+
 to uppercase any selected bytes in a text:
   if the text is nil, exit.
   loop.
@@ -11520,11 +11618,17 @@ a vertex array record has a count and a spot pointer.
 
 a vertex is a thing with an x coord, a y coord, a spot at the x.
 
-to void a pointer:
-  intel $8B8508000000. \ mov eax,[ebp+8] \ the pointer
-  intel $C70000000000. \ mov [eax],0
-
 a w-param is a number.
+
+to wait for an event;
+to deque an event:
+  yield to windows.
+  put the event queue's first into the event.
+  if the event is nil, repeat.
+  remove the event from the event queue.
+  if the event's kind is "done", destroy the event; exit.
+  destroy the current event.
+  put the event into the current event.
 
 to wait for some grains of sand;
 to wait for some grains of sand to fall;
@@ -11628,38 +11732,6 @@ to wrap a text:
   convert the absolute position to the text's anchor given the text.
   convert the other absolute position to the text's caret given the text.
   limit the origin of the text.
-
-to write a buffer to a file:
-  clear the i/o error.
-  call "kernel32.dll" "SetFilePointer" with the file and 0 and 0 and 0 [file_begin] returning a result number.
-  if the result number is -1, put "Error positioning file pointer." into the i/o error; exit.
-  call "kernel32.dll" "WriteFile" with the file and the buffer's first and the buffer's length
-    and a number's whereabouts and 0 returning the result number.
-  if the result number is 0, put "Error writing file." into the i/o error; exit.
-
-to write a buffer to a path:
-  clear the i/o error.
-  extract a directory from the path.
-  if the directory is not in the file system,
-    put "Directory '" then the directory then "' doesn't exist."
-      into the i/o error;
-    exit.
-  set the path to read-write mode.
-  privatize the path.
-  null terminate the path.
-  call "kernel32.dll" "CreateFileA"
-    with the path's first and 1073741824 [generic_write] 
-    and 0 and 0 and 2 [create_always]
-    and -2147483520 [file_flag_write_through or file_attribute_normal]
-    and 0 returning a handle.
-  if the handle is -1 [invalid_handle_value],
-    put "Error opening file '" then the path then "'." into the i/o error; exit.
-  call "kernel32.dll" "WriteFile"
-    with the handle and the buffer's first and the buffer's length
-    and a number's whereabouts and 0 returning the number.
-  call "kernel32.dll" "CloseHandle" with the handle.
-  if the number is not 0, exit.
-  put "Error writing file '" then the path then "'." into the i/o error.
 
 to write a buffer to stderr:
   clear the i/o error.
