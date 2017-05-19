@@ -207,6 +207,11 @@ the broken-bar byte is a byte equal to 166.
 
 the bullet byte is a byte equal to 149.
 
+to bump a byte limiting it to another byte and a third byte:
+  add 1 to the byte.
+  if the byte is greater than the third byte,
+    put the other byte into the byte.
+
 a byte count is a count.
 
 a byte pointer is a pointer to a byte.

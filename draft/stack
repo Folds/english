@@ -1,0 +1,58 @@
+\ The portions of this file that are from CAL-4700
+\ are copyright 2017 by the Osmosian Order.
+\ The remainder is copyright 2017 by Jasper Paulsen.
+
+to clear the stack:
+  destroy the stack.
+
+to decide if the stack has just one thing on it:
+  if the stack's count is 1, say yes.
+  say no.
+
+to decide if a token is numeric:
+  privatize the token.
+  remove any leading noise from the token.
+  if the token is blank, say no.
+  loop.
+    get a byte from the token.
+    if the byte is not any digit, say no.
+    if the token is blank, say yes.
+  repeat.
+
+to finalize the stack:
+  destroy the stack.
+
+to get a number from the stack:
+  put 0 into the number.
+  get a stack entry from the stack.
+  if the stack entry is nil, exit.
+  convert the stack entry's string to the number.
+  remove the stack entry from the stack.
+  destroy the stack entry.
+
+to get a string from the stack:
+  clear the string.
+  get an stack entry from the stack.
+  if the stack entry is nil, put "error" into the string; exit.
+  put the stack entry's string to the string.
+  remove the stack entry from the stack.
+  destroy the stack entry.
+
+to initialize the stack:
+  \ nothing to do here,
+  \ because the stack is a global variable made of things.
+
+to put a number on the stack:
+  convert the number to a token.
+  put the token on the stack.
+
+to put a token on the stack:
+  allocate memory for an stack entry.
+  put the token into the stack entry's string.
+  prepend the stack entry to the stack.
+
+a stack entry is a thing with a string.
+
+the stack is some stack entries.
+
+a token is a string.

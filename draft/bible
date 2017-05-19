@@ -1,0 +1,34 @@
+\ The portions of this file that are from CAL-4700
+\ are copyright 2017 by the Osmosian Order.
+\ The remainder is copyright 2017 by Jasper Paulsen.
+
+the Bible is a thing with some verses.
+
+a verse is a thing with a string.
+
+to read the Bible:
+  if the Bible is not nil, exit.
+  extract a directory from the module's path.
+  loop.
+    if the directory is blank, exit.
+    put the directory then "bible.txt" into a path.
+    if the path is in the file system,
+      read the Bible given the path; exit.
+    extract the directory from the directory.
+  repeat.
+
+to read the Bible given a path:
+  if the Bible is not nil, exit.
+  read the path into a buffer.
+  if the i/o error is not blank, exit.
+  allocate memory for the Bible.
+  slap a rider on the buffer.
+  loop.
+    if the rider's source is blank, exit.
+    allocate memory for a verse.
+    append the verse to the Bible's verses.
+    move the rider (text file rules).
+    put the rider's token into the verse's string.
+    remove any leading noise from the verse's string. 
+    remove any trailing noise from the verse's string.
+  repeat.

@@ -1,0 +1,38 @@
+\ The portions of this file that are from CAL-3040
+\ are copyright 2006 by the Osmosian Order.
+\ The portions of this file that are from CAL-4700
+\ are copyright 2017 by the Osmosian Order.
+\ The remainder is copyright 2017 by Jasper Paulsen.
+
+to read a byte from a console:
+  read a string from the console.
+  if the string is blank, put the null byte into the byte; exit.
+  put the string's first's target into the byte.
+
+to read a flag from a console:
+  read a string from the console.
+  convert the string to the flag.
+
+to read a number from a console:
+  read a string from the console.
+  convert the string to the number.
+
+to read a string from a console:
+  read the console into the string.
+
+to write a string to a console;
+to write a string on a console:
+  if the console is nil, exit.
+  insert the string into the console's text.
+  insert the return byte into the console's text.
+  wrap the console's text.
+  scroll the console's text to the caret.
+  show the console.
+
+to write a string to a console without advancing;
+to write a string on a console without advancing:
+  if the console is nil, exit.
+  insert the string into the console's text.
+  wrap the console's text.
+  scroll the console's text to the caret.
+  show the console.

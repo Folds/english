@@ -425,6 +425,8 @@ a big-endian unsigned wyrd is a record with 2 bytes.
 
 a billion is 1000 millions.
 
+a binary string is a string.
+
 a bit is a unit.
 
 a bitmapdata is a record with
@@ -480,6 +482,14 @@ a bucket# is a number.
 
 a buffer is a string.
 
+to bump a number:
+  add 1 to the number.
+
+to bump a number limiting it to another number and a third number:
+  add 1 to the number.
+  if the number is greater than the third number,
+    put the other number into the number.
+
 to bump a rider:
   intel $8B9D08000000. \ mov ebx,[ebp+8] \ the rider
   intel $FF8314000000. \ inc [ebx+20] \ the rider's token's last
@@ -507,6 +517,12 @@ to buzz:
 a canvas is an hdc.
 
 a caret is a position.
+
+to center a box at the bottom of another box:
+  center the box in the other box (horizontally).
+  put the box's height into a height.
+  put the other box's bottom into the box's bottom.
+  put the box's bottom minus the height into the box's top.
 
 to center a box in another box (horizontally):
   put the other box's center's x minus the box's center's x into a number.
@@ -613,9 +629,6 @@ to clear a box:
 
 to clear an ellipse:
   clear the ellipse's box.
-
-to clear a flag:
-  put no into the flag.
 
 to clear a font:
   put "" and 0 into the font.
@@ -828,6 +841,16 @@ to convert an absolute position to a position given a text:
     put the absolute position into the position's column#.
     subtract the row's string's length from the absolute position.
     if the absolute position is less than 1, exit.
+  repeat.
+
+to convert a binary string into a number:
+  put 0 into the number.
+  put 1 into a value number.
+  loop.
+    if the binary string is blank, exit.
+    get a character from the binary string (backwards). \ was backwards
+    if the character is "1", add the value to the number.
+    double the value.
   repeat.
 
 to convert a box to a string:
@@ -1851,6 +1874,9 @@ the current font is a font.
 
 a cursor is a handle.
 
+to cut a number in half:
+  divide the number by 2.
+
 a date/time has
   a year number,
   a month number,
@@ -2253,6 +2279,10 @@ to decide if left is implied by a mouse wyrd:
   if 1 [mk_left] is bitwise included in the number, say yes.
   say no.
 
+to decide if the left mouse button is down:
+  if the mouse's left button is down, say yes.
+  say no.
+
 to decide if left [half screen] was requested:
   get a string (command line).
   if left [half screen] was requested in the command line, say yes.
@@ -2322,6 +2352,10 @@ to decide if the mouse has been dragged from a spot given a grid:
   get a difference between the other spot and the spot.
   if the difference is within the grid, repeat.
   say yes.
+
+to decide if the mouse is in a box:
+  if the mouse's spot is in the box, say yes.
+  say no.
 
 to decide if none of some string things starts with a string:
   if at least one of the string things starts with the string, say no.
@@ -2833,6 +2867,11 @@ to decide if a spot is within a grid of another spot:
   if the difference is within the grid, say yes.
   say no.
 
+to decide if a spot is within some twips of another spot:
+  put the twips and the twips into a grid.
+  if the spot is within the grid of the other spot, say yes.
+  say no.
+
 to decide if a spot is within some twips of a box:
   privatize the box.
   outdent the box given the twips.
@@ -3131,6 +3170,11 @@ to decide if verbose test was requested:
   if the other string is "verbose", say yes.
   say no.
 
+to decide if we could find a pointer;
+to decide if we did find a pointer:
+  if the pointer is nil, say no.
+  say yes.
+
 to decide if we're above a horizontal line:
   if the context's spot is above the horizontal line, say yes.
   say no.
@@ -3188,6 +3232,10 @@ to deduplicate some string things:
 the default font is a font.
 
 the default smtp server is "localhost".
+
+a depth is some twips.
+
+a description is a string.
 
 to deselect a text:
   if the text is nil, exit.
@@ -3399,6 +3447,9 @@ a docinfo is a record with
   a number called fwtype.
 
 a dot is an ellipse.
+
+to double a number:
+  add the number to the number.
 
 to draw and fill a box with a color:
   draw the box with the color and the color.
@@ -4534,6 +4585,11 @@ to find a sector given a grid and a spot:
   put the spot's x divided by the grid's x times the grid's x into the sector's x.
   put the spot's y divided by the grid's y times the grid's y into the sector's y.
 
+to find a square root of a distance:
+  put the distance in a number.
+  put the square root of the number in a number called result.
+  put the result in the square root.
+
 to find a string given some string things and a string#:
   clear the string.
   loop.
@@ -4630,6 +4686,9 @@ to flush an event queue:
 
 a font has a name and a height.
 
+a font height is some twips.
+\indicates line height - the letters will fit nicely in a box of this height
+
 a font info is a thing with \ used for pdf conversion
   a font,
   an emsquare number,
@@ -4721,6 +4780,11 @@ to get a box for the caret in a text:
   if the text's wrap flag is not set, exit.
   limit the box's left to the text's left and the text's right.
   limit the box's right to the text's left and the text's right.
+
+to get a box for a line:
+  put the line's start into the box's left-top.
+  put the line's end into the box's right-bottom.
+  normalize the box.
 
 to get a box given a row and a text:
   if the text is nil, clear the box; exit.
@@ -4846,6 +4910,17 @@ to get a difference between a pair and another pair:
 to get a difference between a pair and another pair given a grid pair:
   get the difference between the pair and the other pair.
   round the difference to the grid.
+
+to get a distance between a spot and another spot (approximate):
+  put the spot's x minus the other spot's x into a number.
+  de-sign the number.
+  put the spot's y minus the other spot's y into another number.
+  de-sign the other number.
+  put the number times the number into the distance.
+  add the other number times the other number to the distance.
+  find a square root of the distance.
+  put the square root into the distance.
+  if the d-key is down, debug the distance.
 
 to get a distance between a spot and another spot (chessboard):
   put the spot's x minus the other spot's x into a number.
@@ -6535,7 +6610,9 @@ an lcm is a number.
 
 a left click is an input.
 
-a length is a number.
+a left is some twips.
+
+a length is some twips.
 
 a letter height is some twips. \ indicates actual height of a typical uppercase letter
 
@@ -7138,8 +7215,24 @@ to move a polygon given some x twips and some y twips:
 to move a polygon left some twips:
   move the polygon given - the twips and 0.
 
+to move a polygon left some twips and down some other twips:
+  move the polygon left the twips.
+  move the polygon down the other twips.
+
+to move a polygon left some twips and up some other twips:
+  move the polygon left the twips.
+  move the polygon up the other twips.
+
 to move a polygon right some twips:
   move the polygon given the twips and 0.
+
+to move a polygon right some twips and down some other twips:
+  move the polygon right the twips.
+  move the polygon down the other twips.
+
+to move a polygon right some twips and up some other twips:
+  move the polygon right the twips.
+  move the polygon up the other twips.
 
 to move a polygon to a spot:
   if the polygon is nil, exit.
@@ -7336,6 +7429,8 @@ to move a window right:
   call "user32.dll" "MoveWindow" with the window
     and the box's left and the box's top
     and the screen's pixel width and the screen's pixel height and 1.
+
+a ms is 1 millisecond.
 
 a msg is a record with
   a window called hwnd,
@@ -7552,6 +7647,9 @@ to outdent a box given a number:
   add the number to the box's bottom.
 
 an outdent is a number.
+
+to outline a box with a color:
+  draw the box with the color and the clear color.
 
 a outlinetextmetric is a record with
   a number called otmsize,
@@ -7971,6 +8069,8 @@ a processinfo is a record with
   a handle called hthread,
   a number called dwprocessid,
   a number called dwthreadid.
+
+a punch line is a string.
 
 to put the actual data of a font into a buffer:
   \ only works with true/open type fonts
@@ -8637,6 +8737,9 @@ to put a string into another string:
   unassign the other string's first.
   put the pointer into the other string's first.
   put the other string's first plus the saved length minus 1 into the other string's last.
+
+to put a string into a letter:
+  put the string's first's target into the letter.
 
 to put a string into a text:
   if the text is nil, exit.
@@ -9348,6 +9451,10 @@ to reset a count:
 to reset the drawing origin:
   set the drawing origin to the zero spot.
 
+to reset a flag;
+to clear a flag:
+  put no into the flag.
+
 to reset the origin of a text:
   if the text is nil, exit.
   put the text's margin into the text's x.
@@ -9565,6 +9672,15 @@ to reverse a number;
 to invert a number:
   multiply the number by -1.
 
+to reverse a string: \ could be more efficient
+  privatize the string.
+  clear the original string.
+  loop.
+    if the string is blank, break.
+    get a character from the string (backwards).
+    append the character to the original string.
+  repeat.
+
 to reverse some things:
   swap the things with some other things.
   loop.
@@ -9704,6 +9820,10 @@ to save a canvas:
 the saved memory hbitmap is a hbitmap.
 
 the saved tpp is a number.
+
+to say a number:
+  put the number into a string.
+  say the string.
 
 to say a string;
 to speak a string:
@@ -10180,7 +10300,6 @@ to show a cursor:
 
 to shut down:
 \  destroy the bible.
-\  destroy the stack.
   destroy the lexicon.
 \  destroy the default console.
   destroy the console.
@@ -10205,7 +10324,7 @@ to shut down the cgi:
 
 the silent flag is a flag.
 
-a size is a number.
+a size is some twips.
 
 to skip any leading linefeed byte in a substring:
   if the substring is blank, exit.
@@ -10298,6 +10417,14 @@ to smooth a polygon:
   if the flag is not set, exit.
   destroy the polygon's first vertex given the polygon.
   destroy the polygon's last vertex given the polygon.
+
+to smooth a polygon some times:
+  privatize the times.
+  loop.
+    if the times is 0, exit.
+    smooth the polygon.
+    subtract 1 from the times.
+  repeat.
 
 an smtp server is a string.
 
@@ -10463,6 +10590,8 @@ a spot is a pair with an x coord and a y coord.
 
 a spot pointer is a pointer to a spot.
 
+a square root is a number.
+
 to square up any selection in a text:
   if the text is nil, exit.
   if nothing is selected in the text, exit.
@@ -10536,6 +10665,9 @@ to start up the cgi:
   initialize winsock.
   initialize the module.
   initialize the cgi.
+
+to start with nothing in a pointer:
+  void the pointer.
 
 a startupinfo is a record with
   a number called cb,
@@ -11434,6 +11566,10 @@ a tick is a number.
 
 a timer has a count, some start ticks and some total ticks.
 
+some times is a number.
+
+a top is some twips.
+
 the tpi is some twips equal to 1440.
 
 the tpp is some twips.
@@ -11779,21 +11915,6 @@ to write a ratio:
 to write a ratio without advancing:
   convert the ratio to a string.
   write the string without advancing.
-
-to write a string on a console:
-  if the console is nil, exit.
-  insert the string into the console's text.
-  insert the return byte into the console's text.
-  wrap the console's text.
-  scroll the console's text to the caret.
-  show the console.
-
-to write a string on a console without advancing:
-  if the console is nil, exit.
-  insert the string into the console's text.
-  wrap the console's text.
-  scroll the console's text to the caret.
-  show the console.
 
 to write a string to stdout:
   call "kernel32.dll" "WriteFile" with the stdout handle

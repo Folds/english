@@ -192,6 +192,10 @@ to move a box close to the left of another box:
   pick a length between 0 and the box's width times 3/4.
   move the box right the length.
 
+to pick a hue between a number and another number:
+  pick a number called result between the number and the other number.
+  put the result in the hue.
+
 to pick a letter of the alphabet:  \ put letter into context? ***
   pick a number between 65 and 90.
   put the number into the letter.
@@ -239,6 +243,19 @@ to put a box some twips by some other twips in the center of another box;
 to center a box some twips by some other twips in another box:
   make the box the twips by the other twips.
   center the box in the other box.
+
+to put masking tape below a figure:
+  if the figure is nil, exit.
+  if the figure's vertices' count is less than 2, exit.
+  copy the figure to another figure.
+  put the screen's bottom into a spot's y.
+  put the figure's last's x into the spot's x.
+  append the spot to the other figure.
+  put the figure's first's x into the spot's x.
+  append the spot to the other figure.
+  append the figure's first's spot to the other figure.
+  mask inside the other figure.
+  destroy the other figure.
 
 a rise is a number.
 a run is a number.
