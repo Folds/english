@@ -985,26 +985,6 @@ to compile the call'd part given a rider and a variable:
   move the rider (compiler rules).
   scan the variable's name given the rider.
 
-to compile a directory:
-  compile the directory (start).
-  compile the directory (read the source files).
-  define a global variable given "the return code is a number.".
-  compile the directory (scan the source files).
-  compile the directory (resolve the types).
-  compile the directory (resolve the globals).
-  compile the directory (compile the headers of the routines).
-  compile the directory (calculate lengths and offsets of types).
-  compile the directory (add the built-in memory routines).
-  compile the directory (index the routines for utility use).
-  compile the directory (compile the bodies of the routines).
-  compile the directory (add and compile the built-in startup routine).
-  compile the directory (offset parameters and variables).
-  compile the directory (address).
-  compile the directory (transmogrify).
-  compile the directory (link).
-  compile the directory (write the exe).
-  compile the directory (stop).
-
 to compile a directory (add and compile the built-in startup routine):
   if the compiler's abort flag is set, exit.
   show status "Adding...".
@@ -1085,13 +1065,6 @@ to compile a directory (offset parameters and variables):
   offset the locals in the routines.
   stop the offsetting timer.
 
-to compile a directory (read the source files):
-  if the compiler's abort flag is set, exit.
-  show status "Reading...".
-  start the reading timer.
-  read the source files.
-  stop the reading timer.
-
 to compile a directory (resolve the globals):
   if the compiler's abort flag is set, exit.
   show status "Resolving...".
@@ -1141,6 +1114,33 @@ to compile a directory (write the exe):
   write the compiler's exe to the compiler's exe path.
   if the i/o error is not blank, abort with the i/o error.
   stop the writing timer.
+
+to compile a directory given a depth:
+  compile the directory (start).
+  compile the directory given the depth (read the source files).
+  define a global variable given "the return code is a number.".
+  compile the directory (scan the source files).
+  compile the directory (resolve the types).
+  compile the directory (resolve the globals).
+  compile the directory (compile the headers of the routines).
+  compile the directory (calculate lengths and offsets of types).
+  compile the directory (add the built-in memory routines).
+  compile the directory (index the routines for utility use).
+  compile the directory (compile the bodies of the routines).
+  compile the directory (add and compile the built-in startup routine).
+  compile the directory (offset parameters and variables).
+  compile the directory (address).
+  compile the directory (transmogrify).
+  compile the directory (link).
+  compile the directory (write the exe).
+  compile the directory (stop).
+
+to compile a directory given a depth (read the source files):
+  if the compiler's abort flag is set, exit.
+  show status "Reading...".
+  start the reading timer.
+  read the source files given the depth.
+  stop the reading timer.
 
 to compile an expression given a rider:
   if the compiler's abort flag is set, exit.
@@ -3729,11 +3729,21 @@ to read a source file:
     abort with "Could not read the file named '"
     then the source file's path then "'."; exit.
 
-to read some source files:
+to read some source files given a depth:
+  read the source files given the compiler's directory and the depth.
+
+to read some source files given a directory and a depth:
+  if the depth is less than 1, exit.
+  privatize the depth.
+  put the depth in another depth.
+  subtract 1 from the other depth.
   loop.
     if the compiler's abort flag is set, exit.
-    get an item from the compiler's directory.
+    get an item from the directory.
     if the item is not found, break.
+    if the item's kind is "directory",
+      read the source files given the item's path and the other depth;
+      repeat.
     if the item's kind is not "file", repeat.
     if the item's extension is not blank, repeat.
     if the item looks reamish, repeat.

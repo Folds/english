@@ -556,11 +556,23 @@ to find a command given a menu and a spot:
     if the spot is in the command, exit.
   repeat.
 
-to find a directory to compile:
+to find a directory and a depth to compile:
   clear the directory.
+  put 0 in the depth.
   if the current tab's node is nil, exit.
   if the current tab's node's source is nil, exit.
+  put 1 in the depth.
   put the current tab's node's directory into the directory.
+  put the directory then "noodle\" in a path.
+  if the path is in the file system,
+    put 2 in the depth;
+    exit.
+  if the current tab's node's parent is nil, exit.
+  put the current tab's node's parent's directory into another directory.
+  put the other directory then "noodle\" in the path.
+  if the path is in the file system,
+    put the other directory into the directory;
+    put 2 in the depth.
 
 to find a free tab starting with a tab:
   privatize the tab.
@@ -1068,9 +1080,9 @@ to handle compile:
   handle save all.
   untint the status.
   if the i/o error is not blank, exit.
-  find a directory to compile.
+  find a directory and a depth to compile.
   if the directory is blank, show error "I'm not sure what to compile."; exit.
-  compile the directory.
+  compile the directory given the depth.
   if the compiler's abort flag is set,
     handle compile or list or run error; exit.
   show status the compiler's timer's string then " ms".
@@ -1079,11 +1091,11 @@ to handle compile (requested):
   handle save all.
   if the i/o error is not blank,
     put 1 in the return code; exit.
-  find a directory to compile.
+  find a directory and a depth to compile.
   if the directory is blank,
     show error "I'm not sure what to compile."; 
     put 1 in the return code; exit.
-  compile the directory.
+  compile the directory given the depth.
   if the compiler's abort flag is set,
     handle compile or list or run error; 
     put 1 in the return code; exit.
@@ -1442,10 +1454,10 @@ to handle list:
   handle save all.
   untint the status.
   if the i/o error is not blank, exit.
-  find a directory to compile.
+  find a directory and a depth to compile.
   if the directory is blank,
     show error "I'm not sure what to compile and list"; exit.
-  compile the directory.
+  compile the directory given the depth.
   show status "Listing...".
   list.
   if the compiler's abort flag is set,
@@ -1456,11 +1468,11 @@ to handle list (requested):
   handle save all.
   if the i/o error is not blank, 
     put 1 in the return code; exit.
-  find a directory to compile.
+  find a directory and a depth to compile.
   if the directory is blank,
     show error "I'm not sure what to compile and list"; 
     put 1 in the return code; exit.
-  compile the directory.
+  compile the directory given the depth.
   show status "Listing...".
   list.
   if the compiler's abort flag is set,
@@ -1728,10 +1740,10 @@ to handle run:
   handle save all.
   untint the status.
   if the i/o error is not blank, exit.
-  find a directory to compile.
+  find a directory and a depth to compile.
   if the directory is blank,
     show error "I'm not sure what you want me to compile."; exit.
-  compile the directory.
+  compile the directory given the depth.
   if the compiler's abort flag is set,
     handle compile or list or run error; exit.
   show status "Running...".
