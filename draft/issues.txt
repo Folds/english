@@ -23,24 +23,6 @@ The program's change log is implicit
 in the source code repository's change log.
 These items should occasionally be moved to done issues.txt.
 
-184.  Round a number up to nearest factor of another number.
-  If the number is more than the other number,
-  rescale by the other number.
-  Status:  Won't do.  No longer needed for trig.
-  Audience:  Programmers.
-  Benefit:  Medium.
-  Implementation difficulty:  Hard.
-  Demoing difficulty:  Medium.
-  Testing difficulty:  Easy.
-  Requested by Jasper Paulsen on March 31, 2017.
- 
-185.  Round a number down to nearest factor of another number.
-  If the number is more than the other number,
-  rescale by the other number.
-  Status:  Won't do.  No longer needed for trig.
-  Audience:  Programmers.
-  Requested by Jasper Paulsen on March 31, 2017.
-
  
 \ ======================================
    
@@ -54,52 +36,7 @@ These items should occasionally be moved to demoed fixes.txt.
 The following requests have been demonstrated,
 but do not have test plans yet.
 These items should occasionally be moved to demoed fixes.txt.
- 
-210.  In colors, add a "pen" alias for each color.
-  Status:  Implemented.
-  Audience:  Turtle programmers.
-  Benefit:  Medium.
-  Implementation difficulty:  Medium.
-  Demoing difficulty:  Medium.
-  Testing difficulty:  Medium.
-  Requested by Gerry Rzeppa on March 13, 2017.
- 
-211.  In colors, add a "brightness" alias for "lightness".
-  Status:  Implemented.
-  Audience:  Turtle programmers.
-  Benefit:  Medium.
-  Implementation difficulty:  Medium.
-  Demoing difficulty:  Medium.
-  Testing difficulty:  Medium.
-  Requested by Gerry Rzeppa on March 13, 2017.
- 
-214.  Create color aliases:  brown, sky blue, pink, tan.
-  Status:  Implemented.
-  Audience:  Turtle programmers.
-  Benefit:  Medium.
-  Implementation difficulty:  Medium.
-  Demoing difficulty:  Medium.
-  Testing difficulty:  Medium.
-  Requested by Gerry Rzeppa on March 13, 2017.
- 
-215.  Add "gold" color name.
-  Status:  Implemented.
-  Audience:  Turtle programmers.
-  Benefit:  Medium.
-  Implementation difficulty:  Medium.
-  Demoing difficulty:  Medium.
-  Testing difficulty:  Medium.
-  Requested by Gerry Rzeppa on March 13, 2017.
- 
-213.  Make "reverse a color" get complement, not opposite saturation.
-  Status:  Implemented.
-  Audience:  Turtle programmers.
-  Benefit:  Medium.
-  Implementation difficulty:  Medium.
-  Demoing difficulty:  Medium.
-  Testing difficulty:  Medium.
-  Requested by Gerry Rzeppa on March 13, 2017.
- 
+  
   
 \ ======================================   
 The following requests have been partially demonstrated.
@@ -162,13 +99,6 @@ from higher priority to lower priority.
   Testing difficulty:  n/a.
   Requested by Jasper Paulsen on April 30, 2017.
 
-159.  Incorporate CAL-4700's turtle graphics features.
-  Status:   Request.
-  Benefit:  Medium.
-  Demoing difficulty:  Medium.
-  Testing difficulty:  Medium.
-  Requested by Gerry Rzeppa on March 13, 2017.
- 
 176.  Add a "Measure Code" menu item.
   Output a text file with the following columns:
   source   code lines  just comments   blank lines  code wraps  total lines

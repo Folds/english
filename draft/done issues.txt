@@ -926,3 +926,22 @@ Automated tests make debugging easier.
   Demoing difficulty:  Medium.
   Testing difficulty:  Easy.
   Requested by Jasper Paulsen on May 7, 2017.
+
+184.  Round a number up to nearest factor of another number.
+  If the number is more than the other number,
+  rescale by the other number.
+  Status:  Won't do.  No longer needed for trig.
+  Audience:  Programmers.
+  Benefit:  Medium.
+  Implementation difficulty:  Hard.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Easy.
+  Requested by Jasper Paulsen on March 31, 2017.
+ 
+185.  Round a number down to nearest factor of another number.
+  If the number is more than the other number,
+  rescale by the other number.
+  Status:  Won't do.  No longer needed for trig.
+  Audience:  Programmers.
+  Requested by Jasper Paulsen on March 31, 2017.
+

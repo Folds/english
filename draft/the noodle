@@ -915,6 +915,15 @@ to convert some font widths to pdf em units:
     add a number's magnitude to the number pointer.
   repeat.
 
+to convert a fraction to a ratio;
+to convert a ratio to a fraction;
+to put a ratio into a fraction;
+to put a fraction into a ratio;
+to put a fraction into another fraction;
+to put a ratio into another ratio:
+  put the ratio's numerator into the other ratio's numerator.
+  put the ratio's denominator into the other ratio's denominator.
+
 to convert a gpbitmap to a buffer (pdf style):
   clear the buffer.
   if the gpbitmap is nil, exit.
@@ -4679,6 +4688,8 @@ to format a number and a singular string or a plural string into a string:
   append the space byte to the string.
   if the number is 1, append the singular to the string.
   if the number is not 1, append the plural to the string.
+
+a fraction is a ratio.
 
 a gcd is a number. \ greatest common denominator.
 
@@ -8453,10 +8464,6 @@ to put a polygon's y-extent into a height:
   if the polygon is nil, clear the height; exit.
   put the polygon's box's y-extent into the height.
 
-to put a ratio into another ratio:
-  put the ratio's numerator into the other ratio's numerator.
-  put the ratio's denominator into the other ratio's denominator.
-
 to put a ratio into a string;
 to convert a ratio to a string:
   clear the string.
@@ -8879,7 +8886,11 @@ to raise a number to another number:
 
 a random number is a number.
 
-a ratio has a numerator number and a denominator number.
+a ratio has
+  a numerator number,
+  a denominator number,
+  a top number at the numerator, and
+  a bottom number at the denominator.
 
 a ratio pair has a ratio and another ratio.
 

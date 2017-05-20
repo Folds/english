@@ -400,6 +400,13 @@ next to the first instance, instead of covering the first instance.
   Status: Demonstrated.
   Requested by Jasper Paulsen on March 7, 2014.
 
+159.  Incorporate CAL-4700's turtle graphics features.
+  Status:   Demonstrated.
+  Benefit:  Medium.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Medium.
+  Requested by Gerry Rzeppa on March 13, 2017.
+ 
 032.  Adjust the number of tabs, depending on the initial width of the main window.
   Status: Demonstrated.
   Audience:  Windows programmers and Linux programmers.
@@ -548,6 +555,51 @@ next to the first instance, instead of covering the first instance.
   Testing difficulty:  Hard.
   Audience:  Windows and Linux programmers.
   Requested by Jasper Paulsen on February 28, 2017.
+
+210.  In colors, add a "pen" alias for each color.
+  Status:  Implemented.
+  Audience:  Turtle programmers.
+  Benefit:  Medium.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Medium.
+  Requested by Gerry Rzeppa on March 13, 2017.
+ 
+211.  In colors, add a "brightness" alias for "lightness".
+  Status:  Implemented.
+  Audience:  Turtle programmers.
+  Benefit:  Medium.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Medium.
+  Requested by Gerry Rzeppa on March 13, 2017.
+ 
+214.  Create color aliases:  brown, sky blue, pink, tan.
+  Status:  Implemented.
+  Audience:  Turtle programmers.
+  Benefit:  Medium.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Medium.
+  Requested by Gerry Rzeppa on March 13, 2017.
+ 
+215.  Add "gold" color name.
+  Status:  Implemented.
+  Audience:  Turtle programmers.
+  Benefit:  Medium.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Medium.
+  Requested by Gerry Rzeppa on March 13, 2017.
+ 
+213.  Make "reverse a color" get complement, not opposite saturation.
+  Status:  Implemented.
+  Audience:  Turtle programmers.
+  Benefit:  Medium.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Medium.
+  Requested by Gerry Rzeppa on March 13, 2017.
 
 117.  Enable shift mouse-wheel scrolling horizontally in editor panes.
   Let the user press Shift while scrolling the vertical wheel,
