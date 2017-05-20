@@ -2,6 +2,7 @@
 
 \ The terminal is similar to the console,
 \ but designed for use with turtle graphics.
+\ ***
 
 to add a quora to a terminal:
   create the quora.
