@@ -10,7 +10,6 @@
 \ The "keeper" file has routines that use the context,
 \ but leave the context in the same state they found it,
 \ and do not refresh the screen.
-\ ***
 
 to add some horizontal twips and some vertical twips to the current spot:
   add the horizontal twips to the context's spot's x.

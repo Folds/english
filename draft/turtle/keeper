@@ -14,7 +14,6 @@
 \ so it can still be used or changed by the next routine.
 
 \ The "modder" file has routines that change the context.
-\ ***
 
 to center a dot on the current spot:
   center the dot on the context's spot.

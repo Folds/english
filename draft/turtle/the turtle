@@ -7,7 +7,6 @@
 \ and do not refresh the screen.
 
 \ The "modder" file has routines that change the context.
-\ ***
 
 to add a line to a figure:
   if the figure is nil,
