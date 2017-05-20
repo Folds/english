@@ -835,6 +835,23 @@ to make a color like another color:
   set the color's saturation to something between 100 and 1000.
   set the color's lightness to something between 0 and 800.
 
+to make a color a ratio from a color called left color toward a color called right color:
+  privatize the left color.
+  privatize the right color.
+  normalize the left color.
+  normalize the right color.
+  put the left color in the color.
+  subtract the left color's hue from the right color's hue.
+  subtract the left color's saturation from the right color's saturation.
+  subtract the left color's brightness from the right color's brightness.
+  multiply the right color's hue by the ratio.
+  multiply the right color's saturation by the ratio.
+  multiply the right color's brightness by the ratio.
+  add the right color's hue to the color's hue.
+  add the right color's saturation to the color's saturation.
+  add the right color's brightness to the color's brightness.
+  normalize the color.
+
 to make a greenish color:
   \ To-do:  update "make a color like another color"
   \ by inverting the dE-2000 formula,
@@ -842,6 +859,11 @@ to make a greenish color:
   pick the greenish color's hue between 900 and 1200.
   pick the greenish color's saturation between 500 and 1000.
   pick the greenish color's brightness between 250 and 875.
+
+to normalize a color:
+  normalize the color's hue.
+  limit the color's saturation to 0 and 1000.
+  limit the color's lightness  to 0 and 1000.
 
 to normalize a hue:
   divide the hue by 3600 giving a quotient and a remainder.

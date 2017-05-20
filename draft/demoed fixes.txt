@@ -895,3 +895,66 @@ next to the first instance, instead of covering the first instance.
   Testing difficulty:  Medium.
   Requested by Gerry Rzeppa on March 13, 2017.
 
+227.  Move bottom row of text in tab slightly lower.
+  Status:  request.
+  Audience:  Windows programmers.
+  Benefit:  Medium.
+  Implementation difficulty:  Easy.
+  Demoing difficulty:  Easy.
+  Testing difficulty:  Medium.
+  Requested by Jasper Paulsen on May 20, 2017.
+
+226.  Increase tab height enough to allow a second line of text.
+  Status:  request.
+  Audience:  Windows programmers.
+  Benefit:  Medium.
+  Implementation difficulty:  Easy.
+  Demoing difficulty:  Easy.
+  Testing difficulty:  Medium.
+  Requested by Jasper Paulsen on May 20, 2017.
+
+228.  Add top row of text in tab.
+  Status:  request.
+  Audience:  Windows programmers.
+  Benefit:  Medium.
+  Implementation difficulty:  Easy.
+  Demoing difficulty:  Easy.
+  Testing difficulty:  Medium.
+  Requested by Jasper Paulsen on May 20, 2017.
+
+229.  Show node's parent's descriptor in tab's top row.
+  Status:  request.
+  Audience:  Windows programmers.
+  Benefit:  Medium.
+  Implementation difficulty:  Easy.
+  Demoing difficulty:  Medium.  Verify works with
+                       both Arial and the custom font.
+  Testing difficulty:  Medium.
+  Requested by Jasper Paulsen on May 20, 2017.
+
+230.  Show trailing \ in node's parent's descriptor.
+  Status:  request.
+  Audience:  Windows programmers.
+  Benefit:  Minor.
+  Implementation difficulty:  Easy.
+  Demoing difficulty:  Easy.
+  Testing difficulty:  Medium.
+  Requested by Jasper Paulsen on May 20, 2017.
+
+236.  Make tabs show folder on top row, file on bottom row.
+  Status:    Implemented.
+  Audience:  Users.
+  Benefit:   Medium.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Easy.
+  Testing difficulty:  Medium.
+  Requested by Jasper Paulsen on May 20, 2017.
+
+234.  Subtly make tabs' top lines of text less noticeable.
+  Status:    Designed.
+  Audience:  Windows programmers.
+  Benefit:   minor.
+  Implementation difficulty:  Easy.
+  Demoing difficulty:  Easy.
+  Testing difficulty:  Medium.
+  Requested by Jasper Paulsen on May 20, 2017.

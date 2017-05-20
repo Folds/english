@@ -121,6 +121,16 @@ to adjust some tabs:
       put the tab's previous' right into the tab's left.
     if the tab is not the tabs' last,
       put the tab's left plus the width into the tab's right.
+    \ make the tab's info box and name box overlap,
+    \ but not by enough to make the text overlap.
+    \ (as long as the requested control font's height is
+    \  at most 7/24 inch high, they will not overlap.)
+    put the tab's box in the tab's info box.
+    put the tab's info box's top in the tab's info box's bottom.
+    add 1/4 inch to the tab's info box's bottom.
+    put the tab's box in the tab's name box.
+    put the tab's name box's bottom in the tab's name box's top.
+    subtract 1/4 inch from the tab's name box's top.    
   repeat.
 
 to ask user a string:
@@ -447,7 +457,7 @@ to draw the switch:
   mask only outside the switch's box.
   draw the switch's box with the black color and the black color.
   put the switch's box into a box.
-  subtract 1/3 inch from the box's bottom.
+  subtract 15/32 inch from the box's bottom.
   draw the box with the desktop color and the desktop color.
   draw the tabs.
 
@@ -460,7 +470,13 @@ to draw a tab:
     draw the tab's box's left line with the black color.
   if the tab is not the current tab,
     draw the tab's box's top line with the black color.
-  draw the tab's name in the center of the tab's box
+  if the tab's mode is "finder",
+    draw the tab's name in the center of the tab's info box
+      with the black color and the requested control font;
+    exit.
+  draw the tab's info string in the center of the tab's info box
+    with the gray color and the requested control font.
+  draw the tab's name in the center of the tab's name box
     with the black color and the requested control font.
 
 to draw some tabs:
@@ -571,7 +587,11 @@ to find a tab given a spot:
   repeat.
 
 to format a string to fit in a box given a font:
+  format the string to fit in the box given the font and "".
+
+to format a string to fit in a box given a font and a tail string:
   put the box's width minus 1/8 inch into a width.
+  put the string in another string.
   loop.
     if the string's length is less than 2, exit.
     get another width given the string and the memory canvas and the font.
@@ -582,8 +602,22 @@ to format a string to fit in a box given a font:
       put the little-t byte then the abbreviation byte
         then the string in the string;
       repeat.
+    if the tail string is "",
+      remove the last two bytes from the string;
+      append the abbreviation byte to the string;
+      repeat.
+    if the string does not end with the tail string,
+      remove the last two bytes from the string;
+      append the abbreviation byte to the string;
+      repeat.
+    remove trailing bytes from the string given the tail string's length.
+    if the string's length is less than 3,
+      format the other string to fit in the box given the font;
+      put the other string in the string;
+      exit.
     remove the last two bytes from the string.
     append the abbreviation byte to the string.
+    append the tail string to the string.
   repeat.
 
 a free tab is a tab.
@@ -2195,7 +2229,9 @@ to resize the pad:
   put the screen's right into the pad's right.
 
 to resize the switch:
-  put 1/4 inch plus 1/3 inch into the switch's height.
+  \ The 1/4 inch is the margin at the bottom of the pad,
+  \ into which the scrollbar's downtick button fits.
+  put 1/4 inch plus 15/32 inch into the switch's height.
   put the screen's left into the switch's left.
   put the screen's bottom minus the switch's height into the switch's top.
   put the screen's right into the switch's right.
@@ -2280,7 +2316,15 @@ to switch a tab to a node:
   put the node into the tab's node.
   put the node's designator into the tab's name.
   lowercase the tab's name.
-  format the tab's name to fit in the tab's box given the requested control font.
+  if the tab's name ends with "\",
+    put "" in the tab's info string.
+  if the tab's name does not end with "\",
+    put the node's info string into the tab's info string;
+    lowercase the tab's info string;
+    format the tab's info string to fit in the tab's box
+      given the requested control font and "\".
+  format the tab's name to fit in the tab's box
+    given the requested control font.
   put "finder" into the tab's mode.
   if the node's source is not nil, put "editor" into the tab's mode.
   if the node's document is not nil,
@@ -2289,7 +2333,10 @@ to switch a tab to a node:
 
 a tab is a thing with
   a box,
+  an info string,
+  an info box,
   a name,
+  a name box,
   a mode,
   a node.
 

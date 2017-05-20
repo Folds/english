@@ -955,6 +955,11 @@ to put a node's first visible nodette into a nodette:
     if the nodette is visible in the node, exit.
   repeat.
 
+to put a node's info string into a string:
+  if the node is nil, clear the string; exit.
+  if the node's parent node is nil, clear the string; exit.
+  put the node's parent node's designator into the string.
+
 to put a node's last selected nodette into a nodette:
   void the nodette.
   if the node is nil, exit.

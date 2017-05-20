@@ -99,44 +99,32 @@ from higher priority to lower priority.
   Testing difficulty:  n/a.
   Requested by Jasper Paulsen on April 30, 2017.
 
-176.  Add a "Measure Code" menu item.
-  Output a text file with the following columns:
-  source   code lines  just comments   blank lines  code wraps  total lines
-  with one line for each source file in the folder,
-  and one line for the totals.
-  Use tab-separated variable format.
-  Save as <exe name>.tsv
-  Status:  Request.
-  Audience:  Programmers
+231.  Determine project folder based on existence of noodle subfolder.
+  Status:  request.
+  Audience:  Windows programmers.
+  Benefit:  Medium.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Medium.
+  Requested by Jasper Paulsen on May 20, 2017.
+
+232.  Determine whether project has one or two level(s) of folders.
+  Status:  request.
+  Audience:  Windows programmers.
+  Benefit:  Medium.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Medium.
+  Requested by Jasper Paulsen on May 20, 2017.
+
+233.  Compile using project folder.
+  Status:    Designed.
+  Audience:  Windows programmers.
   Benefit:   Minor.
   Implementation difficulty:  Medium.
-  Demoing difficulty:  Easy.
+  Demoing difficulty:  Medium.
   Testing difficulty:  Medium.
-  Requested by Jasper Paulsen on March 23, 2017.
-
-172.  From "the noodle", factor out command-line parsing into a "commands" file.
-  Status:  request.
-  Audience:  Programmers.
-  Benefit:   minor.
-  Implementation difficulty:  Easy.
-  Demoing difficulty:  Not applicable.
-  Testing difficulty:  Not applicable.
-  Requested by Jasper Paulsen on March 20, 2017.
-
-219.  From "the editor", factor out blocks and sorting code into a "text sorter" file.
-  Status:    Designed.  Do after project can handle multiple folders.
-  Audience:  Programmers.
-  Benefit:   Minor.
-  Implementation difficulty:  Easy.
-  Demoing difficulty:  Not applicable.
-  Testing difficulty:  Not applicable.
-  Requested by Jasper Paulsen on April 27, 2017.
- 
-094.  Document "Plain English programming idioms",
-  and how they compare to other common programming languages.
-  Implementation difficulty:  Hard.
-  Testing difficulty:  Profound.
-  Requested by Jasper Paulsen on March 15, 2014.
+  Requested by Jasper Paulsen on May 20, 2017.
 
 201.  Allow compiling sources in multiple folders.
   Perhaps a subtree starting with the active source's folder?
@@ -152,6 +140,49 @@ from higher priority to lower priority.
   Testing difficulty:  Medium.
   Requested by Jasper Paulsen on April 25, 2017.
   
+235.  Update the documentation to discuss two-level projects.
+  Audience:  programmers.
+  Status:    request.
+  Benefit:   Important -- the documentation needs to be accurate.
+  Implementation difficulty:  Medium.
+  Demo difficulty:  Easy.
+  Test difficulty:  not applicable.
+  Requested by Jasper Paulsen on May 20, 2017.
+
+197.  In finder, allow running a .exe file.
+  Status:  Designed.
+  Audience:  Application users.
+  Benefit:  Medium.
+  Implementation difficulty:  Easy.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Medium.
+  Requested by Gerry Rzeppa on March 13, 2017.
+
+177.  Let user create shell shortcuts.
+  Status:  request.
+  Implementation difficulty:  Hard.
+  Demoing difficulty:  medium.
+  Testing difficulty:  Medium.
+  Requested by Jasper Paulsen on April 4, 2017.
+
+198.  In finder, allow running a .lnk file.
+  Status:  Designed.
+  Audience:  Application users.
+  Benefit:  Medium.
+  Implementation difficulty:  Easy.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Medium.
+  Requested by Jasper Paulsen on April 4, 2017.
+
+199.  In finder, allow creating a .lnk file.
+  Status:  Designed.
+  Audience:  Application users.
+  Benefit:  Medium.
+  Implementation difficulty:  Easy.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Medium.
+  Requested by Jasper Paulsen on April 4, 2017.
+
 021.  Make it easy to search all files that are open,
 regardless of whether the file's tab is visible.
   Status:  request.
@@ -193,6 +224,45 @@ open the files that are found.
   Demoing difficulty:  Easy.
   Testing difficulty:  Medium.
   Requested by Jasper Paulsen on March 7, 2014.
+
+176.  Add a "Measure Code" menu item.
+  Output a text file with the following columns:
+  source   code lines  just comments   blank lines  code wraps  total lines
+  with one line for each source file in the folder,
+  and one line for the totals.
+  Use tab-separated variable format.
+  Save as <exe name>.tsv
+  Status:  Request.
+  Audience:  Programmers
+  Benefit:   Minor.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Easy.
+  Testing difficulty:  Medium.
+  Requested by Jasper Paulsen on March 23, 2017.
+
+172.  From "the noodle", factor out command-line parsing into a "commands" file.
+  Status:  request.
+  Audience:  Programmers.
+  Benefit:   minor.
+  Implementation difficulty:  Easy.
+  Demoing difficulty:  Not applicable.
+  Testing difficulty:  Not applicable.
+  Requested by Jasper Paulsen on March 20, 2017.
+
+219.  From "the editor", factor out blocks and sorting code into a "text sorter" file.
+  Status:    Designed.  Do after project can handle multiple folders.
+  Audience:  Programmers.
+  Benefit:   Minor.
+  Implementation difficulty:  Easy.
+  Demoing difficulty:  Not applicable.
+  Testing difficulty:  Not applicable.
+  Requested by Jasper Paulsen on April 27, 2017.
+ 
+094.  Document "Plain English programming idioms",
+  and how they compare to other common programming languages.
+  Implementation difficulty:  Hard.
+  Testing difficulty:  Profound.
+  Requested by Jasper Paulsen on March 15, 2014.
 
 217.  Allow drawing a Unicode string on-screen.
   Status:    Request.
@@ -646,41 +716,7 @@ while a letter's menu is visible.
   Testing difficulty:  Medium. 
   Requested by Jasper Paulsen on April 4, 2017.
 
-197.  In finder, allow running a .exe file.
-  Status:  Designed.
-  Audience:  Application users.
-  Benefit:  Medium.
-  Implementation difficulty:  Easy.
-  Demoing difficulty:  Medium.
-  Testing difficulty:  Medium.
-  Requested by Gerry Rzeppa on March 13, 2017.
-
-177.  Let user create shell shortcuts.
-  Status:  request.
-  Implementation difficulty:  Hard.
-  Demoing difficulty:  medium.
-  Testing difficulty:  Medium.
-  Requested by Jasper Paulsen on April 4, 2017.
-
-198.  In finder, allow running a .lnk file.
-  Status:  Designed.
-  Audience:  Application users.
-  Benefit:  Medium.
-  Implementation difficulty:  Easy.
-  Demoing difficulty:  Medium.
-  Testing difficulty:  Medium.
-  Requested by Jasper Paulsen on April 4, 2017.
-
-199.  In finder, allow creating a .lnk file.
-  Status:  Designed.
-  Audience:  Application users.
-  Benefit:  Medium.
-  Implementation difficulty:  Easy.
-  Demoing difficulty:  Medium.
-  Testing difficulty:  Medium.
-  Requested by Jasper Paulsen on April 4, 2017.
-
-059  Implement enumerated types.
+059.  Implement enumerated types.
   For example, it would be nice to have
     an enumerated type of difficulty rating levels.
   The difficulty level is profound, because it requires namespaces.
@@ -792,6 +828,6 @@ with an adjustable slider between them.
 \ ======================================
 Unsorted requests:
 
-Next item number:  226.
+Next item number:  237.
 
 
