@@ -99,47 +99,6 @@ from higher priority to lower priority.
   Testing difficulty:  n/a.
   Requested by Jasper Paulsen on April 30, 2017.
 
-231.  Determine project folder based on existence of noodle subfolder.
-  Status:  request.
-  Audience:  Windows programmers.
-  Benefit:  Medium.
-  Implementation difficulty:  Medium.
-  Demoing difficulty:  Medium.
-  Testing difficulty:  Medium.
-  Requested by Jasper Paulsen on May 20, 2017.
-
-232.  Determine whether project has one or two level(s) of folders.
-  Status:  request.
-  Audience:  Windows programmers.
-  Benefit:  Medium.
-  Implementation difficulty:  Medium.
-  Demoing difficulty:  Medium.
-  Testing difficulty:  Medium.
-  Requested by Jasper Paulsen on May 20, 2017.
-
-233.  Compile using project folder.
-  Status:    Designed.
-  Audience:  Windows programmers.
-  Benefit:   Minor.
-  Implementation difficulty:  Medium.
-  Demoing difficulty:  Medium.
-  Testing difficulty:  Medium.
-  Requested by Jasper Paulsen on May 20, 2017.
-
-201.  Allow compiling sources in multiple folders.
-  Perhaps a subtree starting with the active source's folder?
-  Perhaps directories containing designated files?
-  Status:    Request.
-  Audience:  Programmers.
-  Benefit:   Major.  Would make it easier to organize
-             large numbers of source files, and thereby
-             encourage refactoring large source files
-             into multiple small source files.
-  Implementation difficulty:  Medium.
-  Demoing difficulty:  Easy.
-  Testing difficulty:  Medium.
-  Requested by Jasper Paulsen on April 25, 2017.
-  
 235.  Update the documentation to discuss two-level projects.
   Audience:  programmers.
   Status:    request.
