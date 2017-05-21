@@ -112,6 +112,24 @@ to convert a position to an absolute position given a text:
     add the row's string's length to the absolute position; repeat.
   add the position's column# to the absolute position.
 
+to convert some rows to a string:
+  clear the string.
+  loop.
+    get a row from the rows.
+    if the row is nil, exit.
+    append the row's string to the string.
+    if the string's last's target is the return byte,
+      append the linefeed byte to the string; repeat.
+  repeat.
+
+to convert some rows to a string (no linefeed additions):
+  clear the string.
+  loop.
+    get a row from the rows.
+    if the row is nil, exit.
+    append the row's string to the string.
+  repeat.
+
 to convert a string to some rows:
   slap a rider on the string.
   loop.
@@ -164,6 +182,14 @@ to copy a text into another text:
   if the text is nil, void the other text; exit.
   allocate memory for the other text.
   copy the guts of the text into the other text.
+
+to create a row given a byte:
+  allocate memory for the row.
+  put the byte into the row's string.
+
+to create a row given a string:
+  allocate memory for the row.
+  put the string into the row's string.
 
 to create a text:
   allocate memory for the text.
@@ -527,6 +553,7 @@ to get a column# given a row and a spot and a text:
 to get a position given a spot and a text:
   if the text is nil, clear the position; exit.
   get a row given the spot and the text.
+  if the row is nil, clear the position; exit.
   put the row's row# into the position's row#.
   get the position's column# given the row and the spot and the text.
 
@@ -580,6 +607,7 @@ to get a spot given a position and a text:
   clear the spot.
   if the text is nil, exit.
   get a row given the position's row# and the text.
+  if the row is nil, exit.
   get a box given the row and the text.
   put the box's top into the spot's y.
   put the row's string's first into a substring's first.
@@ -979,6 +1007,7 @@ the max text undos is a count equal to 32.
 to move the anchor left to any non-alphanumeric byte in a text:
   if the text is nil, exit.
   get a row given the text's anchor row# and the text.
+  if the row is nil, exit.
   loop.
     if the text's anchor column# is 1, exit.
     put the row's string's first plus the text's anchor column# minus 2 into a byte pointer.
@@ -1154,6 +1183,11 @@ to outdent any selected rows in a text:
 
 a position is a pair with a column# and a row#.
 
+to put a row's working string into a substring:
+  if the row is nil, clear the substring; exit.
+  slap the substring on the row's string.
+  subtract 1 from the substring's last.
+
 to put a selection into another selection:
   put the selection's anchor into the other selection's anchor.
   put the selection's caret into the other selection's caret.
@@ -1184,6 +1218,7 @@ to center a text on a spot:
 
 to put a text's first line into a string:
   if the text is nil, clear the string; exit.
+  if the text's first row is nil, clear the string; exit.
   put the text's first row's string into the string.
   remove the last byte from the string.
 
@@ -1285,6 +1320,7 @@ to remove bytes from a text (backspace over a return):
   if the text is nil, exit.
   if the text's caret row# is 1, exit.
   get a row given the text's caret row# minus 1 and the text.
+  if the row is nil, exit.
   put the row's string's length and the text's caret row# minus 1 into the text's caret.
   remove any selected bytes in the text.
 
@@ -1317,6 +1353,7 @@ to remove bytes from a text (forward delete with jump):
   if something is selected in the text,
     remove any selected bytes in the text; exit.
   get a row given the text's caret row# and the text.
+  if the row is nil, exit.
   if the text's caret column# is the row's string's length,
     remove bytes from the text (forward delete a return); exit.
   jump the caret right in the text.
@@ -1327,6 +1364,7 @@ to remove bytes from a text (forward delete):
   if something is selected in the text,
     remove any selected bytes in the text; exit.
   get a row given the text's caret row# and the text.
+  if the row is nil, exit.
   if the text's caret column# is the row's string's length,
     remove bytes from the text (forward delete a return); exit.
   move the caret right in the text.
@@ -1516,7 +1554,8 @@ to select every byte in a text:
   if the text is nil, exit.
   if the text's rows are empty, exit. \ What is the right thing to do in this situation?
   put 1 and 1 into the text's anchor.
-  put the text's rows' last's string's length and the text's row count into the text's caret.
+  put the text's rows' last's string's length
+    and the text's row count into the text's caret.
 
 to select a row# given a text:
   if the text is nil, exit.
@@ -1572,7 +1611,10 @@ to sort some rows:
 
 to split the rows of a text into some rows and some selected rows and some other rows:
   if the text is nil,
-    clear the rows; clear the selected rows; clear the other rows; exit.
+    clear the rows;
+    clear the selected rows;
+    clear the other rows;
+    exit.
   loop.
     put the text's rows' first into a row.
     if the row is nil, exit.

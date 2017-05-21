@@ -1006,24 +1006,6 @@ to convert a ratio to a string given a number:
   if the string's first's target is the period byte, prepend "0" to the string.
   if the flag is set, prepend "-" to the string.
 
-to convert some rows to a string:
-  clear the string.
-  loop.
-    get a row from the rows.
-    if the row is nil, exit.
-    append the row's string to the string.
-    if the string's last's target is the return byte,
-      append the linefeed byte to the string; repeat.
-  repeat.
-
-to convert some rows to a string (no linefeed additions):
-  clear the string.
-  loop.
-    get a row from the rows.
-    if the row is nil, exit.
-    append the row's string to the string.
-  repeat.
-
 to convert a string and an actual font info and an original font info into a buffer for pdf output:
   clear the buffer.
   put 0 into a current byte#.
@@ -1600,14 +1582,6 @@ to create the request handle of a winhttp request using a url record:
     and the secure number
     returning the winhttp request's request.
   if the winhttp request's request is 0, put "Could not open request." into the i/o error; exit.
-
-to create a row given a byte:
-  allocate memory for the row.
-  put the byte into the row's string.
-
-to create a row given a string:
-  allocate memory for the row.
-  put the string into the row's string.
 
 to create a socket given a host string and a port number: \ this guy creates and connects, sets i/o error if there is a problem
   clear the i/o error.
@@ -7366,11 +7340,6 @@ to put a roundy box into another roundy box:
   put the roundy box's right into the other roundy box's right.
   put the roundy box's bottom into the other roundy box's bottom.
   put the roundy box's radius into the other roundy box's radius.
-
-to put a row's working string into a substring:
-  if the row is nil, clear the substring; exit.
-  slap the substring on the row's string.
-  subtract 1 from the substring's last.
 
 to put a sockaddr into another sockaddr:
   copy bytes from the sockaddr's whereabouts to the other sockaddr's whereabouts for the sockaddr's magnitude.
