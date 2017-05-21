@@ -1,0 +1,1659 @@
+\ The portions of this file that are from CAL-3040
+\ are copyright 2006 by the Osmosian Order.
+\ The portions of this file that are from CAL-4700
+\ are copyright 2017 by the Osmosian Order.
+\ The remainder is copyright 2014, 2017 by Jasper Paulsen.
+
+\ here are the text rules:
+\   in a non-wrapped text, the rows end with a return byte.
+\   in a wrapped text, the rows end with either a return byte or a space.
+\   when text is converted to a string,
+\     linefeed bytes are added after return bytes.
+\   when a string is converted to text, linefeed bytes are removed.
+\   there is always at least one row.
+\   there is always a return byte at the end of the last row.
+
+\ this source file contains routines that use texts,
+\ rows of texts, carets, anchors, positions, and text selections.
+\ of the types listed in this paragraph, texts and rows are things;
+\ the others are not.
+
+an absolute position is a number.
+
+to align a text given an alignment:
+  if the text is nil, exit.
+  put the alignment into the text's alignment.
+
+an anchor is a position.
+
+to autoscroll a text given a spot and a flag:
+  if the text is nil, clear the flag; exit.
+  put the text's font's height into a number.
+  clear a difference.
+  put the text's box into a box.
+  indent the box given the tpp.
+  if the spot's y is less than the box's top,
+    put the number into the difference's y.
+  if the spot's y is greater than the box's bottom,
+    put the number into the difference's y; negate the difference's y.
+  if the spot's x is less than the box's left,
+    put the number into the difference's x.
+  if the spot's x is greater than the box's right,
+    put the number into the difference's x; negate the difference's x.
+  if the text's horizontal scroll flag is not set,
+    put 0 into the difference's x.
+  if the text's vertical scroll flag is not set,
+    put 0 into the difference's y.
+  if the difference is 0, clear the flag; exit.
+  set the flag.
+  scroll the text given the difference.
+  wait for 50 milliseconds.
+
+a caret is a position.
+
+to center a text in a box (horizontally):
+  if the text is nil, exit.
+  put the box's center's x minus the text's box's center's x into a number.
+  round the number to the nearest multiple of the tpp.
+  move the text given the number and 0.
+
+to center a text in a box (vertically):
+  if the text is nil, exit.
+  put the box's center's y minus the text's box's center's y into a number.
+  round the number to the nearest multiple of the tpp.
+  move the text given 0 and the number.
+
+to change a text given a box:
+  if the text is nil, exit.
+  put the box into the text's box.
+  wrap the text.
+
+to change a text given a font height:
+  if the text is nil, exit.
+  subtract the text's margin from the text's x.
+  put the text's origin divided by the text's grid into a pair.
+  put the font height into the text's font's height.
+  scale the text's font's height given the text's scale.
+  put the pair times the text's grid into the text's origin.
+  add the text's margin to the text's x.
+  limit the origin of the text.
+  wrap the text.
+
+to change a text given a font name:
+  if the text is nil, exit.
+  put the font name into the text's font's name.
+  wrap the text.
+
+to clear a selection:
+  clear the selection's anchor.
+  clear the selection's caret.
+
+a column# is a number.
+
+to convert an absolute position to a position given a text:
+  if the text is nil, clear the position; exit.
+  privatize the absolute position.
+  loop.
+    get a row from the text's rows.
+    if the row is nil, clear the position; exit.
+    put the row's row# into the position's row#.
+    put the absolute position into the position's column#.
+    subtract the row's string's length from the absolute position.
+    if the absolute position is less than 1, exit.
+  repeat.
+
+to convert a position to an absolute position given a text:
+  if the text is nil, clear the absolute position; exit.
+  put 0 into the absolute position.
+  loop.
+  get a row from the text's rows.
+  if the row is nil, exit.
+  if the row's row# is less than the position's row#,
+    add the row's string's length to the absolute position; repeat.
+  add the position's column# to the absolute position.
+
+to convert a string to some rows:
+  slap a rider on the string.
+  loop.
+    move the rider (text file rules).
+    if the rider's token is blank, break.
+    create a row given the rider's token.
+    append the row to the rows.
+    if the row's string's last's target is the linefeed byte,
+      put the return byte into the row's string's last's target.
+      \ *dahn new to handle lines terminated by just linefeed
+  repeat.
+  renumber the rows.
+
+to copy the guts of a text into another text:
+  if the text is nil, exit.
+  if the other text is nil, exit.
+  put the text's box into the other text's box.
+  put the text's origin into the other text's origin.
+  put the text's pen into the other text's pen.
+  put the text's font into the other text's font.
+  put the text's alignment into the other text's alignment.
+  copy the text's rows into the other text's rows.
+  put the text's margin into the other text's margin.
+  put the text's scale into the other text's scale.
+  put the text's wrap flag into the other text's wrap flag.
+  put the text's horizontal scroll flag into the other text's horizontal scroll flag.
+  put the text's vertical scroll flag into the other text's vertical scroll flag.
+  put the text's selection into the other text's selection.
+  put the text's modified flag into the other text's modified flag.
+  put the text's last operation into the other text's last operation.
+  \ don't copy undos and redos
+
+to copy a row into another row:
+  if the row is nil, void the other row; exit.
+  allocate memory for the other row.
+  put the row's row# into the other row's row#.
+  put the row's string into the other row's string.
+
+to copy some rows into some other rows:
+  \ to-do:  validate all uses of this routine.
+  destroy the other rows.
+  loop.
+    get a row from the rows.
+    if the row is nil, exit.
+    copy the row into another row.
+    append the other row to the other rows.
+  repeat.
+
+to copy a text into another text:
+  if the text is nil, void the other text; exit.
+  allocate memory for the other text.
+  copy the guts of the text into the other text.
+
+to create a text:
+  allocate memory for the text.
+  put the black color into the text's pen.
+  put the requested font into the text's font.
+  put "left" into the text's alignment.
+  put 1/1 into the text's scale.
+  guarantee one row in the text.
+  reset the origin of the text.
+  reset the caret of the text.
+  deselect the text.
+
+to decide if the caret of a text is at the beginning:
+  if the text is nil, say no.
+  if the text's caret row# is not 1, say no.
+  if the text's caret column# is not 1, say no.
+  say yes.
+
+to decide if the caret of a text is at the end:
+  if the text is nil, say no.
+  if the text's caret row# is not the text's rows' count, say no.
+  get a row given the text's caret row# and the text.
+  if the text's caret column# is not the row's string's length, say no.
+  say yes.
+
+to decide if the caret of a text is on the first line:
+  if the text is nil, say no.
+  if the text's caret row# is not 1, say no.
+  say yes.
+
+to decide if the caret of a text is on the last line:
+  if the text is nil, say  no.
+  if the text's rows are empty, say no.
+  if the text's caret row# is not the text's last row's row#, say no.
+  say yes.
+
+to decide if a row is blank:
+  if the row is nil, say yes.
+  slap a substring on the row's string.
+  loop.
+    if the substring is blank, say yes.
+    if the substring's first's target is not noise, say no.
+    add 1 to the substring's first.
+  repeat.
+
+to decide if a row of a text is selected:
+  if the text is nil, say no.
+  if the row is nil, say no.
+  if nothing is selected in the text, say no.
+  put the text's normalized selection into a selection.
+  if the row's row# is less than the selection's anchor row#, say no.
+  if the row's row# is greater than the selection's caret row#, say no.
+  if the row's row# is not the selection's caret row#, say yes.
+  if the selection's caret column# is 1, say no.
+  say yes.
+
+to decide if a row of a text is visible:
+  if the text is nil, say no.
+  if the row is nil, say  no.
+  get a box given the row and the text.
+  put the text's box into another box.
+  adjust the other box given 0 and the tpp and 0 and - the tpp.
+  if the box is touching the other box, say yes.
+  say no.
+
+to decide if a row of a text is visible given a box:
+  if the row of the text is not visible, say no.
+  privatize the box.
+  get another box given the row and the text.
+  if the current tab is nil, say no.
+  if the current tab's node is nil, say no.
+  if the current tab's node's page is nil, say no.
+  put the current tab's node's page's origin in a spot.
+  adjust the box given 0 and the tpp and 0 and - the tpp.
+  adjust the box given the spot's x and the spot's y and the spot's x and the spot's y.
+  if the box is touching the other box, say yes.
+  say no.
+
+to decide if a selection is another selection:
+  if the selection's anchor is not the other selection's anchor, say no.
+  if the selection's caret is not the other selection's caret, say no.
+  say yes.
+
+to decide if something is selected in a text:
+  if the text is nil, say no.
+  if the text's anchor is the text's caret, say no.
+  say yes.
+
+to decide if a spot is in a text:
+  if the text is nil, say no.
+  if the spot is in the text's box, say yes.
+  say no.
+
+to decide if a text can be redone:
+  if the text is nil, say no.
+  if the text's redos' last is nil, say no.
+  say yes.
+
+to decide if a text can be undone:
+  if the text is nil, say no.
+  if the text's undos' last is nil, say no.
+  say yes.
+
+to decide if a text is modified:
+  if the text is nil, say no.
+  if the text's modified flag is set, say yes.
+  say no.
+
+to decide if a text is visible given a box:
+  if the text is nil, say no.
+  loop.
+    get a row from the text's rows.
+    if the row is nil, say no.
+    \debug the row's string.
+    if the row of the text is visible given the box, say yes.
+  repeat.
+
+to decide if there is something to backspace in a text:
+  if the text is nil, say no.
+  if something is selected in the text, say yes.
+  if the text's caret row# is not 1, say yes.
+  if the text's caret column# is not 1, say yes.
+  say no.
+
+to decide if there is something to remove in a text:
+  if the text is nil, say no.
+  if something is selected in the text, say yes.
+  if the text's caret row# is not the text's row count, say yes.
+  get a row given the text's caret row# and the text.
+  if the row is nil, say no.
+  if the text's caret column# is not the row's string's length, say yes.
+  say no.
+
+to deselect a text:
+  if the text is nil, exit.
+  put the text's caret into the text's anchor.
+
+to draw any visible rows of a text:
+  if the text is nil, exit.
+  loop.
+    get a row from the text's rows.
+    if the row is nil, exit.
+    if the row of the text is not visible, repeat.
+    draw the row of the text.
+  repeat.
+
+to draw any visible rows of a text (editing):
+  if the text is nil, exit.
+  loop.
+    get a row from the text's rows.
+    if the row is nil, exit.
+\    if the row of the text is not visible given the screen's box, repeat.
+    if the row of the text is not visible, repeat.
+    draw the row of the text (editing).
+  repeat.
+
+to draw the caret in a text:
+  if the text is nil, exit.
+  get a box for the caret in the text.
+  if the box is not touching the text's box, exit.
+  put the box's left-top and the box's right-bottom into a line.
+  draw the line with the black color.
+
+to draw a row of a text:
+  if the text is nil, exit.
+  if the row is nil, exit.
+  get a box given the row and the text.
+  draw the row's working string in the box
+    with the text's pen and the text's font and the text's alignment.
+
+to draw a row of a text (editing):
+  if the text is nil, exit.
+  if the row is nil, exit.
+  draw the selection box for the row of the text.
+  get a box given the row and the text.
+  draw the row's working string in the box
+    with the text's pen and the text's font and the text's alignment.
+
+to draw the selection box for a row of a text:
+  if the text is nil, exit.
+  if the row is nil, exit.
+  if the row of the text is not selected, exit.
+  get a selection box given the row and the text.
+  draw the selection box with the hilite color and the hilite color.
+
+to draw a text:
+  if the text is nil, exit.
+  save the current canvas.
+  mask outside the text's box.
+  draw any visible rows of the text.
+  restore the current canvas.
+
+to draw a text (editing):
+  if the text is nil, exit.
+  save the current canvas.
+  mask outside the text's box.
+  draw any visible rows of the text (editing).
+  draw the caret in the text.
+  restore the current canvas.
+
+to extend any selection in a text given a spot:
+  if the text is nil, exit.
+  get the text's caret given the spot and the text.
+  clear the text's last operation.
+
+to extract a string from a text:
+  if the text is nil, clear the string; exit.
+  convert the text's rows to the string.
+  remove any trailing linefeed byte from the string.
+  remove any trailing return byte from the string.
+
+to extract a string from a text (no linefeed additions):
+  if the text is nil, clear the string; exit.
+  convert the text's rows to the string (no linefeed additions).
+  remove any trailing return byte from the string.
+
+to extract a string from a text (selected bytes):
+  clear the string.
+  if the text is nil, exit.
+  loop.
+    get a row from the text's rows.
+    if the row is nil, exit.
+    slap a substring on any selected bytes in the row of the text.
+    if the substring is blank, repeat.
+    append the substring to the string.
+    if the substring's last's target is the return byte,
+      append the linefeed byte to the string.
+  repeat.
+
+the find anchor is an anchor.
+
+to find next given a row and a text and a flag:
+  clear the flag.
+  if the text is nil, exit.
+  if the row is nil, exit.
+  slap a substring on the row's string.
+  put the substring's first plus the find string's length minus 1 into the substring's last.
+  if the row's row# is the find anchor's row#,
+    move the substring given the find anchor's column# minus 1.
+  loop.
+    if the substring's last is greater than or equal to the row's string's last, exit.
+    if the substring is the find string, break.
+    move the substring given 1.
+  repeat.
+  set the flag.
+  put the substring's first minus the row's string's first plus 1 into the text's anchor column#.
+  put the row's row# into the text's anchor row#.
+  put the substring's last minus the row's string's first plus 2 into the text's caret column#.
+  put the row's row# into the text's caret row#.
+
+to find next given a text and a flag:
+  if the text is nil,
+    clear the flag; exit.
+  if the text's wrap flag is set,
+    find next given the text and the flag (wrapped text); exit.
+  clear the flag.
+  if the find string's length is 0, exit.
+  loop.
+    get a row from the text's rows.
+    if the row is nil, exit.
+    if the row's row# is less than the find anchor's row#, repeat.
+    find next given the row and the text and the flag.
+    if the flag is set, exit.
+  repeat.
+
+to find next given a text and a flag (wrapped text):
+  clear the flag.
+  if the text is nil, exit.
+  convert the find anchor to an absolute position called offset given the text.
+  extract a string from the text (no linefeed additions).
+  put the string's first plus the offset minus 1 into a substring's first.
+  put the substring's first plus the find string's length minus 1 into the substring's last.
+  loop.
+    if the substring's last is greater than the string's last, exit.
+    if the substring is the find string, break.
+    move the substring given 1.
+  repeat.
+  set the flag.
+  put the substring's first minus the string's first plus 1 into an anchor absolute position.
+  put the substring's last minus the string's first plus 2 into a caret absolute position.
+  convert the anchor absolute position to the text's anchor given the text.
+  convert the caret absolute position to the text's caret given the text.
+
+to find the next misspelling given a row and a text and a flag:
+  clear the flag.
+  if the text is nil, exit.
+  if the row is nil, exit.
+  slap a rider on the row's string.
+  if the row's row# is the find anchor's row#, add the find anchor's column# minus 1 to the rider's source's first.
+  if the rider's source's first is not the row's string's first, skip word characters in the rider's source.
+  loop.
+  move the rider (spell checking rules).
+  if the rider's token is blank, exit.
+  if the rider's token is not misspelled, repeat.
+  set the flag.
+  put the rider's token's first minus the row's string's first plus 1 into the text's anchor column#.
+  put the row's row# into the text's anchor row#.
+  put the rider's token's last minus the row's string's first plus 2 into the text's caret column#.
+  put the row's row# into the text's caret row#.
+
+to find the next misspelling in a text given a flag:
+  clear the flag.
+  if the text is nil, exit.
+  loop.
+    get a row from the text's rows.
+    if the row is nil, exit.
+    if the row's row# is less than the find anchor's row#, repeat.
+    find the next misspelling given the row and the text and the flag.
+    if the flag is set, exit.
+  repeat.
+
+to get a box for the caret in a text:
+  if the text is nil, clear the box; exit.
+  get a spot given the text's caret and the text.
+  put the spot and the spot into the box.
+  add the text's row height to the box's bottom.
+  adjust the box given 0 and the tpp and 0 and - the tpp.
+  put the text's globalized origin into an origin.
+  if the box's left is less than the origin's x,
+    put the origin's x into the box's left;
+    put the origin's x into the box's right.
+  if the text's wrap flag is not set, exit.
+  limit the box's left to the text's left and the text's right.
+  limit the box's right to the text's left and the text's right.
+
+to get a box given a row and a text:
+  if the text is nil, clear the box; exit.
+  if the row is nil, clear the box; exit.
+  put the text's globalized origin into the box's left-top.
+  put the row's row# in a number.
+  subtract 1 from the number.
+  multiply the number by the text's row height.
+  add the number to the box's top.
+  put the text's right into the box's right.
+  put the box's top plus the text's row height into the box's bottom.
+
+to get a column# given a row and a spot and a text:
+  put 0 into the column#.
+  if the text is nil, exit.
+  if the row is nil, exit.
+  get a box given the row and the text.
+  if the spot's y is greater than the box's bottom,
+    put the row's string's length into the column#; exit.
+    \ only happens on last row of text
+  create the hfont of the memory canvas given the text's font.
+  get a start width and a substring given the row and the spot and the text
+    (for "get a column# given a row...").
+  loop.
+    if the substring's last is the row's string's last, break.
+    get a width given the substring and the memory canvas.
+    add the start width to the width.
+    get another width given the substring's last's target and the memory canvas.
+    divide the other width by 2.
+    subtract the other width from the width.
+    if the spot's x is less than the width, break.
+    add 1 to the substring's last.
+  repeat.
+  put the substring's last minus the row's string's first plus 1 into the column#.
+  destroy the hfont of the memory canvas.
+
+to get a position given a spot and a text:
+  if the text is nil, clear the position; exit.
+  get a row given the spot and the text.
+  put the row's row# into the position's row#.
+  get the position's column# given the row and the spot and the text.
+
+to get a row given a row# and a text:
+  void the row.
+  if the text is nil, exit.
+  loop.
+    get the row from the text's rows.
+    if the row is nil, exit.
+    if the row's row# is the row#, exit.
+  repeat.
+
+to get a row given a spot and a text:
+  if the text is nil, void the row; exit.
+  put the spot's y into a y coord.
+  limit the y to the text's top and the text's bottom.
+  put the y minus the text's globalized origin's y divided by the text's row height plus 1 into a row#.
+  limit the row# to 1 and the text's row count.
+  get the row given the row# and the text.
+
+to get a selection box given a row and a text:
+  clear the selection box.
+  if the text is nil, exit.
+  if the row is nil, exit.
+  get a box given the row and the text.
+  put the box into the selection box.
+  get the selection box given the row and the text (left side).
+  get the selection box given the row and the text (right side).
+
+to get a selection box given a row and a text (left side):
+  if the text is nil, clear the selection box; exit.
+  if the row  is nil, clear the selection box; exit.
+  put the text's normalized selection into a selection.
+  put the text's globalized origin's x into the selection box's left.
+  if the selection's anchor row# is the row's row#,
+    get a spot given the selection's anchor and the text;
+    put the spot's x into the selection box's left.
+  limit the selection box's left to the text's left and the text's right.
+
+to get a selection box given a row and a text (right side):
+  if the text is nil, clear the selection box; exit.
+  if the row  is nil, clear the selection box; exit.
+  put the text's normalized selection into a selection.
+  put the text's right into the selection box's right.
+  if the selection's caret row# is the row's row#,
+    get a spot given the selection's caret and the text;
+    put the spot's x into the selection box's right.
+  limit the selection box's right to the text's left and the text's right.
+
+to get a spot given a position and a text:
+  clear the spot.
+  if the text is nil, exit.
+  get a row given the position's row# and the text.
+  get a box given the row and the text.
+  put the box's top into the spot's y.
+  put the row's string's first into a substring's first.
+  put the substring's first plus the position's column# minus 2 into the substring's last.
+  get a width given the substring and the memory canvas and the text's font.
+  put the box's left plus the width into the spot's x.
+  get an offset pair given the row's working string
+    and the box and the text's font and the text's alignment.
+  add the offset pair's x to the spot's x.
+
+to get a start width and a substring given a row and a spot and a text (for "get a column# given a row..."):
+  clear the start width.
+  clear the substring.
+  if the text is nil, exit.
+  if the row is nil, exit.
+  get a box given the row and the text.
+  slap the substring on the row's working string.
+  get an offset pair given the substring and the box and the text's font and the text's alignment (fast).
+  put the text's globalized origin's x plus the offset pair's x into the start width.
+  put the substring's first plus the text cutoff minus 1 into the substring's last.
+  loop.
+    if the substring's last is at least the row's string's last, break.
+    get a width given the substring and the memory canvas.
+    put the start width plus the width into another width.
+    if the spot's x is less than or equal to the other width, break.
+    add the width to the start width.
+    move the substring given the text cutoff.
+  repeat.
+  put the substring's first into the substring's last.
+
+to guarantee one row in a text:
+  if the text is nil, exit.
+  if the text's rows are not empty, exit.
+  create a row given the return byte.
+  append the row to the text's rows.
+  renumber the text's rows.
+
+to handle align given a text and an alignment:
+  if the text is nil, exit.
+  remember the text with "alignment".
+  align the text given the alignment.
+
+to handle copy given a text:
+  if the text is nil, exit.
+  if nothing is selected in the text, exit.
+  extract a string from the text (selected bytes).
+  put the string on the windows clipboard.
+
+to handle cut given a text:
+  if the text is nil, exit.
+  if nothing is selected in the text, exit.
+  remember the text.
+  extract a string from the text (selected bytes).
+  put the string on the windows clipboard.
+  remove any selected bytes in the text.
+  wrap the text.
+  scroll the text to the caret.
+
+to handle an event given a text (backspace key):
+  if the text is nil, exit.
+  if there is nothing to backspace in the text, exit.
+  remember the text with "backspace".
+  if the event is modified, remove bytes from the text (backspace with jump).
+  if the event is not modified, remove bytes from the text (backspace).
+  wrap the text.
+  scroll the text to the caret.
+
+to handle an event given a text (delete key):
+  if the text is nil, exit.
+  if there is nothing to remove in the text, exit.
+  remember the text with "delete".
+  if the event is modified,
+    remove bytes from the text (forward delete with jump).
+  if the event is not modified, remove bytes from the text (forward delete).
+  wrap the text.
+  scroll the text to the caret.
+
+to handle an event given a text (down-arrow key):
+  if the text is nil, exit.
+  if the caret of the text is on the last line, set a flag.
+  if the flag is set, move the caret to the last byte of the text.
+  if the flag is not set, move the caret down in the text.
+  if the event's shift flag is not set, deselect the text.
+  clear the text's last operation.
+  scroll the text to the caret.
+
+to handle an event given a text (end key):
+  if the text is nil, exit.
+  if the event is modified, move the caret to the last byte of the text.
+  if the event is not modified,
+    move the caret to the last byte of the current row of the text.
+  if the event's shift flag is not set, deselect the text.
+  clear the text's last operation.
+  scroll the text to the caret.
+
+to handle an event given a text (enter key):
+  if the text is nil, exit.
+  remember the text with "insert return".
+  remove any selected bytes in the text.
+  insert the return byte into the text.
+  wrap the text.
+  scroll the text to the caret.
+
+to handle an event given a text (escape key):
+  if the text is nil, exit.
+  deselect the text.
+
+to handle an event given a text (home key):
+  if the text is nil, exit.
+  if the event is modified, move the caret to the first byte of the text.
+  if the event is not modified,
+    move the caret to the first byte of the current row of the text.
+  if the event's shift flag is not set, deselect the text.
+  clear the text's last operation.
+  scroll the text to the caret.
+
+to handle an event given a text (left double click):
+  if the text is nil, exit.
+  deselect the text.
+  move the caret right to any non-alphanumeric byte in the text.
+  move the anchor left to any non-alphanumeric byte in the text.
+
+to handle an event given a text (left-arrow key):
+  if the text is nil, exit.
+  if the event is modified, jump the caret left in the text.
+  if the event is not modified, move the caret left in the text.
+  if the event's shift flag is not set, deselect the text.
+  clear the text's last operation.
+  scroll the text to the caret.
+
+to handle an event given a text (page-down key):
+  if the text is nil, exit.
+  scroll the text down one page.
+  move the caret down one page in the text.
+  if the event's shift flag is not set, deselect the text.
+  clear the text's last operation.
+
+to handle an event given a text (page-up key):
+  if the text is nil, exit.
+  scroll the text up one page.
+  move the caret up one page in the text.
+  if the event's shift flag is not set, deselect the text.
+  clear the text's last operation.
+
+to handle an event given a text (printable key):
+  remember the text with "insert".
+  remove any selected bytes in the text.
+  insert the event's byte into the text.
+  wrap the text.
+  scroll the text to the caret.
+
+to handle an event given a text (right-arrow key):
+  if the text is nil, exit.
+  if the event is modified, jump the caret right in the text.
+  if the event is not modified, move the caret right in the text.
+  if the event's shift flag is not set, deselect the text.
+  clear the text's last operation.
+  scroll the text to the caret.
+
+to handle an event given a text (tab key):
+  if the text is nil, exit.
+  remember the text with "insert".
+  remove any selected bytes in the text.
+  insert the space byte into the text.
+  divide the text's caret column# by 2 giving a quotient and a remainder.
+  if the remainder is 0, insert the space byte into the text.
+  scroll the text to the caret.
+
+to handle an event given a text (up-arrow key):
+  if the text is nil, exit.
+  move the caret up in the text.
+  if the event's shift flag is not set, deselect the text.
+  clear the text's last operation.
+  scroll the text to the caret.
+
+to handle font height given a text and a box and a font height:
+  if the text is nil, exit.
+  remember the text with "font height".
+  change the text given the box.
+  change the text given the font height.
+
+to handle font height given a text and a font height:
+  if the text is nil, exit.
+  remember the text with "font height".
+  change the text given the font height.
+
+to handle font name given a text and a font name:
+  if the text is nil, exit.
+  remember the text with "font name".
+  change the text given the font name.
+
+to handle indent given a text:
+  if the text is nil, exit.
+  if nothing is selected in the text, exit.
+  remember the text with "dent".
+  indent any selected rows in the text.
+  square up any selection in the text.
+  wrap the text.
+
+to handle lowercase given a text:
+  if the text is nil, exit.
+  if nothing is selected in the text, exit.
+  remember the text with "case".
+  lowercase any selected bytes in the text.
+  wrap the text.
+
+to handle outdent given a text:
+  if the text is nil, exit.
+  if nothing is selected in the text, exit.
+  remember the text with "dent".
+  outdent any selected rows in the text.
+  square up any selection in the text.
+  wrap the text.
+
+to handle paste given a text:
+  if the text is nil, exit.
+  if there is not text on the windows clipboard, exit.
+  remember the text.
+  remove any selected bytes in the text.
+  get a string from the windows clipboard.
+  insert the string into the text.
+  wrap the text.
+  scroll the text to the caret.
+
+to handle pen given a text and a color:
+  if the text is nil, exit.
+  remember the text with "pen".
+  put the color into the text's pen.
+
+to handle redo given a text:
+  if the text is nil, exit.
+  if the text's redos' last is nil, exit.
+  copy the text into another text.
+  append the other text to the text's undos.
+  put the text's redos' last into a third text.
+  remove the third text from the text's redos.
+  copy the guts of the third text into the text.
+  destroy the third text.
+  set the text's modified flag.
+
+to handle reverse given a text:
+  if the text is nil, exit.
+  if nothing is selected in the text, exit.
+  remember the text with "reverse".
+  reverse any selected rows of the text.
+  square up any selection in the text.
+  wrap the text.
+
+to handle select all given a text:
+  if the text is nil, exit.
+  select every byte in the text.
+
+to handle sort any selected rows given a text:
+  if the text is nil, exit.
+  if nothing is selected in the text, exit.
+  remember the text with "sort selected rows".
+  sort any selected rows in the text.
+  square up any selection in the text.
+  wrap the text.
+
+to handle undo given a text:
+  if the text is nil, exit.
+  if the text's undos' last is nil, exit.
+  copy the text into another text.
+  append the other text to the text's redos.
+  put the text's undos' last into a third text.
+  remove the third text from the text's undos.
+  copy the guts of the third text into the text.
+  destroy the third text.
+  set the text's modified flag.
+
+to handle uppercase given a text:
+  if the text is nil, exit.
+  if nothing is selected in the text, exit.
+  remember the text with "case".
+  uppercase any selected bytes in the text.
+  wrap the text.
+
+to indent any selected rows in a text:
+  if the text is nil, exit.
+  loop.
+    get a row from the text's rows.
+    if the row is nil, exit.
+    if the row of the text is not selected, repeat.
+    if the row is blank, repeat.
+    prepend the space byte to the row's string.
+    prepend the space byte to the row's string.
+  repeat.
+
+to insert a byte into a text:
+  if the text is nil, exit.
+  put the byte into a string.
+  insert the string into the text.
+
+to insert a string into a text:
+  if the text is nil, exit.
+  get a row given the text's caret row# and the text.
+  if the row is nil, exit. \ should this error trap also deselect the text?
+  put the row's string's length minus the text's caret column# into a number.
+  put the row's string into another string.
+  insert the string into the other string before the text's caret column#.
+  convert the other string to some rows.
+  put the rows' last into another row.
+  insert the rows into the text's rows before the row.
+  remove the row from the text's rows.
+  destroy the row.
+  renumber the text's rows.
+  if the other row is nil,
+    deselect the text; exit.
+  put the other row's row# into the text's caret row#.
+  put the other row's string's length minus the number into the text's caret column#.
+  deselect the text.
+
+to jump the caret left in a text:
+  if the text is nil, exit.
+  move the caret left to any non-noise byte in the text.
+  if the text's caret column# is 1, exit.
+  get a row given the text's caret row# and the text.
+  if the row is nil,
+    move the caret left to any non-noise byte in the text;
+    exit.
+  put the row's string's first plus the text's caret column# minus 2 into a byte pointer.
+  if the byte pointer's target is alphanumeric,
+    move the caret left to any non-alphanumeric byte in the text.
+  if the byte pointer's target is not alphanumeric,
+    move the caret left to any non-symbolic byte in the text.
+  move the caret left to any non-noise byte in the text.
+
+to jump the caret right in a text:
+  if the text is nil, exit.
+  move the caret right to any non-noise byte in the text.
+  get a row given the text's caret row# and the text.
+  if the row is nil,
+    move the caret right to any non-noise byte in the text;
+    exit.
+  if the text's caret column# is the row's string's length, exit.
+  put the row's string's first plus the text's caret column# minus 1 into a byte pointer.
+  if the byte pointer's target is alphanumeric,
+    move the caret right to any non-alphanumeric byte in the text.
+  if the byte pointer's target is not alphanumeric,
+    move the caret right to any non-symbolic byte in the text.
+  move the caret right to any non-noise byte in the text.
+
+to limit the caret in a text:
+  if the text is nil, exit.
+  limit the text's caret row# to 1 and the text's row count.
+  get a row given the text's caret row# and the text.
+  if the row is nil, exit.
+  limit the text's caret column# to 1 and the row's string's length.
+
+to limit the origin of a text:
+  if the text is nil, exit.
+  limit the text's x to the smallest number and the text's margin.
+  put the text's row count minus 1 into a count.
+  put the count times the text's row height into a number.
+  limit the text's y to - the number and 0.
+
+to limit the origin of a text (scrolling):
+  if the text is nil, exit.
+  limit the text's x to the smallest number and the text's margin.
+  put the text's rows/box minus 3 into a count.
+  put the text's row count minus the count into another count.
+  put the other count times the text's row height into a number.
+  limit the text's y to - the number and 0.
+
+to limit some texts to a count:
+  put the texts' count into another count.
+  loop.
+    if the other count is less than or equal to the count, exit.
+    put the texts' first into a text.
+    remove the text from the texts.
+    destroy the text.
+    subtract 1 from the other count.
+  repeat.
+
+to lowercase any selected bytes in a text:
+  if the text is nil, exit.
+  loop.
+    get a row from the text's rows.
+    if the row is nil, exit.
+    if the row of the text is not selected, repeat.
+    slap a substring on any selected bytes in the row of the text. 
+    lowercase the substring.
+  repeat.
+
+to lowercase a text:
+  if the text is nil, exit.
+  loop.
+    get a row from the text's rows.
+    if the row is nil, break.
+    lowercase the row's string.
+  repeat.
+  wrap the text.
+
+the max text undos is a count equal to 32.
+
+to move the anchor left to any non-alphanumeric byte in a text:
+  if the text is nil, exit.
+  get a row given the text's anchor row# and the text.
+  loop.
+    if the text's anchor column# is 1, exit.
+    put the row's string's first plus the text's anchor column# minus 2 into a byte pointer.
+    if the byte pointer's target is not alphanumeric, exit.
+    subtract 1 from the text's anchor column#.
+  repeat.
+
+to move the caret down in a text:
+  if the text is nil, exit.
+  add 1 to the text's caret row#.
+  limit the caret in the text.
+
+to move the caret down one page in a text:
+  if the text is nil, exit.
+  add the text's rows/box to the text's caret row#.
+  subtract 1 from the text's caret row#.
+  limit the caret in the text.
+
+to move the caret to the first byte of the current row of a text:
+  if the text is nil, exit.
+  put 1 into the text's caret column#.
+
+to move the caret to the first byte of a text:
+  if the text is nil, exit.
+  put 1 and 1 into the text's caret.
+
+to move the caret to the last byte of the current row of a text:
+  if the text is nil, exit.
+  get a row given the text's caret row# and the text.
+  if the row is nil, exit.
+  put the row's string's length into the text's caret column#.
+
+to move the caret to the last byte of a text:
+  if the text is nil, exit.
+  put the text's row count into the text's caret row#.
+  get a row given the text's caret row# and the text.
+  if the row is nil, exit.
+  put the row's string's length into the text's caret column#.
+
+to move the caret left to any non-alphanumeric byte in a text:
+  if the text is nil, exit.
+  get a row given the text's caret row# and the text.
+  if the row is nil, exit.
+  loop.
+    if the text's caret column# is 1, exit.
+    put the row's string's first plus the text's caret column# minus 2 into a byte pointer.
+    if the byte pointer's target is not alphanumeric, exit.
+    subtract 1 from the text's caret column#.
+  repeat.
+
+to move the caret left to any non-noise byte in a text:
+  if the text is nil, exit.
+  get a row given the text's caret row# and the text.
+  if the row is nil, exit.
+  loop.
+    if the text's caret column# is 1, exit.
+    put the row's string's first plus the text's caret column# minus 2 into a byte pointer.
+    if the byte pointer's target is not noise, exit.
+    subtract 1 from the text's caret column#.
+  repeat.
+
+to move the caret left to any non-symbolic byte in a text:
+  if the text is nil, exit.
+  get a row given the text's caret row# and the text.
+  if the row is nil, exit.
+  loop.
+    if the text's caret column# is 1, exit.
+    put the row's string's first plus the text's caret column# minus 2 into a byte pointer.
+    if the byte pointer's target is not symbolic, exit.
+    subtract 1 from the text's caret column#.
+  repeat.
+
+to move the caret left in a text:
+  if the text is nil, exit.
+  subtract 1 from the text's caret column#.
+  limit the caret in the text.
+
+to move the caret right to any non-alphanumeric byte in a text:
+  if the text is nil, exit.
+  get a row given the text's caret row# and the text.
+  if the row is nil, exit.
+  loop.
+    if the text's caret column# is the row's string's length, exit.
+    put the row's string's first plus the text's caret column# minus 1 into a byte pointer.
+    if the byte pointer's target is not alphanumeric, exit.
+    add 1 to the text's caret column#.
+  repeat.
+
+to move the caret right to any non-noise byte in a text:
+  if the text is nil, exit.
+  get a row given the text's caret row# and the text.
+  if the row is nil, exit.
+  loop.
+    if the text's caret column# is the row's string's length, exit.
+    put the row's string's first plus the text's caret column# minus 1 into a byte pointer.
+    if the byte pointer's target is not noise, exit.
+    add 1 to the text's caret column#.
+  repeat.
+
+to move the caret right to any non-symbolic byte in a text:
+  if the text is nil, exit.
+  get a row given the text's caret row# and the text.
+  if the row is nil, exit.
+  loop.
+    if the text's caret column# is the row's string's length, exit.
+    put the row's string's first plus the text's caret column# minus 1 into a byte pointer.
+    if the byte pointer's target is not symbolic, exit.
+    add 1 to the text's caret column#.
+  repeat.
+
+to move the caret right in a text:
+  if the text is nil, exit.
+  add 1 to the text's caret column#.
+  limit the caret in the text.
+
+to move the caret up in a text:
+  if the text is nil, exit.
+  subtract 1 from the text's caret row#.
+  limit the caret in the text.
+
+to move the caret up one page in a text:
+  if the text is nil, exit.
+  subtract the text's rows/box from the text's caret row#.
+  add 1 to the text's caret row#.
+  limit the caret in the text.
+
+to move a text down some twips:
+  move the text given 0 and the twips.
+
+to move a text given a pair:
+  move the text given the pair's x and the pair's y.
+
+to move a text given some x twips and some y twips:
+  if the text is nil, exit.
+  move the text's box given the x twips and the y twips.
+
+to move a text left some twips:
+  move the text given - the twips and 0.
+
+to move a text right some twips:
+  move the text given the twips and 0.
+
+to move a text to a spot:
+  if the text is nil, exit.
+  get a difference between the spot and the text's left-top.
+  move the text given the difference.
+
+to move a text up some twips:
+  move the text given 0 and - the twips.
+
+to normalize a selection:
+  if the selection's anchor row# is less than the selection's caret row#, exit.
+  if the selection's anchor row# is greater than the selection's caret row#,
+    swap the selection's anchor with the selection's caret; exit.
+  if the selection's anchor column# is greater than the selection's caret column#,
+    swap the selection's anchor column# with the selection's caret column#.
+
+to normalize a text:
+  if the text is nil, exit.
+  normalize the text's box.
+
+to outdent any selected rows in a text:
+  if the text is nil, exit.
+  loop.
+    get a row from the text's rows.
+    if the row is nil, exit.
+    if the row of the text is not selected, repeat.
+    if the row's string's first's target is the space byte,
+      remove the first byte from the row's string.
+    if the row's string's first's target is the space byte,
+      remove the first byte from the row's string.
+  repeat.
+
+a position is a pair with a column# and a row#.
+
+to put a selection into another selection:
+  put the selection's anchor into the other selection's anchor.
+  put the selection's caret into the other selection's caret.
+
+to put a string into a text:
+  if the text is nil, exit.
+  destroy the text's rows.
+  reset the origin of the text.
+  reset the caret of the text.
+  deselect the text.
+  privatize the string.
+  append the return byte to the string.
+  convert the string to the text's rows.
+  wrap the text.
+
+to put a text in the middle of a box;
+to center a text in a box:
+  if the text is nil, exit.
+  center the text in the box (horizontally).
+  center the text in the box (vertically).
+
+to put a text on a spot;
+to center a text on a spot:
+  if the text is nil, exit.
+  get a difference between the spot and the text's box's center.
+  round the difference to the nearest multiple of the tpp.
+  move the text given the difference.
+
+to put a text's first line into a string:
+  if the text is nil, clear the string; exit.
+  put the text's first row's string into the string.
+  remove the last byte from the string.
+
+to put a text's globalized origin into a spot:
+  if the text is nil, clear the spot; exit.
+  put the text's origin into the spot.
+  globalize the spot given the text's left-top.
+
+to put a text's grid into a grid:
+  if the text is nil, clear the grid; exit.
+  put the text's font's height times 4 into the grid's x.
+  put the text's font's height into the grid's y.
+
+to put a text's normalized selection into a selection:
+  if the text is nil, exit.
+  put the text's selection into the selection.
+  normalize the selection.
+
+to put a text's row count into a count:
+  if the text is nil, put 0 into the count; exit.
+  if the text's rows are empty, put 0 into the count; exit.
+  put the text's rows' last's row# into the count.
+
+to put a text's row height into a height:
+  if the text is nil, put 0 into the height; exit.
+  put the text's font's height into the height.
+
+to put a text's rows/box into a count:
+  if the text is nil, put 0 into the count; exit.
+  put the text's box's height divided by the text's row height into the count.
+
+to put a text's selected byte count into a count:
+  put 0 into the count.
+  if the text is nil, exit.
+  if nothing is selected in the text, exit.
+  loop.
+    get a row from the text's rows.
+    if the row is nil, exit.
+    slap a substring on any selected bytes in the row of the text.
+    add the substring's length to the count.
+  repeat.
+
+to put a text's selected row count into a count:
+  put 0 into the count.
+  if the text is nil, exit.
+  put the text's normalized selection into a selection.
+  if the selection's anchor row# is the selection's caret row#, exit.
+  put the selection's caret row# into the count.
+  subtract the selection's anchor row# from the count.
+  if the selection's caret column# is not 1, add 1 to the count.
+
+to put a text's status string into a string:
+  if the text is nil, clear the string; exit.
+  put the text's selected row count into a count.
+  if the count is not 0,
+    format the count and "line" or "lines" into the string; exit.
+  put the text's selected byte count into another count.
+  if the other count is not 0,
+    format the other count and "byte" or "bytes" into the string; exit.
+  convert the text's caret row# to the string.
+  append ":" to the string.
+  append the text's caret column# to the string.
+
+to remember a text:
+  if the text is nil, exit.
+  destroy the text's redos.
+  copy the text into another text.
+  scale the other text to 1/1.
+  append the other text to the text's undos.
+  limit the text's undos to the max text undos.
+  set the text's modified flag.
+
+to remember a text with an operation:
+  if the text is nil, exit.
+  if the text's last operation is the operation,
+    set the text's modified flag; exit.
+  remember the text.
+  put the operation into the text's last operation.
+
+to remove any selected bytes in a text:
+  if the text is nil, exit.
+  if nothing is selected in the text, exit.
+  put the text's selection into a selection.
+  normalize the selection.
+  get a row given the selection's anchor row# and the text.
+  if the row is nil, exit. \ should this error trap also perform the end-of-routine clean-up?
+  slap a substring on the row's string.
+  put the substring's first plus the selection's anchor column# minus 2 into the substring's last.
+  get another row given the selection's caret row# and the text.
+  if the other row is nil, exit. \ should this error trap also perform the end-of-routine clean-up?
+  slap another substring on the other row's string.
+  put the other substring's first plus the selection's caret column# minus 1 into the other substring's first.
+  put the substring then the other substring into the row's string.
+  remove the rows of the text between the row's next and the other row.
+  put the selection's anchor into the text's caret.
+  deselect the text.
+
+to remove bytes from a text (backspace over a return):
+  if the text is nil, exit.
+  if the text's caret row# is 1, exit.
+  get a row given the text's caret row# minus 1 and the text.
+  put the row's string's length and the text's caret row# minus 1 into the text's caret.
+  remove any selected bytes in the text.
+
+to remove bytes from a text (backspace with jump):
+  if the text is nil, exit.
+  if something is selected in the text,
+    remove any selected bytes in the text; exit.
+  if the text's caret column# is 1,
+    remove bytes from the text (backspace over a return); exit.
+  jump the caret left in the text.
+  remove any selected bytes in the text.
+
+to remove bytes from a text (backspace):
+  if the text is nil, exit.
+  if something is selected in the text,
+    remove any selected bytes in the text; exit.
+  if the text's caret column# is 1,
+    remove bytes from the text (backspace over a return); exit.
+  move the caret left in the text.
+  remove any selected bytes in the text.
+
+to remove bytes from a text (forward delete a return):
+  if the text is nil, exit.
+  if the text's caret row# is the text's row count, exit.
+  put 1 and the text's caret row# plus 1 into the text's caret.
+  remove any selected bytes in the text.
+
+to remove bytes from a text (forward delete with jump):
+  if the text is nil, exit.
+  if something is selected in the text,
+    remove any selected bytes in the text; exit.
+  get a row given the text's caret row# and the text.
+  if the text's caret column# is the row's string's length,
+    remove bytes from the text (forward delete a return); exit.
+  jump the caret right in the text.
+  remove any selected bytes in the text.
+
+to remove bytes from a text (forward delete):
+  if the text is nil, exit.
+  if something is selected in the text,
+    remove any selected bytes in the text; exit.
+  get a row given the text's caret row# and the text.
+  if the text's caret column# is the row's string's length,
+    remove bytes from the text (forward delete a return); exit.
+  move the caret right in the text.
+  remove any selected bytes in the text.
+
+to remove every byte in a text:
+  if the text is nil, exit.
+  put "" into the text.
+
+to remove the rows of a text between a row and another row:
+  if the text is nil, exit.
+  if the row is nil, exit.
+  if the other row is nil, exit.
+  if the row's row# is greater than the other row's row#, exit.
+  privatize the row.
+  put the other row's next into a stop row.
+  loop.
+    if the row is the stop row, break.
+    put the row's next into a next row.
+    remove the row from the text's rows.
+    destroy the row.
+    put the next row into the row.
+  repeat.
+  renumber the text's rows.
+
+to renumber some rows:
+  get a row from the rows.
+  if the row is nil, exit.
+  add 1 to a row#.
+  put the row# into the row's row#.
+  repeat.
+
+to reset the caret of a text:
+  if the text is nil, exit.
+  put 1 and 1 into the text's caret.
+
+to reset the origin of a text:
+  if the text is nil, exit.
+  put the text's margin into the text's x.
+  put 0 into the text's y.
+
+to resize a text given a ratio pair:
+  if the text is nil, exit.
+  resize the text's box given the ratio pair.
+  wrap the text.
+
+to resize a text given a twip pair:
+  if the text is nil, exit.
+  resize the text's box given the twip pair.
+  wrap the text.
+
+to reverse any selected rows of a text:
+  if the text is nil, exit.
+  split the rows of the text into some rows and some selected rows and some other rows.
+  reverse the selected rows.
+  append the rows to the text's rows.
+  append the selected rows to the text's rows.
+  append the other rows to the text's rows.
+  renumber the text's rows.
+
+to rotate a text:
+  if the text is nil, exit.
+  rotate the text's box.
+  wrap the text.
+
+a row is a thing with a row# and a string.
+
+a row# is a number.
+
+to scale a text given a ratio:
+  if the text is nil, exit.
+  if the ratio is 1/1, exit.
+  scale the text's box given the ratio.
+  scale the text's origin given the ratio.
+  scale the text's font given the ratio.
+  scale the text's scale given the ratio.
+
+to scale a text to a percent:
+  if the text is nil, exit.
+  put the percent / 100 into a ratio.
+  scale the text given the ratio.
+
+to scale a text to a ratio: \ absolute
+  if the text is nil, exit.
+  put the text's scale into another ratio.
+  flip the other ratio.
+  multiply the other ratio by the ratio.
+  scale the text given the other ratio.
+
+to scroll a text to the bottom:
+  if the text is nil, exit.
+  if the text's vertical scroll flag is not set, exit.
+  put the text's row count minus 1 into a number.
+  put - the number times the text's row height into the text's y.
+  limit the origin of the text.
+
+to scroll a text to the caret:
+  if the text is nil, exit.
+  if the text's caret's column# is 1,
+    put the text's margin into the text's x.
+  get a box for the caret in the text.
+  adjust the box given 0 and - the tpp and 0 and the tpp. \ caret boxes don't fill entire row
+  if the box's top is less than the text's top,
+    put the text's top minus the box's top into a difference's y.
+  if the box's bottom is greater than the text's bottom,
+    put the text's bottom minus the box's bottom into the difference's y.
+  if the box's left is less than the text's left,
+    put the text's left minus the box's left into the difference's x.
+  if the box's right is greater than the text's right,
+    put the text's right minus the box's right into the difference's x.
+  if the difference is 0, exit.
+  scroll the text given the difference.
+
+to scroll a text to the caret and center it:
+  if the text is nil, exit.
+  put the text's margin into the text's x.
+  get a box for the caret in the text.
+  if the box is inside the text's box, exit.
+  adjust the box given 0 and - the tpp and 0 and the tpp. \ caret boxes don't fill entire row
+  put the text's box's y-extent divided by 2 into a height.
+  round the height down to the nearest multiple of the text's row height.
+  put the text's box's top plus the height into a top coord.
+  put the top plus the text's row height into a bottom coord.
+  if the box's top is less than the top, put the top minus the box's top into a difference's y.
+  if the box's bottom is greater than the bottom, put the bottom minus the box's bottom into the difference's y.
+  if the box's left is less than the text's left, put the text's left minus the box's left into the difference's x.
+  if the box's right is greater than the text's right, put the text's right minus the box's right into the difference's x.
+  if the difference is 0, exit.
+  scroll the text given the difference.
+
+to scroll a text down one line:
+  if the text is nil, exit.
+  if the text's vertical scroll flag is not set, exit.
+  put - the text's row height into a difference's y.
+  scroll the text given the difference.
+
+to scroll a text down one page:
+  if the text is nil, exit.
+  if the text's vertical scroll flag is not set, exit.
+  subtract the text's box's y-extent from the text's y.
+  add the text's row height to the text's y.
+\  limit the origin of the text.
+  limit the origin of the text (scrolling).
+
+to scroll a text given a count:
+  if the text is nil, exit.
+  if the count is 0, exit.
+  if the text's vertical scroll flag is not set, exit.
+  put the count times the text's row height into a number.
+  put - the number into a difference's y.
+  scroll the text given the difference.
+
+to scroll a text given a difference:
+  if the text is nil, exit.
+  privatize the difference.
+  if the text's horizontal scroll flag is not set,
+    put 0 into the difference's x.
+  if the text's vertical scroll flag is not set,
+    put 0 into the difference's y.
+  if the difference is 0, exit.
+  move the text's origin given the difference.
+\  limit the origin of the text.
+  limit the origin of the text (scrolling).
+
+to scroll a text to the top:
+  if the text is nil, exit.
+  if the text's vertical scroll flag is not set, exit.
+  put 0 into the text's y.
+\  limit the origin of the text.
+  limit the origin of the text (scrolling).
+
+to scroll a text up one line:
+  if the text is nil, exit.
+  if the text's vertical scroll flag is not set, exit.
+  put the text's row height into a difference's y.
+  scroll the text given the difference.
+
+to scroll a text up one page:
+  if the text is nil, exit.
+  if the text's vertical scroll flag is not set, exit.
+  add the text's box's y-extent to the text's y.
+  subtract the text's row height from the text's y.
+\  limit the origin of the text.
+  limit the origin of the text (scrolling).
+
+to select every byte in a text:
+  if the text is nil, exit.
+  if the text's rows are empty, exit. \ What is the right thing to do in this situation?
+  put 1 and 1 into the text's anchor.
+  put the text's rows' last's string's length and the text's row count into the text's caret.
+
+to select a row# given a text:
+  if the text is nil, exit.
+  get a row given the row# and the text.
+  if the row is nil, exit.
+  put the row# into the text's anchor row#.
+  put 1 into the text's anchor column#.
+  put the row# into the text's caret row#.
+  put the row's string's length into the text's caret column#.
+
+a selection box is a box.
+
+a selection has 
+  an anchor column#, an anchor row#, an anchor at the anchor column#,
+  a caret column#, a caret row#, a caret at the caret column#.
+
+to slap a substring on any selected bytes in a row of a text:
+  clear the substring.
+  if the text is nil, exit.
+  if the row is nil, exit.
+  if the row of the text is not selected, exit.
+  slap the substring on the row's string.
+  put the text's normalized selection into a selection.
+  if the row's row# is the selection's caret row#,
+    put the substring's first plus the selection's caret column# minus 2 into the substring's last.
+  if the row's row# is the selection's anchor row#,
+    put the substring's first plus the selection's anchor column# minus 1 into the substring's first.
+
+to sort any selected rows in a text:
+  if the text is nil, exit.
+  split the rows of the text into some rows
+    and some selected rows and some other rows.
+  sort the selected rows.
+  append the rows to the text's rows.
+  append the selected rows to the text's rows.
+  append the other rows to the text's rows.
+  renumber the text's rows.
+
+to sort some rows:
+  if the rows' first is the rows' last, exit.
+  split the rows into some left rows and some right rows.
+  sort the left rows.
+  sort the right rows.
+  loop.
+    put the left rows' first into a left row.
+    put the right rows' first into a right row.
+    if the left row is nil, append the right rows to the rows; exit.
+    if the right row is nil, append the left rows to the rows; exit.
+    if the left row's string is greater than the right row's string,
+      move the right row from the right rows to the rows; repeat.
+    move the left row from the left rows to the rows.
+  repeat.
+
+to split the rows of a text into some rows and some selected rows and some other rows:
+  if the text is nil,
+    clear the rows; clear the selected rows; clear the other rows; exit.
+  loop.
+    put the text's rows' first into a row.
+    if the row is nil, exit.
+    remove the row from the text's rows.
+    if the row of the text is selected,
+      set a flag; append the row to the selected rows; repeat.
+    if the flag is set, append the row to the other rows; repeat.
+    append the row to the rows.
+  repeat.
+
+to square up any selection in a text:
+  if the text is nil, exit.
+  if nothing is selected in the text, exit.
+  normalize the text's selection.
+  get a row given the text's caret row# and the text.
+  if the row is nil, exit.
+  put 1 into the text's anchor column#.
+  if the text's caret column# is not 1,
+    add 1 to the text's caret row#; put 1 into the text's caret column#.
+  if the text's caret row# is less than or equal to the text's row count, exit.
+  put the text's row count into the text's caret's row#.
+  put the row's string's length into the text's caret's column#.
+
+a text is a thing with 
+  a box,
+  an origin,
+  a pen color,
+  a font,
+  an alignment,
+  some rows,
+  a margin,
+  a scale ratio,
+  a wrap flag,
+  a horizontal scroll flag,
+  a vertical scroll flag,
+  a selection,
+  a modified flag,
+  a last operation,
+  some texts called undos,
+  some texts called redos.
+
+to uppercase any selected bytes in a text:
+  if the text is nil, exit.
+  loop.
+    get a row from the text's rows.
+    if the row is nil, exit.
+    if the row of the text is not selected, repeat.
+    slap a substring on any selected bytes in the row of the text. 
+    uppercase the substring.
+  repeat.
+
+to uppercase a text:
+  if the text is nil, exit.
+  loop.
+    get a row from the text's rows.
+    if the row is nil, break.
+    uppercase the row's string.
+  repeat.
+  wrap the text.
+
+to wrap a text:
+  if the text is nil, exit.
+  if the text's wrap flag is not set, exit.
+  convert the text's anchor to an absolute position given the text.
+  convert the text's caret to another absolute position given the text.
+  put the text's scale into a ratio.
+  scale the text to 1/1.
+  extract a string from the text.
+  append the return byte to the string.
+  destroy the text's rows.
+  slap a rider on the string.
+  create the hfont of the memory canvas given the text's font.
+  loop.
+    move the rider given the text's box (word wrapping rules).
+    if the rider's token is blank, break.
+    create a row given the rider's token.
+    append the row to the text's rows.
+  repeat.
+  destroy the hfont of the memory canvas.
+  renumber the text's rows.
+  scale the text to the ratio.
+  convert the absolute position to the text's anchor given the text.
+  convert the other absolute position to the text's caret given the text.
+  limit the origin of the text.
