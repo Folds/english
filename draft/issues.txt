@@ -41,6 +41,21 @@ These items should occasionally be moved to demoed fixes.txt.
 \ ======================================   
 The following requests have been partially demonstrated.
 
+220.  Fix intermittent crashing bug(s) in editor.
+  The editor can crash when attempting to scroll the scrollbar upward.
+  The editor can crash when attempting to add characters
+  within a row of text.  This problem has been observed
+  both when the row was exactly the pad width,
+  and when the row was much shorter than the pad width.
+  This bug is very hard to reproduce.
+  Status:  Partially demonstrated.
+  Audience:  All users.
+  Benefit:   Critical.
+  Implementation difficulty:  Hard.
+  Demoing difficulty:  n/a.
+  Testing difficulty:  n/a.
+  Requested by Jasper Paulsen on April 30, 2017.
+
 209.  In characters, add nicknames for `~<>\[]{}| 
   Status:  Implemented.
   Audience:  Turtle programmers.
@@ -84,29 +99,17 @@ The following requests have been partially demonstrated.
 The following requests are roughly sorted
 from higher priority to lower priority.
 
-220.  Fix intermittent crashing bug(s) in editor.
-  The editor can crash when attempting to scroll the scrollbar upward.
-  The editor can crash when attempting to add characters
-  within a row of text.  This problem has been observed
-  both when the row was exactly the pad width,
-  and when the row was much shorter than the pad width.
+237.  Fix intermittent crashing bug(s) in writer.
+  The writer can crash upon clicking outside of a line
+  in order to de-select the line.
   This bug is very hard to reproduce.
-  Status:  Partially implemented.
+  Status:    Request.
   Audience:  All users.
   Benefit:   Critical.
   Implementation difficulty:  Hard.
   Demoing difficulty:  n/a.
   Testing difficulty:  n/a.
-  Requested by Jasper Paulsen on April 30, 2017.
-
-235.  Update the documentation to discuss two-level projects.
-  Audience:  programmers.
-  Status:    request.
-  Benefit:   Important -- the documentation needs to be accurate.
-  Implementation difficulty:  Medium.
-  Demo difficulty:  Easy.
-  Test difficulty:  not applicable.
-  Requested by Jasper Paulsen on May 20, 2017.
+  Requested by Jasper Paulsen on May 21, 2017.
 
 197.  In finder, allow running a .exe file.
   Status:  Designed.
@@ -116,6 +119,46 @@ from higher priority to lower priority.
   Demoing difficulty:  Medium.
   Testing difficulty:  Medium.
   Requested by Gerry Rzeppa on March 13, 2017.
+
+176.  Add a "Measure Code" menu item.
+  Output a text file with the following columns:
+  source   code lines  just comments   blank lines  code wraps  total lines
+  with one line for each source file in the folder,
+  and one line for the totals.
+  Use tab-separated variable format.
+  Save as <exe name>.tsv
+  Status:  Request.
+  Audience:  Programmers
+  Benefit:   Minor.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Easy.
+  Testing difficulty:  Medium.
+  Requested by Jasper Paulsen on March 23, 2017.
+
+238.  Add scrollbar to the finder.
+  Status:   Request.
+  Benefit:  Medium.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Medium.
+  Requested by Jasper Paulsen on May 20, 2014.
+
+239.  Add mouse scrolling to the finder.
+  Status:   Request.
+  Benefit:  Medium.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Medium.
+  Requested by Jasper Paulsen on May 20, 2014.
+
+172.  From "the noodle", factor out command-line parsing into a "commands" file.
+  Status:  request.
+  Audience:  Programmers.
+  Benefit:   minor.
+  Implementation difficulty:  Easy.
+  Demoing difficulty:  Not applicable.
+  Testing difficulty:  Not applicable.
+  Requested by Jasper Paulsen on March 20, 2017.
 
 177.  Let user create shell shortcuts.
   Status:  request.
@@ -184,45 +227,6 @@ open the files that are found.
   Testing difficulty:  Medium.
   Requested by Jasper Paulsen on March 7, 2014.
 
-176.  Add a "Measure Code" menu item.
-  Output a text file with the following columns:
-  source   code lines  just comments   blank lines  code wraps  total lines
-  with one line for each source file in the folder,
-  and one line for the totals.
-  Use tab-separated variable format.
-  Save as <exe name>.tsv
-  Status:  Request.
-  Audience:  Programmers
-  Benefit:   Minor.
-  Implementation difficulty:  Medium.
-  Demoing difficulty:  Easy.
-  Testing difficulty:  Medium.
-  Requested by Jasper Paulsen on March 23, 2017.
-
-172.  From "the noodle", factor out command-line parsing into a "commands" file.
-  Status:  request.
-  Audience:  Programmers.
-  Benefit:   minor.
-  Implementation difficulty:  Easy.
-  Demoing difficulty:  Not applicable.
-  Testing difficulty:  Not applicable.
-  Requested by Jasper Paulsen on March 20, 2017.
-
-219.  From "the editor", factor out blocks and sorting code into a "text sorter" file.
-  Status:    Designed.  Do after project can handle multiple folders.
-  Audience:  Programmers.
-  Benefit:   Minor.
-  Implementation difficulty:  Easy.
-  Demoing difficulty:  Not applicable.
-  Testing difficulty:  Not applicable.
-  Requested by Jasper Paulsen on April 27, 2017.
- 
-094.  Document "Plain English programming idioms",
-  and how they compare to other common programming languages.
-  Implementation difficulty:  Hard.
-  Testing difficulty:  Profound.
-  Requested by Jasper Paulsen on March 15, 2014.
-
 217.  Allow drawing a Unicode string on-screen.
   Status:    Request.
   Audience:  Windows programmers.
@@ -244,6 +248,21 @@ open the files that are found.
   Demoing difficulty:  Medium.
   Testing difficulty:  Medium.
   Requested by Jasper Paulsen on April 25, 2017.
+
+219.  From "the editor", factor out blocks and sorting code into a "text sorter" file.
+  Status:    Designed.  Do after project can handle multiple folders.
+  Audience:  Programmers.
+  Benefit:   Minor.
+  Implementation difficulty:  Easy.
+  Demoing difficulty:  Not applicable.
+  Testing difficulty:  Not applicable.
+  Requested by Jasper Paulsen on April 27, 2017.
+ 
+094.  Document "Plain English programming idioms",
+  and how they compare to other common programming languages.
+  Implementation difficulty:  Hard.
+  Testing difficulty:  Profound.
+  Requested by Jasper Paulsen on March 15, 2014.
 
 126.  A way to export CAL's tabs' source names and labels.
   Benefit:  Medium.  Would make it easier to test some features.
@@ -787,6 +806,7 @@ with an adjustable slider between them.
 \ ======================================
 Unsorted requests:
 
-Next item number:  237.
+
+Next item number:  240.
 
 

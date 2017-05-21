@@ -945,3 +945,11 @@ Automated tests make debugging easier.
   Audience:  Programmers.
   Requested by Jasper Paulsen on March 31, 2017.
 
+235.  Update the documentation to discuss two-level projects.
+  Audience:  programmers.
+  Status:    Implemented.
+  Benefit:   Important -- the documentation needs to be accurate.
+  Implementation difficulty:  Medium.
+  Demo difficulty:  Easy.
+  Test difficulty:  not applicable.
+  Requested by Jasper Paulsen on May 20, 2017.
