@@ -1222,6 +1222,19 @@ to put a text's first line into a string:
   put the text's first row's string into the string.
   remove the last byte from the string.
 
+to put a text's first non-blank line into a string:
+  clear the string.
+  if the text is nil, exit.
+  loop.
+    get a row from the text's rows.
+    if the row is nil, exit.
+    put the row's string into the string.
+    remove the last byte from the string. \ cr or space (see text rules) 
+    remove any leading noise from the string.
+    remove any trailing noise from the string.
+    if the string is not blank, exit.
+  repeat.
+
 to put a text's globalized origin into a spot:
   if the text is nil, clear the spot; exit.
   put the text's origin into the spot.
