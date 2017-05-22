@@ -143,23 +143,12 @@ to decide if a spot is in a source:
   if the spot is in the source's text, say yes.
   say no.
 
-to decide if a string does start with any definite article: employ a string starts with any definite article.
-
-to decide if a string does start with any indefinite article: employ a string starts with any indefinite article.
-
-to decide if a string does start with any routine starter: employ a string starts with any routine starter.
-
-to decide if a string has neither code nor comment on it:
-  privatize the string.
-  remove any leading noise from the string.
-  remove any trailing noise from the string.
-  if the string is blank, say yes.
-  say no.
-
+to decide if a string does start with any definite article;
 to decide if a string starts with any definite article:
   if the string starts with "the ", say yes.
   say no.
 
+to decide if a string does start with any definition starter;
 to decide if a string starts with any definition starter:
   if the string starts with "a ", say yes.
   if the string starts with "an ", say yes.
@@ -168,14 +157,23 @@ to decide if a string starts with any definition starter:
   if the string starts with "the ", say yes.
   say no.
 
+to decide if a string does start with any indefinite article;
 to decide if a string starts with any indefinite article:
   if the string starts with "a ", say yes.
   if the string starts with "an ", say yes.
   if the string starts with "some ", say yes.
   say no.
 
+to decide if a string does start with any routine starter;
 to decide if a string starts with any routine starter:
   if the string starts with "to ", say yes.
+  say no.
+
+to decide if a string has neither code nor comment on it:
+  privatize the string.
+  remove any leading noise from the string.
+  remove any trailing noise from the string.
+  if the string is blank, say yes.
   say no.
 
 to draw the right margin of a source given a color:

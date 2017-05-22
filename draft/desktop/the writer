@@ -1272,12 +1272,18 @@ to draw a page:
   draw the page's rect with the white color and the white color.
   draw the grid on the page.
   draw the page's shapes on the page.
-  if the page is not being edited, draw the sizers on the page's shapes.
-  if the page is not being edited, draw the vertices on the page's shapes.
-  if the page is not being edited, draw the croppers on the page's shapes.
+  if the page is not being edited,
+    draw the sizers on the page's shapes.
+  if the page is not being edited,
+    draw the vertices on the page's shapes.
+  if the page is not being edited,
+    draw the croppers on the page's shapes.
   draw the page's rect with the gray color and the clear color.
   set the drawing origin to the zero spot.
-  if the focus box is not the zero box, draw the focus box (focus style).
+  if the focus box is not the zero box,
+    draw the focus box (focus style).
+  if the focus line is not the zero line,
+    draw the focus line with the tracer color. \ tracer
 
 to draw a shape on a page:
   if the shape is nil, exit.
@@ -1893,6 +1899,8 @@ to flip a shape (polygon):
   adjust the shape.
 
 the focus box is a box.
+
+the focus line is a line. \ tracer
 
 to focus on a page in a document:
   if the document is nil, exit.
@@ -2727,10 +2735,16 @@ to handle an event given a page (left click):
     handle the event given the page (left click - edit shape); exit.
   if the page is being edited, end edit on the page.
   void a shape.
-  if the event's spot is in a cropper of the shape on the page, handle the event given the page and the shape and the cropper (left click); exit.
-  if the event's spot is in a vertex of the shape on the page,  handle the event given the page and the shape and the vertex (left click); exit.
-  if the event's spot is in a sizer of the shape on the page,   handle the event given the page and the shape and the sizer (left click); exit.
-  if the event's spot is in the shape on the page, handle the event given the page and the shape (left click); exit.
+  if the event is modified,
+    handle the event given the page (trace polygon); exit. \ tracer
+  if the event's spot is in a cropper of the shape on the page,
+    handle the event given the page and the shape and the cropper (left click); exit.
+  if the event's spot is in a vertex  of the shape on the page,
+    handle the event given the page and the shape and the vertex (left click); exit.
+  if the event's spot is in a sizer   of the shape on the page,
+    handle the event given the page and the shape and the sizer (left click); exit.
+  if the event's spot is in the shape on the page,
+    handle the event given the page and the shape (left click); exit.
   handle the event given the page (left click - blank area).
 
 to handle an event given a page (left double click - edit shape):
@@ -2755,6 +2769,50 @@ to handle an event given a page (set cursor):
   if the event's spot is not in the pad, show the arrow cursor; exit.
   if the event's spot is in the edit shape on the page, show the i-beam cursor; exit.
   show the arrow cursor.
+
+to handle an event given a page (trace polygon):
+  if the page is nil, exit.
+  if the event is nil, exit.
+  deselect the page's shapes.
+  show the desktop with status.
+  remember the page.
+  reset the superduper given the page.
+  put the event's spot into a line's start spot.
+  localize the line's start spot given the page's origin.
+  round the line's start spot to the page's yank.
+  put the page's yank into a grid.
+  create a shape.
+  put "polygon" into the shape's kind.
+  put the tracer color into the shape's border.
+  create the shape's polygon.
+  create a vertex given the line's start spot.
+  append the vertex to the shape's polygon.
+  append the shape to the page's shapes.
+  adjust the shape.
+  loop.
+    wait for the mouse's left button to be up.
+    flush all events.
+    if a flag is set, show the desktop with status.
+    if the ctrl key is up, break.
+    put the mouse's spot into the line's end spot.
+    autoscroll the page given the line's end spot and the flag.
+    localize the line's end spot given the page's origin.
+    round the line's end spot to the page's yank.
+    set the flag.
+    put the line into the focus line.
+    globalize the focus line given the page's origin.
+    if the mouse's left button is up, repeat.
+    create another vertex given the line's end spot.
+    append the other vertex to the shape's polygon.
+    adjust the shape.
+    put the line's end spot into the line's start spot.
+    put the line into the focus line.
+    globalize the focus line given the page's origin.
+  repeat.
+  select the shape.
+  clear the focus line.
+  show the desktop with status.
+  flush all events.
 
 to handle an event given a page and a shape (left click - begin edit):
   begin edit on the page given the shape.
@@ -2849,6 +2907,15 @@ to handle events given a page (finding):
     if the event is nil, exit.
     handle the event given the page (finding).
   repeat.
+
+to handle fill completely given a page and a color:
+  if the page is being edited, end edit on the page.
+  if nothing is selected on the page, cluck; exit.
+  remember the page.
+  show status "Filling completely...".
+  border any selected shapes on the page given the color.
+  fill any selected shapes on the page given the color.
+  show the desktop with status.
 
 to handle fill given a page and a color:
   if the page is being edited, end edit on the page.
@@ -3328,6 +3395,7 @@ to handle yank given a page and a number:
   show the desktop with the string.
 
 to initialize the writer:
+  put the red color into the tracer color. \ tracer
 
 to internalize a box given a rider:
   if the i/o error is not blank, exit.
@@ -4762,6 +4830,8 @@ to switch to a page:
 
 the text margin is a number equal to 1/24 inch.
 
+the tracer color is a color.
+
 to track a cropper on a shape on a page given an event:
   if the page is nil, exit.
   if the shape is nil, exit.
@@ -5009,6 +5079,9 @@ to uppercase some shapes:
     if the shape is nil, exit.
     uppercase the shape.
   repeat. 
+
+to wait for a key to be up: \ tracer - should be in noodle
+  if the key is down, repeat.
 
 to yank a shape to a grid:
   if the shape is nil, exit.

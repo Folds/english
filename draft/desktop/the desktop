@@ -836,6 +836,7 @@ to handle a command:
     handle the command (check spelling...); exit.
   if the handler is "color...",  handle the command (color...); exit.
   if the handler is "fill...",   handle the command (fill...);  exit.
+  if the handler is "fill completely...",   handle the command (fill completely...);  exit.
   if the handler is "font height...", handle the command (font height...); exit.
   if the handler is "font name...", handle the command (font name...); exit.
   if the handler is "grid...",   handle the command (grid...);  exit.
@@ -855,7 +856,10 @@ to handle a command:
   if the handler is "handle border",
     handle border given the command's color; exit.
   if the handler is "handle debug window", handle debug window; exit.
-  if the handler is "handle fill", handle fill given the command's color; exit.
+  if the handler is "handle fill",
+    handle fill given the command's color; exit.
+  if the handler is "handle fill completely",
+    handle fill completely given the command's color; exit.
   if the handler starts with "handle font height given ",
     handle font height given the handler (general); exit.
   if the handler is "handle font height other", handle font height other; exit.
@@ -1001,12 +1005,18 @@ to handle a command (color...):
   create a submenu.
   add "Border..." and "border..." to the submenu.
   add "Fill..." and "fill..." to the submenu.
+  add "Fill Completely..." and "fill completely..." to the submenu.
   add "Pen..." and "pen..." to the submenu.
   handle the command given the submenu.
 
 to handle a command (fill...):
   create a submenu.
   add swatches to the submenu given "handle fill".
+  handle the command given the submenu and the palette width.
+
+to handle a command (fill completely...):
+  create a submenu.
+  add swatches to the submenu given "handle fill completely".
   handle the command given the submenu and the palette width.
 
 to handle a command (grid...):
@@ -1392,6 +1402,11 @@ to handle extract routine headers:
 to handle extract types:
   if the current tab's mode is "editor",
     handle extract types given the current tab's node's source; exit.
+  cluck.
+
+to handle fill completely given a color:
+  if the current tab's mode is "writer",
+    handle fill completely given the current tab's node's page and the color; exit.
   cluck.
 
 to handle fill given a color:
@@ -2051,6 +2066,7 @@ to populate a submenu given a mode (f):
   if the mode is "editor", add "Find Next" and "N" and "handle find next" to the submenu.
   if the mode is "writer", add "Find Next" and "N" and "handle find next" to the submenu.
   if the mode is "writer", add "Fill..." and "fill..." to the submenu.
+  if the mode is "writer", add "Fill Completely..." and "fill completely..." to the submenu.
   if the mode is "writer", add "Flip" to the submenu.
   if the mode is "editor", add "Font Height..." and "font height..." to the submenu.
   if the mode is "writer", add "Font Height..." and "font height..." to the submenu.

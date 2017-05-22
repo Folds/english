@@ -2074,6 +2074,13 @@ to decide if a line is above a coord:
   if the line's end's y is greater than or equal to the coord, say no.
   say yes.
 
+to decide if a line is another line:
+  if the line's start spot is not the other line's start spot,
+    say no.
+  if the line's end spot is not the other line's end spot,
+    say no.
+  say yes.
+
 to decide if a line is below a box:
   if the line's start's y is less than or equal to the box's bottom, say no.
   if the line's end's y is less than or equal to the box's bottom, say no.
@@ -4697,6 +4704,10 @@ a gigabyte is 1024 megabytes.
 
 to globalize a box given a pair:
   move the box given the pair.
+
+to globalize a line given a pair:
+  move the line's start spot given the pair.
+  move the line's end spot given the pair.
 
 to globalize a spot given a pair:
   move the spot given the pair.
