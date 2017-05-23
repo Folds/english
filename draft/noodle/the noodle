@@ -9241,6 +9241,28 @@ to test (basic math - divide 25 by 3):
   divide the number by 3.
   stash the test result given the number.
 
+to test (basic math - fractions and ratios):
+  create a test result about "the noodle" and "fractions and ratios"
+    and expecting "1-1/2; 5/6; 2; 2".
+                                    \ r1  r2   f1   f2
+  put 1/2 into a ratio.             \ 1/2 0/0  0/0  0/0
+  put 1/3 into another ratio.       \     1/3
+  add the ratio to the other ratio. \     5/6
+  put 1/4 into a fraction.          \          1/4
+  put the ratio into the fraction.  \          1/2
+  put the fraction into the ratio.  \ 1/2
+  add the fraction to the ratio.    \ 1/1
+  add the ratio to the fraction.    \          3/2
+  add 1/2 to the fraction.          \          2/1
+  add 1/2 to the ratio.             \ 3/2
+  clear another fraction.           \               0/1
+  add the fraction to the other fraction. \         2/1
+  convert the ratio to a string.
+  append "; " then the other ratio then "; "
+    then the fraction then "; " then the other fraction
+    to the string.
+  stash the test result given the string.
+
 to test (basic math - leftshift number):
   create a test result about "the noodle" and "1543 leftshifted 3 bits"
     and expecting "12344".
@@ -9333,6 +9355,7 @@ to test (basic math):
   test (basic math - 6 plus 0/1).
   test (basic math - reduce 0 trifles).
   test (basic math - 6 plus 0/1866240000).
+  test (basic math - fractions and ratios).
 
 to test (command line - get missing parameter):
   create a test result about "the noodle" and "get missing parameter"
