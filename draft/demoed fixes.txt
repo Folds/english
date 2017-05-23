@@ -238,6 +238,17 @@ but do not have test plans yet.
   Audience:  Windows and Linux programmers.
   Requested by Jasper Paulsen on March 3, 2017.
 
+244.  Ignore lexicon files when compiling source code.
+  Plain English source code contains periods.
+  Lexicon files do not contain any periods.
+  Status:  Demonstrated.
+  Audience:  Programmers.
+  Benefit:   Medium.
+  Implementation difficulty:  Easy.
+  Demoing difficulty:  Easy.
+  Testing difficulty:  Medium.
+  Requested by Jasper Paulsen on May 23, 2017.
+  
 143.  A command-line way to call the "list" mode of the compiler.
   Benefit:  Minor.
   Implementation difficulty:  Easy 

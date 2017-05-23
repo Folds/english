@@ -1849,6 +1849,11 @@ to decide if a box is touching another box:
   if the other box's top is greater than the box's bottom, say no.
   say yes.
 
+to decide if a buffer does contain a string;
+to decide if a string does contain another string:
+  if the other string is in the string, say yes.
+  say no.
+
 to decide if a byte is in a string:
   privatize the byte.
   lowercase the byte.
@@ -2591,10 +2596,6 @@ to decide if a spot is within some twips of a box:
   privatize the box.
   outdent the box given the twips.
   if the spot is within the box, say yes.
-  say no.
-
-to decide if a string does contain another string:
-  if the other string is in the string, say yes.
   say no.
 
 to decide if a string does end with another string;

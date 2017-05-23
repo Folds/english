@@ -2114,6 +2114,22 @@ to decide if a global is twin of another global:
   if the global's global body is not the other global's global body, say no.
   say yes.
 
+to decide if an item does look lexiconish;
+to decide if an item looks lexiconish:
+  \ check progressively larger portions of the file (in bytes).
+  if the item does not look lexiconish given 200, say no.
+  if the item does not look lexiconish given 10000, say no.
+  if the item does not look lexiconish given the largest number, say no.
+  say yes.
+
+to decide if an item does look lexiconish given a size;
+to decide if an item looks lexiconish given a size:
+  \ Plain English source code files include periods.
+  \ Lexicons do not include periods.
+  read the item's path into a buffer given the size.
+  if the buffer does contain ".", say no.
+  say yes.
+
 to decide if an item looks reamish:
   put 100 in a size. \ don't read more than 100 bytes.
   read the item's path into a buffer given the size.
@@ -3747,6 +3763,7 @@ to read some source files given a directory and a depth:
     if the item's kind is not "file", repeat.
     if the item's extension is not blank, repeat.
     if the item looks reamish, repeat.
+    if the item looks lexiconish, repeat.
     add a source file to the source files given the item's path.
     read the source file.
   repeat.

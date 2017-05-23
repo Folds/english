@@ -5089,3 +5089,5 @@ to yank a shape to a grid:
   round the spot to the grid.
   get a difference between the spot and the shape's left-top.
   move the shape given the difference.
+
+the zero line is a line. \ tracer
