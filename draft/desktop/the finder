@@ -217,10 +217,7 @@ to decide if a spot is in a nodette:
   if the spot is in the nodette's box, say yes.
   say no.
 
-to decide if the user does want to overwrite an item in a node: employ the user wants to overwrite an item in a node.
-
-to decide if the user does want to overwrite a path: employ the user wants to overwrite a path.
-
+to decide if the user does want to overwrite an item in a node;
 to decide if the user wants to overwrite an item in a node:
   if the node is nil, say no.
   put the node's path into a path.
@@ -228,6 +225,7 @@ to decide if the user wants to overwrite an item in a node:
   if the user wants to overwrite the path, say yes.
   say no.
 
+to decide if the user does want to overwrite a path;
 to decide if the user wants to overwrite a path:
   if the path is not in the file system, say yes.
   extract a designator from the path.
@@ -752,6 +750,24 @@ to handle reverse given a node:
   if the node is root-level, cluck; exit.
   reverse the node.
   show the desktop with status.
+  flush the event queue.
+
+to handle run given a node:
+  if the node is nil, cluck; exit.
+  if the node is root-level, cluck; exit.
+  put the node's first selected nodette into a nodette.
+  if the nodette is nil,
+    show error "I'm not sure what you want me to run."; exit.
+  if the nodette's extension is not ".exe",
+    show error "I don't know how to run that kind of file from here."; exit.
+  show status "Running...".
+  \start the current process given the nodette's path.
+  start the current process
+    given the nodette's path and the running options
+    returning the recent thread handle and the recent twin thread handle.
+  if the i/o error is not blank, show error the i/o error; exit.
+  if the current process is not 0,
+    put the current process in the recent process.
   flush the event queue.
 
 to handle select all given a node:

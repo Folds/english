@@ -597,6 +597,15 @@ next to the first instance, instead of covering the first instance.
   Audience:  Windows and Linux programmers.
   Requested by Jasper Paulsen on February 28, 2017.
 
+197.  In finder, allow running a .exe file.
+  Status:    Demonstrated.
+  Audience:  Turtle programmers.
+  Benefit:   Medium.
+  Implementation difficulty:  Easy.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Medium.
+  Requested by Gerry Rzeppa on March 13, 2017.
+
 210.  In colors, add a "pen" alias for each color.
   Status:  Implemented.
   Audience:  Turtle programmers.
@@ -639,6 +648,28 @@ next to the first instance, instead of covering the first instance.
   Benefit:  Medium.
   Implementation difficulty:  Medium.
   Demoing difficulty:  Medium.
+  Testing difficulty:  Medium.
+  Requested by Gerry Rzeppa on March 13, 2017.
+
+240.  Add CAL-4700 writer's trace polygon feature.
+  In the writer, old down the alt key or control key,
+  and click a bunch of points to make a polygon.
+  Status:    Demonstrated.
+  Audience:  Cartoonists.
+  Benefit:   Minor.
+  Implementation difficulty:  Easy.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Medium.
+  Requested by Gerry Rzeppa on March 13, 2017.
+
+241.  Implement CAL-4700's border and fill feature.
+  Put it in the writer's C->Color...->Fill Completely...
+  and F->Fill Completely... menus.  Don't create a * menu.
+  Status:    Demonstrated.
+  Audience:  Cartoonists.
+  Benefit:   Medium.
+  Implementation difficulty:  Easy.
+  Demoing difficulty:  Easy.
   Testing difficulty:  Medium.
   Requested by Gerry Rzeppa on March 13, 2017.
 

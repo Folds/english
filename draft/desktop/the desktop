@@ -302,6 +302,11 @@ to decide if a handler has a letter menu:
   destroy the submenu.
   say no.
 
+to decide if a mode does need running options:
+  if the mode is "editor", say yes.
+  if the mode is "finder", say yes.
+  say no.
+
 to decide if a node should be read-only:
   if the node is nil, say  no.
   if the node's kind is not "file", say no.
@@ -1222,6 +1227,7 @@ to handle an event (key down - shortcut):
   if the key is the p-key, handle print; exit.
   if the key is the q-key, handle quit; exit.
   if the key is the r-key and the mode is "editor", handle run; exit.
+  if the key is the r-key and the mode is "finder", handle run; exit.
   if the key is the r-key and the mode is "writer", handle reduce; exit.
   if the key is the s-key, handle save; exit.
   if the key is the t-key, handle comment; exit.
@@ -1751,6 +1757,8 @@ to handle rotate shape:
   cluck.
 
 to handle run:
+  if the current tab's mode is "finder",
+    handle run given the current tab's node; exit.
   if the current tab's mode is not "editor", cluck; exit.
   handle save all.
   untint the status.
@@ -1784,7 +1792,7 @@ to handle run:
   show status the compiler's timer's string then " ms".
 
 to handle running options:
-  if the current tab's mode is not "editor", cluck; exit.
+  if the current tab's mode does not need running options, cluck; exit.
   put the running options in a string called old options.
   ask a question with the running options.
   if the answer is the old options, exit.
@@ -2154,8 +2162,11 @@ to populate a submenu given a mode (r):
   if the mode is "writer", add "Rotate Page" to the submenu.
   if the mode is "writer", add "Rotate Shape" and "J" and "handle rotate shape" to the submenu.
   if the mode is "editor", add "Running Options…" and "handle running options" to the submenu.
+  if the mode is "finder", add "Running Options…" and "handle running options" to the submenu.
   if the mode is "editor", add "Run" and "R" and "handle run" to the submenu.
-  if the mode is "editor", add "Result" and "handle result" to the submenu.
+  if the mode is "finder", add "Run" and "R" and "handle run" to the submenu.
+  if the mode is "editor", add "Result" to the submenu.
+  if the mode is "finder", add "Result" to the submenu.
   if the recent process is 0,
     put the desktop color in the submenu's commands' last's color.
 
@@ -2172,6 +2183,7 @@ to populate a submenu given a mode (s):
   if the mode is "editor", add "Sort..." and "sort..." to the submenu.
   if the mode is "finder", add "Sort..." and "sort..." to the submenu.
   if the mode is "editor", add "Stop" to the submenu.
+  if the mode is "finder", add "Stop" to the submenu.
 
 to populate a submenu given a mode (t):
   if the mode is "editor", add "Test" and "handle test" to the submenu.
