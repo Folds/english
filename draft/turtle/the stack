@@ -2,10 +2,10 @@
 \ are copyright 2017 by the Osmosian Order.
 \ The remainder is copyright 2017 by Jasper Paulsen.
 
-to clear the stack:
+to clear a stack:
   destroy the stack.
 
-to decide if the stack has just one thing on it:
+to decide if a stack has just one thing on it:
   if the stack's count is 1, say yes.
   say no.
 
@@ -19,10 +19,10 @@ to decide if a token is numeric:
     if the token is blank, say yes.
   repeat.
 
-to finalize the stack:
+to finalize a stack:
   destroy the stack.
 
-to get a number from the stack:
+to get a number from a stack:
   put 0 into the number.
   get a stack entry from the stack.
   if the stack entry is nil, exit.
@@ -30,29 +30,41 @@ to get a number from the stack:
   remove the stack entry from the stack.
   destroy the stack entry.
 
-to get a string from the stack:
+to get a string from a stack:
   clear the string.
-  get an stack entry from the stack.
+  get a stack entry from the stack.
   if the stack entry is nil, put "error" into the string; exit.
   put the stack entry's string to the string.
   remove the stack entry from the stack.
   destroy the stack entry.
 
-to initialize the stack:
+to get a token from a reply:
+  remove any leading noise from the reply.
+  clear the token.
+  loop.
+    if the reply is blank, exit.
+    get a byte from the reply.
+    if the byte is the space byte, exit.
+    append the byte to the token.
+  repeat.
+
+to initialize a stack:
   \ nothing to do here,
-  \ because the stack is a global variable made of things.
+  \ because a stack consists of some things.
 
 to put a number on the stack:
   convert the number to a token.
   put the token on the stack.
 
-to put a token on the stack:
-  allocate memory for an stack entry.
+to put a token on a stack:
+  allocate memory for a stack entry.
   put the token into the stack entry's string.
   prepend the stack entry to the stack.
 
 a stack entry is a thing with a string.
 
-the stack is some stack entries.
+the stack is a stack.
+
+a stack is some stack entries.
 
 a token is a string.

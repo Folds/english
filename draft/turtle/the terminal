@@ -1,4 +1,6 @@
-\ copyright © 2006, 2017 the osmosian order (4700)
+\ The portions of this file that are from CAL-4700
+\ are copyright © 2017 by the Osmosian Order.
+\ The remainder is copyright © 2017 by Jasper Paulsen.
 
 \ The terminal is similar to the console,
 \ but designed for use with turtle graphics.
@@ -12,6 +14,7 @@ to add a quora to a terminal:
   destroy the doomed quora.
 
 to clear a terminal:
+  if the terminal is nil, exit.
   destroy the terminal's quoras.
 
 to create a quora:
@@ -36,6 +39,10 @@ to draw a terminal:
   write the terminal's quoras in the terminal's box.
   restore the current canvas.
 
+to finalize a terminal:
+  clear the terminal.
+  destroy the terminal.
+
 to handle an event given a terminal:
   if the terminal is nil, exit.
   if the event's kind is "key down", handle the event given the terminal (key down); exit.
@@ -44,6 +51,7 @@ to handle an event given a terminal:
   if the event's kind is "left click", relinquish control. \ *** added for invisible turtle book questionable
 
 to handle an event given a terminal (backspace key):
+  if the terminal is nil, exit.
   if the terminal's reply is blank, exit.
   if the event is modified, exit.
   remove the last byte from the terminal's reply.
@@ -75,11 +83,12 @@ to handle events given a terminal:
     handle the event given the terminal.
   repeat.
 
-to initialize the terminal:
+to initialize a terminal:
   create the terminal in the screen's box.
 
 to put a terminal in the middle of a box;
-  to center a terminal in a box:
+to center a terminal in a box:
+  if the terminal is nil, exit.
   privatize the box.
   indent the box 1/4 inch.
   put the box into the terminal's box.
