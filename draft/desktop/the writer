@@ -616,6 +616,11 @@ to decide if a document is empty:
   if the document's first page is nil, say yes.
   say no.
 
+to decide if a document is enlargeable:
+  if the document is nil, say no.
+  if the document's scale is at least 4/1, say no.
+  say yes.
+
 to decide if a document is modified:
   if the document is nil, say no.
   if the document's read-only flag is set, say no.
@@ -626,6 +631,11 @@ to decide if a document is read-only:
   if the document is nil, say no.
   if the document's read-only flag is set, say yes.
   say no.
+
+to decide if a document is reducible:
+  if the document is nil, say no.
+  if the document's scale is at most 1/2, say no.
+  say yes.
 
 to decide if a document is relying on a font name:
   if the document is nil, say no.
@@ -802,6 +812,14 @@ to decide if a page does contain visible text:
   get first visible text from the page returning a text.
   if the text is nil, say no.
   say yes.
+
+to decide if a page does have at least one selected shape:
+  if the page is nil, say no.
+  loop.
+    get a shape from the page's shapes.
+    if the shape is nil, say no.
+    if the shape is selected, say yes.
+  repeat.
 
 to decide if a page is being edited:
   if the page is nil, say no.
@@ -2213,7 +2231,8 @@ to handle check spelling given a page (current page only):
   if the lexicon is nil,
     show error "I can't find any lecksicon."; exit.
   end edit on the page.
-  deselect the page's shapes.
+  if the page is not nil,
+    deselect the page's shapes.
   check spelling given the page (current page only).
 
 to handle check spelling given a page (entire document):
@@ -2310,7 +2329,8 @@ to handle duplicate given a page:
   show the desktop with status.
 
 to handle enlarge given a page:
-  if the current tab's node's document's scale is 4/1, cluck; exit.
+  if the current tab's node's document is not enlargeable,
+    cluck; exit.
   remember the page.
   multiply the current tab's node's document's scale by 2.
   scale the page to the current tab's node's document's scale.
@@ -3112,6 +3132,8 @@ to handle mirror given a page:
   show the desktop with status.
 
 to handle new page given a document:
+  if the current tab is nil, exit.
+  if the current tab's node is nil, exit.
   if the current tab's node's path is read-only,
     show error "I'm sorry, but this directory is read only."; exit.
   show status "Creating...".
@@ -3122,6 +3144,7 @@ to handle new page given a document:
 
 to handle new shape given a page and a kind:
   if the page is being edited, end edit on the page.
+  if the page is nil, exit.
   create a shape given the kind (default).
   if the shape is nil, show the desktop with status; exit.
   adjust the shape.
@@ -3167,7 +3190,8 @@ to handle paste given a page (editing):
   show the desktop with "Pasted".
 
 to handle pen given a page and a color:
-  if the page is being edited, handle pen given the page and the color (editing); exit.
+  if the page is being edited,
+    handle pen given the page and the color (editing); exit.
   if nothing is selected on the page, cluck; exit.
   remember the page.
   show status "Penning...".
@@ -3216,7 +3240,8 @@ to handle radius given a page:
   show the desktop with status.
 
 to handle redo given a page:
-  if the page is being edited, handle redo given the page (editing); exit.
+  if the page is being edited,
+    handle redo given the page (editing); exit.
   put the current tab's node's document into a document.
   if the document is nil, cluck; exit.
   if the document's page redos are empty, cluck; exit.
@@ -3368,7 +3393,8 @@ to handle unlabel given a page:
   show the desktop with status.
 
 to handle uppercase given a page:
-  if the page is being edited, handle uppercase given the page (editing); exit.
+  if the page is being edited,
+    handle uppercase given the page (editing); exit.
   if nothing is selected on the page, cluck; exit.
   show status "Uppercasing...".
   remember the page.

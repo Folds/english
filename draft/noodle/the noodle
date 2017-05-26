@@ -1947,6 +1947,10 @@ to decide if a number is another number:
   intel $0F8406000000. \ je over the next 1 statement
   intel $C7C000000000. \ mov eax,0        \ now it's false
 
+to decide if a flag is clear:
+  if the flag is yes, say no.
+  say yes.
+
 to decide if a flag is on;
 to decide if a flag is set:
   if the flag is yes, say yes.
@@ -2330,13 +2334,7 @@ to decide if a ratio is another ratio:
   if the ratio's numerator is the other ratio's numerator, say yes.
   say no.
 
-to decide if a ratio is greater than another ratio:
-  privatize the ratio.
-  privatize the other ratio.
-  normalize the ratio and the other ratio.
-  if the ratio's numerator is greater than the other ratio's numerator, say yes.
-  say no.
-
+to decide if a ratio is at least another ratio;
 to decide if a ratio is greater than or equal to another ratio:
   privatize the ratio.
   privatize the other ratio.
@@ -2344,18 +2342,26 @@ to decide if a ratio is greater than or equal to another ratio:
   if the ratio's numerator is greater than or equal to the other ratio's numerator, say yes.
   say no.
 
-to decide if a ratio is less than another ratio:
-  privatize the ratio.
-  privatize the other ratio.
-  normalize the ratio and the other ratio.
-  if the ratio's numerator is less than the other ratio's numerator, say yes.
-  say no.
-
+to decide if a ratio is at most another ratio;
 to decide if a ratio is less than or equal to another ratio:
   privatize the ratio.
   privatize the other ratio.
   normalize the ratio and the other ratio.
   if the ratio's numerator is less than or equal to the other ratio's numerator, say yes.
+  say no.
+
+to decide if a ratio is greater than another ratio:
+  privatize the ratio.
+  privatize the other ratio.
+  normalize the ratio and the other ratio.
+  if the ratio's numerator is greater than the other ratio's numerator, say yes.
+  say no.
+
+to decide if a ratio is less than another ratio:
+  privatize the ratio.
+  privatize the other ratio.
+  normalize the ratio and the other ratio.
+  if the ratio's numerator is less than the other ratio's numerator, say yes.
   say no.
 
 to decide if a ratio is negative:
@@ -5623,7 +5629,8 @@ to load the lexicon:
   loop.
     if the directory is blank, exit.
     put the directory then "lexicon\" into a path.
-    if the path is in the file system, load the lexicon given the path; exit.
+    if the path is in the file system,
+      load the lexicon given the path; exit.
     extract the directory from the directory.
   repeat.
 

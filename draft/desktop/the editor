@@ -278,13 +278,16 @@ to get a substring given a row and a source (commented part):
   subtract 1 from the substring's last. \ so we don't draw the return byte
 
 to handle check spelling given a source:
+  if the source is nil, exit.
   load the lexicon.
-  if the lexicon is nil, show error "I can't find any lecksicon."; exit.
+  if the lexicon is nil,
+    show error "I can't find any lecksicon."; exit.
   put "check spelling" into the find mode.
   clear the source's text's last operation.
   put 1 into the find anchor.
   find the next misspelling in the source's text given a flag.
-  if the flag is not set, cluck; show the desktop with "Done"; exit.
+  if the flag is not set,
+    cluck; show the desktop with "Done"; exit.
   scroll the source's text to the caret and center it.
   show the desktop with "Found".
 
@@ -700,6 +703,7 @@ to handle uncomment given a source:
   show the desktop with status.
 
 to handle undo given a source:
+  if the source's text is nil, cluck; exit.
   if the source's text cannot be undone, cluck; exit.
   handle undo given the source's text.
   show the desktop with status.

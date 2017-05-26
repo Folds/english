@@ -454,7 +454,8 @@ to get the status for a node:
 
 to handle copy given a node:
   if the node is root-level, cluck; exit.
-  if nothing is selected in the node, show error "I'm not sure what you want me to copy."; exit.
+  if nothing is selected in the node,
+    show error "I'm not sure what you want me to copy."; exit.
   show status "Copying...".
   destroy the finder's clipboard in the file system.
   create the finder's clipboard in the file system.
@@ -660,7 +661,8 @@ to handle extract nibble literal given a node:
 
 to handle get size given a node:
   if the node is root-level, cluck; exit.
-  if nothing is selected in the node, show error "I'm not sure what you want me to get the size of."; exit.
+  if nothing is selected in the node,
+    show error "I'm not sure what you want me to get the size of."; exit.
   show status "Getting...".
   calculate a size of any selected nodettes in the node.
   format the size and "byte" or "bytes" into a string.
@@ -669,22 +671,29 @@ to handle get size given a node:
 
 to handle new directory given a node:
   if the node is root-level, cluck; exit.
-  if the node's path is read-only, show error "I'm sorry, but this directory is read only."; exit.
+  if the node is nil, exit.
+  if the node's path is read-only,
+    show error "I'm sorry, but this directory is read only."; exit.
   ask "Directory name?".
   if the answer is blank, exit.
-  if the answer is not dos-compatible, show error "I'm sorry, but that is not a valid name."; exit.
+  if the answer is not dos-compatible,
+    show error "I'm sorry, but that is not a valid name."; exit.
   put the node's path then the answer then "\" into a path.
-  if the path is in the file system, show error "I'm sorry, but that name is already in the file system."; exit.
+  if the path is in the file system,
+    show error "I'm sorry, but that name is already in the file system."; exit.
   show the desktop with "Creating...".
   add a nodette to the node and to the file system given the path.
-  if the i/o error is not blank, show error the i/o error; exit.
+  if the i/o error is not blank,
+    show error the i/o error; exit.
   focus on the nodette in the node.
   show the desktop with "Directory created".
   flush the event queue.
 
 to handle new document given a node:
   if the node is root-level, cluck; exit.
-  if the node's path is read-only, show error "I'm sorry, but this directory is read only."; exit.
+  if the node is nil, exit.
+  if the node's path is read-only,
+    show error "I'm sorry, but this directory is read only."; exit.
   ask "Document name?".
   if the answer is blank, exit.
   if the answer is not dos-compatible, show error "I'm sorry, but that is not a valid name."; exit.
@@ -696,22 +705,28 @@ to handle new document given a node:
   append the linefeed byte to the buffer.
   append "end" to the buffer.
   add a nodette to the node and to the file system given the path and the buffer.
-  if the i/o error is not blank, show error the i/o error; exit.
+  if the i/o error is not blank,
+    show error the i/o error; exit.
   focus on the nodette in the node.
   show the desktop with "Document created".
   flush the event queue.
 
 to handle new text file given a node:
   if the node is root-level, cluck; exit.
-  if the node's path is read-only, show error "I'm sorry, but this directory is read only."; exit.
+  if the node is nil, exit.
+  if the node's path is read-only,
+    show error "I'm sorry, but this directory is read only."; exit.
   ask "File name?".
   if the answer is blank, exit.
-  if the answer is not dos-compatible, show error "I'm sorry, but that is not a valid name."; exit.
+  if the answer is not dos-compatible,
+    show error "I'm sorry, but that is not a valid name."; exit.
   put the node's path then the answer into a path.
-  if the path is in the file system, show error "I'm sorry, but that name is already in the file system."; exit.
+  if the path is in the file system,
+    show error "I'm sorry, but that name is already in the file system."; exit.
   show the desktop with "Creating...".
   add a nodette to the node and to the file system given the path.
-  if the i/o error is not blank, show error the i/o error; exit.
+  if the i/o error is not blank,
+    show error the i/o error; exit.
   focus on the nodette in the node.
   show the desktop with "File created".
   flush the event queue.
@@ -719,7 +734,8 @@ to handle new text file given a node:
 to handle paste given a node:
   if the node is root-level, cluck; exit.
   if the finder's clipboard is empty in the file system, cluck; exit.
-  if the node's path is read-only, show error "I'm sorry, but this directory is read only."; exit.
+  if the node's path is read-only,
+    show error "I'm sorry, but this directory is read only."; exit.
   show status "Pasting...".
   paste any copied items into the node and into the file system returning a count.
   set the caret and anchor in the node using the selected nodettes.

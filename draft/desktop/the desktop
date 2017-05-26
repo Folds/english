@@ -30,7 +30,13 @@ to add a name and a handler to a menu:
   put "left" into the command's alignment.
 
 to add a name and a handler to a submenu:
-  add the name and "" and the handler to the submenu.
+  put yes in a relevance.
+  add the name and the handler
+    to the submenu given the relevance.
+
+to add a name and a handler to a submenu given a relevance:
+  add the name and "" and the handler
+    to the submenu given the relevance.
 
 to add a name and a shortcut and a handler and a color to a submenu:
   if the submenu is nil, exit.
@@ -44,10 +50,22 @@ to add a name and a shortcut and a handler and a color to a submenu:
   put "left" into the command's alignment.
 
 to add a name and a shortcut and a handler to a submenu:
+  put yes in a relevance.
   add the name and the shortcut and the handler
-    and the white color to the submenu.
+    to the submenu given the relevance.
+
+to add a name and a shortcut and a handler to a submenu given a relevance:
+  put the desktop color in a color.
+  if the relevance is set,
+    put the white color in the color.
+  add the name and the shortcut and the handler
+    and the color to the submenu.
 
 to add a name to a submenu:
+  put yes in a relevance.
+  add the name to the submenu given the relevance.
+
+to add a name to a submenu given a relevance:
   put the name into a string.
   lowercase the string.
   if the string ends with "…",
@@ -56,7 +74,8 @@ to add a name to a submenu:
     remove the last three bytes from the string.
   put "handle " then the string in a handler.
   put "" in a shortcut.
-  add the name and the shortcut and the handler to the submenu.
+  add the name and the shortcut and the handler
+    to the submenu given the relevance.
 
 to add swatches to a submenu given a handler:
   if the submenu is nil, exit.
@@ -154,6 +173,8 @@ to choose a color for a command (temporary color):
   if the color is clear, put the white color into the color.
   if the command is pointless,
     put the desktop color into the color.
+
+a clipboard relevance is a relevance.
 
 the command height is a height equal to 1/3 inch.
 
@@ -655,6 +676,140 @@ to get an abbreviation byte given a font:
   \         to a "modifier letter low tilde" (U+02F7)
   \         https://www.everything2.com/title/Spacing+modifier+letters
 
+to get a clipboard relevance (full):
+  clear the clipboard relevance.
+  if there is text on the windows clipboard,
+    set the clipboard relevance.
+
+to get a document relevance (enlargeable):
+  get the document relevance (existence).
+  if the document relevance is clear, exit.
+  if the current tab's node's document is not enlargeable,
+    clear the document relevance.
+
+to get a document relevance (existence):
+  clear the document relevance.
+  if the current tab is nil, exit.
+  if the current tab's node is nil, exit.
+  if the current tab's node's document is nil, exit.
+  set the document relevance.
+
+to get a document relevance (reducible):
+  get the document relevance (existence).
+  if the document relevance is clear, exit.
+  if the current tab's node's document is not reducible,
+    clear the document relevance.
+
+to get a document relevance (selection):
+  get the document relevance (existence).
+  if the document relevance is clear, exit.
+  if nothing is selected in the current tab's node's document,
+    clear the document relevance.
+
+to get a node relevance (existence):
+  clear the node relevance.
+  if the current tab is nil, exit.
+  if the current tab's node is nil, exit.
+  set the node relevance.
+
+to get a node relevance (pastable):
+  get the node relevance (existence).
+  if the node relevance is clear, exit.
+  if the current tab's node is root-level,
+    clear the node relevance; exit.
+  if the finder's clipboard is "",
+    clear the node relevance; exit.
+
+to get a node relevance (savable):
+  get the node relevance (existence).
+  if the node relevance is clear, exit.
+  if the current tab's node is not savable,
+    clear the node relevance.
+
+to get a node relevance (selection):
+  get the node relevance (existence).
+  if the node relevance is clear, exit.
+  if nothing is selected in the current tab's node,
+    clear the node relevance.
+
+to get a page relevance (editing redoable):
+  get the page relevance (existence).
+  if the page relevance is clear, exit.
+  if the current tab's node's page's edit shape is nil,
+    clear the page relevance; exit.
+  if the current tab's node's page's edit shape's text is nil,
+    clear the page relevance; exit.
+  if the current tab's node's page's edit shape's text cannot be redone,
+    clear the page relevance; exit.
+
+to get a page relevance (editing undoable):
+  get the page relevance (existence).
+  if the page relevance is clear, exit.
+  if the current tab's node's page's edit shape is nil,
+    clear the page relevance; exit.
+  if the current tab's node's page's edit shape's text is nil,
+    clear the page relevance; exit.
+  if the current tab's node's page's edit shape's text cannot be undone,
+    clear the page relevance; exit.
+
+to get a page relevance (editing):
+  get the page relevance (existence).
+  if the page relevance is clear, exit.
+  if the current tab's node's page is not being edited,
+    clear the page relevance.
+
+to get a page relevance (existence):
+  clear the page relevance.
+  if the current tab is nil, exit.
+  if the current tab's node is nil, exit.
+  if the current tab's node's page is nil, exit.
+  set the page relevance.
+
+to get a page relevance (redoable):
+  get the page relevance (existence).
+  if the page relevance is clear, exit.
+  if the current tab's node's page is being edited,
+    get the page relevance (editing redoable); exit.
+  get a document relevance (existence).
+  if the document relevance is clear,
+    clear the page relevance; exit.
+  if the current tab's node's document's page redos are empty,
+    clear the page relevance; exit.
+
+to get a page relevance (selected shape):
+  get the page relevance (existence).
+  if the page relevance is clear, exit.
+  if the current tab's node's page does not have
+    at least one selected shape,
+    clear the page relevance.
+
+to get a page relevance (selection):
+  get the page relevance (existence).
+  if the page relevance is clear, exit.
+  if nothing is selected on the current tab's node's page,
+    clear the page relevance.
+
+to get a page relevance (undoable):
+  get the page relevance (existence).
+  if the page relevance is clear, exit.
+  if the current tab's node's page is being edited,
+    get the page relevance (editing undoable); exit.
+  get a document relevance (existence).
+  if the document relevance is clear,
+    clear the page relevance; exit.
+  if the current tab's node's document's page undos are empty,
+    clear the page relevance; exit.
+
+to get a process relevance (available):
+  clear the process relevance.
+  if the recent process is 0,
+    set the process relevance.
+
+to get a process relevance (running):
+  clear the process relevance.
+  if the recent process is 0, exit.
+  set the process relevance.
+
 to get relevant path given a path and a string thing returning another path:
   if the string thing is nil,
     put the path in the other path.
@@ -750,6 +905,35 @@ to get running options given a command line returning a string:
     get the files from the command line given "/files".
   if the files are full and are the run files,
     append " /runfiles=/files" to the string.
+
+to get a source relevance (existence):
+  clear the source relevance.
+  if the current tab is nil, exit.
+  if the current tab's node is nil, exit.
+  if the current tab's source is nil, exit.
+  set the source relevance.
+
+to get a source relevance (redoable):
+  get the source relevance (existence).
+  if the source relevance is clear, exit.
+  if the current tab's node's source's text is nil,
+    clear the source relevance; exit.
+  if the current tab's node's source's text cannot be redone,
+    clear the source relevance; exit.
+
+to get a source relevance (selection):
+  get the source relevance (existence).
+  if the source relevance is clear, exit.
+  if nothing is selected in the current tab's source,
+    clear the source relevance.
+
+to get a source relevance (undoable):
+  get the source relevance (existence).
+  if the source relevance is clear, exit.
+  if the current tab's node's source's text is nil,
+    clear the source relevance; exit.
+  if the current tab's node's source's text cannot be undone,
+    clear the source relevance; exit.
 
 to get a thread status of a thread handle:
   clear the thread status' error flag.
@@ -1565,7 +1749,7 @@ to handle new text file:
   cluck.
 
 to handle open:
-  if the current tab's mode is "finder", handle open (finder); exit.
+  if the current tab's mode is "finder",  handle open (finder); exit.
   if the current tab's mode is "docster", handle open (docster); exit.
   cluck.
 
@@ -1577,6 +1761,7 @@ to handle open (docster):
   refresh the cursor.
 
 to handle open (finder):
+  if the current tab is nil, exit.
   if the current tab's mode is not "finder", cluck; exit.
   get some selected path links given the current tab's node.
   if the selected path links are empty,
@@ -1604,6 +1789,7 @@ to handle open (finder):
   refresh the cursor.
 
 to handle open as dump:
+  if the current tab is nil, exit.
   if the current tab's mode is not "finder", cluck; exit.
   put the current tab's node's first selected nodette into a nodette.
   if the nodette is nil,
@@ -1617,6 +1803,7 @@ to handle open as dump:
   flush the event queue.
 
 to handle open as text:
+  if the current tab is nil, exit.
   if the current tab's mode is not "finder", cluck; exit.
   put the current tab's node's first selected nodette into a nodette.
   if the nodette is nil,
@@ -1630,6 +1817,9 @@ to handle open as text:
   flush the event queue.
 
 to handle open without drawing (docster):
+  if the current tab is nil, exit.
+  if the current tab's node is nil, exit.
+  if the current tab's node's document is nil, exit.
   put the current tab's node's document's first selected page into a page.
   if the page is nil,
     show error "I'm not sure what you want me to open."; exit.
@@ -1993,7 +2183,11 @@ a menu is a thing with some commands.
 
 a mode is a string.
 
+a node relevance is a relevance.
+
 the pad has a box.
+
+an page relevance is a relevance.
 
 the palette width is a width equal to 2-1/3 inches.
 
@@ -2026,82 +2220,160 @@ to populate a submenu given a handler and a mode (letter):
   if the handler is "z", populate the submenu given the mode (z); exit.
 
 to populate a submenu given a mode (a):
-  if the mode is "writer", add "Align Left" to the submenu.
-  if the mode is "writer", add "Align Center" to the submenu.
-  if the mode is "writer", add "Align Right" to the submenu.
+  if the mode is not "writer", exit.
+  get a page relevance (selected shape).
+  add "Align Left"   to the submenu given the page relevance.
+  add "Align Center" to the submenu given the page relevance.
+  add "Align Right"  to the submenu given the page relevance.
 
 to populate a submenu given a mode (b):
-  if the mode is "writer", add "Border..." and "border..." to the submenu.
+  if the mode is not "writer", exit.
+  get a page relevance (selected shape).
+  add "Border..." and "border..."
+      to the submenu given the page relevance.
   if the mode is "writer",
-    add "Bring to Front" and "handle bring to front" to the submenu.
+    add "Bring to Front" and "handle bring to front"
+      to the submenu given the page relevance.
 
 to populate a submenu given a mode (c):
+  \ the source is the current tab's node's source
   if the mode is "editor", add "Check Spelling" to the submenu.
   if the mode is "writer",
-    add "Check Spelling..." and "check spelling..." to the submenu.
+    get a source relevance (existence);
+    add "Check Spelling..." and "check spelling..."
+      to the submenu given the source relevance.
   add "Close" and "W" and "handle close" to the submenu.
   add "Close All" to the submenu.
   if the mode is "writer",
     add "Color..." and "color..." to the submenu.
   if the mode is "editor",
-    add "Comment" and "T" and "handle comment" to the submenu.
+    get the source relevance (existence);
+    add "Comment" and "T" and "handle comment"
+      to the submenu given the source relevance.
   if the mode is "editor",
     add "Compile" and "M" and "handle compile" to the submenu.
-  add "Copy" and "C" and "handle copy" to the submenu.
-  add "Cut" and "X" and "handle cut" to the submenu.
+  if the mode is "finder",
+    get a node relevance (selection);
+    add "Copy" and "C" and "handle copy"
+      to the submenu given the node relevance.
+  if the mode is "editor",
+    get the source relevance (selection);
+    add "Copy" and "C" and "handle copy"
+      to the submenu given the source relevance.
+  if the mode is "docster",
+    get a document relevance (selection);
+    add "Copy" and "C" and "handle copy"
+      to the submenu given the document relevance.
+  if the mode is "writer",
+    get a page relevance (selection);
+    add "Copy" and "C" and "handle copy"
+      to the submenu given the page relevance.
+  if the mode is "finder",
+    add "Cut" and "X" and "handle cut"
+      to the submenu given the node relevance.
+  if the mode is "editor",
+    add "Cut" and "X" and "handle cut"
+      to the submenu given the source relevance.
+  if the mode is "docster",
+    add "Cut" and "X" and "handle cut"
+      to the submenu given the document relevance.
+  if the mode is "writer",
+    add "Cut" and "X" and "handle cut"
+      to the submenu given the page relevance.
 
 to populate a submenu given a mode (d):
   add "Debug the Window" and "handle debug window" to the submenu.
-  if the mode is "editor", add "Decrypt..." to the submenu.
+  if the mode is "editor",
+    get a source relevance (selection);
+    add "Decrypt..." to the submenu given the source relevance.
   if the mode is "finder",
-    add "Duplicate" and "D" and "handle duplicate" to the submenu.
+    get a node relevance (selection);
+    add "Duplicate" and "D" and "handle duplicate"
+      to the submenu given the node relevance.
   if the mode is "docster",
-    add "Duplicate" and "D" and "handle duplicate" to the submenu.
+    get a document relevance (selection);
+    add "Duplicate" and "D" and "handle duplicate"
+      to the submenu given the document relevance.
   if the mode is "writer",
-    add "Duplicate" and "D" and "handle duplicate" to the submenu.
+    get a page relevance (selection);
+    add "Duplicate" and "D" and "handle duplicate"
+      to the submenu given the page relevance.
 
 to populate a submenu given a mode (e):
-  if the mode is "writer", add "Enlarge" and "E" and "handle enlarge" to the submenu.
-  if the mode is "editor", add "Encrypt..." to the submenu.
+  if the mode is "writer",
+    get a document relevance (enlargeable);
+    add "Enlarge" and "E" and "handle enlarge"
+      to the submenu given the document relevance.
+  if the mode is "editor",
+    get a source relevance (selection);
+    add "Encrypt..." to the submenu given the source relevance.
   if the mode is "editor", add "Extract Types" to the submenu.
   if the mode is "editor", add "Extract Globals" to the submenu.
   if the mode is "editor", add "Extract Routine Headers" to the submenu.
-  if the mode is "finder", add "Extract Nibble Literal" to the submenu.
+  if the mode is "finder",
+    get a node relevance (selection);
+    add "Extract Nibble Literal"
+      to the submenu given the node relevance.
 
 to populate a submenu given a mode (f):
   if the mode is "editor", add "Find" and "F" and "handle find" to the submenu.
   if the mode is "writer", add "Find" and "F" and "handle find" to the submenu.
   if the mode is "editor", add "Find Next" and "N" and "handle find next" to the submenu.
   if the mode is "writer", add "Find Next" and "N" and "handle find next" to the submenu.
-  if the mode is "writer", add "Fill..." and "fill..." to the submenu.
-  if the mode is "writer", add "Fill Completely..." and "fill completely..." to the submenu.
-  if the mode is "writer", add "Flip" to the submenu.
+  if the mode is "writer",
+    get a page relevance (selection);
+    add "Fill..." and "fill..."
+      to the submenu given the page relevance.
+  if the mode is "writer",
+    add "Fill Completely..." and "fill completely..."
+      to the submenu given the page relevance.
+  if the mode is "writer",
+    add "Flip" to the submenu given the page relevance.
   if the mode is "editor", add "Font Height..." and "font height..." to the submenu.
   if the mode is "writer", add "Font Height..." and "font height..." to the submenu.
   if the mode is "editor", add "Font Name..." and "font name..." to the submenu.
   if the mode is "writer", add "Font Name..." and "font name..." to the submenu.
 
 to populate a submenu given a mode (g):
-  if the mode is "finder", add "Get Size" to the submenu.
-  if the mode is "writer", add "Grayscale" to the submenu.
-  if the mode is "writer", add "Grid..." and "grid..." to the submenu.
-  if the mode is "writer", add "Group" and "G" and "handle group" to the submenu.
+  if the mode is "finder",
+    get a node relevance (selection);
+    add "Get Size" to the submenu given the node relevance.
+  if the mode is "writer",
+    get a page relevance (selection);
+    add "Grayscale" to the submenu given the page relevance.
+  if the mode is "writer",
+    add "Grid..." and "grid..." to the submenu.
+  if the mode is "writer",
+    add "Group" and "G" and "handle group"
+      to the submenu given the page relevance.
 
 to populate a submenu given a mode (h):
   if the mode is "writer", add "Hide Grid" and "handle grid given no" to the submenu.
 
 to populate a submenu given a mode (i):
-  if the mode is "editor", add "Indent" and "I" and "handle indent" to the submenu.
+  if the mode is "editor",
+    get a source relevance (selection);
+    add "Indent" and "I" and "handle indent"
+      to the submenu given the source relevance.
 
 to populate a submenu given a mode (j):
 
 to populate a submenu given a mode (k):
 
 to populate a submenu given a mode (l):
-  if the mode is "editor", add "List" and "L" and "handle list" to the submenu.
-  if the mode is "editor", add "Lowercase" to the submenu.
-  if the mode is "writer", add "Label..." and "Label..." to the submenu.
-  if the mode is "writer", add "Lowercase" to the submenu.
+  if the mode is "editor",
+    get a source relevance (existence);
+    add "List" and "L" and "handle list"
+      to the submenu given the source relevance.
+  if the mode is "editor",
+    get the source relevance (selection);
+    add "Lowercase" to the submenu given the source relevance.
+  if the mode is "writer",
+    get a page relevance (selection);
+    add "Label..." and "Label..."
+      to the submenu given the page relevance.
+  if the mode is "writer",
+    add "Lowercase" to the submenu given the page relevance.
 
 to populate a submenu given a mode (m):
   add "Minimize" and "handle minimize" to the submenu.
@@ -2114,89 +2386,210 @@ to populate a submenu given a mode (m):
   if the screen is restored given the main window,
     add "Maximize" and "F11" and "handle maximize" to the submenu.
   if the mode is "writer", add "Measure..." to the submenu.
-  if the mode is "writer", add "Mirror" to the submenu.
+  if the mode is "writer",
+    get a page relevance (selection);
+    add "Mirror" to the submenu given the page relevance.
 
 to populate a submenu given a mode (n):
-  if the mode is "finder", add "New Directory..." to the submenu.
-  if the mode is "finder", add "New Document..." to the submenu.
-  if the mode is "writer", add "New Ellipse" to the submenu.
-  if the mode is "docster", add "New Page" to the submenu.
-  if the mode is "writer", add "New Picture..." to the submenu.
-  if the mode is "writer", add "New Polygon" to the submenu.
-  if the mode is "writer", add "New Rectangle" to the submenu.
-  if the mode is "writer", add "New Text" to the submenu.
-  if the mode is "finder", add "New Text File..." to the submenu.
+  if the mode is "finder",
+    get a node relevance (existence);
+    add "New Directory..."
+      to the submenu given the node relevance.
+  if the mode is "finder",
+    add "New Document..."
+      to the submenu given the node relevance.
+  if the mode is "writer",
+    get a page relevance (existence);
+    add "New Ellipse" to the submenu given the page relevance.
+  if the mode is "docster",
+    get the node relevance (existence);
+    add "New Page" to the submenu given the node relevance.
+  if the mode is "writer",
+    add "New Picture..." to the submenu given the page relevance.
+  if the mode is "writer",
+    add "New Polygon" to the submenu given the page relevance.
+  if the mode is "writer",
+    add "New Rectangle" to the submenu given the page relevance.
+  if the mode is "writer",
+    add "New Text" to the submenu given the page relevance.
+  if the mode is "finder",
+    add "New Text File..."
+      to the submenu given the node relevance.
 
 to populate a submenu given a mode (o):
-  if the mode is "finder",  add "Open" and "O" and "handle open" to the submenu.
-  if the mode is "docster", add "Open" and "O" and "handle open" to the submenu.
-  if the mode is "finder",  add "Open As Dump" to the submenu.
-  if the mode is "finder",  add "Open As Text" to the submenu.
-  if the mode is "editor",  add "Outdent" and "O" and "handle outdent" to the submenu.
+  if the mode is "finder",
+    get a node relevance (selection);
+    add "Open" and "O" and "handle open"
+      to the submenu given the node relevance.
+  if the mode is "docster",
+    get a document relevance (selection);
+    add "Open" and "O" and "handle open"
+      to the submenu given the document relevance.
+  if the mode is "finder",
+    add "Open As Dump" to the submenu given the node relevance.
+  if the mode is "finder",
+    add "Open As Text" to the submenu given the node relevance.
+  if the mode is "editor",
+    get a source relevance (selection);
+    add "Outdent" and "O" and "handle outdent"
+      to the submenu given the source relevance.
 
 to populate a submenu given a mode (p):
-  add "Paste" and "V" and "handle paste" to the submenu.
-  if the mode is "writer",  add "Pen..." and "pen..." to the submenu.
-  if the mode is "editor",  add "Print..." and "P" and "handle print" to the submenu.
-  if the mode is "docster", add "Print..." and "P" and "handle print" to the submenu.
-  if the mode is "writer",  add "Print..." and "P" and "handle print" to the submenu.
+  if the mode is "finder",
+    get a node relevance (pastable);
+    add "Paste" and "V" and "handle paste"
+      to the submenu given the node relevance.
+  if the mode is not "finder",
+    get a clipboard relevance (full);
+    add "Paste" and "V" and "handle paste"
+      to the submenu given the clipboard relevance.
+  if the mode is "writer",
+    get a page relevance (selection);
+    add "Pen..." and "pen..."
+      to the submenu given the page relevance.
+  if the mode is "editor",
+    get a source relevance (selection);
+    add "Print..." and "P" and "handle print"
+      to the submenu given the source relevance.
+  if the mode is "docster",
+    get a document relevance (selection);
+    add "Print..." and "P" and "handle print"
+      to the submenu given the document relevance.
+  if the mode is "writer",
+    add "Print..." and "P" and "handle print"
+      to the submenu.
 
 to populate a submenu given a mode (q):
   add "Quit" and "Q" and "handle quit" to the submenu.
 
 to populate a submenu given a mode (r):
-  if the mode is "writer", add "Radius..." to the submenu.
-  if the mode is "editor", add "Redo" and "Y" and "handle redo" to the submenu.
-  if the mode is "writer", add "Redo" and "Y" and "handle redo" to the submenu.
-  if the mode is "writer", add "Reduce" and "R" and "handle reduce" to the submenu.
-  if the mode is "finder", add "Rename..." to the submenu.
-  if the mode is "docster", add "Renumber Pages..." to the submenu.
+  if the mode is "writer",
+    get a page relevance (selection);
+    add "Radius..." to the submenu given the page relevance.
+  if the mode is "editor",
+    get a source relevance (redoable);
+    add "Redo" and "Y" and "handle redo"
+      to the submenu given the source relevance.
+  if the mode is "writer",
+    get the page relevance (redoable);
+    add "Redo" and "Y" and "handle redo"
+      to the submenu given the page relevance.
+  if the mode is "writer",
+    get a document relevance (reducible);
+    add "Reduce" and "R" and "handle reduce"
+      to the submenu given the document relevance.
+  if the mode is "finder",
+    get a node relevance (selection);
+    add "Rename..." to the submenu given the node relevance.
+  if the mode is "docster",
+    add "Renumber Pages..." to the submenu.
   if the screen is maximized given the main window,
     add "Restore" and "F11" and "handle restore" to the submenu.
   if the screen is restored given the main window,
     add "Restore" and "F11" and "handle restore" and the desktop color to the submenu.
   if the main window is minimized,
     add "Restore" and "F11" and "handle restore" to the submenu.
-  if the mode is "editor", add "Reverse" to the submenu.
+  if the mode is "editor",
+    get the source relevance (selection);
+    add "Reverse" to the submenu given the source relevance.
   if the mode is "finder", add "Reverse" to the submenu.
   if the mode is "writer", add "Rotate Page" to the submenu.
-  if the mode is "writer", add "Rotate Shape" and "J" and "handle rotate shape" to the submenu.
+  if the mode is "writer",
+    get the page relevance (selection);
+    add "Rotate Shape" and "J" and "handle rotate shape"
+    to the submenu given the page relevance.
   if the mode is "editor", add "Running Options…" and "handle running options" to the submenu.
   if the mode is "finder", add "Running Options…" and "handle running options" to the submenu.
-  if the mode is "editor", add "Run" and "R" and "handle run" to the submenu.
-  if the mode is "finder", add "Run" and "R" and "handle run" to the submenu.
-  if the mode is "editor", add "Result" to the submenu.
-  if the mode is "finder", add "Result" to the submenu.
-  if the recent process is 0,
-    put the desktop color in the submenu's commands' last's color.
+  if the mode is "editor",
+    get a process relevance (available);
+    restrict a relevance given the source relevance and the process relevance;
+    add "Run" and "R" and "handle run"
+      to the submenu given the relevance.
+  if the mode is "finder",
+    get the process relevance (available);
+    restrict the relevance given the node relevance and the process relevance;
+    add "Run" and "R" and "handle run"
+      to the submenu given the relevance.
+  if the mode is "editor",
+    get the process relevance (running);
+    add "Result" to the submenu given the process relevance.
+  if the mode is "finder",
+    get the process relevance (running);
+    add "Result" to the submenu given the process relevance.
 
 to populate a submenu given a mode (s):
-  if the mode is "editor", add "Save" and "S" and "handle save" to the submenu.
-  if the mode is "docster", add "Save" and "S" and "handle save" to the submenu.
-  if the mode is "writer", add "Save" and "S" and "handle save" to the submenu.
+  if the mode is "editor",
+    get a node relevance (savable);
+    add "Save" and "S" and "handle save"
+      to the submenu given the node relevance.
+  if the mode is "docster",
+    get the node relevance (savable);
+    add "Save" and "S" and "handle save"
+      to the submenu given the node relevance.
+  if the mode is "writer",
+    get the node relevance (savable);
+    add "Save" and "S" and "handle save"
+      to the submenu given the node relevance.
   add "Save All" and "handle save all" to the submenu.
-  if the mode is "docster", add "Save as PDF..." and "handle save as pdf" to the submenu.
+  if the mode is "docster",
+    get a document relevance (selection);
+    add "Save as PDF..." and "handle save as pdf"
+      to the submenu given the document relevance.
   add "Select All" and "A" and "handle select all" to the submenu.
-  if the mode is "writer", add "Send to Back" and "handle send to back" to the submenu.
-  if the mode is "writer", add "Show Grid" and "handle grid given yes" to the submenu.
-  if the mode is "writer", add "Smooth" and "M" and "handle smooth" to the submenu.
-  if the mode is "editor", add "Sort..." and "sort..." to the submenu.
-  if the mode is "finder", add "Sort..." and "sort..." to the submenu.
-  if the mode is "editor", add "Stop" to the submenu.
-  if the mode is "finder", add "Stop" to the submenu.
+  if the mode is "writer",
+    get a page relevance (selection);
+    add "Send to Back" and "handle send to back"
+      to the submenu given the page relevance.
+  if the mode is "writer",
+    add "Show Grid" and "handle grid given yes" to the submenu.
+  if the mode is "writer",
+    add "Smooth" and "M" and "handle smooth"
+      to the submenu given the page relevance.
+  if the mode is "editor",
+    get a source relevance (existence);
+    add "Sort..." and "sort..."
+      to the submenu given the source relevance.
+  if the mode is "finder",
+    get the node relevance (existence);
+    add "Sort..." and "sort..."
+    to the submenu given the node relevance.
+  if the mode is "editor",
+    get a process relevance (running);
+    add "Stop" to the submenu given the process relevance.
+  if the mode is "finder",
+    get the process relevance (running);
+    add "Stop" to the submenu given the process relevance.
 
 to populate a submenu given a mode (t):
-  if the mode is "editor", add "Test" and "handle test" to the submenu.
+  if the mode is "editor",
+    add "Test" and "handle test" to the submenu.
 
 to populate a submenu given a mode (u):
-  if the mode is "editor", add "Uncomment" and "U" and "handle uncomment" to the submenu.
-  if the mode is "editor", add "Undo" and "Z" and "handle undo" to the submenu.
-  if the mode is "writer", add "Undo" and "Z" and "handle undo" to the submenu.
-  if the mode is "writer", add "Ungrayscale" to the submenu.
-  if the mode is "writer", add "Ungroup" and "U" and "handle ungroup" to the submenu.
-  if the mode is "writer", add "Unlabel" to the submenu.
-  if the mode is "editor", add "Uppercase" to the submenu.
-  if the mode is "writer", add "Uppercase" to the submenu.
+  if the mode is "editor",
+    get a source relevance (selection);
+    add "Uncomment" and "U" and "handle uncomment"
+      to the submenu given the source relevance.
+  if the mode is "editor",
+    get the source relevance (undoable);
+    add "Undo" and "Z" and "handle undo"
+      to the submenu given the source relevance.
+  if the mode is "writer",
+    get a page relevance (undoable);
+    add "Undo" and "Z" and "handle undo"
+      to the submenu given the page relevance.
+  if the mode is "writer",
+    get the page relevance (selection);
+    add "Ungrayscale" to the submenu given the page relevance.
+  if the mode is "writer",
+    add "Ungroup" and "U" and "handle ungroup"
+      to the submenu given the page relevance.
+  if the mode is "writer",
+    add "Unlabel" to the submenu given the page relevance.
+  if the mode is "editor",
+    get the source relevance (selection);
+    add "Uppercase" to the submenu given the source relevance.
+  if the mode is "writer",
+    add "Uppercase" to the submenu given the page relevance.
 
 to populate a submenu given a mode (v):
   add "Version" to the submenu.
@@ -2207,16 +2600,27 @@ to populate a submenu given a mode (x):
 
 to populate a submenu given a mode (y):
   if the mode is not "writer", exit.
-  add "Yank 1/8"  and "handle yank 1/8 inch"  to the submenu.
-  add "Yank 1/9"  and "handle yank 1/9 inch"  to the submenu.
-\  add "Yank 1/12" and "handle yank 1/12 inch" to the submenu.
-  add "Yank 1/16" and "handle yank 1/16 inch" to the submenu.
-  add "Yank 1/24" and "handle yank 1/24 inch" to the submenu.
-  add "Yank 1/32" and "handle yank 1/32 inch" to the submenu.
-  add "Yank 1/48" and "handle yank 1/48 inch" to the submenu.
-  add "Yank None" and "handle yank the tpp" to the submenu.
+  get a document relevance (existence).
+  add "Yank 1/8"  and "handle yank 1/8 inch"
+    to the submenu given the document relevance.
+  add "Yank 1/9"  and "handle yank 1/9 inch"
+    to the submenu given the document relevance.
+\  add "Yank 1/12" and "handle yank 1/12 inch"
+\    to the submenu given the document relevance.
+  add "Yank 1/16" and "handle yank 1/16 inch"
+    to the submenu given the document relevance.
+  add "Yank 1/24" and "handle yank 1/24 inch"
+    to the submenu given the document relevance.
+  add "Yank 1/32" and "handle yank 1/32 inch"
+    to the submenu given the document relevance.
+  add "Yank 1/48" and "handle yank 1/48 inch"
+    to the submenu given the document relevance.
+  add "Yank None" and "handle yank the tpp"
+    to the submenu given the document relevance.
 
 to populate a submenu given a mode (z):
+
+a process relevance is a relevance.
 
 the recent nonstandard font height name is a string.
 
@@ -2227,6 +2631,8 @@ the recent process is a process.
 the recent thread handle is a thread handle.
 
 the recent twin thread handle is a thread handle.
+
+a relevance is a flag.
 
 to remove five bytes from a string:
   remove trailing bytes from the string given 5.
@@ -2278,6 +2684,11 @@ to resize the switch:
   put the screen's bottom into the switch's bottom.
   adjust the tabs.
 
+to restrict a relevance called result given a relevance and another relevance:
+  clear the result.
+  if the relevance is clear, exit.
+  put the other relevance in the result.
+
 to run:
   start up.
   initialize.
@@ -2315,6 +2726,8 @@ to show the desktop with status:
 to show the desktop with a string:
   put the string into the status' string.
   show the desktop.
+
+a source relevance is a relevance.
 
 a submenu is a menu.
 
