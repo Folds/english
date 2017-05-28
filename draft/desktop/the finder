@@ -648,6 +648,7 @@ to handle an event given a node (set cursor):
 
 to handle extract nibble literal given a node:
   if the node is root-level, cluck; exit.
+  if the node's selected nodette count is 0, show error "Select one file item to extract."; exit.
   if the node's selected nodette count is not 1, show error "Select only one file item to extract."; exit.
   show status "Copying...".
   put the node's first selected nodette into a nodette.

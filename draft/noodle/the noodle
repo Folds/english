@@ -8820,6 +8820,7 @@ to split a string into a left substring and a right substring given a separator 
 to split a string into some string things given a separator byte:
   destroy the string things.
   if the string is blank, exit.
+  privatize the string.
   slap a rider on the string.
   loop.
     move the rider given the separator byte.

@@ -249,6 +249,18 @@ but do not have test plans yet.
   Testing difficulty:  Medium.
   Requested by Jasper Paulsen on May 23, 2017.
   
+242.  Gray out irrelevant menu items.
+  If a menu item requires a particular kind of thing
+  to be selected, but no such thing is selected,
+  gray out the menu item.
+  Status:    Demonstrated.
+  Audience:  Users.
+  Benefit:   Medium.
+  Implementation difficulty:  Hard.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Hard.
+  Requested by Jasper Paulsen on May 22, 2017.
+
 143.  A command-line way to call the "list" mode of the compiler.
   Benefit:  Minor.
   Implementation difficulty:  Easy 
