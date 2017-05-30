@@ -5375,8 +5375,9 @@ to initialize the screen:
     in the screen's restored pixel height.
   put 96 into the ppi. \ pixels per inch.
   put the tpi divided by the ppi into the tpp. \ twips per pixel.
+  if full [screen] was requested,
+    maximize the screen; exit.
   restore the screen.
-\  maximize the screen.
 
 to initialize the screen canvas:
    call "user32.dll" "GetWindowDC" with the main window returning the screen canvas.

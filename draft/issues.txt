@@ -56,18 +56,6 @@ The following requests have been partially demonstrated.
   Testing difficulty:  n/a.
   Requested by Jasper Paulsen on April 30, 2017.
 
-237.  Fix intermittent crashing bug(s) in writer.
-  The writer can crash upon clicking outside of a line
-  in order to de-select the line.
-  This bug is very hard to reproduce.
-  Status:    Partially demonstrated.
-  Audience:  Application users.
-  Benefit:   Critical.
-  Implementation difficulty:  Hard.
-  Demoing difficulty:  n/a.
-  Testing difficulty:  n/a.
-  Requested by Jasper Paulsen on May 21, 2017.
-
 209.  In characters, add nicknames for `~<>\[]{}| 
   Status:  Implemented.
   Audience:  Turtle programmers.
@@ -110,6 +98,79 @@ The following requests have been partially demonstrated.
 \ ======================================   
 The following requests are roughly sorted
 from higher priority to lower priority.
+
+237.  Fix intermittent crashing bug(s) in writer.
+  The writer can crash upon clicking outside of a line
+  in order to de-select the line.  It can also crash while
+  changing the size of a selection region.
+  This bug is very hard to reproduce.
+  Status:    Request.
+  Audience:  Application users.
+  Benefit:   Critical.
+  Implementation difficulty:  Hard.
+  Demoing difficulty:  n/a.
+  Testing difficulty:  n/a.
+  Requested by Jasper Paulsen on May 21, 2017.
+
+245.  Remove number field from turtle's context.
+  Status:  Designed.
+  Audience:  All users.
+  Benefit:   Medium.
+  Implementation difficulty:  Medium.  (But much easier
+             than trying to both retain it and make
+             the noodle not depend on the turtle.)
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Not applicable.
+  Requested by Gerry Rzeppa on May 29, 2017.
+
+246.  In the editor, make keypad Ctrl-+ a shortcut for enlarge.
+  Status:    Designed.
+  Audience:  Regular users.
+  Benefit:   Minor.
+  Implementation difficulty:  Easy.
+  Demoing difficulty:  Easy.
+  Testing difficulty:  Medium.
+  Requested by Jasper Paulsen on May 30, 2017.
+
+247.  In the editor, make keypad Ctrl-- a shortcut for reduce.
+  Status:    Designed.
+  Audience:  Regular users.
+  Benefit:   Minor.
+  Implementation difficulty:  Easy.
+  Demoing difficulty:  Easy.
+  Testing difficulty:  Medium.
+  Requested by Jasper Paulsen on May 30, 2017.
+
+248.  In the editor, make keyboard Ctrl-+ a shortcut for enlarge.
+  Note that + is usually Shift-=.
+  Status:    Designed.
+  Audience:  Regular users.
+  Benefit:   Minor.
+  Implementation difficulty:  Easy.
+  Demoing difficulty:  Easy.
+  Testing difficulty:  Medium.
+  Requested by Jasper Paulsen on May 30, 2017.
+
+249.  In the editor, make keyboard Ctrl-- a shortcut for reduce.
+  Status:    Designed.
+  Audience:  Regular users.
+  Benefit:   Minor.
+  Implementation difficulty:  Easy.
+  Demoing difficulty:  Easy.
+  Testing difficulty:  Medium.
+  Requested by Jasper Paulsen on May 30, 2017.
+
+250.  Replace long list of colors with color's <adverbs> shade.
+  Per the designer of the colors, do not worry about backward
+  compatibility -- existing programs have copies of
+  noodle or color source files with the old definitions.
+  Status:    Designed.
+  Audience:  Programmers.
+  Benefit:   Minor.
+  Implementation difficulty:  Easy.
+  Demoing difficulty:  Not applicable.
+  Testing difficulty:  Medium.
+  Requested by Gerry Rzeppa on May 29, 2017.
 
 238.  Add scrollbar to the finder.
   Status:   Request.
@@ -809,6 +870,6 @@ with an adjustable slider between them.
 Unsorted requests:
 
 
-Next item number:  245.
+Next item number:  251.
 
 

@@ -2,11 +2,9 @@
 \ are copyright 2017 by the Osmosian Order.
 \ The remainder is copyright 2017 by Jasper Paulsen.
 
-\ The "keeper" file has routines that use the context,
-\ but leave the context in the same state they found it,
-\ and do not refresh the screen.
-
-\ The "modder" file has routines that change the context.
+to add some horizontal twips and some vertical twips to the current spot:
+  add the horizontal twips to the context's spot's x.
+  add the vertical twips to the context's spot's y.
 
 to add a line to a figure:
   if the figure is nil,
@@ -23,12 +21,23 @@ to add a name to some choices:
 to add a spot to a figure:
   append the spot to the figure.
 
+to center a dot on the current spot:
+  center the dot on the context's spot.
+
+to change the current hue by some points:
+  change the context's hue by the points.
+
 to change a hue by some points:
   add the points to the hue.
 
 a choice is a thing with a name and a box.
 
 the choices are some choices.
+
+to clear the screen without refreshing it:
+  unmask everything.
+  draw the screen's box with the black color and the black color.
+  put the screen's box into the context's box.
 
 the context is a context.
 
@@ -65,9 +74,28 @@ to convert a heading to a trig angle:
   scale the hundredths given the other ratio.
   make the trig angle given the degrees and the minutes and the seconds and the hundredths.
 
+to darken the current color about some percent:
+  darken the context's color by the percent.
+
 to decide if a choice is a string:
   if the choice is nil, say no.
   if the choice's name is the string, say yes.
+  say no.
+
+to decide if the current spot is above or below a box:
+  if the context's spot is above or below the box, say yes.
+  say no.
+
+to decide if the current spot is left or right of a box:
+  if the context's spot is left or right of the box, say yes.
+  say no.
+
+to decide if the current spot is to the right of a box:
+  if the context's spot's x is greater than the box's right, say yes.
+  say no.
+
+to decide if the current spot is within some twips of a box:
+  if the context's spot is within the twips of the box, say yes.
   say no.
 
 to decide if the user is clicking in some choices;
@@ -83,15 +111,344 @@ to decide if the user clicks on some choices:
   if the choice can't be found, say no.
   say yes.
 
+to decide if we're above a box:
+  if the context's y is less than the box's top, say yes.
+  say no.
+
+to decide if we're above a coord:
+  if the context's y is less than the coord, say yes.
+  say no.
+
+to decide if we're above or below a box:
+  if the context's y is less than the box's top, say yes.
+  if the context's y is greater than the box's bottom, say yes.
+  say no.
+
+to decide if we're above a spot:
+  if the context's y is less than the spot's y, say yes.
+  say no.
+
+to decide if we're below a box:
+  if the context's y is greater than the box's bottom, say yes.
+  say no.
+
+to decide if we're below a coord:
+  if the context's y is greater than the coord, say yes.
+  say no.
+
+to decide if we're below a spot:
+  if the context's y is greater than the spot's y, say yes.
+  say no.
+
+to decide if we're facing north: \ *** need east, south, west
+  normalize the context's heading.
+  if the context's heading is 0, say yes.
+  say no.
+
+to decide if we're left of a box:
+  if the context's x is less than the box's left, say yes.
+  say no.
+
+to decide if we're left or right of a box:
+  if the context's x is less than the box's left, say yes.
+  if the context's x is greater than the box's right, say yes.
+  say no.
+
+to decide if we're outside a box:
+  if the context's spot is outside the box, say yes.
+  say no.
+
+to decide if we're right of a box:
+  if the context's x is greater than the box's right, say yes.
+  say no.
+
+to decide if we're still in a box;
+to decide if we're in a box:
+  if the context's spot is in the box, say yes.
+  say no.
+
+to decide if we're within some twips of a box:
+  if the context's spot is within the twips of the box, say yes.
+  say no.
+
 to decide if you feel like it:
   pick a number between 1 and 100.
   if the number is less than 51, say yes.
   say no.
 
+to draw a circle about some twips wide;
+to draw a circle given a width;
+to draw a circle some twips in width;
+to draw a circle some twips wide:
+  save the context.
+  put the twips times the pizza pie divided by 48 into a segment length.
+  add 1 to the segment length.
+  loop.
+    stroke the segment length.
+    turn right 1/48 of the way.
+    add 1 to a count. if the count is 48, break.
+  repeat.
+  restore the context.
+
+to draw a circle some twips wide (backwards);
+to draw a circle some twips wide (counterclockwise):
+  put the twips times the pizza pie divided by 48 into a segment length.
+  add 1 to the segment length.
+  loop.
+    stroke the segment length.
+    turn left 1/48 of the way.
+    add 1 to a count. if the count is 48, break.
+  repeat.
+
+to draw a fancy arrow some twips long with a color;
+to stroke a fancy arrow some twips long with a color:
+  put the color into the context's color.
+  save the context.
+  stroke the twips.
+  turn around.
+  move the twips divided by 8.
+  save the context.
+  turn left 1/8 of the way.
+  draw a spiral starting with the twips divided by 4.
+  restore the context.
+  turn right 1/8 of the way.
+  draw another spiral backwards starting with the twips divided by 4.
+  restore the context.
+
 to draw a figure with a color:
   draw the figure with the color and the clear color.
 
+to draw a figure with some sides about some twips wide:
+  save the context.
+  put 1 and the side count into a fraction.
+  put the twips times the pizza pie divided by the sides into a segment length.
+  if the sides are 4, put the twips times 7/8 into the segment length. \ what is this? ***
+  loop.
+    stroke the segment length.
+    turn the fraction.
+    add 1 to a count. if the count is the sides, break.
+  repeat.
+  restore the context.
+
+to draw a figure with some sides some twips long;
+to draw a figure with some sides and some twips:
+  save the context.
+  put 1 and the sides into a fraction.
+  loop.
+    stroke the twips.
+    turn the fraction.
+    add 1 to a count. if the count is the sides, break.
+  repeat.
+  restore the context.
+
+to draw a figure with some sides some twips long using a color;
+to draw a figure with some sides and some twips using a color:
+  put the color into the context's color.
+  draw the figure with the sides and the twips.
+
+to draw a half circle about some twips wide;
+to draw a half circle given a size:
+  put the size times the pizza pie divided by 48 into a segment length.
+  add 1 to the segment length.
+  put the segment length in some other twips.
+  loop.
+    stroke the other twips.
+    turn right 1/48 of the way.
+    add 1 to a count.
+    if the count is 24, exit.
+  repeat.
+
+to draw a half circle given a size (backwards);
+to draw a half circle given a size (counterclockwise):
+  put the size times the pizza pie divided by 48 into a segment length.
+  add 1 to the segment length.
+  put the segment length in some twips.
+  loop.
+    stroke the twips.
+    turn left 1/48 of the way.
+    add 1 to a count.
+    if the count is 24, exit.
+  repeat.
+
+to draw a hexagon given a side length:
+  save the context.
+  loop.
+    stroke the side length.
+    turn right 1/6 of the way.
+    add 1 to a count. if the count is 6, break.
+  repeat.
+  restore the context.
+
+to draw a line:
+  draw the line with the context's color.
+
+to draw a line around some twips long;   \ "around" is significant here
+to draw a line about some twips long;    \ "about"  is significant here
+to stroke a line around some twips long; \ "around" is significant here
+to stroke a line about some twips long:  \ "about"  is significant here
+  put the twips divided by 2 into some other twips.
+  pick some third twips between the twips minus the other twips and the twips plus the other twips.
+  stroke the line the third twips long.
+
+to draw a line as high as a box with a color;
+to draw a line as tall as a box with a color:
+  put the color into the context's color.
+  stroke the box's height.
+
+to draw a line as wide as a box with a color:
+  put the color into the context's color.
+  stroke the box's width.
+
+to draw a line between some twips and some other twips long;
+to draw a line between some twips to some other twips long;
+to draw a line some twips to some other twips long;
+to stroke a line some twips to some other twips long:
+  pick some third twips between the twips and the other twips.
+  stroke the line the third twips long.
+
+to draw a line some twips long;
+to stroke a line some twips long:
+  \wait for the delay. ***
+  put the context's spot into the line's start.
+  put the context's spot into the line's end.
+  get a rise and a run given the context's heading.
+  add the run times the twips divided by the rise denominator to the line's end's x.
+  add the rise times the twips divided by the rise denominator to the line's end's y.
+  put the line's end into the context's spot.
+  draw the line with the context's color.
+  \if the delay is positive, refresh the screen.
+
+to draw a line using some twips as the length;
+to draw a line using some twips for the length:
+  stroke the twips.
+
+to draw a line with a color around some twips long;   \ "around" is significant here
+to draw a line with a color about some twips long;    \ "about"  is significant here
+to stroke a line with a color around some twips long; \ "around" is significant here
+to stroke a line with a color about some twips long:  \ "about"  is significant here
+  put the twips divided by 2 into some other twips.
+  pick some third twips between the twips minus the other twips and the twips plus the other twips.
+  stroke the line with the color the third twips long.
+
+to draw a line with a color some twips long;
+to stroke a line with a color some twips long:
+  put the color into the context's color.
+  put the context's spot into the line's start.
+  stroke the twips.
+  put the context's spot into the line's end.
+
+to draw a line with a color some twips to some other twips long;
+to stroke a line with a color some twips to some other twips long:
+  pick some third twips between the twips and the other twips.
+  stroke the line with the color the third twips long.
+
+to draw only within a box;
+to draw only inside a box;
+to draw only in a box;
+to draw only within a box from now on;
+to draw only inside a box from now on;
+to draw only in a box from now on;
+to only draw within a box from now on;
+to only draw inside a box from now on;
+to only draw in a box from now on;
+to only draw within a box;
+to only draw inside a box;
+to only draw in a box;
+to draw within a box only;
+to draw inside a box only;
+to draw in a box only;
+to put masking tape all around a box;
+to put masking tape around a box: \ note that this masks the box's border as well
+  privatize the box.
+  indent the box 1 pixel.
+  mask outside the box.
+  put the original box into the context's box. \ *** original box? or indented one?
+
+to draw a quarter circle about some twips wide;
+to draw a quarter circle given a size:
+  put the size times the pizza pie divided by 48 into a segment length.
+  add 1 to the segment length.
+  put the segment length in some twips.
+  loop.
+    stroke the twips.
+    turn right 1/48 of the way.
+    add 1 to a count.
+    if the count is 12, exit.
+  repeat.
+
+to draw a quarter circle between some twips and some other twips wide:
+  pick some third twips between the twips and the other twips.
+  draw a quarter circle given the third twips.
+
+to draw a quarter circle given a size (counterclockwise):
+  put the size times the pizza pie divided by 48 into a segment length.
+  add 1 to the segment length.
+  loop.
+  stroke the segment length.
+  turn left 1/48 of the way.
+  add 1 to a count.
+  if the count is 12, exit.
+  repeat.
+
+to draw a rectangle some twips by some other twips;
+to draw a rectangle some twips wide by some other twips high:
+  save the context.
+  stroke the other twips.
+  turn right.
+  stroke the twips.
+  turn right.
+  stroke the other twips.
+  turn right.
+  stroke the twips.
+  turn right.
+  restore the context.
+
+to draw a spiral backward given some twips;
+to draw a spiral backward starting with some twips;
+to draw a spiral given a size (backwards):
+  privatize the size.
+  loop.
+    draw a half circle given the size (backwards).
+    divide the size by 2.
+    add 1 to a count.
+    if the count is 5, break.
+  repeat.
+
+to draw a spiral starting with some twips;
+to draw a spiral given a size:
+  privatize the size.
+  loop.
+    draw a half circle given the size.
+    divide the size by 2.
+    add 1 to a count. if the count is 5, break.
+  repeat.
+
+to erase the screen;
+to blank out the screen;
+to wipe off the screen;
+to clear the screen:
+  unmask everything.
+  draw the screen's box with the black color and the black color.
+  refresh the screen.
+  put the screen's box into the context's box.
+
 some extra points are some points.
+
+to face any way you want;
+to face any which way:
+  pick a heading.
+
+to face east:
+  put 960 into the context's heading.
+
+to face north:
+  put 0 into the context's heading.
+
+to face south:
+  put 1920 into the context's heading.
+
+to face west:
+  put 2880 into the context's heading.
 
 a figure is a polygon.
 a circle is a  figure.
@@ -130,6 +487,12 @@ an octagon is a figure.
 
 the figures are some polygons.
 
+to finalize a context:
+  destroy the choices.
+  destroy the figures.
+  destroy the context stack.
+  destroy the context.
+
 to find a choice given a spot:
   start with nothing in the choice.
   loop.
@@ -147,6 +510,9 @@ to get a rise and a run given a heading: \ see Madhava's Numbers
   negate the rise. \ screen coordinates increase going down, not up.
   put the rise denominator in the run.
   scale the run given the trig angle's cosine.
+
+to go back to where we were:
+  restore the context.
 
 a heading is some points.  \ [0-3839, clockwise from up or north]
 
@@ -173,6 +539,18 @@ to create a figure using a string and a center spot:
   add 1 to the substring's first.
   repeat.
 
+to initialize a context:
+  allocate memory for the context.
+  put the screen's center into the context's spot.
+  put 0 into the context's heading.
+  put the green color into the context's color.
+  put the small letter height into the context's letter height.
+  \put 1/60 second into the delay. ***
+  seed the random number generator.
+
+to lighten the current color about some percent:
+  lighten the context's color by the percent.
+
 to lighten a hue by some points:
   convert the hue to some other points.
   add the points to the other points.
@@ -181,10 +559,29 @@ to lighten a hue by some points:
 \to lighten a hue by some degrees:
 \  add the degrees to the hue.
 
+to list some choices in a box;
+to draw some choices in a box:
+  \draw really fast. ***
+  get a [first/next] choice from the choices.
+  if the choice is missing [because we've drawn them all], exit.
+  put the box's left plus 1/4 inch into the choice's left.
+  put the box's right minus 1/4 inch into the choice's right.
+  if the choice is the choices' first, put the box's top plus 1/4 inch into the choice's top.
+  if the choice is not the choices' first, put the choice's previous' bottom into the choice's top.
+  put the choice's top plus 1/4 inch into the choice's bottom.
+  \draw the choice's box with the purple color. \ temp ***
+  stroke the choice's name in the choice's box with the context's color.
+  repeat.
+
 to list some choices in a box with a color;
 to draw some choices in a box with a color:
   put the color into the context's color.
   draw the choices in the box.
+
+to move back some twips:
+  turn around.
+  move the twips.
+  turn around.
 
 to move a box close to the left side of another box;
 to move a box close to the left of another box:
@@ -192,13 +589,191 @@ to move a box close to the left of another box:
   pick a length between 0 and the box's width times 3/4.
   move the box right the length.
 
+to move to the left some twips and down some other twips;
+to move left some twips and down some other twips:
+to move some twips to the left and some other twips down;
+to move some twips left and some other twips down:
+  move the context's spot left the twips.
+  move the context's spot down the other twips.
+
+to move to the left some twips and up some other twips;
+to move left some twips and up some other twips;
+to move some twips to the left and some other twips up;
+to move some twips left and some other twips up:
+  move the context's spot left the twips.
+  move the context's spot up the other twips.
+
+to move to the middle;
+to start in the middle;
+to move to the center;
+to start in the center:
+  put the context's box's center into the context's spot.
+
+to move to the middle of a box;
+to start in the middle of a box;
+to move to the center of a box;
+to start in the center of a box:
+  put the box's center into the context's spot.
+
+to move one pixel:
+  move the tpp.
+
+to move to the right some twips and down some other twips;
+to move right some twips and down some other twips;
+to move some twips to the right and some other twips down;
+to move some twips right and some other twips down:
+  move the context's spot right the twips.
+  move the context's spot down the other twips.
+
+to move to the right some twips and up some other twips;
+to move right some twips and up some other twips;
+to move some twips to the right and some other twips up;
+to move some twips right and some other twips up:
+  move the context's spot right the twips.
+  move the context's spot up the other twips.
+
+to move to a spot:
+  put the spot into the context's spot.
+
+to move a spot about some twips in any direction:
+  pick another spot within the twips of the spot.
+  put the other spot into the spot.
+
+to move some squares:
+  move the square size times the squares divided by 1 square. \ squares are scaled up for precision hence the division at the end
+
+to move some squares diagonally;
+to move some squares slantways:
+  move the square size times the squares
+    times the squirt o' two divided by 1 square.
+  \ squares are scaled up for precision
+  \ hence the division at the end
+
+to move some twips:
+  \wait for the delay. ***
+  put the context's spot into a line's start.
+  put the context's spot into the line's end.
+  get a rise and a run given the context's heading.
+  add the run times the twips divided by the rise denominator to the line's end's x.
+  add the rise times the twips divided by the rise denominator to the line's end's y.
+  put the line's end into the context's spot.
+
+to move some twips down;
+to move down some twips:
+  add the twips to the context's y.
+
+to move some twips to the left;
+to move some twips left;
+to move left some twips:
+  subtract the twips from the context's x.
+
+to move some twips to the right;
+to move some twips right;
+to move right some twips: 
+  add the twips to the context's x.
+
+to move some twips up;
+to move up some twips: 
+  subtract the twips from the context's y.
+
+to normalize a heading:
+  divide the heading by 3840 giving a quotient and a remainder.
+  put the remainder into the heading.
+  if the heading is less than 0, add 3840 to the heading.
+
+to pick a brightness between a percent and another percent;
+to vary a lightness between a percent and another percent;
+to pick a lightness between a percent and another percent:
+  pick a number between the percent and the other percent.
+  put the number times 10 into the lightness.
+  put the lightness into the context's lightness.
+
+to pick a brownish color:
+  make the brownish color.
+  put the brownish color into the context's color.
+
+to pick a brownish color about some percent of the time:
+  pick a number between 1 and 100.
+  if the number is greater than the percent, exit.
+  pick the brownish color.
+  put the brownish color into the context's color.
+
+to pick a color:
+  make the color.
+  put the color into the context's color.
+
+to pick a color between another color and a third color (turtle):
+  pick the color between the other color and the third color (guts).
+  put the color into the context's color.
+
+to pick a color like another color:
+  make the color like the other color.
+  put the color into the context's color.
+
+to pick a dark color:
+  pick the dark color's hue.
+  make the dark color be dark.
+  put the dark color into the context's color.
+
+to pick a greenish color:
+  make the greenish color.
+  put the greenish color into the context's color.
+
+to pick a greenish color about some percent of the time:
+  pick a number between 1 and 100.
+  if the number is greater than the percent, exit.
+  pick the greenish color.
+  put the greenish color into the context's color.
+
+to pick a heading:
+  pick the heading between 0 and 3839.
+  put the heading into the context's heading.
+
 to pick a hue between a number and another number:
   pick a number called result between the number and the other number.
   put the result in the hue.
 
+to pick a letter height between some twips and some other twips:
+  pick a random number between the twips and the other twips.
+  put the random number into the letter height.
+  put the random number into the context's letter height.
+
 to pick a letter of the alphabet:  \ put letter into context? ***
   pick a number between 65 and 90.
   put the number into the letter.
+
+to pick a light color:
+  pick the light color's hue.
+  make the light color be light.
+  put the light color into the context's color.
+
+to pick a number (turtle):
+  pick the number (guts). 
+  put the number into the context's number.
+
+to pick a number within an amount of another number (turtle):
+  pick the number within the amount of the other number (guts).
+  put the number into the context's number.
+
+to pick a pastel color:
+  pick the pastel color's hue.
+  make the pastel color be pastel.
+  put the pastel color into the context's color.
+
+to pick a rainbow color:
+  add 1 to the current rainbow color number.
+  if the current rainbow color number is greater than 6,
+    put 1 into the current rainbow color number.
+  interpret the rainbow color. [using the rainbow color number]
+  put the rainbow color into the context's color.
+
+to pick a solid color (turtle):
+  pick the solid color (guts).
+  put the solid color into the context's color.
+
+to pick a spot anywhere in a box (turtle):
+  pick the spot anywhere in the box (guts).
+  put the spot into the context's spot.
 
 to pick a spot anywhere in the top half of a box;
 to pick a spot in the top half of a box:
@@ -206,10 +781,24 @@ to pick a spot in the top half of a box:
   put the box's center's y into the box's bottom.
   pick the spot in the box.
 
+to pick a spot anywhere in the top middle a ratio of a box;
+to pick a spot in the top middle a ratio of a box:
+  privatize the box.
+  put the box's center's y into a coord.
+  put the box's height times the ratio into a number.
+  put the coord minus the number into the box's top.
+  put the coord into the box's bottom.
+  pick the spot in the box.
+
 to pick a spot anywhere on a horizontal line;
 to pick a spot on a horizontal line:
   pick the spot's x between the horizontal line's start's x and the horizontal line's end's x.
   put the horizontal line's y into the spot's y.
+
+to pick a spot in a box:
+  pick the spot's x between the box's left and the box's right.
+  pick the spot's y between the box's top and the box's bottom.
+  put the spot into the context's spot.
 
 to pick a spot in a box about some twips above the middle;
 to pick a spot in a box about some twips above the center:
@@ -226,6 +815,57 @@ to pick a spot in a box about some twips below the center:
   put the box's center's y plus the other twips into the bounding box's top.
   put the bounding box's top plus the twips into the bounding box's bottom.
   pick the spot anywhere in the bounding box.
+
+to pick a spot in a box some twips to some other twips above the middle;
+to pick a spot in a box some twips to some other twips above the center:
+  put the box into a bounding box.
+  put the box's center's y minus the twips into the bounding box's bottom.
+  put the bounding box's bottom minus the other twips into the bounding box's top.
+  pick the spot anywhere in the bounding box.
+
+to pick a spot in a box some twips to some other twips below the middle;
+to pick a spot in a box some twips to some other twips below the center:
+  put the box into a bounding box.
+  put the box's center's y plus the twips into the bounding box's top.
+  put the bounding box's top plus the other twips into the bounding box's bottom.
+  pick the spot anywhere in the bounding box.
+
+to pick a spot within a distance of another spot (turtle):
+  pick the spot within the distance of the other spot (guts).
+  put the spot into the context's spot.
+
+to pick some twips between some min twips and some other twips (turtle); \ are all these necessary? ***
+to pick a number between some min twips and some other twips (turtle);
+to pick a number between a min number and a max number (turtle);
+to pick a number from a min number to a max number (turtle);
+to set a number to something between another number and a third number (turtle);
+to pick a random number between a min number and a max number (turtle):
+  pick the random number between the min number and the max number (guts).
+  put the random number into the context's number.
+
+to pick a very dark color;
+to pick a really dark color:
+  pick the really dark color's hue.
+  make the really dark color be very dark.
+  put the really dark color into the context's color.
+
+to pick a very light color;
+to pick a really light color:
+  pick the really light color's hue.
+  make the really light color be very light.
+  put the really light color into the context's color.
+
+to pick a very very dark color;
+to pick a really really dark color:
+  pick the really really dark color's hue.
+  make the really really dark color be very very dark.
+  put the really really dark color into the context's color.
+
+to pick a very very light color;
+to pick a really really light color:
+  pick the really really light color's hue.
+  make the really really light color be very very light.
+  put the really really light color into the context's color.
 
 the pizza pie is a ratio equal to 45239/14400.
 \ error is 8,526 trifles = 8,526 / (43,200 * 43,200)
@@ -257,9 +897,40 @@ to put masking tape below a figure:
   mask inside the other figure.
   destroy the other figure.
 
+to remember where we are:
+  save the context.
+
+to reset the context:
+  restore the context.
+  save the context.
+
+to restore a context:
+  get a saved context from the context stack.
+  if the saved context is nil, exit.
+  put the saved context's spot into the context's spot.
+  put the saved context's heading into the context's heading.
+  put the saved context's letter height into the context's letter height.
+  put the saved context's color into the context's color.
+  put the saved context's number into the context's number.
+  put the saved context's pen width into the context's pen width.
+  remove the saved context from the context stack.
+  destroy the saved context.
+  put the context's pen width into the pen size.
+
 a rise is a number.
 a run is a number.
 the rise denominator is a number equal to 10000.
+
+to save a context:
+  allocate memory for a saved context.
+  put the context's spot into the saved context's spot.
+  put the context's heading into the saved context's heading.
+  put the context's letter height into the saved context's letter height.
+  put the context's color into the saved context's color.
+  put the context's number into the saved context's number.
+  put the pen size into the context's pen width.
+  put the context's pen width into the saved context's pen width.
+  prepend the saved context to the context stack.
 
 to shrink a box by some twips;
 to indent a box some twips;
@@ -273,6 +944,9 @@ to indent a box given some twips:
 
 a side is 1 unit.
 
+to space between glyphs:
+  turn right. move 3 squares. turn left.
+
 a square is 1440 units.
 \ arbitrary number high enough for precision divides
 
@@ -281,9 +955,1925 @@ the square size is some twips.
 the squirt o' two is a ratio equal to 61094/43200.
 \ error is about 1,119 trifles = 1,119 / (43,200 * 43,200)
 
+to start anywhere in a box:
+  pick the context's spot in the box.
+
+to start anywhere on a horizontal line:
+  pick a spot on the horizontal line.
+  put the spot into the context's spot.
+
+to start at the bottom left corner of a box facing east:
+  put the box's left-bottom into the context's spot.
+  face east.
+
+to start at the bottom left corner of a box facing north:
+  put the box's left-bottom into the context's spot.
+  face north.
+
+to start at the bottom left corner of a box facing south:
+  put the box's left-bottom into the context's spot.
+  face south.
+
+to start at the bottom left corner of a box facing west:
+  put the box's left-bottom into the context's spot.
+  face west.
+
+to start at the bottom of a horizontal line:
+  put the vertical line's end into the context's spot.
+
+to start at the bottom right corner of a box facing east:
+  put the box's right-bottom into the context's spot.
+  face east.
+
+to start at the bottom right corner of a box facing north:
+  put the box's right-bottom into the context's spot.
+  face north.
+
+to start at the bottom right corner of a box facing south:
+  put the box's right-bottom into the context's spot.
+  face south.
+
+to start at the bottom right corner of a box facing west:
+  put the box's right-bottom into the context's spot.
+  face west.
+
+to start at the left of a horizontal line:
+  put the horizontal line's start into the context's spot.
+
+to start at the middle of the bottom of a box;
+to start in the middle of the bottom of a box;
+to start at the center of the bottom of a box;
+to start in the center of the bottom of a box:
+  put the box's center's x into the context's spot's x.
+  put the box's bottom into the context's spot's y.
+
+to start at the middle of the bottom of a box facing east;
+to start in the middle of the bottom of a box facing east;
+to start at the center of the bottom of a box facing east;
+to start in the center of the bottom of a box facing east:
+  put the box's center's x into the context's spot's x.
+  put the box's bottom into the context's spot's y.
+  face east.
+
+to start at the middle of the bottom of a box facing north;
+to start in the middle of the bottom of a box facing north;
+to start at the center of the bottom of a box facing north;
+to start in the center of the bottom of a box facing north:
+  put the box's center's x into the context's spot's x.
+  put the box's bottom into the context's spot's y.
+  face north.
+
+to start at the middle of the bottom of a box facing south;
+to start in the middle of the bottom of a box facing south;
+to start at the center of the bottom of a box facing south;
+to start in the center of the bottom of a box facing south:
+  put the box's center's x into the context's spot's x.
+  put the box's bottom into the context's spot's y.
+  face south.
+
+to start at the middle of the bottom of a box facing west;
+to start in the middle of the bottom of a box facing west;
+to start at the center of the bottom of a box facing west;
+to start in the center of the bottom of a box facing west:
+  put the box's center's x into the context's spot's x.
+  put the box's bottom into the context's spot's y.
+  face west.
+
+to start at the middle of the left of a box facing east;
+to start in the middle of the left of a box facing east;
+to start at the center of the left of a box facing east;
+to start in the center of the left of a box facing east:
+  put the box's left into the context's spot's x.
+  put the box's center's y into the context's spot's y.
+  face east.
+
+to start at the middle of the left of a box facing north;
+to start in the middle of the left of a box facing north;
+to start at the center of the left of a box facing north;
+to start in the center of the left of a box facing north:
+  put the box's left into the context's spot's x.
+  put the box's center's y into the context's spot's y.
+  face north.
+
+to start at the middle of the left of a box facing south;
+to start in the middle of the left of a box facing south;
+to start at the center of the left of a box facing south;
+to start in the center of the left of a box facing south:
+  put the box's left into the context's spot's x.
+  put the box's center's y into the context's spot's y.
+  face south.
+
+to start at the middle of the left of a box facing west;
+to start in the middle of the left of a box facing west;
+to start at the center of the left of a box facing west;
+to start in the center of the left of a box facing west:
+  put the box's left into the context's spot's x.
+  put the box's center's y into the context's spot's y.
+  face west.
+
+to start at the middle of the right of a box facing east;
+to start in the middle of the right of a box facing east;
+to start at the center of the right of a box facing east;
+to start in the center of the right of a box facing east:
+  put the box's right into the context's spot's x.
+  put the box's center's y into the context's spot's y.
+  face east.
+
+to start at the middle of the right of a box facing north;
+to start in the middle of the right of a box facing north;
+to start at the center of the right of a box facing north;
+to start in the center of the right of a box facing north:
+  put the box's right into the context's spot's x.
+  put the box's center's y into the context's spot's y.
+  face north.
+
+to start at the middle of the right of a box facing south;
+to start in the middle of the right of a box facing south;
+to start at the center of the right of a box facing south;
+to start in the center of the right of a box facing south:
+  put the box's right into the context's spot's x.
+  put the box's center's y into the context's spot's y.
+  face south.
+
+to start at the middle of the right of a box facing west;
+to start in the middle of the right of a box facing west;
+to start at the center of the right of a box facing west;
+to start in the center of the right of a box facing west:
+  put the box's right into the context's spot's x.
+  put the box's center's y into the context's spot's y.
+  face west.
+
+to start at the middle of the top of a box;
+to start in the middle of the top of a box;
+to start at the center of the top of a box;
+to start in the center of the top of a box:
+  put the box's center's x into the context's spot's x.
+  put the box's top into the context's spot's y.
+
+to start at the middle of the top of a box facing east;
+to start in the middle of the top of a box facing east;
+to start at the center of the top of a box facing east;
+to start in the center of the top of a box facing east:
+  put the box's center's x into the context's spot's x.
+  put the box's top into the context's spot's y.
+  face east.
+
+to start at the middle of the top of a box facing north;
+to start in the middle of the top of a box facing north;
+to start at the center of the top of a box facing north;
+to start in the center of the top of a box facing north:
+  put the box's center's x into the context's spot's x.
+  put the box's top into the context's spot's y.
+  face north.
+
+to start at the middle of the top of a box facing south;
+to start in the middle of the top of a box facing south;
+to start at the center of the top of a box facing south;
+to start in the center of the top of a box facing south:
+  put the box's center's x into the context's spot's x.
+  put the box's top into the context's spot's y.
+  face south.
+
+to start at the middle of the top of a box facing west;
+to start in the middle of the top of a box facing west;
+to start at the center of the top of a box facing west;
+to start in the center of the top of a box facing west:
+  put the box's center's x into the context's spot's x.
+  put the box's top into the context's spot's y.
+  face west.
+
+to start at the right of a horizontal line:
+  put the horizontal line's end into the context's spot.
+
+to start at a spot:
+  put the spot into the context's spot.
+
+to start at a spot facing east:
+  put the spot into the context's spot.
+  face east.
+
+to start at a spot facing north:
+  put the spot into the context's spot.
+  face north.
+
+to start at a spot facing south:
+  put the spot into the context's spot.
+  face south.
+
+to start at a spot facing west:
+  put the spot into the context's spot.
+  face west.
+
+to start at the top left corner of a box facing east:
+  put the box's left-top into the context's spot.
+  face east.
+
+to start at the top left corner of a box facing north:
+  put the box's left-top into the context's spot.
+  face north.
+
+to start at the top left corner of a box facing south:
+  put the box's left-top into the context's spot.
+  face south.
+
+to start at the top left corner of a box facing west:
+  put the box's left-top into the context's spot.
+  face west.
+
+to start at the top of a vertical line:
+  put the vertical line's start into the context's spot.
+
+to start at the top right corner of a box facing east:
+  put the box's right-top into the context's spot.
+  face east.
+
+to start at the top right corner of a box facing north:
+  put the box's right-top into the context's spot.
+  face north.
+
+to start at the top right corner of a box facing south:
+  put the box's right-top into the context's spot.
+  face south.
+
+to start at the top right corner of a box facing west:
+  put the box's right-top into the context's spot.
+  face west.
+
+to start in the middle of a box facing east;
+to start at the middle of a box facing east;
+to move to the middle of a box facing east;
+to move to the middle of a box and face east;
+to start in the center of a box facing east;
+to start at the center of a box facing east;
+to move to the center of a box facing east;
+to move to the center of a box and face east:
+  put the box's center into the context's spot.
+  face east.
+
+to start in the middle of a box facing north;
+to start at the middle of a box facing north;
+to move to the middle of a box facing north;
+to move to the middle of a box and face north;
+to start in the center of a box facing north;
+to start at the center of a box facing north;
+to move to the center of a box facing north;
+to move to the center of a box and face north:
+  put the box's center into the context's spot.
+  face north.
+
+to start in the middle of a box facing north minus some points;
+to start in the center of a box facing north minus some points:
+  put the box's center into the context's spot.
+  face north.
+  turn left the points.
+
+to start in the middle of a box facing south;
+to start at the middle of a box facing south;
+to move to the middle of a box facing south:
+to move to the middle of a box and face south;
+to start in the center of a box facing south;
+to start at the center of a box facing south;
+to move to the center of a box facing south:
+to move to the center of a box and face south:
+  put the box's center into the context's spot.
+  face south.
+
+to start in the middle of a box facing west;
+to start at the middle of a box facing west;
+to move to the middle of a box facing west;
+to move to the middle of a box and face west;
+to start in the center of a box facing west;
+to start at the center of a box facing west;
+to move to the center of a box facing west;
+to move to the center of a box and face west:
+  put the box's center into the context's spot.
+  face west.
+
+to start some twips above the middle of the bottom of a box: \ incomplete set of these
+  put the box's center's x into the context's spot's x.
+  put the box's bottom minus the twips into the context's spot's y.
+
+to start some twips down from a spot;
+to start some twips below a spot:
+  put the spot's x into the context's x.
+  put the spot's y plus the twips into the context's y.
+
+to start some twips from the center of a box:
+  put the box's center into the context's spot.
+  move the twips.
+
+to start some twips to the left and some other twips down from a spot;
+to start some twips left and some other twips down from a spot:
+  put the spot's x minus the twips into the context's x.
+  put the spot's y plus the other twips into the context's y.
+
+to start some twips left and some other twips up from a spot:
+  put the spot's x minus the twips into the context's x.
+  put the spot's y minus the other twips into the context's y.
+
+to start some twips to the left and some other twips up from a spot;
+to start some twips to the left of a spot;
+to start some twips left of a spot:
+  put the spot's x minus the twips into the context's x.
+
+to start some twips to the right and some other twips down from a spot;
+to start some twips right and some other twips down from a spot:
+  put the spot's x plus the twips into the context's x.
+  put the spot's y plus the other twips into the context's y.
+
+to start some twips to the right and some other twips up from a spot;
+to start some twips right and some other twips up from a spot:
+  put the spot's x plus the twips into the context's x.
+  put the spot's y minus the other twips into the context's y.
+
+to start some twips up from a coord:
+  put the coord minus the twips into the context's y.
+
+to start some twips up from a spot;
+to start some twips above a spot:
+  put the spot's y into the context's y.
+  subtract the twips from the context's y.
+
+to start with a color:
+  put the color into the context's color.
+
+to stroke the accent glyph:
+  save the context.
+  move 4 squares.
+  turn right.
+  turn right 7/96 of the way.
+  stroke 9/4 square.
+  restore the context.
+
+to stroke the asterisk glyph:
+  save the context.
+  move 2 squares.
+  turn right.
+  stroke 2 squares.
+  turn left.
+  move 1 square.
+  turn left.
+  move 1 square.
+  turn left.
+  stroke 2 squares.
+  reset the context.
+  move 1 square.
+  turn right 1/8.
+  stroke 2 squares slantways.
+  reset the context.
+  move 3 squares.
+  turn right 3/8.
+  stroke 2 squares slantways.
+  restore the context.
+
+to stroke the at-sign glyph:
+  save the context.
+  turn right.
+  move 2 squares.
+  turn around.
+  stroke 1 square.
+  turn right 1/8.
+  stroke 1 square slantways.
+  turn right 1/8.
+  stroke 2 squares.
+  turn right 1/8.
+  stroke 1 square slantways.
+  turn right.
+  stroke 1 square slantways.
+  turn right 1/8.
+  stroke 1 square.
+  turn right 3/8.
+  stroke 1/2 square slantways.
+  turn left.
+  stroke 1/2 square slantways.
+  turn left.
+  stroke 1/2 square slantways.
+  turn left.
+  stroke 1/2 square slantways.
+  restore the context.
+
+to stroke the backslash glyph:
+  save the context.
+  turn right.
+  move 2 squares.
+  turn left.
+  turn left 7/96 of the way.
+  stroke 9/2 square.
+  restore the context.
+
+to stroke the big-a glyph:
+  save the context.
+  stroke 3 squares.
+  turn right 1/8.
+  stroke 1 square slantways.
+  turn right.
+  stroke 1 square slantways.
+  turn right 1/8.
+  stroke 3 squares.
+  turn around.
+  move 2 squares.
+  turn left.
+  stroke 1 square.
+  restore the context.
+
+to stroke the big-b glyph:
+  save the context.
+  stroke 4 squares.
+  turn right.
+  stroke 1 square.
+  turn right 1/8.
+  stroke 1 square slantways.
+  turn right.
+  stroke 1 square slantways.
+  turn left.
+  stroke 1 square slantways.
+  turn right.
+  stroke 1 square slantways.
+  restore the context.
+
+to stroke the big-c glyph:
+  save the context.
+  move 2 squares.
+  stroke 1 square.
+  turn right 1/8.
+  stroke 1 square slantways.
+  turn right.
+  stroke 1 square slantways.
+  reset the context.
+  move 2 squares.
+  turn around.
+  stroke 1 square.
+  turn left 1/8.
+  stroke 1 square slantways.
+  turn left.
+  stroke 1 square slantways.
+  restore the context.
+
+to stroke the big-d glyph:
+  save the context.
+  stroke 4 squares.
+  turn right.
+  stroke 1 square.
+  turn right 1/8.
+  stroke 1 square slantways.
+  turn right 1/8.
+  stroke 2 squares.
+  turn right 1/8.
+  stroke 1 square slantways.
+  turn right 1/8.
+  stroke 1 square.
+  restore the context.
+
+to stroke the big-e glyph:
+  save the context.
+  stroke 4 squares.
+  turn right.
+  stroke 2 squares.
+  reset the context.
+  move 2 squares.
+  turn right.
+  stroke 1 square.
+  reset the context.
+  turn right.
+  stroke 2 squares.
+  restore the context.
+
+to stroke the big-f glyph:
+  save the context.
+  stroke 4 squares.
+  turn right.
+  stroke 2 squares.
+  reset the context.
+  move 2 squares.
+  turn right.
+  stroke 1 square.
+  restore the context.
+
+to stroke the big-g glyph:
+  save the context.
+  move 2 squares.
+  stroke 1 square.
+  turn right 1/8.
+  stroke 1 square slantways.
+  turn right.
+  stroke 1 square slantways.
+  reset the context.
+  move 2 squares.
+  turn around.
+  stroke 1 square.
+  turn left 1/8.
+  stroke 1 square slantways.
+  turn left.
+  stroke 1 square slantways.
+  turn left 1/8.
+  stroke 1 square.
+  turn left.
+  stroke 1 square.
+  restore the context.
+
+to stroke the big-h glyph:
+  save the context.
+  stroke 4 squares.
+  reset the context.
+  move 2 squares.
+  turn right.
+  stroke 2 squares.
+  reset the context.
+  turn right.
+  move 2 squares.
+  turn left.
+  stroke 4 squares.
+  restore the context.
+
+to stroke the big-i glyph:
+  save the context.
+  turn right.
+  move 1 square.
+  turn left.
+  stroke 4 squares.
+  reset the context.
+  turn right.
+  stroke 2 squares.
+  reset the context.
+  move 4 squares.
+  turn right.
+  stroke 2 squares.
+  restore the context.
+
+to stroke the big-j glyph:
+  save the context.
+  move 2 squares.
+  turn around.
+  stroke 1 square.
+  turn left 1/8.
+  stroke 1 square slantways.
+  turn left.
+  stroke 1 square slantways.
+  turn left 1/8.
+  stroke 3 squares.
+  restore the context.
+
+to stroke the big-k glyph:
+  save the context.
+  stroke 4 squares.
+  turn around.
+  move 2 squares.
+  turn left.
+  stroke 1 square.
+  save the context.
+  turn left 1/8.
+  stroke 1 square slantways.
+  turn left 1/8.
+  stroke 1 square.
+  restore the context.
+  turn right 1/8.
+  stroke 1 square slantways.
+  turn right 1/8.
+  stroke 1 square.
+  restore the context.
+
+to stroke the big-l glyph:
+  save the context.
+  move 4 squares.
+  turn around.
+  stroke 4 squares.
+  turn left.
+  stroke 2 squares.
+  restore the context.
+
+to stroke the big-m glyph:
+  save the context.
+  stroke 4 squares.
+  turn right 41/96.
+  stroke 9/4 square.
+  turn right 62/96.
+  stroke 9/4 square.
+  turn right 41/96.
+  stroke 4 squares.
+  restore the context.
+
+to stroke the big-n glyph:
+  save the context.
+  stroke 4 squares.
+  turn right 41/96.
+  stroke 9/2 square.
+  turn left 41/96.
+  stroke 4 squares.
+  restore the context.
+
+to stroke the big-o glyph:
+  save the context.
+  move 1 square.
+  stroke 2 squares.
+  turn right 1/8.
+  stroke 1 square slantways.
+  turn right 1/4.
+  stroke 1 square slantways.
+  turn right 1/8.
+  stroke 2 squares.
+  turn right 1/8.
+  stroke 1 square slantways.
+  turn right 1/4.
+  stroke 1 square slantways.
+  restore the context.
+
+to stroke the big-p glyph:
+  save the context.
+  stroke 4 squares.
+  turn right.
+  stroke 1 square.
+  turn right 1/8.
+  stroke 1 square slantways.
+  turn right.
+  stroke 1 square slantways.
+  restore the context.
+
+to stroke the big-q glyph:
+  save the context.
+  move 1 square.
+  stroke 2 squares.
+  turn right 1/8.
+  stroke 1 square slantways.
+  turn right 1/4.
+  stroke 1 square slantways.
+  turn right 1/8.
+  stroke 2 squares.
+  turn right 1/8.
+  stroke 1 square slantways.
+  turn right 1/4.
+  stroke 1 square slantways.
+  reset the context.
+  move 1 square.
+  turn right.
+  move 1 square.
+  turn right 1/8 of the way.
+  stroke 1-1/2 square.
+  restore the context.
+
+to stroke the big-r glyph:
+  save the context.
+  stroke 4 squares.
+  turn right.
+  stroke 1 square.
+  turn right 1/8.
+  stroke 1 square slantways.
+  turn right.
+  stroke 1 square slantways.
+  turn left 1/8.
+  turn left 7/96.
+  stroke 7/2 square.
+  restore the context.
+
+to stroke the big-s glyph:
+  save the context.
+  move 1 square.
+  turn around.
+  turn left 1/8.
+  stroke 1 square slantways.
+  turn left.
+  stroke 1 square slantways.
+  turn left.
+  stroke 2 squares slantways.
+  turn right.
+  stroke 1 square slantways.
+  turn right.
+  stroke 1 square slantways.
+  restore the context.
+
+to stroke the big-t glyph:
+  save the context.
+  turn right.
+  move 1 square.
+  turn left.
+  stroke 4 squares.
+  turn left.
+  move 1 square.
+  turn around.
+  stroke 2 squares.
+  restore the context.
+
+to stroke the big-u glyph:
+  save the context.
+  move 4 squares.
+  turn around.
+  stroke 4 squares.
+  turn left.
+  stroke 2 squares.
+  turn left.
+  stroke 4 squares.
+  restore the context.
+
+to stroke the big-v glyph:
+  save the context.
+  move 4 squares.
+  turn around.
+  stroke 3 squares.
+  turn left 1/8.
+  stroke 1 square slantways.
+  turn left.
+  stroke 1 square slantways.
+  turn left 1/8.
+  stroke 3 squares.
+  restore the context.
+
+to stroke the big-w glyph:
+  save the context.
+  move 4 squares.
+  turn around.
+  stroke 4 squares.
+  turn left 41/96.
+  stroke 9/4 square.
+  turn left 61/96.
+  stroke 9/4 square.
+  turn left 41/96.
+  stroke 4 squares.
+  restore the context.
+
+to stroke the big-x glyph:
+  save the context.
+  stroke 1 square.
+  turn right 1/8.
+  stroke 2 squares slantways.
+  turn left 1/8.
+  stroke 1 square.
+  reset the context.
+  turn right.
+  move 2 squares.
+  turn left.
+  stroke 1 square.
+  turn left 1/8.
+  stroke 2 squares slantways.
+  turn right 1/8.
+  stroke 1 square.
+  restore the context.
+
+to stroke the big-y glyph:
+  save the context.
+  move 4 squares.
+  turn around.
+  stroke 1 square.
+  turn left 1/8.
+  stroke 1 square slantways.
+  turn left.
+  stroke 1 square slantways.
+  turn left 1/8.
+  stroke 1 square.
+  reset the context.
+  turn right.
+  move 1 square.
+  turn left.
+  stroke 2 squares.
+  restore the context.
+
+to stroke the big-z glyph:
+  save the context.
+  move 4 squares.
+  turn right.
+  stroke 2 squares.
+  turn right.
+  stroke 1 square.
+  turn right 1/8.
+  stroke 2 squares slantways.
+  turn left 1/8.
+  stroke 1 square.
+  turn left.
+  stroke 2 squares.
+  restore the context.
+
+to stroke a box with a color:
+  put the color into the context's color.
+  put the box's left-bottom into the context's spot.
+  face north.
+  stroke the box's height.
+  turn right.
+  stroke the box's width.
+  turn right.
+  stroke the box's height.
+  turn right.
+  stroke the box's width.
+
+to stroke a byte:
+  put the context's letter height divided by 4 into the square size. \ ***
+  if the byte is the accent byte, stroke the accent glyph.
+  if the byte is the asterisk byte, stroke the asterisk glyph.
+  if the byte is the at-sign byte, stroke the at-sign glyph.
+  if the byte is the backslash byte, stroke the backslash glyph.
+  if the byte is the big-a byte, stroke the big-a glyph.
+  if the byte is the big-b byte, stroke the big-b glyph.
+  if the byte is the big-c byte, stroke the big-c glyph.
+  if the byte is the big-d byte, stroke the big-d glyph.
+  if the byte is the big-e byte, stroke the big-e glyph.
+  if the byte is the big-f byte, stroke the big-f glyph.
+  if the byte is the big-g byte, stroke the big-g glyph.
+  if the byte is the big-h byte, stroke the big-h glyph.
+  if the byte is the big-i byte, stroke the big-i glyph.
+  if the byte is the big-j byte, stroke the big-j glyph.
+  if the byte is the big-k byte, stroke the big-k glyph.
+  if the byte is the big-l byte, stroke the big-l glyph.
+  if the byte is the big-m byte, stroke the big-m glyph.
+  if the byte is the big-n byte, stroke the big-n glyph.
+  if the byte is the big-o byte, stroke the big-o glyph.
+  if the byte is the big-p byte, stroke the big-p glyph.
+  if the byte is the big-q byte, stroke the big-q glyph.
+  if the byte is the big-r byte, stroke the big-r glyph.
+  if the byte is the big-s byte, stroke the big-s glyph.
+  if the byte is the big-t byte, stroke the big-t glyph.
+  if the byte is the big-u byte, stroke the big-u glyph.
+  if the byte is the big-v byte, stroke the big-v glyph.
+  if the byte is the big-w byte, stroke the big-w glyph.
+  if the byte is the big-x byte, stroke the big-x glyph.
+  if the byte is the big-y byte, stroke the big-y glyph.
+  if the byte is the big-z byte, stroke the big-z glyph.
+  if the byte is the caret byte, stroke the caret glyph.
+  if the byte is the colon byte, stroke the colon glyph.
+  if the byte is the comma byte, stroke the comma glyph.
+  if the byte is the dollar-sign byte, stroke the dollar-sign glyph.
+  if the byte is the double-quote byte, stroke the double-quote glyph.
+  if the byte is the eight byte, stroke the eight glyph.
+  if the byte is the equal-sign byte, stroke the equal-sign glyph.
+  if the byte is the exclamation-mark byte, stroke the exclamation-mark glyph.
+  if the byte is the five byte, stroke the five glyph.
+  if the byte is the four byte, stroke the four glyph.
+  if the byte is the left-alligator byte, stroke the left-alligator glyph.
+  if the byte is the left-brace byte, stroke the left-brace glyph.
+  if the byte is the left-bracket byte, stroke the left-bracket glyph.
+  if the byte is the left-paren byte, stroke the left-paren glyph.
+  if the byte is the little-a byte, stroke the little-a glyph.
+  if the byte is the little-b byte, stroke the little-b glyph.
+  if the byte is the little-c byte, stroke the little-c glyph.
+  if the byte is the little-d byte, stroke the little-d glyph.
+  if the byte is the little-e byte, stroke the little-e glyph.
+  if the byte is the little-f byte, stroke the little-f glyph.
+  if the byte is the little-g byte, stroke the little-g glyph.
+  if the byte is the little-h byte, stroke the little-h glyph.
+  if the byte is the little-i byte, stroke the little-i glyph.
+  if the byte is the little-j byte, stroke the little-j glyph.
+  if the byte is the little-k byte, stroke the little-k glyph.
+  if the byte is the little-l byte, stroke the little-l glyph.
+  if the byte is the little-m byte, stroke the little-m glyph.
+  if the byte is the little-n byte, stroke the little-n glyph.
+  if the byte is the little-o byte, stroke the little-o glyph.
+  if the byte is the little-p byte, stroke the little-p glyph.
+  if the byte is the little-q byte, stroke the little-q glyph.
+  if the byte is the little-r byte, stroke the little-r glyph.
+  if the byte is the little-s byte, stroke the little-s glyph.
+  if the byte is the little-t byte, stroke the little-t glyph.
+  if the byte is the little-u byte, stroke the little-u glyph.
+  if the byte is the little-v byte, stroke the little-v glyph.
+  if the byte is the little-w byte, stroke the little-w glyph.
+  if the byte is the little-x byte, stroke the little-x glyph.
+  if the byte is the little-y byte, stroke the little-y glyph.
+  if the byte is the little-z byte, stroke the little-z glyph.
+  if the byte is the minus-sign byte, stroke the minus-sign glyph.
+  if the byte is the nine byte, stroke the nine glyph.
+  if the byte is the number-sign byte, stroke the number-sign glyph.
+  if the byte is the one byte, stroke the one glyph.
+  if the byte is the percent-sign byte, stroke the percent-sign glyph.
+  if the byte is the period byte, stroke the period glyph.
+  if the byte is the plus-sign byte, stroke the plus-sign glyph.
+  if the byte is the question-mark byte, stroke the question-mark glyph.
+  if the byte is the right-alligator byte, stroke the right-alligator glyph.
+  if the byte is the right-brace byte, stroke the right-brace glyph.
+  if the byte is the right-bracket byte, stroke the right-bracket glyph.
+  if the byte is the right-paren byte, stroke the right-paren glyph.
+  if the byte is the semi-colon byte, stroke the semi-colon glyph.
+  if the byte is the seven byte, stroke the seven glyph.
+  if the byte is the single-quote byte, stroke the single-quote glyph.
+  if the byte is the six byte, stroke the six glyph.
+  if the byte is the slash byte, stroke the slash glyph.
+  if the byte is the three byte, stroke the three glyph.
+  if the byte is the tilde byte, stroke the tilde glyph.
+  if the byte is the two byte, stroke the two glyph.
+  if the byte is the underscore byte, stroke the underscore glyph.
+  if the byte is the vertical-bar byte, stroke the vertical-bar glyph.
+  if the byte is the zero byte, stroke the zero glyph.
+  \ refresh the screen. \ *** questionable doesn't work screws up console.
+
+to stroke the caret glyph:
+  save the context.
+  move 3 squares.
+  turn right 1/8.
+  stroke 1 square slantways.
+  turn right.
+  stroke 1 square slantways.
+  restore the context.
+
+to stroke the colon glyph:
+  save the context.
+  turn right.
+  move 1 square.
+  turn left.
+  stroke 1/2 square.
+  move 1/2 square.
+  move 1 square.
+  stroke 1/2 square.
+  restore the context.
+
+to stroke the comma glyph:
+  save the context.
+  turn around.
+  move 1 square.
+  turn left 3/8.
+  stroke 1 square slantways.
+  turn left 1/8.
+  stroke 1/2 square.
+  restore the context.
+
+to stroke the dollar-sign glyph:
+  save the context.
+  move 1 square.
+  turn around.
+  turn left 1/8.
+  stroke 1 square slantways.
+  turn left.
+  stroke 1 square slantways.
+  turn left.
+  stroke 2 squares slantways.
+  turn right.
+  stroke 1 square slantways.
+  turn right.
+  stroke 1 square slantways.
+  reset the context.
+  turn right.
+  move 1 square.
+  turn right.
+  move 1/2 square.
+  turn around.
+  stroke 5 squares.
+  restore the context.
+
+to stroke the double-quote glyph:
+  save the context.
+  turn right.
+  move 1/2 square.
+  turn left.
+  move 2-1/2 squares.
+  stroke 1-1/2 squares.
+  reset the context.
+  turn right.
+  move 1-1/2 squares.
+  turn left.
+  move 2-1/2 squares.
+  stroke 1-1/2 squares.
+  restore the context.
+
+to stroke the eight glyph:
+  save the context.
+  turn right.
+  move 1 square.
+  turn left 3/8.
+  stroke 1 square slantways.
+  turn right.
+  stroke 2 squares slantways.
+  turn left.
+  stroke 1 square slantways.
+  turn left.
+  stroke 1 square slantways.
+  turn left.
+  stroke 2 squares slantways.
+  turn right.
+  stroke 1 square slantways.
+  restore the context.
+
+to stroke the equal-sign glyph:
+  save the context.
+  move 1-1/2 squares.
+  turn right.
+  stroke 2 squares.
+  turn left.
+  move 1 square.
+  turn left.
+  stroke 2 squares.
+  restore the context.
+
+to stroke the exclamation-mark glyph:
+  save the context.
+  move 4 squares.
+  turn right.
+  move 1 square.
+  turn right.
+  stroke 3 squares.
+  move 1 square.
+  stroke 1/2 square.
+  restore the context.
+
+to stroke the five glyph:
+  save the context.
+  turn around.
+  move 1 square.
+  turn left 3/8.
+  stroke 2 squares slantways.
+  turn left.
+  stroke 1 square slantways.
+  turn left 1/8.
+  stroke 1 square.
+  turn right.
+  stroke 2 squares.
+  turn right.
+  stroke 2 squares.
+  restore the context.
+
+to stroke the four glyph:
+  save the context.
+  turn right.
+  move 2 squares.
+  turn left.
+  stroke 4 squares.
+  turn left 3/8.
+  stroke 2 squares slantways.
+  turn left 3/8.
+  stroke 1 square.
+  restore the context.
+
+to stroke the left-alligator glyph:
+  save the context.
+  turn right.
+  move 2 squares.
+  turn left.
+  move 1 square.
+  turn left 17/96 of the way.
+  stroke 9/4 square.
+  turn right 34/96 of the way.
+  stroke 9/4 square.
+  restore the context.
+
+to stroke the left-brace glyph:
+  save the context.
+  turn right.
+  move 2 squares.
+  turn around.
+  stroke 1 square.
+  turn right.
+  stroke 1 square.
+  turn left 1/8.
+  stroke 1 square slantways.
+  turn right.
+  stroke 1 square slantways.
+  turn left 1/8.
+  stroke 1 square.
+  turn right.
+  stroke 1 square.
+  restore the context.
+
+to stroke the left-bracket glyph:
+  save the context.
+  turn right.
+  move 2 squares.
+  turn around.
+  stroke 1 square.
+  turn right.
+  stroke 4 squares.
+  turn right.
+  stroke 1 square.
+  restore the context.
+
+to stroke the left-paren glyph:
+  save the context.
+  turn right.
+  move 1-1/2 squares.
+  turn left 3/8.
+  stroke 1 square slantways.
+  turn right 1/8.
+  stroke 2 squares.
+  turn right 1/8.
+  stroke 1 square slantways.
+  restore the context.
+
+to stroke a length:
+  stroke a line the length long.
+
+to stroke a line as high as a box;
+to stroke a line as tall as a box;
+to draw a line as high as a box;
+to draw a line as tall as a box:
+  stroke the box's height.
+
+to stroke a line as wide as a box;
+to draw a line as wide as a box:
+  stroke the box's width.
+
+to stroke the little-a glyph:
+  save the context.
+  turn right.
+  move 2 squares.
+  turn left.
+  stroke 3 squares.
+  turn around.
+  move 1 square.
+  turn right 3/8.
+  stroke 1 square slantways.
+  turn left.
+  stroke 1 square slantways.
+  turn left 1/8.
+  stroke 1 square.
+  turn left 1/8.
+  stroke 1 square slantways.
+  turn left.
+  stroke 1 square slantways.
+  restore the context.
+
+to stroke the little-b glyph:
+  save the context.
+  stroke 4 squares.
+  turn around.
+  move 2 squares.
+  turn left 3/8.
+  stroke 1 square slantways.
+  turn right.
+  stroke 1 square slantways.
+  turn right 1/8.
+  stroke 1 square.
+  turn right 1/8.
+  stroke 1 square slantways.
+  turn right.
+  stroke 1 square slantways.
+  restore the context.
+
+to stroke the little-c glyph:
+  save the context.
+  turn right.
+  move 2 squares.
+  turn left.
+  move 1 square.
+  turn left 3/8.
+  stroke 1 square slantways.
+  turn right.
+  stroke 1 square slantways.
+  turn right 1/8.
+  stroke 1 square.
+  turn right 1/8.
+  stroke 1 square slantways.
+  turn right.
+  stroke 1 square slantways.
+  restore the context.
+
+to stroke the little-d glyph:
+  save the context.
+  turn right.
+  move 2 squares.
+  turn left.
+  stroke 4 squares.
+  turn around.
+  move 2 squares.
+  turn right 3/8.
+  stroke 1 square slantways.
+  turn left.
+  stroke 1 square slantways.
+  turn left 1/8.
+  stroke 1 square.
+  turn left 1/8.
+  stroke 1 square slantways.
+  turn left.
+  stroke 1 square slantways.
+  restore the context.
+
+to stroke the little-e glyph:
+  save the context.
+  turn right.
+  move 2 squares.
+  turn around.
+  stroke 1 square.
+  turn right 1/8.
+  stroke 1 square slantways.
+  turn right 1/8.
+  stroke 1 square.
+  turn right 1/8.
+  stroke 1 square slantways.
+  turn right.
+  stroke 1 square slantways.
+  turn right 1/8.
+  stroke 1/2 square.
+  turn right.
+  stroke 2 squares.
+  restore the context.
+
+to stroke the little-f glyph:
+  save the context.
+  turn right.
+  move 1 square.
+  turn left.
+  save the context.
+  turn around.
+  turn right 1/8.
+  stroke 1 square slantways.
+  restore the context.
+  stroke 4 squares.
+  turn right 1/8.
+  stroke 1 square slantways.
+  reset the context.
+  move 3 squares.
+  turn right.
+  stroke 2 squares.
+  restore the context.
+
+to stroke the little-g glyph:
+  save the context.
+  turn right.
+  move 2 squares.
+  turn left.
+  move 1 square.
+  turn left 3/8.
+  stroke 1 square slantways.
+  turn right.
+  stroke 1 square slantways.
+  turn right 1/8.
+  stroke 1 square.
+  turn right 1/8.
+  stroke 1 square slantways.
+  turn right.
+  stroke 1 square slantways.
+  reset the context.
+  move 3 squares.
+  turn right.
+  move 2 squares.
+  turn right.
+  stroke 3 squares.
+  turn right 1/8.
+  stroke 1-1/2 square slantways.
+  restore the context.
+
+to stroke the little-h glyph:
+  save the context.
+  stroke 4 squares.
+  turn around.
+  move 2 squares.
+  turn left 3/8.
+  stroke 1 square slantways.
+  turn right.
+  stroke 1 square slantways.
+  turn right 1/8.
+  stroke 2 squares.
+  restore the context.
+
+to stroke the little-i glyph:
+  save the context.
+  turn right.
+  stroke 2 squares.
+  turn around.
+  move 1 square.
+  turn right.
+  stroke 3 squares.
+  turn left.
+  stroke 1 square.
+  turn around.
+  move 1 square.
+  turn left.
+  move 1/2 square.
+  stroke 1/2 square.
+  restore the context.
+
+to stroke the little-j glyph:
+  save the context.
+  move 1 square.
+  turn around.
+  stroke 1 square.
+  turn left 1/8.
+  stroke 1 square slantways.
+  turn left.
+  stroke 1 square slantways.
+  turn left 1/8.
+  stroke 3 squares.
+  move 1/2 square.
+  stroke 1/2 square.
+  restore the context.
+
+to stroke the little-k glyph:
+  save the context.
+  stroke 4 squares.
+  turn around.
+  move 2 squares.
+  turn left 1/8.
+  stroke 2 squares slantways.
+  reset the context.
+  move 2 squares.
+  turn right 17/96.
+  stroke 9/4 square.
+  restore the context.
+
+to stroke the little-l glyph:
+  save the context.
+  turn right.
+  stroke 2 squares.
+  turn around.
+  move 1 square.
+  turn right.
+  stroke 4 squares.
+  turn left.
+  stroke 1 square.
+  restore the context.
+
+to stroke the little-m glyph:
+  save the context.
+  stroke 3 squares.
+  turn around.
+  move 1 square.
+  turn left 3/8.
+  stroke 1 square slantways.
+  turn right 3/8.
+  stroke 2 squares.
+  turn around.
+  move 1 square.
+  turn right 1/8.
+  stroke 1 square slantways.
+  turn right 3/8.
+  stroke 3 squares.
+  restore the context.
+
+to stroke the little-n glyph:
+  save the context.
+  stroke 3 squares.
+  turn around.
+  move 1 square.
+  turn left 3/8.
+  stroke 1 square slantways.
+  turn right.
+  stroke 1 square slantways.
+  turn right 1/8.
+  stroke 2 squares.
+  restore the context.
+
+to stroke the little-o glyph:
+  save the context.
+  turn right.
+  move 2 squares.
+  turn left.
+  move 1 square.
+  turn left 3/8.
+  stroke 1 square slantways.
+  turn right.
+  stroke 1 square slantways.
+  turn right 1/8.
+  stroke 1 square.
+  turn right 1/8.
+  stroke 1 square slantways.
+  turn right.
+  stroke 1 square slantways.
+  turn right 1/8.
+  stroke 1 square.
+  restore the context.
+
+to stroke the little-p glyph:
+  save the context.
+  move 3 squares.
+  turn around.
+  stroke 4 squares.
+  turn around.
+  move 3 squares.
+  turn right 1/8.
+  stroke 1 square slantways.
+  turn right.
+  stroke 1 square slantways.
+  turn right 1/8.
+  stroke 1 square.
+  turn right 1/8.
+  stroke 1 square slantways.
+  turn right.
+  stroke 1 square slantways.
+  restore the context.
+
+to stroke the little-q glyph:
+  save the context.
+  turn right.
+  move 2 squares.
+  turn left.
+  move 1 square.
+  turn left 3/8.
+  stroke 1 square slantways.
+  turn right.
+  stroke 1 square slantways.
+  turn right 1/8.
+  stroke 1 square.
+  turn right 1/8.
+  stroke 1 square slantways.
+  turn right.
+  stroke 1 square slantways.
+  turn left 3/8.
+  move 1 square.
+  turn around.
+  stroke 4 squares.
+  restore the context.
+
+to stroke the little-r glyph:
+  save the context.
+  stroke 3 squares.
+  turn around.
+  move 1 square.
+  turn left 3/8.
+  stroke 1 square slantways.
+  turn right.
+  stroke 1 square slantways.
+  restore the context.
+
+to stroke the little-s glyph:
+  save the context.
+  move 1 square.
+  turn right 3/8.
+  stroke 1 square slantways.
+  turn left.
+  stroke 1 square slantways.
+  reset the context.
+  move 2 squares.
+  turn right 1/8.
+  stroke 1 square slantways.
+  turn right.
+  stroke 1 square slantways.
+  reset the context.
+  move 2 squares.
+  turn right 31/96.
+  stroke 9/4 squares.
+  restore the context.
+
+to stroke the little-t glyph:
+  save the context.
+  turn right.
+  move 1 square.
+  turn right 1/8.
+  stroke 1 square slantways.
+  reset the context.
+  turn right.
+  move 1 square.
+  turn left.
+  stroke 4 squares.
+  turn around.
+  move 1 square.
+  turn right.
+  move 1 square.
+  turn around.
+  stroke 2 squares.
+  restore the context.
+
+to stroke the little-u glyph:
+  save the context.
+  move 3 squares.
+  turn around.
+  stroke 2 squares.
+  turn left 1/8.
+  stroke 1 square slantways.
+  turn left.
+  stroke 1 square slantways.
+  turn left 1/8.
+  move 2 squares.
+  turn around.
+  stroke 3 squares.
+  restore the context.
+
+to stroke the little-v glyph:
+  save the context.
+  move 3 squares.
+  turn around.
+  stroke 2 squares.
+  turn left 1/8.
+  stroke 1 square slantways.
+  turn left.
+  stroke 1 square slantways.
+  turn left 1/8.
+  stroke 2 squares.
+  restore the context.
+
+to stroke the little-w glyph:
+  save the context.
+  move 3 squares.
+  turn around.
+  stroke 3 squares.
+  turn around.
+  turn right 7/96.
+  stroke 9/4 squares.
+  turn right 34/96.
+  stroke 9/4 squares.
+  turn left 41/96.
+  stroke 3 squares.
+  restore the context.
+
+to stroke the little-x glyph:
+  save the context.
+  stroke 1 square.
+  turn right 17/96.
+  stroke 9/4 square.
+  turn left 17/96.
+  stroke 1 square.
+  reset the context.
+  turn right.
+  move 2 squares.
+  turn left.
+  stroke 1 square.
+  turn left 17/96.
+  stroke 9/4 square.
+  turn right 17/96.
+  stroke 1 square.
+  restore the context.
+
+to stroke the little-y glyph:
+  save the context.
+  move 3 squares.
+  turn around.
+  stroke 2 squares.
+  turn left 1/8.
+  stroke 1 square slantways.
+  turn left.
+  stroke 1 square slantways.
+  turn left 1/8.
+  move 2 squares.
+  turn around.
+  stroke 3 squares.
+  turn right 1/8.
+  stroke 1-1/2 squares slantways.
+  restore the context.
+
+to stroke the little-z glyph:
+  save the context.
+  move 3 squares.
+  turn right.
+  stroke 2 squares.
+  turn right.
+  stroke 1 square.
+  turn right 17/96.
+  stroke 9/4 square.
+  turn left 17/96.
+  stroke 1 square.
+  turn left.
+  stroke 2 squares.
+  restore the context.
+
+to stroke the minus-sign glyph:
+  save the context.
+  move 2 squares.
+  turn right.
+  stroke 2 squares.
+  restore the context.
+
+to stroke the nine glyph:
+  save the context.
+  move 1 square.
+  turn right 3/8.
+  stroke 1 square slantways.
+  turn left.
+  stroke 1 square slantways.
+  turn left 1/8.
+  stroke 2 squares.
+  turn left 1/8.
+  stroke 1 square slantways.
+  turn left.
+  stroke 1 square slantways.
+  turn left.
+  stroke 1 square slantways.
+  restore the context.
+
+to stroke the number-sign glyph:
+  save the context.
+  move 3 squares.
+  turn right.
+  stroke 2 squares.
+  reset the context.
+  move 1 square.
+  turn right.
+  stroke 2 squares.
+  reset the context.
+  turn right.
+  move 1/2 square.
+  turn left.
+  stroke 4 squares.
+  reset the context.
+  turn right.
+  move 1-1/2 squares.
+  turn left.
+  stroke 4 squares.
+  restore the context.
+
+to stroke the one glyph:
+  save the context.
+  turn right.
+  move 1 square.
+  turn left.
+  stroke 4 squares.
+  reset the context.
+  turn right.
+  stroke 2 squares.
+  reset the context.
+  move 3 squares.
+  turn right 1/8.
+  stroke 1 square slantways.
+  restore the context.
+
+to stroke one pixel:
+  stroke the tpp.
+
+to stroke the percent-sign glyph:
+  save the context.
+  turn right 7/96.
+  stroke 9/2 squares.
+  reset the context.
+  move 2-1/2 squares.
+  stroke 1/2 square.
+  reset the context.
+  turn right.
+  move 2 squares.
+  turn left.
+  move 1 square.
+  stroke 1/2 square.
+  restore the context.
+
+to stroke the period glyph:
+  save the context.
+  turn right.
+  move 1 square.
+  turn left.
+  stroke 1/2 square.
+  restore the context.
+
+to stroke the plus-sign glyph:
+  save the context.
+  move 2 squares.
+  turn right.
+  stroke 2 squares.
+  turn left.
+  move 1 square.
+  turn left.
+  move 1 square.
+  turn left.
+  stroke 2 squares.
+  restore the context.
+
+to stroke the question-mark glyph:
+  save the context.
+  move 3 squares.
+  turn right 1/8.
+  stroke 1 square slantways.
+  turn right.
+  stroke 1 square slantways.
+  turn right.
+  stroke 1 square slantways.
+  turn left 1/8.
+  stroke 1 square.
+  move 1 square.
+  stroke 1/2 square.
+  restore the context.
+
+to stroke the right-alligator glyph:
+  save the context.
+  move 1 square.
+  turn right 17/96 of the way.
+  stroke 9/4 square.
+  turn left 34/96 of the way.
+  stroke 9/4 square.
+  restore the context.
+
+to stroke the right-brace glyph:
+  save the context.
+  turn right.
+  stroke 1 square.
+  turn left.
+  stroke 1 square.
+  turn right 1/8.
+  stroke 1 square slantways.
+  turn left.
+  stroke 1 square slantways.
+  turn right 1/8.
+  stroke 1 square.
+  turn left.
+  stroke 1 square.
+  restore the context.
+
+to stroke the right-bracket glyph:
+  save the context.
+  turn right.
+  stroke 1 square.
+  turn left.
+  stroke 4 squares.
+  turn left.
+  stroke 1 square.
+  restore the context.
+
+to stroke the right-paren glyph:
+  save the context.
+  turn right.
+  move 1/2 square.
+  turn left.
+  turn right 1/8.
+  stroke 1 square slantways.
+  turn left 1/8.
+  stroke 2 squares.
+  turn left 1/8.
+  stroke 1 square slantways.
+  restore the context.
+
+to stroke the semi-colon glyph:
+  save the context.
+  turn around.
+  move 1 square.
+  turn left 3/8.
+  stroke 1 square slantways.
+  turn left 1/8.
+  stroke 1/2 square.
+  move 1/2 square.
+  move 1 square.
+  stroke 1/2 square.
+  restore the context.
+
+to stroke the seven glyph:
+  save the context.
+  move 3 squares.
+  stroke 1 square.
+  turn right.
+  stroke 2 squares.
+  turn right.
+  stroke 1 square.
+  turn right 1/8.
+  stroke 1 square slantways.
+  turn left 1/8.
+  stroke 2 squares.
+  restore the context.
+
+to stroke the single-quote glyph:
+  save the context.
+  turn right.
+  move 1 square.
+  turn left.
+  move 2-1/2 squares.
+  stroke 1-1/2 squares.
+  restore the context.
+
+to stroke the six glyph:
+  save the context.
+  turn right.
+  move 2 squares.
+  turn left.
+  move 3 squares.
+  turn left 1/8.
+  stroke 1 square slantways.
+  turn left.
+  stroke 1 square slantways.
+  turn left 1/8.
+  stroke 2 squares.
+  turn left 1/8.
+  stroke 1 square slantways.
+  turn left.
+  stroke 1 square slantways.
+  turn left.
+  stroke 1 square slantways.
+  restore the context.
+
+to stroke the slash glyph:
+  save the context.
+  turn right 7/96 of the way.
+  stroke 9/2 square.
+  restore the context.
+
+to stroke some squares:
+  stroke the square size times the squares divided by 1 square. \ squares are scaled up for precision hence the division at the end
+
+to stroke some squares diagonally;
+to stroke some squares slantways:
+  stroke the square size times the squares times the squirt o' two divided by 1 square. \ squares are scaled up for precision hence the division at the end
+
+to stroke the three glyph:
+  save the context.
+  move 3 squares.
+  turn right 1/8.
+  stroke 1 square slantways.
+  turn right.
+  stroke 1 square slantways.
+  turn right.
+  stroke 1 square slantways.
+  turn left.
+  stroke 1 square slantways.
+  turn right.
+  stroke 1 square slantways.
+  turn right.
+  stroke 1 square slantways.
+  restore the context.
+
+to stroke the tilde glyph:
+  save the context.
+  move 2 squares.
+  turn right 7/96 of the way.
+  stroke 9/8 square.
+  turn right.
+  stroke 9/6 square.
+  turn left.
+  stroke 9/8 square.
+  restore the context.
+
+to stroke some twips:
+  draw a line the twips long.
+
+to stroke the two glyph:
+  save the context.
+  move 3 squares.
+  turn right 1/8.
+  stroke 1 square slantways.
+  turn right.
+  stroke 1 square slantways.
+  turn right.
+  stroke 2 squares slantways.
+  turn left 1/8.
+  stroke 1 square.
+  turn left.
+  stroke 2 squares.
+  restore the context.
+
+to stroke the underscore glyph:
+  save the context.
+  turn around.
+  move 1 square.
+  turn left.
+  stroke 2 squares.
+  restore the context.
+
+to stroke the vertical-bar glyph:
+  save the context.
+  turn right.
+  move 1 square.
+  turn right.
+  move 1 square.
+  turn around.
+  stroke 5 squares.
+  restore the context.
+
+to stroke the zero glyph:
+  save the context.
+  move 1 square.
+  stroke 2 squares.
+  turn right 1/8.
+  stroke 1 square slantways.
+  turn right 1/4.
+  stroke 1 square slantways.
+  turn right 1/8.
+  stroke 2 squares.
+  turn right 1/8.
+  stroke 1 square slantways.
+  turn right 1/4.
+  stroke 1 square slantways.
+  turn right 1/8.
+  move 1 square.
+  turn right.
+  move 1 square.
+  stroke one pixel.
+  restore the context.
+
 to take off all the masking tape: unmask everything.
 
 to take off any masking tape: unmask everything.
+
+to turn around:
+  turn right 1/2.
+
+to turn left:
+  turn -1/4.
+
+to turn left some points:
+  put the points / 3840 into a ratio.
+  turn left the ratio.
+
+to turn left a ratio of the way;
+to turn left a ratio of the way around;
+to turn left a ratio:
+  privatize the ratio.
+  negate the ratio.
+  turn the ratio.
+
+to turn a ratio of the way;
+to turn a ratio of the way around;
+to turn a ratio:
+  if the ratio is 1/1, exit.
+  put 3840 times the ratio plus the context's heading into the context's heading.
+  normalize the context's heading.
+
+to turn right:
+  turn 1/4.
+
+to turn right some points:
+  put the points and 3840 into a fraction.
+  turn right the fraction.
+
+to turn right a ratio of the way;
+to turn right a ratio of the way around;
+to turn right a ratio:
+  turn the ratio.
+
+to use a color:
+  put the color into the context's color.
+
+to use the fat pen:
+  put 3 into the pen size.
+
+to use a letter height:
+  put the letter height into the context's letter height.
+
+to use a letter height of some twips:
+  put the twips into the letter height.
+  put the twips into the context's letter height.
+
+to use a pen:
+  put the pen into the context's pen.
+
+to use the skinny pen:
+  \ changing the pen size affects the context
+  \ the next time the context is saved.
+  put 1 into the pen size.
+
+to use small pointy letters:
+  \ as opposed to "roundy letters" not yet implemented
+  use small letters.
 
 to wait for a key to come back up:
   if the key is not up, repeat.
@@ -303,6 +2893,165 @@ to wait for a key:
   wait for the key to come up.
   flush all events.
 
+to write a string;
+to stroke a string:
+  privatize the string.
+  loop.
+    if the string is blank, exit.
+    get a byte from the string.
+    stroke the byte.
+    if the string is not blank, space between glyphs.
+  repeat.
+
+to write a string around a center spot at a radius;
+to write a string given a center spot and a radius;
+to stroke a string around a center spot at a radius;
+to stroke a string given a center spot and a radius:
+  privatize the string.
+  put 1 / the string's length into a ratio.
+  loop.
+    if the string is blank, exit.
+    get a byte from the string.
+    start at the center spot.
+    move the radius.
+    stroke the byte.
+    turn the ratio.
+  repeat.
+
+to write a string at a spot with a color;
+to stroke a string at a spot with a color:
+  start at the spot.
+  put the color into the context's color.
+  stroke the string.
+
+to write a string in a box;
+to stroke a string in a box:
+  stroke the string in the box with the context's color.
+
+to write a string in a box with a color;
+to stroke a string in a box with a color:
+  put the color into the context's color.
+  put the box's left-bottom into the context's spot.
+  put the box's height divided by 2 into the context's letter height.
+  \put the box's height into the context's letter height.
+  face north.
+  move the box's height divided by 4. \ was 4 and still is now! ***
+  stroke the string.
+
+to write a string in the middle of a box;
+to stroke a string in the middle of a box:
+  put the context's letter height divided by 4 into a square size. \ was 4 ***
+  \ glyphs are two squares wide plus one square of intercharacter spacing. no spacing at the end.
+  put the string's length times the square size times 3 minus the square size into a width.
+  divide the width by 2.
+  start in the middle of the box.
+  move down the context's letter height divided by 2. \ was 2 ***
+  move left the width.
+  face north.
+  stroke the string.
+
 to write a string in the middle of the screen:
   stroke the string in the middle of the screen's box.
   refresh the screen.
+
+to write a string a radius away from a center spot;
+to write a string a radius around a center spot;
+to write a string about a radius from a center spot;
+to write a string a radius from a center spot;
+to stroke a string a radius away from a center spot;
+to stroke a string a radius around a center spot;
+to stroke a string about a radius from a center spot;
+to stroke a string a radius from a center spot:
+  stroke the string given the center spot and the radius.
+
+to write a string a radius away from the middle of a box;
+to write a string a radius around the middle of a box;
+to write a string about a radius from the middle of a box;
+to write a string a radius from the middle of a box;
+to stroke a string a radius away from the middle of a box;
+to stroke a string a radius around the middle of a box;
+to stroke a string about a radius from the middle of a box;
+to stroke a string a radius from the middle of a box:
+  stroke the string given the box's center and the radius.
+
+to write a string with a color;
+to stroke a string with a color:
+  put the color into the context's color.
+  stroke the string.
+
+to write a string with a color at the bottom of a box;
+to stroke a string with a color at the bottom of a box:
+  put the context's letter height divided by 4 into a square size. \ ***
+  \ glyphs are two squares wide plus one square of intercharacter spacing. no spacing at the end.
+  put the string's length times the square size times 3 minus the square size into a width.
+  divide the width by 2.
+  start in the middle of the bottom of the box.
+  move up the context's letter height times 2. \ was without the times 2 ***
+  move left the width.
+  face north.
+  stroke the string with the color.
+
+to write a string with a color at the top of a box;
+to stroke a string with a color at the top of a box:
+  put the context's letter height divided by 4 into a square size. \ ***
+  \ glyphs are two squares wide plus one square of intercharacter spacing. no spacing at the end.
+  put the string's length times the square size times 3 minus the square size into a width.
+  divide the width by 2.
+  start in the middle of the top of the box.
+  move down the context's letter height times 4. \ was times 2 ***
+  move left the width.
+  face north.
+  stroke the string with the color.
+
+to write a string with a color in the middle of a box;
+to stroke a string with a color in the middle of a box:
+  put the context's letter height divided by 4 into a square size. \ was 4 ***
+  \ glyphs are two squares wide plus one square of intercharacter spacing. no spacing at the end.
+  put the string's length times the square size times 3 minus the square size into a width.
+  divide the width by 2.
+  start in the middle of the box.
+  move down the context's letter height divided by 2. \ was 2 ***
+  move left the width.
+  face north.
+  stroke the string with the color.
+
+to write a string with a color a radius away from a center spot;
+to write a string with a color a radius around a center spot;
+to write a string with a color about a radius from a center spot;
+to write a string with a color a radius from a center spot;
+to stroke a string with a color a radius away from a center spot;
+to stroke a string with a color a radius around a center spot;
+to stroke a string with a color about a radius from a center spot;
+to stroke a string with a color a radius from a center spot:
+  put the color into the context's color.
+  stroke the string given the center spot and the radius.
+
+to write a string with a color some twips down from the top of a box;
+to write a string with a color some twips down from the top center of a box;
+to stroke a string with a color some twips down from the top of a box;
+to stroke a string with a color some twips down from the top center of a box:
+  put the context's letter height divided by 4 into a square size. \ was 4 ***
+  \ glyphs are two squares wide plus one square of intercharacter spacing. no spacing at the end.
+  put the string's length times the square size times 3 minus the square size into a width.
+  divide the width by 2.
+  start in the middle of the top of the box.
+  move down the twips.
+  move left the width.
+  face north.
+  stroke the string with the color.
+
+to write with large letters;
+to use large letters:
+  put the large letter height into the context's letter height.
+
+to write with medium letters;
+to use medium size letters;
+to use medium-size letters;
+to use medium sized letters;
+to use medium-sized letters;
+to use medium letters:
+  put the medium letter height into the context's letter height.
+
+to write with small letters;
+  to use small letters:
+  put the small letter height into the context's letter height.

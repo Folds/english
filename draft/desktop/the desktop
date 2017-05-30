@@ -546,11 +546,11 @@ to decide if a tab is relevant (pastable):
   say no.
 
 to decide if a tab is relevant (process available):
-  if the recent process is 0, say yes.
+  if the current process is 0, say yes.
   say no.
 
 to decide if a tab is relevant (process running):
-  if the recent process is 0, say no.
+  if the current process is 0, say no.
   say yes.
 
 to decide if a tab is relevant (redoable - editor):
