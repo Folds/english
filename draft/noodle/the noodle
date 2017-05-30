@@ -6636,14 +6636,19 @@ the pen size is a number.
 
 a percent is a number. \ a scale with 100 in the denominator
 
-to pick a number (guts):
+to pick a number:
   pick the number between 0 and the largest number.
 
-to pick a number within an amount of another number (guts):
+to pick a number within an amount of another number:
   pick the number between the other number minus the amount
-    and the other number plus the amount (guts).
+    and the other number plus the amount.
 
-to pick a random number between a min number and a max number (guts):
+to pick some twips between some min twips and some other twips; \ are all these necessary? ***
+to pick a number between some min twips and some other twips;
+to pick a number between a min number and a max number;
+to pick a number from a min number to a max number;
+to set a number to something between another number and a third number;
+to pick a random number between a min number and a max number:
   put the seed's whereabouts into eax.
   \ put address of randseed into ecx
   intel $8BC8.         \ mov ecx,eax
@@ -6664,14 +6669,6 @@ to pick a random number between a min number and a max number (guts):
   \ store the result
   intel $8B9D08000000. \ mov ebx,[ebp+08] \ the random number
   intel $8913.         \ mov [ebx],edx
-
-to pick a spot anywhere in a box (guts):
-  pick the spot's x between the box's left and the box's right.
-  pick the spot's y between the box's top and the box's bottom.
-
-to pick a spot within a distance of another spot (guts):
-  pick the spot's x within the distance of the other spot's x.
-  pick the spot's y within the distance of the other spot's y.
 
 a picture is a thing with
  \ all boxes are in twits

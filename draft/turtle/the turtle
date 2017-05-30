@@ -43,7 +43,7 @@ the context is a context.
 
 a context is a thing with
   a spot, a box, a heading, a letter height,
-  a color, a number, a pen size,
+  a color, a pen size,
   a letter size at the letter height,
   a pen at the color,
   and a pen width at the pen size.
@@ -702,8 +702,13 @@ to pick a color:
   make the color.
   put the color into the context's color.
 
-to pick a color between another color and a third color (turtle):
-  pick the color between the other color and the third color (guts).
+to pick a color between another color and a third color:
+  pick the color's hue
+    between the other color's hue and the third color's hue.
+  pick the color's saturation
+    between the other color's saturation and the third color's saturation.
+  pick the color's lightness
+    between the other color's lightness and the third color's lightness.
   put the color into the context's color.
 
 to pick a color like another color:
@@ -747,14 +752,6 @@ to pick a light color:
   make the light color be light.
   put the light color into the context's color.
 
-to pick a number (turtle):
-  pick the number (guts). 
-  put the number into the context's number.
-
-to pick a number within an amount of another number (turtle):
-  pick the number within the amount of the other number (guts).
-  put the number into the context's number.
-
 to pick a pastel color:
   pick the pastel color's hue.
   make the pastel color be pastel.
@@ -767,12 +764,14 @@ to pick a rainbow color:
   interpret the rainbow color. [using the rainbow color number]
   put the rainbow color into the context's color.
 
-to pick a solid color (turtle):
-  pick the solid color (guts).
+to pick a solid color:
+  pick the solid color's hue between 0 and 3599.
+  make the solid color be solid.
   put the solid color into the context's color.
 
-to pick a spot anywhere in a box (turtle):
-  pick the spot anywhere in the box (guts).
+to pick a spot anywhere in a box:
+  pick the spot's x between the box's left and the box's right.
+  pick the spot's y between the box's top and the box's bottom.
   put the spot into the context's spot.
 
 to pick a spot anywhere in the top half of a box;
@@ -830,18 +829,10 @@ to pick a spot in a box some twips to some other twips below the center:
   put the bounding box's top plus the other twips into the bounding box's bottom.
   pick the spot anywhere in the bounding box.
 
-to pick a spot within a distance of another spot (turtle):
-  pick the spot within the distance of the other spot (guts).
+to pick a spot within a distance of another spot:
+  pick the spot's x within the distance of the other spot's x.
+  pick the spot's y within the distance of the other spot's y.
   put the spot into the context's spot.
-
-to pick some twips between some min twips and some other twips (turtle); \ are all these necessary? ***
-to pick a number between some min twips and some other twips (turtle);
-to pick a number between a min number and a max number (turtle);
-to pick a number from a min number to a max number (turtle);
-to set a number to something between another number and a third number (turtle);
-to pick a random number between a min number and a max number (turtle):
-  pick the random number between the min number and the max number (guts).
-  put the random number into the context's number.
 
 to pick a very dark color;
 to pick a really dark color:
@@ -911,7 +902,6 @@ to restore a context:
   put the saved context's heading into the context's heading.
   put the saved context's letter height into the context's letter height.
   put the saved context's color into the context's color.
-  put the saved context's number into the context's number.
   put the saved context's pen width into the context's pen width.
   remove the saved context from the context stack.
   destroy the saved context.
@@ -927,7 +917,6 @@ to save a context:
   put the context's heading into the saved context's heading.
   put the context's letter height into the saved context's letter height.
   put the context's color into the saved context's color.
-  put the context's number into the saved context's number.
   put the pen size into the context's pen width.
   put the context's pen width into the saved context's pen width.
   prepend the saved context to the context stack.

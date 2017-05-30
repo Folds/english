@@ -41,6 +41,17 @@ These items should occasionally be moved to demoed fixes.txt.
 \ ======================================   
 The following requests have been partially demonstrated.
 
+245.  Remove number field from turtle's context.
+  Status:  Partially demonstrated.
+  Audience:  All users.
+  Benefit:   Medium.
+  Implementation difficulty:  Medium.  (But much easier
+             than trying to both retain it and make
+             the noodle not depend on the turtle.)
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Not applicable.
+  Requested by Gerry Rzeppa on May 29, 2017.
+
 220.  Fix intermittent crashing bug(s) in editor.
   The editor can crash when attempting to scroll the scrollbar upward.
   The editor can crash when attempting to add characters
@@ -111,17 +122,6 @@ from higher priority to lower priority.
   Demoing difficulty:  n/a.
   Testing difficulty:  n/a.
   Requested by Jasper Paulsen on May 21, 2017.
-
-245.  Remove number field from turtle's context.
-  Status:  Designed.
-  Audience:  All users.
-  Benefit:   Medium.
-  Implementation difficulty:  Medium.  (But much easier
-             than trying to both retain it and make
-             the noodle not depend on the turtle.)
-  Demoing difficulty:  Medium.
-  Testing difficulty:  Not applicable.
-  Requested by Gerry Rzeppa on May 29, 2017.
 
 246.  In the editor, make keypad Ctrl-+ a shortcut for enlarge.
   Status:    Designed.
