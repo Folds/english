@@ -123,43 +123,6 @@ from higher priority to lower priority.
   Testing difficulty:  n/a.
   Requested by Jasper Paulsen on May 21, 2017.
 
-246.  In the editor, make keypad Ctrl-+ a shortcut for enlarge.
-  Status:    Designed.
-  Audience:  Regular users.
-  Benefit:   Minor.
-  Implementation difficulty:  Easy.
-  Demoing difficulty:  Easy.
-  Testing difficulty:  Medium.
-  Requested by Jasper Paulsen on May 30, 2017.
-
-247.  In the editor, make keypad Ctrl-- a shortcut for reduce.
-  Status:    Designed.
-  Audience:  Regular users.
-  Benefit:   Minor.
-  Implementation difficulty:  Easy.
-  Demoing difficulty:  Easy.
-  Testing difficulty:  Medium.
-  Requested by Jasper Paulsen on May 30, 2017.
-
-248.  In the editor, make keyboard Ctrl-+ a shortcut for enlarge.
-  Note that + is usually Shift-=.
-  Status:    Designed.
-  Audience:  Regular users.
-  Benefit:   Minor.
-  Implementation difficulty:  Easy.
-  Demoing difficulty:  Easy.
-  Testing difficulty:  Medium.
-  Requested by Jasper Paulsen on May 30, 2017.
-
-249.  In the editor, make keyboard Ctrl-- a shortcut for reduce.
-  Status:    Designed.
-  Audience:  Regular users.
-  Benefit:   Minor.
-  Implementation difficulty:  Easy.
-  Demoing difficulty:  Easy.
-  Testing difficulty:  Medium.
-  Requested by Jasper Paulsen on May 30, 2017.
-
 250.  Replace long list of colors with color's <adverbs> shade.
   Per the designer of the colors, do not worry about backward
   compatibility -- existing programs have copies of

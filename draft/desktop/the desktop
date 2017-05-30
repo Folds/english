@@ -331,6 +331,10 @@ to decide if an event is any shortcut:
   if the event's key is any function key, say yes.
   if the event is not modified, say no.
   if the event's key is between the a-key and the z-key, say yes.
+  if the event's key is the numpad-cross key, say yes.
+  if the event's key is the equal-sign key, say yes.
+  if the event's key is the dash key, say yes.
+  if the event's key is the numpad-dash key, say yes.
   say no.
 
 to decide if an event is ctrl-tab:
@@ -1615,6 +1619,10 @@ to handle an event (key down - shortcut):
   if the key is the x-key, handle cut; exit.
   if the key is the y-key, handle redo; exit.
   if the key is the z-key, handle undo; exit.
+  if the key is the equal-sign key   and the mode is "writer", handle enlarge; exit.
+  if the key is the numpad-cross key and the mode is "writer", handle enlarge; exit.
+  if the key is the dash key         and the mode is "writer", handle reduce; exit.
+  if the key is the numpad-dash key  and the mode is "writer", handle reduce; exit.
   \ Visual Studio's shortcuts are listed at:
   \ http://www.dofactory.com/ShortCutKeys/ShortCutKeys.aspx
   \ the f1-key is for context-sensitive help.
@@ -1632,7 +1640,10 @@ to handle an event (key down - shortcut):
   cluck.
 
 to handle an event (key down):
-  if the event is any shortcut, handle the event (key down - shortcut); exit.
+\  if the current tab's mode is "writer", debug the event.
+  if the event is any shortcut,
+\    debug the event;
+    handle the event (key down - shortcut); exit.
   if the event is ctrl-tab, handle the event (key down - ctrl-tab); exit.
   if the current tab is nil, exit.
   if the current tab's mode is "finder",

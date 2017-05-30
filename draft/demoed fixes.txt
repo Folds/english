@@ -1045,6 +1045,43 @@ next to the first instance, instead of covering the first instance.
   Testing difficulty:  Medium.
   Requested by Jasper Paulsen on May 20, 2017.
 
+246.  In the writer, make keypad Ctrl-+ a shortcut for enlarge.
+  Status:    Demonstrated.
+  Audience:  Regular users.
+  Benefit:   Minor.
+  Implementation difficulty:  Easy.
+  Demoing difficulty:  Easy.
+  Testing difficulty:  Medium.
+  Requested by Jasper Paulsen on May 30, 2017.
+
+247.  In the writer, make keypad Ctrl-- a shortcut for reduce.
+  Status:    Demonstrated.
+  Audience:  Regular users.
+  Benefit:   Minor.
+  Implementation difficulty:  Easy.
+  Demoing difficulty:  Easy.
+  Testing difficulty:  Medium.
+  Requested by Jasper Paulsen on May 30, 2017.
+
+248.  In the writer, make keyboard Ctrl-+ a shortcut for enlarge.
+  Note that + is usually Shift-=.
+  Status:    Demonstrated.
+  Audience:  Regular users.
+  Benefit:   Minor.
+  Implementation difficulty:  Easy.
+  Demoing difficulty:  Easy.
+  Testing difficulty:  Medium.
+  Requested by Jasper Paulsen on May 30, 2017.
+
+249.  In the writer, make keyboard Ctrl-- a shortcut for reduce.
+  Status:    Demonstrated.
+  Audience:  Regular users.
+  Benefit:   Minor.
+  Implementation difficulty:  Easy.
+  Demoing difficulty:  Easy.
+  Testing difficulty:  Medium.
+  Requested by Jasper Paulsen on May 30, 2017.
+
 234.  Subtly make tabs' top lines of text less noticeable.
   Status:    Demonstrated.
   Audience:  Windows programmers.

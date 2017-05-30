@@ -3819,6 +3819,20 @@ an event is a thing with
   a spot,
   a key, a byte.
 
+to debug an event:
+  put the event's kind then " event is " in a string.
+  if the event's ctrl flag is set,
+    append "Ctrl-" to the string.
+  if the event's alt flag is set,
+    append "Alt-" to the string.
+  if the event's shift flag is set,
+    append "Shift-" to the string.
+  append " key = " then the event's key
+    then "; byte = " then the event's byte
+    then "; at x = " then the event's spot's x
+    then ", y = " then the event's spot's y to the string.
+  debug the string.
+
 the event queue is an event queue.
 
 an event queue is some events.
