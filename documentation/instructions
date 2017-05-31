@@ -40,7 +40,7 @@ ream cal-3024
     text -1 0 0 -1 0 0 10800 14760 11520 15120 0 "page number" "Arial" 320 "right" 0 0 0 yes
        "4"
     end
-    text -1 0 0 -1 0 0 2160 1800 10170 14040 0 "title" "Arial" 320 "left" 0 0 0 yes
+    text -1 0 0 -1 0 0 2160 2160 10170 14400 0 "title" "Arial" 320 "left" 0 0 0 yes
        "INTRODUCTION"
        ""
        "I am the CAL-4009. My primary function is to compile Plain English text files"
@@ -57,7 +57,6 @@ ream cal-3024
        "         (8) the writer, an elegant page editor (used to produce this document);"
        "         (9) the compiler, mentioned above"
        "The ""turtle"" subfolder has routines for drawing turtle graphics."
-       "Bonus files include a stack and a Bible reader."
        ""
        "I am capable of replication and can recompile myself in under five seconds. Which is less time than it takes Microsoft Word just to start up."
        ""
@@ -318,98 +317,98 @@ ream cal-3024
     text -1 0 0 -1 0 0 10800 14760 11520 15120 0 "page number" "Arial" 320 "right" 0 0 0 yes
        "8"
     end
-    text -1 0 0 -1 0 0 2160 1980 10080 3600 0 "title" "Arial" 320 "left" 0 0 0 yes
+    text -1 0 0 -1 0 0 2160 2160 10080 3780 0 "title" "Arial" 320 "left" 0 0 0 yes
        "THE FINDER"
        ""
        "My finder shows you the kluge's file system as it actually is. No gaudy window frames. No silly little pictures. Just the directories and what's in them."
        ""
     end
-    polygon 0 0 0 -1 0 0 2 2160 4050 2160 4770
-    polygon 0 0 0 -1 0 0 2 2520 3690 9720 3690
-    polygon 0 0 0 -1 0 0 2 10080 4050 10080 4770
+    polygon 0 0 0 -1 0 0 2 2160 4230 2160 4950
+    polygon 0 0 0 -1 0 0 2 2520 3870 9720 3870
+    polygon 0 0 0 -1 0 0 2 10080 4230 10080 4950
     group
-      polygon 0 0 0 -1 0 0 9 2160 4050 2160 3960 2166 3876 2182 3802 2216 3746 2272 3712 2346 3696 2430 3690 2520 3690
+      polygon 0 0 0 -1 0 0 9 2160 4230 2160 4140 2166 4056 2182 3982 2216 3926 2272 3892 2346 3876 2430 3870 2520 3870
     end
     group
-      polygon 0 0 0 -1 0 0 9 10080 4050 10080 3960 10076 3876 10058 3802 10024 3746 9968 3712 9896 3696 9810 3690 9720 3690
+      polygon 0 0 0 -1 0 0 9 10080 4230 10080 4140 10076 4056 10058 3982 10024 3926 9968 3892 9896 3876 9810 3870 9720 3870
     end
-    polygon 0 0 0 -1 0 0 2 2160 4770 2160 6030
-    polygon 0 0 0 -1 0 0 2 10080 4770 10080 6030
-    text -1 0 0 -1 0 0 2520 4770 9720 5130 0 "" "Arial" 360 "left" 0 0 0 yes
+    polygon 0 0 0 -1 0 0 2 2160 4950 2160 6210
+    polygon 0 0 0 -1 0 0 2 10080 4950 10080 6210
+    text -1 0 0 -1 0 0 2520 4950 9720 5310 0 "" "Arial" 360 "left" 0 0 0 yes
        "a:\ (removable)"
     end
-    text -1 0 0 -1 0 0 2520 5130 9720 5490 0 "" "Arial" 360 "left" 0 0 0 yes
+    text -1 0 0 -1 0 0 2520 5310 9720 5670 0 "" "Arial" 360 "left" 0 0 0 yes
        "c:\ (fixed)"
     end
-    text -1 0 0 -1 0 0 2520 5490 9720 5850 0 "" "Arial" 360 "left" 0 0 0 yes
+    text -1 0 0 -1 0 0 2520 5670 9720 6030 0 "" "Arial" 360 "left" 0 0 0 yes
        "d:\ (cd-rom)"
     end
-    polygon 0 0 0 -1 0 0 4 2160 6030 5040 5940 7920 6120 10080 6030
-    text -1 0 0 -1 0 0 8730 3990 9090 4410 0 "" "Arial" 360 "center" 0 0 0 yes
+    polygon 0 0 0 -1 0 0 4 2160 6210 5040 6120 7920 6300 10080 6210
+    text -1 0 0 -1 0 0 8730 4170 9090 4590 0 "" "Arial" 360 "center" 0 0 0 yes
        "_"
     end
-    text -1 0 0 -1 0 0 9090 4050 9450 4410 0 "" "Arial" 360 "center" 0 0 0 yes
+    text -1 0 0 -1 0 0 9090 4230 9450 4590 0 "" "Arial" 360 "center" 0 0 0 yes
        "+"
     end
-    text -1 0 0 -1 0 0 9450 4050 9810 4410 0 "" "Arial" 360 "center" 0 0 0 yes
+    text -1 0 0 -1 0 0 9450 4230 9810 4590 0 "" "Arial" 360 "center" 0 0 0 yes
        "X"
     end
-    rectangle 0 0 0 -1 0 0 2520 4050 2880 4410 90
-    text -1 0 0 -1 0 0 2520 4050 2880 4410 0 "" "Arial" 360 "center" 0 0 0 yes
+    rectangle 0 0 0 -1 0 0 2520 4230 2880 4590 90
+    text -1 0 0 -1 0 0 2520 4230 2880 4590 0 "" "Arial" 360 "center" 0 0 0 yes
        "A"
     end
-    rectangle 0 0 0 -1 0 0 2880 4050 3240 4410 90
-    text -1 0 0 -1 0 0 2880 4050 3240 4410 0 "" "Arial" 360 "center" 0 0 0 yes
+    rectangle 0 0 0 -1 0 0 2880 4230 3240 4590 90
+    text -1 0 0 -1 0 0 2880 4230 3240 4590 0 "" "Arial" 360 "center" 0 0 0 yes
        "B"
     end
-    rectangle 0 0 0 -1 0 0 3240 4050 3600 4410 90
-    text -1 0 0 -1 0 0 3240 4050 3600 4410 0 "" "Arial" 360 "center" 0 0 0 yes
+    rectangle 0 0 0 -1 0 0 3240 4230 3600 4590 90
+    text -1 0 0 -1 0 0 3240 4230 3600 4590 0 "" "Arial" 360 "center" 0 0 0 yes
        "C"
     end
-    rectangle 0 0 0 -1 0 0 3600 4050 3960 4410 90
-    text -1 0 0 -1 0 0 3600 4050 3960 4410 0 "" "Arial" 360 "center" 0 0 0 yes
+    rectangle 0 0 0 -1 0 0 3600 4230 3960 4590 90
+    text -1 0 0 -1 0 0 3600 4230 3960 4590 0 "" "Arial" 360 "center" 0 0 0 yes
        "D"
     end
-    rectangle 0 0 0 -1 0 0 3960 4050 4320 4410 90
-    text -1 0 0 -1 0 0 3960 4050 4320 4410 0 "" "Arial" 360 "center" 0 0 0 yes
+    rectangle 0 0 0 -1 0 0 3960 4230 4320 4590 90
+    text -1 0 0 -1 0 0 3960 4230 4320 4590 0 "" "Arial" 360 "center" 0 0 0 yes
        "E"
     end
-    rectangle 0 0 0 -1 0 0 4320 4050 4680 4410 90
-    text -1 0 0 -1 0 0 4320 4050 4680 4410 0 "" "Arial" 360 "center" 0 0 0 yes
+    rectangle 0 0 0 -1 0 0 4320 4230 4680 4590 90
+    text -1 0 0 -1 0 0 4320 4230 4680 4590 0 "" "Arial" 360 "center" 0 0 0 yes
        "F"
     end
-    rectangle 0 0 0 -1 0 0 4680 4050 5040 4410 90
-    text -1 0 0 -1 0 0 4680 4050 5040 4410 0 "" "Arial" 360 "center" 0 0 0 yes
+    rectangle 0 0 0 -1 0 0 4680 4230 5040 4590 90
+    text -1 0 0 -1 0 0 4680 4230 5040 4590 0 "" "Arial" 360 "center" 0 0 0 yes
        "G"
     end
-    rectangle 0 0 0 -1 0 0 8730 4050 9090 4410 90
-    rectangle 0 0 0 -1 0 0 9090 4050 9450 4410 90
-    rectangle 0 0 0 -1 0 0 9450 4050 9810 4410 90
-    rectangle 0 0 0 -1 0 0 5040 4050 5400 4410 90
-    text -1 0 0 -1 0 0 5040 4050 5400 4410 0 "" "Arial" 360 "center" 0 0 0 yes
+    rectangle 0 0 0 -1 0 0 8730 4230 9090 4590 90
+    rectangle 0 0 0 -1 0 0 9090 4230 9450 4590 90
+    rectangle 0 0 0 -1 0 0 9450 4230 9810 4590 90
+    rectangle 0 0 0 -1 0 0 5040 4230 5400 4590 90
+    text -1 0 0 -1 0 0 5040 4230 5400 4590 0 "" "Arial" 360 "center" 0 0 0 yes
        "..."
     end
-    rectangle 0 0 0 -1 0 0 5400 4050 5760 4410 90
-    text -1 0 0 -1 0 0 5400 4050 5760 4410 0 "" "Arial" 360 "center" 0 0 0 yes
+    rectangle 0 0 0 -1 0 0 5400 4230 5760 4590 90
+    text -1 0 0 -1 0 0 5400 4230 5760 4590 0 "" "Arial" 360 "center" 0 0 0 yes
        "W"
     end
-    rectangle 0 0 0 -1 0 0 5760 4050 6120 4410 90
-    text -1 0 0 -1 0 0 5760 4050 6120 4410 0 "" "Arial" 360 "center" 0 0 0 yes
+    rectangle 0 0 0 -1 0 0 5760 4230 6120 4590 90
+    text -1 0 0 -1 0 0 5760 4230 6120 4590 0 "" "Arial" 360 "center" 0 0 0 yes
        "X"
     end
-    rectangle 0 0 0 -1 0 0 6120 4050 6480 4410 90
-    text -1 0 0 -1 0 0 6120 4050 6480 4410 0 "" "Arial" 360 "center" 0 0 0 yes
+    rectangle 0 0 0 -1 0 0 6120 4230 6480 4590 90
+    text -1 0 0 -1 0 0 6120 4230 6480 4590 0 "" "Arial" 360 "center" 0 0 0 yes
        "Y"
     end
-    rectangle 0 0 0 -1 0 0 6480 4050 6840 4410 90
-    text -1 0 0 -1 0 0 6480 4050 6840 4410 0 "" "Arial" 360 "center" 0 0 0 yes
+    rectangle 0 0 0 -1 0 0 6480 4230 6840 4590 90
+    text -1 0 0 -1 0 0 6480 4230 6840 4590 0 "" "Arial" 360 "center" 0 0 0 yes
        "Z"
     end
-    rectangle 0 0 0 -1 0 0 6840 4050 8280 4410 90
-    text -1 0 0 -1 0 0 6960 4050 8160 4410 0 "" "Arial" 360 "right" 0 0 0 yes
+    rectangle 0 0 0 -1 0 0 6840 4230 8280 4590 90
+    text -1 0 0 -1 0 0 6960 4230 8160 4590 0 "" "Arial" 360 "right" 0 0 0 yes
        "3 items"
     end
-    text -1 0 0 -1 0 0 2160 6540 10260 13680 0 "" "arial" 320 "left" 0 0 0 yes
+    text -1 0 0 -1 0 0 2160 6720 10260 13860 0 "" "arial" 320 "left" 0 0 0 yes
        "Each work area is initially positioned at the root level, as shown above."
        "If you really need work areas to start somewhere else, you can.  "
        "The COMMAND LINE section of my glossary tells how."
@@ -595,7 +594,7 @@ ream cal-3024
     text -1 0 0 -1 0 0 10800 14760 11520 15120 0 "page number" "Arial" 320 "right" 0 0 0 yes
        "10"
     end
-    text -1 0 0 -1 0 0 2160 1800 10080 4680 0 "title" "Arial" 320 "left" 0 0 0 yes
+    text -1 0 0 -1 0 0 2160 1890 10080 4770 0 "title" "Arial" 320 "left" 0 0 0 yes
        "THE WRITER"
        ""
        "My writer is a full-featured, what-you-see-is-what-you-get page-layout program that makes it easy for me to tell you what I know about myself. "
@@ -1163,7 +1162,7 @@ ream cal-3024
     text -1 0 0 -1 0 0 10800 14760 11520 15120 0 "page number" "Arial" 320 "right" 0 0 0 yes
        "17"
     end
-    text -1 0 0 -1 0 0 2160 1980 10440 4860 0 "title" "Arial" 320 "left" 0 0 0 yes
+    text -1 0 0 -1 0 0 2160 2160 10440 4860 0 "title" "Arial" 320 "left" 0 0 0 yes
        "THE PROJECT DIRECTORY"
        ""
        "Now that we're agreed on the design, let's start programming."
@@ -1207,37 +1206,37 @@ ream cal-3024
     text -1 0 0 -1 0 0 2520 7020 9720 7380 0 "" "Arial" 360 "left" 0 0 0 yes
        "c:\another directory that you already had"
     end
-    rectangle 0 0 0 -1 0 0 2520 10980 2880 11340 90
-    text -1 0 0 -1 0 0 2520 10980 2880 11340 0 "" "Arial" 360 "center" 0 0 0 yes
+    rectangle 0 0 0 -1 0 0 2520 10890 2880 11250 90
+    text -1 0 0 -1 0 0 2520 10890 2880 11250 0 "" "Arial" 360 "center" 0 0 0 yes
        "A"
     end
-    polygon 0 0 0 -1 0 0 2 2160 10980 2160 11700
-    polygon 0 0 0 -1 0 0 2 2520 10620 9720 10620
-    polygon 0 0 0 -1 0 0 2 10080 10980 10080 11700
-    rectangle 0 0 0 -1 0 0 2880 10980 3240 11340 90
-    text -1 0 0 -1 0 0 2880 10980 3240 11340 0 "" "Arial" 360 "center" 0 0 0 yes
+    polygon 0 0 0 -1 0 0 2 2160 10890 2160 11610
+    polygon 0 0 0 -1 0 0 2 2520 10530 9720 10530
+    polygon 0 0 0 -1 0 0 2 10080 10890 10080 11610
+    rectangle 0 0 0 -1 0 0 2880 10890 3240 11250 90
+    text -1 0 0 -1 0 0 2880 10890 3240 11250 0 "" "Arial" 360 "center" 0 0 0 yes
        "B"
     end
-    rectangle 0 0 0 -1 0 0 3240 10980 3600 11340 90
-    text -1 0 0 -1 0 0 3240 10980 3600 11340 0 "" "Arial" 360 "center" 0 0 0 yes
+    rectangle 0 0 0 -1 0 0 3240 10890 3600 11250 90
+    text -1 0 0 -1 0 0 3240 10890 3600 11250 0 "" "Arial" 360 "center" 0 0 0 yes
        "C"
     end
     group
-      polygon 0 0 0 -1 0 0 9 2160 10980 2160 10890 2166 10806 2182 10732 2216 10676 2272 10642 2346 10626 2430 10620 2520 10620
+      polygon 0 0 0 -1 0 0 9 2160 10890 2160 10800 2166 10716 2182 10642 2216 10586 2272 10552 2346 10536 2430 10530 2520 10530
     end
     group
-      polygon 0 0 0 -1 0 0 9 10080 10980 10080 10890 10076 10806 10058 10732 10024 10676 9968 10642 9896 10626 9810 10620 9720 10620
+      polygon 0 0 0 -1 0 0 9 10080 10890 10080 10800 10076 10716 10058 10642 10024 10586 9968 10552 9896 10536 9810 10530 9720 10530
     end
-    polygon 0 0 0 -1 0 0 2 2160 11700 2160 12960
-    polygon 0 0 0 -1 0 0 2 10080 11700 10080 12960
-    text -1 0 0 -1 0 0 2520 12060 9720 12420 0 "" "Arial" 360 "left" 0 0 0 yes
+    polygon 0 0 0 -1 0 0 2 2160 11610 2160 12870
+    polygon 0 0 0 -1 0 0 2 10080 11610 10080 12870
+    text -1 0 0 -1 0 0 2520 11970 9720 12330 0 "" "Arial" 360 "left" 0 0 0 yes
        "c:\cal monet\how to paint"
     end
-    text -1 0 0 -1 0 0 2520 11700 9720 12060 0 "" "Arial" 360 "left" 0 0 0 yes
+    text -1 0 0 -1 0 0 2520 11610 9720 11970 0 "" "Arial" 360 "left" 0 0 0 yes
        "c:\cal monet\noodle\"
     end
     polygon 0 0 0 -1 0 0 4 2160 7740 5040 7650 7920 7830 10080 7740
-    polygon 0 0 0 -1 0 0 4 2160 12960 5040 12870 7920 13050 10080 12960
+    polygon 0 0 0 -1 0 0 4 2160 12870 5040 12780 7920 12960 10080 12870
     text -1 0 0 -1 0 0 8730 5160 9090 5580 0 "" "Arial" 360 "center" 0 0 0 yes
        "_"
     end
@@ -1290,59 +1289,59 @@ ream cal-3024
     text -1 0 0 -1 0 0 6960 5220 8160 5580 0 "" "Arial" 360 "right" 0 0 0 yes
        "4 items"
     end
-    text -1 0 0 -1 0 0 8730 10920 9090 11340 0 "" "Arial" 360 "center" 0 0 0 yes
+    text -1 0 0 -1 0 0 8730 10830 9090 11250 0 "" "Arial" 360 "center" 0 0 0 yes
        "_"
     end
-    text -1 0 0 -1 0 0 9090 10980 9450 11340 0 "" "Arial" 360 "center" 0 0 0 yes
+    text -1 0 0 -1 0 0 9090 10890 9450 11250 0 "" "Arial" 360 "center" 0 0 0 yes
        "+"
     end
-    text -1 0 0 -1 0 0 9450 10980 9810 11340 0 "" "Arial" 360 "center" 0 0 0 yes
+    text -1 0 0 -1 0 0 9450 10890 9810 11250 0 "" "Arial" 360 "center" 0 0 0 yes
        "X"
     end
-    rectangle 0 0 0 -1 0 0 3600 10980 3960 11340 90
-    text -1 0 0 -1 0 0 3600 10980 3960 11340 0 "" "Arial" 360 "center" 0 0 0 yes
+    rectangle 0 0 0 -1 0 0 3600 10890 3960 11250 90
+    text -1 0 0 -1 0 0 3600 10890 3960 11250 0 "" "Arial" 360 "center" 0 0 0 yes
        "D"
     end
-    rectangle 0 0 0 -1 0 0 3960 10980 4320 11340 90
-    text -1 0 0 -1 0 0 3960 10980 4320 11340 0 "" "Arial" 360 "center" 0 0 0 yes
+    rectangle 0 0 0 -1 0 0 3960 10890 4320 11250 90
+    text -1 0 0 -1 0 0 3960 10890 4320 11250 0 "" "Arial" 360 "center" 0 0 0 yes
        "E"
     end
-    rectangle 0 0 0 -1 0 0 4320 10980 4680 11340 90
-    text -1 0 0 -1 0 0 4320 10980 4680 11340 0 "" "Arial" 360 "center" 0 0 0 yes
+    rectangle 0 0 0 -1 0 0 4320 10890 4680 11250 90
+    text -1 0 0 -1 0 0 4320 10890 4680 11250 0 "" "Arial" 360 "center" 0 0 0 yes
        "F"
     end
-    rectangle 0 0 0 -1 0 0 4680 10980 5040 11340 90
-    text -1 0 0 -1 0 0 4680 10980 5040 11340 0 "" "Arial" 360 "center" 0 0 0 yes
+    rectangle 0 0 0 -1 0 0 4680 10890 5040 11250 90
+    text -1 0 0 -1 0 0 4680 10890 5040 11250 0 "" "Arial" 360 "center" 0 0 0 yes
        "G"
     end
-    rectangle 0 0 0 -1 0 0 8730 10980 9090 11340 90
-    rectangle 0 0 0 -1 0 0 9090 10980 9450 11340 90
-    rectangle 0 0 0 -1 0 0 9450 10980 9810 11340 90
-    rectangle 0 0 0 -1 0 0 5040 10980 5400 11340 90
-    text -1 0 0 -1 0 0 5040 10980 5400 11340 0 "" "Arial" 360 "center" 0 0 0 yes
+    rectangle 0 0 0 -1 0 0 8730 10890 9090 11250 90
+    rectangle 0 0 0 -1 0 0 9090 10890 9450 11250 90
+    rectangle 0 0 0 -1 0 0 9450 10890 9810 11250 90
+    rectangle 0 0 0 -1 0 0 5040 10890 5400 11250 90
+    text -1 0 0 -1 0 0 5040 10890 5400 11250 0 "" "Arial" 360 "center" 0 0 0 yes
        "..."
     end
-    rectangle 0 0 0 -1 0 0 5400 10980 5760 11340 90
-    text -1 0 0 -1 0 0 5400 10980 5760 11340 0 "" "Arial" 360 "center" 0 0 0 yes
+    rectangle 0 0 0 -1 0 0 5400 10890 5760 11250 90
+    text -1 0 0 -1 0 0 5400 10890 5760 11250 0 "" "Arial" 360 "center" 0 0 0 yes
        "W"
     end
-    rectangle 0 0 0 -1 0 0 5760 10980 6120 11340 90
-    text -1 0 0 -1 0 0 5760 10980 6120 11340 0 "" "Arial" 360 "center" 0 0 0 yes
+    rectangle 0 0 0 -1 0 0 5760 10890 6120 11250 90
+    text -1 0 0 -1 0 0 5760 10890 6120 11250 0 "" "Arial" 360 "center" 0 0 0 yes
        "X"
     end
-    rectangle 0 0 0 -1 0 0 6120 10980 6480 11340 90
-    text -1 0 0 -1 0 0 6120 10980 6480 11340 0 "" "Arial" 360 "center" 0 0 0 yes
+    rectangle 0 0 0 -1 0 0 6120 10890 6480 11250 90
+    text -1 0 0 -1 0 0 6120 10890 6480 11250 0 "" "Arial" 360 "center" 0 0 0 yes
        "Y"
     end
-    rectangle 0 0 0 -1 0 0 6480 10980 6840 11340 90
-    text -1 0 0 -1 0 0 6480 10980 6840 11340 0 "" "Arial" 360 "center" 0 0 0 yes
+    rectangle 0 0 0 -1 0 0 6480 10890 6840 11250 90
+    text -1 0 0 -1 0 0 6480 10890 6840 11250 0 "" "Arial" 360 "center" 0 0 0 yes
        "Z"
     end
-    rectangle 0 0 0 -1 0 0 6840 10980 8280 11340 90
-    text -1 0 0 -1 0 0 6960 10980 8160 11340 0 "" "Arial" 360 "right" 0 0 0 yes
+    rectangle 0 0 0 -1 0 0 6840 10890 8280 11250 90
+    text -1 0 0 -1 0 0 6960 10890 8160 11250 0 "" "Arial" 360 "right" 0 0 0 yes
        "2 items"
     end
-    text -1 0 0 -1 0 0 2160 13500 10080 13860 0 "" "arial" 320 "left" 0 0 0 yes
+    text -1 0 0 -1 0 0 2160 13410 10080 13770 0 "" "arial" 320 "left" 0 0 0 yes
        "And now we're ready to write some Plain English code."
     end
     text -1 0 0 -1 0 0 2160 8100 10440 10260 0 "" "arial" 320 "left" 0 0 0 yes
@@ -6708,12 +6707,12 @@ ream cal-3024
     end
   end
   page 12240 15840 1 1440
-    text -1 0 0 -1 0 0 2160 1980 10080 3240 0 "title" "Arial" 320 "left" 0 0 0 yes
+    text -1 0 0 -1 0 0 2160 2160 10080 3420 0 "title" "Arial" 320 "left" 0 0 0 yes
        "COMMAND LINE, more options"
        ""
        "Here are some more of my command line options:"
     end
-    text -1 0 0 -1 0 0 2160 3420 3240 13680 0 "" "Arial" 320 "left" 0 0 0 yes
+    text -1 0 0 -1 0 0 2160 3600 3240 13860 0 "" "Arial" 320 "left" 0 0 0 yes
        "/folder="
        ""
        ""
@@ -6743,7 +6742,7 @@ ream cal-3024
        "/list"
        ""
     end
-    text -1 0 0 -1 0 0 3240 3420 10080 14040 0 "" "Arial" 320 "left" 0 0 0 yes
+    text -1 0 0 -1 0 0 3240 3600 10080 14220 0 "" "Arial" 320 "left" 0 0 0 yes
        "tells me what folder the finder should start in."
        "Put the folder in quotes right after the equals sign, like this:"
        "/folder=""C:\big folder\smaller folder"""
@@ -7262,7 +7261,7 @@ ream cal-3024
     polygon 0 0 0 -1 0 0 2 5850 6750 6390 6300
   end
   page 12240 15840 1 1440
-    text -1 0 0 -1 0 0 2160 1440 10440 14760 0 "title" "Arial" 320 "left" 0 0 0 yes
+    text -1 0 0 -1 0 0 2160 2160 10440 14400 0 "title" "Arial" 320 "left" 0 0 0 yes
        "EVENTS"
        ""
        "The kluge insists that we use its convoluted, non-procedural processing model with its hundreds of preposterous messages and codes. Fortunately, my noodle includes definitions that reduce this monstrosity to just thirteen simple events that can be handled in a purely procedural manner.  Here's the scoop:"
@@ -8659,7 +8658,7 @@ ream cal-3024
     end
   end
   page 12240 15840 1 1440
-    text -1 0 0 -1 0 0 2160 1980 10800 14400 0 "title" "Arial" 320 "left" 0 0 0 yes
+    text -1 0 0 -1 0 0 2160 2160 10800 13680 0 "title" "Arial" 320 "left" 0 0 0 yes
        "RUNNING OPTIONS"
        ""
        "You can tell me some things to do, even before I start.  The ""Command Line"" entry talks about them.  When I start, I follow the directions in the command line options."
@@ -9105,24 +9104,24 @@ ream cal-3024
     end
   end
   page 12240 15840 1 1440
-    text -1 0 0 -1 0 0 2160 1800 10080 3240 0 "title" "Arial" 320 "left" 0 0 0 yes
+    text -1 0 0 -1 0 0 2160 2160 10080 3600 0 "title" "Arial" 320 "left" 0 0 0 yes
        "TESTING, continued."
        ""
        "A typical test looks like this:"
        ""
     end
-    polygon 0 0 0 -1 0 0 2 2160 3420 2160 4140
-    polygon 0 0 0 -1 0 0 2 2520 3240 9720 3240
-    polygon 0 0 0 -1 0 0 2 10080 3420 10080 4140
+    polygon 0 0 0 -1 0 0 2 2160 3690 2160 4410
+    polygon 0 0 0 -1 0 0 2 2520 3510 9720 3510
+    polygon 0 0 0 -1 0 0 2 10080 3690 10080 4410
     group
-      polygon 0 0 0 -1 0 0 9 2160 3600 2160 3510 2166 3426 2182 3352 2216 3296 2272 3262 2346 3246 2430 3240 2520 3240
+      polygon 0 0 0 -1 0 0 9 2160 3870 2160 3780 2166 3696 2182 3622 2216 3566 2272 3532 2346 3516 2430 3510 2520 3510
     end
     group
-      polygon 0 0 0 -1 0 0 9 10080 3600 10080 3510 10076 3426 10058 3352 10024 3296 9968 3262 9896 3246 9810 3240 9720 3240
+      polygon 0 0 0 -1 0 0 9 10080 3870 10080 3780 10076 3696 10058 3622 10024 3566 9968 3532 9896 3516 9810 3510 9720 3510
     end
-    polygon 0 0 0 -1 0 0 2 2160 4140 2160 7560
-    polygon 0 0 0 -1 0 0 2 10080 4140 10080 7560
-    text -1 0 0 -1 0 0 2520 4320 9720 7200 0 "" "Courier New" 288 "left" 0 0 0 yes
+    polygon 0 0 0 -1 0 0 2 2160 4410 2160 7830
+    polygon 0 0 0 -1 0 0 2 10080 4410 10080 7830
+    text -1 0 0 -1 0 0 2520 4590 9720 7470 0 "" "Courier New" 288 "left" 0 0 0 yes
        "to test (the noodle - trim length from end of string):"
        "  create a test result about ""the noodle"" "
        "    and ""trim length from end of string"""
@@ -9133,117 +9132,117 @@ ream cal-3024
        "  stash the test result given the actual."
        ""
     end
-    text -1 0 0 -1 0 0 2160 7562 4140 7922 0 "" "Arial" 360 "center" 0 0 0 yes
+    text -1 0 0 -1 0 0 2160 7832 4140 8192 0 "" "Arial" 360 "center" 0 0 0 yes
        "the noodle"
     end
     group
-      polygon 0 0 0 -1 0 0 9 2160 7560 2160 7650 2166 7736 2182 7808 2216 7864 2272 7898 2346 7916 2430 7920 2520 7920
+      polygon 0 0 0 -1 0 0 9 2160 7830 2160 7920 2166 8006 2182 8078 2216 8134 2272 8168 2346 8186 2430 8190 2520 8190
     end
     group
-      polygon 0 0 0 -1 0 0 9 10080 7560 10080 7650 10076 7736 10058 7808 10024 7864 9968 7898 9896 7916 9810 7920 9720 7920
+      polygon 0 0 0 -1 0 0 9 10080 7830 10080 7920 10076 8006 10058 8078 10024 8134 9968 8168 9896 8186 9810 8190 9720 8190
     end
     group
-      polygon 0 0 0 -1 0 0 9 4140 7560 4140 7650 4136 7736 4118 7808 4084 7864 4028 7898 3956 7916 3870 7920 3780 7920
+      polygon 0 0 0 -1 0 0 9 4140 7830 4140 7920 4136 8006 4118 8078 4084 8134 4028 8168 3956 8186 3870 8190 3780 8190
     end
     group
-      polygon 0 0 0 -1 0 0 9 6120 7560 6120 7650 6116 7736 6098 7808 6064 7864 6008 7898 5936 7916 5850 7920 5760 7920
+      polygon 0 0 0 -1 0 0 9 6120 7830 6120 7920 6116 8006 6098 8078 6064 8134 6008 8168 5936 8186 5850 8190 5760 8190
     end
     group
-      polygon 0 0 0 -1 0 0 9 8100 7560 8100 7650 8096 7736 8078 7808 8044 7864 7988 7898 7916 7916 7830 7920 7740 7920
+      polygon 0 0 0 -1 0 0 9 8100 7830 8100 7920 8096 8006 8078 8078 8044 8134 7988 8168 7916 8186 7830 8190 7740 8190
     end
     group
-      polygon 0 0 0 -1 0 0 9 4140 7560 4140 7650 4146 7736 4162 7808 4196 7864 4252 7898 4326 7916 4410 7920 4500 7920
+      polygon 0 0 0 -1 0 0 9 4140 7830 4140 7920 4146 8006 4162 8078 4196 8134 4252 8168 4326 8186 4410 8190 4500 8190
     end
     group
-      polygon 0 0 0 -1 0 0 9 6120 7560 6120 7650 6126 7736 6142 7808 6176 7864 6232 7898 6306 7916 6390 7920 6480 7920
+      polygon 0 0 0 -1 0 0 9 6120 7830 6120 7920 6126 8006 6142 8078 6176 8134 6232 8168 6306 8186 6390 8190 6480 8190
     end
     group
-      polygon 0 0 0 -1 0 0 9 8100 7560 8100 7650 8106 7736 8122 7808 8156 7864 8212 7898 8286 7916 8370 7920 8460 7920
+      polygon 0 0 0 -1 0 0 9 8100 7830 8100 7920 8106 8006 8122 8078 8156 8134 8212 8168 8286 8186 8370 8190 8460 8190
     end
-    polygon 0 0 0 -1 0 0 2 2520 7920 3780 7920
-    polygon 0 0 0 -1 0 0 2 4500 7920 5760 7920
-    polygon 0 0 0 -1 0 0 2 6480 7920 7740 7920
-    polygon 0 0 0 -1 0 0 2 8460 7920 9720 7920
-    polygon 0 0 0 -1 0 0 2 4140 7246 10080 7246
-    polygon 0 0 0 -1 0 0 2 4140 7246 4140 7560
-    polygon 0 0 0 -1 0 0 2 6120 7246 6120 7560
-    polygon 0 0 0 -1 0 0 2 8100 7246 8100 7560
-    text -1 0 0 -1 0 0 8730 3540 9090 3960 0 "" "Arial" 360 "center" 0 0 0 yes
+    polygon 0 0 0 -1 0 0 2 2520 8190 3780 8190
+    polygon 0 0 0 -1 0 0 2 4500 8190 5760 8190
+    polygon 0 0 0 -1 0 0 2 6480 8190 7740 8190
+    polygon 0 0 0 -1 0 0 2 8460 8190 9720 8190
+    polygon 0 0 0 -1 0 0 2 4140 7516 10080 7516
+    polygon 0 0 0 -1 0 0 2 4140 7516 4140 7830
+    polygon 0 0 0 -1 0 0 2 6120 7516 6120 7830
+    polygon 0 0 0 -1 0 0 2 8100 7516 8100 7830
+    text -1 0 0 -1 0 0 8730 3810 9090 4230 0 "" "Arial" 360 "center" 0 0 0 yes
        "_"
     end
-    text -1 0 0 -1 0 0 9090 3600 9450 3960 0 "" "Arial" 360 "center" 0 0 0 yes
+    text -1 0 0 -1 0 0 9090 3870 9450 4230 0 "" "Arial" 360 "center" 0 0 0 yes
        "+"
     end
-    text -1 0 0 -1 0 0 9450 3600 9810 3960 0 "" "Arial" 360 "center" 0 0 0 yes
+    text -1 0 0 -1 0 0 9450 3870 9810 4230 0 "" "Arial" 360 "center" 0 0 0 yes
        "X"
     end
-    rectangle 0 0 0 -1 0 0 2520 3600 2880 3960 90
-    text -1 0 0 -1 0 0 2520 3600 2880 3960 0 "" "Arial" 360 "center" 0 0 0 yes
+    rectangle 0 0 0 -1 0 0 2520 3870 2880 4230 90
+    text -1 0 0 -1 0 0 2520 3870 2880 4230 0 "" "Arial" 360 "center" 0 0 0 yes
        "A"
     end
-    rectangle 0 0 0 -1 0 0 2880 3600 3240 3960 90
-    text -1 0 0 -1 0 0 2880 3600 3240 3960 0 "" "Arial" 360 "center" 0 0 0 yes
+    rectangle 0 0 0 -1 0 0 2880 3870 3240 4230 90
+    text -1 0 0 -1 0 0 2880 3870 3240 4230 0 "" "Arial" 360 "center" 0 0 0 yes
        "B"
     end
-    rectangle 0 0 0 -1 0 0 3240 3600 3600 3960 90
-    text -1 0 0 -1 0 0 3240 3600 3600 3960 0 "" "Arial" 360 "center" 0 0 0 yes
+    rectangle 0 0 0 -1 0 0 3240 3870 3600 4230 90
+    text -1 0 0 -1 0 0 3240 3870 3600 4230 0 "" "Arial" 360 "center" 0 0 0 yes
        "C"
     end
-    rectangle 0 0 0 -1 0 0 3600 3600 3960 3960 90
-    text -1 0 0 -1 0 0 3600 3600 3960 3960 0 "" "Arial" 360 "center" 0 0 0 yes
+    rectangle 0 0 0 -1 0 0 3600 3870 3960 4230 90
+    text -1 0 0 -1 0 0 3600 3870 3960 4230 0 "" "Arial" 360 "center" 0 0 0 yes
        "D"
     end
-    rectangle 0 0 0 -1 0 0 3960 3600 4320 3960 90
-    text -1 0 0 -1 0 0 3960 3600 4320 3960 0 "" "Arial" 360 "center" 0 0 0 yes
+    rectangle 0 0 0 -1 0 0 3960 3870 4320 4230 90
+    text -1 0 0 -1 0 0 3960 3870 4320 4230 0 "" "Arial" 360 "center" 0 0 0 yes
        "E"
     end
-    rectangle 0 0 0 -1 0 0 4320 3600 4680 3960 90
-    text -1 0 0 -1 0 0 4320 3600 4680 3960 0 "" "Arial" 360 "center" 0 0 0 yes
+    rectangle 0 0 0 -1 0 0 4320 3870 4680 4230 90
+    text -1 0 0 -1 0 0 4320 3870 4680 4230 0 "" "Arial" 360 "center" 0 0 0 yes
        "F"
     end
-    rectangle 0 0 0 -1 0 0 4680 3600 5040 3960 90
-    text -1 0 0 -1 0 0 4680 3600 5040 3960 0 "" "Arial" 360 "center" 0 0 0 yes
+    rectangle 0 0 0 -1 0 0 4680 3870 5040 4230 90
+    text -1 0 0 -1 0 0 4680 3870 5040 4230 0 "" "Arial" 360 "center" 0 0 0 yes
        "G"
     end
-    rectangle 0 0 0 -1 0 0 8730 3600 9090 3960 90
-    rectangle 0 0 0 -1 0 0 9090 3600 9450 3960 90
-    rectangle 0 0 0 -1 0 0 9450 3600 9810 3960 90
-    rectangle 0 0 0 -1 0 0 5040 3600 5400 3960 90
-    text -1 0 0 -1 0 0 5040 3600 5400 3960 0 "" "Arial" 360 "center" 0 0 0 yes
+    rectangle 0 0 0 -1 0 0 8730 3870 9090 4230 90
+    rectangle 0 0 0 -1 0 0 9090 3870 9450 4230 90
+    rectangle 0 0 0 -1 0 0 9450 3870 9810 4230 90
+    rectangle 0 0 0 -1 0 0 5040 3870 5400 4230 90
+    text -1 0 0 -1 0 0 5040 3870 5400 4230 0 "" "Arial" 360 "center" 0 0 0 yes
        "..."
     end
-    rectangle 0 0 0 -1 0 0 5400 3600 5760 3960 90
-    text -1 0 0 -1 0 0 5400 3600 5760 3960 0 "" "Arial" 360 "center" 0 0 0 yes
+    rectangle 0 0 0 -1 0 0 5400 3870 5760 4230 90
+    text -1 0 0 -1 0 0 5400 3870 5760 4230 0 "" "Arial" 360 "center" 0 0 0 yes
        "W"
     end
-    rectangle 0 0 0 -1 0 0 5760 3600 6120 3960 90
-    text -1 0 0 -1 0 0 5760 3600 6120 3960 0 "" "Arial" 360 "center" 0 0 0 yes
+    rectangle 0 0 0 -1 0 0 5760 3870 6120 4230 90
+    text -1 0 0 -1 0 0 5760 3870 6120 4230 0 "" "Arial" 360 "center" 0 0 0 yes
        "X"
     end
-    rectangle 0 0 0 -1 0 0 6120 3600 6480 3960 90
-    text -1 0 0 -1 0 0 6120 3600 6480 3960 0 "" "Arial" 360 "center" 0 0 0 yes
+    rectangle 0 0 0 -1 0 0 6120 3870 6480 4230 90
+    text -1 0 0 -1 0 0 6120 3870 6480 4230 0 "" "Arial" 360 "center" 0 0 0 yes
        "Y"
     end
-    rectangle 0 0 0 -1 0 0 6480 3600 6840 3960 90
-    text -1 0 0 -1 0 0 6480 3600 6840 3960 0 "" "Arial" 360 "center" 0 0 0 yes
+    rectangle 0 0 0 -1 0 0 6480 3870 6840 4230 90
+    text -1 0 0 -1 0 0 6480 3870 6840 4230 0 "" "Arial" 360 "center" 0 0 0 yes
        "Z"
     end
-    rectangle 0 0 0 -1 0 0 6840 3600 8280 3960 90
-    text -1 0 0 -1 0 0 6960 3600 8160 3960 0 "" "Arial" 360 "right" 0 0 0 yes
+    rectangle 0 0 0 -1 0 0 6840 3870 8280 4230 90
+    text -1 0 0 -1 0 0 6960 3870 8160 4230 0 "" "Arial" 360 "right" 0 0 0 yes
        "10433:1"
     end
-    rectangle 0 0 0 -1 0 0 9810 6526 10080 6796 90
-    rectangle 0 0 0 -1 0 0 9810 4230 10080 6526 90
-    rectangle 0 0 0 -1 0 0 9810 6796 10080 6976 90
+    rectangle 0 0 0 -1 0 0 9810 6796 10080 7066 90
+    rectangle 0 0 0 -1 0 0 9810 4500 10080 6796 90
+    rectangle 0 0 0 -1 0 0 9810 7066 10080 7246 90
     group
-      rectangle 0 0 0 -1 0 0 9810 3960 10080 4230 90
-      polygon 0 0 0 0 0 625 9 9856 4170 9878 4170 9924 4152 9982 4152 10028 4170 10050 4170 9958 4020 9948 4020 9856 4170
+      rectangle 0 0 0 -1 0 0 9810 4230 10080 4500 90
+      polygon 0 0 0 0 0 625 9 9856 4440 9878 4440 9924 4422 9982 4422 10028 4440 10050 4440 9958 4290 9948 4290 9856 4440
     end
     group
-      rectangle 0 0 0 -1 0 0 9810 6976 10080 7246 90
-      polygon 0 0 0 0 0 625 9 9856 7036 9878 7036 9924 7054 9982 7054 10028 7036 10050 7036 9958 7186 9948 7186 9856 7036
+      rectangle 0 0 0 -1 0 0 9810 7246 10080 7516 90
+      polygon 0 0 0 0 0 625 9 9856 7306 9878 7306 9924 7324 9982 7324 10028 7306 10050 7306 9958 7456 9948 7456 9856 7306
     end
-    text -1 0 0 -1 0 0 2160 8280 10440 14400 0 "" "Arial" 320 "left" 0 0 0 yes
+    text -1 0 0 -1 0 0 2160 8640 10440 14040 0 "" "Arial" 320 "left" 0 0 0 yes
        "You can name a test whatever you want, but I suggest ""to test"" followed by "
        "a qualifier.  The qualifier should have the part of the program being tested, "
        "and a description of the test.  The test should create a test result about the "
@@ -9260,7 +9259,7 @@ ream cal-3024
     text -1 0 0 -1 0 0 10800 14760 11520 15120 0 "page number" "Arial" 320 "right" 0 0 0 yes
        "119"
     end
-    text -1 0 0 -1 0 0 2160 7246 4140 7606 0 "" "Arial" 360 "center" 0 0 500 yes
+    text -1 0 0 -1 0 0 2160 7516 4140 7876 0 "" "Arial" 360 "center" 0 0 500 yes
        "noodle\"
     end
   end
@@ -9825,7 +9824,7 @@ ream cal-3024
        "reference, 80, 98"
        ""
     end
-    text -1 0 0 -1 0 0 8550 2880 10710 15120 0 "" "Arial" 240 "left" 0 0 0 yes
+    text -1 0 0 -1 0 0 8460 2880 10620 15120 0 "" "Arial" 240 "left" 0 0 0 yes
        "refreshing, "
        "        26-27, 75, 77, 88"
        "remarks, 20-21, 58, 69"

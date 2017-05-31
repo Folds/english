@@ -53,14 +53,16 @@ to adjust the page number of a page:
   if the page is nil, exit.
   clear the page's page number.
   find a shape given the page's shape refers and "page number".
-  if the shape is not nil,
-    put the shape's text's first line into the page's page number; exit.
+  adjust the page's page number string given the shape.
   find another shape given the page's shape refers and "page number (even)".
-  if the other shape is not nil,
-    put the other shape's text's first line into the page's page number; exit.
+  adjust the page's page number string given the other shape.
   find a third shape given the page's shape refers and "page number (odd)".
-  if the third shape is not nil,
-    put the third shape's text's first line into the page's page number; exit.
+  adjust the page's page number string given the third shape.
+
+to adjust a page number string given a shape:
+  if the shape is nil, exit.
+  if the shape's text is nil, exit.
+  put the shape's text's first line into the page number string.
 
 to adjust a shape:
   if the shape is nil, exit.
@@ -94,7 +96,8 @@ to adjust the title of a page:
   put "untitled" into the page's title.
   find a shape given the page's shape refers and "title".
   if the shape is nil, exit.
-  put the shape's text's first non-blank line into the page's title.
+  if the shape's text is not nil,
+    put the shape's text's first non-blank line into the page's title.
   if the page's title is blank, put "untitled" into the page's title; exit.
   if the page's title ends with "...", exit.
   if the page's title ends with "..", append "." to the page's title; exit.
@@ -327,10 +330,12 @@ to check spelling given a page and a flag (shapes):
   clear the flag.
   if the page is nil, exit.
   get a shape refer with which to start finding given the page.
-  get the find anchor with which to start finding given the shape refer and the page.
+  get the find anchor with which to start finding
+    given the shape refer and the page.
   loop.
     if the shape refer is nil, exit.
-    find the next misspelling in the shape refer's shape's text given the flag.
+    if the shape refer's shape is not nil,
+      find the next misspelling in the shape refer's shape's text given the flag.
     if the flag is set, begin edit on the page given the shape refer's shape; exit.
     put 1 and 1 into the find anchor.
     put the shape refer's next into the shape refer.
@@ -604,6 +609,12 @@ to decide if a buffer is document-format:
   if the rider's token is not the document version, say no.
   say yes.
 
+to decide if current document does exist:
+  if the current tab is nil, say no.
+  if the current tab's node is nil, say no.
+  if the current tab's node's document is nil, say no.
+  say yes.
+
 to decide if current document was already modified:
   if the current tab is nil, say no.
   if the current tab's node is nil, say no.
@@ -682,6 +693,7 @@ to decide if a document needs a font name to be loaded (custom):
   repeat.
 
 to decide if the edge of a page is visible in a document:
+  if the document is nil, say no.
   if the page is nil, say no.
   put the page's edge into a box.
   globalize the box given the document's origin.
@@ -894,6 +906,7 @@ to decide if a shape is relying on a font name (group):
 to decide if a shape is relying on a font name (text):
   if the shape is nil, say no.
   if the shape's kind is not "text", say no.
+  if the shape's text is nil, say no.
   if the shape's text's font's name is the font name, say yes.
   say no.
 
@@ -1748,7 +1761,8 @@ to find given a page and a flag (shapes):
     find the shape refer given the page's shape refers and the find shape.
   loop.
     if the shape refer is nil, exit.
-    find next given the shape refer's shape's text and the flag.
+    if the shape refer's shape is not nil,
+      find next given the shape refer's shape's text and the flag.
     if the flag is set,
       begin edit on the page given the shape refer's shape;
       exit.
@@ -1777,7 +1791,8 @@ to find next given a page and a flag (shapes):
     given the shape refer and the page.
   loop.
     if the shape refer is nil, exit.
-    find next given the shape refer's shape's text and the flag.
+    if the shape refer's shape is not nil,
+      find next given the shape refer's shape's text and the flag.
     if the flag is set,
       begin edit on the page given the shape refer's shape;
       exit.
@@ -1796,6 +1811,7 @@ to find a page given a document and a spot:
 
 to find a page in a document given a spot (limiting):
   if the document is nil, void the page; exit.
+  if the document's first page is nil, void the page; exit.
   put the document's first page's edge's left-top into a box's left-top.
   put the document's last page's edge's right-bottom into the box's right-bottom.
   limit the spot to the box.
@@ -1843,6 +1859,7 @@ to find a shape given some shape refers and a label:
   loop.
     get a shape refer from the shape refers.
     if the shape refer is nil, void the shape; exit.
+    if the shape refer's shape is nil, repeat.
     if the shape refer's shape's label is the label, break.
   repeat.
   put the shape refer's shape into the shape.
@@ -1936,6 +1953,7 @@ to get an anchor with which to start finding given a shape refer and a page:
   if the page is nil, exit.
   if the shape refer is nil, exit.
   if the shape refer's shape is not the page's edit shape, exit.
+  if the shape refer's shape's text is nil, exit.
   put the shape refer's shape's text's caret into the anchor.
 
 to get a box (text visibility):
@@ -2088,6 +2106,7 @@ to get a page number given some pages and a page:
 
 to get a radius given a page:
   put 0 into the radius.
+  if the page is nil, exit.
   put the page's first selected shape into a shape.
   if the shape is nil, exit.
   if the shape's kind is "rectangle", put the shape's rect's radius into the radius.
@@ -2099,8 +2118,8 @@ to get a shape refer with which to start finding given a page:
   if the page is being edited, 
     find the shape refer given the page's shape refers and the page's edit shape; exit.
   put the page's shape refers' first selected shape refer into the shape refer.
-  if the shape refer is not nil, exit.
-  put the page's shape refers' first into the shape refer.
+  if the shape refer is nil,
+    put the page's shape refers' first into the shape refer.
 
 to get the status for a box and another box given a measure:
   get a difference between the other box's left-top and the box's left-top.
@@ -2134,8 +2153,13 @@ to get the status for a document:
 
 to get the status for a page:
   if the page is nil, clear the status' string; exit.
+  if the current tab is nil, clear the status' string; exit.
+  if the current tab's node is nil, clear the status' string; exit.
+  if the current tab's node's document is nil, clear the status' string; exit.
   get a page number given the current tab's node's document's pages and the page.
-  put "Page " then the page number then " of " then the current tab's node's document's pages' count into the status' string.
+  put "Page " then the page number then " of "
+    then the current tab's node's document's pages' count
+    into the status' string.
   if the current tab's node's document's read-only flag is set,
     append " (r)" to the status' string.
   if the page's selected shape count is not 1, exit.
@@ -2204,8 +2228,12 @@ to handle align given a page and an alignment:
   show the desktop with status.
 
 to handle align given a page and an alignment (editing):
+  if the page is nil, exit.
+  if the current tab is nil, exit.
+  if the current tab's node is nil, exit.
   show status "Changing...".
-  set the current tab's node's document's modified flag.
+  if the current tab's node's document is not nil,
+    set the current tab's node's document's modified flag.
   handle align given the page's edit shape's text and the alignment.
   show the desktop with status.
 
@@ -2276,6 +2304,8 @@ to handle copy given a page (editing):
   show the desktop with "Copied".
 
 to handle cut given a document:
+  if the document is nil,
+    show error "I'm not sure what you want me to cut."; exit.
   if nothing is selected in the document,
     show error "I'm not sure what you want me to cut."; exit.
   show status "Cutting...".
@@ -2305,7 +2335,8 @@ to handle cut given a page (editing):
   if the page's edit shape is nil, cluck; exit.
   if nothing is selected in the page's edit shape's text, cluck; exit.
   show status "Cutting...".
-  set the current tab's node's document's modified flag.
+  if the current tab's node's document is not nil,
+    set the current tab's node's document's modified flag.
   handle cut given the page's edit shape's text.
   scroll the page to the caret.
   show the desktop with "Cut".
@@ -2329,6 +2360,9 @@ to handle duplicate given a page:
   show the desktop with status.
 
 to handle enlarge given a page:
+  if the current tab is nil, cluck; exit.
+  if the current tab's node is nil, cluck; exit.
+  if the current tab's node's document is nil, cluck; exit.
   if the current tab's node's document is not enlargeable,
     cluck; exit.
   remember the page.
@@ -2338,14 +2372,17 @@ to handle enlarge given a page:
   if the page is being edited, scroll the page to the caret.
   if the page is not being edited,
     scroll the page to the page's first selected shape.
-  put the page's scale's numerator then ":"
-    then the page's scale's denominator into the status' string.
+  if the page is not nil,
+    put the page's scale's numerator then ":"
+      then the page's scale's denominator into the status' string.
   show the desktop.
 
 to handle an event given a document (key down - backspace key):
   handle the event given the document (key down - delete key).
 
 to handle an event given a document (key down - delete key):
+  if the document is nil,
+    show error "I'm not sure what you want me to delete."; exit.
   if nothing is selected in the document,
     show error "I'm not sure what you want me to delete."; exit.
   if the user is not sure, exit.
@@ -2440,6 +2477,7 @@ to handle an event given a document (key down - page-up key):
 
 to handle an event given a document (key down - up-arrow key - shifted):
   if the document is empty, exit.
+  if the document's caret is nil, exit.
   if the document's caret's previous is nil, cluck; exit.
   put the document's caret's previous into the document's caret.
   select the document's pages given the document's selection.
@@ -2576,7 +2614,8 @@ to handle an event given a page (key down - backspace key - editing):
   if the page is nil, cluck; exit.
   if the page's edit shape is nil, cluck; exit.
   if there is nothing to backspace in the page's edit shape's text, cluck; exit.
-  set the current tab's node's document's modified flag.
+  if current document does exist,
+    set the current tab's node's document's modified flag.
   handle the event given the page's edit shape's text (backspace key).
   scroll the page to the caret.
   show the desktop with status.
@@ -2613,6 +2652,7 @@ to handle an event given a page (key down - down-arrow key):
   show the desktop with status.
 
 to handle an event given a page (key down - end key - editing):
+  if the page is not being edited, cluck; exit.
   hide the cursor.
   handle the event given the page's edit shape's text (end key).
   scroll the page to the caret.
@@ -2620,6 +2660,8 @@ to handle an event given a page (key down - end key - editing):
 
 to handle an event given a page (key down - end key):
   if the event is modified, end edit on the page.
+  if the page is nil,
+    cluck; show the desktop with status; exit.
   if the page is being edited,
     handle the event given the page (key down - end key - editing); exit.
   if the page's next is nil,
@@ -2630,19 +2672,27 @@ to handle an event given a page (key down - end key):
 to handle an event given a page (key down - enter key):
   if the page is not being edited, cluck; exit.
   hide the cursor.
-  set the current tab's node's document's modified flag.
+  if current document does exist,
+    set the current tab's node's document's modified flag.
   handle the event given the page's edit shape's text (enter key).
   scroll the page to the caret.
   show the desktop with status.
 
 to handle an event given a page (key down - escape key - editing):
-  if nothing is selected in the page's edit shape's text, end edit on the page; show the desktop with status; exit.
+  if the page is nil, show the desktop with status; exit.
+  if the page's edit shape is nil,
+    show the desktop with status; exit.
+  if nothing is selected in the page's edit shape's text,
+    end edit on the page;
+    show the desktop with status;
+    exit.
   deselect the page's edit shape's text.
   show the desktop with status.
 
 to handle an event given a page (key down - escape key):
   if the page is being edited,
     handle the event given the page (key down - escape key - editing); exit.
+  if the page is nil, handle close; exit.
   if something is selected on the page,
     deselect the page's shapes;
     show the desktop with status;
@@ -2650,6 +2700,8 @@ to handle an event given a page (key down - escape key):
   handle close.
 
 to handle an event given a page (key down - home key - editing):
+  if the page is nil, cluck; exit.
+  if the page's edit shape is nil, cluck; exit.
   hide the cursor.
   handle the event given the page's edit shape's text (home key).
   scroll the page to the caret.
@@ -2663,7 +2715,8 @@ to handle an event given a page (key down - home key):
     cluck; show the desktop with status; exit.
   if the page's previous is nil,
     cluck; show the desktop with status; exit.
-  switch to the current tab's node's document's pages' first.
+  if current document does exist,
+    switch to the current tab's node's document's pages' first.
   show the desktop with status.
 
 to handle an event given a page (key down - left-arrow key):
@@ -2687,7 +2740,8 @@ to handle an event given a page (key down - page-up key):
 
 to handle an event given a page (key down - printable key - editing):
   hide the cursor.
-  set the current tab's node's document's modified flag.
+  if current document does exist,
+    set the current tab's node's document's modified flag.
   handle the event given the page's edit shape's text (printable key).
   scroll the page to the caret.
   show the desktop with status.
@@ -2786,8 +2840,10 @@ to handle an event given a page (right click):
   show the arrow cursor.
 
 to handle an event given a page (set cursor):
-  if the event's spot is not in the pad, show the arrow cursor; exit.
-  if the event's spot is in the edit shape on the page, show the i-beam cursor; exit.
+  if the event's spot is not in the pad,
+    show the arrow cursor; exit.
+  if the event's spot is in the edit shape on the page,
+    show the i-beam cursor; exit.
   show the arrow cursor.
 
 to handle an event given a page (trace polygon):
@@ -2860,12 +2916,15 @@ to handle an event given a page and a shape (left click - shifted):
 to handle an event given a page and a shape (left click):
   if the event's shift flag is set,
     handle the event given the page and the shape (left click - shifted); exit.
-  put the shape's selected flag into the shape's previously selected flag.
-  if the shape is not selected, reset the selection on the page given the shape.
+  if the shape is not nil,
+    put the shape's selected flag into the shape's previously selected flag.
+  if the shape is not selected,
+    reset the selection on the page given the shape.
   get the status for the shape given the page's measure.
   show the status.
   if the mouse has been dragged from the event's spot given the page's yank,
     handle the event given the page and the shape (left click - dragging); exit.
+  if the shape is nil, exit.
   if the shape's previously selected flag is not set, exit.
   put the event's spot into a spot.
   if the page is not nil,
@@ -2888,6 +2947,7 @@ to handle an event given a page and a shape (left double click):
   show the desktop with status.
 
 to handle an event given a page and a shape and a cropper (left click):
+  if the page is nil, exit.
   if the mouse has not been dragged from the event's spot given the page's yank, exit.
   remember the page.
   reset the superduper given the page.
@@ -2913,6 +2973,7 @@ to handle an event given a page and a shape and a vertex (left click):
 
 to handle an event given a page and a shape and a vertex (left double click):
   if the shape is nil, cluck; exit.
+  if the shape's polygon is nil, cluck; exit.
   if the shape's polygon's vertices' count is 2, cluck; exit.
   remember the page.
   reset the superduper given the page.
@@ -2953,7 +3014,8 @@ to handle find given a page:
   get a shape refer with which to start finding given the page.
   if the shape refer is not nil,
     put the shape refer's shape into the find shape.
-  get the find anchor with which to start finding given the shape refer and the page.
+  get the find anchor with which to start finding
+    given the shape refer and the page.
   clear the find string.
   put "find" into the find mode.
   show the desktop with "Finding...".
@@ -2966,9 +3028,12 @@ to handle find given a page:
   refresh the cursor.
 
 to handle find next given a page:
-  if the find mode is "find", handle find next given the page (find); exit.
-  if the find mode is "check spelling - entire document", check spelling given the page (entire document); exit.
-  if the find mode is "check spelling - current page only", check spelling given the page (current page only); exit.
+  if the find mode is "find",
+    handle find next given the page (find); exit.
+  if the find mode is "check spelling - entire document",
+    check spelling given the page (entire document); exit.
+  if the find mode is "check spelling - current page only",
+    check spelling given the page (current page only); exit.
   cluck.
 
 to handle find next given a page (find):
@@ -3001,7 +3066,8 @@ to handle font height given a page and a font height:
 
 to handle font height given a page and a font height (editing):
   show status "Changing...".
-  set the current tab's node's document's modified flag.
+  if current document does exist,
+    set the current tab's node's document's modified flag.
   handle font height given the page's edit shape's text and the font height.
   show the desktop with status.
 
@@ -3013,7 +3079,8 @@ to handle font height other given a page:
   if the answer is blank, exit.
   show the desktop.
   convert the answer to another ratio.
-  if the other ratio is 0, show error "Invalid font height."; exit.
+  if the other ratio is 0,
+    show error "Invalid font height."; exit.
   put 1 inch times the other ratio into another font height.
   if the other font height is not standard (font height),
     cache the other font height (font height).
@@ -3032,7 +3099,8 @@ to handle font name given a page and a string:
 to handle font name given a page and a string (editing):
   show the desktop.
   show status "Changing...".
-  set the current tab's node's document's modified flag.
+  if current document does exist,
+    set the current tab's node's document's modified flag.
   handle font name given the page's edit shape's text and the string.
   show the desktop with status.
 
@@ -3069,7 +3137,8 @@ to handle grayscale given a page and a flag:
   show the desktop with status.
 
 to handle grid given a page and a flag:
-  put the flag into the current tab's node's document's grid showing flag.
+  if current document does exist,
+    put the flag into the current tab's node's document's grid showing flag.
   show the desktop with status.
 
 to handle group given a page:
@@ -3105,11 +3174,13 @@ to handle lowercase given a page (editing):
   if the page's edit shape is nil, cluck; exit.
   if nothing is selected in the page's edit shape's text, cluck; exit.
   show status "Lowercasing...".
-  set the current tab's node's document's modified flag.
+  if current document does exist,
+    set the current tab's node's document's modified flag.
   handle lowercase given the page's edit shape's text.
   show the desktop with status.
 
 to handle measure given a page:
+  if the page is nil, cluck; exit.
   if the page is being edited, end edit on the page.
   ask "Measure Ratio?" with the page's measure.
   if the answer is blank, exit.
@@ -3183,8 +3254,11 @@ to handle paste given a page:
 
 to handle paste given a page (editing):
   if there is not text on the windows clipboard, cluck; exit.
+  if the page is nil, cluck; exit.
+  if the page's edit shape is nil, cluck; exit.
   show status "Pasting...".
-  set the current tab's node's document's modified flag.
+  if current document does exist,
+    set the current tab's node's document's modified flag.
   handle paste given the page's edit shape's text.
   scroll the page to the caret.
   show the desktop with "Pasted".
@@ -3201,7 +3275,8 @@ to handle pen given a page and a color:
 to handle pen given a page and a color (editing):
   if the page is nil, cluck; exit.
   show status "Penning...".
-  set the current tab's node's document's modified flag.
+  if current document does exist,
+    set the current tab's node's document's modified flag.
   handle pen given the page's edit shape's text and the color.
   show the desktop with status.
 
@@ -3230,7 +3305,8 @@ to handle radius given a page:
   convert the radius / 1 inch to a ratio string.
   ask "Radius (inches)?" with the ratio string.
   if the answer is blank, exit.
-  if the answer is not any numeric literal, show error "Invalid radius."; exit.
+  if the answer is not any numeric literal,
+    show error "Invalid radius."; exit.
   convert the answer to another ratio.
   put 1 inch times the other ratio into another radius.
   scale the other radius given the page's scale.
@@ -3242,6 +3318,7 @@ to handle radius given a page:
 to handle redo given a page:
   if the page is being edited,
     handle redo given the page (editing); exit.
+  if current document does not exist, cluck; exit.
   put the current tab's node's document into a document.
   if the document is nil, cluck; exit.
   if the document's page redos are empty, cluck; exit.
@@ -3259,7 +3336,8 @@ to handle redo given a page (editing):
   if the page is nil, cluck; exit.
   if the page's edit shape is nil, cluck; exit.
   if the page's edit shape's text cannot be redone, cluck; exit.
-  set the current tab's node's document's modified flag.
+  if current document does exist,
+    set the current tab's node's document's modified flag.
   scale the page's edit shape to 1/1.
   handle redo given the page's edit shape's text.
   scale the page's edit shape to the page's scale.
@@ -3267,6 +3345,8 @@ to handle redo given a page (editing):
   show the desktop with status.
 
 to handle reduce given a page:
+  if the page is nil, cluck; exit.
+  if current document does not exist, cluck; exit.
   if the current tab's node's document's scale is 1/2, cluck; exit.
   remember the page.
   divide the current tab's node's document's scale by 2.
@@ -3283,12 +3363,14 @@ to handle renumber pages given a document:
   show the desktop with "Renumbering...".
   convert the answer to a page number.
   put the page number into the remembered page number.
-  renumber every page in the document starting with the page number and returning a count.
+  renumber every page in the document
+    starting with the page number and returning a count.
   show the desktop.
   show status the count and "page renumbered" or "pages renumbered".
   flush the event queue.
 
 to handle rotate page given a page:
+  if the page is nil, cluck; exit.
   if the page is being edited, end edit on the page.
   show status "Rotating...".
   remember the page.
@@ -3328,7 +3410,9 @@ to handle select all given a document:
   show the desktop with status.
 
 to handle select all given a page:
-  if the page is being edited, handle select all given the page (editing); exit.
+  if the page is nil, exit.
+  if the page is being edited,
+    handle select all given the page (editing); exit.
   select the page's shapes.
   show the desktop with status.
 
@@ -3354,6 +3438,8 @@ to handle smooth given a page:
 
 to handle undo given a page:
   if the page is being edited, handle undo given the page (editing); exit.
+  if the current tab is nil, cluck; exit.
+  if the current tab's node is nil, cluck; exit.
   put the current tab's node's document into a document.
   if the document is nil, cluck; exit.
   if the document's page undos are empty, cluck; exit.
@@ -3368,8 +3454,11 @@ to handle undo given a page:
   show the desktop with status.
 
 to handle undo given a page (editing):
+  if the page is nil, cluck; exit.
+  if the page's edit shape is nil, cluck; exit.
   if the page's edit shape's text cannot be undone, cluck; exit.
-  set the current tab's node's document's modified flag.
+  if current document does exist,
+    set the current tab's node's document's modified flag.
   scale the page's edit shape to 1/1.
   handle undo given the page's edit shape's text.
   scale the page's edit shape to the page's scale.
@@ -3406,11 +3495,14 @@ to handle uppercase given a page (editing):
   if the page's edit shape is nil, cluck; exit.
   if nothing is selected in the page's edit shape's text, cluck; exit.
   show status "Uppercasing...".
-  set the current tab's node's document's modified flag.
+  if current document does exist,
+    set the current tab's node's document's modified flag.
   handle uppercase given the page's edit shape's text.
   show the desktop with status.
 
 to handle yank given a page and a number:
+  if the current tab is nil, exit.
+  if the current tab's node is nil, exit.
   put the current tab's node's document into a document.
   if the document is nil, exit.
   if the page is being edited, end edit on the page.
@@ -3438,15 +3530,19 @@ to internalize a color given a rider:
 
 to internalize a document given a rider:
   if the i/o error is not blank, exit.
-  if the rider's token is not "ream", fail with "Invalid document - ""ream"" not found"; exit.
+  if the rider's token is not "ream",
+    fail with "Invalid document - ""ream"" not found"; exit.
   move the rider (document rules).
-  if the rider's token is not the document version, fail with "Invalid document version"; exit.
+  if the rider's token is not the document version,
+    fail with "Invalid document version"; exit.
   move the rider (document rules).
   create the document.
   internalize the document's pages given the rider.
-  if the rider's token is not "end", fail with "Invalid document - ""end"" not found"; exit.
+  if the rider's token is not "end",
+    fail with "Invalid document - ""end"" not found"; exit.
   move the rider (document rules).
-  if the rider's token is not blank, fail with "Invalid document"; exit.
+  if the rider's token is not blank,
+    fail with "Invalid document"; exit.
   adjust the edge of every page in the document.
 
 to internalize an ellipse given a rider:
@@ -3454,7 +3550,8 @@ to internalize an ellipse given a rider:
 
 to internalize a flag given a rider:
   if the i/o error is not blank, exit.
-  if the rider's token is not any flag literal, fail with "Invalid document - expected flag"; exit.
+  if the rider's token is not any flag literal,
+    fail with "Invalid document - expected flag"; exit.
   convert the rider's token to the flag.
   move the rider (document rules).
 
@@ -3470,13 +3567,15 @@ to internalize a hex string given a rider:
 
 to internalize a number given a rider:
   if the i/o error is not blank, exit.
-  if the rider's token is not any integer literal, fail with "Invalid document - expected number"; exit.
+  if the rider's token is not any integer literal,
+    fail with "Invalid document - expected number"; exit.
   convert the rider's token to the number.
   move the rider (document rules).
 
 to internalize a page given a rider:
   if the i/o error is not blank, exit.
-  if the rider's token is not "page", fail with "Invalid document - ""page"" not found"; exit.
+  if the rider's token is not "page",
+    fail with "Invalid document - ""page"" not found"; exit.
   move the rider (document rules).
   create the page.
   internalize the page's width given the rider.
@@ -3484,7 +3583,8 @@ to internalize a page given a rider:
   internalize the page's measure given the rider.
   internalize the page's shapes given the rider.
   adjust the page.
-  if the rider's token is not "end", fail with "Invalid document - ""end"" not found"; exit.
+  if the rider's token is not "end",
+    fail with "Invalid document - ""end"" not found"; exit.
   move the rider (document rules).
 
 to internalize some pages given a rider:
@@ -3568,7 +3668,8 @@ to internalize a shape given a rider (group):
   move the rider (document rules).
   internalize the shape's shapes given the rider.
   adjust the shape.
-  if the rider's token is not "end", fail with "Invalid document - invalid group"; exit.
+  if the rider's token is not "end",
+    fail with "Invalid document - invalid group"; exit.
   move the rider (document rules).
 
 to internalize a shape given a rider (picture):
@@ -3609,7 +3710,8 @@ to internalize a shape given a rider (text):
   if the shape's text is nil, exit.
   adjust the text in the shape.
   adjust the shape.
-  if the rider's token is not "end", fail with "Invalid document - invalid text"; exit.
+  if the rider's token is not "end",
+    fail with "Invalid document - invalid text"; exit.
   move the rider (document rules).
 
 to internalize some shapes given a rider:
@@ -3628,7 +3730,8 @@ to internalize a spot given a rider:
 
 to internalize a string given a rider:
   if the i/o error is not blank, exit.
-  if the rider's token does not start with the double-quote byte, fail with "Invalid document - expected string"; exit.
+  if the rider's token does not start with the double-quote byte,
+    fail with "Invalid document - expected string"; exit.
   put the rider's token into the string.
   move the rider (document rules).
   unquote the string.
@@ -3661,9 +3764,9 @@ to limit the origin in a document:
 to limit a page:
   if the page is nil, exit.
   loop.
-  if the page is too low, scroll the page up; repeat.
-  if the page is too high, scroll the page down; repeat.
-  if the page is too far left, scroll the page right; repeat.
+  if the page is too low,       scroll the page up; repeat.
+  if the page is too high,      scroll the page down; repeat.
+  if the page is too far left,  scroll the page right; repeat.
   if the page is too far right, scroll the page left; repeat.
 
 to limit the undos in a document:
@@ -3699,14 +3802,14 @@ to make a knob given a shape and a string and a fill color:
   if the shape is nil, clear the knob; exit.
   put the string into the knob's kind.
   put the fill into the knob's fill.
-  if the string is "left-top", make the knob given the shape's box's left-top; exit.
-  if the string is "right-top", make the knob given the shape's box's right-top; exit.
-  if the string is "left-bottom", make the knob given the shape's box's left-bottom; exit.
+  if the string is "left-top",     make the knob given the shape's box's left-top; exit.
+  if the string is "right-top",    make the knob given the shape's box's right-top; exit.
+  if the string is "left-bottom",  make the knob given the shape's box's left-bottom; exit.
   if the string is "right-bottom", make the knob given the shape's box's right-bottom; exit.
-  if the string is "left", make the knob given the shape's box's left-center; exit.
-  if the string is "top", make the knob given the shape's box's center-top; exit.
-  if the string is "right", make the knob given the shape's box's right-center; exit.
-  if the string is "bottom", make the knob given the shape's box's center-bottom; exit.
+  if the string is "left",         make the knob given the shape's box's left-center; exit.
+  if the string is "top",          make the knob given the shape's box's center-top; exit.
+  if the string is "right",        make the knob given the shape's box's right-center; exit.
+  if the string is "bottom",       make the knob given the shape's box's center-bottom; exit.
 
 to make a knob given a spot:
   put the spot and the spot into the knob's box.
@@ -3786,8 +3889,10 @@ to move the focus on a page (backwards):
   if the page is nil, exit.
   if the page's shape refers are empty, exit.
   put the page's shape refers' last selected shape refer into a shape refer.
-  if the shape refer is not nil, put the shape refer's previous into the shape refer.
-  if the shape refer is nil, put the page's shape refers' last into the shape refer.
+  if the shape refer is not nil,
+    put the shape refer's previous into the shape refer.
+  if the shape refer is nil,
+    put the page's shape refers' last into the shape refer.
   deselect the page's shapes.
   select the shape refer's shape.
 
@@ -3795,8 +3900,10 @@ to move the focus on a page (forwards):
   if the page is nil, exit.
   if the page's shape refers are empty, exit.
   put the page's shape refers' first selected shape refer into a shape refer.
-  if the shape refer is not nil, put the shape refer's next into the shape refer.
-  if the shape refer is nil, put the page's shape refers' first into the shape refer.
+  if the shape refer is not nil,
+    put the shape refer's next into the shape refer.
+  if the shape refer is nil,
+    put the page's shape refers' first into the shape refer.
   deselect the page's shapes.
   select the shape refer's shape.
 
@@ -3862,15 +3969,17 @@ to move a shape given a ratio pair and a spot:
   move the shape given the other difference.
 
 to move some shapes given a pair:
-  get a shape from the shapes.
-  if the shape is nil, exit.
-  move the shape given the pair.
+  loop.
+    get a shape from the shapes.
+    if the shape is nil, exit.
+    move the shape given the pair.
   repeat.
 
 to move some shapes given a ratio pair and a spot:
-  get a shape from the shapes.
-  if the shape is nil, exit.
-  move the shape given the ratio pair and the spot.
+  loop.
+    get a shape from the shapes.
+    if the shape is nil, exit.
+    move the shape given the ratio pair and the spot.
   repeat.
 
 to open a page:
@@ -3924,7 +4033,8 @@ to paste any pages on a page clipboard into a document returning a count:
     add 1 to the count.
     show status the count then " of " then the total count then "...".
     copy the copied page into another copied page.
-    insert the other copied page into the document's pages before the first selected page.
+    insert the other copied page into the document's pages
+      before the first selected page.
     select the other copied page.
   repeat.
   set the document's modified flag.
@@ -3952,7 +4062,8 @@ to pdfify a document to a pdf:
     if the page is nil, break.
     if the page is not selected, repeat.
     add 1 to the current count.
-    show status the current count then " of " then the total count then "...".
+    show status the current count then " of "
+      then the total count then "...".
     pdfify the page.
   repeat.
   end printing the pdf.
@@ -3963,7 +4074,8 @@ to pdfify a page:
   end edit on the other page.
   scale the other page to 1/1.
   find a shape given the page's shape refers and "title".
-  if the shape is not nil, put the shape's text's first line into a string.
+  if the shape is not nil,
+    put the shape's text's first line into a string.
   begin a sheet given the other page's box and the string.
   draw the other page's shapes on the other page.
   end the sheet.
@@ -4186,6 +4298,9 @@ a rect is a roundy box [that may have a 0 radius].
 
 to remember a page:
   if the page is nil, exit.
+  if the current tab is nil, exit.
+  if the current tab's node is nil, exit.
+  if the current tab's node's document is nil, exit.
   destroy the current tab's node's document's page redos.
   limit the undos in the current tab's node's document.
   copy the page into another page.
@@ -4223,7 +4338,8 @@ to remove any selected shapes on a page:
     put the original shapes' first into a shape.
     if the shape is nil, exit.
     remove the shape from the original shapes.
-    if the shape is not selected, append the shape to the page's shapes; repeat.
+    if the shape is not selected,
+      append the shape to the page's shapes; repeat.
     destroy the shape.
   repeat.
 
@@ -4429,18 +4545,22 @@ to rotate a shape (group):
   adjust the shape.
 
 to rotate a shape (picture):
+  if the shape is nil, exit.
   rotate the shape's picture.
   adjust the shape.
 
 to rotate a shape (polygon):
+  if the shape is nil, exit.
   rotate the shape's polygon.
   adjust the shape.
 
 to rotate a shape (rectangle):
+  if the shape is nil, exit.
   rotate the shape's rect.
   adjust the shape.
 
 to rotate a shape (text):
+  if the shape is nil, exit.
   rotate the shape's text rect.
   adjust the text in the shape.
   adjust the shape.
@@ -4478,26 +4598,32 @@ to scale a shape given a ratio:
   debug "scale a shape by a scale: " then the shape's kind.
 
 to scale a shape given a ratio (ellipse):
+  if the shape is nil, exit.
   scale the shape's ellipse's box given the ratio.
   adjust the shape.
 
 to scale a shape given a ratio (group):
+  if the shape is nil, exit.
   scale the shape's shapes given the ratio.
   adjust the shape.
 
 to scale a shape given a ratio (picture):
+  if the shape is nil, exit.
   scale the shape's picture given the ratio.
   adjust the shape.
 
 to scale a shape given a ratio (polygon):
+  if the shape is nil, exit.
   scale the shape's polygon given the ratio.
   adjust the shape.
 
 to scale a shape given a ratio (rectangle):
+  if the shape is nil, exit.
   scale the shape's rect given the ratio.
   adjust the shape.
 
 to scale a shape given a ratio (text):
+  if the shape is nil, exit.
   scale the shape's text rect given the ratio.
   scale the shape's text given the ratio.
   adjust the text in the shape.
@@ -4511,9 +4637,10 @@ to scale a shape to a ratio: \ absolute
   scale the shape given the other ratio.
 
 to scale some shapes given a ratio:
-  get a shape from the shapes.
-  if the shape is nil, exit.
-  scale the shape given the ratio.
+  loop.
+    get a shape from the shapes.
+    if the shape is nil, exit.
+    scale the shape given the ratio.
   repeat.
 
 to scale a superduper given a ratio:
@@ -4899,7 +5026,9 @@ to track a document given an event:
 to track the rubberband on a page given an event:
   if the page is nil, exit.
   if the event is nil, exit.
-  if the event's shift flag is not set, deselect the page's shapes; show the desktop with status.
+  if the event's shift flag is not set,
+    deselect the page's shapes;
+    show the desktop with status.
   snapshot the page's shapes.
   put the event's spot into a box's left-top.
   localize the box's left-top given the page's origin.
@@ -4911,7 +5040,8 @@ to track the rubberband on a page given an event:
     put the mouse's spot into the box's right-bottom.
     autoscroll the page given the box's right-bottom and the flag.
     localize the box's right-bottom given the page's origin.
-    if the current spot is within the grid of the box's right-bottom, repeat.
+    if the current spot is within the grid
+      of the box's right-bottom, repeat.
     set the flag.
     put the box's right-bottom into the current spot.
     select the page's shapes given the box.
@@ -4936,15 +5066,19 @@ to track a shape on a page given an event:
     put the mouse's spot into a spot.
     autoscroll the page given the spot and the flag.
     localize the spot given the page's origin.
-    get a difference between the spot and the current spot given the page's yank.
+    get a difference between the spot
+      and the current spot given the page's yank.
     if the difference is 0, repeat.
     set the flag.
     move any selected shapes on the page given the difference.
-    get the status for the box and the shape's box given the page's measure.
+    get the status for the box and the shape's box
+      given the page's measure.
     add the difference to the current spot.
   repeat.
-  get the difference between the current spot and the start spot given the page's yank.
-  if the page's superduper's flag is set, add the difference to the page's superduper's pair.
+  get the difference between the current spot
+    and the start spot given the page's yank.
+  if the page's superduper's flag is set,
+    add the difference to the page's superduper's pair.
   show the desktop with status.
 
 to track a shape on a page given an event (text selection):
@@ -5052,9 +5186,10 @@ to unlabel a shape:
   clear the shape's label.
 
 to unlabel some shapes:
-  get a shape from the shapes.
-  if the shape is nil, exit.
-  unlabel the shape.
+  loop.
+    get a shape from the shapes.
+    if the shape is nil, exit.
+    unlabel the shape.
   repeat. 
 
 some unsorted shape refers are some shape refers.

@@ -150,17 +150,17 @@ to decide if a string starts with any definite article:
 
 to decide if a string does start with any definition starter;
 to decide if a string starts with any definition starter:
-  if the string starts with "a ", say yes.
-  if the string starts with "an ", say yes.
+  if the string starts with "a ",    say yes.
+  if the string starts with "an ",   say yes.
   if the string starts with "some ", say yes.
-  if the string starts with "to ", say yes.
-  if the string starts with "the ", say yes.
+  if the string starts with "to ",   say yes.
+  if the string starts with "the ",  say yes.
   say no.
 
 to decide if a string does start with any indefinite article;
 to decide if a string starts with any indefinite article:
-  if the string starts with "a ", say yes.
-  if the string starts with "an ", say yes.
+  if the string starts with "a ",    say yes.
+  if the string starts with "an ",   say yes.
   if the string starts with "some ", say yes.
   say no.
 
@@ -192,14 +192,17 @@ to draw a row of a source (colorized):
   if the substring is blank,
     draw the row of the source's text (editing); exit.
   draw the selection box for the row of the source's text.
+  if the source's text is nil, exit.
   get a box given the row and the source's text.
   \ uncommented part
   slap another substring on the row's string.
   put the substring's first minus 1 into the other substring's last.
   draw the other substring in the box
-    with the black color and the source's text's font and the source's text's alignment.
+    with the black color and the source's text's font
+    and the source's text's alignment.
   \ commented part
-  get a width given the other substring and the memory canvas and the source's text's font.
+  get a width given the other substring
+    and the memory canvas and the source's text's font.
   add the width to the box's left.
   draw the substring in the box with the comment color
     and the source's text's font and the source's text's alignment.
@@ -218,7 +221,8 @@ to draw a source:
     mask only outside the source's text's box.
   if the source is using fixed-width font,
     draw the right margin of the source using the white color.
-  if the source's colorized flag is set, draw the source (colorized); exit.
+  if the source's colorized flag is set,
+    draw the source (colorized); exit.
   draw the source (not colorized).
 
 to draw a source (colorized):
@@ -249,6 +253,7 @@ to finalize the editor:
 
 to get a first row and an last row given a sheet number and a source:
   if the source is nil, void the first row; void the last row; exit.
+  if the source's text is nil, void the first row; void the last row; exit.
   put the source's text's normalized selection into a selection.
   put the selection's anchor row# into a row#.
   add the sheet number minus 1 times the source's rows/sheet to the row#.
@@ -279,6 +284,7 @@ to get a substring given a row and a source (commented part):
 
 to handle check spelling given a source:
   if the source is nil, exit.
+  if the source's text is nil, exit.
   load the lexicon.
   if the lexicon is nil,
     show error "I can't find any lecksicon."; exit.
@@ -334,6 +340,7 @@ to handle encrypt given a source:
 
 to handle an event given a source (finding - key down - backspace key):
   if the find string is blank, cluck; exit.
+  if the source is nil, cluck; exit.
   remove the last byte from the find string.
   find next given the source's text and a flag.
   if the flag is not set, cluck.
@@ -342,6 +349,8 @@ to handle an event given a source (finding - key down - backspace key):
   show the desktop with "Finding...".
 
 to handle an event given a source (finding - key down - printable key):
+  if the source is nil, cluck; exit.
+  if the source's text is nil, cluck; exit.
   append the event's byte to the find string.
   put the find anchor into an anchor.
   put the source's text's anchor into the find anchor.
@@ -378,72 +387,86 @@ to handle an event given a source (finding):
 
 to handle an event given a source (key down - backspace key):
   hide the cursor.
+  if the source is nil, cluck; exit.
   if there is nothing to backspace in the source's text, cluck; exit.
   handle the event given the source's text (backspace key).
   show the desktop with status.
 
 to handle an event given a source (key down - delete key):
   hide the cursor.
+  if the source is nil, cluck; exit.
   if there is nothing to remove in the source's text, cluck; exit.
   handle the event given the source's text (delete key).
   show the desktop with status.
 
 to handle an event given a source (key down - down-arrow key):
   hide the cursor.
+  if the source is nil, cluck; exit.
   handle the event given the source's text (down-arrow key).
   show the desktop with status.
 
 to handle an event given a source (key down - end key):
   hide the cursor.
+  if the source is nil, cluck; exit.
   handle the event given the source's text (end key).
   show the desktop with status.
 
 to handle an event given a source (key down - enter key):
   hide the cursor.
+  if the source is nil, cluck; exit.
   handle the event given the source's text (enter key).
   show the desktop with status.
 
 to handle an event given a source (key down - escape key):
+  if the source is nil, cluck; exit.
   handle the event given the source's text (escape key).
   show the desktop with status.
 
 to handle an event given a source (key down - home key):
   hide the cursor.
+  if the source is nil, cluck; exit.
   handle the event given the source's text (home key).
   show the desktop with status.
 
 to handle an event given a source (key down - left-arrow key):
   hide the cursor.
+  if the source is nil, cluck; exit.
   handle the event given the source's text (left-arrow key).
   show the desktop with status.
 
 to handle an event given a source (key down - page-down key):
   hide the cursor.
+  if the source is nil, cluck; exit.
   handle the event given the source's text (page-down key).
   show the desktop with status.
 
 to handle an event given a source (key down - page-up key):
   hide the cursor.
+  if the source is nil, cluck; exit.
   handle the event given the source's text (page-up key).
   show the desktop with status.
 
 to handle an event given a source (key down - printable key):
   hide the cursor.
+  if the source is nil, cluck; exit.
   handle the event given the source's text (printable key).
   show the desktop with status.
 
 to handle an event given a source (key down - right-arrow key):
   hide the cursor.
+  if the source is nil, cluck; exit.
   handle the event given the source's text (right-arrow key).
   show the desktop with status.
 
 to handle an event given a source (key down - tab key):
   hide the cursor.
+  if the source is nil, cluck; exit.
   handle the event given the source's text (tab key).
   show the desktop with status.
 
 to handle an event given a source (key down - up-arrow key):
   hide the cursor.
+  if the source is nil, cluck; exit.
   handle the event given the source's text (up-arrow key).
   show the desktop with status.
 
@@ -484,6 +507,7 @@ to handle an event given a source (left click):
   refresh the cursor.
 
 to handle an event given a source (left double click):
+  if the source is nil, cluck; exit.
   handle the event given the source's text (left double click).
   show the desktop with status.
 
@@ -557,6 +581,8 @@ to handle extract types given a source:
   show the desktop with "On the clipboard".
 
 to handle find given a source:
+  if the source is nil, cluck; exit.
+  if the source's text is nil, cluck; exit.
   clear the source's text's last operation.
   deselect the source's text.
   scroll the source's text to the caret.
@@ -575,6 +601,8 @@ to handle find next given a source:
   cluck.
 
 to handle find next given a source (check spelling):
+  if the source is nil, cluck; exit.
+  if the source's text is nil, cluck; exit.
   clear the source's text's last operation.
   put the source's text's caret into the find anchor.
   find the next misspelling in the source's text given a flag.
@@ -583,6 +611,8 @@ to handle find next given a source (check spelling):
   show the desktop with "Found".
 
 to handle find next given a source (find):
+  if the source is nil, cluck; exit.
+  if the source's text is nil, cluck; exit.
   clear the source's text's last operation.
   put the source's text's caret into the find anchor.
   find next given the source's text and a flag.
@@ -591,6 +621,8 @@ to handle find next given a source (find):
   show the desktop with "Found".
 
 to handle font height given a source and a font height:
+  if the source is nil, cluck; exit.
+  if the source's text is nil, cluck; exit.
   privatize the font height.
   put the tpp in a number called pixelsize.
   if the pixelsize is less than 1, put 1/96 inch into the pixelsize.
@@ -607,6 +639,8 @@ to handle font height given a source and a font height:
   show the desktop with status.
 
 to handle font height other given a source:
+  if the source is nil, cluck; exit.
+  if the source's text is nil, cluck; exit.
   put the source's text's font's height / 1 inch into a ratio.
   convert the ratio to a ratio string.
   ask "Height (inches)?" with the ratio string.
@@ -620,6 +654,8 @@ to handle font height other given a source:
   handle font height given the source and the font height.
 
 to handle font name given a source and a string:
+  if the source is nil, cluck; exit.
+  if the source's text is nil, cluck; exit.
   show the desktop.
   if the source's text is not modified, 
     set a flag.
@@ -629,7 +665,9 @@ to handle font name given a source and a string:
   show the desktop with status.
 
 to handle font name other given a source:
-  ask "Name?" with the source's text's font's name.
+  if the source is nil, exit.
+  if the source's text is not nil,
+    ask "Name?" with the source's text's font's name.
   if the answer is blank, exit.
   put the answer in a font name.
   if the font name is in the custom font names, 
@@ -660,8 +698,13 @@ to handle paste given a source:
   show the desktop with "Pasted".
 
 to handle print given a source:
+  if the source is nil,
+    show error "I'm not sure what you want me to print."; exit.
+  if the source's text is nil,
+    show error "I'm not sure what you want me to print."; exit.
   put the source's text's selected row count into a count.
-  if the count is 0, show error "I'm not sure what you want me to print."; exit.
+  if the count is 0,
+    show error "I'm not sure what you want me to print."; exit.
   ask "Copies?" with "1".
   if the answer is blank, exit.
   convert the answer to a number between 1 and the largest number.
@@ -670,6 +713,7 @@ to handle print given a source:
   show status "Printed".
 
 to handle redo given a source:
+  if the source is nil, cluck; exit.
   if the source's text cannot be redone, cluck; exit.
   handle redo given the source's text.
   show the desktop with status.
@@ -680,12 +724,14 @@ to handle reverse given a source:
   show the desktop with status.
 
 to handle select all given a source:
-  handle select all given the source's text.
+  if the source is not nil,
+    handle select all given the source's text.
   show the desktop with status.
 
 to handle sort definitions given a source:
   show status "Sorting...".
-  remember the source's text with "sort definitions".
+  if the source is not nil,
+    remember the source's text with "sort definitions".
   sort definitions given the source.
   show the desktop with "Sorted".
 
@@ -703,6 +749,7 @@ to handle uncomment given a source:
   show the desktop with status.
 
 to handle undo given a source:
+  if the source is nil, cluck; exit.
   if the source's text is nil, cluck; exit.
   if the source's text cannot be undone, cluck; exit.
   handle undo given the source's text.
@@ -779,6 +826,7 @@ to print a copy of a sheet number of a sheets/copy of a source:
   put the first row into a current row.
   loop.
     print the current row of the source at the spot.
+    if the current row is nil, break.
     if the current row is the last row, break.
     put the current row's next into the current row.
     add the source's text's row height to the spot's y.
@@ -808,6 +856,7 @@ to print a number of copies of a source:
 to print a row of a source at a spot:
   if the source is nil, exit.
   if the row is nil, exit.
+  if the source's text is nil, exit.
   put 0 and 0 and 7-1/2 inches and the source's text's row height into a box.
   move the box to the spot.
   mask only outside the box.
@@ -835,7 +884,10 @@ to put a source's rows/sheet into a rows/sheet:
 
 to put a source's sheets/copy into a sheets/copy:
   if the source is nil, put 0 into the sheets/copy; exit.
-  divide the source's text's selected row count by the source's rows/sheet giving a quotient and a remainder.
+  if the source's text is nil, put 0 into the sheets/copy; exit.
+  divide the source's text's selected row count
+    by the source's rows/sheet
+    giving a quotient and a remainder.
   put the quotient into the sheets/copy.
   if the remainder is not 0, add 1 to the sheets/copy.
 
@@ -845,6 +897,7 @@ a rows/sheet is a number.
 
 to scroll a source given an event:
   if the source is nil, exit.
+  if the source's text is nil, exit.
   find a sector given the source's text's grid and the event's spot.
   loop.
     if the mouse's right button is up, exit.
@@ -886,19 +939,27 @@ to scrub a block for extracting:
   if the block is nil, exit.
   put the block's last row into a row.
   if the row is nil, break.
-  if the row is blank, remove the row from the block's rows; destroy the row; repeat.
-  if the row's string starts with "\", remove the row from the block's rows; destroy the row; repeat.
+  if the row is blank,
+    remove the row from the block's rows;
+    destroy the row;
+    repeat.
+  if the row's string starts with "\",
+    remove the row from the block's rows;
+    destroy the row;
+    repeat.
 
 to scrub some blocks:
-  get a block from the blocks.
-  if the block is nil, exit.
-  scrub the block.
+  loop.
+    get a block from the blocks.
+    if the block is nil, exit.
+    scrub the block.
   repeat.
 
 to scrub some blocks for extracting:
-  get a block from the blocks.
-  if the block is nil, exit.
-  scrub the block for extracting.
+  loop.
+    get a block from the blocks.
+    if the block is nil, exit.
+    scrub the block for extracting.
   repeat.
 
 a sheet number is a number.
@@ -964,6 +1025,7 @@ to split out some preamble rows from some rows:
 
 to track a source given an event:
   if the source is nil, exit.
+  if the source's text is nil, exit.
   if the event is nil, exit.
   extend any selection in the source's text given the event's spot.
   if the event's shift flag is not set, deselect the source's text.
@@ -997,6 +1059,7 @@ to try removing extra blank rows from some rows given a count:
 
 to uncomment any selected rows in a source:
   if the source is nil, exit.
+  if the source's text is nil, exit.
   loop.
     get a row from the source's text's rows.
     if the row is nil, exit.
