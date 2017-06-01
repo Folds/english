@@ -447,6 +447,8 @@ to decide if a tab does satisfy a relevancy:
     get the relevance given the tab (one selected file); break.
   if the relevancy is "pastable",
     get the relevance given the tab (pastable); break.
+  if the relevancy is "process ever started",
+    get the relevance given the tab (process ever started); break.
   if the relevancy is "process running",
     get the relevance given the tab (process running); break.
   if the relevancy is "redoable",
@@ -552,6 +554,10 @@ to decide if a tab is relevant (pastable):
 to decide if a tab is relevant (process available):
   if the current process is 0, say yes.
   say no.
+
+to decide if a tab is relevant (process ever started):
+  if the recent process is 0, say no.
+  say yes.
 
 to decide if a tab is relevant (process running):
   if the current process is 0, say no.
@@ -982,6 +988,11 @@ to get a relevance given a tab (one selected file):
 
 to get a relevance given a tab (pastable):
   if the tab is relevant (pastable),
+    set the relevance; exit.
+  clear the relevance.
+
+to get a relevance given a tab (process ever started):
+  if the tab is relevant (process ever started),
     set the relevance; exit.
   clear the relevance.
 
@@ -2627,7 +2638,8 @@ to populate a submenu given a tab (r):
     given the tab has "finder"
     and wants "first selection is .exe; process available".
   add "Result" to the submenu
-    given the tab has "editor or finder" and wants "process running".
+    given the tab has "editor or finder"
+    and wants "process ever started".
 
 to populate a submenu given a tab (s):
   add "Save" and "S" and "handle save" to the submenu

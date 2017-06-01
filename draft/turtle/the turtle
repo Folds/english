@@ -34,6 +34,18 @@ a choice is a thing with a name and a box.
 
 the choices are some choices.
 
+to clear the screen to a color:
+  unmask everything.
+  draw the screen's box with the color and the color.
+  refresh the screen.
+  put the screen's box into the context's box.
+
+to clear the screen to white:
+  unmask everything.
+  draw the screen's box with the white color and the white color.
+  refresh the screen.
+  put the screen's box into the context's box.
+
 to clear the screen without refreshing it:
   unmask everything.
   draw the screen's box with the black color and the black color.
@@ -119,6 +131,10 @@ to decide if we're above a coord:
   if the context's y is less than the coord, say yes.
   say no.
 
+to decide if we're above a horizontal line:
+  if the context's spot is above the horizontal line, say yes.
+  say no.
+
 to decide if we're above or below a box:
   if the context's y is less than the box's top, say yes.
   if the context's y is greater than the box's bottom, say yes.
@@ -134,6 +150,10 @@ to decide if we're below a box:
 
 to decide if we're below a coord:
   if the context's y is greater than the coord, say yes.
+  say no.
+
+to decide if we're below a horizontal line:
+  if the context's spot is below the horizontal line, say yes.
   say no.
 
 to decide if we're below a spot:
@@ -199,6 +219,11 @@ to draw a circle some twips wide (counterclockwise):
     turn left 1/48 of the way.
     add 1 to a count. if the count is 48, break.
   repeat.
+
+to draw a dot some twips wide on the current spot with a color:
+  make the dot the twips wide.
+  center the dot on the context's spot.
+  draw the dot with the color.
 
 to draw a fancy arrow some twips long with a color;
 to stroke a fancy arrow some twips long with a color:
@@ -636,7 +661,7 @@ to move to a spot:
   put the spot into the context's spot.
 
 to move a spot about some twips in any direction:
-  pick another spot within the twips of the spot.
+  pick another spot within the twips of the spot (turtle).
   put the other spot into the spot.
 
 to move some squares:
@@ -702,13 +727,8 @@ to pick a color:
   make the color.
   put the color into the context's color.
 
-to pick a color between another color and a third color:
-  pick the color's hue
-    between the other color's hue and the third color's hue.
-  pick the color's saturation
-    between the other color's saturation and the third color's saturation.
-  pick the color's lightness
-    between the other color's lightness and the third color's lightness.
+to pick a color between another color and a third color (turtle):
+  pick the color between the other color and the third color.
   put the color into the context's color.
 
 to pick a color like another color:
@@ -769,9 +789,9 @@ to pick a solid color:
   make the solid color be solid.
   put the solid color into the context's color.
 
-to pick a spot anywhere in a box:
-  pick the spot's x between the box's left and the box's right.
-  pick the spot's y between the box's top and the box's bottom.
+to pick a spot anywhere in a box (turtle);
+to pick a spot in a box:
+  pick the spot anywhere in the box.
   put the spot into the context's spot.
 
 to pick a spot anywhere in the top half of a box;
@@ -794,18 +814,13 @@ to pick a spot on a horizontal line:
   pick the spot's x between the horizontal line's start's x and the horizontal line's end's x.
   put the horizontal line's y into the spot's y.
 
-to pick a spot in a box:
-  pick the spot's x between the box's left and the box's right.
-  pick the spot's y between the box's top and the box's bottom.
-  put the spot into the context's spot.
-
 to pick a spot in a box about some twips above the middle;
 to pick a spot in a box about some twips above the center:
   put the box into a bounding box.
   put the twips divided by 2 into some other twips.
   put the box's center's y minus the other twips into the bounding box's bottom.
   put the bounding box's bottom minus the twips into the bounding box's top.
-  pick the spot anywhere in the bounding box.
+  pick the spot anywhere in the bounding box (turtle).
 
 to pick a spot in a box about some twips below the middle;
 to pick a spot in a box about some twips below the center:
@@ -813,25 +828,24 @@ to pick a spot in a box about some twips below the center:
   put the twips divided by 2 into some other twips.
   put the box's center's y plus the other twips into the bounding box's top.
   put the bounding box's top plus the twips into the bounding box's bottom.
-  pick the spot anywhere in the bounding box.
+  pick the spot anywhere in the bounding box (turtle).
 
 to pick a spot in a box some twips to some other twips above the middle;
 to pick a spot in a box some twips to some other twips above the center:
   put the box into a bounding box.
   put the box's center's y minus the twips into the bounding box's bottom.
   put the bounding box's bottom minus the other twips into the bounding box's top.
-  pick the spot anywhere in the bounding box.
+  pick the spot anywhere in the bounding box (turtle).
 
 to pick a spot in a box some twips to some other twips below the middle;
 to pick a spot in a box some twips to some other twips below the center:
   put the box into a bounding box.
   put the box's center's y plus the twips into the bounding box's top.
   put the bounding box's top plus the other twips into the bounding box's bottom.
-  pick the spot anywhere in the bounding box.
+  pick the spot anywhere in the bounding box (turtle).
 
-to pick a spot within a distance of another spot:
-  pick the spot's x within the distance of the other spot's x.
-  pick the spot's y within the distance of the other spot's y.
+to pick a spot within a distance of another spot (turtle):
+  pick the spot within the distance of the other spot.
   put the spot into the context's spot.
 
 to pick a very dark color;

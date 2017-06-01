@@ -953,3 +953,14 @@ Automated tests make debugging easier.
   Demo difficulty:  Easy.
   Test difficulty:  not applicable.
   Requested by Jasper Paulsen on May 20, 2017.
+
+245.  Remove number field from turtle's context.
+  Status:    Demonstrated.
+  Audience:  All users.
+  Benefit:   Medium.
+  Implementation difficulty:  Medium.  (But much easier
+             than trying to both retain it and make
+             the noodle not depend on the turtle.)
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Not applicable.
+  Requested by Gerry Rzeppa on May 29, 2017.

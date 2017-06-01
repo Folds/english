@@ -891,6 +891,14 @@ a pastel color is a color.
 
 an pen is a color.
 
+to pick a color between another color and a third color:
+  pick the color's hue
+    between the other color's hue and the third color's hue.
+  pick the color's saturation
+    between the other color's saturation and the third color's saturation.
+  pick the color's lightness
+    between the other color's lightness and the third color's lightness.
+
 the pink color is a color.
 
 the pink pen is a pen.

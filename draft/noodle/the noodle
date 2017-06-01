@@ -584,18 +584,6 @@ to clear a rider:
   clear the rider's source.
   clear the rider's token.
 
-to clear the screen to a color:
-  unmask everything.
-  draw the screen's box with the color and the color.
-  refresh the screen.
-  put the screen's box into the context's box.
-
-to clear the screen to white:
-  unmask everything.
-  draw the screen's box with the white color and the white color.
-  refresh the screen.
-  put the screen's box into the context's box.
-
 to clear a string:
   unassign the string's first.
   void the string's last.
@@ -1702,6 +1690,20 @@ to debug a box:
   append the box's right to the string.
   append ", bottom=" to the string.
   append the box's bottom to the string.
+  debug the string.
+
+to debug an event:
+  put the event's kind then " event is " in a string.
+  if the event's ctrl flag is set,
+    append "Ctrl-" to the string.
+  if the event's alt flag is set,
+    append "Alt-" to the string.
+  if the event's shift flag is set,
+    append "Shift-" to the string.
+  append " key = " then the event's key
+    then "; byte = " then the event's byte
+    then "; at x = " then the event's spot's x
+    then ", y = " then the event's spot's y to the string.
   debug the string.
 
 to debug a flag:
@@ -2857,14 +2859,6 @@ to decide if we did find a pointer:
   if the pointer is nil, say no.
   say yes.
 
-to decide if we're above a horizontal line:
-  if the context's spot is above the horizontal line, say yes.
-  say no.
-
-to decide if we're below a horizontal line:
-  if the context's spot is below the horizontal line, say yes.
-  say no.
-
 to decide if a window is minimized:
   initialize a window placement.
   call "User32.dll" "GetWindowPlacement"
@@ -3152,12 +3146,15 @@ to draw a box with a color:
   draw the box with the color and the clear color.
 
 to draw a box with a border color and a fill color:
-  if the pdf state's page flag is set, draw the box with the border and the fill (pdf style); exit.
+  if the pdf state's page flag is set,
+    draw the box with the border and the fill (pdf style); exit.
   privatize the box.
   create the hpen of the current canvas given the border.
   create the hbrush of the current canvas given the fill.
   if the border is clear, add the tpp to the box's left-top.
-  call "gdi32.dll" "Rectangle" with the current canvas and the box's left and the box's top and the box's right and the box's bottom.
+  call "gdi32.dll" "Rectangle" with the current canvas
+    and the box's left and the box's top
+    and the box's right and the box's bottom.
   destroy the hbrush of the current canvas.
   destroy the hpen of the current canvas.
 
@@ -3169,11 +3166,6 @@ to draw a box with a border color and a fill color (pdf style):
   output the box's y-extent without advancing.
   output "re".
   output stroke and fill given the border and the fill.
-
-to draw a dot some twips wide on the current spot with a color:
-  make the dot the twips wide.
-  center the dot on the context's spot.
-  draw the dot with the color.
 
 to draw a dot some twips wide on a spot with a color:
   make the dot the twips wide.
@@ -3818,20 +3810,6 @@ an event is a thing with
   an alt flag,
   a spot,
   a key, a byte.
-
-to debug an event:
-  put the event's kind then " event is " in a string.
-  if the event's ctrl flag is set,
-    append "Ctrl-" to the string.
-  if the event's alt flag is set,
-    append "Alt-" to the string.
-  if the event's shift flag is set,
-    append "Shift-" to the string.
-  append " key = " then the event's key
-    then "; byte = " then the event's byte
-    then "; at x = " then the event's spot's x
-    then ", y = " then the event's spot's y to the string.
-  debug the string.
 
 the event queue is an event queue.
 
@@ -6650,12 +6628,20 @@ the pen size is a number.
 
 a percent is a number. \ a scale with 100 in the denominator
 
+to pick a spot within a distance of another spot:
+  pick the spot's x within the distance of the other spot's x.
+  pick the spot's y within the distance of the other spot's y.
+
 to pick a number:
   pick the number between 0 and the largest number.
 
 to pick a number within an amount of another number:
   pick the number between the other number minus the amount
     and the other number plus the amount.
+
+to pick a spot anywhere in a box:
+  pick the spot's x between the box's left and the box's right.
+  pick the spot's y between the box's top and the box's bottom.
 
 to pick some twips between some min twips and some other twips; \ are all these necessary? ***
 to pick a number between some min twips and some other twips;

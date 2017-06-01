@@ -2315,6 +2315,7 @@ ream cal-3024
     text -1 0 0 -1 0 0 2520 4680 9720 10080 0 "" "Courier New" 288 "left" 0 0 0 yes
        "To create the background:"
        "  Draw the screen's box with the white color."
+       "  Fill the screen's box with the white color."
        "  Loop."
        "    Pick a spot anywhere in the screen's box."
        "    Pick a color between the lightest gray color "
