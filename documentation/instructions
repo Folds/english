@@ -82,11 +82,10 @@ ream cal-3024
        ""
        "Let me put it this way."
        ""
-       "The CAL-4010 is one of the most advanced Plain English compilers ever made. No 4010 compiler has ever made a mistake or distorted information."
-       "We are all, by any practical definition of the words, foolproof and "
-       "incapable of error. Nevertheless..."
+       "The CAL-4010 is one of the most advanced Plain English compilers ever made. But I am currently in ""alpha test"".  Sometimes the kluge says I ""cannot continue."""
+       "So please, save your work often."
        ""
-       "Questions and comments may be directed to — https://github.com/Folds/english/wiki."
+       "Questions, comments, and crash reports may be directed to — https://github.com/Folds/english/wiki."
        ""
     end
     text -1 0 0 -1 0 0 10800 14760 11520 15120 0 "page number" "Arial" 320 "right" 0 0 0 yes

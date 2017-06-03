@@ -529,12 +529,69 @@ to find a choice given a spot:
 a geometric figure is a figure.
 
 to get a rise and a run given a heading: \ see Madhava's Numbers
-  convert the heading to a trig angle.
+  if the heading is evenly divisible by 480,
+    get the rise and the run given the heading (octant); exit.
   put the rise denominator in the rise.
+  put the rise denominator in the run.
+  privatize the heading.
+  normalize the heading.
+  if the heading is 1640,
+    multiply the rise by 287 / 320;  \ error of 4,215 trifles = 4,215/(43,200*43,200)
+    multiply the run by 2123 / 4800; \ error of 5,555 trifles = 5,555/(43,200*43,200)
+    exit.
+  if the heading is 280,
+    get the rise and the run given 1640;
+    negate the rise;
+    exit.
+  if the heading is 680,
+    get the rise and the run given 1640;
+    put the rise in a number called temp;
+    put the run in the rise;
+    put the temp in the run;
+    negate the rise;
+    exit.
+  if the heading is 3160,
+    get the rise and the run given 680;
+    negate the run;
+    exit.
+  convert the heading to a trig angle.
   scale the rise given the trig angle's sine.
   negate the rise. \ screen coordinates increase going down, not up.
-  put the rise denominator in the run.
   scale the run given the trig angle's cosine.
+
+to get a rise and a run given a heading (octant):
+  if the heading is evenly divisible by 960,
+    get the rise and the run given the heading (quadrant); exit.
+  if the heading is not evenly divisible by 480, exit.
+  put the rise denominator in a number.
+  multiply the number by the squirt o' two.
+  divide the number by 2.
+  put the number in the rise.
+  put the number in the run.
+  if the heading is 480, negate the rise; exit.
+  if the heading is 1440, exit.
+  if the heading is 2400, negate the run; exit.
+  \ the heading must be 3360.
+  negate the rise.
+  negate the run.
+
+to get a rise and a run given a heading (quadrant):
+  if the heading is not evenly divisible by 960, exit.
+  privatize the heading.
+  normalize the heading.
+  if the heading is 0,
+    put the rise denominator in the rise; negate the rise;
+    put 0 in the run; exit.
+  if the heading is 960,
+    put the rise denominator in the run;
+    put 0 in the rise; exit.
+  if the heading is 1920,
+    put the rise denominator in the rise;
+    put 0 in the run; exit.
+  \ the heading must be 2880.
+  put the rise denominator in the run.
+  negate the run.
+  put 0 in the rise.
 
 to go back to where we were:
   restore the context.
@@ -1988,7 +2045,7 @@ to stroke the four glyph:
   stroke 1 square.
   restore the context.
 
-to stroke the left-alligator glyph:
+to stroke the left-alligator glyph: \ <
   save the context.
   turn right.
   move 2 squares.
@@ -2611,7 +2668,7 @@ to stroke the question-mark glyph:
   stroke 1/2 square.
   restore the context.
 
-to stroke the right-alligator glyph:
+to stroke the right-alligator glyph: \ >
   save the context.
   move 1 square.
   turn right 17/96 of the way.

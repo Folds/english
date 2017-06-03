@@ -39,9 +39,30 @@ to draw a terminal:
   write the terminal's quoras in the terminal's box.
   restore the current canvas.
 
+to draw a terminal (last quora):
+  if the terminal is nil, exit.
+  get a quora from the terminal's quoras (backwards).
+  if the quora is nil, exit.
+  save the current canvas.
+  get a quora box given the terminal's box (last quora).
+  mask only outside the quora box.
+  draw and fill the quora box with the black color.
+  write the quora's string in the quora box with the quora's color.
+  restore the current canvas.
+
 to finalize a terminal:
   clear the terminal.
   destroy the terminal.
+
+to get a quora box given a box (last quora):
+  if the terminal is nil, clear the quora box; exit.
+  count the terminal's quoras returning a count.
+  if the count is less than 1, clear the quora box; exit.
+  subtract 1 from the count.
+  put the count times 1/4 inch in a height.
+  put the box into the quora box.
+  put the quora box's top plus 1/4 inch into the quora box's bottom.
+  move the quora box down the height.
 
 to handle an event given a terminal:
   if the terminal is nil, exit.
@@ -56,7 +77,7 @@ to handle an event given a terminal (backspace key):
   if the event is modified, exit.
   remove the last byte from the terminal's reply.
   remove the last byte from the terminal's quoras' last's string.
-  show the terminal.
+  show the terminal (last quora).
 
 to handle an event given a terminal (enter key):
   relinquish control.
@@ -67,7 +88,7 @@ to handle an event given a terminal (key down):
   if the event's byte is not printable, exit.
   append the event's byte to the terminal's reply.
   append the event's byte to the terminal's quoras' last's string.
-  show the terminal.
+  show the terminal (last quora).
 
 to handle an event given a terminal (refresh):
   show the terminal.
@@ -121,6 +142,13 @@ to show a terminal:
   if the terminal is nil, exit.
   save the current canvas.
   draw the terminal.
+  refresh the screen given the terminal's box.
+  restore the current canvas.
+
+to show a terminal (last quora):
+  if the terminal is nil, exit.
+  save the current canvas.
+  draw the terminal (last quora).
   refresh the screen given the terminal's box.
   restore the current canvas.
 
