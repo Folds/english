@@ -112,29 +112,7 @@ The following requests have been partially demonstrated.
 The following requests are roughly sorted
 from higher priority to lower priority.
 
-250.  Replace long list of colors with color's <adverbs> shade.
-  Per the designer of the colors, do not worry about backward
-  compatibility -- existing programs have copies of
-  noodle or color source files with the old definitions.
-  Status:    Designed.
-  Audience:  Programmers.
-  Benefit:   Minor.
-  Implementation difficulty:  Easy.
-  Demoing difficulty:  Not applicable.
-  Testing difficulty:  Medium.
-  Requested by Gerry Rzeppa on May 29, 2017.
-
 257.  In finder, allow double-clicking runnable files to run them.
-  Status:    Request.
-  Audience:  Programmers.
-  Benefit:   Medium.
-  Implementation difficulty:  Medium.
-  Demoing difficulty:  Easy.
-  Testing difficulty:  Medium.
-  Requested by Jasper Paulsen on June 3, 2017.
-
-258.  In editor, add a "list and run" menu item.
-  Perhaps with a different name.
   Status:    Request.
   Audience:  Programmers.
   Benefit:   Medium.

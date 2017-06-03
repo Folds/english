@@ -24,7 +24,7 @@ to create a terminal in a box:
   allocate memory for the terminal.
   put the box into the terminal's box.
   put the green color into the terminal's output color.
-  put the lightest green color into the terminal's input color.
+  put the green color's lightest shade into the terminal's input color.
 
 to decide if a terminal is full:
   put the terminal's height divided by 1/4 inch into a number.

@@ -20,8 +20,8 @@ a console is a thing with
 
 to create a console:
   allocate memory for the console.
-  put the lighter gray color into the console's border.
-  put the lighter gray color into the console's fill.
+  put the gray color's lighter shade into the console's border.
+  put the gray color's lighter shade into the console's fill.
   put the screen's box into the console's box.
   put the screen's box into a box.
   subtract the default font's height from the box's bottom.

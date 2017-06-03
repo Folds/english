@@ -2362,9 +2362,9 @@ to initialize the bar:
   initialize the status.
 
 to initialize the desktop:
-  put the lightest gray color into the desktop color.
-  put the light sky color into the comment color.
-  put the lightest sky color into the grid color.
+  put the gray color's lightest shade into the desktop color.
+  put the sky color's light shade into the comment color.
+  put the sky color's lightest shade into the grid color.
   initialize the bar.
   initialize the switch.
   initialize the pad. \ uses the bar and the switch
@@ -2886,7 +2886,7 @@ to test (the desktop - can gray out unused menus):
   \ so we can later verify whether the temporary color
   \ is the desktop color or the command's color.
   if the desktop color is the orange color,
-    put the lightest lime color in the command's color.
+    put the lime color's lightest shade in the command's color.
   if the desktop color is not the orange color,
     put the orange color in the command's color.
   choose a color for the command (temporary color).
@@ -2916,7 +2916,7 @@ to test (the desktop - does not gray out useful menus):
   \ so we can later verify whether the temporary color
   \ is the desktop color or the command's color.
   if the desktop color is the orange color,
-    put the lightest lime color in the command's color.
+    put the lime color's lightest shade in the command's color.
   if the desktop color is not the orange color,
     put the orange color in the command's color.
   choose a color for the command (temporary color).

@@ -984,3 +984,36 @@ Automated tests make debugging easier.
   Demoing difficulty:  Easy.
   Testing difficulty:  Not applicable.
   Requested by Gerry Rzeppa on June 3, 2017.
+
+258.  In editor, add a "list and run" menu item.
+  Perhaps with a different name.
+  Reasons for not doing:
+  1)  Conjunctions in feature names are a code smell.
+  2)  It only does two pieces (which can already be easily done)
+      of a larger process (which I have not scoped yet).
+  3)  To be consistent with this feature, a similar
+      command line feature would need to be added.
+  4)  But that command line feature would have questionable
+      design choices for reporting success or failure.
+  5)  That command line feature would not be consistent
+      with use in "one action per line" batch scripts.
+  6)  That command line feature would be the beginning of
+      an of-order-summorial increase in the number of
+      command line features.
+  7)  That command line feature would need to be documented,
+      and the documentation would be confusing.
+  8)  Very few users would find it useful.
+  9)  There are really only two use cases for it.
+      One is part of a build finalization process,
+      which needs to produce a file with debugging information
+      that corresponds to the released-and-tested .exe file.
+      The other is for intermediate builds while waiting for
+      a crashing bug to occur.  When crashing bugs are
+      eliminated, this use case disappears.
+  Status:    Won't do.
+  Audience:  Programmers.
+  Benefit:   Medium.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Easy.
+  Testing difficulty:  Medium.
+  Requested by Jasper Paulsen on June 3, 2017.

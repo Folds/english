@@ -254,8 +254,8 @@ to initialize the status:
   initialize the status' all test results.
   initialize the status' failures.
   resize the status.
-  put the lightest green color into the status' pass color.
-  put the lightest red color into the status' fail color.
+  put the green color's lightest shade into the status' pass color.
+  put the red color's lightest shade into the status' fail color.
   untint the status.
   put no in the status' started tests.
 

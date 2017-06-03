@@ -160,7 +160,8 @@ to destroy a scrollbar:
 to draw an arrow in a command:
   privatize the arrow.
   center the arrow in the command's roundy box.
-  draw the arrow with the black color and the light gray color.
+  draw the arrow with the black color
+    and the gray color's light shade.
 
 to draw down arrow in a command:
   create an arrow.

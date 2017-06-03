@@ -102,7 +102,8 @@ to create a submenu (font names):
 the custom font names are some font name things.
 
 to decide if a command is highlighted:
-  if the command's color is the lightest yellow color, say yes.
+  put the yellow color's lightest shade in a color.
+  if the command's color is the color, say yes.
   say no.
 
 to decide if a font height is standard (font height):
@@ -235,10 +236,11 @@ to highlight a string in a submenu:
   loop.
     get a command from the submenu's commands.
     if the command is nil, break.
+    put the yellow color's lightest shade in a color.
     if the command's name is the string,
-      put the lightest yellow color in the command's color; break.
+      put the color in the command's color; break.
     if the command's name starts with "Other",
-      put the lightest yellow color in the command's color; break.
+      put the color in the command's color; break.
   repeat.
 
 to initialize the font heights:

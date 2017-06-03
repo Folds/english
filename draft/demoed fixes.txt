@@ -538,6 +538,19 @@ next to the first instance, instead of covering the first instance.
   Testing difficulty:  Medium.
   Requested by Jasper Paulsen on April 25, 2017.
   
+250.  Replace long list of colors with color's <adverbs> shade.
+  Per the designer of the colors, do not worry about backward
+  compatibility -- existing programs have copies of
+  noodle or color source files with the old definitions.
+  Make "lighter" and "darker" relative to the "possessing" color.
+  Status:    Demonstrated.
+  Audience:  Programmers.
+  Benefit:   Minor.
+  Implementation difficulty:  Easy.
+  Demoing difficulty:  Not applicable.
+  Testing difficulty:  Medium.
+  Requested by Gerry Rzeppa on May 29, 2017.
+
 155.  Add a /full command line option for full-screen mode.
   Status:   Demonstrated.
   Benefit.  Minor.

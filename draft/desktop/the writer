@@ -1382,10 +1382,11 @@ to draw some shapes on a page:
 
 to draw the sizers on a shape:
   if the shape is nil, exit.
-  draw a sizer on the shape given "left-top" and the lighter gray color.
-  draw another sizer on the shape given "right-top" and the lighter gray color.
-  draw a third sizer on the shape given "left-bottom" and the lighter gray color.
-  draw a fourth sizer on the shape given "right-bottom" and the lighter gray color.
+  put the gray color's lighter shade in a color.
+  draw a sizer on the shape given "left-top" and the color.
+  draw another sizer on the shape given "right-top" and the color.
+  draw a third sizer on the shape given "left-bottom" and the color.
+  draw a fourth sizer on the shape given "right-bottom" and the color.
 
 to draw the sizers on some shapes:
   loop.

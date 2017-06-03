@@ -43,7 +43,7 @@ ream cal-3024
     text -1 0 0 -1 0 0 2160 2160 10170 14400 0 "title" "Arial" 320 "left" 0 0 0 yes
        "INTRODUCTION"
        ""
-       "I am the CAL-4010. My primary function is to compile Plain English text files"
+       "I am the CAL-4011. My primary function is to compile Plain English text files"
        "into executable programs compatible with the Windows operating system."
        "My code — just 37,000 lines of Plain English — is surprisingly broad in scope."
        ""
@@ -63,7 +63,7 @@ ream cal-3024
        "INSTALLATION"
        ""
        "I don't require special installation procedures. My source code, my"
-       "executable self, and this very documentation (in both native and PDF format) are all contained in the CAL-4010 folder.  Simply double-click the executable file to activate me."
+       "executable self, and this very documentation (in both native and PDF format) are all contained in the CAL-4011 folder.  Simply double-click the executable file to activate me."
        ""
        "If you usually want me to use different fonts, or if you usually want me to"
        "cover the whole screen, you can make a desktop icon for my executable."
@@ -82,7 +82,7 @@ ream cal-3024
        ""
        "Let me put it this way."
        ""
-       "The CAL-4010 is one of the most advanced Plain English compilers ever made. But I am currently in ""alpha test"".  Sometimes the kluge says I ""cannot continue."""
+       "The CAL-4011 is one of the most advanced Plain English compilers ever made. But I am currently in ""alpha test"".  Sometimes the kluge says I ""cannot continue."""
        "So please, save your work often."
        ""
        "Questions, comments, and crash reports may be directed to — https://github.com/Folds/english/wiki."
@@ -807,7 +807,7 @@ ream cal-3024
        ""
        "It's actually pretty easy.  I'll lead you through it:"
        ""
-       "(1) Open the CAL-4010 directory and copy my desktop subfolder and my noodle subfolder. Shift-click or drag to select. Copy is under ""C""."
+       "(1) Open the CAL-4011 directory and copy my desktop subfolder and my noodle subfolder. Shift-click or drag to select. Copy is under ""C""."
        ""
        "(2) Make a new directory on your ""C"" drive with an appropriate name like ""Baby Cal"". Then open it up and paste the two subfolders into it. Open one of the subfolders.  Now open any of the files. To open a bunch of files, just drag to select and tap the ENTER key."
        ""
@@ -1200,7 +1200,7 @@ ream cal-3024
        "c:\cal monet"
     end
     text -1 0 0 -1 0 0 2520 6660 9720 7020 0 "" "Arial" 360 "left" 0 0 0 yes
-       "c:\cal-4010"
+       "c:\cal-4011"
     end
     text -1 0 0 -1 0 0 2520 7020 9720 7380 0 "" "Arial" 360 "left" 0 0 0 yes
        "c:\another directory that you already had"
@@ -1344,7 +1344,7 @@ ream cal-3024
        "And now we're ready to write some Plain English code."
     end
     text -1 0 0 -1 0 0 2160 8100 10440 10260 0 "" "arial" 320 "left" 0 0 0 yes
-       "Good. Now get a copy of my noodle subfolder from the CAL-4010 directory, open our new directory, and slip it in there with CTRL-V."
+       "Good. Now get a copy of my noodle subfolder from the CAL-4011 directory, open our new directory, and slip it in there with CTRL-V."
        ""
        "Last step. Make a new text file in our new directory and call it whatever you please. But don't give it an extension. I only compile files with no extension."
        "I'm going to assume you decided to call it ""How to Paint"", like this:"
@@ -1803,7 +1803,7 @@ ream cal-3024
        ""
        "Now I know it doesn't look like it, but it is running. And running. And running. You can't see it because we haven't told it to do anything visible or audible yet. But it is running. And running. And running. So stop it. Like this:"
        ""
-       "(1) ALT-TAB back to me, the CAL-4010."
+       "(1) ALT-TAB back to me, the CAL-4011."
        ""
        "(2) Execute the Stop command. It's under ""S""."
     end
@@ -2317,7 +2317,7 @@ ream cal-3024
        "  Fill the screen's box with the white color."
        "  Loop."
        "    Pick a spot anywhere in the screen's box."
-       "    Pick a color between the lightest gray color "
+       "    Pick a color between the gray color's lightest shade"
        "      and the white color."
        "    Dab the color on the spot."
        "    If a counter is past 80000, break."
@@ -3947,8 +3947,8 @@ ream cal-3024
        "To mix a color given a spot:"
        "  Get the color given the spot."
        "  If the color is not very very light, exit."
-       "  Pick the color between the lightest gray"
-       "    color and the white color."
+       "  Pick the color between the gray color's"
+       "    lightest shade and the white color."
        ""
     end
     text -1 0 0 -1 0 0 2160 8280 4140 8640 0 "" "Arial" 360 "center" 0 0 0 yes
@@ -6485,7 +6485,8 @@ ream cal-3024
        ""
        ""
        ""
-       "I have an appropriately-named global variable for each of these colors in my ""colors"" file. ""The lightest gray color"", for example, or ""the darker blue color"". You should omit the adjective on normal shades, as in ""the red color""."
+       "I have a global variable for each of the normal colors in my ""colors"" file."
+       """The red color"", for example.  Each normal color has lighter and darker shades.  ""The gray color's lightest shade"", for example, or ""the blue color's darker shade""."
        ""
        "You can also dream up your own colors like this:"
        ""
@@ -6915,7 +6916,7 @@ ream cal-3024
     polygon 0 0 0 -1 0 0 4 2160 5760 5040 5670 7920 5850 10080 5760
     polygon 0 0 0 -1 0 0 2 10080 4320 10080 5760
     text -1 0 0 -1 0 0 2520 4320 9720 5400 0 "" "Arial" 320 "left" 0 0 0 yes
-       "I am the CAL-4010. What is your name?"
+       "I am the CAL-4011. What is your name?"
        "> Dr. Chandra"
        "Good morning, Dr. Chandra. I'm ready for my first lesson."
     end
