@@ -1111,7 +1111,7 @@ to compile a directory (write the exe):
   if the compiler's abort flag is set, exit.
   show status "Writing...".
   start the writing timer.
-  write the compiler's exe to the compiler's exe path.
+  write the compiler's exe buffer to the compiler's exe path.
   if the i/o error is not blank, abort with the i/o error.
   stop the writing timer.
 
@@ -1910,7 +1910,9 @@ the compiler has
   an abort row#,
   a name count,
   a exe buffer,
-  a listing buffer.
+  an exe path,
+  a listing buffer, and
+  a listing path.
 
 the compiling routine bodies timer is a timer.
 
@@ -3049,6 +3051,11 @@ to initialize the compiler given a directory:
   clear the compiler's abort message.
   clear the compiler's abort path.
   put 0 into the compiler's abort row#.
+  extract a designator from the compiler's directory.
+  remove any trailing backslash from the designator.
+  put the compiler's directory then the designator into a string.
+  put the string then ".exe" into the compiler's exe path.
+  put the string then ".lst" into the compiler's listing path.
   void the current routine.
   create the type index    given 4027 [buckets].
   create the global index  given 4027 [buckets].
@@ -3154,32 +3161,33 @@ to link:
   round up borough sizes.
   initialize a dos header.
   initialize a pe header.
-  fill the compiler's exe with the null byte given the compiler's exe size.
-  blurt the dos header into the compiler's exe.
-  blurt the pe header into the compiler's exe.
-  blurt the imports into the compiler's exe.
-  blurt the globals into the compiler's exe.
-  blurt the literals into the compiler's exe.
-  blurt the routines into the compiler's exe.
+  fill the compiler's exe buffer with the null byte
+    given the compiler's exe size.
+  blurt the dos header into the compiler's exe buffer.
+  blurt the pe header  into the compiler's exe buffer.
+  blurt the imports    into the compiler's exe buffer.
+  blurt the globals    into the compiler's exe buffer.
+  blurt the literals   into the compiler's exe buffer.
+  blurt the routines   into the compiler's exe buffer.
 
 the linking timer is a timer.
 
 to list:
-  clear the compiler's listing.
-  list the compiler's abort message in the compiler's listing.
-  list the types under "TYPES:" in the compiler's listing.
-  list the globals under "GLOBALS:" in the compiler's listing.
-  list the literals under "LITERALS:" in the compiler's listing.
-  list the routines under "ROUTINES:" in the compiler's listing.
-  list the type index under "TYPE INDEX:" in the compiler's listing.
-  list the global index under "GLOBAL INDEX:" in the compiler's listing.
-  list the literal index under "LITERAL INDEX:" in the compiler's listing.
-  list the routine index under "ROUTINE INDEX:" in the compiler's listing.
-  list the utility index under "UTILITY INDEX:" in the compiler's listing.
-  list the imports under "IMPORTS:" in the compiler's listing.
-  list the source files under "SOURCE FILES:" in the compiler's listing.
-  list the timers under "TIMERS:" in the compiler's listing.
-  write the compiler's listing to the compiler's listing path.
+  clear the compiler's listing buffer.
+  list the compiler's abort message in the compiler's listing buffer.
+  list the types         under "TYPES:"         in the compiler's listing buffer.
+  list the globals       under "GLOBALS:"       in the compiler's listing buffer.
+  list the literals      under "LITERALS:"      in the compiler's listing buffer.
+  list the routines      under "ROUTINES:"      in the compiler's listing buffer.
+  list the type index    under "TYPE INDEX:"    in the compiler's listing buffer.
+  list the global index  under "GLOBAL INDEX:"  in the compiler's listing buffer.
+  list the literal index under "LITERAL INDEX:" in the compiler's listing buffer.
+  list the routine index under "ROUTINE INDEX:" in the compiler's listing buffer.
+  list the utility index under "UTILITY INDEX:" in the compiler's listing buffer.
+  list the imports       under "IMPORTS:"       in the compiler's listing buffer.
+  list the source files  under "SOURCE FILES:"  in the compiler's listing buffer.
+  list the timers        under "TIMERS:"        in the compiler's listing buffer.
+  write the compiler's listing buffer to the compiler's listing path.
   if listing failed,
     put 1 in the return code;
     append the i/o error to a buffer;
@@ -3710,29 +3718,11 @@ the push address tag is a tag equal to 18.
 
 the push value tag is a tag equal to 19.
 
-to put the compiler's exe path into a path:
-  extract a designator from the compiler's directory.
-  remove any trailing backslash from the designator.
-  put the compiler's directory then the designator then ".exe" into the path.
-
 to put the compiler's exe size into a size:
   put 4096 [section base] into the size.
   add the import borough's size to the size.
   add the data borough's size to the size.
   add the code borough's size to the size.
-
-to put the compiler's listing path into a path:
-  extract a designator from the compiler's directory.
-  remove any trailing backslash from the designator.
-  put the compiler's directory then the designator then ".lst" into the path.
-  \
-  \ The preceding routine is a getter routine.
-  \ Even though the compiler was NOT defined to have
-  \ a member field called listing path,
-  \ the existence of this routine allows routines
-  \ (that are getting data from the compiler record)
-  \ to pretend that the compiler was defined to include:
-  \   a path called listing path
 
 to put a term into another term:
   put the term's variable into the other term's variable.

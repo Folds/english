@@ -964,3 +964,23 @@ Automated tests make debugging easier.
   Demoing difficulty:  Medium.
   Testing difficulty:  Not applicable.
   Requested by Gerry Rzeppa on May 29, 2017.
+
+255.  Refactor compiler's exe path into an ordinary field.
+  Instead of a calculated field.
+  Status:    Demonstrated.
+  Audience:  Compiler programmers.
+  Benefit:   Minor.
+  Implementation difficulty:  Easy.
+  Demoing difficulty:  Easy.
+  Testing difficulty:  Not applicable.
+  Requested by Gerry Rzeppa on June 3, 2017.
+
+256.  Refactor compiler's listing path into an ordinary field.
+  Instead of a calculated field.
+  Status:    Demonstrated.
+  Audience:  Compiler programmers.
+  Benefit:   Minor.
+  Implementation difficulty:  Easy.
+  Demoing difficulty:  Easy.
+  Testing difficulty:  Not applicable.
+  Requested by Gerry Rzeppa on June 3, 2017.

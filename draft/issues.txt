@@ -124,6 +124,25 @@ from higher priority to lower priority.
   Testing difficulty:  Medium.
   Requested by Gerry Rzeppa on May 29, 2017.
 
+257.  In finder, allow double-clicking runnable files to run them.
+  Status:    Request.
+  Audience:  Programmers.
+  Benefit:   Medium.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Easy.
+  Testing difficulty:  Medium.
+  Requested by Jasper Paulsen on June 3, 2017.
+
+258.  In editor, add a "list and run" menu item.
+  Perhaps with a different name.
+  Status:    Request.
+  Audience:  Programmers.
+  Benefit:   Medium.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Easy.
+  Testing difficulty:  Medium.
+  Requested by Jasper Paulsen on June 3, 2017.
+
 238.  Add scrollbar to the finder.
   Status:   Request.
   Benefit:  Medium.
@@ -868,4 +887,4 @@ with an adjustable slider between them.
 Unsorted requests:
 
 
-Next item number:  255.
+Next item number:  259.
