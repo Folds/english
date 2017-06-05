@@ -7,7 +7,8 @@
 to add a page to a document:
   if the document is nil, exit.
   create the page.
-  insert the page into the document's pages before the document's first selected page.
+  insert the page into the document's pages
+    before the document's first selected page.
   set the document's modified flag.
   adjust the edge of every page in the document.
 
@@ -379,7 +380,9 @@ to convert some rows to some paragraphs:
       append the paragraph to the paragraphs.
     append the row's string to the paragraph's string.
     if the row's string's last's target is not the return byte, repeat.
-    subtract 1 from the paragraph's string's last. \ paragraphs don't end with carriage returns; use subtract for speed
+    \ paragraphs don't end with carriage returns;
+    \ use subtract for speed
+    subtract 1 from the paragraph's string's last.
     void the paragraph.
   repeat.
 
@@ -429,7 +432,8 @@ to copy a page into another page:
 \  don't copy shape refers, recreate them
   put the page's edge into the other page's edge.
   put the page's selected flag into the other page's selected flag.
-  put the page's previously selected flag into the other page's previously selected flag.
+  put the page's previously selected flag
+    into the other page's previously selected flag.
   put the page's title into the other page's title.
   put the page's page number into the other page's page number.
   adjust the other page.
@@ -455,7 +459,8 @@ to copy a shape into another shape:
   copy the shape's shapes   into the other shape's shapes.
   put the shape's box       into the other shape's box.
   put the shape's selected flag into the other shape's selected flag.
-  put the shape's previously selected flag into the other shape's previously selected flag.
+  put the shape's previously selected flag
+    into the other shape's previously selected flag.
   put the shape's scale     into the other shape's scale.
 
 to copy some shapes into some other shapes:
@@ -1054,7 +1059,8 @@ to decide if a spot is in a shape (rectangle):
 to decide if a spot is in a shape (text):
   if the shape is nil, say no.
   if the shape's kind is not "text", say no.
-  if the spot is not in the shape's text rect, say no. \ text's box may be indented
+  \ text's box may be indented
+  if the spot is not in the shape's text rect, say no.
   say yes.
 
 to decide if a spot is in a shape on a page:
@@ -1127,7 +1133,8 @@ to decide if a spot is on a shape (rectangle):
 to decide if a spot is on a shape (text):
   if the shape is nil, say no.
   if the shape's kind is not "text", say no.
-  if the spot is on the shape's text rect, say yes. \ text's box may be indented
+  \ text's box may be indented
+  if the spot is on the shape's text rect, say yes.
   say no.
 
 to decide if a spot is on a shape on a page:
@@ -1191,7 +1198,8 @@ a document is a thing with
   a document selection called selection,
   some pages,
   a grid showing flag,
-  a yank grid, [1/8 inch, 1/9 inch, 1/16 inch, 1/24 inch, 1/32 inch, 1/48 inch, 0]
+  a yank grid,  \ 1/8 inch,  1/9 inch,  1/16 inch, 1/24 inch, 
+                \ 1/32 inch, 1/48 inch, 0]
   a scale ratio,
   some pages called page undos,
   some pages called page redos.
@@ -1238,9 +1246,11 @@ to draw the edge of a page in a document:
   put the roundy box into a box.
   adjust the box given 1/24 inch and 0 and -1/2 inch and 0.
   mask only outside the box.
-  draw the page's title in the box with the black color and the default font and "left".
+  draw the page's title in the box with the black color
+    and the default font and "left".
   put the roundy box into another box.
-  put the other box's right minus 1/2 inch plus 1/24 inch into the other box's left.
+  put the other box's right minus 1/2 inch plus 1/24 inch
+    into the other box's left.
   subtract 1/24 inch from the other box's right.
   mask only outside the other box.
   draw the page's page number in the other box (docster page number).
@@ -1428,7 +1438,8 @@ to draw the vertices on a shape:
     get a vertex from the shape's polygon's vertices.
     if the vertex is nil, exit.
     draw the vertex.
-    if the vertex is the shape's polygon's vertices' last, draw the vertex's spot with the black color.
+    if the vertex is the shape's polygon's vertices' last,
+      draw the vertex's spot with the black color.
   repeat.
 
 to draw the vertices on some shapes:
@@ -1965,7 +1976,8 @@ to get a box (text visibility):
 to get a box of the selected shapes on a page:
   if the page is nil, clear the box; exit.
   if nothing is selected on the page, clear the box; exit.
-  put the largest number and the largest number and the smallest number and the smallest number into the box.
+  put the largest number and the largest number
+    and the smallest number and the smallest number into the box.
   loop.
     get a shape from the page's shapes.
     if the shape is nil, exit.
@@ -2006,7 +2018,8 @@ to get first selected visible text from some shapes returning a text:
     if the shape is nil, exit.
     if the shape is not selected, repeat.
     if the shape's kind is "group", 
-      get first selected visible text from the shape's shapes returning the text; exit.
+      get first selected visible text from the shape's shapes
+        returning the text; exit.
     if the shape is selected visible text, 
       put the shape's text in the text; exit.
   repeat.
@@ -2468,7 +2481,10 @@ to handle an event given a document (key down - page-down key):
 to handle an event given a document (key down - page-up key):
   if the document is empty, exit.
   scroll the document up one page.
-  if the event's shift flag is not set, focus on the document's first visible page in the document; show the desktop with status; exit.
+  if the event's shift flag is not set,
+    focus on the document's first visible page in the document;
+    show the desktop with status;
+    exit.
   if the document's anchor is nil,
     put the document's last page into the document's anchor.
   put the document's first visible page into the document's caret.
@@ -2543,7 +2559,8 @@ to handle an event given a document (left click):
 to handle an event given a document (left double click):
   if the event is in the scrollbar, exit.
   if something is selected in the document, handle open; exit.
-  if the event's spot is not in the edge of any page in the document, handle open; exit.
+  if the event's spot is not in the edge of any page in the document,
+    handle open; exit.
   extend any selection in the document given the event's spot.
   show the desktop with status.
   handle open.
@@ -2829,9 +2846,12 @@ to handle an event given a page (left double click - edit shape):
 
 to handle an event given a page (left double click):
   if the event's spot is not in the pad, exit.
-  if the event's spot is in the edit shape on the page, handle the event given the page (left double click - edit shape); exit.
-  if the event's spot is in a vertex of a shape on the page, handle the event given the page and the shape and the vertex (left double click); exit.
-  if the event's spot is on the shape on the page, handle the event given the page and the shape (left double click); exit.
+  if the event's spot is in the edit shape on the page,
+    handle the event given the page (left double click - edit shape); exit.
+  if the event's spot is in a vertex of a shape on the page,
+    handle the event given the page and the shape and the vertex (left double click); exit.
+  if the event's spot is on the shape on the page,
+    handle the event given the page and the shape (left double click); exit.
 
 to handle an event given a page (right click):
   if the event's spot is not in the pad, exit.
@@ -3354,8 +3374,10 @@ to handle reduce given a page:
   scale the page to the current tab's node's document's scale.
   center the page.
   if the page is being edited, scroll the page to the caret.
-  if the page is not being edited, scroll the page to the page's first selected shape.
-  put the page's scale's numerator then ":" then the page's scale's denominator into the status' string.
+  if the page is not being edited,
+    scroll the page to the page's first selected shape.
+  put the page's scale's numerator then ":"
+    then the page's scale's denominator into the status' string.
   show the desktop.
 
 to handle renumber pages given a document:
@@ -3757,7 +3779,10 @@ to limit the origin in a document:
   if the document is empty, exit.
   put the document's left into the document's origin's x.
 \  put the document's top minus the document's last page's edge's top into a number.
-  put the document's edges/box minus 3 into a count.
+  put the document's edges/box into a count.
+  if the document's pages' count is at most the count,
+    put the document's top in the document's origin's y; exit.
+  subtract 3 from the count.
   put the count times the edge height into a height.
   put the document's top minus the document's last page's edge's top plus the height into a number.  
   limit the document's origin's y to the number and the document's top.
@@ -4119,7 +4144,8 @@ to print a copy of a document:
     if the page is nil, exit.
     if the page is not selected, repeat.
     add 1 to a number.
-    show status the copy then " of " then the number then " of " then the count then "...".
+    show status the copy then " of " then the number
+      then " of " then the count then "...".
     print the page.
   repeat.
 
@@ -4690,7 +4716,8 @@ to scroll to the edge of a page given a document:
   globalize the box given the document's origin.
   if the box's bottom is less than or equal to the document's top,
     put the document's top minus the box's top into a difference's y.
-  if the box's top is greater than or equal to the document's bottom,
+\  if the box's top is greater than or equal to the document's bottom,
+  if the box's bottom is greater than the document's bottom,
     put the document's bottom minus the box's top minus the edge height into the difference's y.
   scroll the document given the difference.
 
@@ -4781,7 +4808,9 @@ to select some pages:
 to select some pages given a document selection:
   if the document selection's anchor is nil, exit.
   if the document selection's caret is nil, exit.
-  put the document selection's anchor's edge's left-top and the document selection's caret's edge's right-bottom into a box.
+  put the document selection's anchor's edge's left-top
+    and the document selection's caret's edge's right-bottom
+    into a box.
   add the tpp to the box's top.
   subtract the tpp from the box's bottom.
   normalize the box.
@@ -5104,7 +5133,8 @@ to track a shape on a page given an event (text selection):
   repeat.
 
 to track a sizer on a shape on a page given an event:
-  \ the idea on sizing is always size from bottom right, then move shapes if sized from sizer other than right-bottom
+  \ the idea on sizing is always size from bottom right,
+  \ then move shapes if sized from sizer other than right-bottom
   if the page is nil, exit.
   if the shape is nil, exit.
   if the event is nil, exit.
@@ -5163,8 +5193,10 @@ to ungroup any selected shapes on a page:
     put the original shapes' first into a shape.
     if the shape is nil, exit.
     remove the shape from the original shapes.
-    if the shape is not selected, append the shape to the page's shapes; repeat.
-    if the shape's kind is not "group", append the shape to the page's shapes; repeat.
+    if the shape is not selected,
+      append the shape to the page's shapes; repeat.
+    if the shape's kind is not "group", 
+      append the shape to the page's shapes; repeat.
     select the shape's shapes.
     append the shape's shapes to the page's shapes.
     destroy the shape.

@@ -341,7 +341,6 @@ to draw any visible rows of a text (editing):
   loop.
     get a row from the text's rows.
     if the row is nil, exit.
-\    if the row of the text is not visible given the screen's box, repeat.
     if the row of the text is not visible, repeat.
     draw the row of the text (editing).
   repeat.
@@ -961,15 +960,13 @@ to limit the caret in a text:
 to limit the origin of a text:
   if the text is nil, exit.
   limit the text's x to the smallest number and the text's margin.
-  put the text's row count minus 1 into a count.
-  put the count times the text's row height into a number.
-  limit the text's y to - the number and 0.
-
-to limit the origin of a text (scrolling):
-  if the text is nil, exit.
-  limit the text's x to the smallest number and the text's margin.
-  put the text's rows/box minus 3 into a count.
-  put the text's row count minus the count into another count.
+  put the text's rows/box into a count.
+  if the text's rows' last is nil,
+    put 0 in the text's y; exit.
+  if the text's rows' last's row# is at most the count,
+    put 0 in the text's y; exit.
+  subtract 3 from the count.
+  put the text's rows' last's row# minus the count into another count.
   put the other count times the text's row height into a number.
   limit the text's y to - the number and 0.
 
@@ -1402,6 +1399,7 @@ to remove the rows of a text between a row and another row:
     put the next row into the row.
   repeat.
   renumber the text's rows.
+  limit the origin of the text.
 
 to renumber some rows:
   get a row from the rows.
@@ -1519,8 +1517,7 @@ to scroll a text down one page:
   if the text's vertical scroll flag is not set, exit.
   subtract the text's box's y-extent from the text's y.
   add the text's row height to the text's y.
-\  limit the origin of the text.
-  limit the origin of the text (scrolling).
+  limit the origin of the text.
 
 to scroll a text given a count:
   if the text is nil, exit.
@@ -1539,15 +1536,13 @@ to scroll a text given a difference:
     put 0 into the difference's y.
   if the difference is 0, exit.
   move the text's origin given the difference.
-\  limit the origin of the text.
-  limit the origin of the text (scrolling).
+  limit the origin of the text.
 
 to scroll a text to the top:
   if the text is nil, exit.
   if the text's vertical scroll flag is not set, exit.
   put 0 into the text's y.
-\  limit the origin of the text.
-  limit the origin of the text (scrolling).
+  limit the origin of the text.
 
 to scroll a text up one line:
   if the text is nil, exit.
@@ -1560,8 +1555,7 @@ to scroll a text up one page:
   if the text's vertical scroll flag is not set, exit.
   add the text's box's y-extent to the text's y.
   subtract the text's row height from the text's y.
-\  limit the origin of the text.
-  limit the origin of the text (scrolling).
+  limit the origin of the text.
 
 to select every byte in a text:
   if the text is nil, exit.

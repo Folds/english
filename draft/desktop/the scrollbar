@@ -601,7 +601,7 @@ to horizontal scroll a source given a count:
   put - the twips and 0 into a difference.
   move the source's text's origin given the difference.
   \debug the source's text's x.
-  limit the origin of the source's text (scrolling).
+  limit the origin of the source's text.
   put the old flag in the source's text's horizontal scroll flag.
 
 to initialize an arrow:
