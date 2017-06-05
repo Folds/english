@@ -112,14 +112,53 @@ The following requests have been partially demonstrated.
 The following requests are roughly sorted
 from higher priority to lower priority.
 
-257.  In finder, allow double-clicking runnable files to run them.
+259.  Fix docster so short lists of edges don't pop up and down.
+  Status:    Request.
+  Audience:  Application users.
+  Benefit:   Medium.
+  Implementation difficulty:  Hard.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Medium.
+  Requested by Gerry Rzeppa on June 4, 2017.
+
+260.  Fix editor so short texts don't pop up and down.
+  Status:    Request.
+  Audience:  Application users.
+  Benefit:   Medium.
+  Implementation difficulty:  Hard.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Medium.
+  Requested by Jasper Paulsen on June 4, 2017.
+
+269.  Allow user to save files that have not been modified.
+  Status:  Request.
+  Audience:  All users.
+  Benefit:   Medium.
+  Implementation difficulty:  Easy.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Hard.
+  Requested by Jasper Paulsen on June 4, 2017.
+
+270.  Make explicit which routines only save unmodified files.
+  Status:  Request.
+  Audience:  Programmers.
+  Benefit:   Medium.
+  Implementation difficulty:  Easy.
+  Demoing difficulty:  Easy.
+  Testing difficulty:  Not applicable.
+  Requested by Jasper Paulsen on June 4, 2017.
+
+263.  Allow editor to export all test results as a text file.
+  Save in the project folder as "test results.txt"
+  if test all is called from the GUI.  Continue to only send
+  to standard error if called from the command line.
   Status:    Request.
   Audience:  Programmers.
   Benefit:   Medium.
   Implementation difficulty:  Medium.
-  Demoing difficulty:  Easy.
+  Demoing difficulty:  Medium.
   Testing difficulty:  Medium.
-  Requested by Jasper Paulsen on June 3, 2017.
+  Requested by Gerry Rzeppa on June 3, 2017.
 
 238.  Add scrollbar to the finder.
   Status:   Request.
@@ -139,6 +178,7 @@ from higher priority to lower priority.
 
 016.  Mark the tabs to indicate files with unsaved edits.
   For example, put a "*" before the name of each unsaved file.
+  Or perhaps put the file designator's text in dark blue.
   Audience:  programmers.
   Status:  request.
   Benefit:  Minor.
@@ -148,7 +188,9 @@ from higher priority to lower priority.
   Requested by Jasper Paulsen on March 7, 2014.
 
 198.  In finder, allow running a .lnk file.
-  Status:  Designed.
+  Some hints are in:
+  https://msdn.microsoft.com/en-us/library/ms861519.aspx
+  Status:  Requested.
   Audience:  Application users.
   Benefit:  Medium.
   Implementation difficulty:  Easy.
@@ -789,80 +831,9 @@ while a letter's menu is visible.
   Testing difficulty:  Medium.
   Requested by Jasper Paulsen on April 25, 2017.
 
-060.  Allow the user to change fonts of user interface features.
-  For example, the menus, the status bar, and the tab-strip.
-  This can be a configuration file Easter egg.
-  Audience:  Windows programmers and Linux programmers.
-  Implementation difficulty:  Easy.
-  Demoing difficulty:  Medium.
-  Testing difficulty:  Medium.
-  Benefit:  minor.
-  Status: request.
-  Requested by Jasper Paulsen on March 7, 2014.
-
-064.  Allow user to enter font heights in points (72nds of inches).
-  Audience:  Windows programmers.
-  Status:  request.
-  Benefit:  Minor.
-  Implementation difficulty:  Medium.
-  Demoing difficulty:  Medium.
-  Testing difficulty:  Medium.
-  Requested by Jasper Paulsen on March 7, 2014.
-
-008.  Change the default font for first-time users.
-  If the system has "Courier New" available, use it.
-  If "Courier New" is not available, try "Arial".
-  If "Arial" is not available, use "Times New Roman".
-  Benefit:  Very important -- many potential users did not even try
-            the system, because the first font they saw was the old
-            default font, and they did not see how to change the font.
-  Audience:  Windows programmers and Linux programmers.
-  Implementation difficulty:  Easy.
-  Demoing difficulty:  Profound.  (Because the demonstrator will
-            not be a first-time user.)
-  Testing difficulty:  Medium.
-  Requested by Jasper Paulsen on March 7, 2014.
-
-099.  Use a checkmark instead of a highlight color for the current font height.
-  Audience:  All users.
-  Status:  request.
-  Benefit:  Might do more harm than good.
-    The 8-bit ASCII character set does not include a checkmark.
-    This is probably why Microsoft's implementation of checkmarked menus
-    uses a custom hard-coded bitmap.  The closest 8-bit ascii characters
-    are the bullet (#149) and the generic currency sign (#164).
-    There are other symbols that look sort of like checkmarks
-    (if you squint hard enough), but they mean "not", not "selected".
-    Using unicode character #10003 or #10004 (#x2713 or #x2714)
-    would produce a checkmark, but would require the compiler
-    to deal gracefully with Unicode strings.
-  Implementation difficulty:  Hard.
-  Demoing difficulty:  Easy.
-  Testing difficulty:  Medium.
-  Requested by Gerry Rzeppa on March 18, 2014.
-
-065.  Allow splitting an editor window into a top section and a bottom section,
-with an adjustable slider between them.
-  Audience:  Windows programmers -- this was a feature of Visual Basic.
-  Status:  request.
-  Benefit:  Possibly does more harm than good.
-  Implementation difficulty:  Hard.
-  Demoing difficulty:  Easy.
-  Testing difficulty:  Medium.
-  Requested by Jasper Paulsen on March 7, 2014.
-
-047.  Use subtle shading to hint at the edges of the text editing area.
-  Status:  request.
-  Audience:  Windows programmers.
-  Benefit:  minor.
-  Implementation difficulty:  Medium.
-  Demoing difficulty:  Easy.
-  Testing difficulty:  Medium.
-  Requested by Jasper Paulsen on March 7, 2014.
-
 
 \ ======================================
 Unsorted requests:
 
 
-Next item number:  259.
+Next item number:  271.
