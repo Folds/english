@@ -6782,6 +6782,7 @@ ream cal-3024
        ""
        ""
        ""
+       ""
        "/test=verbose"
        ""
        ""
@@ -6794,8 +6795,12 @@ ream cal-3024
     end
     text -1 0 0 -1 0 0 3780 3240 10080 13680 0 "" "Arial" 320 "left" 0 0 0 yes
        ""
-       "tells me to run all the tests, and then quit.  The tests are run as if you had clicked in my status box.  If all of the tests pass, "
-       "I will return 0.  If any test(s) fail, I will return a positive number, and I will describe the failed test(s) in the standard error stream.  A memory leak counts as a failed test, but I don't know how to describe it."
+       "tells me to run all the tests, and then quit.  The tests are run"
+       "as if you had clicked in my status box, except I won't save"
+       "a ""test results.txt"" file.  If all of the tests pass, I will return 0."
+       "If any test(s) fail, I will return a positive number, and I will describe the failed test(s) in the standard error stream."
+       "A memory leak counts as a failed test, but I don't know"
+       "how to describe it."
        ""
        "is like /test, except I describe all of the tests in the standard error stream."
        ""
@@ -9070,7 +9075,7 @@ ream cal-3024
     end
   end
   page 12240 15840 1 1440
-    text -1 0 0 -1 0 0 2160 2160 10440 13680 0 "title" "Arial" 320 "left" 0 0 0 yes
+    text -1 0 0 -1 0 0 2160 2160 10620 13680 0 "title" "Arial" 320 "left" 0 0 0 yes
        "TESTING"
        ""
        "I can check whether a bunch of my features are working correctly."
@@ -9081,14 +9086,21 @@ ream cal-3024
        "how many tests passed.  If you click in the box with how many tests passed,"
        "I will tell you about some of the tests."
        ""
-       "If any of the tests failed, my status box will turn pink.  I will tell you how many tests failed.  If you click in the box with how many tests failed, I will tell you about some of the tests that failed."
+       "If any of the tests failed, my status box will turn pink.  I will tell you how many tests failed.  If you click in the box with how many tests failed, I will tell you about some"
+       "of the tests that failed."
        ""
-       "If you click on a test result, I wll copy the test result to the clipboard, and hide all of the test results.  Or you can click anywhere else to continue without copying."
+       "If you click on a test result, I wll copy the test result to the clipboard, and hide all"
+       "of the test results.  Or you can click anywhere else to continue without copying."
        ""
        "You can find my tests by searching for ""to test"" in my status, and in any files mentioned in my status' ""to test (all) routine.  The next page of this glossary explains how to add a test."
        ""
-       "The /test command line option will just run the tests."
-       "It outputs descriptions of the failed tests in the standard error stream."
+       "If you run the tests while you are looking at a file in the editor,"
+       "I will output descriptions of all of the tests in a file called ""test results.txt""."
+       "I put ""test results.txt"" in the same place I would compile a .exe file. "
+       "Thus, you can find ""test results.txt"" in either the same folder"
+       "as the file you are looking at, or in that folder's parent folder."
+       ""
+       "The /test command line option will just run the tests, without saving ""test results.txt"". Instead, it outputs descriptions of the failed tests in the standard error stream."
        "The /test=verbose command line option also just runs the tests,"
        "but it outputs descriptions of all of the tests in the standard error stream."
        "The ""Command Line"" entry in this glossary talks about these options."

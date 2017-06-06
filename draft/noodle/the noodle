@@ -8995,13 +8995,14 @@ to write a buffer to a path:
     put "Directory '" then the directory then "' doesn't exist."
       into the i/o error;
     exit.
-  set the path to read-write mode.
+\  set the path to read-write mode.
   privatize the path.
   null terminate the path.
   call "kernel32.dll" "CreateFileA"
     with the path's first and 1073741824 [generic_write] 
     and 0 and 0 and 2 [create_always]
-    and -2147483520 [file_flag_write_through or file_attribute_normal]
+    and -2147483520 [file_attribute_normal   =      0x100]
+                 [or file_flag_write_through = 0x80000000]
     and 0 returning a handle.
   if the handle is -1 [invalid_handle_value],
     put "Error opening file '" then the path then "'." into the i/o error; exit.

@@ -103,18 +103,6 @@ The following requests have been partially demonstrated.
 The following requests are roughly sorted
 from higher priority to lower priority.
 
-263.  Allow editor to export all test results as a text file.
-  Save in the project folder as "test results.txt"
-  if test all is called from the GUI.  Continue to only send
-  to standard error if called from the command line.
-  Status:    Request.
-  Audience:  Programmers.
-  Benefit:   Medium.
-  Implementation difficulty:  Medium.
-  Demoing difficulty:  Medium.
-  Testing difficulty:  Medium.
-  Requested by Gerry Rzeppa on June 3, 2017.
-
 238.  Add scrollbar to the finder.
   Status:   Request.
   Benefit:  Medium.

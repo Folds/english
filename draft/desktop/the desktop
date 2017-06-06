@@ -1332,9 +1332,6 @@ to handle a command:
   if the handler is "handle save as pdf", handle save as pdf; exit.
   if the handler is "handle select all", handle select all; exit.
   if the handler is "handle send to back", handle send to back; exit.
-  if the handler is "handle test quota", handle test quota; exit.
-  if the handler starts with "handle test result ",
-    handle the command (copy test result); exit.
   if the handler is "handle smooth", handle smooth; exit.
   if the handler is "handle sort definitions", handle sort definitions; exit.
   if the handler is "handle sort selected lines",
@@ -1347,6 +1344,9 @@ to handle a command:
     handle sort nodettes given "name"; exit.
   if the handler is "handle stop", handle stop; exit.
   if the handler is "handle test", handle test; exit.
+  if the handler is "handle test quota", handle test quota; exit.
+  if the handler starts with "handle test result ",
+    handle the command (copy test result); exit.
   if the handler is "handle toggle screensize", handle toggle screensize; exit.
   if the handler is "handle uncomment", handle uncomment; exit.
   if the handler is "handle undo", handle undo; exit.

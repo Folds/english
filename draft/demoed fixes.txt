@@ -466,6 +466,18 @@ next to the first instance, instead of covering the first instance.
   Testing difficulty:  Not applicable.
   Requested by Jasper Paulsen on June 4, 2017.
 
+263.  Allow editor to export all test results as a text file.
+  Save in the project folder as "test results.txt"
+  if test all is called from the GUI.  Continue to only send
+  to standard error if called from the command line.
+  Status:    Demonstrated.
+  Audience:  Programmers.
+  Benefit:   Medium.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Medium.
+  Requested by Gerry Rzeppa on June 3, 2017.
+
 032.  Adjust the number of tabs, depending on the initial width of the main window.
   Status: Demonstrated.
   Audience:  Windows programmers and Linux programmers.
