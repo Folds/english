@@ -448,6 +448,24 @@ next to the first instance, instead of covering the first instance.
   Testing difficulty:  Medium.
   Requested by Gerry Rzeppa on March 13, 2017.
  
+269.  Allow user to save files that have not been modified.
+  Status:  Demonstrated.
+  Audience:  All users.
+  Benefit:   Medium.
+  Implementation difficulty:  Easy.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Hard.
+  Requested by Jasper Paulsen on June 4, 2017.
+
+270.  Make explicit which routines only save unmodified files.
+  Status:  Demonstrated.
+  Audience:  Programmers.
+  Benefit:   Medium.
+  Implementation difficulty:  Easy.
+  Demoing difficulty:  Easy.
+  Testing difficulty:  Not applicable.
+  Requested by Jasper Paulsen on June 4, 2017.
+
 032.  Adjust the number of tabs, depending on the initial width of the main window.
   Status: Demonstrated.
   Audience:  Windows programmers and Linux programmers.
@@ -659,6 +677,18 @@ next to the first instance, instead of covering the first instance.
   Demoing difficulty:  Medium.
   Testing difficulty:  Medium.
   Requested by Gerry Rzeppa on March 13, 2017.
+
+016.  Mark the tabs to indicate files with unsaved edits.
+  For example, put a "*" before the name of each unsaved file.
+  Or perhaps put the file designator's text in dark blue.
+  (Chose a color 1/5 of the way from darkest blue toward black.)
+  Audience:  programmers.
+  Status:   Demonstrated.
+  Benefit:  Minor.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Easy.
+  Testing difficulty:  Hard.
+  Requested by Jasper Paulsen on March 7, 2014.
 
 196.  In writer, get title of a page from first non-blank line, if possible.
   Status:  Demonstrated.

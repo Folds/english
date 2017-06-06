@@ -765,12 +765,12 @@ to draw a tab:
     draw the tab's box's top line with the black color.
   if the tab's mode is "finder",
     draw the tab's name in the center of the tab's info box
-      with the black color and the requested control font;
+      with the tab's name color and the requested control font;
     exit.
   draw the tab's info string in the center of the tab's info box
     with the gray color and the requested control font.
   draw the tab's name in the center of the tab's name box
-    with the black color and the requested control font.
+    with the tab's name color and the requested control font.
 
 to draw some tabs:
   get a tab from the tabs.
@@ -2710,6 +2710,15 @@ to populate a submenu given a tab (y):
     given the tab has "writer" and wants "existence".
 
 to populate a submenu given a tab (z):
+
+to put a tab's name color into a color:
+  put the black color in the color.
+  if the tab is nil, exit.
+  if the tab's mode is "finder", exit.
+  if the tab's node is not modified, exit.
+  put the blue color's darkest shade in another color.
+  put 100 in the other color's lightness.   
+  put the other color in the color.
 
 the recent nonstandard font height name is a string.
 

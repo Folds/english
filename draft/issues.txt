@@ -103,24 +103,6 @@ The following requests have been partially demonstrated.
 The following requests are roughly sorted
 from higher priority to lower priority.
 
-269.  Allow user to save files that have not been modified.
-  Status:  Implemented.
-  Audience:  All users.
-  Benefit:   Medium.
-  Implementation difficulty:  Easy.
-  Demoing difficulty:  Medium.
-  Testing difficulty:  Hard.
-  Requested by Jasper Paulsen on June 4, 2017.
-
-270.  Make explicit which routines only save unmodified files.
-  Status:  Implemented.
-  Audience:  Programmers.
-  Benefit:   Medium.
-  Implementation difficulty:  Easy.
-  Demoing difficulty:  Easy.
-  Testing difficulty:  Not applicable.
-  Requested by Jasper Paulsen on June 4, 2017.
-
 263.  Allow editor to export all test results as a text file.
   Save in the project folder as "test results.txt"
   if test all is called from the GUI.  Continue to only send
@@ -148,17 +130,6 @@ from higher priority to lower priority.
   Demoing difficulty:  Medium.
   Testing difficulty:  Medium.
   Requested by Jasper Paulsen on May 20, 2014.
-
-016.  Mark the tabs to indicate files with unsaved edits.
-  For example, put a "*" before the name of each unsaved file.
-  Or perhaps put the file designator's text in dark blue.
-  Audience:  programmers.
-  Status:  request.
-  Benefit:  Minor.
-  Implementation difficulty:  Medium.
-  Demoing difficulty:  Easy.
-  Testing difficulty:  Hard.
-  Requested by Jasper Paulsen on March 7, 2014.
 
 198.  In finder, allow running a .lnk file.
   Some hints are in:
