@@ -1074,24 +1074,42 @@ to reverse a node:
   adjust every nodette in the node.
 
 to save a node:
-  if the node is nil, exit.
-  if the node's source is not nil, save the node (source).
-  if the node's document is not nil, save the node (document).
+  save the node given "yes" returning a count.
 
-to save a node (document):
+to save a node given a relevancy returning a count:
+  clear the count.
+  if the node is nil, exit.
+  if the node's source is not nil,
+    save the node given the relevancy returning the count (source).
+  if the node's document is not nil,
+    save the node given the relevancy returning another count (document).
+  if the other count is greater than the count,
+    put the other count in the count.
+
+to save a node given a relevancy returning a count (document):
   clear the i/o error.
-  if the node's document is not modified, exit.
+  clear the count.
+  if the relevancy is not "modified", set a relevance.
+  if the node's document is modified, set the relevance.
+  if the relevance is no, exit.
   externalize the node's document into a buffer.
   write the buffer to the node's path.
-  if the i/o error is blank, clear the node's document's modified flag.
+  if the i/o error is blank,
+    clear the node's document's modified flag;
+    put 1 in the count.
 
-to save a node (source):
+to save a node given a relevancy returning a count (source):
   clear the i/o error.
-  if the node's source is not modified, exit.
+  clear the count.
+  if the relevancy is not "modified", set a relevance.
+  if the node's source is modified, set the relevance.
+  if the relevance is no, exit.
   remember the node's source's text with "save".
   convert the node's source to a buffer.
   write the buffer to the node's path.
-  if the i/o error is blank, clear the node's source's text's modified flag.
+  if the i/o error is blank,
+    clear the node's source's text's modified flag;
+    put 1 in the count.
 
 to scroll a node down one page:
   if the node is nil, exit.
