@@ -232,10 +232,11 @@ ream cal-3024
     polygon 0 0 0 -1 0 0 2 8100 6526 8100 6840
     polygon 0 0 0 -1 0 0 4 2160 5940 5040 5850 7920 6030 10080 5940
     polygon 0 0 0 -1 0 0 4 2160 6120 5040 6030 7920 6210 10080 6120
-    text -1 0 0 -1 0 0 2160 10530 10080 13050 0 "" "arial" 320 "left" 0 0 0 yes
+    text -1 0 0 -1 0 0 2160 10530 10080 13680 0 "" "arial" 320 "left" 0 0 0 yes
        "Most of the time, there aren't any scroll bars in my interface."
        "To scroll, press the right mouse button and shove."
-       "If you have a big file in the editor, I will have a scroll bar."
+       "If you have a big file in the editor, or a lot of items in the finder,"
+       "or a long table of contents in the writer, I will have a scroll bar."
        "When you can see the scroll bar, you can also use the mouse wheel to scroll."
        ""
        "Note also that the CTRL and ALT keys are almost always the same to me."

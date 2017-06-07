@@ -31,7 +31,8 @@ to adjust every nodette in a node:
 
 to adjust a node:
   if the node is nil, exit.
-  put the finder's left plus the finder's margin into the node's origin's x.
+  put the finder's box's left plus the finder's left margin
+    into the node's origin's x.
   put the finder's top into the node's origin's y.
   adjust every nodette in the node.
   void the node's caret.
@@ -43,7 +44,8 @@ to adjust a nodette in a node:
   put 0 into the nodette's left.
   put 32767 into the nodette's right. \ windows gdi max
   put 0 into the nodette's top.
-  if the nodette is not the node's first nodette, put the nodette's previous' bottom into the nodette's top.
+  if the nodette is not the node's first nodette,
+    put the nodette's previous' bottom into the nodette's top.
   put the nodette's top plus the node height into the nodette's bottom.
 
 to autoscroll a node given a spot and a flag:
@@ -305,7 +307,10 @@ to draw a node:
   mask only outside the finder's box.
   draw the finder's box with the desktop color and the desktop color.
   put the finder's box into a box.
-  subtract the finder's margin from the box's right.
+  put the finder's left margin in the finder's right margin.
+  if the scrollbar is needed,
+    add 1/8 inch to the finder's right margin.
+  subtract the finder's right margin from the box's right.
   mask outside the box.
   draw any visible nodettes in the node.
 
@@ -316,7 +321,7 @@ to draw a nodette in a node:
   put the desktop color into a fill color.
   put the nodette's box and 1/12 inch into a roundy box.
   globalize the roundy box given the node's origin.
-  put the finder's right minus the finder's margin into the roundy box's right.
+  put the finder's box's right minus the finder's right margin into the roundy box's right.
   if the nodette's selected flag is set, put the hilite color into the border.
   if the nodette's selected flag is set, put the hilite color into the fill.
   draw the roundy box with the border and the fill.
@@ -423,7 +428,12 @@ to find a nodette in a node given a spot (limiting):
   limit the spot to the box.
   find the nodette given the node and the spot.
 
-the finder has a box, a grid, a margin and a clipboard path.
+the finder has
+  a box,
+  a grid,
+  a left margin,
+  a right margin,
+  and a clipboard path.
 
 to focus on a nodette in a node:
   if the node is nil, exit.
@@ -630,6 +640,7 @@ to handle an event given a node (left click):
   handle the event given the node (left click - not modified, not shifted).
 
 to handle an event given a node (left double click):
+  if the event is in the scrollbar, exit.
   if something is selected in the node, handle open; exit.
   if the event's spot is not in the node, handle open; exit.
   extend any selection in the node given the event's spot.
@@ -811,8 +822,15 @@ to initialize the finder:
 to limit the origin in a node:
   if the node is nil, exit.
   if the node is empty, exit.
-  limit the node's origin's x to -32767 and the finder's left plus the finder's margin.
-  put the finder's top minus the node's last nodette's top into a number.
+  limit the node's origin's x to -32767
+    and the finder's box's left plus the finder's left margin.
+  put the finder's nodes/box into a count.
+  if the node's nodettes' count is at most the count,
+    put the finder's top in the node's origin's y; exit.
+  subtract 3 from the count.
+  put the count times the node height into a height.
+  put the finder's top minus the node's nodettes' last's top
+    plus the height into a number.
   limit the node's origin's y to the number and the finder's top.
 
 the node height is 360.
@@ -967,6 +985,9 @@ to position the selection in a node given a spot:
   find the node's caret in the node given the spot (limiting).
   put the node's caret into the node's anchor.
 
+to put the finder's nodes/box into a count:
+  put the finder's height divided by the node height into the count.
+
 to put the finder's y-extent into a height:
   put the finder's box's y-extent into the height.
 
@@ -1062,7 +1083,8 @@ to rename a nodette in a node and in the file system given a path:
 
 to resize the finder:
   put the node height and the node height into the finder's grid.
-  put 1/4 inch into the finder's margin.
+  put 1/4 inch into the finder's left margin.
+  put 1/4 inch into the finder's right margin.
   put the pad's box into a box.
   put the box's height divided by the node height times the node height into a height.
   put the box's top plus the height into the box's bottom.
@@ -1110,6 +1132,14 @@ to save a node given a relevancy returning a count (source):
   if the i/o error is blank,
     clear the node's source's text's modified flag;
     put 1 in the count.
+
+to scroll a node down given a count:
+  if the node is nil, exit.
+  put the node height in a height.
+  multiply the height by the count.
+  negate the height.
+  put the height in a difference's y.
+  scroll the node given the difference.
 
 to scroll a node down one page:
   if the node is nil, exit.

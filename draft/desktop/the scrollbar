@@ -35,6 +35,17 @@ to convert a count to a height given a document (invert scrollbar drag):
   put the count in the height.
   scale the height given the ratio.
 
+to convert a count to a height given a node (invert scrollbar drag):
+  put the scrollbar's box's height 
+    minus the scrollbar's uptick's height 
+    minus the scrollbar's cab's height 
+    minus the scrollbar's downtick's height 
+    in a height called range.
+  get another count of invisible nodettes given the node.
+  put the range and the other count in a ratio.  \ scrollbar twips per nodette.
+  put the count in the height.
+  scale the height given the ratio.
+
 to convert a count to a height given a source (invert scrollbar drag):
   put the scrollbar's box's height
     minus the scrollbar's uptick's height
@@ -54,6 +65,17 @@ to convert a height to a count given a document (scrollbar drag):
     in a height called range.
   get another count of invisible pages given the document.
   put the other count and the range in a ratio. \ pages per scrollbar twip 
+  put the height in the count.
+  scale the count given the ratio.
+
+to convert a height to a count given a node (scrollbar drag):
+  put the scrollbar's box's height 
+    minus the scrollbar's uptick's height 
+    minus the scrollbar's cab's height 
+    minus the scrollbar's downtick's height 
+    in a height called range.
+  get another count of invisible nodettes given the node.
+  put the other count and the range in a ratio. \ nodettes per scrollbar twip 
   put the height in the count.
   scale the count given the ratio.
 
@@ -108,6 +130,7 @@ to decide if a mode is never scrollable:
 
 to decide if a mode is sometimes scrollable:
   if the mode is "editor", say yes.
+  if the mode is "finder", say yes.
   if the mode is "docster", say yes.
   say no.
 
@@ -121,8 +144,9 @@ to decide if a roundy box is wafer thin:
 to decide if the scrollbar is needed:
   if the current tab is nil, say no.
   if the current tab's mode is never scrollable, say no.
-  if the scrollbar is needed (editor), say yes.
+  if the scrollbar is needed (editor),  say yes.
   if the scrollbar is needed (docster), say yes.
+  if the scrollbar is needed (finder),  say yes.
   say no.
 
 to decide if the scrollbar is needed (docster):
@@ -143,6 +167,17 @@ to decide if the scrollbar is needed (editor):
   count the visible rows of the current tab's node's source's text
     returning another count.
   if the count is greater than the other count, say yes.
+  say no.
+
+to decide if the scrollbar is needed (finder):
+  if the current tab's mode is not "finder", say no.
+  if the current tab's node is nil, say no.
+  if the current tab's node's nodettes' first is nil, say no.
+  if the current tab's node's nodettes' first
+    is not visible in the current tab's node, say yes.
+  if the current tab's node's nodettes' last is nil, say no.
+  if the current tab's node's nodettes' last
+    is not visible in the current tab's node, say yes.
   say no.
 
 to decide if a spot is in the scrollbar:
@@ -208,10 +243,27 @@ to find a command given a scrollbar and a spot:
   if the spot is in the scrollbar's downtick,
     put the scrollbar's downtick in the command; exit.
 
+to get a count of invisible nodettes given a node:
+  get a count called top of leading invisible nodettes given the node.
+  get a count called bottom of trailing invisible nodettes given the node.
+  put the top plus the bottom in the count.
+
 to get a count of invisible pages given a document:
   get a count called top of leading invisible pages given the document.
   get a count called bottom of trailing invisible pages given the document.
   put the top plus the bottom in the count.
+
+to get a count of leading invisible nodettes given a node:
+  put 0 in the count.
+  if the node is nil, exit.
+  loop.
+    get a nodette from the node's nodettes.
+    if the node is nil, exit.
+    put the nodette's box into a box.
+    globalize the box given the node's origin.
+    if the box's top is at least the finder's top, exit.
+    add 1 to the count.
+  repeat.
 
 to get a count of leading invisible pages given a document:
   put 0 in the count.
@@ -222,6 +274,18 @@ to get a count of leading invisible pages given a document:
     put the page's edge into a box.
     globalize the box given the document's origin.
     if the box's top is at least the document's top, exit.
+    add 1 to the count.
+  repeat.
+
+to get a count of trailing invisible nodettes given a node:
+  put 0 in the count.
+  if the node is nil, exit.
+  loop.
+    get a nodette from the node's nodettes (backwards).
+    if the nodette is nil, exit.
+    put the nodette's box into a box.
+    globalize the box given the node's origin.
+    if the finder's bottom is at least the box's bottom, exit.
     add 1 to the count.
   repeat.
 
@@ -269,6 +333,9 @@ to get a height (scrollbar cab height):
   if the current tab's mode is "docster", 
     get the height given the current tab's node's document 
       (scrollbar cab height); exit.
+  if the current tab's mode is "finder", 
+    get the height given the current tab's node
+      (scrollbar cab height); exit.
 
 to get a height given a document (scrollbar cab height):
   put the scrollbar's box's height 
@@ -290,6 +357,30 @@ to get a height given a document (scrollbar cab height):
   put the document's bottom minus the document's top 
     into a height called document height.
   put the document height and the total edge height into a ratio.
+  if the ratio's numerator is greater than the ratio's denominator, 
+    put 1 into the ratio.
+  scale the height given the ratio.
+  if the height is less than 1/4 inch, 
+    put 1/4 inch into the height.
+
+to get a height given a node (scrollbar cab height):
+  put the scrollbar's box's height 
+    minus the scrollbar's uptick's height 
+    minus the scrollbar's downtick's height 
+    into the height.
+  if the height is less than 1/4 inch, exit.
+  if the node is nil, exit.
+  get a nodette from the node's nodettes.
+  if the nodette is nil, exit.
+  put the nodette's box into a box.
+  globalize the box given the node's origin.
+  get another nodette from the node's nodettes (backwards).
+  if the other nodette is nil, exit.
+  put the other nodette's box into another box.
+  globalize the other box given the node's origin.
+  put the other box's bottom minus the box's top  
+    into a total height.
+  put the finder's height and the total height into a ratio.
   if the ratio's numerator is greater than the ratio's denominator, 
     put 1 into the ratio.
   scale the height given the ratio.
@@ -327,6 +418,14 @@ to get the horizontal scroll speed returning a number (from windows):
 \ https://msdn.microsoft.com/en-us/library/windows/desktop/ms724947(v=vs.85).aspx
 \ lists the System Parameters Info (SPI) constants.
 
+to get a ratio of invisible nodettes given a node:
+  get a count called top of leading invisible nodettes given the node.
+  get a count called bottom of trailing invisible nodettes given the node.
+  put the top plus the bottom in a number called invisible.
+  if the invisible is less than the top,
+    put the top and the top in the ratio; exit.
+  put the top and the invisible in the ratio.
+
 to get a ratio of invisible pages given a document:
   get a count called top of leading invisible pages given the document.
   get a count called bottom of trailing invisible pages given the document.
@@ -344,6 +443,9 @@ to get a ratio of invisible rows:
   if the current tab's mode is "docster", 
     get the ratio of invisible pages 
       given the current tab's node's document; exit.
+  if the current tab's mode is "finder", 
+    get the ratio of invisible nodettes 
+      given the current tab's node; exit.
 
 to get a ratio of invisible rows given a text:
   get the first visible row number of the text returning a number.
@@ -374,12 +476,23 @@ to handle downtick:
     handle downtick given the current tab's node's source; exit.
   if the current tab's mode is "docster", 
     handle downtick given the current tab's node's document; exit.
+  if the current tab's mode is "finder", 
+    handle downtick given the current tab's node; exit.
 
 to handle downtick given a document:
   hide the cursor.
   put the edge height into a difference's y.
   negate the difference's y.
   scroll the document given the difference.
+  show the desktop with status.
+  wait for 50 milliseconds.
+  if the scrollbar's downtick is left-clicked, repeat.
+
+to handle downtick given a node:
+  hide the cursor.
+  put the node height into a difference's y.
+  negate the difference's y.
+  scroll the node given the difference.
   show the desktop with status.
   wait for 50 milliseconds.
   if the scrollbar's downtick is left-clicked, repeat.
@@ -408,7 +521,9 @@ to handle an event (mouse horizontal scroll speed changed):
   stash horizontal scroll speed.
 
 to handle an event (mouse horizontal wheel):
-  if the current tab's mode is not "editor", exit.
+  if the current tab is nil, exit.
+  if the current tab's mode is never scrollable, exit.
+  if the current tab's mode is "docster", exit.
   \ the docster only scrolls vertically, not horizontally.
   if the event is modified, exit.
   put the event's byte in a mouse wyrd.
@@ -430,6 +545,9 @@ to handle an event (mouse horizontal wheel):
   put the sign times the quanta in a count called requested quanta.
   if the current tab's mode is "editor",
     horizontal scroll the current tab's source given the requested quanta;
+    show the desktop with status.
+  if the current tab's mode is "finder",
+    horizontal scroll the current tab's node given the requested quanta;
     show the desktop with status.
   put the requested quanta times the roll quantum in a number called requested roll.
   subtract the requested roll from the unprocessed horizontal mouse roll.
@@ -465,6 +583,9 @@ to handle an event (mouse wheel):
   if the current tab's mode is "docster", 
     scroll the current tab's document down given - the requested lines; 
     show the desktop with status.
+  if the current tab's mode is "finder", 
+    scroll the current tab's node down given - the requested lines; 
+    show the desktop with status.
   put the requested lines times the roll quantum in a number called requested roll.
   subtract the requested roll from the unprocessed mouse roll.
 
@@ -477,7 +598,8 @@ to handle an event (shift mouse wheel):
   \ and the speed setting of the vertical mouse scroll.
   \ Shift-mouse scrolling is much easier and more accurate
   \ than horizontal mouse scrolling.
-  if the current tab's mode is not "editor", exit.
+  if the current tab's mode is never scrollable, exit.
+  if the current tab's mode is "docster", exit.
   \ the docster only scrolls vertically, not horizontally.
   if the event is modified, exit.
   if the event's shift flag is not set, exit.
@@ -501,6 +623,9 @@ to handle an event (shift mouse wheel):
   if the current tab's mode is "editor",
     horizontal scroll the current tab's source given - the requested quanta;
     show the desktop with status.
+  if the current tab's mode is "finder",
+    horizontal scroll the current tab's node given - the requested quanta;
+    show the desktop with status.
   put the requested quanta times the roll quantum in a number called requested roll.
   subtract the requested roll from the unprocessed horizontal mouse roll.
 
@@ -509,11 +634,21 @@ to handle page down:
     handle page down given the current tab's node's source; exit.
   if the current tab's mode is "docster", 
     handle page down given the current tab's node's document; exit.
+  if the current tab's mode is "finder", 
+    handle page down given the current tab's node; exit.
 
 to handle page down given a document:
   if the document is empty, exit.
   hide the cursor.
   scroll the document down one page.
+  show the desktop with status.
+  wait for 200 milliseconds.
+  if the scrollbar's downpage is left-clicked, repeat.
+
+to handle page down given a node:
+  if the node is empty, exit.
+  hide the cursor.
+  scroll the node down one page.
   show the desktop with status.
   wait for 200 milliseconds.
   if the scrollbar's downpage is left-clicked, repeat.
@@ -538,11 +673,21 @@ to handle page up:
     handle page up given the current tab's node's source; exit.
   if the current tab's mode is "docster", 
     handle page up given the current tab's node's document; exit.
+  if the current tab's mode is "finder", 
+    handle page up given the current tab's node; exit.
 
 to handle page up given a document:
   if the document is empty, exit.
   hide the cursor.
   scroll the document up one page.
+  show the desktop with status.
+  wait for 200 milliseconds.
+  if the scrollbar's uppage is left-clicked, repeat.
+
+to handle page up given a node:
+  if the node is empty, exit.
+  hide the cursor.
+  scroll the node up one page.
   show the desktop with status.
   wait for 200 milliseconds.
   if the scrollbar's uppage is left-clicked, repeat.
@@ -566,11 +711,21 @@ to handle uptick:
     handle uptick given the current tab's node's source; exit.
   if the current tab's mode is "docster", 
     handle uptick given the current tab's node's document; exit.
+  if the current tab's mode is "finder", 
+    handle uptick given the current tab's node; exit.
 
 to handle uptick given a document:
   hide the cursor.
   put the edge height into a difference's y.
   scroll the document given the difference.
+  show the desktop with status.
+  wait for 50 milliseconds.
+  if the scrollbar's uptick is left-clicked, repeat.
+
+to handle uptick given a node:
+  hide the cursor.
+  put the node height into a difference's y.
+  scroll the node given the difference.
   show the desktop with status.
   wait for 50 milliseconds.
   if the scrollbar's uptick is left-clicked, repeat.
@@ -588,6 +743,20 @@ to handle uptick given a text:
   set the text's vertical scroll flag.
   scroll the text up one line.
   put the old flag in the text's vertical scroll flag.
+
+to horizontal scroll a node given a count:
+  if the node is nil, exit.
+  if the count is 0, exit.
+\  put the source's text's horizontal scroll flag in a flag called old flag.
+\  set the source's text's horizontal scroll flag.
+  estimate character width given the default font returning a ratio.
+  put the count times the ratio's numerator divided by the ratio's denominator into some twips.
+\  horizontal scroll the source's text given the count.
+  put - the twips and 0 into a difference.
+  move the node's origin given the difference.
+  \debug the source's text's x.
+  limit the origin in the node.
+\  put the old flag in the source's text's horizontal scroll flag.
 
 to horizontal scroll a source given a count:
   \debug the source's text's x.
@@ -691,6 +860,35 @@ to scroll given an event (scrollbar drag):
     scroll the current tab's source given the event (scrollbar drag); exit.
   if the current tab's mode is "docster", 
     scroll the current tab's document given the event (scrollbar drag); exit.
+  if the current tab's mode is "finder", 
+    scroll the current tab's node given the event (scrollbar drag); exit.
+
+to scroll a node given an event (scrollbar drag):
+  if the node is nil, exit.
+  if the event is nil, exit.
+  put the event's spot in a spot called old spot.
+  put the old spot's y in a number called old y.
+  put 3 in a count called leeway count.
+  convert the leeway count to a height called leeway height 
+    given the node (invert scrollbar drag).
+  put the scrollbar's downpage's height plus the old y 
+    plus the leeway height in a number called max y.
+  put the old y in a number called previous y.
+  loop.
+    if a flag is set, show the desktop with status.
+    put the mouse's spot's y in a number called current y.
+    if the mouse's left button is up, 
+      exit.
+    if the current y is greater than the max y, 
+      put the max y in the current y.
+    put the current y minus the previous y in a height.
+    if the height is 0, repeat.
+    convert the height to a count given the node (scrollbar drag).
+    if the count is 0, repeat.
+    scroll the node down given the count.
+    put the current y in the previous y.
+    set the flag.
+  repeat.
 
 to scroll a source given a count:
   if the source is nil, exit.
