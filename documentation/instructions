@@ -9076,12 +9076,14 @@ ream cal-3024
     end
   end
   page 12240 15840 1 1440
-    text -1 0 0 -1 0 0 2160 2160 10620 13680 0 "title" "Arial" 320 "left" 0 0 0 yes
+    text -1 0 0 -1 0 0 2160 2160 10620 14400 0 "title" "Arial" 320 "left" 0 0 0 yes
        "TESTING"
        ""
        "I can check whether a bunch of my features are working correctly."
        "Just click in my status box, and I will run a bunch of tests."
        "Or you can choose ""Test"" from my menu."
+       ""
+       "To save time, I don't re-run the tests every time you click my status box or choose ""Test"" from my menu.  If I already have the test results, I just show you the results."
        ""
        "If all of the tests passed, my status box will turn green, and I will tell you "
        "how many tests passed.  If you click in the box with how many tests passed,"
