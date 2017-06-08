@@ -1782,6 +1782,14 @@ to debug a string (quoted):
   append the double-quote byte to the string.
   debug the string.
 
+to debug a timer:
+\  put "count = " then the timer's count then "; "
+\    then the timer's start ticks then " start ticks; "
+\    then the timer's total ticks then " total ticks"
+\    in a string.
+\  debug the string.
+  debug the timer's string then " ms.".
+
 to debug a window:
   initialize a window placement.
   call "User32.dll" "GetWindowPlacement"
@@ -6628,10 +6636,6 @@ the pen size is a number.
 
 a percent is a number. \ a scale with 100 in the denominator
 
-to pick a spot within a distance of another spot:
-  pick the spot's x within the distance of the other spot's x.
-  pick the spot's y within the distance of the other spot's y.
-
 to pick a number:
   pick the number between 0 and the largest number.
 
@@ -6642,6 +6646,10 @@ to pick a number within an amount of another number:
 to pick a spot anywhere in a box:
   pick the spot's x between the box's left and the box's right.
   pick the spot's y between the box's top and the box's bottom.
+
+to pick a spot within a distance of another spot:
+  pick the spot's x within the distance of the other spot's x.
+  pick the spot's y within the distance of the other spot's y.
 
 to pick some twips between some min twips and some other twips; \ are all these necessary? ***
 to pick a number between some min twips and some other twips;

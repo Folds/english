@@ -293,6 +293,11 @@ to decide if a text can be undone:
   if the text's undos' last is nil, say no.
   say yes.
 
+to decide if a text is empty:
+  if the text is nil, say yes.
+  if the text's rows are empty, say yes.
+  say no.
+
 to decide if a text is modified:
   if the text is nil, say no.
   if the text's modified flag is set, say yes.

@@ -1188,3 +1188,22 @@ next to the first instance, instead of covering the first instance.
   Demoing difficulty:  Easy.
   Testing difficulty:  Medium.
   Requested by Jasper Paulsen on May 20, 2017.
+
+273.  Adjust scrollbar cab height
+      when viewing window has empty rows at bottom.
+  Status:  Demonstrated.
+  Audience:  Application users.
+  Benefit:   Minor.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Medium.
+  Requested by Jasper Paulsen on June 7, 2017.
+
+272.  Refactor scrolling code to reduce duplication
+  Status:  Demonstrated.
+  Audience:  Application users.
+  Benefit:   Minor.
+  Implementation difficulty:  Hard.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Medium.
+  Requested by Jasper Paulsen on June 6, 2017.
