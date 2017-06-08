@@ -193,14 +193,11 @@ to handle an event (regression test):
   show status the message.
   if the current tab is nil,
     handle the event (show cached test results); exit.
-  if the current tab's mode is not "editor",
-    handle the event (show cached test results); exit.
   summarize the status' all test results returning a string.
   append the string to a buffer.
   advance the buffer.
   append the status' all test results to the buffer.
-  find a directory and a depth to compile.
-  put the directory then "test results.txt" in a path.
+  put the module's directory then "test results.txt" in a path.
   write the buffer to the path.
   if the i/o error is blank,
     append ".  Saved results." to the message.
