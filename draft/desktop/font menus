@@ -327,8 +327,8 @@ to test (font menus - at least three font names):
     and expecting "at least four choices". \4 = 3 + "other".
   create a submenu (font names).
   count commands in the submenu returning a count called actual.
-  put the actual in the test result's actual value.
-  put the actual in the test result's interpretation.
+  convert the actual into the test result's actual value.
+  convert the actual into the test result's interpretation.
   if the actual is at least 4,
     put the test result's expectation in the test result's interpretation.
   append the test result to the status' all test results.
@@ -386,13 +386,13 @@ to test (font menus - font names):
   destroy the dummies.
 
 to test (font menus - get height):
-  put the tpi / 6 in a string called expectation.
+  convert the tpi / 6 into an expectation string.
   create a test result about "font heights" and "get height"
     and expecting the expectation.
   put "handle font height given 1/6 inch" in a handler.
   put "handle font height given " in a prefix.
   get a height from the handler given the prefix.
-  put the height in a string called actual.
+  convert the height into a string called actual.
   check the test result given the actual.
   append the test result to the status' all test results.
 
@@ -407,13 +407,13 @@ to test (font menus - get inches string):
   append the test result to the status' all test results.
 
 to test (font menus - get test number):
-  put 1 in a string called expectation.
+  convert 1 into an expectation string.
   create a test result about "font menus" and "get test number"
     and expecting the expectation.
   put "handle test result 1" in a handler.
   put "handle test result " in a prefix.
   get a number from the handler given the prefix.
-  put the number in a string called actual.
+  convert the number into a string called actual.
   check the test result given the expectation.
   append the test result to the status' all test results.
 
@@ -472,7 +472,7 @@ to test (font menus - one height highlighted):
     and expecting "1".
   create a submenu (font heights).
   count highlighted items in the submenu returning a count.
-  put the count in a string called actual.
+  convert the count into an actual string.
   check the test result given the actual.
   append the test result to the status' all test results.
   destroy the submenu.
@@ -482,7 +482,7 @@ to test (font menus - one name highlighted):
     and expecting "1".
   create a submenu (font names).
   count highlighted items in the submenu returning a count.
-  put the count in a string called actual.
+  convert the count into an actual string.
   check the test result given the actual.
   append the test result to the status' all test results.
   destroy the submenu.

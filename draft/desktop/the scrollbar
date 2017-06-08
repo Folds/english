@@ -275,7 +275,7 @@ to handle an event (mouse horizontal wheel):
   if the current tab's mode is "docster", exit.
   \ the docster only scrolls vertically, not horizontally.
   if the event is modified, exit.
-  put the event's byte in a mouse wyrd.
+  convert the event's byte into a mouse wyrd.
   \ The scrollbar behaves opposite to "right-click and push",
   \ so let right-click and push take precedence:
   if right is implied by the mouse wyrd, exit.
@@ -312,7 +312,7 @@ to handle an event (mouse wheel):
     handle the event (shift mouse wheel); exit.
   if the scrollbar is not needed, exit.
   if the event is modified, exit.
-  put the event's byte in a mouse wyrd.
+  convert the event's byte into a mouse wyrd.
   \ The scrollbar behaves opposite to "right-click and push",
   \ so let right-click and push take precedence:
   if right is implied by the mouse wyrd, exit.
@@ -355,7 +355,7 @@ to handle an event (shift mouse wheel):
   \ the docster only scrolls vertically, not horizontally.
   if the event is modified, exit.
   if the event's shift flag is not set, exit.
-  put the event's byte in a mouse wyrd.
+  convert the event's byte into a mouse wyrd.
   \ The scrollbar behaves opposite to "right-click and push",
   \ so let right-click and push take precedence:
   if right is implied by the mouse wyrd, exit.

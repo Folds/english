@@ -66,7 +66,7 @@ to convert a mixio to a string:
 
 to convert a mixio to a string (long):
   privatize the mixio.
-  put the mixio's whole number in the string.
+  convert the mixio's whole number into the string.
   if the mixio's nips are negative,
     negate the mixio's nips;
     append " - " then the mixio's nips

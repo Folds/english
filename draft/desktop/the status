@@ -389,7 +389,7 @@ to stash a fuzzy test given a mixio:
   append the test result to the status' all test results.
 
 to stash a test result given a number:
-  put the number in a string called actual.
+  convert the number into a string called actual.
   stash the test result given the actual.
 
 to stash a test result given a string:
@@ -499,7 +499,7 @@ to test (the status - minimum width):
   put "at least " then the minimum in an expectation.
   create a test result about "the status" and "minimum width"
     and expecting the expectation.
-  put the status' width in a string called actual.
+  convert the status' width into an actual string.
   if the status' width is at least the minimum,
     pass the test result given the actual.
   if the status' width is not at least the minimum,

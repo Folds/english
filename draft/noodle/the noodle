@@ -752,6 +752,18 @@ to convert a box to a string:
   append " " to the string.
   append the box's bottom to the string.
 
+to convert a byte into a string:
+  put 1 into a length.
+  reassign the string's first given the length.
+  put the byte into the string's first's target.
+  put the string's first into the string's last.
+
+to convert a byte into a wyrd:
+  intel $8B8508000000. \ mov eax,[ebp+8] \ the byte
+  intel $660FB600.     \ movzx eax,byte ptr [eax]
+  intel $8B9D0C000000. \ mov ebx,[ebp+12] \ the wyrd
+  intel $668903.       \ mov [ebx],ah
+
 to convert a byte to a nibble:
   put the byte into the nibble as a byte.
   uppercase the nibble.
@@ -776,6 +788,10 @@ to convert a flag to a hex string:
   reassign the hex string's first given the flag's magnitude.
   copy bytes from the flag's whereabouts to the hex string's first for the flag's magnitude.
   put the hex string's first plus the flag's magnitude minus 1 into the hex string's last.
+
+to convert a flag to a string:
+  if the flag is set, put "yes" into the string; exit.
+  put "no" into the string.
 
 to convert a font to an hfont:
   privatize the font.
@@ -880,7 +896,7 @@ to convert a nibble to a nibble string:
   privatize the nibble.
   if the nibble is greater than 9, add 7 to the nibble.
   add 48 to the nibble.
-  put the nibble into the nibble string.
+  convert the nibble as a byte into the nibble string as a string.
 
 to convert a nibble string to a hex string:
   privatize the nibble string.
@@ -908,6 +924,20 @@ to put a number into a byte:
 to convert a number to pdf em units given an emsquare number and a font:
   multiply the number by the emsquare / the font's adjusted height.
   multiply the number by 1000 / the emsquare.
+
+to convert a number to a string:
+  clear the string.
+  privatize the number.
+  de-sign the number.
+  loop.
+    divide the number by 10 giving a quotient and a remainder.
+    add 48 to the remainder.
+    put the remainder into a byte.
+    prepend the byte to the string.
+    if the quotient is 0, break.
+    put the quotient into the number.
+  repeat.
+  if the original number is less than 0, prepend the dash byte to the string.
 
 to convert a pchar to a string:
   clear the string.
@@ -979,6 +1009,21 @@ to convert a ratio to a mixed:
     giving the mixed's whole number and a remainder.
   put the remainder and the ratio's denominator into the mixed's ratio.
 
+to convert a ratio to a string:
+  clear the string.
+  privatize the ratio.
+  if the ratio is negative, put "-" into the string; de-sign the ratio.
+  reduce the ratio.
+  convert the ratio to a mixed.
+  if the mixed is 0, append "0" to the string; exit.
+  if the mixed's whole number is not 0,
+    append the mixed's whole number to the string.
+  if the mixed's ratio is 0, exit.
+  if the mixed's whole number is not 0,
+    append the dash byte to the string.
+  append the mixed's numerator then "/" then the mixed's denominator
+    to the string.
+
 to convert a ratio to a string given a number:
   \ converts to a decimal representation with "the number" of places
   clear the string.
@@ -1022,6 +1067,9 @@ to convert a string to a flag:
   if the string is "y", set the flag; exit.
   if the string is "yes", set the flag; exit.
   clear the flag.
+
+to convert a string into a letter:
+  put the string's first's target into the letter.
 
 to convert a string to a nibble string:
   clear the nibble string.
@@ -1140,6 +1188,9 @@ to convert a string to a wide string:
 to convert a string to a wide string and null terminate:
   convert the string to the wide string.
   null terminate the wide string.
+
+to convert a timer to a string:
+  convert the timer's ticks to the string.
 
 to convert a url to a url record:
   privatize the url.
@@ -1822,7 +1873,7 @@ to debug a wyrd:
   debug the string.
 
 to decide if an alleged drive byte is any valid drive:
-  put the alleged drive byte into a path.
+  convert the alleged drive byte into a path.
   append ":\" to the path.
   get a drive kind for the path.
   if the drive kind is "", say no.
@@ -6948,18 +6999,6 @@ to put a byte into a number:
   intel $8B9D0C000000. \ mov ebx,[ebp+12] \ the number
   intel $8903.         \ mov [ebx],eax
 
-to put a byte into a string:
-  put 1 into a length.
-  reassign the string's first given the length.
-  put the byte into the string's first's target.
-  put the string's first into the string's last.
-
-to put a byte into a wyrd:
-  intel $8B8508000000. \ mov eax,[ebp+8] \ the byte
-  intel $660FB600.     \ movzx eax,byte ptr [eax]
-  intel $8B9D0C000000. \ mov ebx,[ebp+12] \ the wyrd
-  intel $668903.       \ mov [ebx],ah
-
 to put the character under a finger into a character:
   if the finger is nil, clear the character; exit.
   put the finger's target into the character.
@@ -7018,11 +7057,6 @@ to center an ellipse on a spot:
 
 to put a finger on the first character of a string:
   put the string's first into the finger.
-
-to put a flag into a string;
-to convert a flag to a string:
-  if the flag is set, put "yes" into the string; exit.
-  put "no" into the string.
 
 to put a font into another font:
   if the font is the other font, exit.
@@ -7176,21 +7210,6 @@ to put a number into a ratio:
   put the number into the ratio's numerator.
   put 1 into the ratio's denominator.
 
-to put a number into a string;
-to convert a number to a string:
-  clear the string.
-  privatize the number.
-  de-sign the number.
-  loop.
-    divide the number by 10 giving a quotient and a remainder.
-    add 48 to the remainder.
-    put the remainder into a byte.
-    prepend the byte to the string.
-    if the quotient is 0, break.
-    put the quotient into the number.
-  repeat.
-  if the original number is less than 0, prepend the dash byte to the string.
-
 to put a number into a wyrd:
   intel $8B8508000000. \ mov eax,[ebp+8] \ the number
   intel $8B00.         \ mov eax,[eax]
@@ -7326,22 +7345,6 @@ to put a polygon's y-extent into a height:
   if the polygon is nil, clear the height; exit.
   put the polygon's box's y-extent into the height.
 
-to put a ratio into a string;
-to convert a ratio to a string:
-  clear the string.
-  privatize the ratio.
-  if the ratio is negative, put "-" into the string; de-sign the ratio.
-  reduce the ratio.
-  convert the ratio to a mixed.
-  if the mixed is 0, append "0" to the string; exit.
-  if the mixed's whole number is not 0,
-    append the mixed's whole number to the string.
-  if the mixed's ratio is 0, exit.
-  if the mixed's whole number is not 0,
-    append the dash byte to the string.
-  append the mixed's numerator then "/" then the mixed's denominator
-    to the string.
-
 to put a ratio pair into another ratio pair:
   put the ratio pair's ratio into the other ratio pair's ratio.
   put the ratio pair's other ratio into the other ratio pair's other ratio.
@@ -7391,7 +7394,7 @@ to center a spot in a box:
   center the spot in the box (horizontally).
   center the spot in the box (vertically).
 
-to put the square root of a number in a number called result:
+to put the square root of a number in a result number:
   \ Rounds down.  Finds magnitude of the square root.
   privatize the number.
   if the number is 0, put 0 into the result; exit.
@@ -7420,7 +7423,7 @@ to put the square root of a number in a number called result:
   put the square root of the number into the result 
     given the lower bound and the upper bound.
 
-to put the square root of a number in a number called result (close): 
+to put the square root of a number in a result number (close): 
   if the number is at most 0, 
     put 0 into the result; exit.
   put the result times the result into a number called square.
@@ -7436,7 +7439,7 @@ to put the square root of a number in a number called result (close):
     add the margin to the next square.
   repeat.
 
-to put the square root of a number in a number called result given a number called lower bound and a number called upper bound:
+to put the square root of a number in a result number given a lower bound number and an upper bound number:
   \uses binary search.  The bounds are inclusive.
   privatize the lower bound.
   privatize the upper bound.
@@ -7471,9 +7474,6 @@ to put a string into another string:
   unassign the other string's first.
   put the pointer into the other string's first.
   put the other string's first plus the saved length minus 1 into the other string's last.
-
-to put a string into a letter:
-  put the string's first's target into the letter.
 
 to put a string on the windows clipboard:
   call "user32.dll" "OpenClipboard" with the main window.
@@ -7553,10 +7553,6 @@ to put some things' count into a count:
     add 1 to the count.
   repeat.
 
-to put a timer into a string;
-to convert a timer to a string:
-  convert the timer's ticks to the string.
-
 to put a timer's string into a string:
   convert the timer's ticks to the string.
 
@@ -7621,7 +7617,7 @@ to relinquish control:
   enque the event.
 
 to quote a string: \ inserts leading, trailing and nested double-quotes
-  put the double-quote byte into another string.
+  convert the double-quote byte into another string.
   slap a substring on the string.
   loop.
     if the substring is blank, break.
@@ -9199,7 +9195,7 @@ to test (basic math - divide 0 by 3 with remainder):
   create a test result about "the noodle" and "0 over 3" and expecting "0".
   put 0 in a number.
   divide the number by 3 giving a quotient and a remainder.
-  put the quotient in a string called actual.
+  convert the quotient into an actual string.
   if the remainder is not 0,
     append " remainder " then the remainder to the actual.
   stash the test result given the actual.
@@ -9215,7 +9211,7 @@ to test (basic math - divide 1 by 3 with remainder):
     and expecting "0 remainder 1".
   put 1 in a number.
   divide the number by 3 giving a quotient and a remainder.
-  put the quotient in a string called actual.
+  convert the quotient into an actual string.
   if the remainder is not 0,
     append " remainder " then the remainder to the actual.
   stash the test result given the actual.
@@ -9231,7 +9227,7 @@ to test (basic math - divide 24 by 3 with remainder):
   create a test result about "the noodle" and "24 over 3" and expecting "8".
   put 24 in a number.
   divide the number by 3 giving a quotient and a remainder.
-  put the quotient in a string called actual.
+  convert the quotient into an actual string.
   if the remainder is not 0,
     append " remainder " then the remainder to the actual.
   stash the test result given the actual.
@@ -9246,7 +9242,7 @@ to test (basic math - divide 25 by 3 with remainder):
   create a test result about "the noodle" and "25 over 3" and expecting "8 remainder 1".
   put 25 in a number.
   divide the number by 3 giving a quotient and a remainder.
-  put the quotient in a string called actual.
+  convert the quotient into an actual string.
   if the remainder is not 0,
     append " remainder " then the remainder to the actual.
   stash the test result given the actual.

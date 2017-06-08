@@ -242,7 +242,7 @@ to create a menu:
   put the big-a byte into a byte.
   loop.
     if the byte is greater than the big-z byte, break.
-    put the byte into a string.
+    convert the byte into a string.
     add the string and the string to the menu.
     put "center" into the menu's commands' last's alignment.
     add 1 to the byte.
@@ -259,7 +259,7 @@ to create a tab:
 
 to create a trio:
   allocate memory for the trio.
-  put the underscore byte in a string.
+  convert the underscore byte into a string.
   add the string and "handle minimize" to the trio.
   boldly format the trio's commands' last.
   if running on wine,
@@ -2979,7 +2979,7 @@ to test (the desktop - menu has 26 buttons):
   create a test result about "the desktop" and "the menu has 26 buttons"
     and expecting "26".
   count the menu's commands returning a number.
-  put the number in a string called actual value.
+  convert the number into a string called actual value.
   put the actual value in an interpretation.
   put the actual value in the test result's actual value.
   put the interpretation in the test result's interpretation.
@@ -3050,7 +3050,7 @@ to test (the desktop - trio has 3 buttons):
   create a test result about "the desktop" and "the trio has three buttons"
     and expecting "3".
   count the trio's commands returning a number.
-  put the number in a string called actual value.
+  convert the number into a string called actual value.
   put the actual value in an interpretation.
   put the actual value in the test result's actual value.
   put the interpretation in the test result's interpretation.

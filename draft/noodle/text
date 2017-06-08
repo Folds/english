@@ -185,7 +185,7 @@ to copy a text into another text:
 
 to create a row given a byte:
   allocate memory for the row.
-  put the byte into the row's string.
+  convert the byte into the row's string.
 
 to create a row given a string:
   allocate memory for the row.
@@ -903,7 +903,7 @@ to indent any selected rows in a text:
 
 to insert a byte into a text:
   if the text is nil, exit.
-  put the byte into a string.
+  convert the byte into a string.
   insert the string into the text.
 
 to insert a string into a text:
