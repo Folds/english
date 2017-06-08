@@ -12,9 +12,10 @@ subfolders (if one of the subfolders is named "noodle").
 The compiled programs use 8-bit ASCII, and run on Windows systems
 (such as Microsoft Windows XP through Windows 10, and WINE). 
 
-This project is a "fork" that started with version 3040 of the
-Osmosian Order's IDE and compiler.  This project also includes
-code from version 4700 of the Osmosian Order's IDE and compiler.
+This project is an authorized "dynamic fork" that started
+with version 3040 of the Osmosian Order's IDE and compiler.
+This project also includes code from version 4700
+of the Osmosian Order's IDE and compiler.
 The Osmosian Order considers this project's IDE to be
 "contrary to Osmosian principles," and does not want
 their name associated with it.  This project

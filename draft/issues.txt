@@ -103,27 +103,6 @@ The following requests have been partially demonstrated.
 The following requests are roughly sorted
 from higher priority to lower priority.
 
-274.  Make sure that copy vs. put coding convention is followed.
-  Copy is for deep copies of dynamic data structures.
-  Put is for copying static data structures,
-  and for copying pointers to dynamic data structures.
-  Status:  Request.
-  Audience:  Programmers.
-  Benefit:   Major.
-  Implementation difficulty:  Medium.
-  Demoing difficulty:  Not applicable.
-  Testing difficulty:  Not applicable.
-  Requested by Gerry Rzeppa on June 7, 2017.
-
-275.  Experiment with gray-on-white for "disabled" menu items.
-  Status:  Request.
-  Audience:  Application users.
-  Benefit:   Minor.
-  Implementation difficulty:  Medium.
-  Demoing difficulty:  Easy.
-  Testing difficulty:  Medium.
-  Requested by Gerry Rzeppa on June 3, 2017.
-
 198.  In finder, allow running a .lnk file.
   Some hints are in:
   https://msdn.microsoft.com/en-us/library/ms861519.aspx

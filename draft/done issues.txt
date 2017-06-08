@@ -1202,3 +1202,34 @@ with an adjustable slider between them.
   Testing difficulty:  Medium.
   Requested by Jasper Paulsen on June 5, 2017.
 
+274.  Make sure that copy vs. put coding convention is followed.
+  Copy is for deep copies of dynamic data structures.
+  Put is for copying bytes between static data structures,
+         for copying pointers to dynamic data structures, and
+         for getters.
+  Create is for allocating and populating dynamic data structures.
+  Make   is for populating static data structures.
+  Convert is for changing one data type into another,
+         with calculations needed (not just copying bytes).
+  Status:    Implemented.
+  Audience:  Programmers.
+  Benefit:   Major.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Not applicable.
+  Testing difficulty:  Not applicable.
+  Requested by Gerry Rzeppa on June 7, 2017.
+
+275.  Experiment with gray-on-white for "disabled" menu items.
+  Status:  Won't do.  Initial experiments showed that
+           simple gray-on-white was both hard to read,
+           and did not adequately convey the meaning of
+           "clicking this won't do the whole job it promises".
+           Choosing a dark-gray-on-light-gray would be
+           more complicated, and could be confused for
+           "this item is highlighted".
+  Audience:  Application users.
+  Benefit:   Minor.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Easy.
+  Testing difficulty:  Medium.
+  Requested by Gerry Rzeppa on June 3, 2017.

@@ -777,9 +777,9 @@ to convert a byte to a nibble string:
   append the other nibble string to the nibble string.
 
 to convert a byte to a query byte:
-  if the byte is between 48 and  57, put the byte into the query byte; exit. \ 0-9
-  if the byte is between 65 and  90, put the byte into the query byte; exit. \ A-Z
-  if the byte is between 97 and 122, put the byte into the query byte; exit. \ a-z
+  if the byte is between 48 and  57, convert the byte into the query byte as a string; exit. \ 0-9
+  if the byte is between 65 and  90, convert the byte into the query byte as a string; exit. \ A-Z
+  if the byte is between 97 and 122, convert the byte into the query byte as a string; exit. \ a-z
   if the byte is 32, put "+" into the query byte; exit. \ space
   convert the byte to a nibble string.
   put "%" then the nibble string into the query byte.
