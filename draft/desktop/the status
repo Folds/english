@@ -368,12 +368,12 @@ to stash a fuzzy test given a mixio:
   put the fuzzy test's context in the test result's context.
   put the fuzzy test's test name in the test result's test name.
   if the fuzzy test's tolerance trifles are 0,
-    put the fuzzy test's bullseye in the test result's expectation.
+    convert the fuzzy test's bullseye into the test result's expectation.
   if the fuzzy test's tolerance trifles are not 0,
     put the fuzzy test's bullseye  
       then " ± " then the fuzzy test's tolerance ratio
       in the test result's expectation.
-  put the mixio in a string.
+  convert the mixio into a string.
   pass the test result given the string.
   if the mixio is greater than the fuzzy test's maximum,
 \    debug the mixio then " is greater than " then the fuzzy test's maximum;

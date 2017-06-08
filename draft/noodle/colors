@@ -53,6 +53,15 @@ to convert a color to a colorref:
     with the color's hue and the color's lightness and the color's saturation
     returning the colorref.
 
+to convert a color into a string:
+  clear the string.
+  append "hue=" to the string.
+  append the color's hue to the string.
+  append ", saturation=" to the string.
+  append the color's saturation to the string.
+  append ", lightness=" to the string.
+  append the color's lightness to the string.
+
 to convert a color to a rgb:
   convert the color to a colorref.
   convert the colorref to the rgb.
@@ -386,15 +395,6 @@ the pink pen is a pen.
 the purple color is a color.
 
 the purple pen is a pen.
-
-to put a color in a string:
-  clear the string.
-  append "hue=" to the string.
-  append the color's hue to the string.
-  append ", saturation=" to the string.
-  append the color's saturation to the string.
-  append ", lightness=" to the string.
-  append the color's lightness to the string.
 
 to put a color into another color:
   put the color's hue into the other color's hue.

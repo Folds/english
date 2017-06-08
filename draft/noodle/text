@@ -146,19 +146,19 @@ to convert a string to some rows:
 to copy the guts of a text into another text:
   if the text is nil, exit.
   if the other text is nil, exit.
-  put the text's box into the other text's box.
-  put the text's origin into the other text's origin.
-  put the text's pen into the other text's pen.
-  put the text's font into the other text's font.
+  put the text's box       into the other text's box.
+  put the text's origin    into the other text's origin.
+  put the text's pen       into the other text's pen.
+  put the text's font      into the other text's font.
   put the text's alignment into the other text's alignment.
-  copy the text's rows into the other text's rows.
-  put the text's margin into the other text's margin.
-  put the text's scale into the other text's scale.
+  copy the text's rows     into the other text's rows.
+  put the text's margin    into the other text's margin.
+  put the text's scale     into the other text's scale.
   put the text's wrap flag into the other text's wrap flag.
   put the text's horizontal scroll flag into the other text's horizontal scroll flag.
-  put the text's vertical scroll flag into the other text's vertical scroll flag.
-  put the text's selection into the other text's selection.
-  put the text's modified flag into the other text's modified flag.
+  put the text's vertical scroll flag   into the other text's vertical scroll flag.
+  put the text's selection      into the other text's selection.
+  put the text's modified flag  into the other text's modified flag.
   put the text's last operation into the other text's last operation.
   \ don't copy undos and redos
 

@@ -2911,7 +2911,7 @@ to test (the desktop - can gray out unused menus):
     put "the desktop color" in the interpretation.
   if the color is the command's color,
     put "the command's color" in the interpretation.
-  put the color in a string called actual.
+  convert the color into an actual string.
   put the actual in the test result's actual value.
   put the interpretation in the test result's interpretation.
   append the test result to the status' all test results.
@@ -2940,7 +2940,7 @@ to test (the desktop - does not gray out useful menus):
     put "the desktop color" in the interpretation.
   if the color is the command's color,
     put "the command's color" in the interpretation.
-  put the color in a string called actual.
+  convert the color into an actual string.
   put the actual in the test result's actual value.
   put the interpretation in the test result's interpretation.
   append the test result to the status' all test results.
