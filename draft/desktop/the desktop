@@ -234,9 +234,6 @@ to create a command:
   put 1/12 inch into the command's roundy box's radius.
   put "left" into the command's alignment.
 
-to create a command line equal to a string:
-  put the string in the command line.
-
 to create a menu:
   allocate memory for the menu.
   put the big-a byte into a byte.
@@ -2400,6 +2397,9 @@ to initialize some tabs given a count:
     append the tab to the tabs.
   repeat.
 
+to make a command line equal to a string:
+  put the string in the command line.
+
 the menu is a menu.
 
 a menu is a thing with some commands.
@@ -2967,7 +2967,7 @@ to test (the desktop - hardcoded running options):
       "/left " then
       "/folder=""/folder"" " then 
       "/files=""/files""".
-  create a command line equal to
+  make a command line equal to
       "cal.exe /right " then
       "/folder=""C:\Users\Owner\Plain English\draft"" " then 
       "/files=""the noodle"";;;;;;issues.txt;""fixed issues.txt"" " then 
@@ -2989,7 +2989,7 @@ to test (the desktop - no running options):
   create a test result about "the desktop"
     and "no running options"
     and expecting "/right".
-  create a command line equal to "cal.exe".
+  make a command line equal to "cal.exe".
   get running options given the command line returning a string called actual.
   stash the test result given the actual.
 
@@ -2998,7 +2998,7 @@ to test (the desktop - parse files option):
     and expecting
       "the noodle, , , , , , issues.txt, fixed issues.txt".
   \summarize (tersely) uses ", " as its separator.
-  create a command line equal to
+  make a command line equal to
       "cal.exe /right /tt " then
       "/folder=""C:\Users\Owner\Plain English\draft"" " then 
       "/files=""the noodle"";;;;;;issues.txt;""fixed issues.txt"" " then 
@@ -3029,7 +3029,7 @@ to test (the desktop - propagate running options):
       "/folder=""C:\Users\Owner\Plain English\draft"" " then 
       "/files=""the noodle"";;;;;;issues.txt;""fixed issues.txt"" " then 
       "/runfolder=/folder /runfiles=/files".
-  create a command line equal to
+  make a command line equal to
       "cal.exe /right " then
       "/folder=""C:\Users\Owner\Plain English\draft"" " then 
       "/files=""the noodle"";;;;;;issues.txt;""fixed issues.txt"" " then 

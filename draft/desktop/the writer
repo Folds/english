@@ -413,10 +413,6 @@ to copy any selected shapes on a page to a shape clipboard:
     append the other shape to the shape clipboard.
   repeat.
 
-to copy a font into another font:
-  put the font's name into the other font's name.
-  put the font's height into the other font's height.
-
 to copy a page into another page:
   if the page is nil, void the other page; exit.
   allocate memory for the other page.
@@ -4869,35 +4865,35 @@ to set the current font given a page:
   if the page is nil, exit.
   get first selected visible text from the page returning a text.
   if the text is not nil, 
-    copy the text's font into the current font; exit.
+    put the text's font into the current font; exit.
   get first selected text from the page returning the text.
   if the text is not nil, 
-    copy the text's font into the current font; exit.
+    put the text's font into the current font; exit.
   get a font given the page's shapes (visible).
   if the font is set, 
-    copy the font into the current font; exit.
+    put the font into the current font; exit.
   set the current font given the page's shapes.
 
 to set the current font given a page (selected text):
   if the page is nil, exit.
   get first selected visible text from the page returning a text.
   if the text is not nil, 
-    copy the text's font into the current font; exit.
+    put the text's font into the current font; exit.
   get first selected text from the page returning the text.
   if the text is not nil, 
-    copy the text's font into the current font; exit.
+    put the text's font into the current font; exit.
 
 to set the current font given a page (visible text):
   if the page is nil, exit.
   get first selected visible text from the page returning a text.
   if the text is not nil, 
-    copy the text's font into the current font; exit.
+    put the text's font into the current font; exit.
   get first selected text from the page returning the text.
   if the text is not nil, 
-    copy the text's font into the current font; exit.
+    put the text's font into the current font; exit.
   get a font given the page's shapes (visible).
   if the font is set, 
-    copy the font into the current font; exit.
+    put the font into the current font; exit.
 
 to set the current font given some shapes:
   loop.
