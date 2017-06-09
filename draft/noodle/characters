@@ -205,6 +205,8 @@ to bitwise or a byte with a number:
 
 the broken-bar byte is a byte equal to 166.
 
+the buck byte is a byte equal to 36.
+
 the bullet byte is a byte equal to 149.
 
 to bump a byte limiting it to another byte and a third byte:
@@ -615,6 +617,8 @@ the hash-tag byte is a byte equal to 163.
 
 the hashtag byte is a byte equal to 163.
 
+the hat byte is a byte equal to 94.
+
 the home key is a key equal to 36.
 
 the i-key is a key equal to 73.
@@ -1023,6 +1027,33 @@ the tab byte is a byte equal to 9.
 
 the tab key is a key equal to 9.
 
+to test (characters - nicknames):
+  create a test result about "characters" and "nicknames"
+    and expecting "`~!@#$%^&*(){}|[]\".
+  append the backtick byte
+    then the twiddle byte
+    then the bang byte
+    then the at-sign byte
+    then the number-sign byte
+    then the buck byte
+    then the percent-sign byte
+    then the hat byte
+    then the ampersand byte
+    then the times-sign byte
+    then the open-paren byte
+    then the close-paren byte
+    then the open-curly byte
+    then the close-curly byte
+    then the pipe byte
+    then the open-bracket byte
+    then the close-bracket byte
+    then the whack byte
+    to an actual string.
+  stash the test result given the actual.
+
+to test (characters):
+  test (characters - nicknames).
+
 the three byte is a byte equal to 51.
 
 the three key is a key equal to 51.
@@ -1032,6 +1063,8 @@ the three-quarter byte is a byte equal to 190.
 the tick byte is a byte equal to 39.
 
 the tilde byte is a byte equal to 126.
+
+the times-sign byte is a byte equal to 42.
 
 the trade-mark byte is a byte equal to 153.
 

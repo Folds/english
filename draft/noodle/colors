@@ -111,7 +111,7 @@ to darken a color some percent:
   limit the color's lightness to 0 and 1000.
 
 to debug a color:
-  put the color in a string.
+  convert the color to a string.
   debug the string.
 
 to decide if a color and another color are clear:
@@ -236,8 +236,10 @@ to initialize the colors:
   put the sky color into the sky blue pen.
 
 to interpret a rainbow color:
-  divide the current rainbow color number by 6
-    giving a quotient and a remainder.
+  put the current rainbow color number in a number.
+  subtract 1 from the number.
+  divide the number by 6 giving a quotient and a remainder.
+  add 1 to the remainder.
   if the remainder is 1, put the red    color into the rainbow color.
   if the remainder is 2, put the orange color into the rainbow color.
   if the remainder is 3, put the yellow color into the rainbow color.
@@ -413,6 +415,20 @@ to put a color's darkest shade into another color:
   put the color into the other color.
   darken the other color by 375.
 
+to put a color's description into a string:
+  \ first draft written for testing the rainbow colors.
+  \ other descriptions can be added as needed.
+  if the color is the black color,  put "black" in the string; exit.
+  if the color's lightness is not 500,
+    put "not solid" in the string; exit.
+  if the color is the red color,    put "red" in the string; exit.
+  if the color is the orange color, put "orange" in the string; exit.
+  if the color is the yellow color, put "yellow" in the string; exit.
+  if the color is the green color,  put "green" in the string; exit.
+  if the color is the blue color,   put "blue" in the string; exit.
+  if the color is the purple color, put "purple" in the string; exit.
+  put "another color" in the string.
+
 to put a color's light shade into another color:
   put the color into the other color.
   brighten the other color by 125.
@@ -489,6 +505,27 @@ the tan pen is a pen.
 the teal color is a color.
 
 the teal pen is a pen.
+
+to test (colors - rainbow):
+  create a test result about "colors" and "rainbow"
+    and expecting "red orange yellow green blue purple "
+             then "red orange yellow green blue purple red".
+  put the current rainbow color number in a number.
+  reset the rainbow colors.
+  loop.
+    add 1 to another number.
+    if the other number is greater than 13, break.
+    if the other number is greater than 1,
+      append the space byte to an actual string.
+    bump the current rainbow color number.
+    interpret a rainbow color.
+    append the rainbow color's description to the actual.
+  repeat.  
+  put the number in the current rainbow color number.
+  stash the test result given the actual.
+
+to test (colors):
+  test (colors - rainbow).
 
 a very dark color is a color.
 

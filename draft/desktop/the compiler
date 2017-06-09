@@ -4391,6 +4391,28 @@ a tag is a number.
 
 a term has a variable and a phrase.
 
+to test (the compiler - parse can't):
+  create a test result about "the compiler" and "parse can't"
+    and expecting "can't find nil pointer".
+  void a pointer.
+  put "can find nil pointer" in an actual string.
+  if the pointer can't be found,
+    put "can't find nil pointer" in the actual.
+  stash the test result given the actual.
+
+to test (the compiler - parse cannot):
+  create a test result about "the compiler" and "parse cannot"
+    and expecting "cannot find nil pointer".
+  void a pointer.
+  put "can find nil pointer" in an actual string.
+  if the pointer cannot be found,
+    put "cannot find nil pointer" in the actual.
+  stash the test result given the actual.
+
+to test (the compiler):
+  test (the compiler - parse can't).
+  test (the compiler - parse cannot).
+
 to transmogrify a fragment:
   if the compiler's abort flag is set, exit.
   if the fragment is nil, exit.

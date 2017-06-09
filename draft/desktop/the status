@@ -485,10 +485,13 @@ to test:
 
 to test (all):
   start the status' all test results' timer.
+  test (the compiler).
   test (the desktop).
   test (font menus).
   test (the status).
   test (the noodle).
+  test (characters).
+  test (colors).
   test (trig).
   test (the finder).
   stop the status' all test results' timer.
