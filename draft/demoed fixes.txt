@@ -26,92 +26,6 @@ These items should occasionally be moved to fixed issues.txt.
 The following requests have been demonstrated, and have test plan(s),
 but have not yet been tested.
 
-224.  Fix prepend some things to some other things.
-  Status:    Demonstrated.
-  Audience:  Programmers.
-  Benefit:   Medium.
-  Implementation difficulty:  Easy.
-  Demoing difficulty:  Easy.
-  Testing difficulty:  Medium.
-  Requested by Jasper Paulsen on May 3, 2017.
-
-Create some things.
-Create some other things.
-Prepend the other things to the things.
-Confirm that the things now have the correct number of items.
-Destroy the things.
-Destroy the other things.
-
-211.  In colors, add a "brightness" alias for "lightness".
-  Status:  Implemented.
-  Audience:  Turtle programmers.
-  Benefit:  Medium.
-  Implementation difficulty:  Medium.
-  Demoing difficulty:  Medium.
-  Testing difficulty:  Medium.
-  Requested by Gerry Rzeppa on March 13, 2017.
-
-Verify the difference in brightness between red and pink.
- 
-214.  Create color aliases:  brown, sky blue, pink, tan.
-  Status:  Implemented.
-  Audience:  Turtle programmers.
-  Benefit:  Medium.
-  Implementation difficulty:  Medium.
-  Demoing difficulty:  Medium.
-  Testing difficulty:  Medium.
-  Requested by Gerry Rzeppa on March 13, 2017.
-
-Verify the difference between brown and tan.
-(sky blue and pink are used in other tests.)
- 
-215.  Add "gold" color name.
-  Status:  Implemented.
-  Audience:  Turtle programmers.
-  Benefit:  Medium.
-  Implementation difficulty:  Medium.
-  Demoing difficulty:  Medium.
-  Testing difficulty:  Medium.
-  Requested by Gerry Rzeppa on March 13, 2017.
-
-Verify that gold is __/__ of the way from yellow to orange.
- 
-213.  Make "reverse a color" get complement, not opposite saturation.
-  Status:  Implemented.
-  Audience:  Turtle programmers.
-  Benefit:  Medium.
-  Implementation difficulty:  Medium.
-  Demoing difficulty:  Medium.
-  Testing difficulty:  Medium.
-  Requested by Gerry Rzeppa on March 13, 2017.
-
-Reverse a color.  Verify the reversed color.
-
-221.  Make editor's sort definitions feature not add extra lines.
-  When editing a source, the Sort Definitions feature
-  adds a blank line after the comments at the top,
-  and before the first definition.
-  Each sorting adds another blank line.
-  Status:  Demonstrated.  (cal-4700 also has this bug; the bug
-           has been reported to its cal-4700's maintainers)
-  Audience:  Programmers.
-  Benefit:  Medium.  The bug requires either manual clean-up
-            after sorting, or invalidates how source code
-            control systems use diff to verify that files
-            have not changed.
-  Implementation difficulty:  Hard.
-  Demoing difficulty:  Easy.
-  Testing difficulty:  Medium.
-  Requested by Jasper Paulsen on April 30, 2017.
-
-Create a text.
-Sort the text.
-Verify that the text has the same number of lines as before.
-
-Create a pre-sorted text.
-Sort the text.
-Verify that the text is identical to what it was before.
-
 118.  A command-line version of the compiler.
   Status:   Demonstrated.
   Benefit:  Major.  Would allow a programmer to automatically
@@ -280,37 +194,6 @@ Tested in 135's test plan.
 
 Tested in 118 and 135's test plans.
 
-250.  Replace long list of colors with color's <adverbs> shade.
-  Per the designer of the colors, do not worry about backward
-  compatibility -- existing programs have copies of
-  noodle or color source files with the old definitions.
-  Make "lighter" and "darker" relative to the "possessing" color.
-  Status:    Demonstrated.
-  Audience:  Programmers.
-  Benefit:   Minor.
-  Implementation difficulty:  Easy.
-  Demoing difficulty:  Not applicable.
-  Testing difficulty:  Medium.
-  Requested by Gerry Rzeppa on May 29, 2017.
-
-make sky blue's light shade.
-make that color's light shade.
-make sky blue's lighter shade.
-verify that the last two colors are the same.
-
-make lime's lighter shade.
-make that color's lighter shade.
-make lime's lightest shade.
-verify that the last two colors are the same.
-
-make pink's darker shade.
-make red's light shade.
-verify that the last two colors are the same.
-
-verify lime's lightest shade.
-
-verify pink.
-
 136:  Output test failure messages to StdErr when tests requested.
   Use the same infrastructure as the compile failure messages.
   Only do this when testing is requested on the command line.
@@ -324,6 +207,31 @@ verify pink.
 
 Similar to 135, except create a deliberately failing test,
   and use /test instead of /test=verbose.
+
+221.  Make editor's sort definitions feature not add extra lines.
+  When editing a source, the Sort Definitions feature
+  adds a blank line after the comments at the top,
+  and before the first definition.
+  Each sorting adds another blank line.
+  Status:  Demonstrated.  (cal-4700 also has this bug; the bug
+           has been reported to its cal-4700's maintainers)
+  Audience:  Programmers.
+  Benefit:  Medium.  The bug requires either manual clean-up
+            after sorting, or invalidates how source code
+            control systems use diff to verify that files
+            have not changed.
+  Implementation difficulty:  Hard.
+  Demoing difficulty:  Easy.
+  Testing difficulty:  Medium.
+  Requested by Jasper Paulsen on April 30, 2017.
+
+Create a text.
+Sort the text.
+Verify that the text has the same number of lines as before.
+
+Create a pre-sorted text.
+Sort the text.
+Verify that the text is identical to what it was before.
 
 196.  In writer, get title of a page from first non-blank line, if possible.
   Status:  Demonstrated.

@@ -326,7 +326,7 @@ to make a color like another color:
   set the color's saturation to something between 100 and 1000.
   set the color's lightness to something between 0 and 800.
 
-to make a color a ratio from a color called left color toward a color called right color:
+to make a color a ratio from a left color toward a right color:
   privatize the left color.
   privatize the right color.
   normalize the left color.
@@ -506,6 +506,64 @@ the teal color is a color.
 
 the teal pen is a pen.
 
+to test (colors - brightness):
+  create a test result about "colors" and "brightness"
+    and expecting "pink is 375 brighter than red.".
+  put the pink color's brightness in a number.
+  subtract the red color's lightness from the number.
+  put "pink is " then the number then " brighter than red."
+    in an actual string.
+  stash the test result given the actual.
+
+to test (colors - brown and tan):
+  create a test result about "colors" and "brown and tan"
+    and expecting "orange is 1/4 of the way from brown toward tan".
+  make a color 1/4 from the brown color toward the tan color.
+  convert the color to an actual string.
+  if the color is the orange color,
+    put "orange is 1/4 of the way from brown toward tan"
+      in the actual.
+  stash the test result given the actual.
+
+to test (colors - dark purples):
+  create a test result about "colors" and "purples"
+    and expecting "darker purple's dark is darkest purple.".
+  put the purple color's darker shade in a color.
+  put the color's dark shade in another color.
+  convert the other color to an actual string.
+  if the other color is the purple color's darkest shade,
+    put "darker purple's dark is darkest purple." in the actual.
+  stash the test result given the actual.
+
+to test (colors - gold):
+  create a test result about "colors" and "gold"
+    and expecting "gold is 1/3 of the way from yellow toward orange".
+  make a color 1/3 from the yellow color toward the orange color.
+  convert the color to an actual string.
+  if the color is the gold color,
+    put "gold is 1/3 of the way from yellow toward orange"
+      in the actual.
+  stash the test result given the actual.
+
+to test (colors - light sky blues):
+  create a test result about "colors" and "light sky blues"
+    and expecting "light sky blue's light is lighter.".
+  put the sky blue color's light shade in a color.
+  put the color's light shade in another color.
+  convert the other color to an actual string.
+  if the other color is the sky blue color's lighter shade,
+    put "light sky blue's light is lighter." in the actual.
+  stash the test result given the actual.
+
+to test (colors - pinks):
+  create a test result about "colors" and "pinks"
+    and expecting "darker pink is light red.".
+  put the pink color's darker shade in a color.
+  convert the color to an actual string.
+  if the color is the red color's light shade,
+    put "darker pink is light red." in the actual.
+  stash the test result given the actual.
+
 to test (colors - rainbow):
   create a test result about "colors" and "rainbow"
     and expecting "red orange yellow green blue purple "
@@ -524,8 +582,26 @@ to test (colors - rainbow):
   put the number in the current rainbow color number.
   stash the test result given the actual.
 
+to test (colors - reverse):
+  create a test result about "colors" and "reverse"
+    and expecting "brown's reverse color is light sky blue".
+  put the brown color in a color.
+  reverse the color.
+  convert the color to an actual string.
+  if the color is the sky blue color's light shade,
+    put "brown's reverse color is light sky blue"
+      in the actual.
+  stash the test result given the actual.
+
 to test (colors):
   test (colors - rainbow).
+  test (colors - brightness).
+  test (colors - brown and tan).
+  test (colors - gold).
+  test (colors - reverse).
+  test (colors - light sky blues).
+  test (colors - pinks).
+  test (colors - dark purples).
 
 a very dark color is a color.
 

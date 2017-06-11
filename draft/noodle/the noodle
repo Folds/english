@@ -9664,6 +9664,20 @@ to test (the noodle - find parent of non-existent folder):
   get requested leaf directory path given the command line returning a string called actual.
   stash the test result given the actual.
 
+to test (the noodle - prepend things):
+  create a test result about "the noodle" and "prepend things"
+    and expecting "a, b, 1, 2, 3".
+  add "1" to some string things.
+  add "2" to the string things.
+  add "3" to the string things.
+  add "a" to some other string things.
+  add "b" to the other string things.
+  prepend the other string things to the string things.
+  summarize the string things returning an actual string (tersely).
+  stash the test result given the actual.
+  destroy the string things.
+  destroy the other string things.
+
 to test (the noodle - replace substring):
   create a test result about "the noodle" and "replace substring"
     and expecting "wowRACADwowRA wowracadwowra".
@@ -9748,6 +9762,7 @@ to test (the noodle):
   test (the noodle - user profile is a directory path).
   test (the noodle - find parent of non-existent folder).
   test (the noodle - replace substring).
+  test (the noodle - prepend things).
 
 to test (the talker - find PlaySound):
   create a test result about "the noodle" and "find PlaySound"

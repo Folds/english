@@ -1263,3 +1263,60 @@ with an adjustable slider between them.
   Testing difficulty:  Medium.
   Requested by Gerry Rzeppa on March 13, 2017.
 
+224.  Fix prepend some things to some other things.
+  Status:    Tested.
+  Audience:  Programmers.
+  Benefit:   Medium.
+  Implementation difficulty:  Easy.
+  Demoing difficulty:  Easy.
+  Testing difficulty:  Medium.
+  Requested by Jasper Paulsen on May 3, 2017.
+
+211.  In colors, add a "brightness" alias for "lightness".
+  Status:  Implemented.
+  Audience:  Turtle programmers.
+  Benefit:  Medium.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Medium.
+  Requested by Gerry Rzeppa on March 13, 2017.
+
+214.  Create color aliases:  brown, sky blue, pink, tan.
+  Status:  Implemented.
+  Audience:  Turtle programmers.
+  Benefit:  Medium.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Medium.
+  Requested by Gerry Rzeppa on March 13, 2017.
+
+215.  Add "gold" color name.
+  Status:  Implemented.
+  Audience:  Turtle programmers.
+  Benefit:  Medium.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Medium.
+  Requested by Gerry Rzeppa on March 13, 2017.
+
+213.  Make "reverse a color" get complement, not opposite saturation.
+  Status:  Implemented.
+  Audience:  Turtle programmers.
+  Benefit:  Medium.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Medium.
+  Requested by Gerry Rzeppa on March 13, 2017.
+
+250.  Replace long list of colors with color's <adverbs> shade.
+  Per the designer of the colors, do not worry about backward
+  compatibility -- existing programs have copies of
+  noodle or color source files with the old definitions.
+  Make "lighter" and "darker" relative to the "possessing" color.
+  Status:    Demonstrated.
+  Audience:  Programmers.
+  Benefit:   Minor.
+  Implementation difficulty:  Easy.
+  Demoing difficulty:  Not applicable.
+  Testing difficulty:  Medium.
+  Requested by Gerry Rzeppa on May 29, 2017.
