@@ -1,0 +1,330 @@
+@if not "%OS%"=="Windows_NT" goto DOSEXIT
+
+@setlocal
+
+@rem    This batch script assumes that it is in a folder
+@rem    (such as ~\bvt\40xx command line) that contains:
+@rem    A *.exe of the version of CAL being tested, named cal-40xx.exe
+@rem    An inputs subfolder, which has various subfolders.
+@rem    Each subfolder of inputs will be copied into in_progress.
+@rem    An in_progress subfolder, which will be emptied at the beginning
+@rem    of the script, and filled as the script progresses.
+@rem    An expected subfolder, which contains a known good copy
+@rem    of output similar to what in_progress should contain.
+
+:SETUP
+@rem === Set the title of the command shell window ===
+@set TITLE_PREFIX="Testing CAL-40xx"
+@title %TITLE_PREFIX:"=%
+
+@rem === Delete in_progress' subfolders ===
+@robocopy /mir inputs\empty in_progress > robocopy.txt
+@del robocopy.txt
+
+:TEST__1
+@(set STEP="TEST__1")&(call :RESET_SUBSTEP)
+@set TRYING="compiling CAL-3040."
+@rem    Verify that CAL-40xx can compile CAL-3040.
+@rem    Verify that CAL-40xx's /list command line feature works. 
+@rem    Verify that CAL-40xx returns 0 when successful.
+@robocopy /mir inputs\cal-3040 in_progress\cal-3040 > robocopy.txt
+@move robocopy.txt in_progress\cal-3040 > NUL
+@title %TITLE_PREFIX:"=%:  %TRYING:"=%..
+@cal-40xx.exe /folder="%CD%\in_progress\cal-3040" /files="the noodle" /list
+@set temp=%errorlevel%
+@title %TITLE_PREFIX:"=%
+@if %temp% EQU 0 goto :%STEP:"=%%NEXT%
+@goto :ABORT
+:TEST__1__2
+@call :BUMP_SUBSTEP
+@set EXPECTED_FOLDER="%CD:"=%\expected\cal-3040"
+@set PROGRESS_FOLDER="%CD:"=%\in_progress\cal-3040"
+@call :MATCH_SUBPATHS %EXPECTED_FOLDER% %PROGRESS_FOLDER%
+@set RET=%RET%
+@if {%RET%}=={""} goto :%STEP:"=%%NEXT% 
+@set DETAILS="Did not find %RET:"=%"
+@goto :ABORT
+:TEST__1__3
+@call :BUMP_SUBSTEP
+@set EXE_PATH="%PROGRESS_FOLDER:"=%\cal-3040.exe"
+@call :GET_FILESIZE %EXE_PATH%
+@set EXE_SIZE=%RET%
+@set LST_PATH="%PROGRESS_FOLDER:"=%\cal-3040.lst"
+@call :GET_FILESIZE %LST_PATH%
+@set LST_SIZE=%RET%
+@if LST_SIZE GTR EXE_SIZE goto :%STEP:"=%%NEXT%
+@set DETAILS="Expected *.lst to be larger than *.exe.  In %PROGRESS_FOLDER%, cal-3040.lst was just %LST_SIZE% bytes.  cal-3040.exe was %EXE_SIZE% bytes."
+@goto :ABORT
+:TEST__1__4
+
+:TEST__2
+@(set STEP="TEST__2")&(call :RESET_SUBSTEP)
+@set TRYING="compiling blank program."
+@rem    Verify that CAL-40xx returns 1 when command-line compilation fails.
+@rem    Verify it reports reason for command-line compilation failure on stdout.
+@robocopy /mir inputs\no_run in_progress\no_run > robocopy.txt
+@move robocopy.txt in_progress\no_run > NUL
+@title %TITLE_PREFIX:"=%:  %TRYING:"=%..
+@cal-40xx.exe /folder="%CD%\in_progress\no_run" /files=blank /list 1>in_progress\no_run\out.txt 2>in_progress\no_run\err.txt
+@set temp=%errorlevel%
+@title %TITLE_PREFIX:"=%
+@if %temp% EQU 1 goto :%STEP:"=%%NEXT%
+@set DETAILS="Expected return value of 1.  Got return value of %temp%."
+@goto :ABORT
+:TEST__2__2
+@call :BUMP_SUBSTEP
+@set EXPECTED_FOLDER="%CD:"=%\expected\no run"
+@set PROGRESS_FOLDER="%CD:"=%\in_progress\no run"
+@set RET=""
+@call :MATCH_SUBPATHS %EXPECTED_FOLDER% %PROGRESS_FOLDER%
+@set RET=%RET%
+@if {%RET%}=={""} goto :%STEP:"=%%NEXT% 
+@set DETAILS="Did not find %RET:"=%"
+@goto :ABORT
+:TEST__2__3
+
+:TEST__3
+@(set STEP="TEST__3")&(call :RESET_SUBSTEP)
+@set TRYING="running with ""/test""."
+@call :RESET_SUBSTEP
+@rem    Verify that CAL-40xx's tests pass.
+@rem    Verify that CAL-40xx can run tests from command line.
+@rem    Verify that /test reports summary of passed tests on stdout.
+@robocopy /mir inputs\terse_test in_progress\terse_test > robocopy.txt
+@move robocopy.txt in_progress\terse_test > NUL
+@title %TITLE_PREFIX:"=%:  %TRYING:"=%..
+@cal-40xx.exe /test 1>in_progress\terse_test\out.txt 2>in_progress\terse_test\err.txt
+@set temp=%errorlevel%
+@title %TITLE_PREFIX:"=%
+@if %temp% EQU 0 goto :%STEP:"=%%NEXT%
+@set DETAILS="Expected return value of 0.  Got return value of %temp%."
+@goto :ABORT
+:TEST__3__2
+@call :BUMP_SUBSTEP
+@set EXPECTED_FOLDER="%CD:"=%\expected\terse_test"
+@set PROGRESS_FOLDER="%CD:"=%\in_progress\terse_test"
+@set RET=""
+@call :MATCH_SUBPATHS %EXPECTED_FOLDER% %PROGRESS_FOLDER%
+@set RET=%RET%
+@if {%RET%}=={""} goto :%STEP:"=%%NEXT% 
+@set DETAILS="Did not find %RET:"=%"
+@goto :ABORT
+:TEST__3__3
+@call :BUMP_SUBSTEP
+@call :COUNT_LINES "%PROGRESS_FOLDER:"=%\err.txt"
+@set LINES=%RET%
+@if {%LINES%}=={1} goto :%STEP:"=%%NEXT% 
+@set DETAILS="Expected 1 line.  %PROGRESS_FOLDER:"=%\err.txt had %LINES% lines."
+@goto :ABORT
+:TEST__3__4
+@call :BUMP_SUBSTEP
+@rem Just set up data for a substep of a later test.
+@call :GET_FIRST_LINE "%PROGRESS_FOLDER:"=%\err.txt"
+@set TERSE_FIRST_LINE=%RET%
+:TEST__3__5
+
+:TEST__4
+@(set STEP="TEST__4")&(call :RESET_SUBSTEP)
+@set TRYING="running with ""/test=verbose""."
+@rem    Verify that CAL-40xx's tests pass.
+@rem    Verify that /test=verbose lists test results on stdout.
+@robocopy /mir inputs\verbose_test in_progress\verbose_test > robocopy.txt
+@move robocopy.txt in_progress\verbose_test > NUL
+@title %TITLE_PREFIX:"=%:  %TRYING:"=%..
+@cal-40xx.exe /test=verbose 1>in_progress\verbose_test\out.txt 2>in_progress\verbose_test\err.txt
+@set temp=%errorlevel%
+@title %TITLE_PREFIX:"=%
+@if %temp% EQU 0 goto :%STEP:"=%%NEXT%
+@set DETAILS="Expected return value of 0.  Got return value of %temp%."
+@goto :ABORT
+:TEST__4__2
+@call :BUMP_SUBSTEP
+@set EXPECTED_FOLDER="%CD:"=%\expected\verbose_test"
+@set PROGRESS_FOLDER="%CD:"=%\in_progress\verbose_test"
+@set RET=""
+@call :MATCH_SUBPATHS %EXPECTED_FOLDER% %PROGRESS_FOLDER%
+@set RET=%RET%
+@if {%RET%}=={""} goto :%STEP:"=%%NEXT% 
+@set DETAILS="Did not find %RET:"=%"
+@goto :ABORT
+:TEST__4__3
+@call :BUMP_SUBSTEP
+@call :GET_FIRST_LINE "%PROGRESS_FOLDER:"=%\err.txt"
+@set FIRST_LINE=%RET%
+@call :GET_FIRST_TOKEN "%FIRST_LINE:"=%"
+@set FIRST_TOKEN=%RET%
+@set /a EXPECTED_LINES=%FIRST_TOKEN%+1
+@call :COUNT_LINES "%PROGRESS_FOLDER:"=%\err.txt"
+@set LINES=%RET%
+@if {%LINES%}=={%EXPECTED_LINES%} goto :%STEP:"=%%NEXT% 
+@set DETAILS="Expected %EXPECTED_LINES% lines.  %PROGRESS_FOLDER:"=%\err.txt had %LINES% lines."
+@goto :ABORT
+:TEST__4__4
+@call :BUMP_SUBSTEP
+@if {"%FIRST_LINE:"=%"}=={"%TERSE_FIRST_LINE:"=%"} goto :%STEP:"=%%NEXT%
+@set DETAILS="Expected first lines of terse and verbose test results to match.  Terse was '%TERSE_FIRST_LINE%'; verbose was '%FIRST_LINE%'."
+@goto :ABORT
+:TEST__4__5
+
+
+:SUCCESS
+@title CAL-40xx tests passed.
+@goto :DONE
+
+:ABORT
+@echo %STEP:"=% failed.  Tried %TRYING:"=%  %DETAILS:"=%
+@title CAL-40xx %STEP:"=% failed.
+
+:DONE
+@endlocal & set RET=%RET%
+@goto :EOF
+
+@rem === Helper routines that don't use setlocal ===
+
+:RESET_SUBSTEP
+@set SUBSTEP=___
+@call :BUMP_SUBSTEP
+@goto :EOF
+
+:BUMP_SUBSTEP
+@for /f "tokens=* delims=_" %%A in ("%SUBSTEP%") do @set SUBSTEP=%%A
+@if "%SUBSTEP%"=="" set SUBSTEP=0
+@set /a SUBSTEP=%SUBSTEP%+1
+@set /a NEXT=%SUBSTEP%+1
+@set SUBSTEP=___%SUBSTEP%
+@set SUBSTEP=%SUBSTEP:~-3%
+@set NEXT=___%NEXT%
+@set NEXT=%NEXT:~-3%
+@goto :EOF
+
+@rem === Helper routines that use setlocal ===
+
+@rem Gets file size (in bytes) of first argument.
+:GET_FILESIZE
+@setlocal
+@set RET=%~z1
+@endlocal & set RET=%RET%
+@goto :EOF
+
+@rem Count lines in a file
+:COUNT_LINES
+@setlocal
+@for /f %%I in ('find /v /c "" ^< %1') do @set RET=%%I
+@endlocal & set RET=%RET%
+@goto :EOF
+
+@rem Get first line of a file
+:GET_FIRST_LINE
+@setlocal
+@set /p RET=< %1
+@endlocal & set RET=%RET%
+@goto :EOF
+
+@rem Get first token of a string.  Ignores leading whitespace.
+:GET_FIRST_TOKEN
+@setlocal
+@for /f "tokens=1" %%I in (%1) do @set RET=%%I
+@endlocal & set RET=%RET%
+@goto :EOF
+
+@rem === Check that matching files and folders exist ===
+
+@rem If a file in %EXPECTED_FOLDER%'s tree
+@rem is not found in %PROGRESS_FOLDER%'s tree
+@rem returns the path to the non-existent file
+@rem in %PROGRESS_FOLDER%'s tree.
+:MATCH_SUBPATHS
+@setlocal
+@set EXPECTED_FOLDER=%1
+@set PROGRESS_FOLDER=%2
+@call :RECURSIVE_MATCH %EXPECTED_FOLDER% %PROGRESS_FOLDER%
+@set RET=%RET%
+@if not {%RET%}=={""} echo %RET%
+@endlocal & set RET=%RET%
+@goto :EOF
+
+@rem If a file in %EXPECTED_FOLDER%'s tree
+@rem is not found in %PROGRESS_FOLDER%'s tree
+@rem returns the path to the non-existent file
+@rem in %PROGRESS_FOLDER%'s tree.
+:RECURSIVE_MATCH
+@setlocal
+@setlocal EnableDelayedExpansion
+@set EXPECTED_FOLDER=%1
+@set PROGRESS_FOLDER=%2
+@call :MATCH_FILES %EXPECTED_FOLDER% %PROGRESS_FOLDER%
+@set RET=%RET%
+@if not {%RET%}=={""} @(goto :RECURSIVE_MATCH_FAILED)
+@for /d %%I in ("%EXPECTED_FOLDER:"=%\*") do @(
+  @call :MATCH_FOLDER %EXPECTED_FOLDER% %PROGRESS_FOLDER% "%%I"
+  @set RET=!RET!
+  @if not {!RET!}=={""} @(goto :RECURSIVE_MATCH_FAILED)
+)
+@endlocal EnableDelayedExpansion & endlocal & set RET=%RET%
+@goto :EOF
+:RECURSIVE_MATCH_FAILED
+@endlocal EnableDelayedExpansion & endlocal & set RET=%RET%
+@goto :EOF
+
+@rem If a file in %EXPECTED_FOLDER% is not found in %PROGRESS_FOLDER%,
+@rem returns the path to the non-existent file in %PROGRESS_FOLDER%.
+:MATCH_FILES
+@setlocal
+@setlocal EnableDelayedExpansion
+@set EXPECTED_FOLDER=%1
+@set PROGRESS_FOLDER=%2
+@for %%I in ("%EXPECTED_FOLDER:"=%\*") do @(
+  @call :MATCH_FILE %EXPECTED_FOLDER% %PROGRESS_FOLDER% "%%I"
+  @set RET=!RET!
+  @if not {!RET!}=={""} @(goto :PARENT_FAILED)
+)
+@endlocal EnableDelayedExpansion & endlocal & set RET=%RET%
+@goto :EOF
+:PARENT_FAILED
+@endlocal EnableDelayedExpansion & endlocal & set RET=%RET%
+@goto :EOF
+
+:MATCH_FILE
+@setlocal
+@set EXPECTED_FOLDER=%1
+@set PROGRESS_FOLDER=%2
+@set ITEM=%3
+@call :STRIP_PREFIX %EXPECTED_FOLDER% %ITEM%
+@set TAIL=%RET%
+@set RET=""
+@if not exist "%PROGRESS_FOLDER:"=%%TAIL:"=%" (
+  @set RET="%PROGRESS_FOLDER:"=%%TAIL:"=%"
+)
+@endlocal & set RET=%RET%
+@goto :EOF
+
+:MATCH_FOLDER
+@setlocal
+@set EXPECTED_FOLDER=%1
+@set PROGRESS_FOLDER=%2
+@set ITEM=%3
+@call :STRIP_PREFIX %EXPECTED_FOLDER% %ITEM%
+@set TAIL=%RET%
+@set RET=""
+@if not exist "%PROGRESS_FOLDER:"=%%TAIL:"=%" goto :MATCH_FOLDER_FAIL
+@call :RECURSIVE_MATCH "%EXPECTED_FOLDER:"=%%TAIL:"=%" "%PROGRESS_FOLDER:"=%%TAIL:"=%"
+@endlocal & set RET=%RET%
+@goto :EOF
+:MATCH_FOLDER_FAIL
+@set RET="%PROGRESS_FOLDER:"=%%TAIL:"=%"
+@endlocal & set RET=%RET%
+@goto :EOF
+
+:STRIP_PREFIX
+@setlocal
+@setlocal EnableDelayedExpansion
+@set PREFIX=%1
+@set ARG=%2
+@set "RET=!ARG:%PREFIX:"=%=!"
+@endlocal EnableDelayedExpansion & endlocal & set RET=%RET%
+@goto :EOF
+
+@rem === This section needs to be at the end ===
+
+:DOSEXIT
+echo This script requires Windows NT (or a version of Windows based on NT, such as Windows 2000, 2003, XP, Vista, 7, 8, or 10).
