@@ -1433,3 +1433,14 @@ with an adjustable slider between them.
   Demoing difficulty:  Medium.
   Testing difficulty:  Medium.
   Requested by Gerry Rzeppa on March 13, 2017.
+
+277.  Cache whether methods are found in libraries.
+  Status:    Tested.
+  Benefit:   Critical -- may prevent crashes in GetProcAddress.
+  Audience:  Application users.
+  Implementation difficulty:  Easy.
+  Demoing difficulty:  Easy.
+  Testing difficulty:  Already done.  Existing tests
+    verify that the cached functionality still works.
+    The implementation exercises the uncaching feature.
+  Requested by Jasper Paulsen on June 27, 2017.

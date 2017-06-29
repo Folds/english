@@ -478,6 +478,28 @@ to buzz:
   \
   play the cluck sound and wait.
 
+to cache failure finding a library:
+  uncache the library.
+  put the library then ";*" in a string.
+  create a string thing given the string.
+  append the string thing to the cached missing library procedures.
+
+to cache failure finding a library procedure in a library:
+  uncache the library procedure in the library.
+  put the library then ";" then the library procedure in a string.
+  create a string thing given the string.
+  append the string thing to the cached missing library procedures.
+
+to cache success finding a library procedure in a library:
+  uncache the library procedure in the library.
+  put the library then ";" then the library procedure in a string.
+  create a string thing given the string.
+  append the string thing to the cached found library procedures.
+
+the cached found library procedures are some string things.
+
+the cached missing library procedures are some string things.
+
 a canvas is an hdc.
 
 to center a box at the bottom of another box:
@@ -1937,16 +1959,60 @@ to decide if a byte is a string:
   say no.
 
 to decide if can find a library procedure in a library:
-  if the library is not loadable, say no.
+  \ When "GetProcAddress" is run on 64-bit hardware,
+  \ it sometimes crashes the process.
+  \ The crashes occur at ntdll.dll!RtlInitString+0x1b
+  \ and have exception code C0000005
+  \ ("Access Violation - Failed to access <address's> memory").
+  \
+  \ It is possible that Windows' Wow64 emulator
+  \ (which runs 32-bit .exes on 64-bit hardware)
+  \ has a bug in how it sets up the stack frame.
+  \
+  \ This routine therefore minimizes the number of calls
+  \ to "GetProcAddress" by caching this routine's result.
+  \ Most library procedures have the same availability
+  \ throughout a run of a program.
+  \ If the library's availability might change,
+  \ the caller should uncache the library, either before
+  \ or after calling this routine (at the caller's option).
+  \ If a library procedure's availability might change,
+  \ the caller should uncache the library procedure
+  \ in the library, either before or after calling
+  \ this routine (at the caller's option).
+  \
+  if cannot find the library procedure in the library (failure cache),
+    say no.
+  if can find the library procedure in the library (success cache),
+    say yes.
+  if the library is not loadable,
+    cache failure finding the library;
+    say no.
   call "kernel32.dll" "LoadLibraryA"
     with the library's first returning a handle.
   if the handle is 0, 
     call "kernel32.dll" "GetLastError" returning a number;
+    cache failure finding the library;
     say no.
   call "kernel32.dll" "GetProcAddress" with the handle
     and the library procedure's first returning a pointer.
-  if the pointer is nil, say no.
+  if the pointer is nil,
+    cache failure finding the library procedure in the library;
+    say no.
+  cache success finding the library procedure in the library.
   say yes.
+
+to decide if can find a library procedure in a library (failure cache):
+  put the library then ";*" in a string.
+  if the string is in the cached missing library procedures, say no.
+  put the library then ";" then the library procedure in the string.
+  if the string is in the cached missing library procedures, say no.
+  say yes.
+
+to decide if can find a library procedure in a library (success cache):
+  put the library then ";" then the library procedure in a string.
+  if the string is in the cached found library procedures, say yes.
+  say no.
 
 to decide if compile or list was requested:
   if list was requested, say yes.
@@ -4025,6 +4091,8 @@ to fill a string with a byte given a count:
   put the string's first plus the count minus 1 into the string's last.
 
 to finalize after run:
+  destroy the cached missing library procedures.
+  destroy the cached found library procedures.
   if the heap count is 0, exit.
   put the heap count into a count.
   if test was requested,
@@ -9883,6 +9951,34 @@ to unassign a pointer:
   if the number is 0, exit.
   void the pointer.
   subtract 1 from the heap count.
+
+to uncache a library:
+  uncache the library from the cached found library procedures.
+  uncache the library from the cached missing library procedures.
+
+to uncache a library from some string things:
+  put the library then ";" in a string.
+  loop.
+    get a string thing from the string things.
+    if the string thing is nil, exit.
+    if the string thing's string starts with the string,
+      remove the string thing from the cached found library procedures.
+  repeat.
+
+to uncache a library procedure in a library:
+  uncache the library procedure in the library
+    from the cached found library procedures.
+  uncache the library procedure in the library
+    from the cached missing library procedures.
+
+to uncache a library procedure in a library from some string things:
+  put the library then ";" then the library procedure in a string.
+  loop.
+    get a string thing from the string things.
+    if the string thing is nil, exit.
+    if the string thing's string is the string,
+      remove the string thing from the cached found library procedures.
+  repeat.
 
 a unit is a number.
 

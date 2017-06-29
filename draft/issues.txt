@@ -41,29 +41,6 @@ These items should occasionally be moved to demoed fixes.txt.
 \ ======================================   
 The following requests have been partially demonstrated.
 
-
-\ ======================================   
-The following requests are roughly sorted
-from higher priority to lower priority.
-
-277.  Cache whether methods are found in libraries.
-  Status:    Request.
-  Benefit:   Critical -- may prevent crashes in GetProcAddress.
-  Audience:  Application users.
-  Implementation difficulty:  Easy.
-  Demoing difficulty:  Easy.
-  Testing difficulty:  Hard.
-  Requested by Jasper Paulsen on June 27, 2017.
-
-278.  Support ain't as an alias for isn't.
-  Status:    Designed.  Similar to "can't".
-  Benefit:   Minor.
-  Audience:  Programmers.
-  Implementation difficulty:  Easy.
-  Demoing difficulty:  Medium.
-  Testing difficulty:  Easy.  Similar to "can't".
-  Requested by Jasper Paulsen on June 27, 2017.
-
 220.  Fix intermittent crashing bug(s) in editor.
   The editor can crash when attempting to scroll the scrollbar upward.
   The editor can crash when attempting to add characters
@@ -91,6 +68,20 @@ from higher priority to lower priority.
   Demoing difficulty:  n/a.
   Testing difficulty:  n/a.
   Requested by Jasper Paulsen on May 21, 2017.
+
+
+\ ======================================   
+The following requests are roughly sorted
+from higher priority to lower priority.
+
+278.  Support ain't as an alias for isn't.
+  Status:    Designed.  Similar to "can't" and "aren't".
+  Benefit:   Minor.
+  Audience:  Programmers.
+  Implementation difficulty:  Easy.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Easy.  Similar to "can't".
+  Requested by Jasper Paulsen on June 27, 2017.
 
 198.  In finder, allow running a .lnk file.
   Some hints are in:
