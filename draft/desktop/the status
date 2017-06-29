@@ -485,15 +485,19 @@ to test:
 
 to test (all):
   start the status' all test results' timer.
+  \ noodle subfolder
+  test (the noodle).
+  test (characters).
+  test (colors).
+  test (text).
+  test (trig).
+  \ desktop subfolder
   test (the compiler).
   test (the desktop).
   test (font menus).
   test (the status).
-  test (the noodle).
-  test (characters).
-  test (colors).
-  test (trig).
   test (the finder).
+  test (the editor).
   stop the status' all test results' timer.
   test (the testing time).
 

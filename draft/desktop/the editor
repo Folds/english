@@ -1023,6 +1023,67 @@ to split out some preamble rows from some rows:
     exit.
   repeat.
 
+to test (the editor - sort already sorted definitions):
+  create a test result about "the editor" and "sort already sorted definitions"
+    and expecting "unchanged".
+  put    "\ comment"  then the crlf string
+    then                   the crlf string
+    then                   the crlf string
+    then "argyle"     then the crlf string
+    then                   the crlf string
+    then "billy bob"  then the crlf string
+    then "betsy barb" then the crlf string
+    then                   the crlf string
+    then "cara carns" then the crlf string
+    then "c"          then the crlf string
+    into a buffer.
+  create a source given the buffer.
+  sort definitions given the source.
+  convert the source to another buffer.
+  put "changed" in an actual string.
+  if the buffer is the other buffer,
+    put "unchanged" in the actual string.
+  stash the test result using the actual.
+  destroy the source.
+
+to test (the editor - sort definitions does not add lines):
+  create a test result about "the editor" and "sort definitions does not add lines"
+    and expecting "as expected".
+  put    "argyle"     then the crlf string
+    then                   the crlf string
+    then "cara carns" then the crlf string
+    then "c"          then the crlf string
+    then                   the crlf string
+    then "\ comment"  then the crlf string
+    then                   the crlf string
+    then "billy bob"  then the crlf string
+    then "betsy barb" then the crlf string
+    then                   the crlf string
+    into a buffer.
+  put    "\ comment"  then the crlf string
+    then                   the crlf string
+    then                   the crlf string
+    then "argyle"     then the crlf string
+    then                   the crlf string
+    then "billy bob"  then the crlf string
+    then "betsy barb" then the crlf string
+    then                   the crlf string
+    then "cara carns" then the crlf string
+    then "c"          then the crlf string
+    into an expected buffer.
+  create a source given the buffer.
+  sort definitions given the source.
+  convert the source to another buffer.
+  put "unexpected" in an actual string.
+  if the other buffer is the expected buffer,
+    put "as expected" in the actual string.
+  stash the test result using the actual.
+  destroy the source.
+
+to test (the editor):
+  test (the editor - sort already sorted definitions).
+  test (the editor - sort definitions does not add lines).
+
 to track a source given an event:
   if the source is nil, exit.
   if the source's text is nil, exit.

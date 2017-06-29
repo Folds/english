@@ -1650,6 +1650,22 @@ to square up any selection in a text:
   put the text's row count into the text's caret's row#.
   put the row's string's length into the text's caret's column#.
 
+to test (text - get first non-blank line):
+  create a test result about "text" and "get first non-blank line"
+    and expecting "fred jones".
+  put the crlf string then the crlf string
+    then "fred jones" then the crlf string then the crlf string
+    then "a string" then the crlf string
+    then "another string"
+    in a buffer.
+  create a source given the buffer.
+  put the source's text's first non-blank line into an actual string.
+  stash the test result using the actual.
+  destroy the source.
+
+to test (text):
+  test (text - get first non-blank line).
+
 a text is a thing with 
   a box,
   an origin,

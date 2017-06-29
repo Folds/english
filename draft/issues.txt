@@ -41,6 +41,29 @@ These items should occasionally be moved to demoed fixes.txt.
 \ ======================================   
 The following requests have been partially demonstrated.
 
+
+\ ======================================   
+The following requests are roughly sorted
+from higher priority to lower priority.
+
+277.  Cache whether methods are found in libraries.
+  Status:    Request.
+  Benefit:   Critical -- may prevent crashes in GetProcAddress.
+  Audience:  Application users.
+  Implementation difficulty:  Easy.
+  Demoing difficulty:  Easy.
+  Testing difficulty:  Hard.
+  Requested by Jasper Paulsen on June 27, 2017.
+
+278.  Support ain't as an alias for isn't.
+  Status:    Designed.  Similar to "can't".
+  Benefit:   Minor.
+  Audience:  Programmers.
+  Implementation difficulty:  Easy.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Easy.  Similar to "can't".
+  Requested by Jasper Paulsen on June 27, 2017.
+
 220.  Fix intermittent crashing bug(s) in editor.
   The editor can crash when attempting to scroll the scrollbar upward.
   The editor can crash when attempting to add characters
@@ -68,11 +91,6 @@ The following requests have been partially demonstrated.
   Demoing difficulty:  n/a.
   Testing difficulty:  n/a.
   Requested by Jasper Paulsen on May 21, 2017.
-
-
-\ ======================================   
-The following requests are roughly sorted
-from higher priority to lower priority.
 
 198.  In finder, allow running a .lnk file.
   Some hints are in:
@@ -197,16 +215,15 @@ open the files that are found.
   Testing difficulty:  Medium.
   Requested by Jasper Paulsen on March 13, 2014.
 
-035.  Indent the contents of loops.
-  Pretty print loops so that the row(s) after Loop: and before Repeat
-  are indented twice as much as the Loop: statement.
-  Status:  request.
-  Audience:  Windows programmers and Linux programmers.
-  Benefit:  minor.
-  Implementation difficulty:  Easy.
-  Demoing difficulty:  Medium.
-  Testing difficulty:  Medium.
-  Requested by Jasper Paulsen on March 7, 2014.
+279.  In the editor, allow counting the characters
+  in a multi-line selection.
+  Status:    Request.
+  Benefit:   Minor.  Would make it easier to play "code golf".
+  Audience:  Programmers who play code golf.
+  Implementation difficulty:  Hard.
+  Demoing difficulty:  Easy.
+  Testing difficulty:  Hard.
+  Requested by Jasper Paulsen on June 27, 2017.
 
 223.  Make the editor's Capitalize feature generate sentence case.
   The Capitalize feature does not work the way its authors intended.
@@ -221,8 +238,19 @@ open the files that are found.
   Testing difficulty:  Medium.
   Requested by Gerry Rzeppa on April 30, 2017.
 
+035.  Indent the contents of loops.
+  Pretty print loops so that the row(s) after Loop: and before Repeat
+  are indented twice as much as the Loop: statement.
+  Status:  request.
+  Audience:  Windows programmers and Linux programmers.
+  Benefit:  minor.
+  Implementation difficulty:  Easy.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Medium.
+  Requested by Jasper Paulsen on March 7, 2014.
+
 021.  Make it easy to search all files that are open,
-regardless of whether the file's tab is visible.
+  regardless of whether the file's tab is visible.
   Status:  request.
   Audience:  programmers.
   Implementation difficulty:  easy.
@@ -723,4 +751,4 @@ while a letter's menu is visible.
 Unsorted requests:
 
 
-Next item number:  277.
+Next item number:  280.
