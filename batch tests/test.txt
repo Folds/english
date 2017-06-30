@@ -2,6 +2,11 @@
 
 @setlocal
 
+@rem    Copyright 2017 by Jasper Paulsen.
+@rem    This batch script contains snippets of code from
+@rem    Tim Hill's book on Windows NT Shell Scripting,
+@rem    which is copyright 1998 by New Riders Publishing.
+
 @rem    This batch script assumes that it is in a folder
 @rem    (such as ~\bvt\40xx command line) that contains:
 @rem    A *.exe of the version of CAL being tested, named cal-40xx.exe
