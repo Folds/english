@@ -43,9 +43,9 @@ ream cal-3024
     text -1 0 0 -1 0 0 2160 2160 10170 14400 0 "title" "Arial" 320 "left" 0 0 0 yes
        "INTRODUCTION"
        ""
-       "I am the CAL-4011. My primary function is to compile Plain English text files"
+       "I am the CAL-4013. My primary function is to compile Plain English text files"
        "into executable programs compatible with the Windows operating system."
-       "My code — just 37,000 lines of Plain English — is surprisingly broad in scope."
+       "My code — just 38,000 lines of Plain English — is surprisingly broad in scope."
        ""
        "The ""noodle"" subfolder is my frontal lobe, which goes with me wherever I go."
        "You can use (or omit) the other subfolders and files, depending on what kind of program you want to write."
@@ -63,7 +63,7 @@ ream cal-3024
        "INSTALLATION"
        ""
        "I don't require special installation procedures. My source code, my"
-       "executable self, and this very documentation (in both native and PDF format) are all contained in the CAL-4011 folder.  Simply double-click the executable file to activate me."
+       "executable self, and this very documentation (in both native and PDF format) are all contained in the CAL-4013 folder.  Simply double-click the executable file to activate me."
        ""
        "If you usually want me to use different fonts, or if you usually want me to"
        "cover the whole screen, you can make a desktop icon for my executable."
@@ -82,7 +82,7 @@ ream cal-3024
        ""
        "Let me put it this way."
        ""
-       "The CAL-4011 is one of the most advanced Plain English compilers ever made. But I am currently in ""alpha test"".  Sometimes the kluge says I ""cannot continue."""
+       "The CAL-4013 is one of the most advanced Plain English compilers ever made. But I am currently in ""alpha test"".  Sometimes the kluge says I ""cannot continue."""
        "So please, save your work often."
        ""
        "Questions, comments, and crash reports may be directed to — https://github.com/Folds/english/wiki."
@@ -808,7 +808,7 @@ ream cal-3024
        ""
        "It's actually pretty easy.  I'll lead you through it:"
        ""
-       "(1) Open the CAL-4011 directory and copy my desktop subfolder and my noodle subfolder. Shift-click or drag to select. Copy is under ""C""."
+       "(1) Open the CAL-4013 directory and copy my desktop subfolder and my noodle subfolder. Shift-click or drag to select. Copy is under ""C""."
        ""
        "(2) Make a new directory on your ""C"" drive with an appropriate name like ""Baby Cal"". Then open it up and paste the two subfolders into it. Open one of the subfolders.  Now open any of the files. To open a bunch of files, just drag to select and tap the ENTER key."
        ""
@@ -965,7 +965,7 @@ ream cal-3024
     end
     rectangle 0 0 0 -1 0 0 6840 7740 8280 8100 90
     text -1 0 0 -1 0 0 6960 7740 8160 8100 0 "" "Arial" 360 "right" 0 0 0 yes
-       "5200:1"
+       "5327:1"
     end
     rectangle 0 0 0 -1 0 0 9810 10500 10080 10770 90
     rectangle 0 0 0 -1 0 0 9810 8370 10080 10500 90
@@ -1201,7 +1201,7 @@ ream cal-3024
        "c:\cal monet"
     end
     text -1 0 0 -1 0 0 2520 6660 9720 7020 0 "" "Arial" 360 "left" 0 0 0 yes
-       "c:\cal-4011"
+       "c:\cal-4013"
     end
     text -1 0 0 -1 0 0 2520 7020 9720 7380 0 "" "Arial" 360 "left" 0 0 0 yes
        "c:\another directory that you already had"
@@ -1345,7 +1345,7 @@ ream cal-3024
        "And now we're ready to write some Plain English code."
     end
     text -1 0 0 -1 0 0 2160 8100 10440 10260 0 "" "arial" 320 "left" 0 0 0 yes
-       "Good. Now get a copy of my noodle subfolder from the CAL-4011 directory, open our new directory, and slip it in there with CTRL-V."
+       "Good. Now get a copy of my noodle subfolder from the CAL-4013 directory, open our new directory, and slip it in there with CTRL-V."
        ""
        "Last step. Make a new text file in our new directory and call it whatever you please. But don't give it an extension. I only compile files with no extension."
        "I'm going to assume you decided to call it ""How to Paint"", like this:"
@@ -1804,7 +1804,7 @@ ream cal-3024
        ""
        "Now I know it doesn't look like it, but it is running. And running. And running. You can't see it because we haven't told it to do anything visible or audible yet. But it is running. And running. And running. So stop it. Like this:"
        ""
-       "(1) ALT-TAB back to me, the CAL-4011."
+       "(1) ALT-TAB back to me, the CAL-4013."
        ""
        "(2) Execute the Stop command. It's under ""S""."
     end
@@ -6922,7 +6922,7 @@ ream cal-3024
     polygon 0 0 0 -1 0 0 4 2160 5760 5040 5670 7920 5850 10080 5760
     polygon 0 0 0 -1 0 0 2 10080 4320 10080 5760
     text -1 0 0 -1 0 0 2520 4320 9720 5400 0 "" "Arial" 320 "left" 0 0 0 yes
-       "I am the CAL-4011. What is your name?"
+       "I am the CAL-4013. What is your name?"
        "> Dr. Chandra"
        "Good morning, Dr. Chandra. I'm ready for my first lesson."
     end
@@ -7574,8 +7574,13 @@ ream cal-3024
        ""
        "The font's name is the actual name stored in a font file. It may or may not be the same as the name of the file. You're probably familiar with font names like ""Arial"", ""Times New Roman"", and ""Courier New"".  The default font is ""Arial""."
        ""
+       "The font's height is the total distance from the top of one line to the top"
+       "of the next line.  What I call a font height of 1 inch is called 54 points"
+       "by other programs, with 1 1/3 spacing.  What I call a font height of 2/9 inch"
+       "is called 12 points by other programs, also with 1 1/3 spacing."
+       ""
        "The font's height can be specified in any convenient unit of measure."
-       "My writer uses values like 1/4 inch and 1/6 inch, which, in concert with"
+       "My writer uses values like 2/9 inch and 1/6 inch, which, in concert with"
        "my writer's ""yank"" feature, keeps everything nicely aligned."
        ""
        "I have a special font called ""Osmosian"" in honor of my creators. "
@@ -7591,6 +7596,8 @@ ream cal-3024
        "Draw ""Hello, World!"" in the center of the screen's box with the font."
        ""
        "If your fonts don't look right, you probably have a bad font name. Remember, a font name is not necessarily the name of the file in the ""font"" folder on your disk. Rather, it is the ""typeface name"" displayed in the sample box when you double-click on one of those font files."
+       ""
+       ""
     end
     text -1 0 0 -1 0 0 10800 14760 11520 15120 0 "page number" "Arial" 320 "right" 0 0 0 yes
        "83"
@@ -9242,7 +9249,7 @@ ream cal-3024
     end
     rectangle 0 0 0 -1 0 0 6840 3870 8280 4230 90
     text -1 0 0 -1 0 0 6960 3870 8160 4230 0 "" "Arial" 360 "right" 0 0 0 yes
-       "9701:1"
+       "9788:1"
     end
     rectangle 0 0 0 -1 0 0 9810 6796 10080 7066 90
     rectangle 0 0 0 -1 0 0 9810 4500 10080 6796 90

@@ -274,6 +274,7 @@ to add a monikette to some monikettes given a string:
   if the string is "is",     put "is/are" into the monikette's string; exit.
   \ aren't/isn't
   if the string is "isn't",  put "is/aren't" into the monikette's string; exit.
+  if the string is "ain't",  put "is/aren't" into the monikette's string; exit.
   if the string is "aren't", put "is/aren't" into the monikette's string; exit.
   \ backward/backwards/counterclockwise/counter-clockwise/anticlockwise/anti-clockwise 
   if the string is "backward",          put "backward" into the monikette's string; exit.
@@ -3810,6 +3811,8 @@ to remove any negatives from some monikettes returning a flag:
     if the monikette's string is "not",
       reverse the flag; destroy the monikette; repeat.
     append the monikette to the monikettes.
+    if the monikette's string is "ain't",  
+      reverse the flag; put "is" into the monikette's string; repeat.
     if the monikette's string is "can't",  
       reverse the flag; put "can" into the monikette's string; repeat.
     if the monikette's string is "cannot",
@@ -4391,6 +4394,17 @@ a tag is a number.
 
 a term has a variable and a phrase.
 
+to test (the compiler - parse ain't):
+  \ this routine is called by test (compiler).
+  \ comment out the line in that routine that calls this routine
+  \ if compiling on CAL-4700 or any version before CAL-4013.
+  create a test result about "the compiler" and "parse ain't"
+    and expecting "1 ain't 2".
+  put "1 is 2" in an actual string.
+  if 1 ain't 2,
+    put "1 ain't 2" in the actual.
+  stash the test result given the actual.
+
 to test (the compiler - parse can't):
   create a test result about "the compiler" and "parse can't"
     and expecting "can't find nil pointer".
@@ -4410,6 +4424,9 @@ to test (the compiler - parse cannot):
   stash the test result given the actual.
 
 to test (the compiler):
+  \ comment out the following line if compiling on
+  \ CAL-4700 or any version before CAL-4013.
+  test (the compiler - parse ain't).
   test (the compiler - parse can't).
   test (the compiler - parse cannot).
 

@@ -1444,3 +1444,13 @@ with an adjustable slider between them.
     verify that the cached functionality still works.
     The implementation exercises the uncaching feature.
   Requested by Jasper Paulsen on June 27, 2017.
+
+278.  Support ain't as an alias for isn't.
+  Similar to "can't" and "aren't".
+  Status:    Tested.
+  Benefit:   Minor.
+  Audience:  Programmers.
+  Implementation difficulty:  Easy.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Easy.  Similar to "can't".
+  Requested by Jasper Paulsen on June 27, 2017.
