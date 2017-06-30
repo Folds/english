@@ -561,6 +561,23 @@ err:ole:CoGetClassObject no class object {96749377-3391-11d2-9ee3-00c04f797396} 
     The test would not need to actually pan the screen.
   Requested by Jasper Paulsen on March 7, 2014.
 
+282.  Cache large numbers that have been checked for primality.
+  Store them as a sorted linked list of numeric ranges.
+  When a number that is adjacent to an existing range
+  is inserted into the cache, modify the existing range.
+  When a number that is adjacent to two existing ranges
+  is inserted into the cache, combine the existing ranges.
+  This cache can be used to quickly identify large
+  non-prime numbers that have already been checked for primality.
+  In finalize after run, destroy the cache.
+  Status:    Designed.
+  Audience:  Programmers.
+  Benefit:   Minor.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Hard.
+  Testing difficulty:  Already done.
+  Requested by Jasper Paulsen on June 29, 2017.
+
 017.  Automate collecting the unit tests.
 In practice, automated testing needs tool support for building test suites.
   Audience:  Windows programmers and Linux programmers.
@@ -612,7 +629,8 @@ while a letter's menu is visible.
   Status:  request.
   Requested by Jasper Paulsen on March 7, 2014.
 
-028.  Update the documentation (or F1-help, or a wiki) to discuss scrolling via the Ctrl-Home and Ctrl-End keys.
+028.  Update the documentation (or F1-help, or a wiki)
+  to discuss scrolling via the Ctrl-Home and Ctrl-End keys.
   Audience:  programmers.
   Status:  request.
   Benefit:  Minor - this would make it easier to navigate in large files.
@@ -732,5 +750,4 @@ while a letter's menu is visible.
 \ ======================================
 Unsorted requests:
 
-
-Next item number:  280.
+Next item number:  283.

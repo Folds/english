@@ -166,6 +166,10 @@ to append a flag to a string:
   convert the flag to another string.
   append the other string to the string.
 
+to append a number to some number things:
+  create a number thing given the number.
+  append the number thing to the number things.
+
 to append a number to a string:
   convert the number to another string.
   append the other string to the string.
@@ -478,6 +482,18 @@ to buzz:
   \
   play the cluck sound and wait.
 
+to cache the early primes through a number:
+  if the cached early primes are empty,
+    create a number thing given 2;
+    append the number thing to the cached early primes.
+  put the cached early primes' last's number in another number.
+  loop.
+    add 1 to the other number.
+    if the other number is more than the number, exit.
+    if the other number is prime,
+      append the other number to the cached early primes.
+  Repeat.
+
 to cache failure finding a library:
   uncache the library.
   put the library then ";*" in a string.
@@ -496,7 +512,24 @@ to cache success finding a library procedure in a library:
   create a string thing given the string.
   append the string thing to the cached found library procedures.
 
+the cached early primes are some number things.
+\ An ordered, doubly-linked list of prime numbers
+\ between 2 and at most 46,337, inclusive.
+\ Populated lazily based on whether each item
+\ is less than the square root of the largest number
+\ for which primality has been tested so far.
+\ All primes less than the largest number in the list
+\ will also be in the list.
+\ Useful for performing the Sieve of Eratosthenes.
+
 the cached found library procedures are some string things.
+
+the cached late primes are some number things.
+\ A ordered, doubly-linked list of prime numbers
+\ between 46,349 and 2,147,483,647, inclusive.
+\ Populated lazily based on whether each item's primality
+\ has been tested so far.
+\ Useful for caching primality of particular large numbers.
 
 the cached missing library procedures are some string things.
 
@@ -1557,6 +1590,13 @@ to create the lexicon:
   allocate memory for the lexicon.
   create the lexicon's index given 4027.
 
+to create a number thing:
+  allocate memory for the number thing.
+
+to create a number thing given a number:
+  allocate memory for the number thing.
+  put the number into the number thing's number.
+
 to create the open handle of a winhttp request:
   if the winhttp request is nil, exit.
   convert the module's name to a wide string called wide module name and null terminate.
@@ -2280,6 +2320,24 @@ to decide if a number is another number and a string is another string:
   if the string is not the other string, say no.
   say yes.
 
+to decide if a number is any cached late prime:
+  if the number is at most the largest square root, say no.
+  if the cached late primes are empty, say no.
+  loop.
+    get a number thing from the cached late primes.
+    if the number thing is nil, say no.
+    if the number thing's number is the number, say yes.
+    if the number thing's number is greater than the number, say no.
+  repeat.
+
+to decide if a number is any of the early primes:
+  if the cached early primes are empty, say no.
+  loop.
+    get a number thing from the cached early primes.
+    if the number thing is nil, say no.
+    if the number is the number thing's number, say yes.
+  repeat.
+
 to decide if a number is between another number and a third number:
   if the number is less than the other number, say no.
   if the number is greater than the third number, say no.
@@ -2300,6 +2358,14 @@ to decide if a number is evenly divisible by another number:
   divide the number by the other number giving a quotient and a remainder.
   if the remainder is 0, say yes.
   say no.
+
+to decide if a number is evenly divisible by any of the early primes:
+  if the cached early primes are empty, say no.
+  loop.
+    get a number thing from the cached early primes.
+    if the number thing is nil, say no.
+    if the number is evenly divisible by the number thing's number, say yes.
+  repeat.
 
 to decide if a number is more than another number:
   if the number is greater than the other number, say yes.
@@ -2322,6 +2388,18 @@ to decide if a number is odd:
 to decide if a number is positive:
   if the number is greater than 0, say yes.
   say no.
+
+to decide if a number is prime:
+  if the number is at most 1, say no.
+  if the number is any cached late prime, say yes.
+  put the square root of the number in another number.
+  add 1 to the other number.
+  cache the early primes through the other number.
+  if the number is any of the early primes, say yes.
+  if the number is evenly divisible by any of the early primes, say no.
+  if the number is greater than the largest square root,
+    insert the number in the cached late primes.
+  say yes.
 
 to decide if the osmosian font is loaded:
   if the osmosian font resource is 0, say no.
@@ -4091,6 +4169,8 @@ to fill a string with a byte given a count:
   put the string's first plus the count minus 1 into the string's last.
 
 to finalize after run:
+  destroy the cached early primes.
+  destroy the cached late primes.
   destroy the cached missing library procedures.
   destroy the cached found library procedures.
   if the heap count is 0, exit.
@@ -5538,6 +5618,23 @@ to initialize winsock:
 
 an input is an event.
 
+to insert a number into some number things:
+  if the number things are empty,
+    append the number to the number things; exit.
+  if the number is greater than the number things' last's number,
+    append the number to the number things; exit.
+  loop.
+    get a number thing from the number things.
+    if the number thing is nil,
+      append the number to the number things; exit.
+    if the number thing's number is the number, exit.
+    if the number thing's number is greater than the number,
+      create another number thing given the number;
+      insert the other number thing into the number things
+        before the number thing;
+      exit.
+  repeat.
+
 to insert a spot into a polygon after a vertex:
   if the polygon is nil, exit.
   create another vertex given the spot.
@@ -6466,6 +6563,8 @@ a number has
   a high wyrd at the third byte.
 
 a number pointer is a pointer to a number.
+
+a number thing is a thing with a number.
 
 an offset is a number.
 
@@ -9132,6 +9231,17 @@ to subtract a ratio from another ratio:
   subtract the ratio's numerator from the other ratio's numerator.
   reduce the other ratio.
 
+to summarize some number things returning a string (tersely):
+  put "" in the string.
+  loop.
+    get a number thing from the number things.
+    if the number thing is nil, exit.
+    if the string is not "",
+      append ", " then the number thing's number to the string.
+    if the string is "",
+      append the number thing's number to the string.
+  repeat.
+
 to summarize some string things returning a string:
   put "" in the string.
   loop.
@@ -9667,6 +9777,22 @@ to test (square root):
   test (square root of 2147395600 is 46340).
   test (square root of 2147483647 is 46340).
 
+to test (the noodle - 200021 is not prime):
+  create a test result about "the noodle" and "200021 is not prime"
+    and expecting "200021 is not prime".
+  put "200021 is not prime" in an actual string.
+  if 200021 is prime,
+    put "200021 is prime" in the actual string.
+  stash the test result given the actual.
+
+to test (the noodle - 200023 is prime):
+  create a test result about "the noodle" and "200023 is prime"
+    and expecting "200023 is prime".
+  put "200023 is not prime" in an actual string.
+  if 200023 is prime,
+    put "200023 is prime" in the actual string.
+  stash the test result given the actual.
+
 to test (the noodle - deduplication):
   create a test result about "the noodle" and "deduplication"
     and expecting "al, betsy, betty, carl".
@@ -9746,6 +9872,30 @@ to test (the noodle - prepend things):
   destroy the string things.
   destroy the other string things.
 
+to test (the noodle - primes through 47):
+  put "2, 3, 5, 7, 11, 13, 17, 19, 23, " 
+    then "29, 31, 37, 41, 43, 47" in a prefix string.
+  put "cached early primes start with " then the prefix string
+    in an expected string.
+  create a test result about "the noodle" and "primes through 47"
+    and expecting the expected string.
+  \ The early primes might not be cached yet,
+  \ or might already be cached through any prime number
+  \ less than or equal to the largest square root.
+  \ In case they have not already been cached through 47,
+  \ cache the early primes through the square root of 2500:
+  if 2500 is prime,
+    put "2500 is prime" in an actual string;
+    stash the test result given the actual;
+    exit.
+  summarize the cached early primes returning a string (tersely).
+  if the string starts with the prefix,
+    put the expected string in the actual string;
+    stash the test result given the actual;
+    exit.
+  put "cached early primes are " then the string in the actual.
+  stash the test result given the actual.    
+
 to test (the noodle - replace substring):
   create a test result about "the noodle" and "replace substring"
     and expecting "wowRACADwowRA wowracadwowra".
@@ -9817,6 +9967,9 @@ to test (the noodle):
   test (basic math).
   test (command line).
   test (square root).
+  test (the noodle - primes through 47).
+  test (the noodle - 200021 is not prime).
+  test (the noodle - 200023 is prime).
   test (the noodle - dll not found).
   test (the noodle - dll found).
   test (the noodle - dll procedure not found).

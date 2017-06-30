@@ -1454,3 +1454,17 @@ with an adjustable slider between them.
   Demoing difficulty:  Medium.
   Testing difficulty:  Easy.  Similar to "can't".
   Requested by Jasper Paulsen on June 27, 2017.
+
+280.  Incorporate CAL-4700's prime number test.
+  Status:   Tested.
+  Benefit:  Medium.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Hard.
+  Requested by Gerry Rzeppa on March 13, 2017.
+ 
+281.  Make the prime number test efficient.
+  Status:   Tested.
+  Benefit:  Medium.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Hard.
+  Requested by Jasper Paulsen on March 25, 2017.
