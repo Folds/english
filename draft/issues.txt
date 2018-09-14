@@ -74,6 +74,284 @@ The following requests have been partially demonstrated.
 The following requests are roughly sorted
 from higher priority to lower priority.
 
+283.  Add a flag array feature (either dynamic or fixed length).
+  Audience:  Windows programmers and Linux programmers.
+  Status:  request.
+  Benefit:  Important -- many numerical and geographical programs use arrays.
+  Implementation difficulty:  Hard.
+  Demo difficulty:  Medium.
+  Test difficulty:  Medium.
+  Requested by Jasper Paulsen on March 7, 2014.
+
+284.  Allow increasing the size of flag arrays.
+  Audience:  Windows programmers and Linux programmers.
+  Status:  Tested, as part of the prime number testing.
+  Benefit:  Important -- this makes many algorithms easier.
+  Implementation difficulty:  Hard.
+  Demo difficulty:  Medium.
+  Test difficulty:  Medium.
+  Requested by Jasper Paulsen on March 7, 2014.
+
+286.  Add a byte array feature (either dynamic or fixed length).
+  Audience:  Windows programmers and Linux programmers.
+  Status:  Tested, as part of the prime number testing.
+  Benefit:  Important -- many numerical and geographical programs use arrays.
+  Implementation difficulty:  Hard.
+  Demo difficulty:  Medium.
+  Test difficulty:  Medium.
+  Requested by Jasper Paulsen on March 7, 2014.
+
+287.  Allow increasing the size of byte arrays.
+  Audience:  Windows programmers and Linux programmers.
+  Status:  Tested, as part of the prime number testing.
+  Benefit:  Important -- this makes many algorithms easier.
+  Implementation difficulty:  Hard.
+  Demo difficulty:  Medium.
+  Test difficulty:  Medium.
+  Requested by Jasper Paulsen on March 7, 2014.
+
+289.  Document how to use GitKraken to retrieve old versions of the code.
+  https://github.com/Folds/english/wiki/Temp-Branch-on-an-Earlier-Commit
+  Status:    Demonsrated.
+  Audience:  Programmers.
+  Benefit:   Major.  Allows changing branches and reverting commits.
+  Implementation difficulty:  Hard.  (Ryan of Axosoft's
+             customer support provided the key insight.)
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Not applicable.
+  Requested by Jasper Paulsen on July 5, 2017.
+
+217.  Allow drawing a Unicode string on-screen.
+  Status:    Request.
+  Audience:  Windows programmers.
+  Benefit:   Minor.
+  Implementation difficulty:  Hard.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Medium.
+  Requested by Jasper Paulsen on April 25, 2017.
+
+218.  Change the tabstrip's ellipsis character in proportional fonts.
+  If there is not enough space in a tab for a full descriptor,
+  the descriptor is abbreviated.  In fixed-width fonts,
+  the ellipsis character is "…".  To save space, proportional
+  fonts use "„".  The unicode "modifier letter low tilde" (U+02F7)
+  would look better, and be less confusing, in proportional fonts.
+  Status:    Request.
+  Benefit:   Minor.
+  Implementation difficulty:  Easy, if can draw Unicode strings on-screen.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Medium.
+  Requested by Jasper Paulsen on April 25, 2017.
+
+292.  Change label of the trio's Restore button from "+" to a unicode character.
+  Status:    Demonstrated.
+  Benefit:   Minor.
+  Implementation difficulty:  Hard.
+  Demoing difficulty:  Easy.
+  Testing difficulty:  Not applicable.
+  Requested by Jasper Paulsen on July 27, 2017.
+
+294.  Show different symbols in the restore button
+  when the screen is maximized vs. not maximized.
+  Status:    Demonstrated.
+  Audience:  Application users.
+  Benefit:   Minor.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Easy.
+  Testing difficulty:  Not applicable.
+  Requested by Gerry Rzeppa on June 4, 2017.
+
+293.  In the instructions, imitate the Restore button's unicode character.
+  Status:    Request.
+  Benefit:   Minor.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Easy.
+  Testing difficulty:  Not applicable.
+  Requested by Jasper Paulsen on July 27, 2017.
+
+295.  Allow converting multi-byte unicode code points to wide strings.
+  Status:    Tested.
+  Audience:  Programmers.
+  Benefit:   Minor.
+  Implementation difficulty:  Hard.
+  Demoing difficulty:  Easy.
+  Testing difficulty:  Easy.
+  Requested by Jasper Paulsen on July 28, 2017.
+
+296.  Allow converting bytes between 128 and 159, inclusive,
+  to unicode codepoints that correspond to their intended meanings.
+  Status:    Tested.
+  Audience:  Programmers.
+  Benefit:   Minor.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Easy.
+  Testing difficulty:  Easy.
+  Requested by Jasper Paulsen on July 29, 2017.
+
+297.  Allow batch scripts to optionally add tests
+  that will be called (indirectly) by "to test".
+  Implemented by creating a short "no bonus" source file
+  that contains an empty "to test (bonus)" routine.
+  The batch script can optionally disable the "no bonus"
+  source file, and add a "bonus" source file that
+  implements "to test (bonus)".  This effectively lets
+  a batch script simulate a preprocessor.
+  Status:  Tested.
+  Audience:  Programmers.
+  Benefit:   Medium.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Medium.
+  Requested by Jasper Paulsen on August 4, 2017.
+
+304.  Modify string-width tests to accommodate Win 10 Build 1703.
+  Build 1703 is the Spring 2017 update to Windows.
+  Status:   Tested.
+  Benefit:  Medium.
+  Testing difficulty:  Easy.
+  Requested by Jasper Paulsen on August 18, 2017.
+
+303.  Mitigate overflow errors when comparing ratios.
+  Allows using ratios for calculating color differences.
+  Status:   Tested.
+  Benefit:  Medium.
+  Implementation difficulty:  Hard.
+  Demoing difficulty:  Not applicable.
+  Testing difficulty:  Medium.
+  Requested by Jasper Paulsen on August 15, 2017.
+
+301.  Mitigate overflow errors when multiplying ratios.
+  Allows using ratios for calculating color differences.
+  Status:   Tested.
+  Benefit:  Medium.
+  Implementation difficulty:  Hard.
+  Demoing difficulty:  Not applicable.
+  Testing difficulty:  Medium.
+  Requested by Jasper Paulsen on August 15, 2017.
+
+299.  Mitigate overflow errors when adding ratios.
+  Allows using ratios for calculating color differences.
+  Status:   Tested.
+  Benefit:  Medium.
+  Implementation difficulty:  Hard.
+  Demoing difficulty:  Not applicable.
+  Testing difficulty:  Medium.
+  Requested by Jasper Paulsen on August 15, 2017.
+
+300.  Mitigate overflow errors when subtracting ratios.
+  Allows using ratios for calculating color differences.
+  Status:   Tested.
+  Benefit:  Medium.
+  Implementation difficulty:  Hard.
+  Demoing difficulty:  Not applicable.
+  Testing difficulty:  Medium.
+  Requested by Jasper Paulsen on August 15, 2017.
+
+298.  Calculate cube root of a ratio.
+  Allows using ratios for calculating color differences.
+  Status:   Tested.
+  Benefit:  Medium.
+  Implementation difficulty:  Hard.
+  Demoing difficulty:  Not applicable.
+  Testing difficulty:  Medium.
+  Requested by Jasper Paulsen on August 15, 2017.
+
+302.  Calculate fifth root of a ratio.
+  Allows using ratios for calculating color differences.
+  Status:   Tested.
+  Benefit:  Medium.
+  Implementation difficulty:  Hard.
+  Demoing difficulty:  Not applicable.
+  Testing difficulty:  Medium.
+  Requested by Jasper Paulsen on August 15, 2017.
+
+305.  Round down square roots of 101 through 120.
+  Square roots of positive numbers are supposed to round down.
+  Status:    Tested.
+  Audience:  Programmers.
+  Benefit:   Medium.  Prevents overflow errors in ratio square roots.
+  Implementation difficulty:  Easy.
+  Demoing difficulty:  n/a.
+  Testing difficulty:  Easy.
+  Requested by Jasper Paulsen on September 16, 2017.
+
+306.  Measure color differences using the dE-2000 formula.
+  http://www.colorwiki.com/wiki/Delta_E:_The_Color_Difference
+  http://www.ece.rochester.edu/~gsharma/ciede2000/ciede2000noteCRNA.pdf
+  http://www.easyrgb.com/en/math.php
+  Status:    Tested.
+  Audience:  Turtle programmers.
+  Benefit:   Medium.
+  Implementation difficulty:  Hard.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Hard.
+  Requested by Jasper Paulsen on May 22, 2017.
+
+307.  Speed up arctangent.
+  Status:    Tested.
+  Audience:  Programmers.
+  Benefit:   Sped up color difference tests by 10 - 15 percent.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Not applicable.
+  Testing difficulty:  Easy.
+  Requested by Jasper Paulsen on September 12, 2017.
+
+308.  Speed up code to choose colors.
+  Status:    Tested.
+  Audience:  Programmers.
+  Benefit:   Medium.  Sped up choosing colors by 40 - 50 percent.
+  Implementation difficulty:  Hard.
+  Demoing difficulty:  Easy.
+  Testing difficulty:  Easy.
+  Requested by Jasper Paulsen on September 29, 2017.
+
+243.  Invert the dE-2000 formula to choose a similar looking color.
+  http://www.colorwiki.com/wiki/Delta_E:_The_Color_Difference
+  http://www.ece.rochester.edu/~gsharma/ciede2000/ciede2000noteCRNA.pdf
+  Status:  Request.
+  Audience:  Turtle programmers.
+  Benefit:   Medium.
+  Implementation difficulty:  Hard.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Hard.
+  Requested by Jasper Paulsen on May 22, 2017.
+
+291.  If the current tab is the editor, don't show items over 1 inch in the font height menu.
+  The editor limits its font heights to 1 inch.
+  Status:    Demonstrated.
+  Audience:  Application users.
+  Benefit:   Minor.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Easy.
+  Testing difficulty:  Medium.
+  Requested by Jasper Paulsen on July 9, 2017.
+
+290.  Adjust the editor's text's box's height
+  when shrinking from full-screen to half-screen.
+  Prevent the editor's text from overlapping with the tabs.
+  Status:  Demonstrated.
+  Audience:  Application users.
+  Benefit:   Minor.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Hard.
+  Requested by Jasper Paulsen on July 7, 2017.
+
+176.  Add a "Measure Code" menu item.
+  Output a text file with the following columns:
+  source   code lines  just comments   blank lines  code wraps  total lines
+  with one line for each source file in the folder,
+  and one line for the totals.
+  Use tab-separated variable format.
+  Save as <exe name>.tsv
+  Status:  Request.
+  Audience:  Programmers
+  Benefit:   Minor.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Easy.
+  Testing difficulty:  Medium.
+  Requested by Jasper Paulsen on March 23, 2017.
+
 198.  In finder, allow running a .lnk file.
   Some hints are in:
   https://msdn.microsoft.com/en-us/library/ms861519.aspx
@@ -100,63 +378,6 @@ from higher priority to lower priority.
   Demoing difficulty:  Medium.
   Testing difficulty:  Medium.
   Requested by Jasper Paulsen on April 4, 2017.
-
-176.  Add a "Measure Code" menu item.
-  Output a text file with the following columns:
-  source   code lines  just comments   blank lines  code wraps  total lines
-  with one line for each source file in the folder,
-  and one line for the totals.
-  Use tab-separated variable format.
-  Save as <exe name>.tsv
-  Status:  Request.
-  Audience:  Programmers
-  Benefit:   Minor.
-  Implementation difficulty:  Medium.
-  Demoing difficulty:  Easy.
-  Testing difficulty:  Medium.
-  Requested by Jasper Paulsen on March 23, 2017.
-
-243.  Invert the dE-2000 formula to choose a similar looking color.
-  http://www.colorwiki.com/wiki/Delta_E:_The_Color_Difference
-  http://www.ece.rochester.edu/~gsharma/ciede2000/ciede2000noteCRNA.pdf
-  Status:  Request.
-  Audience:  Turtle programmers.
-  Benefit:   Medium.
-  Implementation difficulty:  Hard.
-  Demoing difficulty:  Medium.
-  Testing difficulty:  Hard.
-  Requested by Jasper Paulsen on May 22, 2017.
-
-217.  Allow drawing a Unicode string on-screen.
-  Status:    Request.
-  Audience:  Windows programmers.
-  Benefit:   Minor.
-  Implementation difficulty:  Hard.
-  Demoing difficulty:  Medium.
-  Testing difficulty:  Medium.
-  Requested by Jasper Paulsen on April 25, 2017.
-
-218.  Change the tabstrip's ellipsis character in proportional fonts.
-  If there is not enough space in a tab for a full descriptor,
-  the descriptor is abbreviated.  In fixed-width fonts,
-  the ellipsis character is "…".  To save space, proportional
-  fonts use "„".  The unicode "modifier letter low tilde" (U+02F7)
-  would look better, and be less confusing, in proportional fonts.
-  Status:    Request.
-  Benefit:   Minor.
-  Implementation difficulty:  Easy, if can draw Unicode strings on-screen.
-  Demoing difficulty:  Medium.
-  Testing difficulty:  Medium.
-  Requested by Jasper Paulsen on April 25, 2017.
-
-172.  From "the noodle", factor out command-line parsing into a "commands" file.
-  Status:  request.
-  Audience:  Programmers.
-  Benefit:   minor.
-  Implementation difficulty:  Easy.
-  Demoing difficulty:  Not applicable.
-  Testing difficulty:  Not applicable.
-  Requested by Jasper Paulsen on March 20, 2017.
 
 024.  Make it easy to search all files in a project,
 regardless of whether the file is open in the editor.
@@ -188,14 +409,6 @@ open the files that are found.
   Demoing difficulty:  Easy.
   Testing difficulty:  Medium.
   Requested by Jasper Paulsen on March 7, 2014.
-
-171.  Add mouse scrolling to writer's page editing feature.
-  Status:   Request.
-  Benefit:  Medium.
-  Implementation difficulty:  Medium.
-  Demoing difficulty:  Medium.
-  Testing difficulty:  Medium.
-  Requested by Jasper Paulsen on March 13, 2014.
 
 279.  In the editor, allow counting the characters
   in a multi-line selection.
@@ -241,6 +454,126 @@ open the files that are found.
   Benefit:  Important -- this will help break large source
             files into smaller files.
   Requested by Jasper Paulsen on March 7, 2014.
+
+171.  Add mouse scrolling to writer's page editing feature.
+  Status:   Request.
+  Benefit:  Medium.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Medium.
+  Requested by Jasper Paulsen on March 13, 2014.
+
+034.  Have an option to search upward, such as Shift-F3.
+  Audience:  Windows programmers.
+  Status:  request.
+  Benefit:  Might do more harm than good.
+            CAL does not have the Shift-<feature> idiom
+            to perform a <feature> in the opposite direction.
+            For example, it uses Ctrl-I and Ctrl-O
+            to indent and outdent, instead of Tab and Shift-Tab.
+            Also, each CAL feature should be accessible
+            from the menu.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Easy.
+  Testing difficulty:  Medium.
+  Requested by Jasper Paulsen on March 7, 2014.
+
+252.  Document how to find lines of code based on memory addresses.
+  If a program crashes, and if a program like WinCrashReport
+  is installed, it is possible to view the stack.
+  The stack will include addresses of function calls in
+  the *.exe.  It is possible to use a *.lst file's routines
+  section to roughly find which line of source code
+  corresponded to the address of the function call.
+  Status:  Request.
+  Audience:  Windows programmers.
+  Benefit:   Major -- helps diagnose crashing bugs.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Hard.
+  Testing difficulty:  Not applicable.
+  Requested by Jasper Paulsen on June 2, 2017.
+
+253.  Document that null pointer errors cause crashes.
+  Add a paragraph or page to the instructions.
+  Status:  Request.
+  Audience:  Windows programmers.
+  Benefit:   Minor.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Hard.
+  Testing difficulty:  Not applicable.
+  Requested by Jasper Paulsen on June 2, 2017.
+
+004.  Allow true vertical panning.
+  Currently, the user can pan a text document
+  by right-clicking and dragging the mouse.
+  Unfortunately, this often causes the text to move over to the left,
+  so that the left part of the text is off the screen.
+  This is disorienting.
+  The current work-around is to pan up-and-to-the-right,
+  or pan down-and-to-the-right.
+  It would be possible to modify
+     the right-click-and-drag mouse event handler
+     so that if the item being viewed is a text file,
+     and the absolute value of the mouse's change in x is less
+     than an arbitrary fraction of
+     the absolute value of the mouse's change in y,
+     the pan is purely vertical.
+  The audiences are Windows programmers and Linux programmers.
+  The benefit is important -- the non-vertical panning
+  is very jarring to new users of the system.
+  The status is designed.
+  Implementation would be easy.
+  Demoing would be easy.
+  Testing would be easy.  The test could propose
+    possible mouse event delta-x and delta-y values,
+    and verify that the editor can compute
+    the intended delta-x and delta-y values.
+    The test would not need to actually pan the screen.
+  Requested by Jasper Paulsen on March 7, 2014.
+
+254.  Document that stack overflows cause crashes.
+  For example, recursive "eternal loops".
+  Add a paragraph or page to the instructions.
+  Status:  Request.
+  Audience:  Windows programmers.
+  Benefit:   Minor.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Hard.
+  Testing difficulty:  Not applicable.
+  Requested by Jasper Paulsen on June 2, 2017.
+
+094.  Document "Plain English programming idioms",
+  and how they compare to other common programming languages.
+  Implementation difficulty:  Hard.
+  Testing difficulty:  Profound.
+  Requested by Jasper Paulsen on March 15, 2014.
+
+179.  Use more precise and accurate timing ticks.
+  Status:  request.
+  Audience:  Programmers.
+  Benefit:  Important.
+  Implementation difficulty:  Profound.  Requires support for 64-bit numbers.
+  Demoing difficulty:  Easy.
+  Testing difficulty:  Medium.
+  Requested by Jasper Paulsen on April 4, 2017.
+
+178.  Time each test, from test creation to stashing of result.
+  Status:  request.
+  Audience:  Programmers.
+  Benefit:  Important.
+  Implementation difficulty:  Profound.  Requires support for 64-bit numbers.
+  Demoing difficulty:  Easy.
+  Testing difficulty:  Medium.
+  Requested by Jasper Paulsen on April 4, 2017.
+
+180.  If tests pass, show the tests that took the longest amounts of time.
+  Status:  request.
+  Audience:  Programmers.
+  Benefit:  Important.  Would be a simple profiling tool.
+  Implementation difficulty:  Profound.  Requires support for 64-bit numbers.
+  Demoing difficulty:  Easy.
+  Testing difficulty:  Medium. 
+  Requested by Jasper Paulsen on April 4, 2017.
 
 133.  Allow marking comments in the vertical scroll bar.
   Benefit:  Medium.  Would make it easier to find
@@ -292,99 +625,6 @@ open the files that are found.
   Benefit:  Minor.
   Status: request.
   Requested by Jasper Paulsen on March 12, 2014.
-
-179.  Use more precise and accurate timing ticks.
-  Status:  request.
-  Audience:  Programmers.
-  Benefit:  Important.
-  Implementation difficulty:  Profound.  Requires support for 64-bit numbers.
-  Demoing difficulty:  Easy.
-  Testing difficulty:  Medium.
-  Requested by Jasper Paulsen on April 4, 2017.
-
-178.  Time each test, from test creation to stashing of result.
-  Status:  request.
-  Audience:  Programmers.
-  Benefit:  Important.
-  Implementation difficulty:  Profound.  Requires support for 64-bit numbers.
-  Demoing difficulty:  Easy.
-  Testing difficulty:  Medium.
-  Requested by Jasper Paulsen on April 4, 2017.
-
-180.  If tests pass, show the tests that took the longest amounts of time.
-  Status:  request.
-  Audience:  Programmers.
-  Benefit:  Important.  Would be a simple profiling tool.
-  Implementation difficulty:  Profound.  Requires support for 64-bit numbers.
-  Demoing difficulty:  Easy.
-  Testing difficulty:  Medium. 
-  Requested by Jasper Paulsen on April 4, 2017.
-
-219.  From "the editor", factor out blocks and sorting code into a "text sorter" file.
-  Status:    Designed.  Do after project can handle multiple folders.
-  Audience:  Programmers.
-  Benefit:   Minor.
-  Implementation difficulty:  Easy.
-  Demoing difficulty:  Not applicable.
-  Testing difficulty:  Not applicable.
-  Requested by Jasper Paulsen on April 27, 2017.
- 
-034.  Have an option to search upward, such as Shift-F3.
-  Audience:  Windows programmers.
-  Status:  request.
-  Benefit:  Might do more harm than good.
-            CAL does not have the Shift-<feature> idiom
-            to perform a <feature> in the opposite direction.
-            For example, it uses Ctrl-I and Ctrl-O
-            to indent and outdent, instead of Tab and Shift-Tab.
-            Also, each CAL feature should be accessible
-            from the menu.
-  Implementation difficulty:  Medium.
-  Demoing difficulty:  Easy.
-  Testing difficulty:  Medium.
-  Requested by Jasper Paulsen on March 7, 2014.
-
-252.  Document how to find lines of code based on memory addresses.
-  If a program crashes, and if a program like WinCrashReport
-  is installed, it is possible to view the stack.
-  The stack will include addresses of function calls in
-  the *.exe.  It is possible to use a *.lst file's routines
-  section to roughly find which line of source code
-  corresponded to the address of the function call.
-  Status:  Request.
-  Audience:  Windows programmers.
-  Benefit:   Major -- helps diagnose crashing bugs.
-  Implementation difficulty:  Medium.
-  Demoing difficulty:  Hard.
-  Testing difficulty:  Not applicable.
-  Requested by Jasper Paulsen on June 2, 2017.
-
-253.  Document that null pointer errors cause crashes.
-  Add a paragraph or page to the instructions.
-  Status:  Request.
-  Audience:  Windows programmers.
-  Benefit:   Minor.
-  Implementation difficulty:  Medium.
-  Demoing difficulty:  Hard.
-  Testing difficulty:  Not applicable.
-  Requested by Jasper Paulsen on June 2, 2017.
-
-254.  Document that stack overflows cause crashes.
-  For example, recursive "eternal loops".
-  Add a paragraph or page to the instructions.
-  Status:  Request.
-  Audience:  Windows programmers.
-  Benefit:   Minor.
-  Implementation difficulty:  Medium.
-  Demoing difficulty:  Hard.
-  Testing difficulty:  Not applicable.
-  Requested by Jasper Paulsen on June 2, 2017.
-
-094.  Document "Plain English programming idioms",
-  and how they compare to other common programming languages.
-  Implementation difficulty:  Hard.
-  Testing difficulty:  Profound.
-  Requested by Jasper Paulsen on March 15, 2014.
 
 126.  A way to export CAL's tabs' source names and labels.
   Benefit:  Medium.  Would make it easier to test some features.
@@ -533,34 +773,6 @@ err:ole:CoGetClassObject no class object {96749377-3391-11d2-9ee3-00c04f797396} 
   Testing difficulty:  Medium.
   Requested by Jasper Paulsen on March 7, 2014.
 
-004.  Allow true vertical panning.
-  Currently, the user can pan a text document
-  by right-clicking and dragging the mouse.
-  Unfortunately, this often causes the text to move over to the left,
-  so that the left part of the text is off the screen.
-  This is disorienting.
-  The current work-around is to pan up-and-to-the-right,
-  or pan down-and-to-the-right.
-  It would be possible to modify
-     the right-click-and-drag mouse event handler
-     so that if the item being viewed is a text file,
-     and the absolute value of the mouse's change in x is less
-     than an arbitrary fraction of
-     the absolute value of the mouse's change in y,
-     the pan is purely vertical.
-  The audiences are Windows programmers and Linux programmers.
-  The benefit is important -- the non-vertical panning
-  is very jarring to new users of the system.
-  The status is designed.
-  Implementation would be easy.
-  Demoing would be easy.
-  Testing would be easy.  The test could propose
-    possible mouse event delta-x and delta-y values,
-    and verify that the editor can compute
-    the intended delta-x and delta-y values.
-    The test would not need to actually pan the screen.
-  Requested by Jasper Paulsen on March 7, 2014.
-
 282.  Cache large numbers that have been checked for primality.
   Store them as a sorted linked list of numeric ranges.
   When a number that is adjacent to an existing range
@@ -616,19 +828,15 @@ err:ole:CoInitializeEx Attempt to change threading model of this apartment from 
   Testing difficulty:  not applicable.
   Requested by Jasper Paulsen on March 7, 2014.
 
-012.  If there are multiple rows of menu letters, fade out the irrelevant row(s)
-while a letter's menu is visible.
-  Audience:  Windows programmers and Linux programmers.
-  Benefit:  Important.  This will mitigate the confusion
-    caused by folding the menu bar.
-  Implementation difficulty:  Medium.
-  Demoing difficulty: Hard (without the ability
-    to adjust the main window's width at run time);
-    Easy (if the user can adjust the main window's width at run time).
-  Testing difficulty:  Hard.
-  Status:  request.
-  Requested by Jasper Paulsen on March 7, 2014.
-
+219.  From "the editor", factor out blocks and sorting code into a "text sorter" file.
+  Status:    Designed.  Do after project can handle multiple folders.
+  Audience:  Programmers.
+  Benefit:   Minor.
+  Implementation difficulty:  Easy.
+  Demoing difficulty:  Not applicable.
+  Testing difficulty:  Not applicable.
+  Requested by Jasper Paulsen on April 27, 2017.
+ 
 028.  Update the documentation (or F1-help, or a wiki)
   to discuss scrolling via the Ctrl-Home and Ctrl-End keys.
   Audience:  programmers.
@@ -691,6 +899,33 @@ while a letter's menu is visible.
   Test difficulty:  not applicable.
   Requested by Jasper Paulsen on March 7, 2014.
 
+172.  From "the noodle", factor out command-line parsing into a "commands" file.
+  Status:  request.
+  Audience:  Programmers.
+  Benefit:   minor.
+  Implementation difficulty:  Easy.
+  Demoing difficulty:  Not applicable.
+  Testing difficulty:  Not applicable.
+  Requested by Jasper Paulsen on March 20, 2017.
+
+285.  Allow reducing the size of flag arrays.
+  Audience:  Windows programmers and Linux programmers.
+  Status:  Tested, as part of the prime number testing.
+  Benefit:  Minor.
+  Implementation difficulty:  Hard.
+  Demo difficulty:  Medium.
+  Test difficulty:  Medium.
+  Requested by Jasper Paulsen on March 7, 2014.
+
+288.  Allow reducing the size of byte arrays.
+  Audience:  Windows programmers and Linux programmers.
+  Status:  request.
+  Benefit:  Minor.
+  Implementation difficulty:  Hard.
+  Demo difficulty:  Medium.
+  Test difficulty:  Medium.
+  Requested by Jasper Paulsen on March 7, 2014.
+
 170.  Add scrollbar to writer's page editing feature.
   Status:   Request.
   Benefit:  Medium.
@@ -708,6 +943,19 @@ while a letter's menu is visible.
     Java has a good model for how enumerated types should work.
   The audience is Linux programmers.
   The benefit is minor.
+  Requested by Jasper Paulsen on March 7, 2014.
+
+012.  If there are multiple rows of menu letters, fade out the irrelevant row(s)
+while a letter's menu is visible.
+  Audience:  Windows programmers and Linux programmers.
+  Benefit:  Important.  This will mitigate the confusion
+    caused by folding the menu bar.
+  Implementation difficulty:  Medium.
+  Demoing difficulty: Hard (without the ability
+    to adjust the main window's width at run time);
+    Easy (if the user can adjust the main window's width at run time).
+  Testing difficulty:  Hard.
+  Status:  request.
   Requested by Jasper Paulsen on March 7, 2014.
 
 048.  Use shading to better distinguish the active tab from inactive tab(s).
@@ -750,4 +998,4 @@ while a letter's menu is visible.
 \ ======================================
 Unsorted requests:
 
-Next item number:  283.
+Next item number:  309.

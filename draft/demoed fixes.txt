@@ -203,18 +203,14 @@ but have not yet been tested.
     Similar to 135, except create a deliberately failing test,
       and use /test instead of /test=verbose.
 
-122.  Make compiler errors sent to StdErr use a standard format.
-  For example, the format for specifying the problem,
-  the problematic source file, and the problematic line
-  used by GCC.  (The text of the problem specification itself
-  can still be in Plain English.)
-  Benefit:  Major.  Would allow other IDEs to make use of
-            CAL's compiler error messages.
-  Implementation difficulty:  Medium.
+272.  Refactor scrolling code to reduce duplication
+  Status:  Demonstrated.
+  Audience:  Application users.
+  Benefit:   Minor.
+  Implementation difficulty:  Hard.
   Demoing difficulty:  Medium.
   Testing difficulty:  Medium.
-  Audience:  Programmers.
-  Requested by Jasper Paulsen on March 1, 2017.
+  Requested by Jasper Paulsen on June 6, 2017.
 
 070.  Don't hide programs outside of the program's window.
   Currently, the program grabs a screenshot when it starts.
@@ -242,17 +238,6 @@ but have not yet been tested.
    
 The following requests have been demonstrated,
 but do not have test plans yet.
-
-144.  Allow viewing result of running a program.
-  Add a menu item to review the run's result.
-  259 means the program is still active.
-  If the recently run program has finished, show its return code.
-  Benefit:  Minor.  Helps demonstrate command-line compiler return code.
-  Implementation difficulty:  Hard.
-  Demoing difficulty:  Easy.
-  Testing difficulty:  Medium.
-  Audience:  Programmers.
-  Requested by Jasper Paulsen on March 6, 2017.
 
 139.  Allow requesting a /folder that includes ..\
   Benefit:  Minor.
@@ -287,6 +272,178 @@ but do not have test plans yet.
   Testing difficulty:  Hard.
   Audience:  Windows and Linux programmers.
   Requested by Jasper Paulsen on March 3, 2017.
+
+207.  In compiler, don't compile the documentation source code files.
+  Status:   Demonstrated.
+  Audience: Turtle programmers.
+  Benefit:  Medium.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Easy.
+  Testing difficulty:  Medium.
+  Requested by Gerry Rzeppa on March 13, 2017.
+
+231.  Determine project folder based on existence of noodle subfolder.
+  Status:    Demonstrated.
+  Audience:  Windows programmers.
+  Benefit:   Medium.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Medium.
+  Requested by Jasper Paulsen on May 20, 2017.
+
+232.  Determine whether project has one or two level(s) of folders.
+  Status:    Demonstrated.
+  Audience:  Windows programmers.
+  Benefit:   Medium.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Medium.
+  Requested by Jasper Paulsen on May 20, 2017.
+
+233.  Compile using project folder.
+  Status:    Demonstrated.
+  Audience:  Windows programmers.
+  Benefit:   Minor.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Medium.
+  Requested by Jasper Paulsen on May 20, 2017.
+
+201.  Allow compiling sources in multiple folders.
+  Perhaps a subtree starting with the active source's folder?
+  Perhaps directories containing designated files?
+  Status:    Demonstrated.
+  Audience:  Programmers.
+  Benefit:   Major.  Would make it easier to organize
+             large numbers of source files, and thereby
+             encourage refactoring large source files
+             into multiple small source files.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Easy.
+  Testing difficulty:  Medium.
+  Requested by Jasper Paulsen on April 25, 2017.
+  
+127.  Allow requesting the default finder location in the command line.
+  Could (at startup) just set any unused tabs
+  to the requested folder location, in finder mode.
+  Also needs to treat "finder" tabs that have
+  the default location as if they were empty,
+  for purposes of choosing which tabs to open things in.
+  Benefit:  Medium.  Would reduce the number of steps needed
+            to start CAL.
+  Status:   Demonstrated.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Hard.
+  Audience:  Windows and Linux programmers.
+  Requested by Jasper Paulsen on March 1, 2017.
+
+128.  In the command line, use default finder location to shorten source names.
+  Allow making command line requests for tabs' source names
+  be relative to the command line's request
+  for the default finder location.
+  Benefit:  Medium.  Could greatly shorten command lines.
+            Would make it much easier to maintain command lines
+            when the working directory changes.
+  Status:   Demonstrated.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Hard.
+  Testing difficulty:  Hard.
+  Audience:  Windows and Linux programmers.
+  Requested by Jasper Paulsen on March 1, 2017.
+
+124.  Allow requesting tabs' sources in the command line.
+  Benefit:  Medium.  Would help speed up demonstrating features.
+  Status:   Demonstrated.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Hard.
+  Testing difficulty:  Hard.
+  Audience:  Windows and Linux programmers.
+  Requested by Jasper Paulsen on February 28, 2017.
+
+122.  Make compiler errors sent to StdErr use a standard format.
+  For example, the format for specifying the problem,
+  the problematic source file, and the problematic line
+  used by GCC.  (The text of the problem specification itself
+  can still be in Plain English.)
+  Benefit:  Major.  Would allow other IDEs to make use of
+            CAL's compiler error messages.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Medium.
+  Audience:  Programmers.
+  Requested by Jasper Paulsen on March 1, 2017.
+
+157.  In compiler, support multiple headers per routine, a la CAL-4700.
+  Status:   Demonstrated.
+  Benefit:  Permissions requirement.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Medium.
+  Requested by Gerry Rzeppa on March 13, 2017.
+ 
+200.  In compiler, allow multi-line routine headers.
+  Status:   Demonstrated.
+  Audience: Programmers.
+  Benefit:  Medium.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Medium.
+  Requested by Gerry Rzeppa on March 13, 2017.
+
+203.  In compiler, create synonyms for backwards/counter-clockwise.
+  Status:   Demonstrated.
+  Audience: Turtle programmers.
+  Benefit:  Medium.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Medium.
+  Requested by Gerry Rzeppa on March 13, 2017.
+
+204.  In compiler, create synonyms for at/on.
+  Status:   Demonstrated.
+  Audience: Turtle programmers.
+  Benefit:  Medium.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Medium.
+  Requested by Gerry Rzeppa on March 13, 2017.
+
+208.  In compiler, add new prepositions.
+  Status:   Demonstrated.
+  Audience: Turtle programmers.
+  Benefit:  Medium.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Medium.
+  Requested by Gerry Rzeppa on March 13, 2017.
+ 
+206.  In compiler, handle similes differently from other "as" statements.
+  Status:   Demonstrated.
+  Audience: Turtle programmers.
+  Benefit:  Medium.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Medium.
+  Requested by Gerry Rzeppa on March 13, 2017.
+
+159.  Incorporate CAL-4700's turtle graphics features.
+  Status:   Demonstrated.
+  Benefit:  Medium.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Hard.
+  Requested by Gerry Rzeppa on March 13, 2017.
+ 
+144.  Allow viewing result of running a program.
+  Add a menu item to review the run's result.
+  259 means the program is still active.
+  If the recently run program has finished, show its return code.
+  Benefit:  Minor.  Helps demonstrate command-line compiler return code.
+  Implementation difficulty:  Hard.
+  Demoing difficulty:  Easy.
+  Testing difficulty:  Medium.
+  Audience:  Programmers.
+  Requested by Jasper Paulsen on March 6, 2017.
 
 242.  Gray out irrelevant menu items.
   If a menu item requires a particular kind of thing
@@ -462,13 +619,6 @@ next to the first instance, instead of covering the first instance.
   Status: Demonstrated.
   Requested by Jasper Paulsen on March 7, 2014.
 
-159.  Incorporate CAL-4700's turtle graphics features.
-  Status:   Demonstrated.
-  Benefit:  Medium.
-  Demoing difficulty:  Medium.
-  Testing difficulty:  Hard.
-  Requested by Gerry Rzeppa on March 13, 2017.
- 
 269.  Allow user to save files that have not been modified.
   Status:  Demonstrated.
   Audience:  All users.
@@ -554,47 +704,6 @@ next to the first instance, instead of covering the first instance.
   Audience:  Windows and Linux programmers.
   Requested by Jasper Paulsen on February 24, 2017
 
-231.  Determine project folder based on existence of noodle subfolder.
-  Status:    Demonstrated.
-  Audience:  Windows programmers.
-  Benefit:   Medium.
-  Implementation difficulty:  Medium.
-  Demoing difficulty:  Medium.
-  Testing difficulty:  Medium.
-  Requested by Jasper Paulsen on May 20, 2017.
-
-232.  Determine whether project has one or two level(s) of folders.
-  Status:    Demonstrated.
-  Audience:  Windows programmers.
-  Benefit:   Medium.
-  Implementation difficulty:  Medium.
-  Demoing difficulty:  Medium.
-  Testing difficulty:  Medium.
-  Requested by Jasper Paulsen on May 20, 2017.
-
-233.  Compile using project folder.
-  Status:    Demonstrated.
-  Audience:  Windows programmers.
-  Benefit:   Minor.
-  Implementation difficulty:  Medium.
-  Demoing difficulty:  Medium.
-  Testing difficulty:  Medium.
-  Requested by Jasper Paulsen on May 20, 2017.
-
-201.  Allow compiling sources in multiple folders.
-  Perhaps a subtree starting with the active source's folder?
-  Perhaps directories containing designated files?
-  Status:    Demonstrated.
-  Audience:  Programmers.
-  Benefit:   Major.  Would make it easier to organize
-             large numbers of source files, and thereby
-             encourage refactoring large source files
-             into multiple small source files.
-  Implementation difficulty:  Medium.
-  Demoing difficulty:  Easy.
-  Testing difficulty:  Medium.
-  Requested by Jasper Paulsen on April 25, 2017.
-  
 263.  Allow editor to export all test results as a text file.
   Save in the project folder as "test results.txt"
   if test all is called from the GUI.  Continue to only send
@@ -661,44 +770,6 @@ next to the first instance, instead of covering the first instance.
   Audience:  Windows programmers.
   Requested by Jasper Paulsen on March 3, 2017.
   
-127.  Allow requesting the default finder location in the command line.
-  Could (at startup) just set any unused tabs
-  to the requested folder location, in finder mode.
-  Also needs to treat "finder" tabs that have
-  the default location as if they were empty,
-  for purposes of choosing which tabs to open things in.
-  Benefit:  Medium.  Would reduce the number of steps needed
-            to start CAL.
-  Status:   Demonstrated.
-  Implementation difficulty:  Medium.
-  Demoing difficulty:  Medium.
-  Testing difficulty:  Hard.
-  Audience:  Windows and Linux programmers.
-  Requested by Jasper Paulsen on March 1, 2017.
-
-128.  In the command line, use default finder location to shorten source names.
-  Allow making command line requests for tabs' source names
-  be relative to the command line's request
-  for the default finder location.
-  Benefit:  Medium.  Could greatly shorten command lines.
-            Would make it much easier to maintain command lines
-            when the working directory changes.
-  Status:   Demonstrated.
-  Implementation difficulty:  Medium.
-  Demoing difficulty:  Hard.
-  Testing difficulty:  Hard.
-  Audience:  Windows and Linux programmers.
-  Requested by Jasper Paulsen on March 1, 2017.
-
-124.  Allow requesting tabs' sources in the command line.
-  Benefit:  Medium.  Would help speed up demonstrating features.
-  Status:   Demonstrated.
-  Implementation difficulty:  Medium.
-  Demoing difficulty:  Hard.
-  Testing difficulty:  Hard.
-  Audience:  Windows and Linux programmers.
-  Requested by Jasper Paulsen on February 28, 2017.
-
 197.  In finder, allow running a .exe file.
   Status:    Demonstrated.
   Audience:  Turtle programmers.
@@ -958,68 +1029,6 @@ next to the first instance, instead of covering the first instance.
   Audience:  Windows and Linux programmers.
   Requested by Jasper Paulsen on February 26, 2017.
 
-207.  In compiler, don't compile the documentation source code files.
-  Status:   Demonstrated.
-  Audience: Turtle programmers.
-  Benefit:  Medium.
-  Implementation difficulty:  Medium.
-  Demoing difficulty:  Easy.
-  Testing difficulty:  Medium.
-  Requested by Gerry Rzeppa on March 13, 2017.
-
-157.  In compiler, support multiple headers per routine, a la CAL-4700.
-  Status:   Demonstrated.
-  Benefit:  Permissions requirement.
-  Implementation difficulty:  Medium.
-  Demoing difficulty:  Medium.
-  Testing difficulty:  Medium.
-  Requested by Gerry Rzeppa on March 13, 2017.
- 
-200.  In compiler, allow multi-line routine headers.
-  Status:   Demonstrated.
-  Audience: Programmers.
-  Benefit:  Medium.
-  Implementation difficulty:  Medium.
-  Demoing difficulty:  Medium.
-  Testing difficulty:  Medium.
-  Requested by Gerry Rzeppa on March 13, 2017.
-
-203.  In compiler, create synonyms for backwards/counter-clockwise.
-  Status:   Demonstrated.
-  Audience: Turtle programmers.
-  Benefit:  Medium.
-  Implementation difficulty:  Medium.
-  Demoing difficulty:  Medium.
-  Testing difficulty:  Medium.
-  Requested by Gerry Rzeppa on March 13, 2017.
-
-204.  In compiler, create synonyms for at/on.
-  Status:   Demonstrated.
-  Audience: Turtle programmers.
-  Benefit:  Medium.
-  Implementation difficulty:  Medium.
-  Demoing difficulty:  Medium.
-  Testing difficulty:  Medium.
-  Requested by Gerry Rzeppa on March 13, 2017.
-
-206.  In compiler, handle similes differently from other "as" statements.
-  Status:   Demonstrated.
-  Audience: Turtle programmers.
-  Benefit:  Medium.
-  Implementation difficulty:  Medium.
-  Demoing difficulty:  Medium.
-  Testing difficulty:  Medium.
-  Requested by Gerry Rzeppa on March 13, 2017.
-
-208.  In compiler, add new prepositions.
-  Status:   Demonstrated.
-  Audience: Turtle programmers.
-  Benefit:  Medium.
-  Implementation difficulty:  Medium.
-  Demoing difficulty:  Medium.
-  Testing difficulty:  Medium.
-  Requested by Gerry Rzeppa on March 13, 2017.
- 
 202.  In editor, change sorting to accommodate multi-line routine headers.
   Status:    Demonstrated.
   Audience:  Programmers.
@@ -1139,12 +1148,3 @@ next to the first instance, instead of covering the first instance.
   Demoing difficulty:  Medium.
   Testing difficulty:  Medium.
   Requested by Jasper Paulsen on June 7, 2017.
-
-272.  Refactor scrolling code to reduce duplication
-  Status:  Demonstrated.
-  Audience:  Application users.
-  Benefit:   Minor.
-  Implementation difficulty:  Hard.
-  Demoing difficulty:  Medium.
-  Testing difficulty:  Medium.
-  Requested by Jasper Paulsen on June 6, 2017.
