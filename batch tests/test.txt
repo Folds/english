@@ -22,9 +22,22 @@
 @set TITLE_PREFIX="Testing CAL-40xx"
 @title %TITLE_PREFIX:"=%
 
+@rem === Sync input libraries ===
+@title %TITLE_PREFIX:"=%:  syncing input libraries...
+@robocopy /mir inputs\_master\desktop inputs\oxymoron\desktop > NUL
+@robocopy /mir inputs\_master\documentation inputs\stuttered_paths\roman_numerals\documentation > NUL
+@robocopy /mir inputs\_master\documentation inputs\cal-3040\documentation > NUL
+@robocopy /mir inputs\_master\lexicon inputs\stuttered_paths\roman_numerals\lexicon > NUL
+@robocopy /mir inputs\_master\lexicon inputs\cal-3040\lexicon > NUL
+@robocopy /mir inputs\_master\noodle inputs\run_twice\noodle > NUL
+@robocopy /mir inputs\_master\noodle inputs\stuttered_paths\roman_numerals\noodle > NUL
+@robocopy /mir inputs\_master\noodle inputs\turtle_demo\noodle > NUL
+@robocopy /mir inputs\_master\noodle inputs\oxymoron\noodle > NUL
+@robocopy /mir inputs\_master\turtle inputs\turtle_demo\turtle > NUL
+
 @rem === Delete in_progress' subfolders ===
-@robocopy /mir inputs\empty in_progress > robocopy.txt
-@del robocopy.txt
+@title %TITLE_PREFIX:"=%:  clearing in_progress...
+@robocopy /mir inputs\_master\empty in_progress > NUL
 
 :TEST__1
 @(set STEP="TEST__1")&(call :RESET_SUBSTEP)
@@ -170,6 +183,175 @@
 @set DETAILS="Expected first lines of terse and verbose test results to match.  Terse was '%TERSE_FIRST_LINE%'; verbose was '%FIRST_LINE%'."
 @goto :ABORT
 :TEST__4__5
+
+
+:TEST__5
+@(set STEP="TEST__5")&(call :RESET_SUBSTEP)
+@set TRYING="compile program using stuttered paths."
+@rem    Verify that CAL-40xx can use a /folder path containing
+@rem    "\..\" and "\.\", if the folder exists.
+@rem    Verify that CAL-40xx can use a /file path containing
+@rem    "\..\" and "\.\", if the file exists.
+@rem    Verify that CAL-40xx can compile the corresponding code.
+@rem    Verify that CAL can compile a two-level project,
+@rem    including the noodle subfolder,
+@rem    but excluding the lexicon and the "reamish" instructions.
+@robocopy /mir inputs\stuttered_paths in_progress\stuttered_paths > robocopy.txt
+@move robocopy.txt in_progress\stuttered_paths > NUL
+@title %TITLE_PREFIX:"=%:  %TRYING:"=%..
+@cal-40xx.exe /folder="%CD%\in_progress\stuttered_paths\.\stutter_folder\..\roman_numerals\." /files="stutter_toward_file\..\has_file\.\roman";; /list 1>in_progress\stuttered_paths\out.txt 2>in_progress\stuttered_paths\err.txt
+@set temp=%errorlevel%
+@title %TITLE_PREFIX:"=%
+@if %temp% EQU 0 goto :%STEP:"=%%NEXT%
+@goto :ABORT
+:TEST__5__2
+@call :BUMP_SUBSTEP
+@set EXPECTED_FOLDER="%CD:"=%\expected\stuttered_paths"
+@set PROGRESS_FOLDER="%CD:"=%\in_progress\stuttered_paths"
+@call :MATCH_SUBPATHS %EXPECTED_FOLDER% %PROGRESS_FOLDER%
+@set RET=%RET%
+@if {%RET%}=={""} goto :%STEP:"=%%NEXT% 
+@set DETAILS="Did not find %RET:"=%"
+echo betty
+@goto :ABORT
+:TEST__5__3
+@call :BUMP_SUBSTEP
+@set EXE_PATH="%PROGRESS_FOLDER:"=%\roman_numerals\roman_numerals.exe"
+@call :GET_FILESIZE %EXE_PATH%
+@set EXE_SIZE=%RET%
+@set LST_PATH="%PROGRESS_FOLDER:"=%\roman_numerals\roman_numerals.lst"
+@call :GET_FILESIZE %LST_PATH%
+@set LST_SIZE=%RET%
+@if LST_SIZE GTR EXE_SIZE goto :%STEP:"=%%NEXT%
+@set DETAILS="Expected *.lst to be larger than *.exe.  In '%PROGRESS_FOLDER:"=%\roman_numerals', roman_numerals.lst was just %LST_SIZE% bytes.  roman_numerals.exe was %EXE_SIZE% bytes."
+echo celia
+@goto :ABORT
+:TEST__5__4
+
+:TEST__6
+@(set STEP="TEST__6")&(call :RESET_SUBSTEP)
+@set TRYING="cannot compile duplicate run routine."
+@rem    Verify that CAL-40xx's compiler can put an error
+@rem    message on stdout, using gcc's format.
+@robocopy /mir inputs\run_twice in_progress\run_twice > robocopy.txt
+@move robocopy.txt in_progress\run_twice > NUL
+@title %TITLE_PREFIX:"=%:  %TRYING:"=%..
+@cal-40xx.exe /folder="%CD%\in_progress\run_twice\" /files="run run" /list 1>in_progress\run_twice\out.txt 2>in_progress\run_twice\err.txt
+@set temp=%errorlevel%
+@title %TITLE_PREFIX:"=%
+@if %temp% EQU 1 goto :%STEP:"=%%NEXT%
+@set DETAILS="Expected return value of 1.  Got return value of %temp%."
+@goto :ABORT
+:TEST__6__2
+@call :BUMP_SUBSTEP
+@set EXPECTED_FOLDER="%CD:"=%\expected\run_twice"
+@set PROGRESS_FOLDER="%CD:"=%\in_progress\run_twice"
+@set RET=""
+@call :MATCH_SUBPATHS %EXPECTED_FOLDER% %PROGRESS_FOLDER%
+@set RET=%RET%
+@if {%RET%}=={""} goto :%STEP:"=%%NEXT% 
+@set DETAILS="Did not find %RET:"=%"
+@goto :ABORT
+:TEST__6__3
+@call :BUMP_SUBSTEP
+@fc "%EXPECTED_FOLDER:"=%\err.txt" "%PROGRESS_FOLDER:"=%\err.txt" 1>NUL 2>NUL
+@set temp=%errorlevel%
+@if %temp% EQU 0 goto :%STEP:"=%%NEXT%
+@set DETAILS="err.txt files did not match in %EXPECTED_FOLDER% and %PROGRESS_FOLDER%"
+@if %temp% EQU 1 goto :ABORT
+@set DETAILS="missing err.txt file in %EXPECTED_FOLDER% and/or %PROGRESS_FOLDER%"
+@goto :ABORT
+:TEST__6__4
+
+:TEST__7
+@(set STEP="TEST__7")&(call :RESET_SUBSTEP)
+@set TRYING="compile turtle demo."
+@rem    Verify that CAL-40xx's compiler can compile multi-line
+@rem    routine headers that include alternates.
+@rem    Verify that CAL-40xx's compiler can compile similes,
+@rem    new propositions, at/on synonyms, and backward synonyms.
+@robocopy /mir inputs\turtle_demo in_progress\turtle_demo > robocopy.txt
+@move robocopy.txt in_progress\turtle_demo > NUL
+@title %TITLE_PREFIX:"=%:  %TRYING:"=%..
+@cal-40xx.exe /folder="%CD%\in_progress\turtle_demo\" /files="demo" /list 1>in_progress\turtle_demo\out.txt 2>in_progress\turtle_demo\err.txt
+@set temp=%errorlevel%
+@title %TITLE_PREFIX:"=%
+@if %temp% EQU 0 goto :%STEP:"=%%NEXT%
+@goto :ABORT
+:TEST__7__2
+@call :BUMP_SUBSTEP
+@set EXPECTED_FOLDER="%CD:"=%\expected\turtle_demo"
+@set PROGRESS_FOLDER="%CD:"=%\in_progress\turtle_demo"
+@call :MATCH_SUBPATHS %EXPECTED_FOLDER% %PROGRESS_FOLDER%
+@set RET=%RET%
+@if {%RET%}=={""} goto :%STEP:"=%%NEXT% 
+@set DETAILS="Did not find %RET:"=%"
+@goto :ABORT
+:TEST__7__3
+@call :BUMP_SUBSTEP
+@set EXE_PATH="%PROGRESS_FOLDER:"=%\turtle_demo.exe"
+@call :GET_FILESIZE %EXE_PATH%
+@set EXE_SIZE=%RET%
+@set LST_PATH="%PROGRESS_FOLDER:"=%\turtle_demo.lst"
+@call :GET_FILESIZE %LST_PATH%
+@set LST_SIZE=%RET%
+@if LST_SIZE GTR EXE_SIZE goto :%STEP:"=%%NEXT%
+@set DETAILS="Expected *.lst to be larger than *.exe.  In %PROGRESS_FOLDER%, turtle_demo.lst was just %LST_SIZE% bytes.  turtle_demo.exe was %EXE_SIZE% bytes."
+@goto :ABORT
+:TEST__7__4
+
+:TEST__8
+@(set STEP="TEST__8")&(call :RESET_SUBSTEP)
+@set TRYING="compile and run oxymoron with ""/test""."
+@rem    Demonstrate using batch script to simulate a pre-processor,
+@rem    by compiling the "bonus" source code file
+@rem    instead of the "no bonus" source code file.
+@rem    Verify that /test lists test failures on stderr.
+@robocopy /mir inputs\oxymoron in_progress\oxymoron > robocopy.txt
+@move robocopy.txt in_progress\oxymoron > NUL
+@move "in_progress\oxymoron\noodle\no bonus" "in_progress\oxymoron\noodle\no bonus.txt" > NUL
+@title %TITLE_PREFIX:"=%:  %TRYING:"=%..
+@cal-40xx.exe /folder="%CD%\in_progress\oxymoron" /files="bonus";; /compile 1>in_progress\oxymoron\out.txt 2>in_progress\oxymoron\err.txt
+@set temp=%errorlevel%
+@title %TITLE_PREFIX:"=%
+@if %temp% EQU 0 goto :%STEP:"=%%NEXT%
+@goto :ABORT
+:TEST__8__2
+@call :BUMP_SUBSTEP
+@in_progress\oxymoron\oxymoron.exe /test 1>in_progress\oxymoron\out.txt 2>in_progress\oxymoron\err.txt
+@set temp=%errorlevel%
+@title %TITLE_PREFIX:"=%
+@if %temp% GTR 0 goto :%STEP:"=%%NEXT%
+@set DETAILS="Expected positive return value.  Got return value of %temp%."
+@goto :ABORT
+:TEST__8__3
+@call :BUMP_SUBSTEP
+@set EXPECTED_FOLDER="%CD:"=%\expected\oxymoron"
+@set PROGRESS_FOLDER="%CD:"=%\in_progress\oxymoron"
+@set RET=""
+@call :MATCH_SUBPATHS %EXPECTED_FOLDER% %PROGRESS_FOLDER%
+@set RET=%RET%
+@if {%RET%}=={""} goto :%STEP:"=%%NEXT% 
+@set DETAILS="Did not find %RET:"=%"
+@goto :ABORT
+:TEST__8__4
+@call :BUMP_SUBSTEP
+@call :GET_FIRST_LINE "%PROGRESS_FOLDER:"=%\err.txt"
+@set FIRST_LINE=%RET%
+@call :GET_FIRST_TOKEN "%FIRST_LINE:"=%"
+@set FIRST_TOKEN=%RET%
+@set /a EXPECTED_LINES=%FIRST_TOKEN%+1
+@call :COUNT_LINES "%PROGRESS_FOLDER:"=%\err.txt"
+@set LINES=%RET%
+@if {%LINES%}=={%EXPECTED_LINES%} goto :%STEP:"=%%NEXT% 
+@set DETAILS="Expected %EXPECTED_LINES% lines.  %PROGRESS_FOLDER:"=%\err.txt had %LINES% lines."
+@goto :ABORT
+:TEST__8__5
+@call :BUMP_SUBSTEP
+@if %LINES% GTR 1 goto :%STEP:"=%%NEXT%
+@set DETAILS="Expected more than 1 line.  %PROGRESS_FOLDER:"=%\err.txt had %LINES% lines."
+@goto :ABORT
+:TEST__8__6
 
 
 :SUCCESS
