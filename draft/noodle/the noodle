@@ -4,12 +4,14 @@
 \ are copyright 2017 by the Osmosian Order.
 \ The remainder is copyright 2014, 2017 by Jasper Paulsen.
 
-\ Texts (and their events, rows, carets, anchors, positions,
-\ and selections) are defined and manipulated in 'text'.
+\ Arrays (but not strings) are defined and manipulated in 'arrays'.
 \
 \ The colors are defined and manipulated in 'colors'.
 \ The bytes and the keys are defined and manipulated in 'characters'
 \ (but 'characters' does not handle events.)
+\
+\ Texts (and their events, rows, carets, anchors, positions,
+\ and selections) are defined and manipulated in 'text'.
 
 an abc is a record with
   a number called abca,
@@ -483,15 +485,25 @@ to buzz:
   play the cluck sound and wait.
 
 to cache the early primes through a number:
+  if the number is less than 3, exit.
   if the cached early primes are empty,
-    create a number thing given 2;
-    append the number thing to the cached early primes.
-  put the cached early primes' last's number in another number.
+    put the largest square root in a capacity number;
+    add 1 to the capacity;
+    divide the capacity by 2;
+    grow the cached early primes through the capacity.
+  put the cached early primes' capacity in the capacity number.
+  put the cached early primes' bedrock count in a count.
+  put the count in a candidate number.
+  multiply the candidate by 2.
+  subtract 1 from the candidate.
   loop.
-    add 1 to the other number.
-    if the other number is more than the number, exit.
-    if the other number is prime,
-      append the other number to the cached early primes.
+    add 1 to the count.
+    add 2 to the candidate.
+    if the count is more than the capacity, exit.
+    if the candidate is more than the number, exit.
+    if the candidate is prime,
+      set the count in the cached early primes.
+    put the count in the cached early primes' bedrock count.
   Repeat.
 
 to cache failure finding a library:
@@ -512,14 +524,16 @@ to cache success finding a library procedure in a library:
   create a string thing given the string.
   append the string thing to the cached found library procedures.
 
-the cached early primes are some number things.
-\ An ordered, doubly-linked list of prime numbers
-\ between 2 and at most 46,337, inclusive.
+the cached early primes are a flag array.
+\ The number 2 is considered to be a cached prime by default.
+\ The flag array is a 1-indexed array containing 23,170 bits.
+\ Each bit represents whether an odd number
+\ between 1 and 46,340 (inclusive) is prime.
 \ Populated lazily based on whether each item
 \ is less than the square root of the largest number
 \ for which primality has been tested so far.
-\ All primes less than the largest number in the list
-\ will also be in the list.
+\ All primes less than double the flag array's
+\ bedrock count will also be in the list.
 \ Useful for performing the Sieve of Eratosthenes.
 
 the cached found library procedures are some string things.
@@ -2331,12 +2345,14 @@ to decide if a number is any cached late prime:
   repeat.
 
 to decide if a number is any of the early primes:
+  if the number is 2, say yes.
   if the cached early primes are empty, say no.
-  loop.
-    get a number thing from the cached early primes.
-    if the number thing is nil, say no.
-    if the number is the number thing's number, say yes.
-  repeat.
+  if the number is even, say no.
+  privatize the number.
+  add 1 to the number.
+  divide the number by 2.
+  if the number is set in the cached early primes, say yes.
+  say no.
 
 to decide if a number is between another number and a third number:
   if the number is less than the other number, say no.
@@ -2345,6 +2361,12 @@ to decide if a number is between another number and a third number:
 
 to decide if a number is bitwise included in another number:
   privatize the other number.
+  bitwise and the other number with the number.
+  if the number is the other number, say yes.
+  say no.
+
+to decide if a number is bitwise included in a byte:
+  put the byte into another number.
   bitwise and the other number with the number.
   if the number is the other number, say yes.
   say no.
@@ -2360,11 +2382,16 @@ to decide if a number is evenly divisible by another number:
   say no.
 
 to decide if a number is evenly divisible by any of the early primes:
+  if the number is even, say yes.
   if the cached early primes are empty, say no.
+  put the cached early primes' bedrock count in a count.
+  put -1 in a divisor number.
   loop.
-    get a number thing from the cached early primes.
-    if the number thing is nil, say no.
-    if the number is evenly divisible by the number thing's number, say yes.
+    add 1 to another number.
+    add 2 to the divisor.
+    if the other number is greater than the count, say no.
+    if the other number is clear in the cached early primes, repeat.
+    if the number is evenly divisible by the divisor, say yes.
   repeat.
 
 to decide if a number is more than another number:
@@ -2393,7 +2420,8 @@ to decide if a number is prime:
   if the number is at most 1, say no.
   if the number is any cached late prime, say yes.
   put the square root of the number in another number.
-  add 1 to the other number.
+  if the other number times the other number is not the number,
+    add 1 to the other number.
   cache the early primes through the other number.
   if the number is any of the early primes, say yes.
   if the number is evenly divisible by any of the early primes, say no.
@@ -4169,7 +4197,7 @@ to fill a string with a byte given a count:
   put the string's first plus the count minus 1 into the string's last.
 
 to finalize after run:
-  destroy the cached early primes.
+\  destroy the cached early primes.
   destroy the cached late primes.
   destroy the cached missing library procedures.
   destroy the cached found library procedures.
@@ -4516,6 +4544,16 @@ to get a byte from a string (backwards):
   if the string is blank, put the null byte into the byte; exit.
   put the string's last's target into the byte.
   remove the last byte from the string.
+
+to get a byte from a string at a one-indexed position:
+  if the one-indexed position is at most 0,
+    put the null byte in the byte; exit.
+  if the one-indexed position is greater than the string's length,
+    put the null byte in the byte; exit.
+  put the string's first into a byte pointer.
+  convert the one-indexed position to a zero-indexed position.
+  add the zero-indexed position to the byte pointer.
+  put the byte pointer's target in the byte.
 
 to get a center spot given a spot and another spot:
   put the spot and the other spot into a line.
@@ -9231,6 +9269,26 @@ to subtract a ratio from another ratio:
   subtract the ratio's numerator from the other ratio's numerator.
   reduce the other ratio.
 
+to summarize the early primes returning a string (tersely):
+  put "2" in the string.
+  put the cached early primes' capacity in a capacity count.
+  put the cached early primes' bedrock count in a count.
+  if the capacity is less than the count,
+    put the capacity in the count.
+  put -1 in a candidate number.
+  loop.
+    add 1 to a number.
+    add 2 to the candidate.
+    if the number is greater than the count, break.
+    if the number is clear in the cached early primes, repeat.
+    append ", " then the candidate to the string.
+  repeat.
+  put the cached early primes' bedrock count in another number.
+  multiply the other number by 2.
+  append "; valid / capacity = "
+    then the other number then " / "
+    then the cached early primes' capacity to the string.
+
 to summarize some number things returning a string (tersely):
   put "" in the string.
   loop.
@@ -9782,6 +9840,8 @@ to test (the noodle - 200021 is not prime):
     and expecting "200021 is not prime".
   put "200021 is not prime" in an actual string.
   if 200021 is prime,
+    summarize the early primes returning a string (tersely);
+    debug the string;
     put "200021 is prime" in the actual string.
   stash the test result given the actual.
 
@@ -9875,7 +9935,7 @@ to test (the noodle - prepend things):
 to test (the noodle - primes through 47):
   put "2, 3, 5, 7, 11, 13, 17, 19, 23, " 
     then "29, 31, 37, 41, 43, 47" in a prefix string.
-  put "cached early primes start with " then the prefix string
+  put "early primes start with " then the prefix string
     in an expected string.
   create a test result about "the noodle" and "primes through 47"
     and expecting the expected string.
@@ -9888,12 +9948,12 @@ to test (the noodle - primes through 47):
     put "2500 is prime" in an actual string;
     stash the test result given the actual;
     exit.
-  summarize the cached early primes returning a string (tersely).
+  summarize the early primes returning a string (tersely).
   if the string starts with the prefix,
     put the expected string in the actual string;
     stash the test result given the actual;
     exit.
-  put "cached early primes are " then the string in the actual.
+  put "early primes start with " then the string in the actual.
   stash the test result given the actual.    
 
 to test (the noodle - replace substring):

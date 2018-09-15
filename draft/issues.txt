@@ -74,53 +74,6 @@ The following requests have been partially demonstrated.
 The following requests are roughly sorted
 from higher priority to lower priority.
 
-283.  Add a flag array feature (either dynamic or fixed length).
-  Audience:  Windows programmers and Linux programmers.
-  Status:  request.
-  Benefit:  Important -- many numerical and geographical programs use arrays.
-  Implementation difficulty:  Hard.
-  Demo difficulty:  Medium.
-  Test difficulty:  Medium.
-  Requested by Jasper Paulsen on March 7, 2014.
-
-284.  Allow increasing the size of flag arrays.
-  Audience:  Windows programmers and Linux programmers.
-  Status:  Tested, as part of the prime number testing.
-  Benefit:  Important -- this makes many algorithms easier.
-  Implementation difficulty:  Hard.
-  Demo difficulty:  Medium.
-  Test difficulty:  Medium.
-  Requested by Jasper Paulsen on March 7, 2014.
-
-286.  Add a byte array feature (either dynamic or fixed length).
-  Audience:  Windows programmers and Linux programmers.
-  Status:  Tested, as part of the prime number testing.
-  Benefit:  Important -- many numerical and geographical programs use arrays.
-  Implementation difficulty:  Hard.
-  Demo difficulty:  Medium.
-  Test difficulty:  Medium.
-  Requested by Jasper Paulsen on March 7, 2014.
-
-287.  Allow increasing the size of byte arrays.
-  Audience:  Windows programmers and Linux programmers.
-  Status:  Tested, as part of the prime number testing.
-  Benefit:  Important -- this makes many algorithms easier.
-  Implementation difficulty:  Hard.
-  Demo difficulty:  Medium.
-  Test difficulty:  Medium.
-  Requested by Jasper Paulsen on March 7, 2014.
-
-289.  Document how to use GitKraken to retrieve old versions of the code.
-  https://github.com/Folds/english/wiki/Temp-Branch-on-an-Earlier-Commit
-  Status:    Demonstrated.
-  Audience:  Programmers.
-  Benefit:   Major.  Allows changing branches and reverting commits.
-  Implementation difficulty:  Hard.  (Ryan of Axosoft's
-             customer support provided the key insight.)
-  Demoing difficulty:  Medium.
-  Testing difficulty:  Not applicable.
-  Requested by Jasper Paulsen on July 5, 2017.
-
 217.  Allow drawing a Unicode string on-screen.
   Status:    Request.
   Audience:  Windows programmers.

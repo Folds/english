@@ -1,0 +1,11 @@
+\ This "no bonus" source code file contains stub routines,
+\ which do not do anything.  The programmer (or a batch script)
+\ can swap in "bonus" source code to replace this file.
+\ For example, a batch script could delete this file
+\ (or rename it to have a file extension), and instead include
+\ a "bonus" source code file that had different versions
+\ of these routines.  This allows a batch script to verify
+\ (for example) how the program handles a test failure,
+\ without needing to modify the production code.
+
+to test (bonus):
