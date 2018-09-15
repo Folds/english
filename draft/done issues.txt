@@ -1480,6 +1480,40 @@ with an adjustable slider between them.
   Testing difficulty:  Not applicable.
   Requested by Jasper Paulsen on July 5, 2017.
 
+220.  Fix intermittent crashing bug(s) in editor.
+  The editor can crash when attempting to scroll the scrollbar upward.
+  The editor can crash when attempting to add characters
+  within a row of text.  This problem has been observed
+  both when the row was exactly the pad width,
+  and when the row was much shorter than the pad width.
+  This bug is very hard to reproduce.
+  Status:  Demonstrated.
+    The problem occurred inside kernel32.dll's GetProcAddress.
+    The number of calls to this routine have been minimized,
+    and made early in the program run.
+  Audience:  All users.
+  Benefit:   Critical.
+  Implementation difficulty:  Hard.
+  Demoing difficulty:  n/a.
+  Testing difficulty:  n/a.
+  Requested by Jasper Paulsen on April 30, 2017.
+
+237.  Fix intermittent crashing bug(s) in writer.
+  The writer can crash upon clicking outside of a line
+  in order to de-select the line.  It can also crash while
+  changing the size of a selection region.
+  This bug is very hard to reproduce.
+  Status:    Demonstrated.
+    The problem occurred inside kernel32.dll's GetProcAddress.
+    The number of calls to this routine have been minimized,
+    and made early in the program run.
+  Audience:  Application users.
+  Benefit:   Critical.
+  Implementation difficulty:  Hard.
+  Demoing difficulty:  n/a.
+  Testing difficulty:  n/a.
+  Requested by Jasper Paulsen on May 21, 2017.
+
 297.  Allow batch scripts to optionally add tests
   that will be called (indirectly) by "to test".
   Implemented by creating a short "no bonus" source file

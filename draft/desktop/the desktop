@@ -2767,6 +2767,16 @@ to resize the desktop:
   resize the switch.
   resize the pad. \ uses the bar and the switch
   resize the scrollbar.
+  loop.
+    get a tab from the tabs.
+    if the tab is nil, break.
+    if the tab's mode is not "editor", repeat.
+    if the tab's node is nil, repeat.
+    if the tab's node's source is nil, repeat.
+    if the tab's node's source's text is nil, repeat.
+    put the tab's node's source's text's font's height in a font height.
+    handle font height given the tab's node's source and the font height.    
+  repeat.
 
 to resize the pad:
   put the screen's left into the pad's left.

@@ -509,6 +509,17 @@ next to the first instance, instead of covering the first instance.
   Audience:  Windows and Linux programmers.
   Requested by Jasper Paulsen on February 24, 2017
 
+290.  Adjust the editor's text's box's height
+  when shrinking from full-screen to half-screen.
+  Prevent the editor's text from overlapping with the tabs.
+  Status:    Demonstrated.
+  Audience:  Application users.
+  Benefit:   Minor.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Hard.
+  Requested by Jasper Paulsen on July 7, 2017.
+
 263.  Allow editor to export all test results as a text file.
   Save in the project folder as "test results.txt"
   if test all is called from the GUI.  Continue to only send
