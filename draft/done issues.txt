@@ -1468,3 +1468,20 @@ with an adjustable slider between them.
   Demoing difficulty:  Medium.
   Testing difficulty:  Hard.
   Requested by Jasper Paulsen on March 25, 2017.
+
+297.  Allow batch scripts to optionally add tests
+  that will be called (indirectly) by "to test".
+  Implemented by creating a short "no bonus" source file
+  that contains an empty "to test (bonus)" routine.
+  The batch script can optionally disable the "no bonus"
+  source file, and add a "bonus" source file that
+  implements "to test (bonus)".  This effectively lets
+  a batch script simulate a preprocessor.
+  Status:  Tested.
+  Audience:  Programmers.
+  Benefit:   Medium.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Medium.
+  Requested by Jasper Paulsen on August 4, 2017.
+

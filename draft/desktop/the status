@@ -498,6 +498,7 @@ to test (all):
   test (the status).
   test (the finder).
   test (the editor).
+  test (bonus).
   stop the status' all test results' timer.
   test (the testing time).
 

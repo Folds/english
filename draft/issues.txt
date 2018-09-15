@@ -112,7 +112,7 @@ from higher priority to lower priority.
 
 289.  Document how to use GitKraken to retrieve old versions of the code.
   https://github.com/Folds/english/wiki/Temp-Branch-on-an-Earlier-Commit
-  Status:    Demonsrated.
+  Status:    Demonstrated.
   Audience:  Programmers.
   Benefit:   Major.  Allows changing branches and reverting commits.
   Implementation difficulty:  Hard.  (Ryan of Axosoft's
@@ -187,22 +187,6 @@ from higher priority to lower priority.
   Demoing difficulty:  Easy.
   Testing difficulty:  Easy.
   Requested by Jasper Paulsen on July 29, 2017.
-
-297.  Allow batch scripts to optionally add tests
-  that will be called (indirectly) by "to test".
-  Implemented by creating a short "no bonus" source file
-  that contains an empty "to test (bonus)" routine.
-  The batch script can optionally disable the "no bonus"
-  source file, and add a "bonus" source file that
-  implements "to test (bonus)".  This effectively lets
-  a batch script simulate a preprocessor.
-  Status:  Tested.
-  Audience:  Programmers.
-  Benefit:   Medium.
-  Implementation difficulty:  Medium.
-  Demoing difficulty:  Medium.
-  Testing difficulty:  Medium.
-  Requested by Jasper Paulsen on August 4, 2017.
 
 304.  Modify string-width tests to accommodate Win 10 Build 1703.
   Build 1703 is the Spring 2017 update to Windows.
@@ -910,7 +894,7 @@ err:ole:CoInitializeEx Attempt to change threading model of this apartment from 
 
 285.  Allow reducing the size of flag arrays.
   Audience:  Windows programmers and Linux programmers.
-  Status:  Tested, as part of the prime number testing.
+  Status:  request.
   Benefit:  Minor.
   Implementation difficulty:  Hard.
   Demo difficulty:  Medium.
