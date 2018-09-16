@@ -26,29 +26,6 @@ These items should occasionally be moved to fixed issues.txt.
 The following requests have been demonstrated, and have test plan(s),
 but have not yet been tested.
 
-136:  Output test failure messages to StdErr when tests requested.
-  Use the same infrastructure as the compile failure messages.
-  Only do this when testing is requested on the command line.
-  Benefit:  Medium.  This would make it easier to interpret
-            build verification test results in a build pipeline.
-  Implementation difficulty:  Medium.
-  Demoing difficulty:  Medium.
-  Testing difficulty:  Medium.
-  Audience:  Windows and Linux programmers.
-  Requested by Jasper Paulsen on March 1, 2017.
-  Test plan:
-    Similar to 135, except create a deliberately failing test,
-      and use /test instead of /test=verbose.
-
-272.  Refactor scrolling code to reduce duplication
-  Status:  Demonstrated.
-  Audience:  Application users.
-  Benefit:   Minor.
-  Implementation difficulty:  Hard.
-  Demoing difficulty:  Medium.
-  Testing difficulty:  Medium.
-  Requested by Jasper Paulsen on June 6, 2017.
-
 070.  Don't hide programs outside of the program's window.
   Currently, the program grabs a screenshot when it starts.
   The screenshot includes the full screen,
