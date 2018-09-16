@@ -1841,3 +1841,77 @@ with an adjustable slider between them.
   Demoing difficulty:  Easy.
   Testing difficulty:  Not applicable.
   Requested by Jasper Paulsen on July 27, 2017.
+
+260.  Fix editor so short texts don't pop up and down.
+  Status:    Tested.
+  Audience:  Application users.
+  Benefit:   Medium.
+  Implementation difficulty:  Hard.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Medium.
+  Requested by Jasper Paulsen on June 4, 2017.
+
+146.  Fix crashing bug in writer's Font Name… menu item.
+  The program crashes (Windows is OK)
+  immediately upon trying to clicking the Font Name…
+  menu item, when the current tab is in "writer" mode.
+  The submenu of available fonts does not appear.
+  The "editor" mode does not have this problem.
+  Benefit.   Critical.
+  Status.    Tested.  (Specifically, tested the writer's
+             "update font" code.)
+  Audience.  Users of the writer.
+  Implementation difficulty.  Medium.
+  Demoing difficulty.  Easy.
+  Testing difficulty.  Medium.
+  Requested by Jasper Paulsen on March 8, 2017.
+
+147.  Fix crashing bug in writer's Font Height… menu item.
+  The program crashes (Windows is OK)
+  immediately upon trying to clicking the Font Height…
+  menu item, when the current tab is in "writer" mode.
+  The submenu of available font heights does not appear.
+  The "editor" mode does not have this problem.
+  Benefit.   Critical.
+  Status.    Tested.  (Specifically, tested the writer's
+             "update font" code.)
+  Audience.  Users of the writer.
+  Implementation difficulty.  Medium.
+  Demoing difficulty.  Easy.
+  Testing difficulty.  Medium.
+  Requested by Jasper Paulsen on March 8, 2017.
+
+259.  Fix docster so short lists of edges don't pop up and down.
+  Status:    Tested.
+  Audience:  Application users.
+  Benefit:   Medium.
+  Implementation difficulty:  Hard.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Medium.
+  Requested by Gerry Rzeppa on June 4, 2017.
+
+238.  Add scrollbar to the finder.
+  Status:   Tested.
+  Benefit:  Medium.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Medium.
+  Requested by Jasper Paulsen on May 20, 2014.
+
+164.  In writer, make font name menu highlight match selected text.
+  Status:   Tested.  (Just verified that a font could be found
+            in an open page of a read-in document.)
+  Benefit:  Medium.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Medium.
+  Requested by Jasper Paulsen on March 13, 2014.
+ 
+165.  In writer, make font height menu highlight match selected text.
+  Status:   Tested.  (Just verified that a font could be found
+            in an open page of a read-in document.)
+  Benefit:  Medium.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Medium.
+  Requested by Jasper Paulsen on March 13, 2014.

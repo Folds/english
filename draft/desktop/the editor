@@ -1023,6 +1023,74 @@ to split out some preamble rows from some rows:
     exit.
   repeat.
 
+to test (the editor - short sources don't bounce):
+  create a test result about "the editor"
+    and "short sources don't bounce"
+    and expecting "no bouncing".
+  put    "argyle"     then the crlf string
+    then                   the crlf string
+    then "cara carns" then the crlf string
+    into a buffer.
+  create a tab.
+  create the tab's node.
+  create the tab's node's source given the buffer.
+  put "editor" in the tab's mode.
+  adjust the tab's node.
+  make a scrollee given the tab.
+  if a scrollbar is needed given the scrollee,
+    stash the test result using "needed scrollbar";
+    destroy the tab;
+    exit.
+  if the tab's node's source's text's y is not 0,
+    stash the test result using
+      "text's y initialized to "
+      then the tab's node's source's text's y;
+    destroy the tab;
+    exit.
+  \
+  \ Simulate a page down.
+  make the scrollee given the tab.
+  if the scrollee is empty,
+    stash the test result using "empty scrollee during page down";
+    destroy the tab;
+    exit.
+  put the scrollee's window capacity in a count.
+  subtract 1 from the count.
+  if the count is at most 3,
+    stash the test result using "editor pane is too short to simulate page down";
+    destroy the tab;
+    exit.
+  scroll the scrollee given the count.
+  if the tab's node's source's text's y is not 0,
+    stash the test result using
+      "page down set text's y to "
+      then the tab's node's source's text's y;
+    destroy the tab;
+    exit.
+  \
+  \ Simulate a page up.
+  make the scrollee given the tab.
+  if the scrollee is empty,
+    stash the test result using "empty scrollee during page up";
+    destroy the tab;
+    exit.
+  put the scrollee's window capacity in the count.
+  subtract 1 from the count.
+  if the count is at most 3,
+    stash the test result using "editor pane is too short to simulate page up";
+    destroy the tab;
+    exit.
+  negate the count.
+  scroll the scrollee given the count.
+  if the tab's node's source's text's y is not 0,
+    stash the test result using
+      "page up set text's y to "
+      then the tab's node's source's text's y;
+    destroy the tab;
+    exit.
+  stash the test result using "no bouncing".
+  destroy the tab.
+
 to test (the editor - sort already sorted definitions):
   create a test result about "the editor" and "sort already sorted definitions"
     and expecting "unchanged".
@@ -1083,6 +1151,7 @@ to test (the editor - sort definitions does not add lines):
 to test (the editor):
   test (the editor - sort already sorted definitions).
   test (the editor - sort definitions does not add lines).
+  test (the editor - short sources don't bounce).
 
 to track a source given an event:
   if the source is nil, exit.

@@ -4165,11 +4165,12 @@ to end printing a pdf (finish the root):
   append "endobj" to the root.
 
 to end printing a pdf (offset and append objects):
-  get a pdf object from the pdf state's objects.
-  if the pdf object is nil, break.
-  put the pdf's length into the pdf object's offset.
-  append the pdf object's data to the pdf.
-  append the crlf string to the pdf.
+  loop.
+    get a pdf object from the pdf state's objects.
+    if the pdf object is nil, break.
+    put the pdf's length into the pdf object's offset.
+    append the pdf object's data to the pdf.
+    append the crlf string to the pdf.
   repeat.
 
 to end a sheet:

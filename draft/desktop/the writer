@@ -5007,6 +5007,134 @@ to switch to a page:
   handle close without drawing (writer).
   handle open without drawing (docster).
 
+to test (the docster - short tables of contents don't bounce):
+  create a test result about "the writer"
+    and "short tables of contents don't bounce"
+    and expecting "no bouncing".
+  put    "ream cal-3024"             then the crlf string
+    then "  page 12240 15840 1 1440" then the crlf string
+    then "  end"                     then the crlf string
+    then "end"                       then the crlf string
+    into a buffer.
+  create a tab.
+  create the tab's node.
+  create the tab's node's document given the buffer.
+  put "docster" in the tab's mode.
+  adjust the tab's node.
+  make a scrollee given the tab.
+  if a scrollbar is needed given the scrollee,
+    stash the test result using "needed scrollbar";
+    destroy the tab;
+    exit.
+  if the tab's node's document's first page's edge's top is not 0,
+    stash the test result using
+      "document's first page's edge's top initialized to "
+      then the tab's node's document's first page's edge's top;
+    destroy the tab;
+    exit.
+  \
+  \ Simulate a page down.
+  make the scrollee given the tab.
+  if the scrollee is empty,
+    stash the test result using "empty scrollee during page down";
+    destroy the tab;
+    exit.
+  put the scrollee's window capacity in a count.
+  subtract 1 from the count.
+  if the count is at most 3,
+    stash the test result using "docster pane is too short to simulate page down";
+    destroy the tab;
+    exit.
+  scroll the scrollee given the count.
+  if the tab's document's first page's edge's top is not 0,
+    stash the test result using
+      "page down set document's first page's edge's top to "
+      then the tab's node's document's first page's edge's top;
+    destroy the tab;
+    exit.
+  \
+  \ Simulate a page up.
+  make the scrollee given the tab.
+  if the scrollee is empty,
+    stash the test result using "empty scrollee during page up";
+    destroy the tab;
+    exit.
+  put the scrollee's window capacity in the count.
+  subtract 1 from the count.
+  if the count is at most 3,
+    stash the test result using "docster pane is too short to simulate page up";
+    destroy the tab;
+    exit.
+  negate the count.
+  scroll the scrollee given the count.
+  if the tab's node's document's first page's edge's top is not 0,
+    stash the test result using
+      "page up set document's first page's edge's top to "
+      then the tab's node's document's first page's edge's top;
+    destroy the tab;
+    exit.
+  stash the test result using "no bouncing".
+  destroy the tab.
+
+to test (the writer - update font based on text):
+  create a test result about "the writer"
+    and "update font based on text"
+    and expecting "name='Courier New', height=720".
+  put    "ream cal-3024" then the crlf string
+    then "  page 12240 15840 1 1440" then the crlf string
+    then "    text 0 0 0 -1 0 0 2880 2880 8640 4320 0 '' " 
+    then      "'Courier New' 720 'left' 0 0 0 yes" then the crlf string
+    then "       'Big fixed-width.'" then the crlf string
+    then "    end" then the crlf string
+    then "    text 0 0 0 -1 0 0 2880 5040 8640 6480 0 '' "
+    then      "'Times New Roman' 180 'left' 0 0 0 yes" then the crlf string
+    then "       'Small proportional.'" then the crlf string
+    then "    end" then the crlf string
+    then "  end" then the crlf string
+    then "end"
+    into a buffer.
+  replace the single-quote byte
+    with the double-quote byte in the buffer.
+  create a tab.
+  create the tab's node.
+  create the tab's node's document given the buffer.
+  put the tab's node's document's first page into the tab's node's page.
+  scale the tab's node's page given the tab's node's document's scale.
+  center the tab's node's page.
+  put "writer" in the tab's mode.
+  adjust the tab's node.
+  put the current font in a font.
+  update the current font given the tab.
+  put "name='" then the current font's name
+    then "', height=" then the current font's height
+    in an actual string.
+  put the font in the current font.
+  stash the test result using the actual.
+  destroy the tab.
+
+to test (the writer - update font based on trivial document):
+  create a test result about "the writer"
+    and "update font based on trivial document"
+    and expecting "did not crash".
+  put    "ream cal-3024" then the crlf string
+    then "end"
+    into a buffer.
+  create a tab.
+  create the tab's node.
+  create the tab's node's document given the buffer.
+  put "writer" in the tab's mode.
+  adjust the tab's node.
+  put the current font in a font.
+  update the current font given the tab.
+  put the font in the current font.
+  stash the test result using "did not crash".
+  destroy the tab.
+
+to test (the writer):
+  test (the writer - update font based on trivial document).
+  test (the writer - update font based on text).
+  test (the docster - short tables of contents don't bounce).
+
 the text margin is a number equal to 1/24 inch.
 
 the tracer color is a color.
@@ -5224,19 +5352,7 @@ to unlabel some shapes:
 some unsorted shape refers are some shape refers.
 
 to update the current font:
-  if the current tab is nil, exit.
-  if the current tab's mode is not "writer", exit.
-  if the current tab's node is nil, exit.
-  if the current tab's node's page does not contain text, exit.
-  if the current font is selected given the current tab's node's page, exit.
-  if the current tab's node's page does contain selected text, 
-    set the current font given the current tab's node's page (selected text).
-  if the current font was set manually, exit.
-  if the current font is visible given the current tab's node's page, exit.
-  if the current tab's node's page does contain visible text, 
-    set the current font given the current tab's node's page (visible text).
-  if the current font is used by the current tab's node's page, exit.
-  set the current font given the current tab's node's page.
+  update the current font given the current tab.
 
 to update the current font given a shape:
   if the current tab is nil, exit.
@@ -5246,6 +5362,21 @@ to update the current font given a shape:
     set the current font given the shape's text; exit.
   if the shape's kind is "group", 
     set the current font given the shape's shapes.
+
+to update the current font given a tab:
+  if the tab is nil, exit.
+  if the tab's mode is not "writer", exit.
+  if the tab's node is nil, exit.
+  if the tab's node's page does not contain text, exit.
+  if the current font is selected given the tab's node's page, exit.
+  if the tab's node's page does contain selected text, 
+    set the current font given the tab's node's page (selected text).
+  if the current font was set manually, exit.
+  if the current font is visible given the tab's node's page, exit.
+  if the tab's node's page does contain visible text, 
+    set the current font given the tab's node's page (visible text).
+  if the current font is used by the tab's node's page, exit.
+  set the current font given the tab's node's page.
 
 to uppercase any selected shapes on a page:
   if the page is nil, exit.

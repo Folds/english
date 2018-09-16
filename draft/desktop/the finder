@@ -1299,8 +1299,57 @@ to test (the finder - destutter a path):
   destutter the actual.
   stash the test result given the actual.
 
+to test (the finder - don't scroll few files):
+  create a test result about "the finder" and "scroll"
+    and expecting "don't need scrollbar".
+  create a tab.
+  create the tab's node.
+  put "finder" in the tab's mode.
+  put the finder's nodes/box in a count.
+  loop.
+    add 1 to another count.
+    if the other count is greater than the count, break.
+    create a nodette.
+    append the nodette to the tab's node's nodettes.
+    put the tab's node into the nodette's parent node.
+  repeat.
+  adjust the tab's node.
+  make a scrollee given the tab.
+  if a scrollbar is not needed given the scrollee,
+    stash the test result using "don't need scrollbar";
+    destroy the tab;
+    exit.
+  stash the test result given "need scrollbar".
+  destroy the tab.
+
+to test (the finder - scroll many files):
+  create a test result about "the finder" and "scroll"
+    and expecting "need scrollbar".
+  create a tab.
+  create the tab's node.
+  put "finder" in the tab's mode.
+  put the finder's nodes/box in a count.
+  add 5 to the count.
+  loop.
+    add 1 to another count.
+    if the other count is greater than the count, break.
+    create a nodette.
+    append the nodette to the tab's node's nodettes.
+    put the tab's node into the nodette's parent node.
+  repeat.
+  adjust the tab's node.
+  make a scrollee given the tab.
+  if a scrollbar is not needed given the scrollee,
+    stash the test result using "don't need scrollbar";
+    destroy the tab;
+    exit.
+  stash the test result given "need scrollbar".
+  destroy the tab.
+
 to test (the finder):
   test (the finder - destutter a path).
+  test (the finder - don't scroll few files).
+  test (the finder - scroll many files).
 
 a total count is a count.
 
