@@ -207,6 +207,24 @@ a command is a thing with
   a color, a font, a font color, an alignment,
   a name, a shortcut, and a handler.
 
+to convert a byte to a code point (trio):
+  \ See also http://www.unicode.org/charts/PDF/U1F300.pdf
+  if the byte is the underscore byte,
+    convert "U+1F5D5" to the code point; exit. \ MINIMIZE
+  if the byte is the big-x byte,
+    convert "U+1F5D9" to the code point; exit. \ CANCELLATION X
+  if the byte is not the plus-sign byte,
+    convert the byte to the code point; exit.
+  if the screen is maximized,
+    convert "U+1F5D7" to the code point; exit. \ OVERLAP
+  convert   "U+1F5D6" to the code point.       \ MAXIMIZE  
+
+to convert a name string to a wide string (trio):
+  if the name string's length is not 1,
+    convert the name string to the wide string; exit.
+  convert the name string's first's target to a code point (trio).
+  convert the code point to the wide string.
+
 to convert some string things to a string (compact):
   clear the string.
   if the string things are empty, exit.
@@ -718,6 +736,21 @@ to draw a command:
   draw the command's shortcut at the right of the box
     with the black color and the command's font.
 
+to draw a command (trio):
+  if the command is nil, exit.
+  unmask everything.
+  choose a color for the command (temporary color).
+  draw the command's roundy box with the command's font color and the color.
+  put the command's roundy box into a box.
+  adjust the box given 1/8 inch and 0 and -1/8 inch and -1/24 inch.
+  \ don't mask to the box, menu letters are too big to fit
+  mask outside the command's roundy box.
+  convert the command's name to a wide string (trio).
+  draw the wide string in the box with the command's font color
+    and the command's font and the command's alignment (wide string).
+  draw the command's shortcut at the right of the box
+    with the black color and the command's font.
+
 to draw some commands:
   loop.
     get a command from the commands.
@@ -766,19 +799,29 @@ to draw a tab:
     draw the tab's box's left line with the black color.
   if the tab is not the current tab,
     draw the tab's box's top line with the black color.
+  reabbreviate the tab's name giving a wide string called wide name.
   if the tab's mode is "finder",
-    draw the tab's name in the center of the tab's info box
-      with the tab's name color and the requested control font;
+    draw the wide name in the center of the tab's info box
+      with the tab's name color and the requested control font (wide string);
     exit.
-  draw the tab's info string in the center of the tab's info box
-    with the gray color and the requested control font.
-  draw the tab's name in the center of the tab's name box
-    with the tab's name color and the requested control font.
+  reabbreviate the tab's info string giving a wide string called wide info string.
+  draw the wide info string in the center of the tab's info box
+    with the gray color and the requested control font (wide string).
+  draw the wide name in the center of the tab's name box
+    with the tab's name color and the requested control font (wide string).
 
 to draw some tabs:
   get a tab from the tabs.
   if the tab is nil, exit.
   draw the tab.
+  repeat.
+
+to draw a trio:
+  if the trio is nil, exit.
+  loop.
+    get a command from the trio's commands.
+    if the command is nil, exit.
+    draw the command (trio).
   repeat.
 
 the fast menu flag is a flag.
@@ -938,15 +981,14 @@ to get an abbreviation byte given a font:
     put the ellipsis byte in the abbreviation byte; exit.
   \ In proportional fonts, "…" is rather wide.
   \ "t„noodle" takes the same space as "t…noo…" in Arial.
-  \ The "„" does not look as good, but is much narrower,
-  \ so use it instead.
+  \ The "„" does not look as good, but is much narrower.
   put the lower-double-quote byte in the abbreviation byte.
+  \ When drawing tabs that have proportional fonts,
+  \ the abbreviation byte is converted from "„" (U+0084)
+  \ to unicode's "modifier letter low tilde" (U+02F7).
+  \ https://www.everything2.com/title/Spacing+modifier+letters
   \ To-do:  Allow wide strings as command names.
-  \         Allow drawing wide strings in boxes.
   \         Allow wide strings in sources, text, and rows.
-  \         Change the "„" (U+0084)
-  \         to a "modifier letter low tilde" (U+02F7)
-  \         https://www.everything2.com/title/Spacing+modifier+letters
 
 to get a handler given a name:
   put the name into a string.
@@ -2725,6 +2767,17 @@ to put a tab's name color into a color:
   put the blue color's darkest shade in another color.
   put 100 in the other color's lightness.   
   put the other color in the color.
+
+to reabbreviate a string called input giving a wide string called result:
+  convert the input to the result.
+  if the requested control font is fixed-width, exit.
+  \ replace the abbreviation byte with the low modifier tilde (U+02F7).
+  get an abbreviation byte given the requested control font.
+  convert the abbreviation byte to a code point.
+  convert the code point to a wide string called paleo.
+  convert "U+02F7" to another code point.
+  convert the other code point to a wide string called neo.
+  replace the paleo with the neo in the result (throughout).
 
 the recent nonstandard font height name is a string.
 

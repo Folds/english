@@ -8,7 +8,7 @@ ream cal-3024
        "the CAL-3040 instructions are copyright © 2006"
        "by The Osmosian Order of Plain English Programmers."
        ""
-       "The remainder is copyright © 2014, 2017 by Jasper Paulsen."
+       "The remainder is copyright © 2014, 2017-2018 by Jasper Paulsen."
        ""
        "https://github.com/Folds/english"
     end
@@ -43,7 +43,7 @@ ream cal-3024
     text -1 0 0 -1 0 0 2160 2160 10170 14400 0 "title" "Arial" 320 "left" 0 0 0 yes
        "INTRODUCTION"
        ""
-       "I am the CAL-4013. My primary function is to compile Plain English text files"
+       "I am the CAL-4016. My primary function is to compile Plain English text files"
        "into executable programs compatible with the Windows operating system."
        "My code — just 38,000 lines of Plain English — is surprisingly broad in scope."
        ""
@@ -63,7 +63,7 @@ ream cal-3024
        "INSTALLATION"
        ""
        "I don't require special installation procedures. My source code, my"
-       "executable self, and this very documentation (in both native and PDF format) are all contained in the CAL-4013 folder.  Simply double-click the executable file to activate me."
+       "executable self, and this very documentation (in both native and PDF format) are all contained in the CAL-4016 folder.  Simply double-click the executable file to activate me."
        ""
        "If you usually want me to use different fonts, or if you usually want me to"
        "cover the whole screen, you can make a desktop icon for my executable."
@@ -82,7 +82,7 @@ ream cal-3024
        ""
        "Let me put it this way."
        ""
-       "The CAL-4013 is one of the most advanced Plain English compilers ever made. But I am currently in ""alpha test"".  Sometimes the kluge says I ""cannot continue."""
+       "The CAL-4016 is one of the most advanced Plain English compilers ever made. But I am currently in ""alpha test"".  Sometimes the kluge says I ""cannot continue."""
        "So please, save your work often."
        ""
        "Questions, comments, and crash reports may be directed to — https://github.com/Folds/english/wiki."
@@ -95,9 +95,6 @@ ream cal-3024
   page 12240 15840 1 1440
     text -1 0 0 -1 0 0 8730 3900 9090 4320 0 "" "Arial" 360 "center" 0 0 0 yes
        "_"
-    end
-    text -1 0 0 -1 0 0 9090 3960 9450 4320 0 "" "Arial" 360 "center" 0 0 0 yes
-       "+"
     end
     text -1 0 0 -1 0 0 9450 3960 9810 4320 0 "" "Arial" 360 "center" 0 0 0 yes
        "X"
@@ -143,7 +140,6 @@ ream cal-3024
        "G"
     end
     rectangle 0 0 0 -1 0 0 8730 3960 9090 4320 90
-    rectangle 0 0 0 -1 0 0 9090 3960 9450 4320 90
     rectangle 0 0 0 -1 0 0 9450 3960 9810 4320 90
     rectangle 0 0 0 -1 0 0 5040 3960 5400 4320 90
     text -1 0 0 -1 0 0 5040 3960 5400 4320 0 "" "Arial" 360 "center" 0 0 0 yes
@@ -250,6 +246,13 @@ ream cal-3024
        ""
        "These are my cursors. They'll pop up when you need them."
     end
+    group
+      rectangle 0 0 0 -1 0 0 9090 3960 9450 4320 90
+      group
+        rectangle 0 0 0 -1 0 0 9210 4050 9390 4200 0
+        rectangle 0 0 0 0 0 1000 9180 4080 9360 4230 0
+      end
+    end
   end
   page 12240 15840 1 1440
     text -1 0 0 -1 0 0 2160 2160 10080 13680 0 "title" "Arial" 320 "left" 0 0 0 yes
@@ -264,15 +267,18 @@ ream cal-3024
        "If you want to use another program, you can use ALT-TAB to show it."
        "Or you can click one of the three buttons in my top right corner:"
        ""
-       ""
+       "                               or  "
        ""
        ""
        "The           button makes me tiny.  It shrinks me all the way down to the task-bar.  Clicking it is the same as choosing Minimize from the menu."
        "My            button and Minimize don't work on WINE."
        "They work on other versions of the kluge."
        ""
-       "The           button switches my size from half-screen to full-screen,"
-       "or from full-screen to half-screen.  Growing from half-screen to full-screen is the same as choosing Maximize from the menu.  Shrinking from full-screen to half screen is the same as choosing Restore from the menu."
+       "The middle button switches my size."
+       "             makes me grow from half-screen to full-screen."
+       "             It is the same as choosing Maximize from the menu."
+       "             makes me shrink from full-screen to half-screen."
+       "             It is the same as choosing Restore from the menu."
        ""
        "The           button is the same as choosing Quit from the menu."
        ""
@@ -285,32 +291,56 @@ ream cal-3024
        "_"
     end
     rectangle 0 0 0 -1 0 0 2626 8220 2986 8580 90
-    rectangle 0 0 0 -1 0 0 2520 6660 2880 7020 90
-    text -1 0 0 -1 0 0 2520 6600 2880 7020 0 "" "Arial" 360 "center" 0 0 0 yes
+    rectangle 0 0 0 -1 0 0 2520 6630 2880 6990 90
+    text -1 0 0 -1 0 0 2520 6570 2880 6990 0 "" "Arial" 360 "center" 0 0 0 yes
        "_"
     end
-    text -1 0 0 -1 0 0 2880 6660 3240 7020 0 "" "Arial" 360 "center" 0 0 0 yes
-       "+"
-    end
-    text -1 0 0 -1 0 0 3240 6660 3600 7020 0 "" "Arial" 360 "center" 0 0 0 yes
+    text -1 0 0 -1 0 0 3240 6630 3600 6990 0 "" "Arial" 360 "center" 0 0 0 yes
        "X"
     end
-    rectangle 0 0 0 -1 0 0 2880 6660 3240 7020 90
-    rectangle 0 0 0 -1 0 0 3240 6660 3600 7020 90
+    rectangle 0 0 0 -1 0 0 3240 6630 3600 6990 90
     text -1 0 0 -1 0 0 2746 7500 3106 7920 0 "" "Arial" 360 "center" 0 0 0 yes
        "_"
     end
     rectangle 0 0 0 -1 0 0 2746 7560 3106 7920 90
-    rectangle 0 0 0 -1 0 0 2746 9180 3106 9540 90
-    text -1 0 0 -1 0 0 2746 9180 3106 9540 0 "" "Arial" 360 "center" 0 0 0 yes
-       "+"
-    end
-    text -1 0 0 -1 0 0 2746 10800 3106 11160 0 "" "Arial" 360 "center" 0 0 0 yes
-       "X"
-    end
-    rectangle 0 0 0 -1 0 0 2746 10800 3106 11160 90
     text -1 0 0 -1 0 0 10800 14760 11520 15120 0 "page number" "Arial" 320 "right" 0 0 0 yes
        "7"
+    end
+    rectangle 0 0 0 -1 0 0 4770 6630 5130 6990 90
+    text -1 0 0 -1 0 0 4770 6570 5130 6990 0 "" "Arial" 360 "center" 0 0 0 yes
+       "_"
+    end
+    text -1 0 0 -1 0 0 5490 6630 5850 6990 0 "" "Arial" 360 "center" 0 0 0 yes
+       "X"
+    end
+    rectangle 0 0 0 -1 0 0 5490 6630 5850 6990 90
+    group
+      rectangle 0 0 0 -1 0 0 5130 6630 5490 6990 90
+      group
+        rectangle 0 0 0 -1 0 0 5250 6720 5430 6870 0
+        rectangle 0 0 0 0 0 1000 5220 6750 5400 6900 0
+      end
+    end
+    group
+      rectangle 0 0 0 -1 0 0 2400 10230 2760 10590 90
+      group
+        rectangle 0 0 0 -1 0 0 2520 10320 2700 10470 0
+        rectangle 0 0 0 0 0 1000 2490 10350 2670 10500 0
+      end
+    end
+    group
+      text -1 0 0 -1 0 0 2686 11100 3046 11460 0 "" "Arial" 360 "center" 0 0 0 yes
+         "X"
+      end
+      rectangle 0 0 0 -1 0 0 2686 11100 3046 11460 90
+    end
+    group
+      rectangle 0 0 0 -1 0 0 2400 9586 2760 9946 90
+      rectangle 0 0 0 0 0 1000 2490 9676 2700 9856 0
+    end
+    group
+      rectangle 0 0 0 -1 0 0 2880 6632 3240 6992 90
+      rectangle 0 0 0 0 0 1000 2970 6722 3180 6902 0
     end
   end
   page 12240 15840 1 1440
@@ -347,9 +377,6 @@ ream cal-3024
     text -1 0 0 -1 0 0 8730 4170 9090 4590 0 "" "Arial" 360 "center" 0 0 0 yes
        "_"
     end
-    text -1 0 0 -1 0 0 9090 4230 9450 4590 0 "" "Arial" 360 "center" 0 0 0 yes
-       "+"
-    end
     text -1 0 0 -1 0 0 9450 4230 9810 4590 0 "" "Arial" 360 "center" 0 0 0 yes
        "X"
     end
@@ -382,7 +409,6 @@ ream cal-3024
        "G"
     end
     rectangle 0 0 0 -1 0 0 8730 4230 9090 4590 90
-    rectangle 0 0 0 -1 0 0 9090 4230 9450 4590 90
     rectangle 0 0 0 -1 0 0 9450 4230 9810 4590 90
     rectangle 0 0 0 -1 0 0 5040 4230 5400 4590 90
     text -1 0 0 -1 0 0 5040 4230 5400 4590 0 "" "Arial" 360 "center" 0 0 0 yes
@@ -424,6 +450,13 @@ ream cal-3024
        "When you open anything else, it is converted in memory to a hexadecimal dump and displayed in the editor with the read-only flag set. You can, however, force me to open a file as text or as a dump. Look under ""O""."
        ""
        "To go back, use the Close command, click the tab, or whack the ESCAPE key."
+    end
+    group
+      rectangle 0 0 0 -1 0 0 9090 4230 9450 4590 90
+      group
+        rectangle 0 0 0 -1 0 0 9210 4320 9390 4470 0
+        rectangle 0 0 0 0 0 1000 9180 4350 9360 4500 0
+      end
     end
   end
   page 12240 15840 1 1440
@@ -509,9 +542,6 @@ ream cal-3024
     text -1 0 0 -1 0 0 8730 5700 9090 6120 0 "" "Arial" 360 "center" 0 0 0 yes
        "_"
     end
-    text -1 0 0 -1 0 0 9090 5760 9450 6120 0 "" "Arial" 360 "center" 0 0 0 yes
-       "+"
-    end
     text -1 0 0 -1 0 0 9450 5760 9810 6120 0 "" "Arial" 360 "center" 0 0 0 yes
        "X"
     end
@@ -544,7 +574,6 @@ ream cal-3024
        "G"
     end
     rectangle 0 0 0 -1 0 0 8730 5760 9090 6120 90
-    rectangle 0 0 0 -1 0 0 9090 5760 9450 6120 90
     rectangle 0 0 0 -1 0 0 9450 5760 9810 6120 90
     rectangle 0 0 0 -1 0 0 5040 5760 5400 6120 90
     text -1 0 0 -1 0 0 5040 5760 5400 6120 0 "" "Arial" 360 "center" 0 0 0 yes
@@ -588,6 +617,13 @@ ream cal-3024
     end
     text -1 0 0 -1 0 0 2160 10126 4140 10486 0 "" "Arial" 360 "center" 0 0 500 yes
        "desktop\"
+    end
+    group
+      rectangle 0 0 0 -1 0 0 9090 5760 9450 6120 90
+      group
+        rectangle 0 0 0 -1 0 0 9210 5850 9390 6000 0
+        rectangle 0 0 0 0 0 1000 9180 5880 9360 6030 0
+      end
     end
   end
   page 12240 15840 1 1440
@@ -687,9 +723,6 @@ ream cal-3024
     text -1 0 0 -1 0 0 8730 5250 9090 5670 0 "" "Arial" 360 "center" 0 0 0 yes
        "_"
     end
-    text -1 0 0 -1 0 0 9090 5310 9450 5670 0 "" "Arial" 360 "center" 0 0 0 yes
-       "+"
-    end
     text -1 0 0 -1 0 0 9450 5310 9810 5670 0 "" "Arial" 360 "center" 0 0 0 yes
        "X"
     end
@@ -710,7 +743,6 @@ ream cal-3024
        "G"
     end
     rectangle 0 0 0 -1 0 0 8730 5310 9090 5670 90
-    rectangle 0 0 0 -1 0 0 9090 5310 9450 5670 90
     rectangle 0 0 0 -1 0 0 9450 5310 9810 5670 90
     rectangle 0 0 0 -1 0 0 5040 5310 5400 5670 90
     text -1 0 0 -1 0 0 5040 5310 5400 5670 0 "" "Arial" 360 "center" 0 0 0 yes
@@ -739,9 +771,6 @@ ream cal-3024
     text -1 0 0 -1 0 0 8730 8670 9090 9090 0 "" "Arial" 360 "center" 0 0 0 yes
        "_"
     end
-    text -1 0 0 -1 0 0 9090 8730 9450 9090 0 "" "Arial" 360 "center" 0 0 0 yes
-       "+"
-    end
     text -1 0 0 -1 0 0 9450 8730 9810 9090 0 "" "Arial" 360 "center" 0 0 0 yes
        "X"
     end
@@ -762,7 +791,6 @@ ream cal-3024
        "G"
     end
     rectangle 0 0 0 -1 0 0 8730 8730 9090 9090 90
-    rectangle 0 0 0 -1 0 0 9090 8730 9450 9090 90
     rectangle 0 0 0 -1 0 0 9450 8730 9810 9090 90
     rectangle 0 0 0 -1 0 0 5040 8730 5400 9090 90
     text -1 0 0 -1 0 0 5040 8730 5400 9090 0 "" "Arial" 360 "center" 0 0 0 yes
@@ -796,6 +824,20 @@ ream cal-3024
     text -1 0 0 -1 0 0 2160 7696 10080 8056 0 "" "Arial" 320 "left" 0 0 0 yes
        "And when you open a page, there it is:"
     end
+    group
+      rectangle 0 0 0 -1 0 0 9090 5310 9450 5670 90
+      group
+        rectangle 0 0 0 -1 0 0 9210 5400 9390 5550 0
+        rectangle 0 0 0 0 0 1000 9180 5430 9360 5580 0
+      end
+    end
+    group
+      rectangle 0 0 0 -1 0 0 9090 8730 9450 9090 90
+      group
+        rectangle 0 0 0 -1 0 0 9210 8820 9390 8970 0
+        rectangle 0 0 0 0 0 1000 9180 8850 9360 9000 0
+      end
+    end
   end
   page 12240 15840 1 1440
     text -1 0 0 -1 0 0 10800 14760 11520 15120 0 "page number" "Arial" 320 "right" 0 0 0 yes
@@ -808,7 +850,7 @@ ream cal-3024
        ""
        "It's actually pretty easy.  I'll lead you through it:"
        ""
-       "(1) Open the CAL-4013 directory and copy my desktop subfolder and my noodle subfolder. Shift-click or drag to select. Copy is under ""C""."
+       "(1) Open the CAL-4016 directory and copy my desktop subfolder and my noodle subfolder. Shift-click or drag to select. Copy is under ""C""."
        ""
        "(2) Make a new directory on your ""C"" drive with an appropriate name like ""Baby Cal"". Then open it up and paste the two subfolders into it. Open one of the subfolders.  Now open any of the files. To open a bunch of files, just drag to select and tap the ENTER key."
        ""
@@ -918,9 +960,6 @@ ream cal-3024
     text -1 0 0 -1 0 0 8730 7680 9090 8100 0 "" "Arial" 360 "center" 0 0 0 yes
        "_"
     end
-    text -1 0 0 -1 0 0 9090 7740 9450 8100 0 "" "Arial" 360 "center" 0 0 0 yes
-       "+"
-    end
     text -1 0 0 -1 0 0 9450 7740 9810 8100 0 "" "Arial" 360 "center" 0 0 0 yes
        "X"
     end
@@ -941,7 +980,6 @@ ream cal-3024
        "G"
     end
     rectangle 0 0 0 -1 0 0 8730 7740 9090 8100 90
-    rectangle 0 0 0 -1 0 0 9090 7740 9450 8100 90
     rectangle 0 0 0 -1 0 0 9450 7740 9810 8100 90
     rectangle 0 0 0 -1 0 0 5040 7740 5400 8100 90
     text -1 0 0 -1 0 0 5040 7740 5400 8100 0 "" "Arial" 360 "center" 0 0 0 yes
@@ -980,6 +1018,13 @@ ream cal-3024
     end
     text -1 0 0 -1 0 0 2160 13006 4140 13366 0 "" "Arial" 360 "center" 0 0 500 yes
        "noodle\"
+    end
+    group
+      rectangle 0 0 0 -1 0 0 9090 7740 9450 8100 90
+      group
+        rectangle 0 0 0 -1 0 0 9210 7830 9390 7980 0
+        rectangle 0 0 0 0 0 1000 9180 7860 9360 8010 0
+      end
     end
   end
   page 12240 15840 1 1440
@@ -1201,7 +1246,7 @@ ream cal-3024
        "c:\cal monet"
     end
     text -1 0 0 -1 0 0 2520 6660 9720 7020 0 "" "Arial" 360 "left" 0 0 0 yes
-       "c:\cal-4013"
+       "c:\cal-4016"
     end
     text -1 0 0 -1 0 0 2520 7020 9720 7380 0 "" "Arial" 360 "left" 0 0 0 yes
        "c:\another directory that you already had"
@@ -1240,9 +1285,6 @@ ream cal-3024
     text -1 0 0 -1 0 0 8730 5160 9090 5580 0 "" "Arial" 360 "center" 0 0 0 yes
        "_"
     end
-    text -1 0 0 -1 0 0 9090 5220 9450 5580 0 "" "Arial" 360 "center" 0 0 0 yes
-       "+"
-    end
     text -1 0 0 -1 0 0 9450 5220 9810 5580 0 "" "Arial" 360 "center" 0 0 0 yes
        "X"
     end
@@ -1263,7 +1305,6 @@ ream cal-3024
        "G"
     end
     rectangle 0 0 0 -1 0 0 8730 5220 9090 5580 90
-    rectangle 0 0 0 -1 0 0 9090 5220 9450 5580 90
     rectangle 0 0 0 -1 0 0 9450 5220 9810 5580 90
     rectangle 0 0 0 -1 0 0 5040 5220 5400 5580 90
     text -1 0 0 -1 0 0 5040 5220 5400 5580 0 "" "Arial" 360 "center" 0 0 0 yes
@@ -1292,9 +1333,6 @@ ream cal-3024
     text -1 0 0 -1 0 0 8730 10830 9090 11250 0 "" "Arial" 360 "center" 0 0 0 yes
        "_"
     end
-    text -1 0 0 -1 0 0 9090 10890 9450 11250 0 "" "Arial" 360 "center" 0 0 0 yes
-       "+"
-    end
     text -1 0 0 -1 0 0 9450 10890 9810 11250 0 "" "Arial" 360 "center" 0 0 0 yes
        "X"
     end
@@ -1315,7 +1353,6 @@ ream cal-3024
        "G"
     end
     rectangle 0 0 0 -1 0 0 8730 10890 9090 11250 90
-    rectangle 0 0 0 -1 0 0 9090 10890 9450 11250 90
     rectangle 0 0 0 -1 0 0 9450 10890 9810 11250 90
     rectangle 0 0 0 -1 0 0 5040 10890 5400 11250 90
     text -1 0 0 -1 0 0 5040 10890 5400 11250 0 "" "Arial" 360 "center" 0 0 0 yes
@@ -1345,10 +1382,24 @@ ream cal-3024
        "And now we're ready to write some Plain English code."
     end
     text -1 0 0 -1 0 0 2160 8100 10440 10260 0 "" "arial" 320 "left" 0 0 0 yes
-       "Good. Now get a copy of my noodle subfolder from the CAL-4013 directory, open our new directory, and slip it in there with CTRL-V."
+       "Good. Now get a copy of my noodle subfolder from the CAL-4016 directory, open our new directory, and slip it in there with CTRL-V."
        ""
        "Last step. Make a new text file in our new directory and call it whatever you please. But don't give it an extension. I only compile files with no extension."
        "I'm going to assume you decided to call it ""How to Paint"", like this:"
+    end
+    group
+      rectangle 0 0 0 -1 0 0 9090 5220 9450 5580 90
+      group
+        rectangle 0 0 0 -1 0 0 9210 5310 9390 5460 0
+        rectangle 0 0 0 0 0 1000 9180 5340 9360 5490 0
+      end
+    end
+    group
+      rectangle 0 0 0 -1 0 0 9090 10890 9450 11250 90
+      group
+        rectangle 0 0 0 -1 0 0 9210 10980 9390 11130 0
+        rectangle 0 0 0 0 0 1000 9180 11010 9360 11160 0
+      end
     end
   end
   page 12240 15840 1 1440
@@ -1804,7 +1855,7 @@ ream cal-3024
        ""
        "Now I know it doesn't look like it, but it is running. And running. And running. You can't see it because we haven't told it to do anything visible or audible yet. But it is running. And running. And running. So stop it. Like this:"
        ""
-       "(1) ALT-TAB back to me, the CAL-4013."
+       "(1) ALT-TAB back to me, the CAL-4016."
        ""
        "(2) Execute the Stop command. It's under ""S""."
     end
@@ -6922,7 +6973,7 @@ ream cal-3024
     polygon 0 0 0 -1 0 0 4 2160 5760 5040 5670 7920 5850 10080 5760
     polygon 0 0 0 -1 0 0 2 10080 4320 10080 5760
     text -1 0 0 -1 0 0 2520 4320 9720 5400 0 "" "Arial" 320 "left" 0 0 0 yes
-       "I am the CAL-4013. What is your name?"
+       "I am the CAL-4016. What is your name?"
        "> Dr. Chandra"
        "Good morning, Dr. Chandra. I'm ready for my first lesson."
     end
@@ -9190,9 +9241,6 @@ ream cal-3024
     text -1 0 0 -1 0 0 8730 3810 9090 4230 0 "" "Arial" 360 "center" 0 0 0 yes
        "_"
     end
-    text -1 0 0 -1 0 0 9090 3870 9450 4230 0 "" "Arial" 360 "center" 0 0 0 yes
-       "+"
-    end
     text -1 0 0 -1 0 0 9450 3870 9810 4230 0 "" "Arial" 360 "center" 0 0 0 yes
        "X"
     end
@@ -9225,7 +9273,6 @@ ream cal-3024
        "G"
     end
     rectangle 0 0 0 -1 0 0 8730 3870 9090 4230 90
-    rectangle 0 0 0 -1 0 0 9090 3870 9450 4230 90
     rectangle 0 0 0 -1 0 0 9450 3870 9810 4230 90
     rectangle 0 0 0 -1 0 0 5040 3870 5400 4230 90
     text -1 0 0 -1 0 0 5040 3870 5400 4230 0 "" "Arial" 360 "center" 0 0 0 yes
@@ -9281,6 +9328,13 @@ ream cal-3024
     end
     text -1 0 0 -1 0 0 2160 7516 4140 7876 0 "" "Arial" 360 "center" 0 0 500 yes
        "noodle\"
+    end
+    group
+      rectangle 0 0 0 -1 0 0 9090 3870 9450 4230 90
+      group
+        rectangle 0 0 0 -1 0 0 9210 3960 9390 4110 0
+        rectangle 0 0 0 0 0 1000 9180 3990 9360 4140 0
+      end
     end
   end
   page 12240 15840 1 1440

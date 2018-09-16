@@ -8,7 +8,7 @@
 \
 \ The colors are defined and manipulated in 'colors'.
 \ The bytes and the keys are defined and manipulated in 'characters'
-\ (but 'characters' does not handle events.)
+\ (but 'characters' handles neither events nor unicode).
 \
 \ Texts (and their events, rows, carets, anchors, positions,
 \ and selections) are defined and manipulated in 'text'.
@@ -678,6 +678,8 @@ to cluck:
 
 the cluck sound is a wave equal to $524946463A02000057415645666D74201200000001000100401F0000401F000001000800000066616374040000000702000064617461070200007F7F807F7F807F7F808080807F807F7F80817F81817E7E827E7D847C79877D5F6D99B2A25D608269A5979869667F7D8D738C7D8C5E7E878F767A75868D84797278829A7D7E857A73929271657492907D7E7D787E8B887C758388827E817F7C7B89897C7A7E84838183827E7A8488877D7E8181808484817C7F84838181807E7F8283807E8081808182807F7F81818081807F7F8081818080807F7F808180807F80808080807F8080807F8080808080807F7F7F7F7F8080807F7F7F7C7B8182817C7B7D7E8082807D7D7C7F8281807F7C7D808082807E7E7E7D7E807D7B7C7B7D7D7B7A7979797875727269797A490F4571FFF4FF0C001297FBF492525BB0F5B26A001C69BEE5BA76476F9EBD953C3757BAC9BB705C7F9AA883645D7897AA9B806977959588696976999B83766F828C907F7375828E91877B757D868B837A757C858D8880787B8187847B7A7D8788807B79808486817D7C7F8384817D7C7F8484817B7B7D83847F7C7B7E8182827D7C7C8082817D7C7D7F81807F7D7D7F82817F7B7B7E8081807E7D7D7F80807E7D7D7E80807E7D7D7E7F807F7D7D7E7F807F7E7D7E7E80807F7E7D7E80807F7E7E7E7F7F7E7E7E7F7F7F7F7E7E7F7F807F7F7E7E7E7F8080807E7E7E80807F7E7E7F8081807F7F7E7F7F80807F7E7F8081807F7E7E7E80808080807F807F7F7F7F7F7F7F80808080807F7F7F808080807F80808180807F80808100.
 
+a code point is a string.
+
 a command line is a string.
 
 to compare a string to another string given a length and another length (equal only):
@@ -821,6 +823,47 @@ to convert a box to a string:
   append " " to the string.
   append the box's bottom to the string.
 
+to convert a byte to a code point:
+  clear the code point.
+  convert the byte to a nibble string.
+  if the nibble string's length is odd,
+    prepend the zero byte to the nibble string.
+  put the nibble string as a string in the code point.
+  prepend "U+00" to the code point.
+  if the byte is less than the euro-sign byte, exit.
+  if the byte is at least the non-breaking-space byte, exit.
+  \ See also https://msdn.microsoft.com/en-us/library/cc195054.aspx
+  \ The following list is sorted by the byte's numerical order:
+  if the byte is the euro-sign byte,             put "U+20AC" in the code point; exit. \ EURO SIGN
+  if the byte is the lower-single-quote byte,    put "U+201A" in the code point; exit. \ SINGLE LOW-9 QUOTATION MARK
+  if the byte is the little-f-hook byte,         put "U+0192" in the code point; exit. \ LATIN SMALL LETTER F WITH HOOK
+  if the byte is the lower-double-quote byte,    put "U+201E" in the code point; exit. \ DOUBLE LOW-9 QUOTATION MARK
+  if the byte is the ellipsis byte,              put "U+2026" in the code point; exit. \ HORIZONTAL ELLIPSIS
+  if the byte is the dagger byte,                put "U+2020" in the code point; exit. \ DAGGER
+  if the byte is the double-dagger byte,         put "U+2021" in the code point; exit. \ DOUBLE-DAGGER
+  if the byte is the circumflex byte,            put "U+02C6" in the code point; exit. \ MODIFIER LETTER CIRCUMFLEX ACCENT
+  if the byte is the per-mille-sign byte,        put "U+2030" in the code point; exit. \ PER MILLE SIGN
+  if the byte is the big-s-caron byte,           put "U+0160" in the code point; exit. \ LATIN CAPITAL LETTER S WITH CARON
+  if the byte is the left-alligator-quote byte,  put "U+2039" in the code point; exit. \ SINGLE LEFT-POINTING ANGLE QUOTATION MARK
+  if the byte is the big-oe byte,                put "U+0152" in the code point; exit. \ LATIN CAPITAL LIGATURE OE
+  if the byte is the big-z-caron byte,           put "U+017D" in the code point; exit. \ LATIN CAPITAL LETTER Z WITH CARON
+  if the byte is the left-single-quote byte,     put "U+2018" in the code point; exit. \ LEFT SINGLE QUOTATION MARK
+  if the byte is the right-single-quote byte,    put "U+2019" in the code point; exit. \ RIGHT SINGLE QUOTATION MARK
+  \                                                  "U+2032"                          \ PRIME
+  if the byte is the left-double-quote byte,     put "U+201C" in the code point; exit. \ LEFT DOUBLE QUOTATION MARK
+  if the byte is the right-double-quote byte,    put "U+201D" in the code point; exit. \ RIGHT DOUBLE QUOTATION MARK
+  \                                                  "U+2033"                          \ DOUBLE PRIME
+  if the byte is the bullet byte,                put "U+2022" in the code point; exit. \ BULLET
+  if the byte is the en-dash byte,               put "U+2013" in the code point; exit. \ EN DASH
+  if the byte is the em-dash byte,               put "U+2014" in the code point; exit. \ EM DASH
+  if the byte is the little-tilde byte,          put "U+02DC" in the code point; exit. \ SMALL TILDE
+  if the byte is the trade-mark byte,            put "U+2122" in the code point; exit. \ TRADE MARK SIGN
+  if the byte is the little-s-caron byte,        put "U+0161" in the code point; exit. \ LATIN SMALL LETTER S WITH CARON
+  if the byte is the right-alligator-quote byte, put "U+203A" in the code point; exit. \ SINGLE RIGHT-POINTING ANGLE QUOTATION MARK
+  if the byte is the little-oe byte,             put "U+0153" in the code point; exit. \ LATIN SMALL LIGATURE OE
+  if the byte is the little-z-caron byte,        put "U+017E" in the code point; exit. \ LATIN SMALL LETTER Z WITH CARON
+  if the byte is the big-y-diaeresis byte,       put "U+0178" in the code point; exit. \ LATIN CAPITAL LETTER Y WITH DIARESIS
+
 to convert a byte into a string:
   put 1 into a length.
   reassign the string's first given the length.
@@ -852,6 +895,50 @@ to convert a byte to a query byte:
   if the byte is 32, put "+" into the query byte; exit. \ space
   convert the byte to a nibble string.
   put "%" then the nibble string into the query byte.
+
+to convert a code point to a wide string:
+  \ See also: https://stackoverflow.com/tags/surrogate-pairs/info
+  clear the wide string.
+  if the code point's length is 0, exit.
+  if the code point is not valid, exit.
+  privatize the code point.
+  remove the first two bytes from the code point.
+  convert the code point as a nibble string into a hex string.
+  if the hex string starts with the zero byte,
+    remove the first byte from the hex string.
+  if the hex string starts with the zero byte,
+    remove the first byte from the hex string.
+  if the hex string's length is 0,
+    append the zero byte to the hex string.
+  if the hex string's length is 1,
+    convert the hex string as a string to the wide string; exit.
+  if the hex string's length is 2,
+    convert the hex string as a string to the wide string;
+    remove the first two bytes from the wide string;
+    put the hex string's first's target in the wide string's last's target;
+    exit. 
+  if the hex string's length is not 3,
+    exit. \ should not reach here.
+  put the hex string in another hex string.
+  remove the last byte from the hex string.
+  subtract 1 from the hex string's first's target.
+  put the hex string's first's target in a wyrd's high byte.
+  put the hex string's last's target in the wyrd's low byte.
+  put the wyrd in a number's low wyrd.
+  divide the number by 4.
+  add 55296 to the number.
+  put the number's low wyrd in the wyrd.
+  remove the first byte from the other hex string.
+  put the other hex string's first's target in another wyrd's high byte.
+  put the other hex string's last's target in the other wyrd's low byte.
+  put the other wyrd in another number's low wyrd.
+  divide the other number by 1024 giving a quotient and a remainder.
+  add 56320 to the remainder.
+  put the remainder's low wyrd in the other wyrd.
+  put the wyrd's low byte then the wyrd's high byte
+    then the other wyrd's low byte then the other wyrd's high byte
+    in another string.
+  put the other string in the wide string as a string.
 
 to convert a flag to a hex string:
   reassign the hex string's first given the flag's magnitude.
@@ -1132,6 +1219,40 @@ to convert a string and an actual font info and an original font info into a buf
   convert the substring to another pdf string.
   append the other pdf string to the buffer.
 
+to convert a string to another string (listing bytes):
+  clear the other string.
+  put the string's first in a byte pointer.
+  loop.
+    if the byte pointer is greater than the string's last, exit.
+    if the other string is not "",
+      append ", " to the other string.
+    put the byte pointer's target in a wyrd's low byte.
+    put the wyrd in a number's low wyrd.
+    append the number to the other string.
+    add 1 to the byte pointer.
+  repeat.
+
+to convert a string to a code point:
+  clear the code point.
+  if the string is not any valid code point,
+    exit.
+  privatize the string.
+  remove the first two bytes from the string.
+  if the string's length is greater than 6,
+    put the string's length in a number;
+    subtract 6 from the number;
+    remove leading bytes from the string given the number.
+  if the string's length is less than 4,
+    put 4 minus the string's length in a count;
+    fill a pad string with the zero byte given the count;
+    prepend the pad to the string.
+  if the string is 6 long and starts with the zero byte,
+    remove the first byte from the string.
+  if the string is 5 long and starts with the zero byte,
+    remove the first byte from the string.
+  put the string in the code point.
+  prepend "U+" to the code point.
+
 to convert a string to a flag:
   if the string is "y", set the flag; exit.
   if the string is "yes", set the flag; exit.
@@ -1249,6 +1370,12 @@ to convert a string to a wide string:
   slap a substring on the string.
   loop.
     if the substring is blank, exit.
+    if the substring's first's target is between 128 and 159, \ inclusive
+      convert the substring's first's target to a code point;
+      convert the code point to a wide string called temp;
+      append the temp to the wide string;
+      add 1 to the substring's first;
+      repeat.
     append the substring's first's target to the wide string.
     append the null byte to the wide string.
     add 1 to the substring's first.
@@ -1903,6 +2030,10 @@ to debug a string:
   call "user32.dll" "MessageBoxA" with 0
     and the string's first and "debug"'s first and 0.
 
+to debug a string (listing bytes):
+  convert the string to another string (listing bytes).
+  debug the other string.
+
 to debug a string (quoted):
   privatize the string.
   prepend the double-quote byte to the string.
@@ -2066,6 +2197,34 @@ to decide if can find a library procedure in a library (failure cache):
 to decide if can find a library procedure in a library (success cache):
   put the library then ";" then the library procedure in a string.
   if the string is in the cached found library procedures, say yes.
+  say no.
+
+to decide if a code point is valid;
+to decide if a string is any valid code point:
+  privatize the string.
+  if the string does not start with "U+", say no.
+  remove the first two bytes from the string.
+  if the string's length is at most 6,
+    put "0" in another string.
+  if the string's length is greater than 6,
+    put the string in the other string;
+    remove trailing bytes from the other string given 6;
+    put the string's length minus 6 in a number;
+    remove leading bytes from the string given the number.
+  if the other string does not start with "0", say no.
+  if the other string is not boring, say no.
+  if the string is not just hexadecimals, say no.
+  put 6 minus the string's length in the number.
+  fill a pad string with the zero byte given the number.
+  prepend the pad string to the string.
+  \ because we have confirmed that the string only contains
+  \ hexadecimal digits, we do not need to check
+  \ for bytes less than the zero byte.
+  if the string's first's target is the zero byte, say yes.
+  if the string's first's target is greater than the one byte, say no.
+  \ to reach this point, the string must start with "1".
+  remove the first byte from the string.
+  if the string's first's target is the zero byte, say yes.
   say no.
 
 to decide if compile or list was requested:
@@ -2948,9 +3107,24 @@ to decide if a string is blank:
   intel $B800000000.   \ mov eax,0
   \ END:
 
+to decide if a string is boring:
+  if the string's length is at most 1, say yes.
+  put the string's first's target in a byte.
+  put the string's first in a byte pointer.
+  loop.
+    add 1 to the byte pointer.
+    if the byte pointer is greater than the string's last, say yes.
+    if the byte pointer's target is not the byte, say no.
+  repeat.
+
 to decide if a string is a byte:
   if the string's length is not 1, say no.
   if the string's first's target is the byte, say yes.
+  say no.
+
+to decide if a string is a count long and starts with a byte:
+  if the string's length is not the count, say no.
+  if the string starts with the byte, say yes.
   say no.
 
 to decide if a string is dos-compatible:
@@ -3007,6 +3181,14 @@ to decide if a string is in an index:
   find a refer given the string and the index.
   if the refer is nil, say no.
   say yes.
+
+to decide if a string is just hexadecimals:
+  put the string's first in a byte pointer.
+  loop.
+    if the byte pointer is greater than the string's last, say yes.
+    if the byte pointer's target is not any hexadecimal digit, say no.
+    add 1 to the byte pointer.
+  repeat.
 
 to decide if a string is in some string things:
   loop.
@@ -3732,7 +3914,8 @@ to draw a string in a box with a color and an alignment:
   draw the string in the box with the color and the default font and the alignment.
 
 to draw a string in a box with a color and a font and an alignment:
-  get an offset pair given the string and the box and the font and the alignment.
+  get an offset pair given the string
+    and the box and the font and the alignment.
   draw the string at the box's left-top plus the offset pair with the color and the font.
 
 to draw a string in a box with a font and an alignment:
@@ -3749,6 +3932,40 @@ to draw a string in the center of a box with a color and a font:
 
 to draw a string in the center of a box with a font:
   draw the string in the center of the box with the black color and the font.
+
+to draw a wide string at a spot with a color and a font (wide string):
+  if the pdf state's page flag is set,
+    draw the wide string at the spot with the color and the font (pdf style); exit.
+    \to-do:  update pdf code to handle wide string.
+  set the colorref of the current canvas given the color.
+  create the hfont of the current canvas given the font.
+  adjust spacing given the wide string.
+  put the wide string's first into a substring's first.
+  put the substring's first plus the text cutoff minus 1
+    into the substring's last.
+  privatize the spot.
+  loop.
+    if the substring is blank, break.
+    if the substring's last is greater than the wide string's last,
+      put the wide string's last into the substring's last.
+    put the substring's length in a number.
+    divide the number by 2 giving a wyrd count and a remainder.
+    call "gdi32.dll" "TextOutW" with the current canvas
+      and the spot's x and the spot's y
+      and the substring's first and the wyrd count.
+    get a width given the substring as a wide string and the current canvas.
+    add the width to the spot's x.
+    move the substring given the text cutoff.
+  repeat.
+  destroy the hfont of the current canvas.
+
+to draw a wide string in a box with a color and a font and an alignment (wide string):
+  get an offset pair given the wide string
+    and the box and the font and the alignment.
+  draw the wide string at the box's left-top plus the offset pair with the color and the font (wide string).
+
+to draw a wide string in the center of a box with a color and a font (wide string):
+  draw the wide string in the box with the color and the font and "center" (wide string).
 
 a drive is a string.
   \ start of path to first backslash = c:\
@@ -4476,11 +4693,43 @@ to get an abca and an abcc given a string and a canvas:
     and the string's last's target and the string's last's target and another abc's whereabouts.
   put the other abc's abcc into the abcc.
 
+to get an abca and an abcc given a wide string and a canvas:
+  put 0 into the abca.
+  put 0 into the abcc.
+  if the wide string's wyrd count is less than 1, exit.
+  put the wide string's first in a byte pointer.
+  put the byte pointer's target in a wyrd's low byte.
+  add 1 to the byte pointer.
+  put the byte pointer's target in the wyrd's high byte.
+  call "gdi32.dll" "GetCharABCWidthsW" with the canvas
+    and the wyrd and the wyrd and an abc's whereabouts.
+  put the abc's abca into the abca.
+  put the wide string's last in another byte pointer.
+  if the wide string's length is odd,
+    subtract 1 from the other byte pointer.
+  put the other byte pointer's target in another wyrd's high byte.
+  subtract 1 from the other byte pointer.
+  put the other byte pointer's target in the other wyrd's low byte.
+  call "gdi32.dll" "GetCharABCWidthsW" with the canvas
+    and the other wyrd and the other wyrd and another abc's whereabouts.
+  put the other abc's abcc into the abcc.
+
 to get an abca given a string and a canvas:
   put 0 into the abca.
   if the string's length is less than 1, exit.
   call "gdi32.dll" "GetCharABCWidthsA" with the canvas
     and the string's first's target and the string's first's target and an abc's whereabouts.
+  put the abc's abca into the abca.
+
+to get an abca given a wide string and a canvas:
+  put 0 into the abca.
+  if the wide string's wyrd count is less than 1, exit.
+  put the wide string's first in a byte pointer.
+  put the byte pointer's target in a wyrd's low byte.
+  add 1 to the byte pointer.
+  put the byte pointer's target in the wyrd's high byte.
+  call "gdi32.dll" "GetCharABCWidthsW" with the canvas
+    and the wyrd and the wyrd and an abc's whereabouts.
   put the abc's abca into the abca.
 
 to get some addrinfo routines:
@@ -4730,12 +4979,27 @@ to get an offset pair given a string and a box and a font and an alignment:
 
 to get an offset pair given a string and a box and a font and an alignment (fast):
   if the alignment is "left",
-    get the offset pair's x given the string and the box (fast - left).
+    get the offset pair's x given the string and the box (fast - ascii left).
   if the alignment is "right",
-    get the offset pair's x given the string and the box (fast - right).
+    get the offset pair's x given the string and the box (fast - ascii right).
   if the alignment is "center",
-    get the offset pair's x given the string and the box (fast - center).
+    get the offset pair's x given the string and the box (fast - ascii center).
   call "gdi32.dll" "GetTextMetricsA" with the memory canvas and a textmetric's whereabouts.
+  add the box's height minus the textmetric's tmheight divided by 2 to the offset pair's y.
+
+to get an offset pair given a wide string and a box and a font and an alignment:
+  create the hfont of the memory canvas given the font.
+  get the offset pair given the wide string and the box and the font and the alignment (fast).
+  destroy the hfont of the memory canvas.
+
+to get an offset pair given a wide string and a box and a font and an alignment (fast):
+  if the alignment is "left",
+    get the offset pair's x given the wide string and the box (fast - left).
+  if the alignment is "right",
+    get the offset pair's x given the wide string and the box (fast - right).
+  if the alignment is "center",
+    get the offset pair's x given the wide string and the box (fast - center).
+  call "gdi32.dll" "GetTextMetricsW" with the memory canvas and a textmetric's whereabouts.
   add the box's height minus the textmetric's tmheight divided by 2 to the offset pair's y.
 
 to get an outlinetextmetric given a font:
@@ -4917,7 +5181,8 @@ to get a width given a number and some font widths: \ indexes are 0 based
 to get a width given a string and a canvas:
    \ assumes font is already selected in canvas
   call "gdi32.dll" "GetTextExtentPoint32A" with the canvas
-    and the string's first and the string's length and a pair's whereabouts.
+    and the string's first and the string's length
+    and a pair's whereabouts.
   put the pair's x into the width.
 
 to get a width given a string and a canvas and a font:
@@ -4928,19 +5193,50 @@ to get a width given a string and a canvas and a font:
 to get a width given a string and a font: \ assumes memory canvas
   get the width given the string and the memory canvas and the font.
 
-to get an x coord given a string and a box (fast - center):
+to get a width given a wide string and a canvas:
+   \ assumes font is already selected in canvas
+  call "gdi32.dll" "GetTextExtentPoint32W" with the canvas
+    and the wide string's first and the wide string's wyrd count
+    and a pair's whereabouts.
+  put the pair's x into the width.
+
+to get a width given a wide string and a canvas and a font:
+  create the hfont of the canvas given the font.
+  get the width given the wide string and the canvas.
+  destroy the hfont of the canvas.
+
+to get a width given a wide string and a font: \ assumes memory canvas
+  get the width given the wide string and the memory canvas and the font.
+
+to get an x coord given a string and a box (fast - ascii center):
   get a width given the string and the memory canvas.
   get an abca and an abcc given the string and the memory canvas.
   put the width minus the abca minus the abcc into the width.
   put the box's width minus the width divided by 2 minus the abca into the x.
 
-to get an x coord given a string and a box (fast - left):
+to get an x coord given a string and a box (fast - ascii left):
   get an abca given the string and the memory canvas.
   put - the abca into the x.
 
-to get an x coord given a string and a box (fast - right):
+to get an x coord given a string and a box (fast - ascii right):
   get an abca and an abcc given the string and the memory canvas.
   get a width given the string and the memory canvas.
+  put the width minus the abca minus the abcc into the width.
+  put the box's width minus the width minus the abca into the x.
+
+to get an x coord given a wide string and a box (fast - center):
+  get a width given the wide string and the memory canvas.
+  get an abca and an abcc given the wide string and the memory canvas.
+  put the width minus the abca minus the abcc into the width.
+  put the box's width minus the width divided by 2 minus the abca into the x.
+
+to get an x coord given a wide string and a box (fast - left):
+  get an abca given the wide string and the memory canvas.
+  put - the abca into the x.
+
+to get an x coord given a wide string and a box (fast - right):
+  get an abca and an abcc given the wide string and the memory canvas.
+  get a width given the wide string and the memory canvas.
   put the width minus the abca minus the abcc into the width.
   put the box's width minus the width minus the abca into the x.
 
@@ -7774,6 +8070,10 @@ to put the top side of a box into a horizontal line:
   put the box's left-top into the horizontal line's start.
   put the box's right-top into the horizontal line's end.
 
+to put a wide string's wyrd count into a number:
+  put the wide string's length in another number.
+  divide the other number by 2 giving the number and a remainder.
+
 to put a wyrd into another wyrd:
   intel $8B8508000000. \ mov eax,[ebp+8]  \ the wyrd
   intel $668B00.       \ mov ax,[eax]
@@ -9835,6 +10135,115 @@ to test (square root):
   test (square root of 2147395600 is 46340).
   test (square root of 2147483647 is 46340).
 
+to test (string widths - arial ascii):
+  create a test result about "the noodle" and "arial ascii"
+    and expecting "1095".
+  put 2/9 inch in a font's height.
+  put "Arial" in the font's name.
+  put "t÷compiler" in a string.
+  get an actual width given the string and the font.
+  stash the test result given the actual width.
+
+to test (string widths - arial fluffed ascii):
+  create a test result about "the noodle"
+    and "arial fluffed ascii" and expecting "1995".
+  put 2/9 inch in a font's height.
+  put "Arial" in the font's name.
+  put "t÷compiler" in a string.
+  convert the string to a wide string.
+  get an actual width given the wide string as a string and the font.
+  stash the test result given the actual width.
+
+to test (string widths - arial unicode):
+  make a fuzzy test about "the noodle" and "arial unicode"
+    and targeting 1035/1440 with tolerance 19440000 trifles.
+  \ targeting 1035 twips ± 15 twips.
+  put 2/9 inch in a font's height.
+  put "Arial" in the font's name.
+  put "t÷compiler" in a string.
+  convert the string to a wide string.
+  put the wide string's first in a byte pointer.
+  add 3 to the byte pointer.
+  put 2 in the byte pointer's target.
+  get an actual width given the wide string and the font.
+  stash the fuzzy test given the actual width / 1440.
+
+to test (string widths - courier ascii):
+  create a test result about "the noodle" and "courier ascii"
+    and expecting "1350".
+  put 2/9 inch in a font's height.
+  put "Courier New" in the font's name.
+  put "tcompiler" in a string.
+  get an actual width given the string and the font.
+  stash the test result given the actual width.
+
+to test (string widths - courier fluffed ascii):
+  create a test result about "the noodle"
+    and "courier fluffed ascii" and expecting "2700".
+  put 2/9 inch in a font's height.
+  put "Courier New" in the font's name.
+  put "tcompiler" in a string.
+  convert the string to a wide string.
+  get an actual width given the wide string as a string and the font.
+  stash the test result given the actual width.
+
+to test (string widths - courier unicode):
+  make a fuzzy test about "the noodle" and "courier unicode"
+    and targeting 1500/1440 with tolerance 19440000 trifles.
+  \ targeting 1500 twips ± 15 twips.
+  put 2/9 inch in a font's height.
+  put "Courier New" in the font's name.
+  put "t÷compiler" in a string.
+  convert the string to a wide string.
+  put the wide string's first in a byte pointer.
+  add 3 to the byte pointer.
+  put 2 in the byte pointer's target.
+  get an actual width given the wide string and the font.
+  stash the fuzzy test given the actual width / 1440.
+
+to test (string widths - offset pair ascii):
+  create a test result about "the noodle" and "offset pair ascii"
+    and expecting "x=160, y=52".
+  put "t„very lon„" in a string.
+  make a box with 2560 and 10410 and 3840 and 10770.
+  put 2/9 inch in a font's height.
+  put "Arial" in the font's name.
+  put "center" in an alignment.
+  get an offset pair given the string
+    and the box and the font and the alignment.
+  put "x=" then the offset pair's x
+    then ", y=" then the offset pair's y in an actual string.
+  stash the test result given the actual.
+
+to test (string widths - offset pair unicode):
+  create a test result about "the noodle" and "offset pair unicode"
+    and expecting "x=152, y=52".
+  put "t„very lon„" in a string.
+  convert the string to a wide string.
+  \ replace "„" (U+0084) with the low modifier tilde (U+02F7).
+  put the lower-double-quote byte then the null byte in an old string.
+  put the division-symbol byte then the start-of-text byte in a new string.
+  replace the old string with the new string in the wide string (throughout).
+  make a box with 2560 and 10410 and 3840 and 10770.
+  put 2/9 inch in a font's height.
+  put "Arial" in the font's name.
+  put "center" in an alignment.
+  get an offset pair given the wide string
+    and the box and the font and the alignment.
+  put "x=" then the offset pair's x
+    then ", y=" then the offset pair's y in an actual string.
+  stash the test result given the actual.
+
+to test (string widths):
+  test (string widths - arial ascii).
+  test (string widths - arial fluffed ascii).
+  test (string widths - arial unicode).
+  test (string widths - courier ascii).
+  test (string widths - courier fluffed ascii).
+  test (string widths - courier unicode).
+  test (string widths - offset pair ascii).
+  test (string widths - offset pair unicode).
+
 to test (the noodle - 200021 is not prime):
   create a test result about "the noodle" and "200021 is not prime"
     and expecting "200021 is not prime".
@@ -10044,6 +10453,8 @@ to test (the noodle):
   test (the noodle - find parent of non-existent folder).
   test (the noodle - replace substring).
   test (the noodle - prepend things).
+  test (string widths).
+  test (unicode).
 
 to test (the talker - find PlaySound):
   create a test result about "the noodle" and "find PlaySound"
@@ -10086,6 +10497,149 @@ to test (the talker):
 \  test (the talker - get winmm clsid).
   test (the talker - find winmm).
   test (the talker - find sapi).
+
+to test (unicode - basic plane to code point to wide string);
+to test (unicode - four nibbles to code point to wide string):
+  create a test result about "the noodle"
+    and "four nibbles to code point to wide string"
+    and expecting "247, 2".
+  convert "U+02F7" to a code point.
+  convert the code point to a wide string.
+  convert the wide string as a string to an actual string (listing bytes).
+  stash the test result using the actual.
+
+to test (unicode - byte to code point):
+  create a test result about "the noodle"
+    and "byte to code point"
+    and expecting "U+0040".
+  convert the at-sign byte to a code point.
+  stash the test result using the code point.
+
+to test (unicode - empty string is just hexadecimals):
+  create a test result about "the noodle"
+    and "empty string is just hexadecimals"
+    and expecting "just hexadecimals".
+  put "not just hexadecimals" in an actual string.
+  if "" is just hexadecimals,
+    put "just hexadecimals" in the actual string.
+  stash the test result given the actual.
+
+to test (unicode - five nibbles to code point to wide string):
+  create a test result about "the noodle"
+    and "five nibbles to code point to wide string"
+    and expecting "=ØÕÝ".
+  convert "U+1F5D5" to a code point.
+  convert the code point to a wide string.
+  put the wide string as a string in an actual string.
+  stash the test result using the actual.
+
+to test (unicode - hexadecimal string):
+  create a test result about "the noodle"
+    and "hexadecimal string"
+    and expecting "just hexadecimals".
+  put "not just hexadecimals" in an actual string.
+  if "0123456789abcdefABCDEF" is just hexadecimals,
+    put "just hexadecimals" in the actual string.
+  stash the test result given the actual.
+
+to test (unicode - long string to code point):
+  create a test result about "the noodle"
+    and "long string to code point"
+    and expecting "U+1F5D5".
+  convert "U+1F5D5" to a code point.
+  stash the test result using the code point.
+
+to test (unicode - low quote byte to code point):
+  create a test result about "the noodle"
+    and "low quote byte to code point"
+    and expecting "U+201E".
+  convert the lower-double-quote byte to a code point.
+  stash the test result using the code point.
+
+to test (unicode - not just hexadecimals):
+  create a test result about "the noodle"
+    and "not just hexadecimals"
+    and expecting "not just hexadecimals".
+  put "not just hexadecimals" in an actual string.
+  if "0123456789abcdefABCDEFG" is just hexadecimals,
+    put "just hexadecimals" in the actual string.
+  stash the test result given the actual.
+
+to test (unicode - one nibble to code point to wide string):
+  create a test result about "the noodle"
+    and "one nibble to code point to wide string"
+    and expecting "15, 0".
+  convert "U+F" to a code point.
+  convert the code point to a wide string.
+  convert the wide string as a string to an actual string (listing bytes).
+  stash the test result using the actual.
+
+to test (unicode - short string to code point):
+  create a test result about "the noodle"
+    and "short string to code point"
+    and expecting "U+0040".
+  convert "U+40" to a code point.
+  stash the test result using the code point.
+
+to test (unicode - string to wide string):
+  create a test result about "the noodle"
+    and "string to wide string"
+    and expecting "97, 0, 30, 32, 100, 0, 38, 32, 57, 0, 32, 0, 90, 0".
+  convert "a„d…9 Z" to a wide string.
+  convert the wide string to an actual string (listing bytes).
+  stash the test result using the actual.
+
+to test (unicode - two nibbles to code point to wide string):
+  create a test result about "the noodle"
+    and "two nibbles to code point to wide string"
+    and expecting "64, 0".
+  convert "U+40" to a code point.
+  convert the code point to a wide string.
+  convert the wide string as a string to an actual string (listing bytes).
+  stash the test result using the actual.
+
+to test (unicode - U+F is convertible to a code point):
+  create a test result about "the noodle"
+    and "U+F is convertible to a code point"
+    and expecting "convertible".
+  put "not convertible" in an actual string.
+  put "U+F" in a string.
+  if the string is any valid code point,
+    put "convertible" in the actual string.
+  stash the test result using the actual.
+
+to test (unicode - weird string to wide string):
+  \ one-byte characters whose Unicode code points
+  \ are not in U+0000 through U+00FF.
+  convert "€ ‚ƒ„…†‡"
+     then "ˆ‰Š‹Œ Ž "
+     then " ‘’“”•–—"
+     then "˜™š›œž Ÿ" to a wide string.
+  create a test result about "the noodle"
+    and "weird string to wide string"
+    and expecting
+           "172, 32, 32, 0, 26, 32, 25, 1, 30, 32, 38, 32, 32, 32, 33, 32, "
+      then "198, 2, 48, 32, 96, 1, 57, 32, 82, 1, 32, 0, 125, 1, 32, 0, "
+      then "32, 0, 24, 32, 25, 32, 28, 32, 29, 32, 34, 32, 19, 32, 20, 32, "
+      then "220, 2, 34, 33, 97, 1, 58, 32, 83, 1, 126, 1, 32, 0, 120, 1".
+  convert the wide string to an actual string (listing bytes).
+  stash the test result using the actual.
+
+to test (unicode):
+  test (unicode - empty string is just hexadecimals).
+  test (unicode - hexadecimal string).
+  test (unicode - not just hexadecimals).
+  test (unicode - U+F is convertible to a code point).
+  test (unicode - byte to code point).
+  test (unicode - low quote byte to code point).
+  test (unicode - short string to code point).
+  test (unicode - long string to code point).
+  test (unicode - one nibble to code point to wide string).
+  test (unicode - two nibbles to code point to wide string).
+  test (unicode - four nibbles to code point to wide string).
+  test (unicode - five nibbles to code point to wide string).
+  test (unicode - string to wide string).
+  test (unicode - weird string to wide string).
 
 a test result is a thing with
   a string called context,

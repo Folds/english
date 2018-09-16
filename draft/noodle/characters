@@ -306,6 +306,14 @@ to decide if a byte is any digit:
   if the byte is greater than the nine byte, say no.
   say yes.
 
+to decide if a byte is any hexadecimal digit:
+  if the byte is any digit, say yes.
+  if the byte is less than the big-a byte, say no.
+  if the byte is at most the big-f byte, say yes.
+  if the byte is less than the little-a byte, say no.
+  if the byte is at most the little-f byte, say yes.
+  say no.
+
 to decide if a byte is any letter:
   if the byte is between the big-a byte and the big-z byte, say yes.
   if the byte is between the little-a byte and the little-z byte, say yes.
@@ -332,6 +340,26 @@ to decide if a byte is any vowel:
   if the byte is in "aeiou", say yes.
 \  if the byte is "y", say sometimes. \ ha ha ha
   say no.
+
+to decide if a byte is at least another byte;
+to decide if a byte is greater than or equal to another byte:
+  intel $C7C001000000. \ mov eax,1 \ assume true
+  intel $8B9D08000000. \ mov ebx,[ebp+8]  \ the byte
+  intel $8A1B.         \ mov bl,[ebx]
+  intel $8B8D0C000000. \ mov ecx,[ebp+12] \ the other byte
+  intel $3A19.         \ cmp bl,[ecx]
+  intel $0F8306000000. \ ja over the next 1 statement
+  intel $C7C000000000. \ mov eax,0        \ now it's false
+
+to decide if a byte is at most another byte;
+to decide if a byte is less than or equal to another byte:
+  intel $C7C001000000. \ mov eax,1 \ assume true
+  intel $8B9D08000000. \ mov ebx,[ebp+8]  \ the byte
+  intel $8A1B.         \ mov bl,[ebx]
+  intel $8B8D0C000000. \ mov ecx,[ebp+12] \ the other byte
+  intel $3A19.         \ cmp bl,[ecx]
+  intel $0F8606000000. \ jbe over the next 1 statement
+  intel $C7C000000000. \ mov eax,0        \ now it's false
 
 to decide if a byte is between another byte and a third byte:
   if the byte is less than the other byte, say no.
@@ -361,15 +389,6 @@ to decide if a byte is greater than a number:
   intel $0F8F06000000. \ jg over the next 1 statement
   intel $C7C000000000. \ mov eax,0        \ now it's false
 
-to decide if a byte is greater than or equal to another byte:
-  intel $C7C001000000. \ mov eax,1 \ assume true
-  intel $8B9D08000000. \ mov ebx,[ebp+8]  \ the byte
-  intel $8A1B.         \ mov bl,[ebx]
-  intel $8B8D0C000000. \ mov ecx,[ebp+12] \ the other byte
-  intel $3A19.         \ cmp bl,[ecx]
-  intel $0F8306000000. \ ja over the next 1 statement
-  intel $C7C000000000. \ mov eax,0        \ now it's false
-
 to decide if a byte is less than another byte:
   intel $C7C001000000. \ mov eax,1        \ assume true
   intel $8B9D08000000. \ mov ebx,[ebp+8]  \ the byte
@@ -386,15 +405,6 @@ to decide if a byte is less than a number:
   intel $8B8D0C000000. \ mov ecx,[ebp+12] \ the number
   intel $3B19.         \ cmp ebx,[ecx]
   intel $0F8C06000000. \ jl over the next 1 statement
-  intel $C7C000000000. \ mov eax,0        \ now it's false
-
-to decide if a byte is less than or equal to another byte:
-  intel $C7C001000000. \ mov eax,1 \ assume true
-  intel $8B9D08000000. \ mov ebx,[ebp+8]  \ the byte
-  intel $8A1B.         \ mov bl,[ebx]
-  intel $8B8D0C000000. \ mov ecx,[ebp+12] \ the other byte
-  intel $3A19.         \ cmp bl,[ecx]
-  intel $0F8606000000. \ jbe over the next 1 statement
   intel $C7C000000000. \ mov eax,0        \ now it's false
 
 to decide if a byte is like another byte: \ used internally for word wrap
