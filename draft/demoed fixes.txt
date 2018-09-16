@@ -400,6 +400,16 @@ but do not have test plans yet.
   Status: Demonstrated.
   Requested by Jasper Paulsen on March 12, 2014.
 
+291.  If the current tab is the editor, don't show items over 1 inch in the font height menu.
+  The editor limits its font heights to 1 inch.
+  Status:    Demonstrated.
+  Audience:  Application users.
+  Benefit:   Minor.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Easy.
+  Testing difficulty:  Medium.
+  Requested by Jasper Paulsen on July 9, 2017.
+
 011.  Allow the menus (and status bar) to fold to two rows.
   Currently, Cal's menus and status bar need about 1000 pixels of width
   at the top of the screen.  This forces Cal to be at least 1000 pixels wide.

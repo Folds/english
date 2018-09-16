@@ -341,6 +341,12 @@ to decide if an event is ctrl-tab:
   if the event's ctrl flag is not set, say no.
   say yes.
 
+to decide if a font height is currently useful:
+  if the current tab is nil, say no.
+  if the current tab's mode is not "editor", say yes.
+  if the font height is greater than 1 inch, say no.
+  say yes.
+
 to decide if a font is fixed-width:
   put "MOWQL" in a string.        \ wide characters in proportional fonts.
   get a width given the string and the memory canvas and the font.

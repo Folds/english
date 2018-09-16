@@ -13,6 +13,7 @@ to add a string to a submenu (font height name):
   put "handle font height given " in a prefix.
   put the prefix then the string in a handler.
   get a height from the handler given the prefix.
+  if the height is not currently useful, exit.
   add the string and the handler to the submenu.
   put the tall menu font height in another height.
   if the height is less than the other height,
