@@ -1,4 +1,4 @@
-\ Copyright © 2014, 2017 by Jasper Paulsen.
+\ Copyright © 2014, 2017-2018 by Jasper Paulsen.
 
 This file lists issues that have been either marked won't do,
 or demonstrably fixed and automatically regression-tested
