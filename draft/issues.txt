@@ -46,75 +46,11 @@ The following requests have been partially demonstrated.
 The following requests are roughly sorted
 from higher priority to lower priority.
 
-303.  Mitigate overflow errors when comparing ratios.
-  Allows using ratios for calculating color differences.
-  Status:   Tested.
-  Benefit:  Medium.
-  Implementation difficulty:  Hard.
-  Demoing difficulty:  Not applicable.
-  Testing difficulty:  Medium.
-  Requested by Jasper Paulsen on August 15, 2017.
-
-301.  Mitigate overflow errors when multiplying ratios.
-  Allows using ratios for calculating color differences.
-  Status:   Tested.
-  Benefit:  Medium.
-  Implementation difficulty:  Hard.
-  Demoing difficulty:  Not applicable.
-  Testing difficulty:  Medium.
-  Requested by Jasper Paulsen on August 15, 2017.
-
-299.  Mitigate overflow errors when adding ratios.
-  Allows using ratios for calculating color differences.
-  Status:   Tested.
-  Benefit:  Medium.
-  Implementation difficulty:  Hard.
-  Demoing difficulty:  Not applicable.
-  Testing difficulty:  Medium.
-  Requested by Jasper Paulsen on August 15, 2017.
-
-300.  Mitigate overflow errors when subtracting ratios.
-  Allows using ratios for calculating color differences.
-  Status:   Tested.
-  Benefit:  Medium.
-  Implementation difficulty:  Hard.
-  Demoing difficulty:  Not applicable.
-  Testing difficulty:  Medium.
-  Requested by Jasper Paulsen on August 15, 2017.
-
-298.  Calculate cube root of a ratio.
-  Allows using ratios for calculating color differences.
-  Status:   Tested.
-  Benefit:  Medium.
-  Implementation difficulty:  Hard.
-  Demoing difficulty:  Not applicable.
-  Testing difficulty:  Medium.
-  Requested by Jasper Paulsen on August 15, 2017.
-
-302.  Calculate fifth root of a ratio.
-  Allows using ratios for calculating color differences.
-  Status:   Tested.
-  Benefit:  Medium.
-  Implementation difficulty:  Hard.
-  Demoing difficulty:  Not applicable.
-  Testing difficulty:  Medium.
-  Requested by Jasper Paulsen on August 15, 2017.
-
-305.  Round down square roots of 101 through 120.
-  Square roots of positive numbers are supposed to round down.
-  Status:    Tested.
-  Audience:  Programmers.
-  Benefit:   Medium.  Prevents overflow errors in ratio square roots.
-  Implementation difficulty:  Easy.
-  Demoing difficulty:  n/a.
-  Testing difficulty:  Easy.
-  Requested by Jasper Paulsen on September 16, 2017.
-
 306.  Measure color differences using the dE-2000 formula.
   http://www.colorwiki.com/wiki/Delta_E:_The_Color_Difference
   http://www.ece.rochester.edu/~gsharma/ciede2000/ciede2000noteCRNA.pdf
   http://www.easyrgb.com/en/math.php
-  Status:    Tested.
+  Status:    Tested, but not included.
   Audience:  Turtle programmers.
   Benefit:   Medium.
   Implementation difficulty:  Hard.
@@ -122,17 +58,8 @@ from higher priority to lower priority.
   Testing difficulty:  Hard.
   Requested by Jasper Paulsen on May 22, 2017.
 
-307.  Speed up arctangent.
-  Status:    Tested.
-  Audience:  Programmers.
-  Benefit:   Sped up color difference tests by 10 - 15 percent.
-  Implementation difficulty:  Medium.
-  Demoing difficulty:  Not applicable.
-  Testing difficulty:  Easy.
-  Requested by Jasper Paulsen on September 12, 2017.
-
 308.  Speed up code to choose colors.
-  Status:    Tested.
+  Status:    Tested, but not included.
   Audience:  Programmers.
   Benefit:   Medium.  Sped up choosing colors by 40 - 50 percent.
   Implementation difficulty:  Hard.
@@ -143,6 +70,7 @@ from higher priority to lower priority.
 243.  Invert the dE-2000 formula to choose a similar looking color.
   http://www.colorwiki.com/wiki/Delta_E:_The_Color_Difference
   http://www.ece.rochester.edu/~gsharma/ciede2000/ciede2000noteCRNA.pdf
+  http://www.easyrgb.com/en/math.php
   Status:  Request.
   Audience:  Turtle programmers.
   Benefit:   Medium.

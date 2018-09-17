@@ -39,9 +39,6 @@ to add a number to another number:
   intel $8B9D0C000000. \ mov ebx,[ebp+12] \ the other number
   intel $0103. \ add [ebx],eax
 
-to add a number to a ratio:
-  add the number / 1 to the ratio.
-
 to add one to a number:
   put the number plus 1 in the number.
 
@@ -54,12 +51,6 @@ to add a pdf object given a kind:
   append the pdf object to the pdf state's objects.
   add 1 to the pdf state's object number.
   put the pdf state's object number into the pdf object's number.
-
-to add a ratio to another ratio:
-  privatize the ratio.
-  normalize the ratio and the other ratio.
-  add the ratio's numerator to the other ratio's numerator.
-  reduce the other ratio.
 
 to add a string to some string things:
   create a string thing given the string.
@@ -255,7 +246,7 @@ the arrow cursor is a cursor.
 to assign a pointer given a byte count:
   if the byte count is 0, void the pointer; exit.
   privatize the byte count.
-  round the byte count up to the nearest power of two.
+  round the byte count up to the nearest power of two (for the memory manager).
   call "kernel32.dll" "HeapAlloc" with the heap pointer
     and 8 [heap_zero_memory] and the byte count returning the pointer.
   if the pointer is not nil, add 1 to the heap count; exit.
@@ -645,9 +636,6 @@ to clear a number:
 to clear a pair:
   put 0 and 0 into the pair.
 
-to clear a ratio:
-  put 0 and 1 into the ratio.
-
 to clear a rider:
   clear the rider's original.
   clear the rider's source.
@@ -986,15 +974,6 @@ to convert some font widths to pdf em units:
     add a number's magnitude to the number pointer.
   repeat.
 
-to convert a fraction to a ratio;
-to convert a ratio to a fraction;
-to put a ratio into a fraction;
-to put a fraction into a ratio;
-to put a fraction into another fraction;
-to put a ratio into another ratio:
-  put the ratio's numerator into the other ratio's numerator.
-  put the ratio's denominator into the other ratio's denominator.
-
 to convert a gpbitmap to a buffer (pdf style):
   clear the buffer.
   if the gpbitmap is nil, exit.
@@ -1017,8 +996,10 @@ to convert a hex string to a number:
   copy bytes from the hex string's first to the number's whereabouts for the number's magnitude.
 
 to convert a hex string to a ratio:
-  if the hex string's length is not the ratio's magnitude, put 0 and 1 into the ratio; exit.
-  copy bytes from the hex string's first to the ratio's whereabouts for the ratio's magnitude.
+  if the hex string's length is not the ratio's magnitude,
+    put 0 and 1 into the ratio; exit.
+  copy bytes from the hex string's first
+    to the ratio's whereabouts for the ratio's magnitude.
 
 to convert an l-param to a key: \ assumes l-param from wm_char message
   put the l-param into the key.
@@ -1043,10 +1024,6 @@ to convert an l-param to a spot:
   put the wyrd into the spot's y.
   put the other wyrd into the spot's x.
   multiply the spot by the tpp.
-
-to convert a mixed to a ratio:
-  put the mixed's ratio into the ratio.
-  add the mixed's whole number times the ratio's denominator to the ratio's numerator.
 
 to convert a nibble to a nibble string:
   privatize the nibble.
@@ -1157,13 +1134,6 @@ to convert a ratio to a hex string:
     to the hex string's first for the ratio's magnitude.
   put the hex string's first plus the ratio's magnitude minus 1
     into the hex string's last.
-
-to convert a ratio to a mixed:
-  if the ratio's denominator is 0,
-    put 0 into the mixed's whole number; put 0 into the mixed's ratio; exit.
-  divide the ratio's numerator by the ratio's denominator
-    giving the mixed's whole number and a remainder.
-  put the remainder and the ratio's denominator into the mixed's ratio.
 
 to convert a ratio to a string:
   clear the string.
@@ -1926,10 +1896,6 @@ to de-sign a pair:
   de-sign the pair's x.
   de-sign the pair's y.
 
-to de-sign a ratio:
-  de-sign the ratio's numerator.
-  de-sign the ratio's denominator.
-
 to de-sign a string:
   if the string is blank, exit.
   if the string's first's target is any sign, remove the first byte from the string.
@@ -2002,14 +1968,6 @@ to debug a pair:
 to debug a pointer:
   convert the pointer to a nibble string.
   debug "$" then the nibble string.
-
-to debug a ratio:
-  clear a string.
-  append "numerator=" to the string.
-  append the ratio's numerator to the string.
-  append ", denominator=" to the string.
-  append the ratio's denominator to the string.
-  debug the string.
 
 to debug a rgb:
   clear a string.
@@ -2275,6 +2233,11 @@ to decide if a finger is past the end of a string:
   if the finger is greater than the string's last, say yes.
   say no.
 
+to decide if a flag and another flag are both clear:
+  if the flag is set, say no.
+  if the other flag is set, say no.
+  say yes.
+
 to decide if a flag is another flag;
 to decide if a pointer is a number;
 to decide if a pointer is another pointer;
@@ -2460,11 +2423,6 @@ to decide if list was requested:
 to decide if middle is implied by a mouse wyrd:
   put the mouse wyrd in a number.
   if 16 [mk_mbutton] is bitwise included in the number, say yes.
-  say no.
-
-to decide if a mixed is a number:
-  convert the mixed to a ratio.
-  if the ratio is the number, say yes.
   say no.
 
 to decide if the mouse has been dragged from a spot given a grid:
@@ -2717,59 +2675,6 @@ to decide if a polygon is closed:
   if the polygon is nil, say no.
   if the polygon's vertices' count is less than 3, say no.
   if the polygon's first vertex's spot is the polygon's last vertex's spot, say yes.
-  say no.
-
-to decide if a ratio is another ratio:
-  privatize the ratio.
-  privatize the other ratio.
-  normalize the ratio and the other ratio.
-  if the ratio's numerator is the other ratio's numerator, say yes.
-  say no.
-
-to decide if a ratio is at least another ratio;
-to decide if a ratio is greater than or equal to another ratio:
-  privatize the ratio.
-  privatize the other ratio.
-  normalize the ratio and the other ratio.
-  if the ratio's numerator is greater than or equal to the other ratio's numerator, say yes.
-  say no.
-
-to decide if a ratio is at most another ratio;
-to decide if a ratio is less than or equal to another ratio:
-  privatize the ratio.
-  privatize the other ratio.
-  normalize the ratio and the other ratio.
-  if the ratio's numerator is less than or equal to the other ratio's numerator, say yes.
-  say no.
-
-to decide if a ratio is greater than another ratio:
-  privatize the ratio.
-  privatize the other ratio.
-  normalize the ratio and the other ratio.
-  if the ratio's numerator is greater than the other ratio's numerator, say yes.
-  say no.
-
-to decide if a ratio is less than another ratio:
-  privatize the ratio.
-  privatize the other ratio.
-  normalize the ratio and the other ratio.
-  if the ratio's numerator is less than the other ratio's numerator, say yes.
-  say no.
-
-to decide if a ratio is negative:
-  if the ratio's numerator is less than 0, reverse a flag.
-  if the ratio's denominator is less than 0, reverse the flag.
-  say the flag.
-
-to decide if a ratio is a number:
-  if the ratio is the number / 1, say yes.
-  say no.
-
-to decide if a ratio is positive:
-  privatize the ratio.
-  de-sign the ratio.
-  if the ratio's denominator is 0, say no.
-  if the ratio's numerator is positive, say yes.
   say no.
 
 to decide if a rider is stashable:
@@ -3469,15 +3374,6 @@ a directory name w/o backslash is a string.
 
 a distance is a number.
 
-to divide a number by another number returning a ratio:
-  put the number and the other number into the ratio.
-  reduce the ratio.
-
-to divide a number by a ratio:
-  privatize the ratio.
-  flip the ratio.
-  multiply the number by the ratio.
-
 to divide a pair by another pair:
   divide the pair's x by the other pair's x.
   divide the pair's y by the other pair's y.
@@ -3514,15 +3410,6 @@ to divide a number by another number giving a quotient and a remainder:
   intel $8903.         \ mov [ebx],eax
   intel $8B9D14000000. \ mov ebx,[ebp+20] \ the remainder
   intel $8913.         \ mov [ebx],edx
-
-to divide a ratio by another ratio:
-  privatize the other ratio.
-  flip the other ratio.
-  multiply the ratio by the other ratio.
-
-to divide a ratio by a number:
-  multiply the ratio's denominator by the number.
-  reduce the ratio.
 
 a docinfo is a record with
   a number called cbsize,
@@ -4605,9 +4492,6 @@ to flip a polygon:
     put the box's bottom minus the vertex's y into the vertex's y.
   repeat.
 
-to flip a ratio:
-  swap the ratio's numerator with the ratio's denominator.
-
 to flush all input;
 to flush all inputs;
 to flush all events:
@@ -4661,10 +4545,6 @@ to format a number and a singular string or a plural string into a string:
   append the space byte to the string.
   if the number is 1, append the singular to the string.
   if the number is not 1, append the plural to the string.
-
-a fraction is a ratio.
-
-a gcd is a number. \ greatest common denominator.
 
 a gcpresults is a record with
   a number called lstructsize,
@@ -6390,8 +6270,6 @@ to mirror a polygon:
     put the box's right minus the vertex's x into the vertex's x.
   repeat.
 
-a mixed has a whole number and a ratio.
-
 the module has
   a handle,
   a path,
@@ -6765,11 +6643,6 @@ to multiply a number by another number returning a number called result:
   multiply the number by the other number.
   put the number in the result.
 
-to multiply a number by a ratio;
-to scale a number given a ratio:
-  if the ratio's denominator is 0, exit.
-  call "kernel32.dll" "MulDiv" with the number and the ratio's numerator and the ratio's denominator returning the number.
-
 to multiply a pair by another pair:
   multiply the pair's x by the other pair's x.
   multiply the pair's y by the other pair's y.
@@ -6791,10 +6664,6 @@ to multiply a number by another number:
   intel $8B9D08000000. \ mov ebx,[ebp+8] \ the number
   intel $8903.         \ mov [ebx],eax
 
-to multiply a ratio by a number:
-  multiply the ratio's numerator by the number.
-  reduce the ratio.
-
 a name is a string.
 
 to negate a number:
@@ -6804,9 +6673,6 @@ to negate a number:
 to negate a pair:
   negate the pair's x.
   negate the pair's y.
-
-to negate a ratio:
-  negate the ratio's numerator.
 
 a nibble is a byte. \ only low order 4 bits are valid
 
@@ -6854,19 +6720,6 @@ to normalize a picture:
   if the picture is nil, exit.
   normalize the picture's box.
   normalize the picture's uncropped box.
-
-to normalize a ratio and another ratio:
-  reduce the ratio.
-  reduce the other ratio.
-  get a lcm given the ratio's denominator and the other ratio's denominator.
-  call "kernel32.dll" "MulDiv" with the ratio's numerator and the lcm
-    and the ratio's denominator returning a number.
-  put the number in the ratio's numerator.
-  put the lcm into the ratio's denominator.
-  call "kernel32.dll" "MulDiv" with the other ratio's numerator and the lcm
-    and the other ratio's denominator returning the number.
-  put the number in the other ratio's numerator.
-  put the lcm into the other ratio's denominator.
 
 to normalize a vertical line:
   if the line's end is less than the line's start, swap the line's end with the line's start.
@@ -7491,10 +7344,6 @@ to put a box's y-extent into a height:
   put the box's bottom into the height.
   subtract the box's top from the height.
 
-to put a byte and a number into a ratio:
-  put the byte into the ratio's numerator.
-  put the number into the ratio's denominator.
-
 to put a byte into a number:
   intel $8B8508000000. \ mov eax,[ebp+8] \ the byte
   intel $0FB600.       \ movzx eax,byte ptr [eax]
@@ -7696,10 +7545,6 @@ to put a number and another number into a pair:
   put the number into the pair's x.
   put the other number into the pair's y.
 
-to put a number and another number into a ratio:
-  put the number into the ratio's numerator.
-  put the other number into the ratio's denominator.
-
 to put a number into a big-endian unsigned wyrd:
   put the number into a wyrd.
   put the wyrd into the big-endian unsigned wyrd.
@@ -7707,10 +7552,6 @@ to put a number into a big-endian unsigned wyrd:
 to put a number into a pair:
   put the number into the pair's x.
   put the number into the pair's y.
-
-to put a number into a ratio:
-  put the number into the ratio's numerator.
-  put 1 into the ratio's denominator.
 
 to put a number into a wyrd:
   intel $8B8508000000. \ mov eax,[ebp+8] \ the number
@@ -7721,6 +7562,38 @@ to put a number into a wyrd:
 to put a number's absolute value into another number:
   put the number into the other number.
   de-sign the other number.
+
+to put a number's square root into a result number;
+to put the square root of a number in a result number:
+  \ Rounds down.  Finds magnitude of the square root.
+  privatize the number.
+  if the number is 0, put 0 into the result; exit.
+  if the number is negative,
+    negate the number.  \ similar to cal-4700's behavior.
+  if the number is 1, put 1 into the result; exit.
+  if the number is at most 100,
+    put the square root of the number in the result (close); exit.
+  if the number is at least the largest square,
+    put the largest square root into the result; exit.
+  \40971 * 40971 is 1678622841
+  if the number is at least 1678622841,
+    put 40971 into a number called lower bound;
+    put the largest square root minus 1 into a number called upper bound;
+    put the square root of the number in the result
+      given the lower bound and the upper bound; 
+    exit.
+  if the number is less than 121,
+    put 10 in the result; exit.
+  \Perform binary search on the possible answers, 
+  \to narrow down the answer to ten possibilities 
+  \that are checked linearly.
+  \4096 = 12 binary splits.
+  \10 + 1         =    11 = lower bound 
+  \10 + 10 * 4096 = 40970 = upper bound 
+  put 11 into the lower bound.
+  put 40970 into the upper bound.
+  put the square root of the number into the result 
+    given the lower bound and the upper bound.
 
 to put an outlinetextmetric into another outlinetextmetric:
   copy bytes from the outlinetextmetric's whereabouts
@@ -7847,14 +7720,6 @@ to put a polygon's y-extent into a height:
   if the polygon is nil, clear the height; exit.
   put the polygon's box's y-extent into the height.
 
-to put a ratio pair into another ratio pair:
-  put the ratio pair's ratio into the other ratio pair's ratio.
-  put the ratio pair's other ratio into the other ratio pair's other ratio.
-
-to put a ratio's absolute value into another ratio:
-  put the ratio into the other ratio.
-  de-sign the other ratio.
-
 to put a rider into another rider:
   copy bytes from the rider's whereabouts to the other rider's whereabouts for the rider's magnitude.
 
@@ -7895,35 +7760,6 @@ to put a spot in the middle of a box;
 to center a spot in a box:
   center the spot in the box (horizontally).
   center the spot in the box (vertically).
-
-to put the square root of a number in a result number:
-  \ Rounds down.  Finds magnitude of the square root.
-  privatize the number.
-  if the number is 0, put 0 into the result; exit.
-  if the number is negative,
-    negate the number.  \ similar to cal-4700's behavior.
-  if the number is 1, put 1 into the result; exit.
-  if the number is at most 100,
-    put the square root of the number in the result (close); exit.
-  if the number is at least the largest square,
-    put the largest square root into the result; exit.
-  \40971 * 40971 is 1678622841
-  if the number is at least 1678622841,
-    put 40971 into a number called lower bound;
-    put the largest square root minus 1 into a number called upper bound;
-    put the square root of the number in the result
-      given the lower bound and the upper bound; 
-    exit.
-  \Perform binary search on the possible answers, 
-  \to narrow down the answer to ten possibilities 
-  \that are checked linearly.
-  \4096 = 12 binary splits.
-  \10 + 1         =    11 = lower bound 
-  \10 + 10 * 4096 = 40970 = upper bound 
-  put 11 into the lower bound.
-  put 40970 into the upper bound.
-  put the square root of the number into the result 
-    given the lower bound and the upper bound.
 
 to put the square root of a number in a result number (close): 
   if the number is at most 0, 
@@ -8152,14 +7988,6 @@ to raise a number to another number:
 
 a random number is a number.
 
-a ratio has
-  a numerator number,
-  a denominator number,
-  a top number at the numerator, and
-  a bottom number at the denominator.
-
-a ratio pair has a ratio and another ratio.
-
 to read a byte:
   read a string.
   if the string is blank, put the null byte into the byte; exit.
@@ -8280,7 +8108,7 @@ to reassign a pointer given a byte count:
   if the pointer is nil, assign the pointer given the byte count; exit.
   if the byte count is 0, unassign the pointer; exit.
   privatize the byte count.
-  round the byte count up to the nearest power of two.
+  round the byte count up to the nearest power of two (for the memory manager).
   call "kernel32.dll" "HeapReAlloc" with the heap pointer and 8 [heap_zero_memory] and the pointer and the byte count returning the pointer.
 
 to receive a buffer from a socket:
@@ -8309,14 +8137,6 @@ to receive the response from a winhttp request:
   if the result is 0, put "Could not send request." into the i/o error; exit.
 
 a recipient is a string.
-
-to reduce a ratio:
-  if the ratio's denominator is 0, exit.
-  if the ratio's numerator is 0,
-    put 1 in the ratio's denominator; exit.
-  get a gcd given the ratio's numerator and the ratio's denominator.
-  divide the ratio's numerator by the gcd.
-  divide the ratio's denominator by the gcd.
 
 a refer is a thing with a string and a pointer (reference).
 
@@ -8774,6 +8594,23 @@ to round a number up to the nearest multiple of another number:
   add the other number minus the remainder to the number.
 
 to round a number up to the nearest power of two:
+  \ arbitrarily returns 2^30 if the number is greater than 2^30.
+  if the number is less than 2, put 1 in the number; exit.
+  if the number is greater than 536870912,
+    put 1073741824 in the number; exit.
+  if the number is greater than 8,
+    round the number up to the nearest power of two
+      (for the memory manager);
+    exit.
+  if the number is greater than 4,
+    put 8 in the number; exit.
+  if the number is 3,
+    put 4 in the number.
+
+to round a number up to the nearest power of two (for the memory manager):
+  \ Can be used to round a count of bytes
+  \ to a power of two that is a multiple of 16.
+  \ The minimum of 16 helps prevent memory fragmentation.
   intel $8B8D08000000. \ mov ecx,[ebp+8] \ the number
   intel $8B09.         \ mov ecx,[ecx]
   intel $49.           \ dec ecx
@@ -8907,12 +8744,6 @@ to scale a polygon to a percent:
   if the polygon is nil, exit.
   put the percent / 100 into a ratio.
   scale the polygon given the ratio.
-
-to scale a ratio given another ratio;
-to multiply a ratio by another ratio:
-  multiply the ratio's numerator by the other ratio's numerator.
-  multiply the ratio's denominator by the other ratio's denominator.
-  reduce the ratio.
 
 to scale a roundy box given a ratio:
   if the ratio is 1/1, exit.
@@ -9374,6 +9205,9 @@ a spot is a pair with an x coord and a y coord.
 
 a spot pointer is a pointer to a spot.
 
+to square a number:
+  multiply the number by the number.
+
 a square root is a number.
 
 a standard handle is a handle.  \ to standard in, standard out, or standard error.
@@ -9557,18 +9391,9 @@ to subtract a number from another number:
   intel $8B9D0C000000. \ mov ebx,[ebp+12] \ the other number
   intel $2903.         \ sub [ebx],eax
 
-to subtract a number from a ratio:
-  subtract the number / 1 from the ratio.
-
 to subtract a pair from another pair:
   subtract the pair's x from the other pair's x.
   subtract the pair's y from the other pair's y.
-
-to subtract a ratio from another ratio:
-  privatize the ratio.
-  normalize the ratio and the other ratio.
-  subtract the ratio's numerator from the other ratio's numerator.
-  reduce the other ratio.
 
 to summarize the early primes returning a string (tersely):
   put "2" in the string.
@@ -9699,22 +9524,6 @@ a talker vtable record is a record with
 
 the temp path is a path.
 
-to test (basic math - 6 plus 0/1):
-  create a test result about "the noodle" and "6 plus 0/1"
-    and expecting "6".
-  put 0 / 1 in a ratio.
-  add 6 to the ratio.
-  convert the ratio to a string.
-  stash the test result given the string.
-
-to test (basic math - 6 plus 0/1866240000):
-  create a test result about "the noodle" and "6 plus 0/1866240000"
-    and expecting "6".
-  put 0/1866240000 in a ratio.
-  add 6 to the ratio.
-  convert the ratio to a string.
-  stash the test result given the string.
-
 to test (basic math - add numbers):
   create a test result about "the noodle" and "3 plus 7" and expecting "10".
   put 7 in a number.
@@ -9790,28 +9599,6 @@ to test (basic math - divide 25 by 3):
   divide the number by 3.
   stash the test result given the number.
 
-to test (basic math - fractions and ratios):
-  create a test result about "the noodle" and "fractions and ratios"
-    and expecting "1-1/2; 5/6; 2; 2".
-                                    \ r1  r2   f1   f2
-  put 1/2 into a ratio.             \ 1/2 0/0  0/0  0/0
-  put 1/3 into another ratio.       \     1/3
-  add the ratio to the other ratio. \     5/6
-  put 1/4 into a fraction.          \          1/4
-  put the ratio into the fraction.  \          1/2
-  put the fraction into the ratio.  \ 1/2
-  add the fraction to the ratio.    \ 1/1
-  add the ratio to the fraction.    \          3/2
-  add 1/2 to the fraction.          \          2/1
-  add 1/2 to the ratio.             \ 3/2
-  clear another fraction.           \               0/1
-  add the fraction to the other fraction. \         2/1
-  convert the ratio to a string.
-  append "; " then the other ratio then "; "
-    then the fraction then "; " then the other fraction
-    to the string.
-  stash the test result given the string.
-
 to test (basic math - leftshift number):
   create a test result about "the noodle" and "1543 leftshifted 3 bits"
     and expecting "12344".
@@ -9838,15 +9625,6 @@ to test (basic math - negate number):
   put 5 in a number.
   negate the number.
   stash the test result given the number.
-
-to test (basic math - reduce 0 trifles):
-  create a test result about "the noodle" and "reduce 0 trifles"
-    and expecting "0/1".
-  put 0/1866240000 in a ratio.
-  reduce the ratio.
-  put the ratio's numerator then "/"
-    then the ratio's denominator in a string.
-  stash the test result given the string.
 
 to test (basic math - rightshift number):
   create a test result about "the noodle" and "12345 rightshifted 3 bits"
@@ -9901,10 +9679,6 @@ to test (basic math):
   test (basic math - divide 1 by 3 with remainder).
   test (basic math - divide 24 by 3 with remainder).
   test (basic math - divide 25 by 3 with remainder).
-  test (basic math - 6 plus 0/1).
-  test (basic math - reduce 0 trifles).
-  test (basic math - 6 plus 0/1866240000).
-  test (basic math - fractions and ratios).
 
 to test (command line - get missing parameter):
   create a test result about "the noodle" and "get missing parameter"
@@ -10058,6 +9832,18 @@ to test (square root of 1002001 is 1001):
   put the square root of 1002001 in a number called actual.
   stash the test result given the actual.
 
+to test (square root of 103 is 10):
+  create a test result about "the noodle"
+    and "square root of 103 is 10" and expecting "10".
+  put the square root of 103 in a number called actual.
+  stash the test result given the actual.
+
+to test (square root of 120 is 10):
+  create a test result about "the noodle"
+    and "square root of 120 is 10" and expecting "10".
+  put the square root of 120 in a number called actual.
+  stash the test result given the actual.
+
 to test (square root of 121 is 11):
   create a test result about "the noodle"
     and "square root of 121 is 11" and expecting "11".
@@ -10125,6 +9911,8 @@ to test (square root):
   test (square root of 81 is 9).
   test (square root of 99 is 9).
   test (square root of 100 is 10).
+  test (square root of 103 is 10).
+  test (square root of 120 is 10).
   test (square root of 121 is 11).
   test (square root of 999999 is 999).
   test (square root of 1000000 is 1000).

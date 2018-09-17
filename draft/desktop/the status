@@ -490,6 +490,7 @@ to test (all):
   test (characters).
   test (colors).
   test (text).
+  test (ratios).
   test (trig).
   \ desktop subfolder
   test (the compiler).

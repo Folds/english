@@ -1,0 +1,1849 @@
+\ The portions of this file that are from CAL-3040
+\ are copyright 2006 by the Osmosian Order.
+\ The portions of this file that are from CAL-4700
+\ are copyright 2017 by the Osmosian Order.
+\ The remainder is copyright 2014, 2017 by Jasper Paulsen.
+
+to add a number to a ratio:
+  add the number / 1 to the ratio.
+
+to add the product of a number and a ratio to a mixed:
+  add the product of the number / 1 and the ratio to the mixed.
+
+to add the product of a ratio and another ratio to a mixed:
+  multiply the ratio by the other ratio (properly).
+  divide the ratio's numerator by the ratio's denominator
+    giving a quotient and a remainder.
+  add the quotient to the mixed's whole number.
+  add the remainder / the ratio's denominator to the mixed's ratio.
+
+to add a ratio to another ratio:
+  privatize the ratio.
+  if the ratio is addable to the other ratio,
+    add the ratio to the other ratio (normal); exit.
+  reduce the ratio.
+  reduce the other ratio.
+  if the ratio is addable to the other ratio,
+    add the ratio to the other ratio (normal); exit.
+  if the ratio is almost addable to the other ratio,
+    add the ratio to the other ratio (halvsies); exit.
+  if adding the ratio and the other ratio will overflow numerator,
+    add the ratio to the other ratio (mitigate numerator); exit.  
+  if 1 / the ratio's denominator
+    and 1 / the other ratio's denominator are normalizable,
+      add the ratio to the other ratio (arbitrary numerator); exit.
+  if adding the ratio and the other ratio will fit numerator,
+    add the ratio to the other ratio (arbitrary denominator); exit.
+  add the ratio to the other ratio (arbitrary choice).
+
+to add a ratio to another ratio (arbitrary choice):
+  privatize the ratio.
+  if the ratio is not multiplicable by the other ratio (first numerator),
+    swap the ratio's numerator with the other ratio's numerator;
+    swap the ratio's denominator with the other ratio's denominator.
+  if the other ratio's denominator is negative,
+    negate the other ratio's numerator;
+    negate the other ratio's denominator.
+  if the other ratio's denominator
+    is less than the other ratio's numerator's absolute value,
+      add the ratio to the other ratio (arbitrary numerator); exit.
+  add the ratio to the other ratio (arbitrary denominator).
+
+to add a ratio to another ratio (arbitrary denominator):
+  put the ratio in a left ratio.
+  put the other ratio in a right ratio.
+  put the trifle denominator in the left ratio's denominator.
+  put the trifle denominator in the right ratio's denominator.
+  scale the left ratio's numerator
+    by the trifle denominator / the ratio's denominator.
+  scale the right ratio's numerator
+    by the trifle denominator / the other ratio's denominator.
+  add the left ratio to the right ratio (confidently).
+  put the right ratio in the other ratio.
+
+to add a ratio to another ratio (arbitrary numerator):
+  privatize the ratio.
+  if the ratio is not multiplicable by the other ratio (first numerator),
+    swap the ratio's numerator with the other ratio's numerator;
+    swap the ratio's denominator with the other ratio's denominator.
+  put the other ratio in a right ratio.
+  scale the right ratio's denominator
+    by the trifle denominator / the other ratio's numerator.
+  put the other ratio's numerator in the right ratio's numerator.
+  scale the right ratio's numerator
+    by the right ratio's denominator / the other ratio's denominator.
+  put the ratio in a left ratio.
+  put the right ratio's denominator in the left ratio's denominator.
+  scale the left ratio's numerator
+    by the right ratio's denominator / the ratio's denominator.
+  add the left ratio to the right ratio (confidently).
+  put the right ratio in the other ratio.
+
+to add a ratio to another ratio (confidently):
+  if the ratio is addable to the other ratio,
+    add the ratio to the other ratio (normal); exit.
+  add the ratio to the other ratio (halvsies).
+
+to add a ratio to another ratio (halvsies):
+  privatize the ratio.
+  if the ratio's denominator is negative,
+    negate the ratio's numerator;
+    negate the ratio's denominator.
+  if the other ratio's denominator is negative,
+    negate the other ratio's numerator;
+    negate the other ratio's denominator.
+  get a gcd given the ratio's denominator
+    and the other ratio's denominator.
+  put the ratio's denominator in a number.
+  divide the number by the gcd.
+  put the other ratio's denominator in another number.
+  divide the other number by the gcd.
+  multiply the ratio's numerator by the other number.
+  multiply the other ratio's numerator by the number.
+  multiply the other ratio's denominator by the number.
+  divide the other ratio's denominator by 2 giving a quotient and a remainder.
+  scale the ratio's numerator by the quotient / the other ratio's denominator.
+  scale the other ratio's numerator by the quotient / the other ratio's denominator.
+  add the ratio's numerator to the other ratio's numerator.
+  put the quotient in the other ratio's denominator.
+
+to add a ratio to another ratio (mitigate numerator):
+  mitigate the ratio giving a left ratio.
+  if the left ratio is addable to the other ratio,
+    add the left ratio to the other ratio (normal); exit.
+  mitigate the other ratio giving a right ratio.
+  if the ratio is addable to the right ratio,
+    add the ratio to the right ratio (normal);
+    put the right ratio in the other ratio;
+    exit.
+  if the left ratio is addable to the right ratio,
+    add the left ratio to the right ratio (normal);
+    put the right ratio in the other ratio;
+    exit.
+  put the left ratio's denominator in a denominator number.
+  de-sign the denominator.
+  if the right ratio's denominator's absolute value is less than the denominator,
+    put the right ratio's denominator in the denominator.
+  de-sign the denominator.
+  put the ratio's numerator in the left ratio's numerator.
+  scale the left ratio's numerator
+    by the denominator / the ratio's denominator.
+  put the denominator in the left ratio's denominator.
+  put the other ratio's numerator in the right ratio's numerator.
+  scale the right ratio's numerator
+    by the denominator / the other ratio's denominator.
+  put the denominator in the right ratio's denominator.
+  add the left ratio to the right ratio (confidently).
+  put the right ratio in the other ratio.
+
+to add a ratio to another ratio (normal):
+  privatize the ratio.
+  normalize the ratio and the other ratio.
+  add the ratio's numerator to the other ratio's numerator.
+  reduce the other ratio.
+
+to average a ratio and another ratio giving a mean ratio:
+  put the ratio in the mean ratio.
+  add the other ratio to the mean ratio.
+  scale the mean ratio by 1/2.
+
+to average a ratio and another ratio giving a mean ratio (geometric mean):
+  put the ratio in a product ratio.
+  multiply the product by the other ratio.
+  put the product's square root in the mean ratio.
+
+to avoid excessive overflow given a ratio and another ratio (during multiplication):
+  \ Assumes that both ratios bave been de-signed.
+  \ Assumes that the ratio's values are as small as practical,
+  \ and the other ratio's values are as large as practical,
+  \ both before and after the routine.
+  \ Makes sure that neither the numerator nor the denominator
+  \ overflows by more than 2^30.
+  get a numerator flag given the ratio's numerator
+    and the other ratio's numerator (overflow flag).
+  get a denominator flag given the ratio's denominator
+    and the other ratio's denominator (overflow flag).
+  if the numerator flag and the denominator flag are both clear,
+    exit.
+  put the other ratio's numerator in a temp number.
+  divide the other ratio's numerator by 2.
+  scale the other ratio's denominator
+    by the other ratio's numerator / the temp number.
+  reduce and sort the ratio and the other ratio (during multiplication).
+
+to clear a ratio:
+  put 0 and 1 into the ratio.
+
+to convert a fraction to a ratio;
+to convert a ratio to a fraction;
+to put a ratio into a fraction;
+to put a fraction into a ratio;
+to put a fraction into another fraction;
+to put a ratio into another ratio:
+  put the ratio's numerator into the other ratio's numerator.
+  put the ratio's denominator into the other ratio's denominator.
+
+to convert a mixed to a ratio:
+  put the mixed's ratio into the ratio.
+  add the mixed's whole number times the ratio's denominator to the ratio's numerator.
+
+to convert a ratio to a mixed:
+  if the ratio's denominator is 0,
+    put 0 into the mixed's whole number; put 0 into the mixed's ratio; exit.
+  divide the ratio's numerator by the ratio's denominator
+    giving the mixed's whole number and a remainder.
+  put the remainder and the ratio's denominator into the mixed's ratio.
+
+\to convert a ratio pair to a string:
+\  put the ratio pair's ratio then " and "
+\    then the ratio pair's other ratio in the string.
+
+\to cube a ratio:
+\  put the ratio's third power into another ratio.
+\  put the other ratio in the ratio.
+
+to de-sign a ratio:
+  de-sign the ratio's numerator.
+  de-sign the ratio's denominator.
+
+to de-sign a ratio pair:
+  de-sign the ratio pair's ratio.
+  de-sign the ratio pair's other ratio.
+
+\to debug a ratio:
+\  clear a string.
+\  append "numerator=" to the string.
+\  append the ratio's numerator to the string.
+\  append ", denominator=" to the string.
+\  append the ratio's denominator to the string.
+\  debug the string.
+
+to debug a ratio and another ratio:
+   clear a string.
+   append "left numerator=" to the string.
+   append the ratio's numerator to the string.
+   append ", denominator=" to the string.
+   append the ratio's denominator to the string.
+   append "; right numerator=" to the string.
+   append the other ratio's numerator to the string.
+   append ", denominator=" to the string.
+   append the other ratio's denominator to the string.
+   debug the string.
+
+\to debug a ratio pair:
+\  convert the ratio pair to a string.
+\  debug the string.
+
+to decide if adding a ratio and another ratio will fit numerator:
+  get a gcd given the ratio's denominator
+    and the other ratio's denominator.
+  put the ratio's denominator in a number.
+  put the other ratio's denominator in another number.
+  divide the number by the gcd.
+  divide the other number by the gcd.
+  if the ratio's numerator and the other number
+    are not multiplicable, say no.
+  if the other ratio's numerator and the number
+    are not multiplicable, say no.
+  say yes.  
+
+to decide if adding a ratio and another ratio will overflow numerator:
+  get a gcd given the ratio's denominator
+    and the other ratio's denominator.
+  put the ratio's denominator in a number.
+  put the other ratio's denominator in another number.
+  divide the number by the gcd.
+  divide the other number by the gcd.
+  if the ratio's numerator and the other number
+    are multiplicable, say no.
+  if the other ratio's numerator and the number
+    are multiplicable, say no.
+  say yes.  
+
+to decide if a mixed is a number:
+  convert the mixed to a ratio.
+  if the ratio is the number, say yes.
+  say no.
+
+to decide if a number and another number are multiplicable;
+to decide if a number is multiplicable by another number:
+  privatize the number.
+  privatize the other number.
+  de-sign the number.
+  de-sign the other number.
+  put the largest number in a threshold number.
+  divide the threshold by the number.
+  if the threshold is at least the other number, say yes.
+  say no.
+
+to decide if a number is addable to another number;
+to decide if a number and another number are addable:
+  privatize the other number.
+  if the number and the other number are not similarly signed, say yes.
+  if the number is 0, say yes.
+  if the number is positive,
+    put the largest number in a threshold number;
+    subtract the number from the threshold number.
+  if the number is negative,
+    put the smallest number in the threshold number;
+    subtract the other number from the threshold number;
+    de-sign the threshold number;
+    de-sign the other number.
+  if the threshold number is at least the other number, say yes.
+  say no.
+
+to decide if a ratio and another ratio are multiplicable:
+  privatize the ratio.
+  privatize the other ratio.
+  de-sign the ratio.
+  de-sign the other ratio.
+  if the ratio's numerator is not multiplicable
+    by the other ratio's numerator, say no.
+  if the ratio's denominator is not multiplicable
+    by the other ratio's denominator, say no.
+  say yes.
+
+to decide if a ratio and another ratio are normalizable:
+  privatize the ratio.
+  privatize the other ratio.
+  de-sign the ratio.
+  de-sign the other ratio.
+  get a gcd given the ratio's denominator and the other ratio's denominator.
+  divide the ratio's denominator by the gcd.
+  if the ratio's denominator is not multiplicable
+    by the other ratio's denominator, say no.
+  if the ratio's denominator is not multiplicable
+    by the other ratio's numerator, say no.
+  divide the other ratio's denominator by the gcd.
+  if the ratio's numerator is not multiplicable
+    by the other ratio's denominator, say no.
+  say yes.
+
+to decide if a ratio and another ratio are ready (to finish multiplication):
+  if the ratio's numerator is 0, say yes.
+  if the ratio's denominator is 0, say yes.
+  if the other ratio's numerator is 0, say yes.
+  if the other ratio's denominator is 0, say yes.
+  if the ratio and the other ratio are multiplicable, say yes.
+  say no.
+
+to decide if a ratio is addable to another ratio:
+  privatize the ratio.
+  privatize the other ratio.
+  if the ratio's denominator is negative,
+    negate the ratio's numerator;
+    negate the ratio's denominator.
+  if the other ratio's denominator is negative,
+    negate the other ratio's numerator;
+    negate the other ratio's denominator.
+  get a gcd given the ratio's denominator
+    and the other ratio's denominator.
+  divide the ratio's denominator by the gcd.
+  if the ratio's denominator is not multiplicable
+    by the other ratio's denominator, say no.
+  if the ratio's denominator is not multiplicable
+    by the other ratio's numerator, say no.
+  divide the other ratio's denominator by the gcd.
+  if the ratio's numerator is not multiplicable
+    by the other ratio's denominator, say no.
+  if the ratio's denominator is 0, say no.
+  if the other ratio's denominator is 0, say no.
+  if the ratio's numerator is 0, say yes.
+  if the other ratio's numerator is 0, say yes.
+  if the ratio's numerator and the other ratio's numerator
+    are not similarly signed, say yes.
+  de-sign the ratio's numerator.
+  de-sign the other ratio's numerator.
+  multiply the ratio's numerator by the other ratio's denominator.
+  multiply the other ratio's numerator by the ratio's denominator.
+  if the ratio's numerator and the other ratio's numerator
+    are addable, say yes.
+  say no.
+
+to decide if a ratio is almost addable to another ratio:
+  privatize the ratio.
+  privatize the other ratio.
+  if the ratio's denominator is negative,
+    negate the ratio's numerator;
+    negate the ratio's denominator.
+  if the other ratio's denominator is negative,
+    negate the other ratio's numerator;
+    negate the other ratio's denominator.
+  get a gcd given the ratio's denominator
+    and the other ratio's denominator.
+  divide the ratio's denominator by the gcd.
+  if the ratio's denominator is not multiplicable
+    by the other ratio's denominator, say no.
+  if the ratio's denominator is not multiplicable
+    by the other ratio's numerator, say no.
+  divide the other ratio's denominator by the gcd.
+  if the ratio's numerator is not multiplicable
+    by the other ratio's denominator, say no.
+  say yes.
+
+to decide if a ratio is another ratio:
+  privatize the ratio.
+  privatize the other ratio.
+  reduce the ratio.
+  reduce the other ratio.
+  if the ratio's numerator is not the other ratio's numerator, say no.
+  if the ratio's denominator is not the other ratio's denominator, say no.
+  say yes.
+
+to decide if a ratio is at least another ratio;
+to decide if a ratio is greater than or equal to another ratio:
+  if the ratio is less than the other ratio, say no.
+  say yes.
+
+to decide if a ratio is at least another ratio (normal):
+  if the ratio and the other ratio are not normalizable, say no.
+  privatize the ratio.
+  privatize the other ratio.
+  if the ratio's denominator is negative,
+    negate the ratio's numerator;
+    negate the ratio's denominator.
+  if the other ratio's denominator is negative,
+    negate the other ratio's numerator;
+    negate the other ratio's denominator.
+  normalize the ratio and the other ratio.
+  if the ratio's numerator is less than the other ratio's numerator, say no.
+  say yes.
+
+to decide if a ratio is at most another ratio;
+to decide if a ratio is less than or equal to another ratio:
+  if the other ratio is less than the ratio, say no.
+  say yes.
+
+to decide if a ratio is greater than another ratio:
+  if the other ratio is less than the ratio, say yes.
+  say no.
+
+to decide if a ratio is less than another ratio:
+  privatize the ratio.
+  privatize the other ratio.
+  if the ratio is less than the other ratio (normal),
+    say yes.
+  if the ratio is at least the other ratio (normal),
+    say no.
+  if the ratio's denominator is negative,
+    negate the ratio's numerator;
+    negate the ratio's denominator.
+  if the other ratio's denominator is negative,
+    negate the other ratio's numerator;
+    negate the other ratio's denominator.
+  if the ratio's numerator is negative,
+    negate the ratio's numerator;
+    negate the other ratio's numerator;
+    swap the ratio's numerator with the other ratio's numerator;
+    swap the ratio's denominator with the other ratio's denominator.
+  if the ratio's numerator is negative, say yes.
+  if the other ratio's numerator is negative, say no.
+  if the other ratio's numerator is 0, say no.
+  if the ratio's numerator is 0, say yes.
+  reduce the ratio.
+  reduce the other ratio.
+  get a gcd given the ratio's denominator
+    and the other ratio's denominator.
+  divide the ratio's denominator by the gcd.
+  divide the other ratio's denominator by the gcd.
+  get a gcd called gcn given the ratio's numerator
+    and the other ratio's numerator.
+  divide the ratio's numerator by the gcn.
+  divide the other ratio's numerator by the gcn.
+  if the ratio is less than the other ratio (normal),
+    say yes.
+  if the ratio is at least the other ratio (normal),
+    say no.
+  get a number given the ratio's numerator
+    and the other ratio's denominator (overflow factor).
+  get another number given the other ratio's numerator
+    and the ratio's denominator (overflow factor).
+  if the number is less than the other number, say yes.
+  if the number is greater than the other number, say no.
+  if the number is 1,
+    multiply the ratio's numerator by the other ratio's denominator;
+    multiply the other ratio's numerator by the ratio's denominator;
+    put 1 in the ratio's denominator;
+    put 1 in the other ratio's denominator.
+  if the ratio is less than the other ratio (normal),
+    say yes.
+  if the ratio is at least the other ratio (normal),
+    say no.
+  scale the ratio's numerator by 1 / the number.
+  scale the other ratio's numerator by 1 / the number.
+  reduce the ratio.
+  reduce the other ratio.
+  multiply the ratio's numerator by the other ratio's denominator.
+  multiply the other ratio's numerator by the ratio's denominator.
+  put 1 in the ratio's denominator.
+  put 1 in the other ratio's denominator.
+  if the ratio is less than the other ratio (normal),
+    say yes.
+  if the ratio is at least the other ratio (normal),
+    say no.
+  say no.
+
+to decide if a ratio is less than another ratio (normal):
+  if the ratio and the other ratio are not normalizable, say no.
+  privatize the ratio.
+  privatize the other ratio.
+  if the ratio's denominator is negative,
+    negate the ratio's numerator;
+    negate the ratio's denominator.
+  if the other ratio's denominator is negative,
+    negate the other ratio's numerator;
+    negate the other ratio's denominator.
+  normalize the ratio and the other ratio.
+  if the ratio's numerator is less than the other ratio's numerator, say yes.
+  say no.
+
+to decide if a ratio is multiplicable by another ratio (first numerator):
+  get a gcd given the ratio's denominator
+    and the other ratio's denominator.
+  put the other ratio's denominator in a number.
+  divide the number by the gcd.
+  if the ratio's numerator is multiplicable by the number, say yes.
+  say no.
+
+to decide if a ratio is negative:
+  if the ratio's numerator is less than 0, reverse a flag.
+  if the ratio's denominator is less than 0, reverse the flag.
+  say the flag.
+
+to decide if a ratio is a number:
+  if the ratio is the number / 1, say yes.
+  say no.
+
+to decide if a ratio is positive:
+  privatize the ratio.
+  de-sign the ratio.
+  if the ratio's denominator is 0, say no.
+  if the ratio's numerator is positive, say yes.
+  say no.
+
+to decide if a ratio pair is hypotenizable:
+  privatize the ratio pair.
+  de-sign the ratio pair.
+  divide the ratio pair's ratio's numerator
+    by the ratio pair's ratio's denominator.
+  if the ratio pair's ratio's numerator
+    is at least the largest square root,
+      say no.
+  divide the ratio pair's other ratio's numerator
+    by the ratio pair's other ratio's denominator.
+  if the ratio pair's other ratio's numerator
+    is at least the largest square root,
+      say no.
+  add 1 to the ratio pair's ratio's numerator.
+  add 1 to the ratio pair's other ratio's numerator.
+  square the ratio pair's ratio's numerator.
+  square the ratio pair's other ratio's numerator.
+  if the ratio pair's ratio's numerator is addable
+    to the ratio pair's other ratio's numerator,
+      say yes.
+  say no.
+
+to divide a number by another number returning a ratio:
+  put the number and the other number into the ratio.
+  reduce the ratio.
+
+to divide a number by a ratio:
+  privatize the ratio.
+  flip the ratio.
+  multiply the number by the ratio.
+
+to divide a ratio by another ratio:
+  privatize the other ratio.
+  flip the other ratio.
+  multiply the ratio by the other ratio.
+
+to divide a ratio by a number:
+  multiply the ratio by 1 / the number.
+  reduce the ratio.
+
+to find the hypotenuse of a ratio and another ratio giving a result ratio:
+  make a ratio pair given the ratio and the other ratio.
+  put the ratio pair's hypotenuse in the result ratio.
+
+a fraction is a ratio.
+
+a gcd is a number. \ greatest common denominator.
+
+to get a flag given a number and another number (overflow flag):
+  \ if an overflow factor would overflow, set the flag.
+  get a third number given the number and the other number (overflow factor).
+  if the third number is greater than 1073741824 [$40000000],
+    set the flag; exit.
+  clear the flag.
+
+to get a number called numerator overflow and a number called denominator overflow given a ratio and another ratio (overflow factors):
+  get the numerator overflow given the ratio's numerator
+    and the other ratio's numerator (overflow factor).
+  get the denominator overflow given the ratio's denominator
+    and the other ratio's denominator (overflow factor).
+  round the numerator overflow up to the nearest power of two.
+  round the denominator overflow up to the nearest power of two.
+
+to get a ratio given a ratio pair (ordinary hypotenuse):
+  \ In mathematics, this "hypotenuse" (from the origin
+  \ to the ratio pair's location) is called a "magnitude".
+  \ But in the Plain English programming language,
+  \ a magnitude is the number of bytes in a record.
+  privatize the ratio pair.
+  multiply the ratio pair's ratio by the ratio pair's ratio.
+  multiply the ratio pair's other ratio by the ratio pair's other ratio.
+  add the ratio pair's other ratio to the ratio pair's ratio.
+  put the ratio pair's ratio's square root in the ratio.
+
+to get a result number given a number and another number (overflow factor):
+  privatize the number.
+  privatize the other number.
+  de-sign the number.
+  de-sign the other number.
+  put the largest number in a threshold number.
+  divide the threshold by the number.
+  divide the other number by the threshold
+    giving a quotient and a remainder.
+  put the quotient in the result.
+  if the remainder is positive, add 1 to the result.
+
+to get a shrinker given a number and a number called overflow factor:
+  put 1 in the shrinker.
+  if the number is greater than the largest square root,
+    put the number in the shrinker;
+    divide the shrinker by the largest square root;
+    round the shrinker up to the nearest power of two.
+  if the shrinker is greater than the overflow factor,
+    put the overflow factor in the shrinker.
+
+to guess a result ratio given a ratio (cube root):
+  privatize the ratio.
+  if the ratio is negative,
+    negate the ratio;
+    guess the result given the ratio (cube root);
+    negate the result;
+    exit.
+  if the ratio is 0 / 1, put 0 / 1 in the result; exit.
+  if the ratio is 1 / 1, put 1 / 1 in the result; exit.
+  if the ratio is less than 1 / 1,
+    invert the ratio;
+    guess the result given the ratio (cube root);
+    invert the result;
+    exit.
+  if the ratio is at least 50000 / 1,
+    scale the ratio by 1 / the trifle root;
+    guess the result given the ratio (cube root);
+    multiply the result by 35;
+    exit.
+  if the ratio is at least 10000/1,
+    put 28/1 in the result; exit.
+  if the ratio is at least  1865/1,
+    put 16/1 in the result; exit.
+  if the ratio is at least   332/1,
+    put  9/1 in the result; exit.
+  if the ratio is at least    57/1,
+    put  5/1 in the result; exit.
+  if the ratio is at least    13/1,
+    put  3/1 in the result; exit.
+  if the ratio is at least     4/1,
+    put  2/1 in the result; exit.
+  put 5/4 in the result.
+
+to guess a result ratio given a ratio (fifth root):
+  privatize the ratio.
+  if the ratio is negative,
+    negate the ratio;
+    guess the result given the ratio (fifth root);
+    negate the result;
+    exit.
+  if the ratio is 0 / 1, put 0 / 1 in the result; exit.
+  if the ratio is 1 / 1, put 1 / 1 in the result; exit.
+  if the ratio is less than 1 / 1,
+    invert the ratio;
+    guess the result given the ratio (fifth root);
+    invert the result;
+    exit.
+  if the ratio is at least 50000 / 1,
+    scale the ratio by 1 / the trifle root;
+    guess the result given the ratio (fifth root);
+    multiply the result by 17 / 2;
+    exit.
+  if the ratio is at least 10000/1,
+    put 22/3 in the result; exit.
+  if the ratio is at least  1865/1,
+    put 16/3 in the result; exit.
+  if the ratio is at least   332/1,
+    put 19/5 in the result; exit.
+  if the ratio is at least    57/1,
+    put  8/3 in the result; exit.
+  if the ratio is at least    13/1,
+    put 29/15 in the result; exit.
+  if the ratio is at least     4/1,
+    put  3/2 in the result; exit.
+  put 23/20 in the result.
+
+to improve a result ratio given a ratio (cube root):
+  put the result in a temp ratio.
+  multiply the temp by the result.
+  privatize the ratio.
+  divide the ratio by the temp.
+  multiply the result by 2.
+  add the ratio to the result.
+  divide the result by 3.
+  reduce the result.
+
+to improve a result ratio given a ratio (fifth root):
+  put the result in a temp ratio.
+  multiply the temp by the result.
+  put the temp in another ratio.
+  multiply the temp by the other ratio.
+  privatize the ratio.
+  divide the ratio by the temp.
+  multiply the result by 4.
+  add the ratio to the result.
+  divide the result by 5.
+  reduce the result.
+
+to invert a ratio;
+to flip a ratio:
+  swap the ratio's numerator with the ratio's denominator.
+
+to make a ratio pair given a ratio and another ratio:
+  put the ratio in the ratio pair's ratio.
+  put the other ratio in the ratio pair's other ratio.
+
+to mitigate a ratio giving another ratio:
+  privatize the ratio.
+  if the ratio's denominator is 0,
+    put the ratio in the other ratio; exit.
+  if the ratio's denominator is negative,
+    negate the ratio's numerator;
+    negate the ratio's denominator.
+  if the ratio's denominator is at most
+    the ratio's numerator's absolute value,
+      put the trifle denominator in the other ratio's numerator;
+      put the ratio's denominator in the other ratio's denominator;
+      scale the other ratio's denominator
+        by the trifle denominator / the ratio's numerator;
+      exit.
+  put the trifle denominator in the other ratio's denominator.
+  put the ratio's numerator in the other ratio's numerator.
+  scale the other ratio's numerator
+    by the trifle denominator / the ratio's denominator.
+
+a mixed has a whole number and a ratio.
+
+to multiply a number by a ratio;
+to scale a number by a ratio;
+to scale a number given a ratio:
+  if the ratio's denominator is 0, exit.
+  call "kernel32.dll" "MulDiv" with the number
+    and the ratio's numerator and the ratio's denominator
+    returning the number.
+
+to multiply a ratio by another ratio;
+to scale a ratio by another ratio;
+to scale a ratio given another ratio:
+  privatize the other ratio.
+  reduce the ratio.
+  reduce the other ratio.
+  if the ratio and the other ratio are multiplicable,
+    multiply the ratio by the other ratio (ordinary); exit.
+  swap the ratio's numerator with the other ratio's numerator.
+  reduce the ratio.
+  reduce the other ratio.
+  if the ratio and the other ratio are multiplicable,
+    multiply the ratio by the other ratio (ordinary); exit.
+  get the sign of the ratio returning a number called sign.
+  get the sign of the other ratio returning a number called other sign.
+  multiply the sign by the other sign.
+  de-sign the ratio.
+  de-sign the other ratio.
+  divide the ratio's numerator by the ratio's denominator
+    giving a quotient and a remainder.
+  divide the other ratio's numerator by the other ratio's denominator
+    giving another quotient and another remainder.
+  if the quotient and the other quotient are not multiplicable,
+    put the largest number / 1 in the ratio;
+    multiply the ratio's numerator by the sign;
+    exit.
+  clear a mixed's ratio.
+  put the quotient in the mixed's whole number.
+  multiply the mixed's whole number by the other quotient.
+  add the product of the other quotient
+    and the remainder / the ratio's denominator to the mixed.
+  add the product of the quotient
+    and the other remainder / the other ratio's denominator to the mixed.
+  put the mixed's ratio in a right ratio.
+  clear the mixed's ratio.
+  add the product of 1 and the right ratio to the mixed.
+  put the remainder / the ratio's denominator in a left ratio.
+  put the other remainder / the other ratio's denominator in the right ratio.
+  add the product of the left ratio and the right ratio to the mixed.
+  put the mixed's ratio in the ratio.
+  add the mixed's whole number / 1 to the ratio.
+  multiply the ratio by the sign.
+
+to multiply a ratio by another ratio (ordinary):
+  privatize the other ratio.
+  reduce the ratio.
+  reduce the other ratio.
+  multiply the ratio's numerator by the other ratio's numerator.
+  multiply the ratio's denominator by the other ratio's denominator.
+  reduce the ratio.
+
+to multiply a ratio by another ratio (properly):
+  privatize the other ratio.
+  reduce and sort the ratio and the other ratio (during multiplication).
+  if the ratio and the other ratio are multiplicable,
+    multiply the ratio by the other ratio (ordinary); exit.
+  get the sign of the ratio returning a number called sign.
+  get the sign of the other ratio returning a number called other sign.
+  multiply the sign by the other sign.
+  de-sign the ratio.
+  de-sign the other ratio.
+  reduce and sort the ratio and the other ratio (during multiplication).
+  \ limit overflow to at most 2^30.
+  avoid excessive overflow given the ratio and the other ratio (during multiplication).
+  if the ratio and the other ratio are ready (to finish multiplication),
+    multiply the ratio by the other ratio given the sign (ready);
+    exit.
+  get a number called numerator overflow
+    and a number called denominator overflow
+    given the ratio and the other ratio (overflow factors).
+  \ If the numerator overflows, shrink the smaller
+  \ of the two numerators to less than 46,341.
+  \ Adjust the denominator and overflows accordingly.
+  get a shrinker given the ratio's numerator
+    and the numerator overflow.
+  if the shrinker is greater than 1,
+    shrink the ratio's numerator
+      and the other ratio's denominator by the shrinker;
+    reduce and sort the ratio and the other ratio (during multiplication).
+  if the ratio and the other ratio are ready (to finish multiplication),
+    multiply the ratio by the other ratio given the sign (ready);
+    exit.
+  if the shrinker is greater than 1,
+    get the numerator overflow and the denominator overflow
+      given the ratio and the other ratio (overflow factors).
+  \ If the denominator overflows, shrink the smaller
+  \ of the two denominators to less than 46,341.
+  \ Adjust the numerator and overflows accordingly.
+  get the shrinker given the ratio's denominator
+    and the denominator overflow.
+  if the shrinker is greater than 1,
+    shrink the ratio's denominator
+      and the other ratio's numerator by the shrinker;
+    reduce and sort the ratio and the other ratio (during multiplication).
+  if the ratio and the other ratio are ready (to finish multiplication),
+    multiply the ratio by the other ratio given the sign (ready);
+    exit.
+  if the shrinker is greater than 1,
+    get the numerator overflow and the denominator overflow
+      given the ratio and the other ratio (overflow factors).
+  if the numerator overflow is greater than 1,
+    shrink the other ratio's numerator
+      and the other ratio's denominator by the numerator overflow;
+    reduce and sort the ratio and the other ratio (during multiplication).
+  if the ratio and the other ratio are ready (to finish multiplication),
+    multiply the ratio by the other ratio given the sign (ready);
+    exit.
+  if the numerator overflow is greater than 1,
+    get the numerator overflow and the denominator overflow
+      given the ratio and the other ratio (overflow factors).
+  \ In order to reach here, the denominator overflows.
+  shrink the other ratio's denominator
+    and the other ratio's numerator by the denominator overflow.
+  reduce and sort the ratio and the other ratio (during multiplication).
+  multiply the ratio by the other ratio given the sign (ready).
+
+to multiply a ratio by another ratio given a number called sign (ready):
+  if the ratio's denominator is 0,
+    put the largest number / 1 in the ratio;
+    multiply the ratio's numerator by the sign;
+    exit.
+  if the other ratio's denominator is 0,
+    put the largest number / 1 in the ratio;
+    multiply the ratio's numerator by the sign;
+    exit.
+  if the ratio's numerator is 0,
+    put 0/1 in the ratio;
+    exit.
+  if the other ratio's numerator is 0,
+    put 0/1 in the ratio;
+    exit.
+  multiply the ratio by the other ratio (ordinary).
+  multiply the ratio's numerator by the sign.  
+
+to multiply a ratio by a number:
+  if the ratio's numerator is multiplicable by the number,
+    multiply the ratio's numerator by the number;
+    reduce the ratio;
+    exit.
+  multiply the ratio by the number / 1.
+  reduce the ratio.
+
+to negate a ratio:
+  negate the ratio's numerator.
+
+to normalize a ratio and another ratio:
+  reduce the ratio.
+  reduce the other ratio.
+  get a lcm given the ratio's denominator and the other ratio's denominator.
+  call "kernel32.dll" "MulDiv" with the ratio's numerator and the lcm
+    and the ratio's denominator returning a number.
+  put the number in the ratio's numerator.
+  put the lcm into the ratio's denominator.
+  call "kernel32.dll" "MulDiv" with the other ratio's numerator and the lcm
+    and the other ratio's denominator returning the number.
+  put the number in the other ratio's numerator.
+  put the lcm into the other ratio's denominator.
+
+to put a byte and a number into a ratio:
+  put the byte into the ratio's numerator.
+  put the number into the ratio's denominator.
+
+to put the cube root of a ratio into a result ratio;
+to put a ratio's cube root into a result ratio:
+  if the ratio is 0 / 1, put 0 / 1 in the result ratio; exit.
+  if the ratio is 1 / 1, put 1 / 1 in the result ratio; exit.
+  guess the result given the ratio (cube root).
+  put 0 in a count.
+  loop.
+    if the count is at least 10, exit.
+    put the result in a previous ratio.
+    improve the result given the ratio (cube root).
+    if the result is the previous ratio, exit.
+    add 1 to the count.
+  repeat.
+
+to put the fifth root of a ratio into a result ratio;
+to put a ratio's fifth root into a result ratio:
+  if the ratio is 0 / 1, put 0 / 1 in the result ratio; exit.
+  if the ratio is 1 / 1, put 1 / 1 in the result ratio; exit.
+  guess the result given the ratio (fifth root).
+  put the result in a delta ratio.
+  put 0 in a count.
+  loop.
+    if the count is at least 40, exit.
+    put the result in a previous ratio.
+    improve the result given the ratio (fifth root).
+    put the result in the delta ratio.
+    subtract the previous ratio from the delta ratio.
+    if the result is the previous ratio, exit.
+    if the count is at least 7,
+      add the previous ratio to the result;
+      divide the result by 2.
+    add 1 to the count.
+  repeat.
+
+to put a number and another number into a ratio:
+  put the number into the ratio's numerator.
+  put the other number into the ratio's denominator.
+
+to put a number into a ratio:
+  put the number into the ratio's numerator.
+  put 1 into the ratio's denominator.
+
+to put a ratio pair into another ratio pair:
+  put the ratio pair's ratio into the other ratio pair's ratio.
+  put the ratio pair's other ratio into the other ratio pair's other ratio.
+
+to put a ratio pair's hypotenuse into a ratio:
+  if the ratio pair is hypotenizable,
+    get the ratio given the ratio pair (ordinary hypotenuse);
+    exit.
+  privatize the ratio pair.
+  de-sign the ratio pair.
+  if the ratio pair's ratio is greater than the ratio pair's other ratio,
+    swap the ratio pair's ratio's numerator
+      with the ratio pair's other ratio's numerator;
+    swap the ratio pair's ratio's denominator
+      with the ratio pair's other ratio's denominator.
+  divide the ratio pair's ratio by the ratio pair's other ratio.
+  put the ratio pair's ratio in a temp ratio.
+  multiply the ratio pair's ratio by the temp ratio.
+  add 1/1 to the ratio pair's ratio.
+  put the ratio pair's ratio's square root in the ratio.
+  multiply the ratio by the ratio pair's other ratio.
+
+\to put a ratio's absolute value into another ratio:
+\  put the ratio into the other ratio.
+\  de-sign the other ratio.
+
+to put a ratio's sign into a number;
+to get the sign of a ratio returning a number:
+  get the sign of the ratio's denominator returning the number.
+  if the ratio's denominator is 0, put 1 in the number.
+  get the sign of the ratio's numerator returning another number.
+  multiply the number by the other number.
+
+to put a ratio's square root into a result ratio:
+  if the ratio is at most 0/1, put 0/1 in the result; exit.
+  if the ratio is 1/1, put 1/1 in the result; exit.
+  privatize the ratio.
+  de-sign the ratio's numerator.
+  de-sign the ratio's denominator.
+  if the ratio is less than 1/1,
+    invert the ratio;
+    put the ratio's square root in the result;
+    invert the result;
+    exit.
+  put 1 in a number called cofactor.
+  if the ratio's numerator is less than the largest square,
+    put the largest square in a number;
+    divide the number by the ratio's numerator;
+    put the number's square root in the cofactor;
+    multiply the cofactor by the cofactor.
+  multiply the ratio's numerator by the cofactor.
+  multiply the ratio's denominator by the cofactor.
+  put the ratio's denominator's square root in the result's denominator.
+  put the result's denominator in a number called small square.
+  multiply the small square by the small square.
+  scale the ratio's numerator
+    by the small square / the ratio's denominator.
+  put the small square in the ratio's denominator.
+  put the ratio's numerator's square root in the result's numerator.
+  put the result's numerator in a number called first square.
+  multiply the first square by the first square.
+  put the ratio's numerator in a target number.
+  put the target in a number called residue.
+  subtract the first square from the residue. \ has units of 1 / small square.
+  if the residue is 0,
+    reduce the result;
+    exit.
+  multiply the result's denominator by the result's numerator.
+  multiply the result's numerator by the result's numerator.
+  put the residue in another number.
+  divide the other number by 2.
+  add the other number to the result's numerator.
+  reduce the result.
+
+a ratio has
+  a numerator number,
+  a denominator number,
+  a top number at the numerator, and
+  a bottom number at the denominator.
+
+a ratio pair has a ratio and another ratio.
+
+to reduce and sort a ratio and another ratio (during multiplication):
+  reduce the ratio.
+  reduce the other ratio.
+  swap the ratio's numerator with the other ratio's numerator.
+  reduce the ratio.
+  reduce the other ratio.
+  if the ratio's numerator is greater than the other ratio's numerator,
+    swap the ratio's numerator with the other ratio's numerator.
+  if the ratio's denominator is greater than the other ratio's denominator,
+    swap the ratio's denominator with the other ratio's denominator.
+  transfer factors from the ratio to the other ratio.
+
+to reduce a ratio:
+  if the ratio's denominator is 0, exit.
+  if the ratio's numerator is 0,
+    put 1 in the ratio's denominator; exit.
+  get a gcd given the ratio's numerator and the ratio's denominator.
+  divide the ratio's numerator by the gcd.
+  divide the ratio's denominator by the gcd.
+
+to shrink a number and another number by a shrinker:
+  if the shrinker is at most 1, exit.
+  put the number in an old number.
+  scale the number by 1 / the shrinker.
+  scale the other number by the number / the old number.
+
+a shrinker is a number.
+
+\to subtract a number from a ratio:
+\  subtract the number / 1 from the ratio.
+
+to subtract a ratio from another ratio:
+  privatize the ratio.
+  negate the ratio.
+  add the ratio to the other ratio.
+
+to test (ratios - 1 times 17 does not have 31 bits of overflow):
+  create a test result about "ratios"
+    and "1 times 17 does not have 31 bits of overflow"
+    and expecting "no".
+  get a flag given 1 and 17 (overflow flag).
+  convert the flag to an actual string.
+  stash the test result given the actual.
+
+to test (ratios - 1234567890 times 2109876543 has 31 bits of overflow):
+  create a test result about "ratios"
+    and "1234567890 times 2109876543 has 31 bits of overflow"
+    and expecting "yes".
+  get a flag given 1234567890 and 2109876543 (overflow flag).
+  convert the flag to an actual string.
+  stash the test result given the actual.
+
+to test (ratios - 6 plus 0/1):
+  create a test result about "ratios" and "6 plus 0/1"
+    and expecting "6".
+  put 0 / 1 in a ratio.
+  add 6 to the ratio.
+  convert the ratio to a string.
+  stash the test result given the string.
+
+to test (ratios - 6 plus 0/1866240000):
+  create a test result about "ratios" and "6 plus 0/1866240000"
+    and expecting "6".
+  put 0/1866240000 in a ratio.
+  add 6 to the ratio.
+  convert the ratio to a string.
+  stash the test result given the string.
+
+to test (ratios - add 1664603 to 5734649/38880000):
+  make a fuzzy test about "ratios"
+    and "add 1664603 to 5734649/38880000"
+    and targeting 1664603147/1000 with tolerance 933120 trifles.
+  put 5734649/38880000 in an actual ratio.
+  add 1664603 to the actual ratio.
+  stash the fuzzy test given the actual ratio.
+
+to test (ratios - add 171875/12345 to -3235501/123456):
+  make a fuzzy test about "ratios"
+    and "add 171875/12345 to -3235501/123456"
+    and targeting -119411027/9720000 with tolerance 20 trifles.
+  put 171875/12345 in a ratio.
+  put -3235501/123456 in an actual ratio.
+  add the ratio to the actual ratio.
+  stash the fuzzy test given the actual ratio.
+
+to test (ratios - add 171875/12345 to -53041/123456):
+  make a fuzzy test about "ratios"
+    and "add 171875/12345 to -53041/123456"
+    and targeting 98364013/7290000 with tolerance 20 trifles.
+  put 171875/12345 in a ratio.
+  put -53041/123456 in an actual ratio.
+  add the ratio to the actual ratio.
+  stash the fuzzy test given the actual ratio.
+
+to test (ratios - add 171875/12345 to 3235501/123456):
+  make a fuzzy test about "ratios"
+    and "add 171875/12345 to 3235501/123456"
+    and targeting 624107461/15552000 with tolerance 20 trifles.
+  put 171875/12345 in a ratio.
+  put 3235501/123456 in an actual ratio.
+  add the ratio to the actual ratio.
+  stash the fuzzy test given the actual ratio.
+
+to test (ratios - add 171875/12345 to 53041/123456):
+  make a fuzzy test about "ratios"
+    and "add 171875/12345 to 53041/123456"
+    and targeting 22320659/1555200 with tolerance 20 trifles.
+  put 171875/12345 in a ratio.
+  put 53041/123456 in an actual ratio.
+  add the ratio to the actual ratio.
+  stash the fuzzy test given the actual ratio.
+
+to test (ratios - add 171875/123450 to -3235501/123456):
+  make a fuzzy test about "ratios"
+    and "add 171875/123450 to -3235501/123456"
+    and targeting -964825153/38880000 with tolerance 20 trifles.
+  put 171875/123450 in a ratio.
+  put -3235501/123456 in an actual ratio.
+  add the ratio to the actual ratio.
+  stash the fuzzy test given the actual ratio.
+
+to test (ratios - add 171875/123450 to -53041/123456):
+  make a fuzzy test about "ratios"
+    and "add 171875/123450 to -53041/123456"
+    and targeting 359299433/373248000 with tolerance 2 trifles.
+  put 171875/123450 in a ratio.
+  put -53041/123456 in an actual ratio.
+  add the ratio to the actual ratio.
+  stash the fuzzy test given the actual ratio.
+
+to test (ratios - add 171875/123450 to 3235501/123456):
+  make a fuzzy test about "ratios"
+    and "add 171875/123450 to 3235501/123456"
+    and targeting 429235043/15552000 with tolerance 20 trifles.
+  put 171875/123450 in a ratio.
+  put 3235501/123456 in an actual ratio.
+  add the ratio to the actual ratio.
+  stash the fuzzy test given the actual ratio.
+
+to test (ratios - add 171875/123450 to 53041/123456):
+  make a fuzzy test about "ratios"
+    and "add 171875/123450 to 53041/123456"
+    and targeting 425012581/233280000 with tolerance 2 trifles.
+  put 171875/123450 in a ratio.
+  put 53041/123456 in an actual ratio.
+  add the ratio to the actual ratio.
+  stash the fuzzy test given the actual ratio.
+
+to test (ratios - add 32107/12345 to -321097/123456):
+  make a fuzzy test about "ratios"
+    and "add 32107/12345 to -321097/123456"
+    and targeting -5383/58320000 with tolerance 3 trifles.
+  put 32107/12345 in a ratio.
+  put -321097/123456 in an actual ratio.
+  add the ratio to the actual ratio.
+  stash the fuzzy test given the actual ratio.
+
+to test (ratios - add 32107/12345 to 321097/123456):
+  make a fuzzy test about "ratios"
+    and "add 32107/12345 to 321097/123456"
+    and targeting 808970311/155520000 with tolerance 3 trifles.
+  put 32107/12345 in a ratio.
+  put 321097/123456 in an actual ratio.
+  add the ratio to the actual ratio.
+  stash the fuzzy test given the actual ratio.
+
+to test (ratios - add 34375/12345 to -3235501/123456):
+  make a fuzzy test about "ratios"
+    and "add 34375/12345 to -3235501/123456"
+    and targeting -50594107/2160000 with tolerance 20 trifles.
+  put 34375/12345 in a ratio.
+  put -3235501/123456 in an actual ratio.
+  add the ratio to the actual ratio.
+  stash the fuzzy test given the actual ratio.
+
+to test (ratios - add 34375/12345 to -53041/123456):
+  make a fuzzy test about "ratios"
+    and "add 34375/12345 to -53041/123456"
+    and targeting 183116503/77760000 with tolerance 2 trifles.
+  put 34375/12345 in a ratio.
+  put -53041/123456 in an actual ratio.
+  add the ratio to the actual ratio.
+  stash the fuzzy test given the actual ratio.
+
+to test (ratios - add 34375/12345 to 3235501/123456):
+  make a fuzzy test about "ratios"
+    and "add 34375/12345 to 3235501/123456"
+    and targeting 1803550135/62208000 with tolerance 20 trifles.
+  put 34375/12345 in a ratio.
+  put 3235501/123456 in an actual ratio.
+  add the ratio to the actual ratio.
+  stash the fuzzy test given the actual ratio.
+
+to test (ratios - add 34375/12345 to 53041/123456):
+  make a fuzzy test about "ratios"
+    and "add 34375/12345 to 53041/123456"
+    and targeting 1199679911/373248000 with tolerance 2 trifles.
+  put 34375/12345 in a ratio.
+  put 53041/123456 in an actual ratio.
+  add the ratio to the actual ratio.
+  stash the fuzzy test given the actual ratio.
+
+to test (ratios - add 34375/123450 to -3235501/123456):
+  make a fuzzy test about "ratios"
+    and "add 34375/123450 to -3235501/123456"
+    and targeting -201626027/7776000 with tolerance 20 trifles.
+  put 34375/123450 in a ratio.
+  put -3235501/123456 in an actual ratio.
+  add the ratio to the actual ratio.
+  stash the fuzzy test given the actual ratio.
+
+to test (ratios - add 34375/123450 to -53041/123456):
+  make a fuzzy test about "ratios"
+    and "add 34375/123450 to -53041/123456"
+    and targeting -2351183/15552000 with tolerance 2 trifles.
+  put 34375/123450 in a ratio.
+  put -53041/123456 in an actual ratio.
+  add the ratio to the actual ratio.
+  stash the fuzzy test given the actual ratio.
+
+to test (ratios - add 34375/123450 to 3235501/123456):
+  make a fuzzy test about "ratios"
+    and "add 34375/123450 to 3235501/123456"
+    and targeting 1647652201/62208000 with tolerance 20 trifles.
+  put 34375/123450 in a ratio.
+  put 3235501/123456 in an actual ratio.
+  add the ratio to the actual ratio.
+  stash the fuzzy test given the actual ratio.
+
+to test (ratios - add 34375/123450 to 53041/123456):
+  make a fuzzy test about "ratios"
+    and "add 34375/123450 to 53041/123456"
+    and targeting 1321461523/1866240000 with tolerance 1 trifles.
+  put 34375/123450 in a ratio.
+  put 53041/123456 in an actual ratio.
+  add the ratio to the actual ratio.
+  stash the fuzzy test given the actual ratio.
+
+to test (ratios - add negatives):
+  make a fuzzy test about "ratios"
+    and "add negatives"
+    and targeting -933130381/93312000 with tolerance 10 trifles.
+  put -425378384/53046075 in a ratio.
+  put -1244160000/628022579 in an actual ratio.
+  add the ratio to the actual ratio.
+  stash the fuzzy test given the actual ratio.
+
+to test (ratios - add ratios with big numerators and denominators):
+  make a fuzzy test about "ratios"
+    and "add ratios with big numerators and denominators"
+    and targeting 602351783/155520 with tolerance 2160 trifles.
+  put 606090331/228519 in a ratio.
+  put 373521285/305941 in an actual ratio.
+  add the ratio to the actual ratio.
+  stash the fuzzy test given the actual ratio.
+
+to test (ratios - average ratios using large numerator):
+  make a fuzzy test about "ratios"
+    and "average ratios using large numerator"
+    and targeting 500248049/31104000 with tolerance 15 trifles.
+  put 5/1 in a ratio.
+  put 2145370787/78972190 in another ratio.  \ Square root of 738
+  average the ratio and the other ratio giving an actual ratio.
+  stash the fuzzy test given the actual ratio.
+
+to test (ratios - big hypotenuse):
+  make a fuzzy test about "ratios" and "big hypotenuse"
+    and targeting 963188633/9720 with tolerance 320000 trifles.
+  put -1866285475/18967 in a ratio.
+  put 1866357303/159073 in another ratio.
+  find the hypotenuse of the ratio and the other ratio
+    giving an actual ratio.
+  stash the fuzzy test given the actual ratio.
+
+to test (ratios - compare ratios with big denominators):
+  create a test result about "ratios"
+    and "compare ratios with big denominators"
+    and expecting "2562791/1041188224 is greater than 243/100000".
+  \ 2562791/1041188224 is about 0.0024614.
+  \     243/100000     is       0.00243.
+  put "2562791/1041188224 is greater than 243/100000" in an actual string.
+  if 2562791/1041188224 is at most 243/100000,
+    put "2562791/1041188224 is at most 243/100000" in the actual string.
+  stash the test result given the actual string.
+
+to test (ratios - cube of 615/2048):
+  make a fuzzy test about "ratios" and "cube of 615/2048"
+    and targeting 3369083/124416000 with tolerance 5 trifles.
+  put 615/2048 in a ratio.
+  put the ratio in another ratio.
+  multiply the ratio by the other ratio.
+  multiply the ratio by the other ratio.
+  stash the fuzzy test given the ratio.
+
+to test (ratios - cube root of -8/1 is -2/1):
+  create a test result about "ratios"
+    and "cube root of -8/1 is -2/1"
+    and expecting "-2".
+  put the cube root of -8/1 in a ratio.
+  convert the ratio to an actual string.
+  stash the test result given the actual.
+
+to test (ratios - cube root of 27/1000 is 3/10):
+  make a fuzzy test about "ratios"
+    and "cube root of 27/1000 is 3/10"
+    and targeting 3/10 with tolerance 240 trifles.
+  put the cube root of 27/1000 in a ratio.
+  stash the fuzzy test given the ratio.
+
+to test (ratios - cube root of largest ratio):
+  make a fuzzy test about "ratios"
+    and "cube root of largest ratio"
+    and targeting 111469751/86400 with tolerance 7200 trifles.
+  put 1/1 in a ratio.
+  multiply the ratio by the largest number.
+  put the cube root of the ratio in an actual ratio.
+  stash the fuzzy test given the actual ratio.
+
+to test (ratios - divide 466824858/219661 by 1280002125/1):
+  make a fuzzy test about "ratios"
+    and "divide 466824858/219661 by 1280002125/1"
+    and targeting 1033/622080000 with tolerance 2 trifles.
+  put 466824858/219661 in an actual ratio.
+  put 1280002125/1 in a ratio.
+  divide the actual ratio by the ratio.
+  stash the fuzzy test given the actual ratio.
+
+to test (ratios - divide by 3):
+  make a fuzzy test about "ratios"
+    and "divide by 3"
+    and targeting 27993593/93312000 with tolerance 1 trifles.
+  put 839807789/933120000 in an actual ratio.
+  divide the actual ratio by 3.
+  stash the fuzzy test given the actual ratio.
+
+to test (ratios - fifth root of -32/1 is -2/1):
+  create a test result about "ratios"
+    and "fifth root of -32 is -2"
+    and expecting "-2".
+  put the fifth root of -32/1 in a ratio.
+  convert the ratio to an actual string.
+  stash the test result given the actual.
+
+to test (ratios - fifth root of 243/100000 is 3/10):
+  \ Can the tolerance be tightened to 5 trifles?  It was 72.
+  make a fuzzy test about "ratios"
+    and "fifth root of 243/100000 is 3/10"
+    and targeting 3/10 with tolerance 128 trifles.
+  put the fifth root of 243/100000 in a ratio.
+  stash the fuzzy test given the ratio.
+
+to test (ratios - fifth root of largest ratio):
+  \ can this tolerance be reduced to 120 trifles?
+  make a fuzzy test about "ratios"
+    and "fifth root of largest ratio"
+    and targeting 914665309/12441600 with tolerance 2000 trifles.
+  put 1/1 in a ratio.
+  multiply the ratio by the largest number.
+  put the fifth root of the ratio in an actual ratio.
+  stash the fuzzy test given the actual ratio.
+
+to test (ratios - fractions and ratios):
+  create a test result about "ratios" and "fractions and ratios"
+    and expecting "1-1/2; 5/6; 2; 2".
+                                    \ r1  r2   f1   f2
+  put 1/2 into a ratio.             \ 1/2 0/0  0/0  0/0
+  put 1/3 into another ratio.       \     1/3
+  add the ratio to the other ratio. \     5/6
+  put 1/4 into a fraction.          \          1/4
+  put the ratio into the fraction.  \          1/2
+  put the fraction into the ratio.  \ 1/2
+  add the fraction to the ratio.    \ 1/1
+  add the ratio to the fraction.    \          3/2
+  add 1/2 to the fraction.          \          2/1
+  add 1/2 to the ratio.             \ 3/2
+  clear another fraction.           \               0/1
+  add the fraction to the other fraction. \         2/1
+  convert the ratio to a string.
+  append "; " then the other ratio then "; "
+    then the fraction then "; " then the other fraction
+    to the string.
+  stash the test result given the string.
+
+to test (ratios - geometric mean of ratios):
+  make a fuzzy test about "ratios"
+    and "geometric mean of ratios"
+    and targeting 80530211/256000 with tolerance 180 trifles.
+  put 119074581/97736 in a ratio.
+  put 39691527/488680 in another ratio.
+  average the ratio and the other ratio giving an actual ratio (geometric mean).
+  stash the fuzzy test given the actual ratio.
+
+to test (ratios - hypotenuse):
+  make a fuzzy test about "ratios" and "hypotenuse"
+    and targeting 1064920747/933120000 with tolerance 180 trifles.
+  put 477/4000 in a ratio.
+  put -11350/10000 in another ratio.
+  find the hypotenuse of the ratio and the other ratio
+    giving an actual ratio.
+  stash the fuzzy test given the actual ratio.
+
+to test (ratios - invert 0/0):
+  create a test result about "ratios" and "invert 0/0"
+    and expecting "0/0".
+  put 0/0 in a ratio.
+  put 0 in the ratio's numerator.
+  put 0 in the ratio's denominator.
+  invert the ratio.
+  put the ratio's numerator then "/"
+    then the ratio's denominator in an actual string.
+  stash the test result given the actual string.
+
+to test (ratios - multiply ratio with big denominator by 116):
+  \ Can the tolerance be tightened to 40 trifles?
+  make a fuzzy test about "ratios"
+    and "multiply ratio with big denominator by 116"
+    and targeting 489588769/7290000 with tolerance 1200 trifles.
+  put 540235883/933120000 in a ratio.
+  multiply the ratio by 116.
+  stash the fuzzy test given the ratio.
+
+to test (ratios - reduce 0 trifles):
+  create a test result about "ratios" and "reduce 0 trifles"
+    and expecting "0/1".
+  put 0/1866240000 in a ratio.
+  reduce the ratio.
+  put the ratio's numerator then "/"
+    then the ratio's denominator in a string.
+  stash the test result given the string.
+
+to test (ratios - round up 1 to the nearest power of two):
+  create a test result about "ratios"
+    and "round up 1 to the nearest power of two"
+    and expecting "1".
+  put 1 in an actual number.
+  round the actual number up to the nearest power of two.
+  stash the test result given the actual.
+
+to test (ratios - round up 17 to the nearest power of two):
+  create a test result about "ratios"
+    and "round up 17 to the nearest power of two"
+    and expecting "32".
+  put 17 in an actual number.
+  round the actual number up to the nearest power of two.
+  stash the test result given the actual.
+
+to test (ratios - round up 3 to the nearest power of two):
+  create a test result about "ratios"
+    and "round up 3 to the nearest power of two"
+    and expecting "4".
+  put 3 in an actual number.
+  round the actual number up to the nearest power of two.
+  stash the test result given the actual.
+
+to test (ratios - round up 8 to the nearest power of two):
+  create a test result about "ratios"
+    and "round up 8 to the nearest power of two"
+    and expecting "8".
+  put 8 in an actual number.
+  round the actual number up to the nearest power of two.
+  stash the test result given the actual.
+
+to test (ratios - round up 9 to the nearest power of two):
+  create a test result about "ratios"
+    and "round up 9 to the nearest power of two"
+    and expecting "16".
+  put 9 in an actual number.
+  round the actual number up to the nearest power of two.
+  stash the test result given the actual.
+
+to test (ratios - square ratio with big numerator and denominator):
+  \ Can the tolerance be tightened to 20 trifles?
+  make a fuzzy test about "ratios"
+    and "square ratio with big numerator and denominator"
+    and targeting 311201/3456000 with tolerance 200 trifles.
+  put 560016863 / the trifle denominator in a ratio.
+  put the ratio in an actual ratio.
+  multiply the actual ratio by the ratio.
+  stash the fuzzy test given the actual ratio.
+
+to test (ratios - square ratio with big numerator):
+  make a fuzzy test about "ratios"
+    and "square ratio with big numerator"
+    and targeting 1664603147/1000 with tolerance 1080000 trifles.
+  put 1895862856/1469439 in a ratio.
+  put the ratio in an actual ratio.
+  multiply the actual ratio by the ratio.
+  stash the fuzzy test given the actual ratio.
+
+to test (ratios - square root of 1/738):
+  make a fuzzy test about "ratios" and "square root of 1/738"
+    and targeting 572477/15552000 with tolerance 20 trifles.
+  put 1/738 in a ratio.
+  put the ratio's square root in an actual ratio.
+  stash the fuzzy test given the actual ratio.
+
+to test (ratios - square root of 20839129/16000000):
+  make a fuzzy test about "ratios"
+    and "square root of 20839129/16000000"
+    and targeting 1064920747/933120000 with tolerance 5 trifles.
+  put 20839129/16000000 in a ratio.
+  put the ratio's square root in an actual ratio.
+  stash the fuzzy test given the actual ratio.
+
+to test (ratios - square root of 428515643/4332):
+  make a fuzzy test about "ratios"
+    and "square root of 428515643/4332"
+    and targeting 229280249/729000 with tolerance 360 trifles.
+  put 428515643/4332 in a ratio.
+  put the ratio's square root in an actual ratio.
+  stash the fuzzy test given the actual ratio.
+
+to test (ratios - square root of 738/1):
+  make a fuzzy test about "ratios" and "square root of 738/1"
+    and targeting 1689952196/62208000 with tolerance 20 trifles.
+  put 738/1 in a ratio.
+  put the ratio's square root in an actual ratio.
+  stash the fuzzy test given the actual ratio.
+
+to test (ratios - square root of largest ratio):
+  make a fuzzy test about "ratios"
+    and "square root of largest ratio"
+    and targeting 926819/20 with tolerance 2000 trifles.
+  put 1/1 in a ratio.
+  multiply the ratio by the largest number.
+  put the ratio's square root in an actual ratio.
+  stash the fuzzy test given the actual ratio.
+
+to test (ratios - subtract 171875/12345 from -3235501/123456):
+  make a fuzzy test about "ratios"
+    and "subtract 171875/12345 from -3235501/123456"
+    and targeting -624107461/15552000 with tolerance 20 trifles.
+  put 171875/12345 in a ratio.
+  put -3235501/123456 in an actual ratio.
+  subtract the ratio from the actual ratio.
+  stash the fuzzy test given the actual ratio.
+
+to test (ratios - subtract 171875/12345 from -53041/123456):
+  make a fuzzy test about "ratios"
+    and "subtract 171875/12345 from -53041/123456"
+    and targeting -22320659/1555200 with tolerance 10 trifles.
+  put 171875/12345 in a ratio.
+  put -53041/123456 in an actual ratio.
+  subtract the ratio from the actual ratio.
+  stash the fuzzy test given the actual ratio.
+
+to test (ratios - subtract 171875/12345 from 3235501/123456):
+  make a fuzzy test about "ratios"
+    and "subtract 171875/12345 from 3235501/123456"
+    and targeting 119411027/9720000 with tolerance 20 trifles.
+  put 171875/12345 in a ratio.
+  put 3235501/123456 in an actual ratio.
+  subtract the ratio from the actual ratio.
+  stash the fuzzy test given the actual ratio.
+
+to test (ratios - subtract 171875/12345 from 53041/123456):
+  make a fuzzy test about "ratios"
+    and "subtract 171875/12345 from 53041/123456"
+    and targeting -98364013/7290000 with tolerance 10 trifles.
+  put 171875/12345 in a ratio.
+  put 53041/123456 in an actual ratio.
+  subtract the ratio from the actual ratio.
+  stash the fuzzy test given the actual ratio.
+
+to test (ratios - subtract 171875/123450 from -3235501/123456):
+  make a fuzzy test about "ratios"
+    and "subtract 171875/123450 from -3235501/123456"
+    and targeting -429235043/15552000 with tolerance 20 trifles.
+  put 171875/123450 in a ratio.
+  put -3235501/123456 in an actual ratio.
+  subtract the ratio from the actual ratio.
+  stash the fuzzy test given the actual ratio.
+
+to test (ratios - subtract 171875/123450 from -53041/123456):
+  make a fuzzy test about "ratios"
+    and "subtract 171875/123450 from -53041/123456"
+    and targeting -425012581/233280000 with tolerance 2 trifles.
+  put 171875/123450 in a ratio.
+  put -53041/123456 in an actual ratio.
+  subtract the ratio from the actual ratio.
+  stash the fuzzy test given the actual ratio.
+
+to test (ratios - subtract 171875/123450 from 3235501/123456):
+  make a fuzzy test about "ratios"
+    and "subtract 171875/123450 from 3235501/123456"
+    and targeting 964825153/38880000 with tolerance 15 trifles.
+  put 171875/123450 in a ratio.
+  put 3235501/123456 in an actual ratio.
+  subtract the ratio from the actual ratio.
+  stash the fuzzy test given the actual ratio.
+
+to test (ratios - subtract 171875/123450 from 53041/123456):
+  make a fuzzy test about "ratios"
+    and "subtract 171875/123450 from 53041/123456"
+    and targeting -359299433/373248000 with tolerance 2 trifles.
+  put 171875/123450 in a ratio.
+  put 53041/123456 in an actual ratio.
+  subtract the ratio from the actual ratio.
+  stash the fuzzy test given the actual ratio.
+
+to test (ratios - subtract 32107/12345 from -321097/123456):
+  make a fuzzy test about "ratios"
+    and "subtract 32107/12345 from -321097/123456"
+    and targeting -808970311/155520000 with tolerance 3 trifles.
+  put 32107/12345 in a ratio.
+  put -321097/123456 in an actual ratio.
+  subtract the ratio from the actual ratio.
+  stash the fuzzy test given the actual ratio.
+
+to test (ratios - subtract 32107/12345 from 321097/123456):
+  make a fuzzy test about "ratios"
+    and "subtract 32107/12345 from 321097/123456"
+    and targeting 5383/58320000 with tolerance 3 trifles.
+  put 32107/12345 in a ratio.
+  put 321097/123456 in an actual ratio.
+  subtract the ratio from the actual ratio.
+  stash the fuzzy test given the actual ratio.
+
+to test (ratios - subtract 34375/12345 from -3235501/123456):
+  make a fuzzy test about "ratios"
+    and "subtract 34375/12345 from -3235501/123456"
+    and targeting -1803550135/62208000 with tolerance 20 trifles.
+  put 34375/12345 in a ratio.
+  put -3235501/123456 in an actual ratio.
+  subtract the ratio from the actual ratio.
+  stash the fuzzy test given the actual ratio.
+
+to test (ratios - subtract 34375/12345 from -53041/123456):
+  make a fuzzy test about "ratios"
+    and "subtract 34375/12345 from -53041/123456"
+    and targeting -1199679911/373248000 with tolerance 2 trifles.
+  put 34375/12345 in a ratio.
+  put -53041/123456 in an actual ratio.
+  subtract the ratio from the actual ratio.
+  stash the fuzzy test given the actual ratio.
+
+to test (ratios - subtract 34375/12345 from 3235501/123456):
+  make a fuzzy test about "ratios"
+    and "subtract 34375/12345 from 3235501/123456"
+    and targeting 50594107/2160000 with tolerance 15 trifles.
+  put 34375/12345 in a ratio.
+  put 3235501/123456 in an actual ratio.
+  subtract the ratio from the actual ratio.
+  stash the fuzzy test given the actual ratio.
+
+to test (ratios - subtract 34375/12345 from 53041/123456):
+  make a fuzzy test about "ratios"
+    and "subtract 34375/12345 from 53041/123456"
+    and targeting -183116503/77760000 with tolerance 2 trifles.
+  put 34375/12345 in a ratio.
+  put 53041/123456 in an actual ratio.
+  subtract the ratio from the actual ratio.
+  stash the fuzzy test given the actual ratio.
+
+to test (ratios - subtract 34375/123450 from -3235501/123456):
+  make a fuzzy test about "ratios"
+    and "subtract 34375/123450 from -3235501/123456"
+    and targeting -1647652201/62208000 with tolerance 15 trifles.
+  put 34375/123450 in a ratio.
+  put -3235501/123456 in an actual ratio.
+  subtract the ratio from the actual ratio.
+  stash the fuzzy test given the actual ratio.
+
+to test (ratios - subtract 34375/123450 from -53041/123456):
+  make a fuzzy test about "ratios"
+    and "subtract 34375/123450 from -53041/123456"
+    and targeting -1321461523/1866240000 with tolerance 1 trifles.
+  put 34375/123450 in a ratio.
+  put -53041/123456 in an actual ratio.
+  subtract the ratio from the actual ratio.
+  stash the fuzzy test given the actual ratio.
+
+to test (ratios - subtract 34375/123450 from 3235501/123456):
+  make a fuzzy test about "ratios"
+    and "subtract 34375/123450 from 3235501/123456"
+    and targeting 201626027/7776000 with tolerance 15 trifles.
+  put 34375/123450 in a ratio.
+  put 3235501/123456 in an actual ratio.
+  subtract the ratio from the actual ratio.
+  stash the fuzzy test given the actual ratio.
+
+to test (ratios - subtract 34375/123450 from 53041/123456):
+  make a fuzzy test about "ratios"
+    and "subtract 34375/123450 from 53041/123456"
+    and targeting 2351183/15552000 with tolerance 2 trifles.
+  put 34375/123450 in a ratio.
+  put 53041/123456 in an actual ratio.
+  subtract the ratio from the actual ratio.
+  stash the fuzzy test given the actual ratio.
+
+to test (ratios - subtract ratios with big denominators):
+  create a test result about "ratios"
+    and "subtract ratios with big denominators"
+    and expecting "126278371/1866240000".
+  put 1206750137/1866240000 in a ratio.
+  put 540235883/933120000 in another ratio.
+  subtract the other ratio from the ratio.
+  convert the ratio to an actual string.
+  stash the test result given the actual string.
+
+to test (ratios):
+\  \ a trifle is 1 / 1866240000.  1,866,240,000 is 43,200 * 43,200.
+  test (ratios - 6 plus 0/1).
+  test (ratios - reduce 0 trifles).
+  test (ratios - 6 plus 0/1866240000).
+  test (ratios - round up 1 to the nearest power of two).
+  test (ratios - round up 3 to the nearest power of two).
+  test (ratios - round up 8 to the nearest power of two).
+  test (ratios - round up 9 to the nearest power of two).
+  test (ratios - round up 17 to the nearest power of two).
+  test (ratios - 1 times 17 does not have 31 bits of overflow).
+  test (ratios - 1234567890 times 2109876543 has 31 bits of overflow).
+  test (ratios - fractions and ratios).
+  test (ratios - invert 0/0).
+  test (ratios - divide by 3).
+  test (ratios - multiply ratio with big denominator by 116).
+  test (ratios - compare ratios with big denominators).
+  test (ratios - add 171875/12345 to 3235501/123456).
+  test (ratios - add 171875/12345 to 53041/123456).
+  test (ratios - add 171875/123450 to 3235501/123456).
+  test (ratios - add 171875/123450 to 53041/123456).
+  test (ratios - add 32107/12345 to 321097/123456).
+  test (ratios - add 34375/12345 to 3235501/123456).
+  test (ratios - add 34375/12345 to 53041/123456).
+  test (ratios - add 34375/123450 to 3235501/123456).
+  test (ratios - add 34375/123450 to 53041/123456).
+  test (ratios - add 171875/12345 to -3235501/123456).
+  test (ratios - add 171875/12345 to -53041/123456).
+  test (ratios - add 171875/123450 to -3235501/123456).
+  test (ratios - add 171875/123450 to -53041/123456).
+  test (ratios - add 32107/12345 to -321097/123456).
+  test (ratios - add 34375/12345 to -3235501/123456).
+  test (ratios - add 34375/12345 to -53041/123456).
+  test (ratios - add 34375/123450 to -3235501/123456).
+  test (ratios - add 34375/123450 to -53041/123456).
+  test (ratios - add ratios with big numerators and denominators).
+  test (ratios - add 1664603 to 5734649/38880000).
+  test (ratios - add negatives).
+  test (ratios - subtract 171875/12345 from 3235501/123456).
+  test (ratios - subtract 171875/12345 from 53041/123456).
+  test (ratios - subtract 171875/123450 from 3235501/123456).
+  test (ratios - subtract 171875/123450 from 53041/123456).
+  test (ratios - subtract 32107/12345 from 321097/123456).
+  test (ratios - subtract 34375/12345 from 3235501/123456).
+  test (ratios - subtract 34375/12345 from 53041/123456).
+  test (ratios - subtract 34375/123450 from 3235501/123456).
+  test (ratios - subtract 34375/123450 from 53041/123456).
+  test (ratios - subtract 171875/12345 from -3235501/123456).
+  test (ratios - subtract 171875/12345 from -53041/123456).
+  test (ratios - subtract 171875/123450 from -3235501/123456).
+  test (ratios - subtract 171875/123450 from -53041/123456).
+  test (ratios - subtract 32107/12345 from -321097/123456).
+  test (ratios - subtract 34375/12345 from -3235501/123456).
+  test (ratios - subtract 34375/12345 from -53041/123456).
+  test (ratios - subtract 34375/123450 from -3235501/123456).
+  test (ratios - subtract 34375/123450 from -53041/123456).
+  test (ratios - subtract ratios with big denominators).
+  test (ratios - average ratios using large numerator).
+  test (ratios - square ratio with big numerator).
+  test (ratios - square ratio with big numerator and denominator).
+  test (ratios - divide 466824858/219661 by 1280002125/1).
+  test (ratios - square root of 738/1).
+  test (ratios - square root of 1/738).
+  test (ratios - square root of 428515643/4332).
+  test (ratios - square root of 20839129/16000000).
+  test (ratios - square root of largest ratio).
+  test (ratios - geometric mean of ratios).
+  test (ratios - hypotenuse).
+  test (ratios - big hypotenuse).
+  test (ratios - cube of 615/2048).
+  test (ratios - cube root of -8/1 is -2/1).
+  test (ratios - cube root of largest ratio).
+  test (ratios - cube root of 27/1000 is 3/10).
+  test (ratios - fifth root of largest ratio).
+  test (ratios - fifth root of -32/1 is -2/1).
+  test (ratios - fifth root of 243/100000 is 3/10).
+
+to transfer factors from a number to another number:
+  if the number is at most 1, exit.
+  if the other number is at most 0, exit.
+  if the number is multiplicable by the other number,
+    multiply the other number by the number;
+    put 1 in the number;
+    exit.
+  put the largest number in a threshold number.
+  divide the threshold by the other number.
+  if the threshold is greater than the number,
+    put the number in the threshold.
+  put 2 in a prime number.
+  loop.
+    if the prime number is greater than the threshold, exit.
+    if the number is evenly divisible by the prime number,
+      divide the number by the prime number;
+      multiply the other number by the prime number;
+      divide the threshold by the prime number;
+      repeat.
+    if the prime number is 2,
+      put 3 in the prime number; repeat.
+    if the prime number is 3,
+      put 5 in the prime number; repeat.
+    if the prime number is 5,
+      put 7 in the prime number; repeat.
+    if the prime number is 119, exit.
+    add 2 to the prime number.
+    if the prime number is evenly divisible by 5,
+      add 2 to the prime number.
+    if the prime number is evenly divisible by 7,
+      add 2 to the prime number.
+    if the prime number is evenly divisible by 3,
+      add 2 to the prime number.
+    if the prime number is evenly divisible by 5,
+      add 2 to the prime number.
+  repeat.
+
+to transfer factors from a ratio to another ratio:
+  transfer factors from the ratio's numerator
+    to the other ratio's numerator.
+  transfer factors from the ratio's denominator
+    to the other ratio's denominator.
+

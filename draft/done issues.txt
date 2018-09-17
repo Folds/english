@@ -1543,7 +1543,7 @@ with an adjustable slider between them.
   Requested by Jasper Paulsen on March 1, 2017.
 
 272.  Refactor scrolling code to reduce duplication
-  Status:  Demonstrated.
+  Status:    Tested.
   Audience:  Application users.
   Benefit:   Minor.
   Implementation difficulty:  Hard.
@@ -1936,3 +1936,76 @@ with an adjustable slider between them.
   Demoing difficulty:  Medium.
   Testing difficulty:  Medium.
   Requested by Jasper Paulsen on March 13, 2014.
+
+303.  Mitigate overflow errors when comparing ratios.
+  Allows using ratios for calculating color differences.
+  Status:   Tested.
+  Benefit:  Medium.
+  Implementation difficulty:  Hard.
+  Demoing difficulty:  Not applicable.
+  Testing difficulty:  Medium.
+  Requested by Jasper Paulsen on August 15, 2017.
+
+301.  Mitigate overflow errors when multiplying ratios.
+  Allows using ratios for calculating color differences.
+  Status:   Tested.
+  Benefit:  Medium.
+  Implementation difficulty:  Hard.
+  Demoing difficulty:  Not applicable.
+  Testing difficulty:  Medium.
+  Requested by Jasper Paulsen on August 15, 2017.
+
+299.  Mitigate overflow errors when adding ratios.
+  Allows using ratios for calculating color differences.
+  Status:   Tested.
+  Benefit:  Medium.
+  Implementation difficulty:  Hard.
+  Demoing difficulty:  Not applicable.
+  Testing difficulty:  Medium.
+  Requested by Jasper Paulsen on August 15, 2017.
+
+300.  Mitigate overflow errors when subtracting ratios.
+  Allows using ratios for calculating color differences.
+  Status:   Tested.
+  Benefit:  Medium.
+  Implementation difficulty:  Hard.
+  Demoing difficulty:  Not applicable.
+  Testing difficulty:  Medium.
+  Requested by Jasper Paulsen on August 15, 2017.
+
+298.  Calculate cube root of a ratio.
+  Allows using ratios for calculating color differences.
+  Status:   Tested.
+  Benefit:  Medium.
+  Implementation difficulty:  Hard.
+  Demoing difficulty:  Not applicable.
+  Testing difficulty:  Medium.
+  Requested by Jasper Paulsen on August 15, 2017.
+
+302.  Calculate fifth root of a ratio.
+  Allows using ratios for calculating color differences.
+  Status:   Tested.
+  Benefit:  Medium.
+  Implementation difficulty:  Hard.
+  Demoing difficulty:  Not applicable.
+  Testing difficulty:  Medium.
+  Requested by Jasper Paulsen on August 15, 2017.
+
+305.  Round down square roots of 101 through 120.
+  Square roots of positive numbers are supposed to round down.
+  Status:    Tested.
+  Audience:  Programmers.
+  Benefit:   Medium.  Prevents overflow errors in ratio square roots.
+  Implementation difficulty:  Easy.
+  Demoing difficulty:  n/a.
+  Testing difficulty:  Easy.
+  Requested by Jasper Paulsen on September 16, 2017.
+
+307.  Speed up arctangent.
+  Status:    Tested.
+  Audience:  Programmers.
+  Benefit:   Sped up color difference tests by 10 - 15 percent.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Not applicable.
+  Testing difficulty:  Easy.
+  Requested by Jasper Paulsen on September 12, 2017.

@@ -27,6 +27,11 @@ to add some trifles to a mixio:
   add the trifles to the mixio's trifles.
   normalize the mixio.
 
+to clear a mixio:
+  clear the mixio's whole number.
+  clear the mixio's nips.
+  clear the mixio's trifles.
+
 to convert a mixio to a ratio:
   privatize the mixio.
   normalize the mixio.
@@ -138,22 +143,13 @@ to convert a ratio to a mixio:
     negate the mixio's trifles.
   normalize the mixio.
 
-to convert a tangent to a flopped tangent:
-  \ assumes the tangent is between 0 and 1.
-  convert the tangent to a mixio.
-  put the mixio in the flopped tangent.
-  multiply the flopped tangent by -5.
-  add 11 to the flopped tangent.
-  multiply the flopped tangent by the mixio.
-  divide the flopped tangent by 6.
-
 to convert some trifles into a ratio;
 to put some trifles in a ratio:
   put the trifles / the trifle denominator in the ratio.
 
 to convert a trig angle to a mixio:
   put the trig angle's degrees in the mixio's whole number.
-  put 60 times the trig angle's minutes in a number.
+  put the trig angle's minutes in a number.
   multiply the number by 60.
   add the trig angle's seconds to the number.
   multiply the number by 100.
@@ -213,6 +209,10 @@ to convert a trig angle to a string:
 
 a cosine is a ratio.
 
+to de-sign a mixio:
+  if the mixio is at least 0/1, exit.
+  multiply the mixio by -1.
+
 to debug a mixio:
   convert the mixio to a string.
   debug the string.
@@ -230,6 +230,11 @@ to debug a trig angle:
   convert the trig angle to a string.
   debug the string.
 
+to decide if a mixio and another mixio are both non-negative proper fractions:
+  if the mixio is not properly non-negative, say no.
+  if the other mixio is not properly non-negative, say no.
+  say yes.
+
 to decide if a mixio is another mixio:
   privatize the mixio.
   privatize the other mixio.
@@ -238,6 +243,13 @@ to decide if a mixio is another mixio:
   if the mixio's whole number is not the other mixio's whole number, say no.
   if the mixio's nips are not the other mixio's nips, say no.
   if the mixio's trifles are not the other mixio's trifles, say no.
+  say yes.
+
+to decide if a mixio is any number:
+  privatize the mixio.
+  normalize the mixio.
+  if the mixio's nips are not 0, say no.
+  if the mixio's trifles are not 0, say no.
   say yes.
 
 to decide if a mixio is at least another mixio:
@@ -263,6 +275,11 @@ to decide if a mixio is at most a number:
   if the mixio is greater than the other mixio, say no.
   say yes.
 
+to decide if a mixio is at most a number trifles:
+  convert the number / the trifle denominator to another mixio.
+  if the mixio is at most the other mixio, say yes.
+  say no.
+
 to decide if a mixio is greater than another mixio:
   privatize the mixio.
   privatize the other mixio.
@@ -275,6 +292,11 @@ to decide if a mixio is greater than another mixio:
   if the mixio's trifles are greater than the other mixio's trifles, say yes.
   say no.
 
+to decide if a mixio is greater than a number trifles:
+  convert the number / the trifle denominator to another mixio.
+  if the mixio is greater than the other mixio, say yes.
+  say no.
+
 to decide if a mixio is less than another mixio:
   privatize the mixio.
   privatize the other mixio.
@@ -285,6 +307,11 @@ to decide if a mixio is less than another mixio:
   if the mixio's nips are less    than the other mixio's nips, say yes.
   if the mixio's nips are greater than the other mixio's nips, say no.
   if the mixio's trifles are less than the other mixio's trifles, say yes.
+  say no.
+
+to decide if a mixio is less than a number trifles:
+  convert the number / the trifle denominator to another mixio.
+  if the mixio is less than the other mixio, say yes.
   say no.
 
 to decide if a mixio is modest given a number:
@@ -312,6 +339,12 @@ to decide if a mixio is a number:
   if the mixio's trifles are not 0, say no.
   say yes.
 
+to decide if a mixio is properly non-negative:
+  privatize the mixio.
+  normalize the mixio.
+  if the mixio's whole number is not 0, say no.
+  say yes.
+
 to decide if a number is wrapped given a number called alpha and a number called omega:
  privatize the alpha.
  privatize the omega.
@@ -320,6 +353,108 @@ to decide if a number is wrapped given a number called alpha and a number called
  if the number is less than the alpha, say no.
  if the number is more than the omega, say no.
  say yes.
+
+to decide if raising a mixio to a number is futile:
+  if the number is at most 1, say no.
+  if the mixio is negative, say no.
+  if the mixio is at least 1, say no.
+  if the mixio is greater than 715803289 trifles, say no.
+  if the mixio is 0, say yes.
+  if the mixio is at most     30547 trifles, say yes.
+  if the number is 2, say no.
+  if the mixio is at most   1203099 trifles, say yes.
+  if the number is 3, say no.
+  if the mixio is at most   7550368 trifles, say yes.
+  if the number is 4, say no.
+  if the mixio is at most  22728354 trifles, say yes.
+  if the number is 5, say no.
+  if the mixio is at most  47384311 trifles, say yes.
+  if the number is 6, say no.
+  if the mixio is at most  80082805 trifles, say yes.
+  if the number is 7, say no.
+  if the mixio is at most 118704670 trifles, say yes.
+  if the number is 8, say no.
+  if the mixio is at most 161217512 trifles, say yes.
+  if the number is 9, say no.
+  if the mixio is at most 205952820 trifles, say yes.
+  if the number is 10, say no.
+  if the mixio is at most 251643608 trifles, say yes.
+  if the number is 11, say no.
+  if the mixio is at most 297372659 trifles, say yes.
+  if the number is 12, say no.
+  if the mixio is at most 342499541 trifles, say yes.
+  if the number is 13, say no.
+  if the mixio is at most 386592467 trifles, say yes.
+  if the number is 14, say no.
+  if the mixio is at most 429372600 trifles, say yes.
+  if the number is 15, say no.
+  if the mixio is at most 470671227 trifles, say yes.
+  if the number is 16, say no.
+  if the mixio is at most 510397828 trifles, say yes.
+  if the number is 17, say no.
+  if the mixio is at most 548516701 trifles, say yes.
+  if the number is 18, say no.
+  if the mixio is at most 585030020 trifles, say yes.
+  if the number is 19, say no.
+  if the mixio is at most 619965638 trifles, say yes.
+  if the number is 20, say no.
+  if the mixio is at most 653368344 trifles, say yes.
+  if the number is 21, say no.
+  if the mixio is at most 685293635 trifles, say yes.
+  if the number is 22, say no.
+  if the mixio is at most 715803289 trifles, say yes.
+  say no.
+
+to decide if raising a mixio to a number is trifling:
+  if the number is at most 1, say no.
+  if the mixio is negative, say no.
+  if the mixio is at least 1, say no.
+  if the mixio is greater than 750823906 trifles, say no.
+  if the mixio is 0, say yes.
+  if the mixio is at most     52908 trifles, say yes.
+  if the number is 2, say no.
+  if the mixio is at most   1735170 trifles, say yes.
+  if the number is 3, say no.
+  if the mixio is at most   9936843 trifles, say yes.
+  if the number is 4, say no.
+  if the mixio is at most  28313414 trifles, say yes.
+  if the number is 5, say no.
+  if the mixio is at most  56905571 trifles, say yes.
+  if the number is 6, say no.
+  if the mixio is at most  93691342 trifles, say yes.
+  if the number is 7, say no.
+  if the mixio is at most 136178317 trifles, say yes.
+  if the number is 8, say no.
+  if the mixio is at most 182148537 trifles, say yes.
+  if the number is 9, say no.
+  if the mixio is at most 229868716 trifles, say yes.
+  if the number is 10, say no.
+  if the mixio is at most 278074114 trifles, say yes.
+  if the number is 11, say no.
+  if the mixio is at most 325882576 trifles, say yes.
+  if the number is 12, say no.
+  if the mixio is at most 372701919 trifles, say yes.
+  if the number is 13, say no.
+  if the mixio is at most 418151324 trifles, say yes.
+  if the number is 14, say no.
+  if the mixio is at most 462000463 trifles, say yes.
+  if the number is 15, say no.
+  if the mixio is at most 504124412 trifles, say yes.
+  if the number is 16, say no.
+  if the mixio is at most 544471026 trifles, say yes.
+  if the number is 17, say no.
+  if the mixio is at most 583037638 trifles, say yes.
+  if the number is 18, say no.
+  if the mixio is at most 619854555 trifles, say yes.
+  if the number is 19, say no.
+  if the mixio is at most 654973429 trifles, say yes.
+  if the number is 20, say no.
+  if the mixio is at most 688459106 trifles, say yes.
+  if the number is 21, say no.
+  if the mixio is at most 720383950 trifles, say yes.
+  if the number is 22, say no.
+  if the mixio is at most 750823906 trifles, say yes.
+  say no.
 
 to decide if square root nips are close given a mixio and a mixio called result:
   privatize the result.
@@ -453,6 +588,36 @@ to divide a mixio by a divisor mixio returning a quotient number and a remnant m
   subtract the other mixio from the remnant.
   normalize the remnant.
 
+to divide a mixio by a mixio called divisor given a sign flag returning a result mixio (proper fractions):
+  \ assumes that both the mixio and the divisor are non-negative.
+  \ assumes that both the mixio and the divisor are less than 1.
+  if the divisor is 0,
+    convert the largest number into the result; exit.
+  privatize the mixio.
+  privatize the divisor.
+  normalize the mixio.
+  normalize the divisor.
+  put the mixio's nips in a numerator number.
+  put the divisor's nips in a denominator number.
+  multiply the numerator by the trifle root.
+  multiply the denominator by the trifle root.
+  add the mixio's trifles to the numerator.
+  add the divisor's trifles to the denominator.
+  divide the numerator by the denominator
+    giving the result's whole number and a remainder.
+  put the remainder in the result's nips.
+  multiply the remainder by the trifle root.
+  scale the result's nips by the trifle root / the denominator.
+  put the result's nips in a nips number.
+  multiply the nips by the denominator.
+  subtract the nips from the remainder.
+  if the remainder is negative,
+    subtract 1 from the result's nips;
+    add the denominator to the remainder.
+  put the remainder in the result's trifles.
+  scale the result's trifles by the trifle root / the denominator.
+  if the sign flag is set, negate the result.
+
 to divide a mixio by a mixio called divisor returning a number called quotient and a mixio called remnant (loop):
   privatize the mixio.
   put 0 in the quotient.
@@ -481,6 +646,10 @@ to divide a mixio by a mixio called divisor returning a result mixio:
     reverse the sign flag;
     negate the divisor;
     normalize the divisor.
+  if the mixio and the divisor are both non-negative proper fractions,
+    divide the mixio by the divisor given the sign flag
+      returning the result (proper fractions);
+    exit.
   put the mixio in a mixio called temp.
   divide the temp by the trifle root.
   divide the temp by the divisor
@@ -616,8 +785,6 @@ to divide a mixio by a number returning another mixio (modest divisor):
     subtract 1 from the other mixio's trifles.
   normalize the other mixio.
 
-a flopped tangent is a mixio.
-
 a fuzzy test has 
   a string called context, 
   a string called test name,   
@@ -630,6 +797,35 @@ to get modesty threshold given a mixio called divisor returning a number:
   if the number is less than the trifle root,
     put the trifle root in the number.
 
+to get a number given a count (arctangent coefficient numerator):
+  \ Per Herbert Medina's 2006 paper on
+  \ "A Sequence of Polynomials for Approximating Arctangent"
+  \ https://web.archive.org/web/20060902190838/http://myweb.lmu.edu/hmedina/Papers/Arctan.pdf
+  \ The count is the term's power.
+  \ The denominators are 64 times each term's power.
+  put 0 in the number.
+  if the count is at most 0, exit.
+  if the count is at least 24, exit.
+  if the count is  1, put  64 in the number; exit.
+  if the count is  2, exit.
+  if the count is  3, put  -64 in the number; exit.
+  if the count is  5, put   64 in the number; exit.
+  if the count is  7, put  -64 in the number; exit.
+  if the count is  9, put   64 in the number; exit.
+  if the count is 11, put  -64 in the number; exit.
+  if the count is at most  12, exit.
+  if the count is 13, put   65 in the number; exit.
+  if the count is 14, put  -12 in the number; exit.
+  if the count is 15, put    1 in the number; exit.
+  if the count is 16, put -208 in the number; exit.
+  if the count is 17, put  494 in the number; exit.
+  if the count is 18, put -584 in the number; exit.
+  if the count is 19, put  430 in the number; exit.
+  if the count is 20, put -208 in the number; exit.
+  if the count is 21, put   65 in the number; exit.
+  if the count is 22, put  -12 in the number; exit.
+  if the count is 23, put    1 in the number.
+
 to get some radians given a cosine:
   put the cosine in a ratio.
   put the ratio in a sine.
@@ -639,36 +835,16 @@ to get some radians given a cosine:
   add the other radians to the radians.
   normalize the radians.
 
-to get some radians given a flopped tangent called goal mixio:
-  \ the radians are x.  Assume 0 <= x <= pi / 4.
-  if the goal mixio is at most 0,
-    convert 0 into the radians; exit.
-  put tau in some radians called guess radians.
-  divide the guess radians by 8.
-  \ Use Newton's method, in a region where y(x)
-  \ is monotonically increasing and concave downward.
-  \ Thus, the point (low x, low y) never moves from (0, 0),
-  \ and the point (high x, high y) is the guess.
-  convert 1 into a guess mixio.
-  loop.
-    if the goal mixio is at least the guess mixio,
-      put the guess radians in the radians; exit.
-    divide the guess radians by the guess mixio
-      returning a mixio called next factor.
-    put the guess radians in some radians called previous radians.
-    multiply the goal mixio by the next factor
-      returning the guess radians.
-    put the guess radians' tangent in a tangent.
-    convert the tangent to a flopped tangent.
-    if the flopped tangent is the guess mixio,
-      put the guess radians in the radians; exit.
-    if the flopped tangent is less than the goal mixio,
-      strictly interpolate the radians from the goal mixio
-        between the previous radians and the guess radians
-        from between the guess mixio and the flopped tangent;
-      exit.
-    put the flopped tangent in the guess mixio.
-  repeat.
+to get some radians given a mixio (in degrees):
+  put tau in some tau radians.
+  divide the mixio by 6.
+  multiply the mixio by the tau radians.
+  divide the mixio by 60.
+  put the mixio in the radians.
+
+to get some radians given a ratio (in degrees):
+  convert the ratio to a mixio.
+  get the radians given the mixio (in degrees).
 
 to get some radians given a sine:
   privatize the sine.
@@ -725,10 +901,20 @@ to get some radians given a tangent:
   if the tangent is greater than 1 / 1,
     set an invert flag;
     flip the tangent.
-  convert the tangent to a flopped tangent.
-  \ The search region is 0 <= x <= pi/4,
-  \ where x = pi/4 - angle, y = 1 - tangent(x)
-  get the radians given the flopped tangent.
+  convert 0/1 to a mixio.
+  clear a count.
+  loop.
+    add 1 to the count.
+    if the count is at least 24, break.
+    get a number given the count (arctangent coefficient numerator).
+    convert the tangent to another mixio.
+    raise the other mixio to the count.
+    convert the number / the count to a third mixio.
+    multiply the other mixio by the third mixio.
+    add the other mixio to the mixio.
+  repeat.
+  divide the mixio by 64.
+  put the mixio in the radians.
   if the invert flag is set,
     negate the radians;
     add the bogus radians to the radians.
@@ -775,6 +961,11 @@ to get a trig angle given a sine:
 to get a trig angle given a tangent:
   get some radians given the tangent.
   convert the radians to the trig angle.
+
+to invert a mixio:
+  put the mixio in another mixio.
+  convert 1/1 to the mixio.
+  divide the mixio by the other mixio.
 
 to make a mixio given a number and a number called nips and some trifles:
   put the number in the mixio's whole number.
@@ -853,6 +1044,13 @@ to multiply a mixio by a number returning another mixio:
   multiply the mixio's trifles by the remainder.
   normalize the mixio.
   put the mixio in the other mixio.
+
+to multiply a trig angle by a number:
+  multiply the trig angle's degrees by the number.
+  multiply the trig angle's minutes by the number.
+  multiply the trig angle's seconds by the number.
+  multiply the trig angle's hundredths by the number.
+  normalize the trig angle.
 
 to negate a mixio:
   normalize the mixio.
@@ -1083,6 +1281,66 @@ to put a trig angle's tangent into a tangent:
   reduce the tangent.
 
 some radians are a mixio.
+
+to raise a mixio to a number:
+  if the mixio is any number,
+    normalize the mixio;
+    raise the mixio's whole number to the number;
+    exit.
+  if the number is 0,
+    convert 1/1 to the mixio; exit.
+  if the number is 1, exit.
+  privatize the number.
+  if the number is negative,
+    negate the number;
+    invert the mixio;
+    raise the mixio to the number;
+    exit.
+  if the mixio is negative, set a negation flag.
+  if the number is even, clear the negation flag.
+  de-sign the mixio.
+  if the negation flag is set,
+    raise the mixio to the number;
+    negate the mixio;
+    exit.
+  if raising the mixio to the number is futile,
+    convert 0/1 to the mixio; exit.
+  if raising the mixio to the number is trifling,
+    convert 1 / the trifle denominator to the mixio; exit.
+  if the number is at least 2,
+    put the mixio in a square mixio;
+    multiply the square mixio by the mixio.
+  if the number is at least 4,
+    put the square mixio in a fourth mixio;
+    multiply the fourth mixio by the square mixio.
+  if the number is at least 8,
+    put the fourth mixio in an eighth mixio;
+    multiply the eighth mixio by the fourth mixio.
+  if the number is at least 16,
+    put the eighth mixio in a sixteenth mixio;
+    multiply the sixteenth mixio by the eighth mixio.
+  convert 1/1 to a result mixio.
+  loop.
+    if the number is less than 16, break.
+    subtract 16 from the number.
+    multiply the result mixio by the sixteenth mixio.
+  repeat.
+  if the number is at least 8,
+    subtract 8 from the number;
+    multiply the result mixio by the eighth mixio.
+  if the number is at least 4,
+    subtract 4 from the number;
+    multiply the result mixio by the fourth mixio.
+  if the number is at least 2,
+    subtract 2 from the number;
+    multiply the result mixio by the square mixio.
+  if the number is at least 1,
+    subtract 1 from the number;
+    multiply the result mixio by the mixio.
+  put the result mixio in the mixio.
+  if the original number is at least 24, exit.
+  if the mixio is less than 2 trifles,
+    convert 2 / the trifle denominator in the mixio.
 
 to refine square root nips given a mixio and a mixio called result:
   \ assumes that the result is already within 1 of correct answer.
@@ -1400,6 +1658,15 @@ to test (trig - arctangent of -1/5):
   convert the trig angle to a string called actual.
   stash the test result given the actual.
 
+to test (trig - arctangent of -116640/418111321):
+  create a test result about "trig"
+    and "arctangent of -116640/418111321" 
+    and expecting "359°59’2.46”".
+  put -116640/418111321 in a tangent.
+  get a trig angle given the tangent.
+  convert the trig angle to a string called actual.
+  stash the test result given the actual.
+
 to test (trig - arctangent of -14):
   create a test result about "trig" and "arctangent of -14" 
     and expecting "274°5’8.22”".
@@ -1477,6 +1744,7 @@ to test (trig - arctangent):
   test (trig - arctangent of 4/3).
   test (trig - arctangent of 12).
   test (trig - arctangent of largest number).
+  test (trig - arctangent of -116640/418111321).
 
 to test (trig - convert from 0 radians to 0°):
   make a fuzzy test about "trig" 
@@ -1537,6 +1805,15 @@ to test (trig - convert mixio to string):
   make a mixio given -100 and -22100 and 0.
   normalize the mixio.
   convert the mixio to a string called actual.
+  stash the test result using the actual.
+
+to test (trig - convert trig angle to mixio):
+  create a test result about "trig"
+    and "convert trig angle to mixio"
+    and expecting "4-56677/120000".
+  make a trig angle given 4 and 28 and 20 and 31.
+  convert the trig angle to a mixio.
+  convert the mixio to an actual string.
   stash the test result using the actual.
 
 to test (trig - cosine of -240°):
@@ -1605,6 +1882,16 @@ to test (trig - cosine):
   test (trig - cosine of 45°).
   test (trig - cosine of 90°).
   test (trig - cosine of 360°).
+
+to test (trig - divide mixios):
+  create a test result about "trig"
+    and "divide mixios"
+    and expecting "0 + 23567/43200 + 40782/1866240000".
+  make a mixio given 0 and 17 and 15149.
+  make another mixio given 0 and 31 and 34722.
+  divide the mixio by the other mixio returning a mixio called result.
+  convert the result to a string (long).
+  stash the test result using the string.
 
 to test (trig - mixio / 388800):
   make a fuzzy test about "trig" and "mixio / 388800" 
@@ -1893,7 +2180,9 @@ to test (trig - wrap):
 to test (trig):
   test (trig - wrap).
   test (trig - normalize trig angle).
+  test (trig - convert trig angle to mixio).
   test (trig - convert mixio to string).
+  test (trig - divide mixios).
   test (trig - normalize radians).
   test (trig - multiply mixios).
   test (trig - convert from degrees to radians).
