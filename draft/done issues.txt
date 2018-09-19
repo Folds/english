@@ -2009,3 +2009,26 @@ with an adjustable slider between them.
   Demoing difficulty:  Not applicable.
   Testing difficulty:  Easy.
   Requested by Jasper Paulsen on September 12, 2017.
+
+329.  In measure.bat, include special cases
+  for known long lines' linewrap counts.
+  Status:    Demonstrated.
+  Audience:  Programmers.
+  Benefit:   Minor.
+  Implementation difficulty:  Easy.
+  Demoing difficulty:  Easy.
+  Testing difficulty:  Not applicable.
+  Requested by Jasper Paulsen on September 17, 2018.
+
+336.  In the compiler, make function bodies correspond to
+  the first function header instead of the last function header.
+  This would help keep the bodies of related functions together,
+  and make it easier to find other functions related to
+  the text used in the body of a function.
+  Status:    Won't do.  It is not a source code compatible change.
+  Audience:  Programmers.
+  Benefit:   Minor.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Medium.
+  Requested by Jasper Paulsen on September 18, 2018.

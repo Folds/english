@@ -2,7 +2,7 @@
 
 @setlocal
 
-@rem    Copyright 2017 by Jasper Paulsen.
+@rem    Copyright 2017-2018 by Jasper Paulsen.
 @rem    This batch script contains snippets of code from
 @rem    Tim Hill's book on Windows NT Shell Scripting,
 @rem    which is copyright 1998 by New Riders Publishing.
@@ -112,9 +112,12 @@
 @goto :EOF
 
 @rem Add up number of wraps needed to make code less than 81 characters wide.
+@rem The special case is for the noodle's osmosian font resource.
+@rem That line of code is too big to be passed to the subroutine.
 :COUNT_WRAPS
 @setlocal EnableDelayedExpansion
 @set /a WRAPS_IN_FILE=0
+@if "%~n1" equ "the noodle" @set /a WRAPS_IN_FILE=797
 @for /F "usebackq delims=<>" %%I in (%1) do @(
     @set "STR={%%I:"=}"
     @call :COUNT_WRAPS_IN_LINE "!STR:"=!"
@@ -131,21 +134,24 @@
 @if "!STR:~89,1!" equ "" @goto :DONE_COUNT_WRAPS_IN_LINE
 @set WRAPS=1
 @if "!STR:~169,1!" equ "" @goto :DONE_COUNT_WRAPS_IN_LINE
-@set WRAPS=102
-@if "!STR:~8169,1!" neq "" @goto :MAX_COUNT_WRAPS_IN_LINE
+@set WRAPS=2
+@if "!STR:~249,1!" equ "" @goto :DONE_COUNT_WRAPS_IN_LINE
+@set WRAPS=3
+@if "!STR:~329,1!" equ "" @goto :DONE_COUNT_WRAPS_IN_LINE
+@set WRAPS=4
+@if "!STR:~409,1!" equ "" @goto :DONE_COUNT_WRAPS_IN_LINE
 @set WRAPS=0
 @set LEN=0
 @for %%N in (4096 2048 1024 512 256 128 64 32 16 8 4 2 1) do @(
-    if "!STR:~%%N,1!" neq "" (
-      set /a "LEN+=%%N"
-      set "STR=!STR:~%%N!"
-    )
-)
+     if "!STR:~%%N,1!" neq "" (
+       set /a "LEN+=%%N"
+       set "STR=!STR:~%%N!"
+     )
+   )
 @set /a LEN-=9
 @set /a WRAPS = !LEN! / 80
 @set /a LEN+=1
 @goto :DONE_COUNT_WRAPS_IN_LINE
-:MAX_WRAPS_IN_LINE
 :DONE_COUNT_WRAPS_IN_LINE
 @endlocal & set RET=%WRAPS%
 @goto :EOF

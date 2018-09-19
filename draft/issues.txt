@@ -46,23 +46,6 @@ The following requests have been partially demonstrated.
 The following requests are roughly sorted
 from higher priority to lower priority.
 
-282.  Cache large numbers that have been checked for primality.
-  Store them as a sorted linked list of numeric ranges.
-  When a number that is adjacent to an existing range
-  is inserted into the cache, modify the existing range.
-  When a number that is adjacent to two existing ranges
-  is inserted into the cache, combine the existing ranges.
-  This cache can be used to quickly identify large
-  non-prime numbers that have already been checked for primality.
-  In finalize after run, destroy the cache.
-  Status:    Designed.
-  Audience:  Programmers.
-  Benefit:   Minor.
-  Implementation difficulty:  Medium.
-  Demoing difficulty:  Hard.
-  Testing difficulty:  Already done.
-  Requested by Jasper Paulsen on June 29, 2017.
-
 279.  In the editor, allow counting the characters
   in a multi-line selection.
   Status:    Request.
@@ -70,8 +53,53 @@ from higher priority to lower priority.
   Audience:  Programmers who play code golf.
   Implementation difficulty:  Hard.
   Demoing difficulty:  Easy.
-  Testing difficulty:  Hard.
+  Testing difficulty:  Medium.
   Requested by Jasper Paulsen on June 27, 2017.
+
+312.  Store 64-bit signed integers, in Windows' format.
+  Status:  Designed.
+  Audience:  Programmers.
+  Benefit.  Medium.  First step toward performance profiling.
+  Implementation difficulty:  Easy.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Easy.
+  Requested by Jasper Paulsen on October 22, 2017.
+
+313.  Negate 64-bit signed integers.
+  Status:  Request.
+  Audience:  Programmers.
+  Benefit.  Medium.  Second step toward performance profiling.
+  Implementation difficulty:  Hard.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Easy.
+  Requested by Jasper Paulsen on October 22, 2017.
+
+314.  Add 64-bit signed integers.
+  Status:  Request.
+  Audience:  Programmers.
+  Benefit.  Medium.  Third step toward performance profiling.
+  Implementation difficulty:  Hard.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Easy.
+  Requested by Jasper Paulsen on October 22, 2017.
+
+315.  Subtract 64-bit signed integers.
+  Status:  Request.
+  Audience:  Programmers.
+  Benefit.  Medium.  Fourth step toward performance profiling.
+  Implementation difficulty:  Hard.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Easy.
+  Requested by Jasper Paulsen on October 22, 2017.
+
+318.  Convert from 64-bit signed integers to 32-bit signed integers.
+  Status:  Request.
+  Audience:  Programmers.
+  Benefit.  Medium.  Fifth step toward performance profiling.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Easy.
+  Requested by Jasper Paulsen on October 22, 2017.
 
 179.  Use more precise and accurate timing ticks.
   Status:  request.
@@ -166,6 +194,54 @@ from higher priority to lower priority.
   Testing difficulty:  Profound.
   Requested by Gerry Rzeppa on March 7, 2014.
 
+334.  Document how to run measure.bat and test.bat .
+  Status:  Request.
+  Audience:  Programmers.
+  Benefit:   Medium.
+  Implementation difficulty:  Hard.
+  Demoing difficulty:  Easy.
+  Testing difficulty:  Not applicable.
+  Requested by Jasper Paulsen on September 15, 2018.
+  
+331.  At desktop startup, determine which edge the taskbar is on.
+  Status:  Request.
+  Audience:  Application users.
+  Benefit:   Medium.
+  Implementation difficulty:  Hard.
+  Demoing difficulty:  Hard.
+  Testing difficulty:  Medium.
+  Requested by Jasper Paulsen on September 17, 2018.
+  
+332.  At desktop startup, determine size of taskbar.
+  Status:  Request.
+  Audience:  Application users.
+  Benefit:   Medium.
+  Implementation difficulty:  Hard.
+  Demoing difficulty:  Hard.
+  Testing difficulty:  Medium.
+  Requested by Jasper Paulsen on September 17, 2018.
+  
+333.  At desktop startup, adjust size and position of half-screens
+  to accommodate taskbar.
+  Status:  Request.
+  Audience:  Application users.
+  Benefit:   Medium.
+  Implementation difficulty:  Hard.
+  Demoing difficulty:  Hard.
+  Testing difficulty:  Medium.
+  Requested by Jasper Paulsen on September 17, 2018.
+
+337.  The status's test results use a small font when viewed
+  in the writer, when the writer is in reduced mode.
+  Fix the bug.
+  Status:  Request.
+  Audience:  Programmers.
+  Benefit:   Minor.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Easy.
+  Testing difficulty:  Medium.
+  Requested by Jasper Paulsen on September 18, 2018.
+
 035.  Indent the contents of loops.
   Pretty print loops so that the row(s) after Loop: and before Repeat
   are indented twice as much as the Loop: statement.
@@ -189,6 +265,19 @@ from higher priority to lower priority.
   Demoing difficulty:  Easy.
   Testing difficulty:  Medium.
   Requested by Gerry Rzeppa on April 30, 2017.
+
+335.  When sorting code blocks, sort functions
+  by last function header instead of by first function header.
+  This would help keep the bodies of related functions together,
+  and make it easier to find other functions related to
+  the text used in the body of a function.
+  Status:    Request.
+  Audience:  Programmers.
+  Benefit:   Minor.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Medium.
+  Requested by Jasper Paulsen on September 18, 2018.
 
 252.  Document how to find lines of code based on memory addresses.
   If a program crashes, and if a program like WinCrashReport
@@ -275,6 +364,33 @@ from higher priority to lower priority.
   The audience is programmers.
   Requested by Jasper Paulsen on March 7, 2014.
 
+330.  In measure.bat, correctly count linewrap counts.
+  Status:    Request.
+  Audience:  Programmers.
+  Benefit:   Minor.
+  Implementation difficulty:  Hard.
+  Demoing difficulty:  Easy.
+  Testing difficulty:  Not applicable.
+  Requested by Jasper Paulsen on September 17, 2018.
+
+338.  Count test cases in the noodle subfolder.
+  Status:    Request.
+  Audience:  Programmers.
+  Benefit:   Minor.
+  Implementation difficulty:  Hard.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Medium.
+  Requested by Jasper Paulsen on September 18, 2018.
+
+339.  Count deciders in the noodle subfolder.
+  Status:    Request.
+  Audience:  Programmers.
+  Benefit:   Minor.
+  Implementation difficulty:  Hard.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Medium.
+  Requested by Jasper Paulsen on September 18, 2018.
+
 133.  Allow marking comments in the vertical scroll bar.
   Benefit:  Medium.  Would make it easier to find
             major section breaks in source code by scrolling.
@@ -312,6 +428,115 @@ from higher priority to lower priority.
   Audience:  Windows and Linux programmers.
   Requested by Jasper Paulsen on September 16, 2018.
   
+316.  Multiply 64-bit signed integers.
+  Status:  Request.
+  Audience:  Programmers.
+  Benefit.  Minor.
+  Implementation difficulty:  Hard.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Easy.
+  Requested by Jasper Paulsen on October 22, 2017.
+
+317.  Divide 64-bit signed integers.
+  Status:  Request.
+  Audience:  Programmers.
+  Benefit.  Minor.
+  Implementation difficulty:  Hard.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Easy.
+  Requested by Jasper Paulsen on October 22, 2017.
+
+319.  Store ratios of 64-bit signed integers.
+  Status:  Request.
+  Audience:  Programmers.
+  Benefit.  Minor.
+  Implementation difficulty:  Easy.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Easy.
+  Requested by Jasper Paulsen on September 17, 2018.
+
+320.  Invert ratios of 64-bit signed integers.
+  Status:  Request.
+  Audience:  Programmers.
+  Benefit.  Minor.
+  Implementation difficulty:  Easy.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Easy.
+  Requested by Jasper Paulsen on September 17, 2018.
+
+321.  Negate ratios of 64-bit signed integers.
+  Status:  Request.
+  Audience:  Programmers.
+  Benefit.  Minor.
+  Implementation difficulty:  Easy.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Easy.
+  Requested by Jasper Paulsen on September 17, 2018.
+
+322.  Add ratios of 64-bit signed integers.
+  Status:  Request.
+  Audience:  Programmers.
+  Benefit.  Minor.
+  Implementation difficulty:  Hard.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Medium.
+  Requested by Jasper Paulsen on September 17, 2018.
+
+323.  Subtract ratios of 64-bit signed integers.
+  Status:  Request.
+  Audience:  Programmers.
+  Benefit.  Minor.
+  Implementation difficulty:  Hard.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Medium.
+  Requested by Jasper Paulsen on September 17, 2018.
+
+324.  Multiply ratios of 64-bit signed integers.
+  Status:  Request.
+  Audience:  Programmers.
+  Benefit.  Minor.
+  Implementation difficulty:  Hard.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Medium.
+  Requested by Jasper Paulsen on September 17, 2018.
+
+325.  Divide ratios of 64-bit signed integers.
+  Status:  Request.
+  Audience:  Programmers.
+  Benefit.  Minor.
+  Implementation difficulty:  Hard.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Medium.
+  Requested by Jasper Paulsen on September 17, 2018.
+
+326.  Convert from ratios of 64-bit signed integers
+  to ratios of 32-bit signed integers.
+  Status:  Request.
+  Audience:  Programmers.
+  Benefit.  Minor.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Easy.
+  Requested by Jasper Paulsen on October 22, 2017.
+
+327.  Convert from ratios of 64-bit signed integers to mixios.
+  Status:  Request.
+  Audience:  Programmers.
+  Benefit.  Minor.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Easy.
+  Requested by Jasper Paulsen on October 22, 2017.
+
+328.  Convert from mixios to ratios of 64-bit signed integers.
+  Status:  Request.
+  Audience:  Programmers.
+  Benefit.  Minor.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Easy.
+  Requested by Jasper Paulsen on October 22, 2017.
+
 306.  Measure color differences using the dE-2000 formula.
   http://www.colorwiki.com/wiki/Delta_E:_The_Color_Difference
   http://www.ece.rochester.edu/~gsharma/ciede2000/ciede2000noteCRNA.pdf
@@ -344,6 +569,23 @@ from higher priority to lower priority.
   Demoing difficulty:  Medium.
   Testing difficulty:  Hard.
   Requested by Jasper Paulsen on May 22, 2017.
+
+282.  Cache large numbers that have been checked for primality.
+  Store them as a sorted linked list of numeric ranges.
+  When a number that is adjacent to an existing range
+  is inserted into the cache, modify the existing range.
+  When a number that is adjacent to two existing ranges
+  is inserted into the cache, combine the existing ranges.
+  This cache can be used to quickly identify large
+  non-prime numbers that have already been checked for primality.
+  In finalize after run, destroy the cache.
+  Status:    Designed.
+  Audience:  Programmers.
+  Benefit:   Minor.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Hard.
+  Testing difficulty:  Already done.
+  Requested by Jasper Paulsen on June 29, 2017.
 
 024.  Make it easy to search all files in a project,
 regardless of whether the file is open in the editor.
@@ -750,5 +992,5 @@ while a letter's menu is visible.
 \ ======================================
 Unsorted requests:
 
-Next item number:  312.
 
+Next item number:  340.

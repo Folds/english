@@ -45,7 +45,7 @@ ream cal-3024
        ""
        "I am the CAL-4016. My primary function is to compile Plain English text files"
        "into executable programs compatible with the Windows operating system."
-       "My code — just 38,000 lines of Plain English — is surprisingly broad in scope."
+       "My code — just 40,000 lines of Plain English — is surprisingly broad in scope."
        ""
        "The ""noodle"" subfolder is my frontal lobe, which goes with me wherever I go."
        "You can use (or omit) the other subfolders and files, depending on what kind of program you want to write."
@@ -58,7 +58,7 @@ ream cal-3024
        "         (9) the compiler, mentioned above"
        "The ""turtle"" subfolder has routines for drawing turtle graphics."
        ""
-       "I am capable of replication and can recompile myself in under five seconds. Which is less time than it takes Microsoft Word just to start up."
+       "I am capable of replication and can recompile myself in under seven seconds. Which is less time than it takes Microsoft Word just to start up."
        ""
        "INSTALLATION"
        ""
@@ -913,9 +913,9 @@ ream cal-3024
        "  Call ""ole32.dll"" ""CoInitializeEx"""
        "    with 0 and 2 [coinit_aparthreaded]."
        ""
-       "to multiply a ratio by a number:"
-       "  multiply the ratio's numerator by the number."
-       "  reduce the ratio."
+       "to multiply a pair by another pair:"
+       "  multiply the pair's x by the other pair's x."
+       "  multiply the pair's y by the other pair's y."
        ""
        "to negate a number:"
        "  intel $8B8508000000. \ mov eax,[ebp+8] \ the number"
@@ -1003,7 +1003,7 @@ ream cal-3024
     end
     rectangle 0 0 0 -1 0 0 6840 7740 8280 8100 90
     text -1 0 0 -1 0 0 6960 7740 8160 8100 0 "" "Arial" 360 "right" 0 0 0 yes
-       "5407:1"
+       "5622:1"
     end
     rectangle 0 0 0 -1 0 0 9810 10500 10080 10770 90
     rectangle 0 0 0 -1 0 0 9810 8370 10080 10500 90
@@ -7031,7 +7031,7 @@ ream cal-3024
        "DECISIONS I KNOW HOW TO MAKE"
        ""
        "I like deciders because they make me smarter. In fact, I collect them. "
-       "Right now I have 182 deciders in my noodle subfolder."
+       "Right now I have 279 deciders in my noodle subfolder."
        "By the time you read this, I'm sure there will be many more."
        "Here is a sampling of the operational phrases:"
        ""
@@ -9165,7 +9165,7 @@ ream cal-3024
        ""
        "I like tests because they encourage you to tell me how to do new things,"
        "because you can check whether I still know how to do old things."
-       "So I collect tests.  Right now I have 64 tests in my noodle."
+       "So I collect tests.  Right now I have 256 tests in my noodle subfolder."
        ""
        ""
        ""
@@ -9296,7 +9296,7 @@ ream cal-3024
     end
     rectangle 0 0 0 -1 0 0 6840 3870 8280 4230 90
     text -1 0 0 -1 0 0 6960 3870 8160 4230 0 "" "Arial" 360 "right" 0 0 0 yes
-       "9938:1"
+       "10196:1"
     end
     rectangle 0 0 0 -1 0 0 9810 6796 10080 7066 90
     rectangle 0 0 0 -1 0 0 9810 4500 10080 6796 90
