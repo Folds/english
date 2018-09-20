@@ -53,6 +53,17 @@ but have not yet been tested.
 The following requests have been demonstrated,
 but do not have test plans yet.
 
+341.  In the tabstrip, when abbreviating a folder name,
+  have the abbreviation character appear before the whack,
+  instead of replacing the whack.
+  Status:    Demonstrated.
+  Audience:  Application users.
+  Benefit:   Minor.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Easy.
+  Testing difficulty:  Medium.
+  Requested by Jasper Paulsen on September 19, 2018.
+
 144.  Allow viewing result of running a program.
   Add a menu item to review the run's result.
   259 means the program is still active.

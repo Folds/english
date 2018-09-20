@@ -67,17 +67,6 @@ from higher priority to lower priority.
   Demoing difficulty:  Medium.
   Testing difficulty:  Not applicable.
 
-341.  In the tabstrip, when abbreviating a folder name,
-  have the abbreviation character appear before the whack,
-  instead of replacing the whack.
-  Status:    Request.
-  Audience:  Application users.
-  Benefit:   Minor.
-  Implementation difficulty:  Medium.
-  Demoing difficulty:  Easy.
-  Testing difficulty:  Medium.
-  Requested by Jasper Paulsen on September 19, 2018.
-
 279.  In the editor, allow counting the characters
   in a multi-line selection.
   Status:    Request.

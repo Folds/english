@@ -2939,7 +2939,7 @@ to switch a tab to a node:
     format the tab's info string to fit in the tab's box
       given the requested control font and "\".
   format the tab's name to fit in the tab's box
-    given the requested control font.
+    given the requested control font and "\".
   put "finder" into the tab's mode.
   if the node's source is not nil, put "editor" into the tab's mode.
   if the node's document is not nil,
