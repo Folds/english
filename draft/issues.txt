@@ -57,6 +57,27 @@ from higher priority to lower priority.
   Testing difficulty:  Covered by existing tests.
   Requested by Mike Gonta on January 13, 2018.
 
+342.  In the github wiki, on each page explaining how to
+  perform a source control action using the git command line,
+  also explain how to perform the action using GitKraken.
+  Status:  Request.
+  Audience:  Programmers.
+  Benefit:   Minor.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Not applicable.
+
+341.  In the tabstrip, when abbreviating a folder name,
+  have the abbreviation character appear before the whack,
+  instead of replacing the whack.
+  Status:    Request.
+  Audience:  Application users.
+  Benefit:   Minor.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Easy.
+  Testing difficulty:  Medium.
+  Requested by Jasper Paulsen on September 19, 2018.
+
 279.  In the editor, allow counting the characters
   in a multi-line selection.
   Status:    Request.
@@ -1003,5 +1024,4 @@ while a letter's menu is visible.
 \ ======================================
 Unsorted requests:
 
-
-Next item number:  341.
+Next item number:  343.
