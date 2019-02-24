@@ -53,6 +53,15 @@ but have not yet been tested.
 The following requests have been demonstrated,
 but do not have test plans yet.
 
+179.  Use more precise and accurate timing ticks.
+  Status:  Demonstrated.
+  Audience:  Programmers.
+  Benefit:  Important.
+  Implementation difficulty:  Profound.  Requires support for 64-bit numbers.
+  Demoing difficulty:  Easy.
+  Testing difficulty:  Medium.
+  Requested by Jasper Paulsen on April 4, 2017.
+
 341.  In the tabstrip, when abbreviating a folder name,
   have the abbreviation character appear before the whack,
   instead of replacing the whack.

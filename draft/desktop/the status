@@ -1,6 +1,6 @@
 \ The portions of this file that are from CAL-3040
 \ are copyright 2006 by the Osmosian Order.
-\ The remainder is copyright 2014, 2017 by Jasper Paulsen.
+\ The remainder is copyright 2014, 2017, 2019 by Jasper Paulsen.
 
 \ The status is part of the desktop's pad.
 \ The status contains the test results.
@@ -188,8 +188,10 @@ to handle an event (regression test):
   untint the status.
   show status "Testing...".
   test.
-  put "Tests took " then the status' all test results' timer's string
-    then " ms" in a message.
+\  put "Tests took " then the status' all test results' timer's string
+\    then " ms" in a message.
+  put "Tests took " then the status' all test results' timer's careful string
+    in a message.
   show status the message.
   if the current tab is nil,
     handle the event (show cached test results); exit.
@@ -388,6 +390,10 @@ to stash a fuzzy test given a mixio:
     fail the test result given the string.
   append the test result to the status' all test results.
 
+to stash a test result given a bigint:
+  convert the bigint into a string called actual.
+  stash the test result given the actual.
+
 to stash a test result given a number:
   convert the number into a string called actual.
   stash the test result given the actual.
@@ -492,6 +498,7 @@ to test (all):
   test (text).
   test (ratios).
   test (trig).
+  test (bigints).
   \ desktop subfolder
   test (the compiler).
   test (the desktop).
@@ -527,6 +534,8 @@ to test (the testing time):
     and expecting the expectation.
   put the status' all test results' timer's string
     then " ms" in a string called actual.
+\  put the status' all test results' timer's careful string
+\    in a string called actual.
   if the status' all test results' timer's total ticks is at most the maximum,
     pass the test result given the actual.
   if the status' all test results' timer's total ticks is more than the maximum,

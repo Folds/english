@@ -1,0 +1,886 @@
+\ Copyright 2017-2019 by Jasper Paulsen.
+
+\ Intel is "backways" (Little Endian).
+\ The further left the byte, the less significant the byte is.
+\ But within a byte, the further left the bit,
+\ the more significant the bit is.
+
+\ The low number is treated as unsigned.
+\ The low number ranges from 0 through biggest number - smallest number,
+\ not from smallest number through biggest number.
+a bigint has
+  a first byte,
+  a second byte,
+  a third byte,
+  a fourth byte,
+  a fifth byte,
+  a sixth byte,
+  a seventh byte,
+  an eighth byte,
+  a low byte at the first byte,
+  a high byte at the eighth byte,
+  a first wyrd at the first byte,
+  a second wyrd at the third byte,
+  a third wyrd at the fifth byte,
+  a fourth wyrd at the seventh byte,
+  a low wyrd at the first byte,
+  a high wyrd at the seventh byte,
+  a low number at the first byte, and
+  a high number at the fifth byte.
+
+to add a bigint to another bigint:
+  privatize the bigint.
+  add the bigint's low number to the other bigint's low number and carry a flag.
+  add the bigint's high number to the other bigint's high number.
+  if the flag is set, add one to the other bigint's high number.
+
+to add a bigint to another bigint and carry a flag:
+  privatize the bigint.
+  add the bigint's low number to the other bigint's low number and carry another flag.
+  add the bigint's high number to the other bigint's high number and carry the flag.
+  if the other flag is set, add 1 to the other bigint's high number and carry a third flag.
+  if the third flag is set, set the flag.
+
+to add a number to a bigint:
+  convert the number to another bigint.
+  add the other bigint to the bigint.
+
+to append a bigint to a string:
+  convert the bigint to another string.
+  append the other string to the string.
+
+to bitwise and a bigint with another bigint:
+  bitwise and the bigint's high number with
+    the other bigint's high number.
+  bitwise and the bigint's low number with
+    the other bigint's low number.
+
+to bitwise xor a bigint with another bigint:
+  bitwise xor the bigint's high number with
+    the other bigint's high number.
+  bitwise xor the bigint's low number with
+    the other bigint's low number.
+
+to clear a bigint:
+  put 0 into the bigint's high number.
+  put 0 into the bigint's low number.
+
+to convert a bigint to a string:
+  if the bigint is the smallest bigint,
+    put "-9223372036854775808" in the string; exit.
+  clear the string.
+  privatize the bigint.
+  de-sign the bigint.
+  loop.
+    divide the bigint by ten giving a quotient bigint and a remainder.
+    add 48 to the remainder.
+    put the remainder into a byte.
+    prepend the byte to the string.
+    if the quotient bigint is zero, break.
+    put the quotient bigint into the bigint.
+  repeat.
+  if the original bigint is negative, prepend the dash byte to the string.
+
+to convert a string to a bigint:
+  put 0 into the bigint.
+  slap a substring on the string.
+  if the substring is blank, exit.
+  if the substring's first's target is any sign, add 1 to the substring's first.
+  loop.
+    if the substring is blank, break.
+    multiply the bigint by ten.
+    put the substring's first's target into a number.
+    subtract 48 from the number.
+    convert the number to another bigint.
+    add the other bigint to the bigint.
+    add 1 to the substring's first.
+  repeat.
+  if the string's first's target is the dash byte, negate the bigint.
+
+to de-sign a bigint:
+  if the bigint is the smallest bigint,
+    put the largest bigint into the bigint; exit.
+  if the bigint is negative, negate the bigint.
+
+to debug a bigint:
+  convert the bigint to a string.
+  debug the string.
+
+to decide if a bigint is another bigint:
+  if the bigint's low number is not
+    the other bigint's low number, say no.
+  if the bigint's high number is
+    the other bigint's high number, say yes.
+  say no.
+
+to decide if a bigint is another bigint or more;
+to decide if a bigint is at least another bigint;
+to decide if a bigint is greater than or equal to another bigint:
+  if the bigint is the other bigint, say yes.
+  if the bigint is greater than the other bigint, say yes.
+  say no.
+
+to decide if a bigint is bitwise included in another bigint:
+  if the bigint's low number is not bitwise included
+    in the other bigint's low number, say no.
+  if the bigint's high number is bitwise included
+    in the other bigint's high number, say yes.
+  say no.
+
+to decide if a bigint is less than another bigint:
+  if the other bigint is greater than the bigint, say yes.
+  say no.
+
+to decide if a bigint is modest:
+  if the bigint's high number is positive, say no.
+  if the bigint's high number is less than -1, say no.
+  clear a flag.
+  clear another flag.
+  if the bigint is negative, set the flag.
+  if the bigint's low number is not negative, set the other flag.
+  if the flag and the other flag are both set, say no.
+  if the flag is set, say yes.
+  if the bigint's low number is negative, say no.
+  say yes.
+
+to decide if a bigint is more than another bigint;
+to decide if a bigint is greater than another bigint:
+  if the bigint's high number is greater than
+    the other bigint's high number, say yes.
+  if the bigint's high number is less than
+    the other bigint's high number, say no.
+  \ the low numbers' "negatives" are actually
+  \ positives that are bigger than the biggest number.
+  clear a flag.
+  clear another flag.
+  if the bigint's low number is negative, set the flag.
+  if the other bigint's low number is negative,
+    invert the flag; set the other flag.
+  if the flag and the other flag are both set,
+    say no.
+  if the flag is set, say yes.
+  if the bigint's low number is greater than
+    the other bigint's low number, say yes.
+  say no.
+
+to decide if a bigint is negative:
+  if the bigint's high number is negative, say yes.
+  say no.
+
+to decide if a bigint is a number:
+  convert the number to another bigint.
+  if the bigint is the other bigint, say yes.
+  say no.
+
+to decide if a bigint is zero:
+  if the bigint's high number is not 0, say no.
+  if the bigint's low number is 0, say yes.
+  say no.
+
+to decrement a bigint;
+to subtract one from a bigint:
+  if the bigint is the smallest bigint,
+    put the largest bigint in the bigint; exit.
+  if the bigint's low number is the smallest number,
+    put the largest number in the bigint's low number; exit.
+  if the bigint's low number is 0,
+    put the largest number in the bigint's low number;
+    subtract 1 from the bigint's high number; exit.
+  subtract 1 from the bigint's low number.
+
+to divide a bigint by another bigint:
+  divide the bigint by the other bigint
+    giving a quotient bigint and a remainder bigint.
+  put the quotient bigint in the bigint.
+
+to divide a bigint by another bigint giving a quotient bigint and a remainder bigint:
+  privatize the bigint.
+  privatize the other bigint.
+  clear the quotient bigint.
+  clear the remainder bigint.
+  if the other bigint is zero,
+    put the largest bigint in the quotient bigint; exit.
+  if the bigint is modest, set a flag.
+  if the other bigint is modest, set another flag.
+  if the flag and the other flag are both set, \ both modest
+    convert the bigint to a number;
+    convert the other bigint to another number;
+    divide the number by the other number
+      giving a quotient and a remainder;
+    convert the quotient to the quotient bigint;
+    convert the remainder to the remainder bigint;
+    exit.
+  invert the other flag.
+  if the flag and the other flag are both set, \ modest over immodest
+    put the bigint in the remainder bigint; exit.
+  clear the flag.
+  clear the other flag.
+  if the bigint is the smallest bigint, set the flag.
+  if the other bigint is the smallest bigint, set the other flag.
+  if the flag and the other flag are both set,
+    convert 1 to the quotient bigint; exit.
+  if the other flag is set,
+    put the bigint in the remainder bigint; exit.
+  if the flag is set,
+    add one to the bigint;
+    subtract one from the remainder bigint.
+  \ At this point, neither bigint is the smallest bigint,
+  \ so de-signing will not change their absolute values.
+  if the bigint is negative, set a sign flag.
+  if the other bigint is negative, invert the sign flag.
+  if the sign flag is set, negate the remainder bigint.
+  de-sign the bigint.
+  de-sign the other bigint.
+  clear the flag.
+  if the bigint is less than the other bigint, set the flag.
+  if the flag is set,
+    add the bigint to the remainder bigint.
+  if the flag and the sign flag are both set,
+    negate the quotient bigint;
+    negate the remainder bigint;
+    exit.
+  if the flag is set, exit.
+\ to-do: convert most of what follows to assembly code.
+  put the bigint's highest bit into some bits.
+  put the other bigint's highest bit into some other bits.
+  subtract the other bits from the bits.
+  put 1 into a power bigint.
+  shift the power bigint left the bits.
+  put the other bigint in a subtractee bigint.
+  shift the subtractee bigint left the bits.
+  loop.
+    if the bigint is at least the subtractee bigint,
+      add the power bigint to the quotient bigint;
+      subtract the subtractee bigint from the bigint.
+    subtract 1 from the bits.
+    if the bits are negative, break.
+    shift the subtractee bigint right 1 bit. 
+    shift the power bigint right 1 bit. 
+  repeat.
+  add the bigint to the remainder bigint.
+  if the sign flag is set,
+    negate the quotient bigint;
+    negate the remainder bigint.
+
+to divide a bigint by a number:
+  convert the number to another bigint.
+  divide the bigint by the other bigint.
+
+to divide a bigint by ten giving a quotient bigint and a remainder:
+  clear the quotient bigint.
+  divide the bigint's high number by 10
+    giving the quotient bigint's high number
+    and a temp remainder.
+  if the temp remainder is at least 5,
+    put the smallest number in the quotient bigint's low number;
+    subtract 5 from the temp remainder.
+  put 429496729 in a number.
+  multiply the number by the temp remainder.
+  add the number to the quotient bigint's low number.
+  put 6 in the number.
+  multiply the number by the temp remainder.
+  divide the number by 10 giving a bonus number and the remainder.
+  add the bonus number to the quotient bigint's low number.
+  if the bigint's low number is negative,
+    add 429496729 to the quotient bigint's low number;
+    add 6 to the remainder.
+  divide the bigint's low number by 10
+    giving the bonus number and an extra number.
+  add the bonus number to the quotient bigint's low number.
+  add the extra number to the remainder.
+  divide the remainder by 10
+    giving the bonus number and the extra number.
+  add the bonus number to the quotient bigint's low number.
+  put the extra number in the remainder.
+  if the remainder is negative,
+    add 10 to the remainder;
+    subtract 1 from the quotient bigint.
+
+to finalize bigints:
+
+to increment a bigint;
+to add one to a bigint:
+  if the bigint is the largest bigint,
+    put the smallest bigint in the bigint; exit.
+  if the bigint's low number is the largest number,
+    put the smallest number in the bigint's low number; exit.
+  if the bigint's low number is -1,
+    clear the bigint's low number;
+    add one to the bigint's high number; exit.
+  add one to the bigint's low number.
+
+to initialize bigints:
+  clear the smallest bigint.
+  put the smallest number in the smallest bigint's high number.
+  clear the largest bigint.
+  put the largest number in the largest bigint's high number.
+  put -1 in the largest bigint's low number.
+
+the largest bigint is a bigint.
+
+to multiply a bigint by another bigint:
+  if the bigint is zero, exit.
+  if the other bigint is 1, exit.
+  if the other bigint is zero, clear the bigint; exit.
+  if the bigint is 1, put the other bigint in the bigint; exit.
+  if the bigint is negative, set a sign flag.
+  if the other bigint is negative, invert the sign flag.
+  if the bigint is the smallest bigint, set a flag.
+  if the other bigint is the smallest bigint, set the flag.
+  if the flag and the sign flag are both set,
+    put the smallest bigint in the bigint; exit.
+  if the flag is set,
+    put the largest bigint in the bigint; exit.
+  \ At this point, neither bigint is the smallest bigint,
+  \ so de-signing will not change their absolute values.
+  privatize the other bigint.
+  de-sign the bigint.
+  de-sign the other bigint.
+\ to-do: convert most of what follows to assembly code.
+  if the bigint is less than the other bigint,
+    swap the bigint with the other bigint.
+  put the bigint's highest bit into some bits.
+  put the other bigint's highest bit into some other bits.
+  clear the flag.
+  if the bits plus the other bits are at least 65 bits, set the flag.
+  if the flag and the sign flag are both set,
+    put the smallest bigint in the bigint; exit.
+  if the flag is set,
+    put the largest bigint in the bigint; exit.
+  put the bigint into an addend bigint.
+  put 1 into a power bigint.
+  clear the bigint.
+  loop.
+    decrement the other bits.
+    if the other bits are 0, break.
+    if the power bigint is bitwise included in the other bigint,
+      add the addend bigint to the bigint.
+    shift the addend bigint left 1 bit.
+    shift the power bigint left 1 bit.
+  repeat.
+  if the power bigint is bitwise included in the other bigint,
+    add the addend bigint to the bigint and carry the flag.
+  if the flag and the sign flag are both set,
+    put the smallest bigint in the bigint; exit.
+  if the flag is set,
+    put the largest bigint in the bigint; exit.
+  if the sign flag is set, negate the bigint.
+
+to multiply a bigint by a number:
+  convert the number to another bigint.
+  multiply the bigint by the other bigint.
+
+to multiply a bigint by ten:
+  multiply the bigint's high number by 10.
+  put the bigint's low wyrd in a first number.
+  multiply the first number by 10.
+  if the first number is negative,
+    add 655360 to the first number.
+  put the bigint's second wyrd in a second number.
+  multiply the second number by 10.  
+  if the second number is negative,
+    add 655360 to the second number.
+  clear the bigint's low number.
+  divide the first number by 65536
+    giving a first quotient and a first remainder.
+  add the first quotient to the second number.
+  put the first remainder in the bigint's low wyrd.
+  divide the second number by 65536
+    giving a second quotient and a second remainder.
+  add the second quotient to the bigint's high number.
+  put the second remainder in the bigint's second wyrd.
+
+to negate a bigint:
+  put -1 in another bigint.
+  bitwise xor the bigint with the other bigint. \ flip all the bits.
+  increment the bigint.
+
+to put a bigint into another bigint:
+  put the bigint's high number into the other bigint's high number.
+  put the bigint's low number into the other bigint's low number.
+
+to put a bigint into a number;
+to convert a bigint into a number:
+  if the bigint is modest, 
+    put the bigint's low number in the number; exit.
+  if the bigint's high number is negative,
+    put the smallest number in the number; exit.
+  put the largest number in the number.
+
+to put a bigint's highest bit into some bits:
+  put the bigint's high number's highest bit into the bits.
+  if the bits are positive, add 32 to the bits; exit.
+  put the bigint's low number's highest bit into the bits.
+
+to put a number into a bigint;
+to convert a number to a bigint:
+  privatize the number.
+  clear the bigint.
+  if the number is not negative,
+    put the number into the bigint's low number; exit.
+  put -1 into the bigint's high number.
+  put the number into the bigint's low number.
+
+to shift a bigint left some bits:
+  if the bits are at least 32,
+    put the bigint's low number in the bigint's high number;
+    shift the bigint's high number left the bits minus 32 bits;
+    clear the bigint's low number;
+    exit.
+  shift the bigint's high number left the bits.
+  put the bigint's low number in a number.
+  put 32 in some other bits.
+  subtract the bits from the other bits.
+  shift the number right the other bits.
+  bitwise or the bigint's high number with the number.
+  shift the bigint's low number left the bits.
+
+to shift a bigint right some bits:
+  if the bits are at least 32,
+    put the bigint's high number in the bigint's low number;
+    shift the bigint's low number right the bits minus 32 bits;
+    clear the bigint's high number;
+    exit.
+  shift the bigint's low number right the bits.
+  put the bigint's high number in a number.
+  put 32 in some other bits.
+  subtract the bits from the other bits.
+  shift the number left the other bits.
+  bitwise or the bigint's low number with the number.
+  shift the bigint's high number right the bits.
+
+the smallest bigint is a bigint.
+
+to subtract a bigint from another bigint:
+  privatize the bigint.
+  negate the bigint.
+  add the bigint to the other bigint.
+  if the original bigint is the smallest bigint,
+    add one to the other bigint.
+
+to subtract a number from a bigint:
+  convert the number to another bigint.
+  subtract the other bigint from the bigint.
+
+to swap a bigint with another bigint:
+  swap the bigint's high number with the other bigint's high number.
+  swap the bigint's low number with the other bigint's low number.
+
+to test (bigints - add large negative bigints):
+  create a test result about "bigints"
+    and "add large negative bigints" and expecting "-8010008006004002000".
+  convert "-3005004003002001000" to a bigint.
+  convert "-5005004003002001000" to another bigint.
+  add the other bigint to the bigint.
+  stash the test result given the bigint.
+
+to test (bigints - add large positive bigints):
+  create a test result about "bigints"
+    and "add large positive bigints" and expecting "7010008006004002000".
+  convert "6005004003002001000" to a bigint.
+  convert "1005004003002001000" to another bigint.
+  add the other bigint to the bigint.
+  stash the test result given the bigint.
+
+to test (bigints - add small bigints):
+  create a test result about "bigints" and "3 plus 7" and expecting "10".
+  put 7 in a bigint.
+  put 3 in another bigint.
+  add the other bigint to the bigint.
+  stash the test result given the bigint.
+
+to test (bigints - convert -1 to number):
+  create a test result about "bigints" and "convert -1 to number"
+    and expecting "-1".
+  convert -1 to a bigint.
+  convert the bigint to a number.
+  stash the test result given the number.
+
+to test (bigints - convert -123456789 to number):
+  create a test result about "bigints"
+    and "convert -123456789 to number"
+    and expecting "-123456789".
+  convert -123456789 to a bigint.
+  convert the bigint to a number.
+  stash the test result given the number.
+
+to test (bigints - convert 0 to number):
+  create a test result about "bigints"
+    and "convert 0 to number" and expecting "0".
+  convert 0 to a bigint.
+  convert the bigint to a number.
+  stash the test result given the number.
+
+to test (bigints - convert 123456789 to number):
+  create a test result about "bigints"
+    and "convert 123456789 to number"
+    and expecting "123456789".
+  convert 123456789 to a bigint.
+  convert the bigint to a number.
+  stash the test result given the number.
+
+to test (bigints - convert largest bigint to largest number):
+  create a test result about "bigints"
+    and "convert largest bigint to largest number"
+    and expecting "2147483647".
+  convert the largest bigint to a number.
+  stash the test result given the number.
+
+to test (bigints - convert smallest bigint to smallest number):
+  create a test result about "bigints"
+    and "convert smallest bigint to smallest number"
+    and expecting "-2147483648".
+  convert the smallest bigint to a number.
+  stash the test result given the number.
+
+to test (bigints - convert too big to largest number):
+  create a test result about "bigints"
+    and "convert too big to largest number"
+    and expecting "2147483647".
+  convert the largest number to a bigint.
+  add 1 to the bigint.
+  convert the bigint to a number.
+  stash the test result given the number.
+
+to test (bigints - convert too small to smallest number):
+  create a test result about "bigints"
+    and "convert too small to smallest number"
+    and expecting "-2147483648".
+  convert the smallest number to a bigint.
+  subtract 1 from the bigint.
+  convert the bigint to a number.
+  stash the test result given the number.
+
+to test (bigints - copy bigint):
+  create a test result about "the noodle" and "copy bigint"
+    and expecting "5".
+  put 5 in a bigint.
+  put the bigint in another bigint.
+  stash the test result given the other bigint.
+
+to test (bigints - divide by large number):
+  \ numerator       = 2^62 + 2^30
+  \ denominator     = 2^30 +    1
+  \ expected result = 2^32 - 3 with remainder 3
+  create a test result about "bigints"
+    and "divide by large number"
+    and   expecting "4294967293 with remainder 3".
+  convert "4611686019501129728" to a bigint.
+  convert "1073741825" to a divisor bigint.
+  divide the bigint by the divisor bigint
+    giving a quotient bigint and a remainder bigint.
+  stash the test result given the quotient bigint
+    then " with remainder " then the remainder bigint.
+
+to test (bigints - divide by three):
+  \ numerator       = 2^31
+  \ denominator     = 3
+  create a test result about "bigints"
+    and "divide by three"
+    and   expecting "715827882 with remainder 2".
+  convert the smallest number to a bigint.
+  negate the bigint.
+  convert 3 to a divisor bigint.
+  divide the bigint by the divisor bigint
+    giving a quotient bigint and a remainder bigint.
+  stash the test result given the quotient bigint
+    then " with remainder " then the remainder bigint.
+
+to test (bigints - divide negative by positive):
+  create a test result about "bigints" and "divide negative by positive"
+    and expecting "-1000".
+  convert "-10000000000000" to a bigint.
+  convert     "10000000000" to another bigint.
+  divide the bigint by the other bigint.
+  stash the test result given the bigint.
+
+to test (bigints - divide negatives):
+  create a test result about "bigints" and "divide negatives"
+    and expecting "12345678901".
+  convert "-4267640714596567801" to a bigint.
+  convert "-345678901" to another bigint.
+  divide the bigint by the other bigint.
+  stash the test result given the bigint.
+
+to test (bigints - divide positive by negative):
+  create a test result about "bigints" and "divide positive by negative"
+    and expecting "-123456".
+  convert "42676134430744704" to a bigint.
+  convert "-345678901234" to another bigint.
+  divide the bigint by the other bigint.
+  stash the test result given the bigint.
+
+to test (bigints - largest bigint):
+  create a test result about "bigints" and "largest bigint"
+    and expecting "9223372036854775807".
+  stash the test result given the largest bigint.
+
+to test (bigints - multiply 0 by ten):
+  create a test result about "bigints"
+    and "multiply 0 by ten" and expecting "0".
+  put 0 in a bigint.
+  multiply the bigint by ten.
+  stash the test result given the bigint.
+
+to test (bigints - multiply 12 by ten):
+  create a test result about "bigints"
+    and "multiply 12 by ten" and expecting "120".
+  put 12 in a bigint.
+  multiply the bigint by ten.
+  stash the test result given the bigint.
+
+to test (bigints - multiply 123 by ten):
+  create a test result about "bigints"
+    and "multiply 123 by ten" and expecting "1230".
+  put 123 in a bigint.
+  multiply the bigint by ten.
+  stash the test result given the bigint.
+
+to test (bigints - multiply 123456789 by ten):
+  create a test result about "bigints"
+    and "multiply 123456789 by ten" and expecting "1234567890".
+  put 123456789 in a bigint.
+  multiply the bigint by ten.
+  stash the test result given the bigint.
+
+to test (bigints - multiply 1234567890 by ten):
+  create a test result about "bigints"
+    and "multiply 1234567890 by ten" and expecting "12345678900".
+  put 1234567890 in a bigint.
+  multiply the bigint by ten.
+  stash the test result given the bigint.
+
+to test (bigints - multiply negative by positive):
+  create a test result about "bigints" and "multiply negative by positive"
+    and expecting "-4267640714596567801".
+  convert "-345678901" to a bigint.
+  convert "12345678901" to another bigint.
+  multiply the bigint by the other bigint.
+  stash the test result given the bigint.
+
+to test (bigints - multiply negatives):
+  create a test result about "bigints" and "multiply negatives"
+    and expecting "42676134430744704".
+  convert "-345678901234" to a bigint.
+  multiply the bigint by -123456.
+  stash the test result given the bigint.
+
+to test (bigints - multiply positive by negative):
+  create a test result about "bigints" and "multiply positive by negative"
+    and expecting "-4267640716720024680". \ -(2^61 + ...) Has bit #62 set.
+  convert "3456789012" to a bigint.       \  (2^31 + ...) Has bit #32 set.
+  multiply the bigint by -1234567890.     \ -(2^30 + ...) Has bit #31 set.
+  stash the test result given the bigint.
+
+to test (bigints - multiply positives):
+  create a test result about "bigints" and "multiply positives"
+    and expecting "42676134430744704".
+  convert "345678901234" to a bigint.
+  multiply the bigint by 123456.
+  stash the test result given the bigint.
+
+to test (bigints - multiply too negative):
+  create a test result about "bigints" and "multiply too negative"
+    and expecting "-9223372036854775808".
+  convert "-9876543210" to a bigint.
+  convert "1234567890" to another bigint.
+  multiply the bigint by the other bigint.
+  stash the test result given the bigint.
+
+to test (bigints - multiply too positive):
+  create a test result about "bigints" and "multiply too positive"
+    and expecting "9223372036854775807".
+  convert "9876543210" to a bigint.
+  convert "1234567890" to another bigint.
+  multiply the bigint by the other bigint.
+  stash the test result given the bigint.
+
+to test (bigints - negate bigint):
+  create a test result about "bigints" and "negate 5"
+    and expecting "-5".
+  put 5 in a bigint.
+  negate the bigint.
+  stash the test result given the bigint.
+
+to test (bigints - negate negative bigint):
+  create a test result about "bigints" and "negate -5"
+    and expecting "5".
+  put -5 in a bigint.
+  negate the bigint.
+  stash the test result given the bigint.
+
+to test (bigints - shift left 13 bits):
+  create a test result about "bigints"
+    and "shift left 13 bits"
+    and expecting "8796093030400".  \ 2^43 + 2^13
+  convert "1073741825" to a bigint. \ 2^30 + 1
+  shift the bigint left 13 bits.
+  stash the test result given the bigint.
+
+to test (bigints - shift left 32 bits):
+  create a test result about "bigints"
+    and "shift left 32 bits"
+    and expecting "4611686022722355200". \ 2^62 + 2^32
+  convert "1073741825" to a bigint.      \ 2^30 + 1
+  shift the bigint left 32 bits.
+  stash the test result given the bigint.
+
+to test (bigints - shift left 33 bits):
+  create a test result about "bigints"
+    and "shift left 33 bits"
+    and expecting "2969359149424443392".
+  convert "345678901" to a bigint.
+  shift the bigint left 33 bits.
+  stash the test result given the bigint.
+
+to test (bigints - shift right 13 bits):
+  create a test result about "bigints"
+    and "shift right 13 bits" and expecting "1073741825". \ 2^30 + 1
+  convert "8796093030400" to a bigint.                    \ 2^43 + 2^13
+  shift the bigint right 13 bits.
+  stash the test result given the bigint.
+
+to test (bigints - shift right 32 bits):
+  create a test result about "bigints"
+    and "shift right 32 bits" and expecting "1073741825". \ 2^30 + 1
+  convert "4611686022722355200" to a bigint.              \ 2^62 + 2^32
+  shift the bigint right 32 bits.
+  stash the test result given the bigint.
+
+to test (bigints - shift right 33 bits):
+  create a test result about "bigints"
+    and "shift right 33 bits"
+    and expecting "345678901".
+  convert "2969359149424443392" to a bigint.
+  shift the bigint right 33 bits.
+  stash the test result given the bigint.
+
+to test (bigints - smallest bigint plus one):
+  create a test result about "bigints" and "smallest bigint plus one"
+    and expecting "-9223372036854775807".
+  put the smallest bigint in a bigint.
+  increment the bigint.
+  stash the test result given the bigint.
+
+to test (bigints - smallest bigint):
+  create a test result about "bigints" and "smallest bigint"
+    and expecting "-9223372036854775808".
+  stash the test result given the smallest bigint.
+
+to test (bigints - stringify 2305843008139952128):
+  create a test result about "bigints"
+    and "stringify 2305843008139952128"
+    and expecting "2305843008139952128".
+  convert "2305843008139952128" to a bigint.
+  stash the test result given the bigint.
+
+to test (bigints - stringify 7516192768):
+  create a test result about "bigints"
+    and "stringify 7516192768"
+    and expecting "7516192768".
+  convert "7516192768" to a bigint.
+  stash the test result given the bigint.
+
+to test (bigints - subtract large positive bigints):
+  create a test result about "bigints"
+    and "subtract large positive bigints"
+    and expecting "5000000000000000000".
+  convert "6005004003002001000" to a bigint.
+  convert "1005004003002001000" to another bigint.
+  subtract the other bigint from the bigint.
+  stash the test result given the bigint.
+
+to test (bigints - subtract positive bigints):
+  create a test result about "bigints"
+    and "subtract positive bigints"
+    and expecting "2305843008139952128".           \ 2^61 - 2^30
+  convert "4611686019501129728" to a bigint.       \ 2^62 + 2^30
+  convert "2305843011361177600" to another bigint. \ 2^61 + 2^31
+  subtract the other bigint from the bigint.
+  stash the test result given the bigint.
+
+to test (bigints - subtract small bigints):
+  create a test result about "bigints" and "10 minus 3" and expecting "7".
+  put 10 in a bigint.
+  put 3 in another bigint.
+  subtract the other bigint from the bigint.
+  stash the test result given the bigint.
+
+to test (bigints - unstringify -8765432109876543210):
+  create a test result about "bigints"
+    and "unstringify -8765432109876543210"
+    and   expecting "-8765432109876543210".
+  convert "-8765432109876543210" to a bigint.
+  stash the test result given the bigint.
+
+to test (bigints - unstringify largest bigint):
+  create a test result about "bigints"
+    and "unstringify largest bigint"
+    and   expecting "9223372036854775807".
+  append the largest bigint to a string.
+  convert the string to a bigint.
+  stash the test result given the bigint.
+
+to test (bigints - unstringify smallest bigint):
+  create a test result about "bigints"
+    and "unstringify smallest bigint"
+    and   expecting "-9223372036854775808".
+  convert the smallest bigint in a string.
+  convert the string to a bigint.
+  stash the test result given the bigint.
+
+to test (bigints - zero):
+  create a test result about "bigints" and "zero"
+    and expecting "0".
+  put 0 in a bigint.
+  stash the test result given the bigint.
+
+to test (bigints):
+  test (bigints - largest bigint).
+  test (bigints - smallest bigint).
+  test (bigints - smallest bigint plus one).
+  test (bigints - zero).
+  test (bigints - copy bigint).
+  test (bigints - negate bigint).
+  test (bigints - negate negative bigint).
+  test (bigints - add small bigints).
+  test (bigints - subtract small bigints).
+  test (bigints - multiply 0 by ten).
+  test (bigints - multiply 12 by ten).
+  test (bigints - multiply 123 by ten).
+  test (bigints - multiply 123456789 by ten).
+  test (bigints - multiply 1234567890 by ten).
+  test (bigints - unstringify -8765432109876543210).
+  test (bigints - unstringify largest bigint).
+  test (bigints - unstringify smallest bigint).
+  test (bigints - add large positive bigints).
+  test (bigints - subtract large positive bigints).
+  test (bigints - stringify 7516192768).
+  test (bigints - stringify 2305843008139952128).
+  test (bigints - subtract positive bigints).
+  test (bigints - add large negative bigints).
+  test (bigints - convert largest bigint to largest number).
+  test (bigints - convert too big to largest number).
+  test (bigints - convert 123456789 to number).
+  test (bigints - convert 0 to number).
+  test (bigints - convert -1 to number).
+  test (bigints - convert -123456789 to number).
+  test (bigints - convert too small to smallest number).
+  test (bigints - convert smallest bigint to smallest number).
+  test (bigints - shift left 13 bits).
+  test (bigints - shift left 32 bits).
+  test (bigints - shift left 33 bits).
+  test (bigints - shift right 13 bits).
+  test (bigints - shift right 32 bits).
+  test (bigints - shift right 33 bits).
+  test (bigints - multiply too negative).
+  test (bigints - multiply too positive).
+  test (bigints - multiply positives).
+  test (bigints - multiply negatives).
+  test (bigints - multiply positive by negative).
+  test (bigints - multiply negative by positive).
+  test (bigints - divide by large number).
+  test (bigints - divide by three).
+  test (bigints - divide negatives).
+  test (bigints - divide positive by negative).
+  test (bigints - divide negative by positive).

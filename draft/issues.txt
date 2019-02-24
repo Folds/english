@@ -46,91 +46,6 @@ The following requests have been partially demonstrated.
 The following requests are roughly sorted
 from higher priority to lower priority.
 
-340.  Use temp variables when bumping a rider.
-  According to Mike Gonta, this will prevent Windows Defender
-  from complaining about CAL.
-  Status:    Designed.
-  Audience:  All users.
-  Benefit:   Critical.  Anti-virus programs scare away users.
-  Implementation difficulty:  Easy.
-  Demoing difficulty:  Medium.
-  Testing difficulty:  Covered by existing tests.
-  Requested by Mike Gonta on January 13, 2018.
-
-342.  In the github wiki, on each page explaining how to
-  perform a source control action using the git command line,
-  also explain how to perform the action using GitKraken.
-  Status:  Request.
-  Audience:  Programmers.
-  Benefit:   Minor.
-  Implementation difficulty:  Medium.
-  Demoing difficulty:  Medium.
-  Testing difficulty:  Not applicable.
-
-279.  In the editor, allow counting the characters
-  in a multi-line selection.
-  Status:    Request.
-  Benefit:   Minor.  Would make it easier to play "code golf".
-  Audience:  Programmers who play code golf.
-  Implementation difficulty:  Hard.
-  Demoing difficulty:  Easy.
-  Testing difficulty:  Medium.
-  Requested by Jasper Paulsen on June 27, 2017.
-
-312.  Store 64-bit signed integers, in Windows' format.
-  Status:  Designed.
-  Audience:  Programmers.
-  Benefit.  Medium.  First step toward performance profiling.
-  Implementation difficulty:  Easy.
-  Demoing difficulty:  Medium.
-  Testing difficulty:  Easy.
-  Requested by Jasper Paulsen on October 22, 2017.
-
-313.  Negate 64-bit signed integers.
-  Status:  Request.
-  Audience:  Programmers.
-  Benefit.  Medium.  Second step toward performance profiling.
-  Implementation difficulty:  Hard.
-  Demoing difficulty:  Medium.
-  Testing difficulty:  Easy.
-  Requested by Jasper Paulsen on October 22, 2017.
-
-314.  Add 64-bit signed integers.
-  Status:  Request.
-  Audience:  Programmers.
-  Benefit.  Medium.  Third step toward performance profiling.
-  Implementation difficulty:  Hard.
-  Demoing difficulty:  Medium.
-  Testing difficulty:  Easy.
-  Requested by Jasper Paulsen on October 22, 2017.
-
-315.  Subtract 64-bit signed integers.
-  Status:  Request.
-  Audience:  Programmers.
-  Benefit.  Medium.  Fourth step toward performance profiling.
-  Implementation difficulty:  Hard.
-  Demoing difficulty:  Medium.
-  Testing difficulty:  Easy.
-  Requested by Jasper Paulsen on October 22, 2017.
-
-318.  Convert from 64-bit signed integers to 32-bit signed integers.
-  Status:  Request.
-  Audience:  Programmers.
-  Benefit.  Medium.  Fifth step toward performance profiling.
-  Implementation difficulty:  Medium.
-  Demoing difficulty:  Medium.
-  Testing difficulty:  Easy.
-  Requested by Jasper Paulsen on October 22, 2017.
-
-179.  Use more precise and accurate timing ticks.
-  Status:  request.
-  Audience:  Programmers.
-  Benefit:  Important.
-  Implementation difficulty:  Profound.  Requires support for 64-bit numbers.
-  Demoing difficulty:  Easy.
-  Testing difficulty:  Medium.
-  Requested by Jasper Paulsen on April 4, 2017.
-
 178.  Time each test, from test creation to stashing of result.
   Status:  request.
   Audience:  Programmers.
@@ -148,6 +63,36 @@ from higher priority to lower priority.
   Demoing difficulty:  Easy.
   Testing difficulty:  Medium. 
   Requested by Jasper Paulsen on April 4, 2017.
+
+340.  Use temp variables when bumping a rider.
+  According to Mike Gonta, this will prevent Windows Defender
+  from complaining about CAL.
+  Status:    Designed.
+  Audience:  All users.
+  Benefit:   Critical.  Anti-virus programs scare away users.
+  Implementation difficulty:  Easy.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Covered by existing tests.
+  Requested by Mike Gonta on January 13, 2018.
+
+343.  In the finder, allow sorting files by date.
+  Status:  Designed.
+  Audience:  Programmers.
+  Benefit:   Medium.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Medium.
+  Requested by Gerry Rzeppa on June 25, 2018.
+
+279.  In the editor, allow counting the characters
+  in a multi-line selection.
+  Status:    Request.
+  Benefit:   Minor.  Would make it easier to play "code golf".
+  Audience:  Programmers who play code golf.
+  Implementation difficulty:  Hard.
+  Demoing difficulty:  Easy.
+  Testing difficulty:  Medium.
+  Requested by Jasper Paulsen on June 27, 2017.
 
 216.  Fillet the top corner(s) of the active tab.
   Status:    Request.
@@ -167,6 +112,16 @@ from higher priority to lower priority.
   Testing difficulty:  Easy.
   Requested by Jasper Paulsen on September 17, 2017.
   
+342.  In the github wiki, on each page explaining how to
+  perform a source control action using the git command line,
+  also explain how to perform the action using GitKraken.
+  Status:  Request.
+  Audience:  Programmers.
+  Benefit:   Minor.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Not applicable.
+
 020.  Provide wrappers and/or documentation for the hash map feature.
   Audience:  Windows programmers and Linux programmers.
   Status:  request.
@@ -1013,4 +968,5 @@ while a letter's menu is visible.
 \ ======================================
 Unsorted requests:
 
-Next item number:  343.
+
+Next item number:  348.

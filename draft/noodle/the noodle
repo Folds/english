@@ -2,9 +2,10 @@
 \ are copyright 2006 by the Osmosian Order.
 \ The portions of this file that are from CAL-4700
 \ are copyright 2017 by the Osmosian Order.
-\ The remainder is copyright 2014, 2017 by Jasper Paulsen.
+\ The remainder is copyright 2014, 2017, 2019 by Jasper Paulsen.
 
 \ Arrays (but not strings) are defined and manipulated in 'arrays'.
+\ Bigints are defined and manipulated in 'bigints'.
 \
 \ The colors are defined and manipulated in 'colors'.
 \ The bytes and the keys are defined and manipulated in 'characters'
@@ -12,6 +13,7 @@
 \
 \ Texts (and their events, rows, carets, anchors, positions,
 \ and selections) are defined and manipulated in 'text'.
+
 
 an abc is a record with
   a number called abca,
@@ -28,6 +30,15 @@ to add a number and another number to a pair:
   add the number to the pair's x.
   add the other number to the pair's y.
 
+to add a number to another number and carry a flag:
+  clear the flag.
+  intel $8B9510000000. \ mov edx,[ebp+16] \ the flag.
+  intel $8B8508000000. \ mov eax,[ebp+8] \ the number
+  intel $8B00.         \ mov eax,[eax]
+  intel $8B9D0C000000. \ mov ebx,[ebp+12] \ the other number
+  intel $0103.         \ add [ebx],eax
+  intel $831200.       \ adc [edx],0
+
 to add a number to a pair:
   add the number to the pair's x.
   add the number to the pair's y.
@@ -35,11 +46,12 @@ to add a number to a pair:
 to add a number to a pointer;
 to add a number to another number:
   intel $8B8508000000. \ mov eax,[ebp+8] \ the number
-  intel $8B00. \ mov eax,[eax]
+  intel $8B00.         \ mov eax,[eax]
   intel $8B9D0C000000. \ mov ebx,[ebp+12] \ the other number
-  intel $0103. \ add [ebx],eax
+  intel $0103.         \ add [ebx],eax
 
-to add one to a number:
+to add one to a number;
+to increment a number:
   put the number plus 1 in the number.
 
 to add a pair to another pair:
@@ -514,6 +526,10 @@ to cache success finding a library procedure in a library:
   put the library then ";" then the library procedure in a string.
   create a string thing given the string.
   append the string thing to the cached found library procedures.
+
+to cache a timer:
+  put the timer's jiffies in the timer's cached jiffies.
+  put the timer's ticks in the timer's cached ticks.
 
 the cached early primes are a flag array.
 \ The number 2 is considered to be a cached prime by default.
@@ -1054,11 +1070,29 @@ to put a number into a byte:
   intel $8B9D0C000000. \ mov ebx,[ebp+12] \ the byte
   intel $8803.         \ mov [ebx],al
 
+to convert a number called seconds to a string (HH:MM:SS):
+  divide the seconds by 60
+    giving a minutes quotient and a seconds remainder.
+  divide the minutes quotient by 60
+    giving an hours quotient and a minutes remainder.
+  clear the string.
+  if the hours quotient is less than 10,
+    append "0" to the string.
+  append the hours quotient then ":" to the string.
+  if the minutes remainder is less than 10,
+    append "0" to the string.
+  append the minutes remainder then ":" to the string.
+  if the seconds remainder is less than 10,
+    append "0" to the string.
+  append the seconds remainder to the string.
+
 to convert a number to pdf em units given an emsquare number and a font:
   multiply the number by the emsquare / the font's adjusted height.
   multiply the number by 1000 / the emsquare.
 
 to convert a number to a string:
+  if the number is the smallest number,
+    put "-2147483648" in the string; exit.
   clear the string.
   privatize the number.
   de-sign the number.
@@ -1071,6 +1105,8 @@ to convert a number to a string:
     put the quotient into the number.
   repeat.
   if the original number is less than 0, prepend the dash byte to the string.
+  if the original number is the smallest number,
+    add 1 to the string's last's target.
 
 to convert a pchar to a string:
   clear the string.
@@ -2238,6 +2274,11 @@ to decide if a flag and another flag are both clear:
   if the other flag is set, say no.
   say yes.
 
+to decide if a flag and another flag are both set:
+  if the flag is not set, say no.
+  if the other flag is not set, say no.
+  say yes.
+
 to decide if a flag is another flag;
 to decide if a pointer is a number;
 to decide if a pointer is another pointer;
@@ -3087,19 +3128,19 @@ to decide if a string is in an index:
   if the refer is nil, say no.
   say yes.
 
+to decide if a string is in some string things:
+  loop.
+    get a string thing from the string things.
+    if the string thing is nil, say no.
+    if the string is the string thing's string, say yes.
+  repeat.
+
 to decide if a string is just hexadecimals:
   put the string's first in a byte pointer.
   loop.
     if the byte pointer is greater than the string's last, say yes.
     if the byte pointer's target is not any hexadecimal digit, say no.
     add 1 to the byte pointer.
-  repeat.
-
-to decide if a string is in some string things:
-  loop.
-    get a string thing from the string things.
-    if the string thing is nil, say no.
-    if the string is the string thing's string, say yes.
   repeat.
 
 to decide if a string is less than another string:
@@ -3164,6 +3205,14 @@ to decide if there is text on the windows clipboard:
 to decide if some things are empty:
   if the things' first is nil, say yes.
   say no.
+
+to decide if a timer is imprecise:
+  if the timer's imprecise flag is set, say yes.
+  say no.
+
+to decide if a timer is precise:
+  if the timer's imprecise flag is set, say no.
+  say yes.
 
 to decide if verbose test was requested:
   if test was not requested, say no.
@@ -4933,7 +4982,8 @@ to get a rgb pointer from a bitmapdata at a row# and a column#: \ 1 based
   add the row# minus 1 times the bitmapdata's stride to the rgb pointer.
   add the column# minus 1 times a rgb's magnitude to the rgb pointer.
 
-to get the sign of a number returning another number:
+to get the sign of a number returning another number;
+to put a number's sign into another number:
   if the number is greater than 0, put  1 in the other number; exit.
   if the number is    less than 0, put -1 in the other number; exit.
   put 0 in the other number.
@@ -5993,6 +6043,8 @@ an item has
   a size,
   a win32finddata and a handle.
 
+a jiffy is a bigint. \ for measuring time more precisely than ticks.
+
 a kilobyte is 1024 units.
 
 a kind is a string.
@@ -6140,6 +6192,9 @@ to make a ratio pair given a box and another box:
 to make sure the osmosian font is loaded:
   if the osmosian font is loaded, exit.
   load the osmosian font source returning the osmosian font resource.
+
+to make a timer be imprecise:
+  set the timer's imprecise flag.
 
 a margin is a number.
 
@@ -6774,6 +6829,7 @@ to open a file given a path:
 
 to open a file given a path and some milliseconds:
   start a timer.
+  make the timer be imprecise.
   loop.
     open the file given the path.
     if the i/o error is blank, exit.
@@ -7563,6 +7619,18 @@ to put a number's absolute value into another number:
   put the number into the other number.
   de-sign the other number.
 
+to put a number's highest bit into some bits:
+  if the number is 0, clear the bits; exit.
+  put 32 into the bits.
+  if the number is negative, exit.
+  put 1 into another number.
+  shift the other number left 30 bits.
+  loop.
+    subtract 1 from the bits.
+    if the other number is bitwise included in the number, exit.
+    shift the other number right 1 bit.
+  repeat.
+
 to put a number's square root into a result number;
 to put the square root of a number in a result number:
   \ Rounds down.  Finds magnitude of the square root.
@@ -7861,11 +7929,32 @@ to put the system's date/time into a date/time:
   put the systemtime's wsecond into the date/time's second.
   put the systemtime's wmilliseconds into the date/time's millisecond.
 
+to put the system's jiffies into some jiffies: \ wraps no more than once per 50 years.
+  call "kernel32.dll" "QueryPerformanceCounter"
+    with the jiffies' whereabouts returning a number.
+  if the number is 0, clear the jiffies; exit.
+  bitwise and the jiffies with the largest bigint. 
+
 to put the system's last error into a number:
   call "kernel32.dll" "GetLastError" returning the number.
 
 to put the system's last winsock error into a number:
   call "ws2_32.dll" "WSAGetLastError" returning the number.
+
+to put the system's precision into a bigint: \ measured in jiffies per second.
+  put "kernel32.dll" in a library.
+  put "QueryPerformanceCounter" in a library procedure.
+  if cannot find the library procedure in the library,
+    clear the bigint; 
+\    debug "failed to find " then the library procedure
+\      then " in " then the library;
+    exit.
+  call "kernel32.dll" "QueryPerformanceFrequency"
+    with the bigint's whereabouts returning a number.
+  if the number is 0,
+\    put the system's last error in another number;
+\    debug "QueryPerformanceFrequency failed with error " then the other number;
+    clear the bigint.
 
 to put the system's tick count into some ticks: \ wraps every 24.8 days or so
   call "kernel32.dll" "GetTickCount" returning the ticks.
@@ -7890,6 +7979,121 @@ to put some things' count into a count:
     if the thing is nil, exit.
     add 1 to the count.
   repeat.
+
+to put a timer's cached days into a number:  
+  if the timer is imprecise,
+    put the timer's cached ticks in the number; \ in milliseconds
+    divide the number by 1000;           \ in seconds
+    divide the number by 3600;           \ in hours
+    divide the number by 24;             \ in days
+    exit.
+  put the timer's cached jiffies in a bigint.        \ in jiffies
+  divide the bigint by the timer's precision. \ in seconds
+  divide the bigint by 3600.                  \ in hours
+  divide the bigint by 24.                    \ in days
+  convert the bigint to the number.
+
+to put a timer's cached microseconds into a number:  
+  if the timer is imprecise,
+    clear the number; exit.
+  put the timer's cached jiffies in a bigint.        \ in jiffies
+  divide the bigint by the timer's precision
+    giving a quotient bigint and a remainder bigint.
+  multiply the remainder bigint by 1000000.
+  divide the remainder bigint by the timer's precision.
+  convert the remainder bigint to the number.
+  put the timer's cached milliseconds in another number.
+  multiply the other number by 1000.
+  subtract the other number from the number.
+
+to put a timer's cached milliseconds into a number:  
+  if the timer is imprecise,
+    divide the timer's cached ticks by 1000
+      giving a quotient and a remainder;      \ in milliseconds
+    put the quotient in the number;
+    exit.
+  put the timer's cached jiffies in a bigint. \ in jiffies
+  divide the bigint by the timer's precision
+    giving a quotient bigint and a remainder bigint.
+  multiply the remainder bigint by 1000.
+  divide the remainder bigint by the timer's precision.
+  convert the remainder bigint to the number.
+
+to put a timer's cached nanoseconds into a number:  
+  if the timer is imprecise,
+    clear the number; exit.
+  if the the timer's precision is at most 1000000,
+    clear the number; exit.
+  put the timer's cached jiffies in a bigint.        \ in jiffies
+  divide the bigint by the timer's precision
+    giving a quotient bigint and a remainder bigint.
+  multiply the remainder bigint by 1000000000.
+  divide the remainder bigint by the timer's precision.
+  convert the remainder bigint to the number.
+  put the timer's cached milliseconds in another number.
+  multiply the other number by 1000000.
+  subtract the other number from the number.
+  put the timer's cached microseconds in a third number.
+  multiply the third number by 1000.
+  subtract the third number from the number.
+
+to put a timer's cached seconds into a number:  
+  if the timer is imprecise,
+    put the timer's cached ticks in the number; \ in milliseconds
+    divide the number by 1000;                  \ in seconds
+    put the timer's cached days in another number;
+    multiply the other number by 24;
+    multiply the other number by 3600;
+    subtract the other number from the number;
+    exit.
+  put the timer's cached jiffies in a bigint.        \ in jiffies
+  divide the bigint by the timer's precision. \ in seconds
+  put the timer's cached days in another bigint.
+  multiply the other bigint by 24.
+  multiply the other bigint by 3600.
+  subtract the other bigint from the bigint.
+  convert the bigint to the number.
+
+to put a timer's careful string into a string:
+  clear the string.
+  cache the timer.
+  if the timer is imprecise,
+    put the timer's cached ticks then " ms" into the string;
+    exit.
+  put the timer's cached days in a number.
+  if the number is positive,
+    append the number then " d " to the string.
+  put the timer's cached seconds in the number.
+  convert the number to another string (HH:MM:SS).
+  if the number is positive,
+    append the other string then " " to the string.
+  put the timer's cached milliseconds in the number.
+  if the number is positive,
+    append the number then " ms " to the string.
+  if the string ends with " ", remove the last byte from the string.
+
+to put a timer's jiffies into some jiffies:
+  if the timer is imprecise,
+    clear the jiffies; exit.
+  put the timer's total jiffies into the jiffies.
+  if the timer's count is 0, exit.
+  put the system's jiffies into some other jiffies.
+  subtract the timer's start jiffies from the other jiffies.
+  add the other jiffies to the jiffies.
+
+to put a timer's precise string into a string:
+  clear the string.
+  put the timer's careful string into the string.
+  if the timer is imprecise, exit.
+  append " " to the string.
+  put the timer's cached microseconds in the number.
+  if the number is positive,
+    append the number then " " then the micro byte then "s " to the string.
+  put the timer's cached nanoseconds in the number.
+  if the number is positive,
+    append the number then " ns " to the string.
+  if the string ends with " ", remove the first byte from the string.
+  if the string ends with " ", remove the last byte from the string.
 
 to put a timer's string into a string:
   convert the timer's ticks to the string.
@@ -7979,6 +8183,8 @@ to raise a number to another number:
   if the other number is 0, put 1 into the number; exit.
   if the other number is less than 0, put 0 into the number; exit.
     \ should be 1/the raised result, but always comes out 0 with numbers
+  if the number is 0, exit.
+  if the number is 1, exit.
   put 1 into a result number.
   loop.
     if a counter is past the other number, break.
@@ -8306,9 +8512,18 @@ to void a pointer:
   intel $C70000000000. \ mov [eax],0
 
 to reset a timer:
-  put 0 into the timer's count.
-  put 0 into the timer's start ticks.
-  put 0 into the timer's total ticks.
+  clear the timer's count.
+  clear the timer's start ticks.
+  clear the timer's total ticks.
+  clear the timer's start jiffies.
+  clear the timer's total jiffies.
+  clear the timer's cached ticks.
+  clear the timer's cached jiffies.
+  if the timer's precision is zero, set a flag.
+  invert the flag.
+  if the flag and the timer's imprecise flag are both clear,
+    put the system's precision in the timer's precision.
+  if the timer's precision is zero, set the timer's imprecise flag.
 
 a residue is a string.
 
@@ -8442,6 +8657,8 @@ to restart a timer:
   add 1 to the timer's count.
   if the timer's count is not 1, exit.
   put the system's tick count into the timer's start ticks.
+  if the timer is precise,
+    put the system's jiffies into the timer's start jiffies.
 
 to restore a canvas:
   call "gdi32.dll" "RestoreDC" with the canvas and -1.
@@ -8980,6 +9197,7 @@ to shut down:
   finalize gdi+.
   finalize winsock.
   finalize com.
+  finalize bigints.
 
 to shut down the cgi:
   finalize the cgi.
@@ -9250,6 +9468,7 @@ to start a timer:
   restart the timer.
 
 to start up:
+  initialize bigints.
   initialize com.
   initialize winsock.
   initialize gdi+.
@@ -9318,6 +9537,10 @@ to stop a timer:
   if the timer's count is 0, exit.
   subtract 1 from the timer's count. 
   if the timer's count is not 0, exit.
+  if the timer is precise,
+    put the system's jiffies into some jiffies;
+    subtract the timer's start jiffies from the jiffies;
+    add the jiffies to the timer's total jiffies.
   put the system's tick count into some ticks.
   subtract the timer's start ticks from the ticks.
   add the ticks to the timer's total ticks.
@@ -9599,6 +9822,11 @@ to test (basic math - divide 25 by 3):
   divide the number by 3.
   stash the test result given the number.
 
+to test (basic math - largest number):
+  create a test result about "basic math" and "largest number"
+    and expecting "2147483647".
+  stash the test result given the largest number.
+
 to test (basic math - leftshift number):
   create a test result about "the noodle" and "1543 leftshifted 3 bits"
     and expecting "12344".
@@ -9647,6 +9875,18 @@ to test (basic math - round 32 up to 32):
   round the number up to the nearest power of two.
   stash the test result given the number.
 
+to test (basic math - smallest number plus one):
+  create a test result about "basic math" and "smallest number plus one"
+    and expecting "-2147483647".
+  put the smallest number in a number.
+  increment the number.
+  stash the test result given the number.
+
+to test (basic math - smallest number):
+  create a test result about "basic math" and "smallest number"
+    and expecting "-2147483648".
+  stash the test result given the smallest number.
+
 to test (basic math - subtract numbers):
   create a test result about "the noodle" and "10 minus 3" and expecting "7".
   put 10 in a number.
@@ -9660,6 +9900,9 @@ to test (basic math - unterminated string length):
   stash the test result given the string's length.
 
 to test (basic math):
+  test (basic math - largest number).
+  test (basic math - smallest number).
+  test (basic math - smallest number plus one).
   test (basic math - add numbers).
   test (basic math - subtract numbers).
   test (basic math - rightshift number).
@@ -10471,9 +10714,14 @@ a thousand is 10 hundreds.
 
 a thread handle is a handle.
 
-a tick is a number.
+a tick is a number. \ in milliseconds.  Typically has a precision of 15 or 16 ms.
 
-a timer has a count, some start ticks and some total ticks.
+a timer has a count,
+  some start ticks and some total ticks,
+  an imprecise flag,  \ imprecise if CPU or BIOS does not support jiffies, or if set by client code.
+  a precision bigint, \ number of jiffies per second.  0 if not checked yet, or if jiffies are not supported.
+  some start jiffies and some total jiffies,
+  some cached ticks and some cached jiffies.
 
 some times is a number.
 
@@ -10535,6 +10783,10 @@ to uncache a library procedure in a library from some string things:
     if the string thing's string is the string,
       remove the string thing from the cached found library procedures.
   repeat.
+
+to uncache a timer:
+  clear the timer's cached jiffies.
+  clear the timer's cached ticks.
 
 a unit is a number.
 
