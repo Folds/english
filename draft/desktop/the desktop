@@ -2983,6 +2983,7 @@ to test (the desktop - can gray out unused menus):
   convert the color into an actual string.
   put the actual in the test result's actual value.
   put the interpretation in the test result's interpretation.
+  stop the test result's timer.
   append the test result to the status' all test results.
   destroy the command.
 
@@ -3012,6 +3013,7 @@ to test (the desktop - does not gray out useful menus):
   convert the color into an actual string.
   put the actual in the test result's actual value.
   put the interpretation in the test result's interpretation.
+  stop the test result's timer.
   append the test result to the status' all test results.
   destroy the command.
 
@@ -3052,6 +3054,7 @@ to test (the desktop - menu has 26 buttons):
   put the actual value in an interpretation.
   put the actual value in the test result's actual value.
   put the interpretation in the test result's interpretation.
+  stop the test result's timer.
   append the test result to the status' all test results.
 
 to test (the desktop - no running options):
@@ -3123,6 +3126,7 @@ to test (the desktop - trio has 3 buttons):
   put the actual value in an interpretation.
   put the actual value in the test result's actual value.
   put the interpretation in the test result's interpretation.
+  stop the test result's timer.
   append the test result to the status' all test results.
 
 to test (the desktop):

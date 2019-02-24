@@ -328,12 +328,13 @@ to test (font menus - at least three font names):
     and expecting "at least four choices". \4 = 3 + "other".
   create a submenu (font names).
   count commands in the submenu returning a count called actual.
+  destroy the submenu.
   convert the actual into the test result's actual value.
   convert the actual into the test result's interpretation.
   if the actual is at least 4,
     put the test result's expectation in the test result's interpretation.
+  stop the test result's timer.
   append the test result to the status' all test results.
-  destroy the submenu.
 
 to test (font menus - courier new is wysiwyg):
   create a test result about "font names" and "courier new is wysiwyg"
@@ -342,9 +343,10 @@ to test (font menus - courier new is wysiwyg):
   get a command from the submenu given "courier new".
   if the command is not nil,
     put the command's font's name in a string called actual.
-  check the test result given the actual.
-  append the test result to the status' all test results.
   destroy the submenu.
+  check the test result given the actual.
+  stop the test result's timer.
+  append the test result to the status' all test results.
 
 to test (font menus - current font height highlighted):
   create a test result about "font heights" and "current height highlighted"
@@ -353,12 +355,13 @@ to test (font menus - current font height highlighted):
   describe the font's height returning a string.
   create a submenu (font heights).
   get first highlighted name in the submenu returning a name.
+  destroy the submenu.
   put the name in the test result's actual value.
   put the name in the test result's interpretation.
   if the name is the string,
     put "current font height" in the test result's interpretation.
+  stop the test result's timer.
   append the test result to the status' all test results.
-  destroy the submenu.
 
 to test (font menus - current font name highlighted):
   create a test result about "font names" and "current name highlighted"
@@ -366,12 +369,13 @@ to test (font menus - current font name highlighted):
   get a font.
   create a submenu (font names).
   get first highlighted name in the submenu returning a name.
+  destroy the submenu.
   put the name in the test result's actual value.
   put the name in the test result's interpretation.
   if the name is the font's name,
     put "current font name" in the test result's interpretation.
+  stop the test result's timer.
   append the test result to the status' all test results.
-  destroy the submenu.
 
 to test (font menus - font names):
   create a test result about "font names" and "collation"
@@ -382,9 +386,10 @@ to test (font menus - font names):
   sort the dummies.
   deduplicate the dummies.
   summarize the dummies returning a string called actual.
-  check the test result given the actual.
-  append the test result to the status' all test results.
   destroy the dummies.
+  check the test result given the actual.
+  stop the test result's timer.
+  append the test result to the status' all test results.
 
 to test (font menus - get height):
   convert the tpi / 6 into an expectation string.
@@ -395,6 +400,7 @@ to test (font menus - get height):
   get a height from the handler given the prefix.
   convert the height into a string called actual.
   check the test result given the actual.
+  stop the test result's timer.
   append the test result to the status' all test results.
 
 to test (font menus - get inches string):
@@ -405,6 +411,7 @@ to test (font menus - get inches string):
   get a residue from the handler after the prefix.
   put the residue in a string called actual.
   check the test result given the actual.
+  stop the test result's timer.
   append the test result to the status' all test results.
 
 to test (font menus - get test number):
@@ -416,6 +423,7 @@ to test (font menus - get test number):
   get a number from the handler given the prefix.
   convert the number into a string called actual.
   check the test result given the expectation.
+  stop the test result's timer.
   append the test result to the status' all test results.
 
 to test (font menus - heights are shown in current font):
@@ -426,24 +434,26 @@ to test (font menus - heights are shown in current font):
   get a command from the submenu given "1/6 Inch".
   if the command is not nil,
     put the command's font's name in a string called actual.
+  destroy the submenu.
   put the actual in the test result's actual value.
   put the actual in the test result's interpretation.
   if the actual is the font's name,
     put "current font name" in the test result's interpretation.
+  stop the test result's timer.
   append the test result to the status' all test results.
-  destroy the submenu.
 
 to test (font menus - heights followed by other):
   create a test result about "font heights" and "has other choice"
     and expecting "last choice starts with other".
   create a submenu (font heights).
   put the submenu's commands' last's name in a string called actual.
+  destroy the submenu.
   put the actual in the test result's actual value.
   put the actual in the test result's expectation.
   if the actual starts with "other",
     put the test result's expectation in the test result's interpretation.
+  stop the test result's timer.
   append the test result to the status' all test results.
-  destroy the submenu.
 
 to test (font menus - large heights are not wysiwyg):
   create a test result about "font heights" and "1/2 Inch is not wysiwyg"
@@ -453,6 +463,7 @@ to test (font menus - large heights are not wysiwyg):
   if the command is not nil,
     describe the command's font's height returning a string called actual.
   check the test result given the actual.
+  stop the test result's timer.
   append the test result to the status' all test results.
   destroy the submenu.
 
@@ -465,6 +476,7 @@ to test (font menus - names followed by other):
   put the actual in the test result's expectation.
   if the actual starts with "other",
     put the test result's expectation in the test result's interpretation.
+  stop the test result's timer.
   append the test result to the status' all test results.
   destroy the submenu.
 
@@ -474,9 +486,10 @@ to test (font menus - one height highlighted):
   create a submenu (font heights).
   count highlighted items in the submenu returning a count.
   convert the count into an actual string.
-  check the test result given the actual.
-  append the test result to the status' all test results.
   destroy the submenu.
+  check the test result given the actual.
+  stop the test result's timer.
+  append the test result to the status' all test results.
 
 to test (font menus - one name highlighted):
   create a test result about "font names" and "count highlighted item(s)"
@@ -484,9 +497,10 @@ to test (font menus - one name highlighted):
   create a submenu (font names).
   count highlighted items in the submenu returning a count.
   convert the count into an actual string.
-  check the test result given the actual.
-  append the test result to the status' all test results.
   destroy the submenu.
+  check the test result given the actual.
+  stop the test result's timer.
+  append the test result to the status' all test results.
 
 to test (font menus - small heights are wysiwyg):
   create a test result about "font heights" and "1/6 Inch is wysiwyg"
@@ -495,9 +509,10 @@ to test (font menus - small heights are wysiwyg):
   get a command from the submenu given "1/6 Inch".
   if the command is not nil,
     describe the command's font's height returning a string called actual.
-  check the test result given the actual.
-  append the test result to the status' all test results.
   destroy the submenu.
+  check the test result given the actual.
+  stop the test result's timer.
+  append the test result to the status' all test results.
 
 to test (font menus - sorting by height):
   create a test result about "font heights" and "sorting by height"
@@ -512,9 +527,10 @@ to test (font menus - sorting by height):
   add "1 inch" to the dummies.
   sort the dummies (by height).
   summarize the dummies returning a string called actual (tersely).
-  check the test result given the actual.
-  append the test result to the status' all test results.
   destroy the dummies.
+  check the test result given the actual.
+  stop the test result's timer.
+  append the test result to the status' all test results.
 
 to test (font menus - times new roman is wysiwyg):
   create a test result about "font names" and "times new roman is wysiwyg"
@@ -523,9 +539,10 @@ to test (font menus - times new roman is wysiwyg):
   get a command from the submenu given "times new roman".
   if the command is not nil,
     put the command's font's name in a string called actual.
-  check the test result given the actual.
-  append the test result to the status' all test results.
   destroy the submenu.
+  check the test result given the actual.
+  stop the test result's timer.
+  append the test result to the status' all test results.
 
 to test (font menus):
   test (font menus - get inches string).

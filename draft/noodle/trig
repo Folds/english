@@ -788,8 +788,9 @@ to divide a mixio by a number returning another mixio (modest divisor):
 a fuzzy test has 
   a string called context, 
   a string called test name,   
-  a bullseye mixio, and 
-  some tolerance trifles. \ implied denominator of 43,200 * 43,200.
+  a bullseye mixio, 
+  some tolerance trifles, and \ implied denominator of 43,200 * 43,200.
+  a timer. 
 
 to get modesty threshold given a mixio called divisor returning a number:
   put the divisor's whole number in the number.

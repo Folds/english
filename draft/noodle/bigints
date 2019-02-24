@@ -120,6 +120,21 @@ to decide if a bigint is greater than or equal to another bigint:
   if the bigint is greater than the other bigint, say yes.
   say no.
 
+to decide if a bigint is another bigint or less;
+to decide if a bigint is at most another bigint;
+to decide if a bigint is less than or equal to another bigint:
+  if the bigint is the other bigint, say yes.
+  if the bigint is less than the other bigint, say yes.
+  say no.
+  
+to decide if a bigint is a number or less;
+to decide if a bigint is at most a number;
+to decide if a bigint is less than or equal to a number:
+  convert the number to another bigint.
+  if the bigint is the other bigint, say yes.
+  if the bigint is less than the other bigint, say yes.
+  say no.
+  
 to decide if a bigint is bitwise included in another bigint:
   if the bigint's low number is not bitwise included
     in the other bigint's low number, say no.

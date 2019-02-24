@@ -7980,6 +7980,16 @@ to put some things' count into a count:
     add 1 to the count.
   repeat.
 
+to put a timer into another timer:
+  put the timer's start ticks into the other timer's start ticks.
+  put the timer's total ticks into the other timer's total ticks.
+  put the timer's imprecise flag into the other timer's imprecise flag.
+  put the timer's precision bigint into the other timer's precision bigint.
+  put the timer's start jiffies into the other timer's start jiffies.
+  put the timer's total jiffies into the other timer's total jiffies.
+  put the timer's cached ticks into the other timer's cached ticks.
+  put the timer's cached jiffies into the other timer's cached jiffies.
+
 to put a timer's cached days into a number:  
   if the timer is imprecise,
     put the timer's cached ticks in the number; \ in milliseconds
@@ -8022,7 +8032,7 @@ to put a timer's cached milliseconds into a number:
 to put a timer's cached nanoseconds into a number:  
   if the timer is imprecise,
     clear the number; exit.
-  if the the timer's precision is at most 1000000,
+  if the timer's precision is at most 1000000,
     clear the number; exit.
   put the timer's cached jiffies in a bigint.        \ in jiffies
   divide the bigint by the timer's precision
@@ -10677,8 +10687,9 @@ a test result is a thing with
   a string called context,
   a string called test name,
   an expectation,
-  a string called actual value, and
-  an interpretation.
+  a string called actual value,
+  an interpretation, and
+  a timer.
 
 the text cutoff is a number equal to 500.
 

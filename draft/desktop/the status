@@ -41,6 +41,10 @@ to check a test result given a string called actual:
 
 to create a test result:
   allocate memory for the test result.
+  start the test result's timer.
+
+to create a test result (without starting timer):
+  allocate memory for the test result.
 
 to create a test result about a string called context and a string called test name and expecting an expectation:
   create the test result.
@@ -48,12 +52,13 @@ to create a test result about a string called context and a string called test n
   put the expectation in the test result's expectation.
 
 to create a test result called duplicate given a test result:
-  create the duplicate.
+  create the duplicate (without starting timer).
   put the test result's context in the duplicate's context.
   put the test result's test name in the duplicate's test name.
   put the test result's expectation in the duplicate's expectation.
   put the test result's actual value in the duplicate's actual value.
   put the test result's interpretation in the duplicate's interpretation.
+  put the test result's timer in the duplicate's timer.
 
 to decide if 3-way-match given an expectation and a string and an interpretation:
   if the expectation is not the string, say no.
@@ -164,6 +169,8 @@ to handle a command given a number (copy test result):
   show the desktop with "Copied".
 
 to handle a command given a submenu and a quota and some test results:
+  sort the test results (by jiffies).
+  reverse the test results.
   put 1 in a number called counter.
   Loop.
     if the counter is greater than the quota, break.
@@ -289,6 +296,7 @@ to make a fuzzy test about a string and another string and targeting a mixio wit
     and targeting the mixio with tolerance 4 trifles.
 
 to make a fuzzy test about a string and another string and targeting a mixio with tolerance some trifles:
+  start the fuzzy test's timer.
   put the string in the fuzzy test's context.
   put the other string in the fuzzy test's test name.
   put the mixio in the fuzzy test's bullseye.
@@ -323,6 +331,34 @@ to put a fuzzy test's tolerance ratio into a ratio:
   put the fuzzy test's tolerance trifles / the trifle denominator
     into the ratio.
   reduce the ratio.
+
+to put a test result's timeliness into a string:
+  if the test result's timer is imprecise,
+    put "." into the string; exit.
+  cache the test result's timer.
+  put " in " into the string.
+  if the test result's timer's cached days are positive,
+    append the test result's timer's cached days
+      then " days." to the string;
+    exit.
+  if the test result's timer's cached seconds are positive,
+    convert the test result's timer's cached seconds
+      to another string (HH:MM:SS);
+    append the other string then "." to the string;
+    exit.
+  if the test result's timer's cached milliseconds are positive,
+    append the test result's timer's cached milliseconds
+      then " ms." to the string;
+    exit.
+  if the test result's timer's cached microseconds are positive,
+    append the test result's timer's cached microseconds
+      then " " then the micro byte then "s." to the string;
+    exit.
+  if the test result's timer's cached nanoseconds are positive,
+    append the test result's timer's cached nanoseconds
+      then " ns." to the string;
+    exit.
+  put "." into the string.
 
 a quota is a number.
 
@@ -365,8 +401,30 @@ to show status a string:
   put the string into the status' string.
   show the status.
 
+to sort some test results (by jiffies):
+  if the test results' first is the test results' last, exit.
+  if the test results' first's timer is imprecise, exit.
+  split the test results
+    into some left test results and some right test results.
+  sort the left test results (by jiffies).
+  sort the right test results (by jiffies).
+  loop.
+    put the left test results' first into a left test result.
+    put the right test results' first into a right test result.
+    if the left test result is nil,
+      append the right test results to the test results; exit.
+    if the right test result is nil,
+      append the left test results to the test results; exit.
+    put the left test result's timer's jiffies into some left jiffies.
+    put the right test result's timer's jiffies into some right jiffies.
+    if the left jiffies are greater than the right jiffies,
+      move the right test result from the right test results to the test results;
+      repeat.
+    move the left test result from the left test results to the test results.
+  repeat.
+
 to stash a fuzzy test given a mixio:
-  create a test result.
+  create a test result (without starting timer).
   put the fuzzy test's context in the test result's context.
   put the fuzzy test's test name in the test result's test name.
   if the fuzzy test's tolerance trifles are 0,
@@ -388,6 +446,8 @@ to stash a fuzzy test given a mixio:
 \    debug the mixio (long);
 \    debug the fuzzy test's minimum (long);
     fail the test result given the string.
+  stop the fuzzy test's timer.
+  put the fuzzy test's timer in the test result's timer.
   append the test result to the status' all test results.
 
 to stash a test result given a bigint:
@@ -401,6 +461,7 @@ to stash a test result given a number:
 to stash a test result given a string:
   check the test result given the string.
   append the test result to the status' all test results.
+  stop the test result's timer.
 
 the status has a roundy box and a string
   and a color and a pass color and a fail color
@@ -423,12 +484,12 @@ to summarize given a number and a string and a quota returning a string called r
     put "1 test " then the string then ".  It was:" in the result; exit.
   if the quota is 1,
     put the number then " tests " then the string then "."
-      then "  The first 1 is:" in the result; exit.
+      then "  The longest 1 is:" in the result; exit.
   put the number then " tests " then the string in the result.
   if the number is at most the quota,
     append ":" to the result.
   if the number is more than the quota,
-    append ".  The first " then the quota then " were:" to the result.
+    append ".  The longest " then the quota then " were:" to the result.
 
 to summarize given a number and a string returning a string called result:
   if the number is 0,
@@ -445,26 +506,27 @@ to summarize a test result returning a string:
   put the test result's expectation in an expectation.
   put the test result's actual value in a string called actual.
   put the test result's interpretation in an interpretation.
+  put the test result's timeliness in a timeliness string.
   append "  Expected '" then the expectation then "'" to the string.
   \ expectation == actual == interpretation => OK
   if 3-way-match given the expectation and the actual and the interpretation,
-    append ", which I got." to the string; exit.
+    append ", which I got" then the timeliness to the string; exit.
   \ expectation == interpretation != actual => OK
   if the expectation is the interpretation,
     append ", and got '" then the actual then "'"
-      then ", which is OK." to the string; exit.
+      then ", which is OK" then the timeliness to the string; exit.
   \ actual == expectation != interpretation => not OK, but should not happen.
   if the actual is the expectation,
     append ", which I got, but it meant '" then the interpretation then "'"
-      then ", so the test failed." to the string; cluck; exit.
+      then ", so the test failed" then the timeliness to the string; cluck; exit.
   \ actual == interpretation != expectation -> not OK.
   if the actual is the interpretation,
     append ", but I got '" then the actual then "'"
-      then ", so the test failed." to the string; exit.
+      then ", so the test failed" then the timeliness to the string; exit.
   \ all 3 are different.
   append ", but I got '" then the actual then "'" to the string.
   append " which is '" then the interpretation then "'" to the string.
-  append ", so the test failed." to the string.
+  append ", so the test failed" then the timeliness to the string.
 
 to summarize a test result returning a string (description):
   put "In " then the test result's context
@@ -521,6 +583,7 @@ to test (the status - minimum width):
     pass the test result given the actual.
   if the status' width is not at least the minimum,
     fail the test result given the actual.
+  stop the test result's timer.
   append the test result to the status' all test results.
 
 to test (the status):
@@ -540,6 +603,7 @@ to test (the testing time):
     pass the test result given the actual.
   if the status' all test results' timer's total ticks is more than the maximum,
     fail the test result given the actual.
+  stop the test result's timer.
   append the test result to the status' all test results.
 
 the test quota is a quota equal to 10.
