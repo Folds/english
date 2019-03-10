@@ -1,4 +1,4 @@
-\ Copyright 2017 by Jasper Paulsen.
+\ Copyright 2017, 2019 by Jasper Paulsen.
 
 a byte array has
   a string, and
@@ -19,7 +19,9 @@ to clear a one-indexed position in a flag array:
   get a byte from the flag array's byte array at the other one-indexed position.
   put 2 in a number.
   raise the number to the remainder.
-  bitwise and the byte with the number.
+  put the number in another byte.
+  invert the other byte.
+  bitwise and the byte with the other byte.
   set the byte in the flag array's byte array at the other one-indexed position.
   put the flag array's bedrock count in a count.
   add 1 to the count.
@@ -166,5 +168,41 @@ to summarize a flag array returning a string (tersely):
   append "bedrock / capacity = "
     then the flag array's bedrock count then " / "
     then the flag array's capacity to the string.
+
+to test (arrays - clear a flag):
+  create a test result about "arrays" and "clear a flag"
+    and expecting "no".
+  put 45 in a one-indexed position.
+  grow a flag array through 64.
+  set the one-indexed position in the flag array.
+  put 53 in the flag array's bedrock count.  
+  if the one-indexed position is set in the flag array, set a flag.
+  clear the one-indexed position in the flag array.  
+  if the one-indexed position is clear in the flag array, clear the flag.
+  stash the test result given the flag.
+
+to test (arrays - flags start clear):
+  create a test result about "arrays" and "set a flag"
+    and expecting "no".
+  grow a flag array through 64.
+  put 47 in a one-indexed position.
+  put 53 in the flag array's bedrock count.  
+  if the one-indexed position is set in the flag array, set a flag.
+  stash the test result given the flag.
+
+to test (arrays - set a flag):
+  create a test result about "arrays" and "set a flag"
+    and expecting "yes".
+  grow a flag array through 64.
+  put 47 in a one-indexed position.
+  set the one-indexed position in the flag array.
+  put 53 in the flag array's bedrock count.  
+  if the one-indexed position is set in the flag array, set a flag.
+  stash the test result given the flag.
+
+to test (arrays):
+  test (arrays - flags start clear).
+  test (arrays - set a flag).
+  test (arrays - clear a flag).
 
 a zero-indexed position is a number.

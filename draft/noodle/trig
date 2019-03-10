@@ -1,4 +1,4 @@
-\ Copyright 2017 by Jasper Paulsen.
+\ Copyright 2017, 2019 by Jasper Paulsen.
 
 to add a mixio to another mixio:
   privatize the mixio.

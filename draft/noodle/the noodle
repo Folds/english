@@ -1529,6 +1529,14 @@ to count from a byte pointer to a byte returning a length:
 
 a count is a number.
 
+to count primes through a number giving another number:
+  clear the other number.
+  loop.
+    add 1 to a candidate number.
+    if the candidate is greater than the number, exit.
+    if the candidate is prime (ignore large cache), add 1 to the other number.
+  repeat. 
+
 to count some things returning a number:
   put 0 in the number.
   if the things are empty, exit.
@@ -2585,6 +2593,16 @@ to decide if a number is prime:
   if the number is evenly divisible by any of the early primes, say no.
   if the number is greater than the largest square root,
     insert the number in the cached late primes.
+  say yes.
+
+to decide if a number is prime (ignore large cache):
+  if the number is at most 1, say no.
+  put the square root of the number in another number.
+  if the other number times the other number is not the number,
+    add 1 to the other number.
+  cache the early primes through the other number.
+  if the number is any of the early primes, say yes.
+  if the number is evenly divisible by any of the early primes, say no.
   say yes.
 
 to decide if the osmosian font is loaded:
@@ -5996,6 +6014,11 @@ to intersect a box with another box giving a third box:
   if the box's bottom is greater than the other box's bottom,
     put the other box's bottom into the third box's bottom.
 
+to invert a byte:
+  privatize the byte.
+  put 255 in the original byte.
+  subtract the byte from the original byte.
+
 to invert a flag:
   if the flag is yes, put no into the flag; exit.
   put yes into the flag.
@@ -9148,37 +9171,49 @@ to set a path to read-write mode:
 
 a sheet is a box.
 
-to shift a byte left some bits:
+to shift a byte left some bits;
+to left shift a byte some bits;
+to left shift a byte by some bits:
   intel $8B8D0C000000. \ mov ecx,[ebp+12] \ the bits
   intel $8B09.         \ mov ecx,[ecx]
   intel $8B8508000000. \ mov eax,[ebp+8] \ the byte
   intel $D220.         \ shl byte pointer [eax],ecx
 
-to shift a byte right some bits:
+to shift a byte right some bits;
+to right shift a byte some bits;
+to right shift a byte by some bits:
   intel $8B8D0C000000. \ mov ecx,[ebp+12] \ the bits
   intel $8B09.         \ mov ecx,[ecx]
   intel $8B8508000000. \ mov eax,[ebp+8] \ the byte
   intel $D228.         \ shr byte pointer [eax],ecx
 
-to shift a number left some bits:
+to shift a number left some bits;
+to left shift a number some bits;
+to left shift a number by some bits:
   intel $8B8D0C000000. \ mov ecx,[ebp+12] \ the bits
   intel $8B09.         \ mov ecx,[ecx]
   intel $8B8508000000. \ mov eax,[ebp+8] \ the number
   intel $D320.         \ shl [eax],ecx
 
-to shift a number right some bits:
+to shift a number right some bits;
+to right shift a number some bits;
+to right shift a number by some bits:
   intel $8B8D0C000000. \ mov ecx,[ebp+12] \ the bits
   intel $8B09.         \ mov ecx,[ecx]
   intel $8B8508000000. \ mov eax,[ebp+8] \ the number
   intel $D328.         \ shr [eax],ecx
 
-to shift a wyrd left some bits:
+to shift a wyrd left some bits;
+to left shift a wyrd some bits;
+to left shift a wyrd by some bits:
   intel $8B8D0C000000. \ mov ecx,[ebp+12] \ the bits
   intel $8B09.         \ mov ecx,[ecx]
   intel $8B8508000000. \ mov eax,[ebp+8] \ the wyrd
   intel $66D320.       \ shl word ptr [eax],ecx
 
-to shift a wyrd right some bits:
+to shift a wyrd right some bits;
+to right shift a wyrd some bits;
+to right shift a wyrd by some bits:
   intel $8B8D0C000000. \ mov ecx,[ebp+12] \ the bits
   intel $8B09.         \ mov ecx,[ecx]
   intel $8B8508000000. \ mov eax,[ebp+8] \ the wyrd
@@ -10304,6 +10339,13 @@ to test (the noodle - 200023 is prime):
     put "200023 is prime" in the actual string.
   stash the test result given the actual.
 
+to test (the noodle - count primes through 250000):
+  create a test result about "the noodle"
+    and "count primes through 250000" and expecting "22044".
+  put 250000 in a number.
+  count primes through the number giving another number.
+  stash the test result given the other number.
+
 to test (the noodle - deduplication):
   create a test result about "the noodle" and "deduplication"
     and expecting "al, betsy, betty, carl".
@@ -10430,6 +10472,20 @@ to test (the noodle - sorting):
   stash the test result given the actual.
   destroy the nametags.
 
+to test (the noodle - timer precision is not negative):
+  create a test result about "the noodle" and "timer precision is not negative"
+    and expecting "precision is not negative".
+  put the test result's timer's precision in a bigint.
+  put "the timer's precision is " then the bigint then " jiffies per second"
+    into the test result's actual value.
+  if the bigint is negative,
+    convert the bigint to a string;
+    put the string in the test result's interpretation.
+  if the bigint is not negative,
+    put "precision is not negative" in the test result's interpretation.
+  stop the test result's timer.
+  append the test result to the status' all test results.
+
 to test (the noodle - trim complete length from end of string):
   create a test result about "the noodle" and "trim complete length from end of string"
     and expecting "".
@@ -10478,6 +10534,7 @@ to test (the noodle):
   test (basic math).
   test (command line).
   test (square root).
+\  test (the noodle - count primes through 250000). \ takes 5 or 6 seconds.
   test (the noodle - primes through 47).
   test (the noodle - 200021 is not prime).
   test (the noodle - 200023 is prime).
@@ -10495,6 +10552,7 @@ to test (the noodle):
   test (the noodle - find parent of non-existent folder).
   test (the noodle - replace substring).
   test (the noodle - prepend things).
+  test (the noodle - timer precision is not negative).
   test (string widths).
   test (unicode).
 

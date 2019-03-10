@@ -454,6 +454,14 @@ to stash a test result given a bigint:
   convert the bigint into a string called actual.
   stash the test result given the actual.
 
+to stash a test result given a binary logarithm:
+  convert the binary logarithm into a string called actual.
+  stash the test result given the actual.
+
+to stash a test result given a flag:
+  convert the flag into a string called actual.
+  stash the test result given the actual.
+
 to stash a test result given a number:
   convert the number into a string called actual.
   stash the test result given the actual.
@@ -556,6 +564,7 @@ to test (all):
   \ noodle subfolder
   test (the noodle).
   test (characters).
+  test (arrays).
   test (colors).
   test (text).
   test (ratios).
@@ -640,3 +649,4 @@ to widen a submenu to a width:
     if the command is nil, exit.
     widen the command to the width.
   repeat.
+

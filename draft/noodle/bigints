@@ -28,6 +28,63 @@ a bigint has
   a low number at the first byte, and
   a high number at the fifth byte.
 
+\ a premix can store a mixio as a bigint, measured in trifles.
+\ In other words, it is an implied ratio of the bigint / (43,200*43,200).
+a premix is a bigint.
+
+\ A binary logarithm represents log base 2 of a value.
+\ A binary logarithm is similar to a float,
+\ but the mantissa is used differently.
+\ Both have some bits and a mantissa.
+\
+\ A float's mantissa is not logarithmic,
+\ but a float's bits are logarithmic.
+\ A float with positive bits is evaluated
+\ by left shifting its mantissa by the bits.
+\ A float with negative bits is evaluated
+\ by right shifting its mantissa by the negative of the bits.
+\
+\ In a binary logarithm,
+\ both the bits and the mantissa are logarithmic.
+\
+\ A binary logarithm is similar to a mixed:
+\ The bits are the whole number (which can be negative, zero, or positive).
+\ The mantissa is the fractional part (which can be zero or positive).
+\ The bits are added to the mantissa to get the full value of the binary logarithm.
+\
+\ To find the antilog of a binary logarithm,
+\ de-sign both the bits and the mantissa,
+\ raise 2 to the power of the mantissa,
+\ left shift the result by the bits,
+\ and if the original logarithm was negative, invert the result.
+\
+a binary logarithm has some bits and a mantissa.
+
+\ In this library,
+\ a mantissa represents a ratio, with an implied denominator of 2^61.
+\ Properties of the mantissa of a float during intermediate calculations:
+\   Bit #64 (the sign bit) is 0.
+\   Bit #63 (the 2^62 place) may be 0 or 1.
+\ Properties of the mantissa of a float when normalized as a float:
+\   Bit #64 is the sign bit.  It may be 0 or 1:
+\     0 means the float is zero or positive.
+\     1 means the float is zero or negative.
+\   Bit #63 (the 2^62 place) is 0.
+\   Either the mantissa is 0, or bit #62 (the 2^61 place) is 1.
+\
+\ The mantissa of a binary logarithm is never negative.
+\ It represents a fractional logarithmic value in base 2.
+\ Properties of the mantissa of a binary logarithm during intermediate calculations:
+\   Bit #64 (the sign bit) is 0.
+\   Bit #63 (the 2^62 place) may be 0 or 1.
+\   Bit #62 (the 2^61 place) may be 0 or 1.
+\ Properties of the mantissa of a binary logarithm when normalized:
+\   Bit #64 (the sign bit) is 0.
+\   Bit #63 (the 2^62 place) is 0.
+\   Bit #62 (the 2^61 place) is 0.
+\
+a mantissa is a bigint.
+
 to add a bigint to another bigint:
   privatize the bigint.
   add the bigint's low number to the other bigint's low number and carry a flag.
@@ -41,9 +98,16 @@ to add a bigint to another bigint and carry a flag:
   if the other flag is set, add 1 to the other bigint's high number and carry a third flag.
   if the third flag is set, set the flag.
 
+to add a binary logarithm to another binary logarithm:
+  add the binary logarithm's bits to the other binary logarithm's bits.
+  add the binary logarithm's mantissa to the other binary logarithm's mantissa.
+  normalize the other binary logarithm.
+
 to add a number to a bigint:
   convert the number to another bigint.
   add the other bigint to the bigint.
+
+the antiscale mantissa is a mantissa. \ initialized to ln(2).
 
 to append a bigint to a string:
   convert the bigint to another string.
@@ -65,6 +129,10 @@ to clear a bigint:
   put 0 into the bigint's high number.
   put 0 into the bigint's low number.
 
+to clear a binary logarithm:
+  clear the binary logarithm's bits.
+  clear the binary logarithm's mantissa.
+
 to convert a bigint to a string:
   if the bigint is the smallest bigint,
     put "-9223372036854775808" in the string; exit.
@@ -80,6 +148,29 @@ to convert a bigint to a string:
     put the quotient bigint into the bigint.
   repeat.
   if the original bigint is negative, prepend the dash byte to the string.
+
+to convert a binary logarithm to a string:
+  convert the binary logarithm's mantissa as a bigint to the string.
+  if the binary logarithm's bits are 0, exit.
+  append " and " to the string.
+  format the binary logarithm's bits and "bit" or "bits" into another string.
+  append the other string to the string.
+
+to convert a mixio to a premix:
+  put the unit premix in the premix.
+  multiply the premix as a bigint by the mixio's whole number.
+  put the trifle root in a bigint.
+  multiply the bigint by the mixio's nips.
+  add the bigint to the premix as a bigint.
+  add the mixio's trifles to the premix as a bigint.
+
+to convert a number to a premix:
+  put the unit premix in the premix.
+  multiply the premix by the number.
+
+to convert a ratio to a premix:
+  convert the ratio to a mixio.
+  convert the mixio to the premix.
 
 to convert a string to a bigint:
   put 0 into the bigint.
@@ -113,6 +204,13 @@ to decide if a bigint is another bigint:
     the other bigint's high number, say yes.
   say no.
 
+to decide if a bigint is another bigint or less;
+to decide if a bigint is at most another bigint;
+to decide if a bigint is less than or equal to another bigint:
+  if the bigint is the other bigint, say yes.
+  if the bigint is less than the other bigint, say yes.
+  say no.
+
 to decide if a bigint is another bigint or more;
 to decide if a bigint is at least another bigint;
 to decide if a bigint is greater than or equal to another bigint:
@@ -120,21 +218,6 @@ to decide if a bigint is greater than or equal to another bigint:
   if the bigint is greater than the other bigint, say yes.
   say no.
 
-to decide if a bigint is another bigint or less;
-to decide if a bigint is at most another bigint;
-to decide if a bigint is less than or equal to another bigint:
-  if the bigint is the other bigint, say yes.
-  if the bigint is less than the other bigint, say yes.
-  say no.
-  
-to decide if a bigint is a number or less;
-to decide if a bigint is at most a number;
-to decide if a bigint is less than or equal to a number:
-  convert the number to another bigint.
-  if the bigint is the other bigint, say yes.
-  if the bigint is less than the other bigint, say yes.
-  say no.
-  
 to decide if a bigint is bitwise included in another bigint:
   if the bigint's low number is not bitwise included
     in the other bigint's low number, say no.
@@ -144,6 +227,11 @@ to decide if a bigint is bitwise included in another bigint:
 
 to decide if a bigint is less than another bigint:
   if the other bigint is greater than the bigint, say yes.
+  say no.
+
+to decide if a bigint is less than a number:
+  put the number in another bigint.
+  if the bigint is less than the other bigint, say yes.
   say no.
 
 to decide if a bigint is modest:
@@ -187,6 +275,19 @@ to decide if a bigint is a number:
   if the bigint is the other bigint, say yes.
   say no.
 
+to decide if a bigint is a number or less;
+to decide if a bigint is at most a number;
+to decide if a bigint is less than or equal to a number:
+  convert the number to another bigint.
+  if the bigint is the other bigint, say yes.
+  if the bigint is less than the other bigint, say yes.
+  say no.
+
+to decide if a bigint is positive:
+  if the bigint is negative, say no.
+  if the bigint is zero, say no.
+  say yes.
+
 to decide if a bigint is zero:
   if the bigint's high number is not 0, say no.
   if the bigint's low number is 0, say yes.
@@ -203,10 +304,24 @@ to subtract one from a bigint:
     subtract 1 from the bigint's high number; exit.
   subtract 1 from the bigint's low number.
 
+the denomlog is a binary logarithm.  \ initialized to log base 2 of (43,200)*(43,200).
+
 to divide a bigint by another bigint:
   divide the bigint by the other bigint
     giving a quotient bigint and a remainder bigint.
   put the quotient bigint in the bigint.
+
+to divide a bigint by another bigint giving some bits and a remainder bigint:
+  \ assumes the bigint and the other bigint are both positive.
+  \ assumes that the bigint has been right shifted to the other bigint.
+  put the bigint's highest bit into the bits.
+  put the other bigint's highest bit into some other bits.
+  subtract the other bits from the bits.
+  privatize the bigint.
+  privatize the other bigint.
+  left shift the other bigint by the bits.
+  subtract the other bigint from the bigint.
+  put the bigint in the remainder bigint.
 
 to divide a bigint by another bigint giving a quotient bigint and a remainder bigint:
   privatize the bigint.
@@ -215,6 +330,7 @@ to divide a bigint by another bigint giving a quotient bigint and a remainder bi
   clear the remainder bigint.
   if the other bigint is zero,
     put the largest bigint in the quotient bigint; exit.
+  \
   if the bigint is modest, set a flag.
   if the other bigint is modest, set another flag.
   if the flag and the other flag are both set, \ both modest
@@ -228,6 +344,7 @@ to divide a bigint by another bigint giving a quotient bigint and a remainder bi
   invert the other flag.
   if the flag and the other flag are both set, \ modest over immodest
     put the bigint in the remainder bigint; exit.
+  \
   clear the flag.
   clear the other flag.
   if the bigint is the smallest bigint, set the flag.
@@ -311,7 +428,194 @@ to divide a bigint by ten giving a quotient bigint and a remainder:
     add 10 to the remainder;
     subtract 1 from the quotient bigint.
 
+to divide a bigint left shifted some bits by another bigint:
+  if the other bigint is zero,
+    put the largest bigint in the bigint; exit.
+  privatize the bits.
+  if the bits are not positive,
+    divide the bigint by the other bigint;
+    negate the bits;
+    right shift the bigint the bits;
+    exit.
+  if the bits are at least 128,
+    put the largest bigint in the bigint; exit.
+  privatize the bigint.
+  privatize the other bigint.
+  clear the original bigint.
+  \
+  if the bigint is negative, set a sign flag.
+  if the other bigint is negative, invert the sign flag.
+  if the bigint is the smallest bigint,
+    divide the bigint by 2;
+    add 1 to the bits.
+  if the other bigint is the smallest bigint,
+    divide the other bigint by 2;
+    subtract 1 from the bits.
+  \ At this point, neither bigint is the smallest bigint,
+  \ so de-signing will not change their absolute values.
+  de-sign the bigint.
+  de-sign the other bigint.
+\ to-do: convert most of what follows to assembly code.
+  put the bigint's highest bit into some temp bits.
+  subtract 63 from the temp bits.
+  negate the temp bits.
+  shift the bigint left the temp bits.
+  subtract the temp bits from the bits.
+  put the other bigint's highest bit into the temp bits.
+  subtract 63 from the temp bits.
+  negate the temp bits.
+  shift the other bigint left the temp bits.
+  add the temp bits to the bits.
+  put 1 into a power bigint.
+  shift the power bigint left the bits.
+  loop.
+    if the bigint is at least the other bigint,
+      add the power bigint to the original bigint;
+      subtract the other bigint from the bigint.
+    subtract 1 from the bits.
+    if the bits are negative, break.
+    shift the other bigint right 1 bit.
+    shift the power bigint right 1 bit.
+  repeat.
+  if the sign flag is set,
+    negate the original bigint.
+
+to divide a mantissa by another mantissa:
+  divide the mantissa as a bigint left shifted 61 bits
+    by the other mantissa as a bigint.
+
 to finalize bigints:
+
+to half natural logify an arg mantissa giving a mantissa:
+  put the arg mantissa into a numerator mantissa.
+  subtract the unit mantissa from the numerator mantissa.
+  put the arg mantissa into a denominator mantissa.
+  add the unit mantissa to the denominator mantissa.
+  put the numerator mantissa into a first mantissa.
+  divide the first mantissa by the denominator mantissa.
+  \ the first mantissa is in the range 0 < mantissa < 2^61 / 5.8…
+  put the first mantissa in the mantissa.
+  \
+  put the first mantissa in a factor mantissa.
+  multiply the factor mantissa by the first mantissa.
+  put the first mantissa in a third mantissa.
+  multiply the third mantissa by the factor mantissa.
+  \ the third mantissa is in the range 0 < mantissa < 2^61 / 197.99…
+  if the third mantissa is less than 2, exit.
+  put the third mantissa in a temp mantissa.
+  divide the temp mantissa as a bigint by 3.
+  add the temp mantissa to the mantissa.
+  \
+  put the factor mantissa in a square mantissa.
+  multiply the square mantissa by the factor mantissa.
+  put the first mantissa in a fifth mantissa.
+  multiply the fifth mantissa by the square mantissa.
+  \ the fifth mantissa is in the range 0 < mantissa < 2^61 / 6,725.99…
+  if the fifth mantissa as a bigint is less than 3, exit.
+  put the fifth mantissa in the temp mantissa.
+  divide the temp mantissa as a bigint by 5.
+  add the temp mantissa to the mantissa.
+  \
+  put the third mantissa in a seventh mantissa.
+  multiply the seventh mantissa by the square mantissa.
+  \ the seventh mantissa is in the range 0 < mantissa < 2^61 / 228,485.99…
+  if the seventh mantissa as a bigint is less than 4, exit.
+  put the seventh mantissa in the temp mantissa.
+  divide the temp mantissa as a bigint by 7.
+  add the temp mantissa to the mantissa.
+  \
+  put the square mantissa in a quad mantissa.
+  multiply the quad mantissa by the square mantissa.
+  put the first mantissa in a ninth mantissa.
+  multiply the ninth mantissa by the quad mantissa.
+  \ the ninth mantissa is in the range 0 < mantissa < 2^61 / 7,761,797.99…
+  if the ninth mantissa as a bigint is less than 5, exit.
+  put the ninth mantissa in the temp mantissa.
+  divide the temp mantissa as a bigint by 9.
+  add the temp mantissa to the mantissa.
+  \
+  put the third mantissa in an eleventh mantissa.
+  multiply the eleventh mantissa by the quad mantissa.
+  \ the eleventh mantissa is in the range 0 < mantissa < 2^61 / 263,672,645.99…
+  if the eleventh mantissa as a bigint is less than 6, exit.
+  put the eleventh mantissa in the temp mantissa.
+  divide the temp mantissa as a bigint by 11.
+  add the temp mantissa to the mantissa.
+  \
+  put the fifth mantissa in a thirteenth mantissa.
+  multiply the thirteenth mantissa by the quad mantissa.
+  \ the thirteenth mantissa is in the range 0 < mantissa < 2^61 / 8,957,108,165.99…
+  if the thirteenth mantissa as a bigint is less than 7, exit.
+  put the thirteenth mantissa in the temp mantissa.
+  divide the temp mantissa as a bigint by 13.
+  add the temp mantissa to the mantissa.
+  if the thirteenth mantissa as a bigint is less than 272, exit.
+  \
+  put the seventh mantissa in a fifteenth mantissa.
+  multiply the fifteenth mantissa by the quad mantissa.
+  \ the fifteenth mantissa is in the range 0 < mantissa < 2^61 / 304,278,004,997.99…
+  if the fifteenth mantissa as a bigint is less than 8, exit.
+  put the fifteenth mantissa in the temp mantissa.
+  divide the temp mantissa as a bigint by 15.
+  add the temp mantissa to the mantissa.
+  if the fifteenth mantissa as a bigint is less than 306, exit.
+  \
+  put the quad mantissa in an oct mantissa.
+  multiply the oct mantissa by the quad mantissa.
+  put the first mantissa in a seventeenth mantissa.
+  multiply the seventeenth mantissa by the oct mantissa.
+  \ the seventeenth mantissa is in the range 0 < mantissa < 2^61 / 10,336,495,061,765.99…
+  if the seventeenth mantissa as a bigint is less than 9, exit.
+  put the seventeenth mantissa in the temp mantissa.
+  divide the temp mantissa as a bigint by 15.
+  add the temp mantissa to the mantissa.
+  if the seventeenth mantissa as a bigint is less than 340, exit.
+  \
+  put the third mantissa in a nineteenth mantissa.
+  multiply the nineteenth mantissa by the oct mantissa.
+  \ the nineteenth mantissa is in the range 0 < mantissa < 2^61 / 351,136,554,095,045.99…
+  if the nineteenth mantissa as a bigint is less than 10, exit.
+  put the nineteenth mantissa in the temp mantissa.
+  divide the temp mantissa as a bigint by 19.
+  add the temp mantissa to the mantissa.
+  if the nineteenth mantissa as a bigint is less than 374, exit.
+  \
+  put the fifth mantissa in a twentyfirst mantissa.
+  multiply the twentyfirst mantissa by the oct mantissa.
+  \ the twentyfirst mantissa is in the range 0 < mantissa < 2^61 / 11,928,306,344,169,797.99…
+  if the twentyfirst mantissa as a bigint is less than 11, exit.
+  put the twentyfirst mantissa in the temp mantissa.
+  divide the temp mantissa as a bigint by 21.
+  add the temp mantissa to the mantissa.
+  \ the twentythird mantissa will be less than 12.
+
+to half natural logify a bigint giving a mantissa:
+  \ routine clears flag if return value is double the natural log of the argument.
+  \ routine sets   flag if return value is double the natural log of 2 / the argument.
+  clear the mantissa.
+  clear a flag.
+  if the bigint is zero, exit.
+  privatize the bigint.
+  de-sign the bigint.
+  put the bigint's highest bit into some bits.
+  if the bits are 63,
+    right shift the bigint by 1 bit.
+  if the bits are less than 62,
+    subtract 62 from the bits;
+    negate the bits;
+    left shift the bigint by the bits.
+  \ the bigint now satisfies the invariants of a mantissa
+  \ of a binary logarithm during intermediate calculations.
+  put the bigint into an arg mantissa as a bigint.
+  if the arg mantissa is the unit mantissa,
+    clear the mantissa; exit.
+  prepare the arg mantissa for logification also giving the flag.
+  half natural logify the arg mantissa giving the mantissa.
+  if the flag is clear, exit.
+  negate the mantissa.
+  add the offset mantissa to the mantissa.
+
+the halfmax bigint is a bigint. \ initialized to 2^62 
 
 to increment a bigint;
 to add one to a bigint:
@@ -330,8 +634,59 @@ to initialize bigints:
   clear the largest bigint.
   put the largest number in the largest bigint's high number.
   put -1 in the largest bigint's low number.
+  convert the trifle denominator to the unit premix as a bigint.
+  \ Set 2^61
+  clear the unit mantissa.
+  put 1 in the unit mantissa's high number.
+  left shift the unit mantissa's high number 29 bits.
+\  debug the unit mantissa as a bigint.
+\ 2305843009213693952
+  \ Set 2^62
+  put the unit mantissa as a bigint in the halfmax bigint.
+  left shift the halfmax bigint 1 bit.
+  \ Set 2^61.5 = 3260954456333195553
+  put 759250124 in the threshold mantissa's high number.
+  put -25716447 in the threshold mantissa's low number.
+  \ Set 2^61 * 2 / ln 2 = 6653256548922161245
+  put  1549082004 in the rescale mantissa's high number.
+  put -1374947235 in the rescale mantissa's low number.
+  \ Set 2^61 * (ln 2) / 2 = 799144290325165979
+  put  186065279 in the offset mantissa's high number.
+  put 2099050395 in the offset mantissa's low number.
+  \ Set 2^61 * (ln 2) = 1598288580650331958
+  put the offset mantissa in the antiscale mantissa.
+  left shift the antiscale mantissa as a bigint by 1 bit.
+  \ Set log base 2 of (43,200)*(43,200) = 30 bits and 1838880709047483326
+  clear the denomlog.
+  put 30 in the denomlog's bits.
+  put  428147779 in the denomlog's high number.
+  put  387447742 in the denomlog's low number.
 
 the largest bigint is a bigint.
+
+to logify a bigint giving a binary logarithm:
+  logify the bigint giving the binary logarithm's bits.
+  logify the bigint giving the binary logarithm's mantissa.
+
+to logify a bigint giving some bits:
+  if the bigint is zero,
+    put the smallest number in the bits; exit.
+  privatize the bigint.
+  de-sign the bigint.
+  put the bigint's highest bit into the bits.
+  subtract 1 from the bits.
+
+to logify a bigint giving a mantissa:
+  half natural logify the bigint giving the mantissa.
+  multiply the mantissa by the rescale mantissa.
+
+to logify a premix giving a binary logarithm:
+  if the premix is zero,
+    put the smallest number in the binary logarithm's bits;
+    clear the binary logarithm's mantissa;
+    exit.
+  logify the premix as a bigint giving the binary logarithm.
+  subtract the denomlog from the binary logarithm.
 
 to multiply a bigint by another bigint:
   if the bigint is zero, exit.
@@ -405,10 +760,169 @@ to multiply a bigint by ten:
   add the second quotient to the bigint's high number.
   put the second remainder in the bigint's second wyrd.
 
+to multiply a bigint right shifted some bits by another bigint:
+  if the bigint is zero, exit.
+  if the other bigint is zero, clear the bigint; exit.
+  if the bits are at least 128, clear the bigint; exit.
+  privatize the bits.
+  if the bits are not positive,
+    multiply the bigint by the other bigint;
+    negate the bits;
+    left shift the bigint the bits;
+    exit.
+  if the bigint is negative, set a sign flag.
+  if the other bigint is negative, invert the sign flag.
+  privatize the other bigint.
+  if the bigint is the smallest bigint,
+    divide the bigint by 2;
+    subtract 1 from the bits.
+  if the other bigint is the smallest bigint,
+    divide the other bigint by 2;
+    subtract 1 from the bits.
+  \ At this point, neither bigint is the smallest bigint,
+  \ so de-signing will not change their absolute values.
+  de-sign the bigint.
+  de-sign the other bigint.
+  put the bigint in a left bigint.
+  put the other bigint in a right bigint.
+  put the bits in some spare bits.
+  prepare the bigint and the other bigint
+    for multiplication with right shift by the bits.
+  divide the left bigint by the bigint giving some left bits and a left residual bigint.
+  divide the right bigint by the other bigint giving some right bits and a right residual bigint.
+  multiply the left residual bigint by the other bigint.
+  right shift the left residual bigint by the left bits.
+  multiply the right residual bigint by the bigint.
+  right shift the right residual bigint by the right bits.
+  multiply the bigint by the other bigint.
+  add the left residual bigint to the bigint.
+  add the right residual bigint to the bigint.
+  if the bits are positive,
+    right shift the bigint by the bits;
+    clear the bits.
+  if the bits are negative,
+    left shift the bigint by the bits;
+    clear the bits.
+  if the sign flag is set, negate the bigint.
+
+to multiply a mantissa by another mantissa:
+  multiply the mantissa as a bigint right shifted 61 bits
+    by the other mantissa as a bigint.
+
+to natural unlogify an arg mantissa giving a result mantissa (other bits):
+  \ assumes that 0 <= arg mantissa < 2^54 * ln(2).
+  put the unit mantissa in the result mantissa.
+  if the arg mantissa is not positive, exit.
+  add the arg mantissa to the result mantissa.
+  \
+  put the arg mantissa in a factor mantissa.
+  put the factor mantissa in a square mantissa.
+  multiply the square mantissa by the factor mantissa.
+  put the square mantissa in a temp mantissa.
+  right shift the temp mantissa by 1 bit.
+  add the temp mantissa to the result mantissa.
+  \
+  put the square mantissa in a cube mantissa.
+  multiply the cube mantissa by the factor mantissa.
+  put the cube mantissa in the temp mantissa.
+  divide the temp mantissa by 6.
+  add the temp mantissa to the result mantissa.
+  \
+  put the square mantissa in a quad mantissa.
+  multiply the quad mantissa by the square mantissa.
+  put the quad mantissa in the temp mantissa.
+  divide the temp mantissa by 24.
+  add the temp mantissa to the result mantissa.
+  \
+  put the factor mantissa in a fifth mantissa.
+  multiply the fifth mantissa by the quad mantissa.
+  put the fifth mantissa in the temp mantissa.
+  divide the temp mantissa by 120.
+  add the temp mantissa to the result mantissa.
+  \
+  put the factor mantissa in a sixth mantissa.
+  multiply the sixth mantissa by the quad mantissa.
+  put the sixth mantissa in the temp mantissa.
+  divide the temp mantissa by 720.
+  add the temp mantissa to the result mantissa.
+  \
+  put the factor mantissa in a seventh mantissa.
+  multiply the seventh mantissa by the quad mantissa.
+  put the seventh mantissa in the temp mantissa.
+  divide the temp mantissa by 5040.
+  add the temp mantissa to the result mantissa.
+
 to negate a bigint:
   put -1 in another bigint.
   bitwise xor the bigint with the other bigint. \ flip all the bits.
   increment the bigint.
+
+to normalize a binary logarithm:
+  if the binary logarithm's mantissa as a bigint
+    is at least the halfmax bigint,
+      subtract the halfmax bigint from the binary logarithm's mantissa as a bigint;
+      add 2 to the binary logarithm's bits.
+  if the binary logarithm's mantissa is at least the unit mantissa,
+      subtract the unit mantissa from the binary logarithm's mantissa;
+      add 1 to the binary logarithm's bits.
+  if the binary logarithm's mantissa is not negative, exit.
+  if the binary logarithm's mantissa as a bigint is the smallest bigint,
+    clear the binary logarithm's mantissa;
+    subtract 4 from the binary logarithm's bits;
+    exit.
+  if the binary logarithm's mantissa as a bigint is at most - the halfmax bigint,
+    add the halfmax bigint to the binary logarithm's mantissa as a bigint;
+    subtract 2 from the binary logarithm's bits.
+  if the binary logarithm's mantissa is not negative, exit.
+  add the unit mantissa to the binary logarithm's mantissa.
+  subtract 1 from the binary logarithm's bits.
+
+the offset mantissa is a mantissa.   \ initialized to (1/2) ln 2
+
+to prepare an arg mantissa for logification also giving a flag:
+  \ assumes the mantissa is positive.
+  \ threshold mantissa is 3260954456333195553 = 2^61.5
+  if the arg mantissa is greater than the threshold mantissa,
+    set the flag;
+    put the arg mantissa into a temp mantissa;
+    put the halfmax bigint into the arg mantissa as a bigint;
+    divide the arg mantissa by the temp mantissa.
+
+to prepare a bigint and another bigint for multiplication with right shift by some bits:
+  \ assumes that both bigints are positive.
+  \ assumes that the bits are positive.
+  put the bigint's highest bit into some temp bits.
+  put the other bigint's highest bit into some other bits.
+  put the bits in some later bits.
+  add 60 to the later bits.
+  subtract the temp bits from the later bits.
+  subtract the other bits from the later bits.
+  if the later bits are negative,
+    clear the later bits.
+  subtract the later bits from the bits.
+  subtract the other bits from the temp bits.
+  if the temp bits are at least the bits,
+    right shift the bigint the bits;
+    put the later bits in the bits;
+    exit.
+  if the temp bits are negative, set a flag.
+  if - the temp bits are at least the bits, set another flag.
+  if the flag and the other flag are both set,
+    right shift the other bigint the bits;
+    put the later bits in the bits;
+    exit.
+  add the bits to the temp bits.
+  divide the temp bits by 2.
+  if the temp bits are positive,
+    right shift the bigint by the temp bits.
+  if the temp bits are negative,
+    left shift the bigint by the temp bits.
+  subtract the temp bits from the bits.
+  if the bits are positive,
+    right shift the other bigint by the bits.
+  if the bits are negative,
+    left shift the other bigint by the bits.
+  put the later bits in the bits.
 
 to put a bigint into another bigint:
   put the bigint's high number into the other bigint's high number.
@@ -427,6 +941,10 @@ to put a bigint's highest bit into some bits:
   if the bits are positive, add 32 to the bits; exit.
   put the bigint's low number's highest bit into the bits.
 
+to put a binary logarithm into another binary logarithm:
+  put the binary logarithm's bits into the other binary logarithm's bits.
+  put the binary logarithm's mantissa into the other binary logarithm's mantissa.  
+
 to put a number into a bigint;
 to convert a number to a bigint:
   privatize the number.
@@ -436,7 +954,12 @@ to convert a number to a bigint:
   put -1 into the bigint's high number.
   put the number into the bigint's low number.
 
-to shift a bigint left some bits:
+the rescale mantissa is a mantissa.  \ initialized to 1 / (2 ln 2).
+
+to shift a bigint left some bits;
+to left shift a bigint some bits;
+to left shift a bigint by some bits:
+  if the bits are at most 0, exit.
   if the bits are at least 32,
     put the bigint's low number in the bigint's high number;
     shift the bigint's high number left the bits minus 32 bits;
@@ -450,7 +973,10 @@ to shift a bigint left some bits:
   bitwise or the bigint's high number with the number.
   shift the bigint's low number left the bits.
 
-to shift a bigint right some bits:
+to shift a bigint right some bits;
+to right shift a bigint some bits;
+to right shift a bigint by some bits:
+  if the bits are at most 0, exit.
   if the bits are at least 32,
     put the bigint's high number in the bigint's low number;
     shift the bigint's low number right the bits minus 32 bits;
@@ -472,6 +998,13 @@ to subtract a bigint from another bigint:
   add the bigint to the other bigint.
   if the original bigint is the smallest bigint,
     add one to the other bigint.
+
+to subtract a binary logarithm from another binary logarithm:
+  subtract the binary logarithm's bits from the other binary logarithm's bits.
+  subtract the binary logarithm's mantissa from the other binary logarithm's mantissa.
+  if the other binary logarithm's mantissa is negative,
+    add the unit mantissa to the other binary logarithm's mantissa;
+    subtract 1 from the other binary logarithm's bits.
 
 to subtract a number from a bigint:
   convert the number to another bigint.
@@ -625,10 +1158,100 @@ to test (bigints - divide positive by negative):
   divide the bigint by the other bigint.
   stash the test result given the bigint.
 
+to test (bigints - divide with shift):
+  create a test result about "bigints" and "divide with shift"
+    and expecting "161571587009907888".
+  convert  "347492122999483937" to a bigint.
+  convert "4959178141426871841" to another bigint.
+  divide the bigint left shifted 61 bits by the other bigint.
+  stash the test result given the bigint.
+
+to test (bigints - half natural logify 2653335132213177886):
+  create a test result about "bigints"
+    and "half natural logify 2653335132213177886"
+    and expecting "161836800893997887". 
+  convert "2653335132213177886" to a bigint.
+  put the bigint into an arg mantissa as a bigint.
+  half natural logify the arg mantissa giving a result mantissa.
+  stash the test result given the result mantissa as a bigint.
+
+to test (bigints - half natural logify 4007719883243520000):
+  create a test result about "bigints"
+    and "half natural logify 4007719883243520000"
+    and expecting "637307489431168091". 
+  convert "4007719883243520000" to a bigint.
+  half natural logify the bigint giving a result mantissa.
+  stash the test result given the result mantissa as a bigint.
+
 to test (bigints - largest bigint):
   create a test result about "bigints" and "largest bigint"
     and expecting "9223372036854775807".
   stash the test result given the largest bigint.
+
+to test (bigints - logify 1/2 unit):
+  create a test result about "bigints" and "logify 1/2 unit"
+    and expecting "0 and -1 bits". \ -1 bits + 0 * 2^61 [/ 2^61]
+  convert 1/2 to a premix.
+  logify the premix giving a binary logarithm.
+  stash the test result given the binary logarithm.
+
+to test (bigints - logify 1/256 units):
+  create a test result about "bigints" and "logify 1/256 units"
+    and expecting "0 and -8 bits". \ -8 bits + 0 * 2^61 [/ 2^61]
+  convert 1/256 to a premix.
+  logify the premix giving a binary logarithm.
+  stash the test result given the binary logarithm.
+
+to test (bigints - logify 1/5 unit):
+  create a test result about "bigints" and "logify 1/5 unit"
+    and expecting "1563527362148188915 and -3 bits".
+  convert 1/5 to a premix.
+  logify the premix giving a binary logarithm.
+  stash the test result given the binary logarithm.
+
+to test (bigints - logify 2 units):
+  create a test result about "bigints" and "logify 2 units"
+    and expecting "0 and 1 bit". \ 1 bit + 0 * 2^61 [/ 2^61]
+  convert 2 to a premix.
+  logify the premix giving a binary logarithm.
+  stash the test result given the binary logarithm.
+
+to test (bigints - logify 256 units):
+  create a test result about "bigints" and "logify 256 units"
+    and expecting "0 and 8 bits". \ 8 bits + 0 * 2^61 [/ 2^61]
+  convert 256 to a premix.
+  logify the premix giving a binary logarithm.
+  stash the test result given the binary logarithm.
+
+to test (bigints - logify 3125 units):
+  create a test result about "bigints" and "logify 3125 units"
+    and expecting "1405735226113842178 and 11 bits".
+  convert 3125 to a premix.
+  logify the premix giving a binary logarithm.
+  stash the test result given the binary logarithm.
+
+to test (bigints - logify 3732480000 to mantissa):
+  create a test result about "bigints"
+    and "logify 3732480000 to mantissa"
+    and expecting "1838880709047483326".
+  convert 2 into a premix.
+  logify the premix as a bigint giving a mantissa.
+  stash the test result given the mantissa as a bigint.
+
+to test (bigints - logify square root of 2 units):
+  create a test result about "bigints"
+    and "logify square root of 2 units"
+    and expecting "1152921505056615774". \ 0 bits + ~ 0.5 * 2^61 [/ 2^61]
+  convert "2639261919" to a bigint.
+  put the bigint in a premix as a bigint.
+  logify the premix giving a binary logarithm.
+  stash the test result given the binary logarithm.
+
+to test (bigints - logify unit):
+  create a test result about "bigints" and "logify unit"
+    and expecting "0".
+  logify the unit premix giving a binary logarithm.
+  stash the test result given the binary logarithm.
 
 to test (bigints - multiply 0 by ten):
   create a test result about "bigints"
@@ -664,6 +1287,15 @@ to test (bigints - multiply 1234567890 by ten):
   put 1234567890 in a bigint.
   multiply the bigint by ten.
   stash the test result given the bigint.
+
+to test (bigints - multiply mantissa by itself):
+  create a test result about "bigints" and "multiply mantissa by itself"
+    and expecting "11321402898891335".
+  convert "161571587009907888" to a bigint.
+  put the bigint in a mantissa as a bigint.
+  put the mantissa in another mantissa.
+  multiply the mantissa by the other mantissa.
+  stash the test result given the mantissa as a bigint.
 
 to test (bigints - multiply negative by positive):
   create a test result about "bigints" and "multiply negative by positive"
@@ -724,6 +1356,36 @@ to test (bigints - negate negative bigint):
   negate the bigint.
   stash the test result given the bigint.
 
+to test (bigints - prepare 2653335132213177886 for logification):
+  create a test result about "bigints"
+    and "prepare 2653335132213177886 for logification"
+    and expecting "2653335132213177886 and no".
+  convert "2653335132213177886" to a bigint.
+  put the bigint in an arg mantissa as a bigint.
+  prepare the arg mantissa for logification also giving a flag.
+  put the arg mantissa as a bigint then " and " then the flag
+    into a string.
+  stash the test result given the string.
+
+to test (bigints - prepare 4007719883243520000 for logification):
+  create a test result about "bigints"
+    and "prepare 4007719883243520000 for logification"
+    and expecting "2653335132213177889 and yes".
+  convert "4007719883243520000" to a bigint.
+  put the bigint in an arg mantissa as a bigint.
+  prepare the arg mantissa for logification also giving a flag.
+  put the arg mantissa as a bigint then " and " then the flag
+    into a string.
+  stash the test result given the string.
+
+to test (bigints - shift left 0 bits):
+  create a test result about "bigints"
+    and "shift left 0 bits"
+    and expecting "4959178141426871841".
+  convert "4959178141426871841" to a bigint.
+  shift the bigint left 0 bits.
+  stash the test result given the bigint.
+
 to test (bigints - shift left 13 bits):
   create a test result about "bigints"
     and "shift left 13 bits"
@@ -746,6 +1408,14 @@ to test (bigints - shift left 33 bits):
     and expecting "2969359149424443392".
   convert "345678901" to a bigint.
   shift the bigint left 33 bits.
+  stash the test result given the bigint.
+
+to test (bigints - shift right 0 bits):
+  create a test result about "bigints"
+    and "shift left 0 bits"
+    and expecting "4959178141426871841".
+  convert "4959178141426871841" to a bigint.
+  shift the bigint left 0 bits.
   stash the test result given the bigint.
 
 to test (bigints - shift right 13 bits):
@@ -796,6 +1466,17 @@ to test (bigints - stringify 7516192768):
   convert "7516192768" to a bigint.
   stash the test result given the bigint.
 
+to test (bigints - subtract binary logarithms):
+  create a test result about "bigints"
+    and "subtract binary logarithms"
+    and expecting "2017612633174424409". \ 0 bits + ~ 0.5 * 2^61 [/ 2^61]
+  convert "171489801222601287" to a binary logarithm's mantissa as a bigint.
+  put 31 in the binary logarithm's bits.
+  convert "459720177261870830" to another binary logarithm's mantissa as a bigint.
+  put 30 in the other binary logarithm's bits.
+  subtract the other binary logarithm from the binary logarithm.
+  stash the test result given the binary logarithm.
+
 to test (bigints - subtract large positive bigints):
   create a test result about "bigints"
     and "subtract large positive bigints"
@@ -820,6 +1501,58 @@ to test (bigints - subtract small bigints):
   put 3 in another bigint.
   subtract the other bigint from the bigint.
   stash the test result given the bigint.
+
+to test (bigints - unlogify -8):
+  create a test result about "bigints" and "unlogify -8"
+    and expecting "7290000".
+  put -8 in a binary logarithm's bits.
+  unlogify the binary logarithm giving a premix.
+  stash the test result given the premix as a bigint.
+
+to test (bigints - unlogify 0):
+  create a test result about "bigints" and "unlogify 0"
+    and expecting "1866240000".
+  clear a binary logarithm.
+  unlogify the binary logarithm giving a premix.
+  stash the test result given the premix as a bigint.
+
+to test (bigints - unlogify 8):
+  create a test result about "bigints" and "unlogify 8"
+    and expecting "477757440000".
+  put 8 in a binary logarithm's bits.
+  unlogify the binary logarithm giving a premix.
+  stash the test result given the premix as a bigint.
+
+to test (bigints - unlogify high bit):
+  create a test result about "bigints" and "unlogify high bit"
+    and expecting "3260954456333195553".
+  convert "1152921504606846976" to a mantissa as a bigint.
+  unlogify the mantissa giving a result mantissa (high bits).
+  stash the test result given the result mantissa as a bigint.
+
+to test (bigints - unlogify mantissa of 1152921504606846976):
+  create a test result about "bigints"
+    and "unlogify mantissa of 1152921504606846976"
+    and expecting "3260954456333195553".
+  convert "1152921504606846976" to a mantissa as a bigint. \ 102/128 * 2^61
+  unlogify the mantissa giving a result mantissa.
+  stash the test result given the result mantissa as a bigint.
+
+to test (bigints - unlogify mantissa of 1837468647967162368):
+  create a test result about "bigints"
+    and "unlogify mantissa of 1837468647967162368"
+    and expecting "4006019078736290886".
+  convert "1837468647967162368" to a mantissa as a bigint. \ 102/128 * 2^61
+  unlogify the mantissa giving a result mantissa.
+  stash the test result given the result mantissa as a bigint.
+
+to test (bigints - unlogify mantissa of 1838880709047483326):
+  create a test result about "bigints"
+    and "unlogify mantissa of 1838880709047483326"
+    and expecting "4007719883243520005".
+  convert "1838880709047483326" to a mantissa as a bigint.
+  unlogify the mantissa giving a result mantissa.
+  stash the test result given the result mantissa as a bigint.
 
 to test (bigints - unstringify -8765432109876543210):
   create a test result about "bigints"
@@ -882,9 +1615,11 @@ to test (bigints):
   test (bigints - convert -123456789 to number).
   test (bigints - convert too small to smallest number).
   test (bigints - convert smallest bigint to smallest number).
+  test (bigints - shift left 0 bits).
   test (bigints - shift left 13 bits).
   test (bigints - shift left 32 bits).
   test (bigints - shift left 33 bits).
+  test (bigints - shift right 0 bits).
   test (bigints - shift right 13 bits).
   test (bigints - shift right 32 bits).
   test (bigints - shift right 33 bits).
@@ -894,8 +1629,128 @@ to test (bigints):
   test (bigints - multiply negatives).
   test (bigints - multiply positive by negative).
   test (bigints - multiply negative by positive).
+  test (bigints - multiply mantissa by itself).
   test (bigints - divide by large number).
   test (bigints - divide by three).
   test (bigints - divide negatives).
   test (bigints - divide positive by negative).
   test (bigints - divide negative by positive).
+  test (bigints - divide with shift).
+  test (logify).
+  test (unlogify).
+
+to test (logify):
+  test (bigints - logify unit).
+  test (bigints - prepare 2653335132213177886 for logification).
+  test (bigints - prepare 4007719883243520000 for logification).
+  test (bigints - half natural logify 2653335132213177886).
+  test (bigints - half natural logify 4007719883243520000).
+  test (bigints - logify 3732480000 to mantissa).
+  test (bigints - logify 2 units).
+  test (bigints - subtract binary logarithms).
+  test (bigints - logify square root of 2 units).
+  test (bigints - logify 1/2 unit).
+  test (bigints - logify 256 units).
+  test (bigints - logify 1/256 units).
+  test (bigints - logify 3125 units).
+  test (bigints - logify 1/5 unit).
+
+to test (unlogify):
+  test (bigints - unlogify high bit).
+  test (bigints - unlogify mantissa of 1152921504606846976).
+  test (bigints - unlogify mantissa of 1837468647967162368).
+  test (bigints - unlogify mantissa of 1838880709047483326).
+  test (bigints - unlogify 0).
+  test (bigints - unlogify 8).
+  test (bigints - unlogify -8).
+
+the threshold mantissa is a mantissa.
+
+the unit mantissa is a mantissa.  \ initialized to 2^61.
+
+the unit premix is a premix. \ initialized to the trifle denominator.
+                             \ (43,200*43,200).
+
+to unlogify an arg mantissa giving a result mantissa:
+  \ assumes that 0 <= arg mantissa < 2^61.
+  if the arg mantissa as a bigint is not positive,
+    put the unit mantissa in the result mantissa;
+    exit.
+  privatize the arg mantissa.
+  unlogify the arg mantissa giving the result mantissa (high bits).
+  multiply the arg mantissa by the antiscale mantissa. \ multiply by ln(2).
+  natural unlogify the arg mantissa giving a temp mantissa (other bits).
+  multiply the result mantissa by the temp mantissa.  
+
+to unlogify an arg mantissa giving a result mantissa (high bits):
+  \ assumes that 0 <= arg mantissa < 2^61.
+  put the unit mantissa in the result mantissa.
+  put the unit mantissa's high number in a place number.
+  put 62 in some bits. \ 2^61's place.
+  loop.
+    right shift the place number by 1 bit.
+    subtract 1 from the bits.
+    if the arg mantissa's high number is at least the place number,
+      unlogify the bits [from within the arg mantissa] giving a temp mantissa;
+      multiply the result mantissa by the temp mantissa;
+      subtract the place number from the arg mantissa's high number.
+    if the bits are less than 55, exit. 
+  repeat.
+
+to unlogify a binary logarithm giving a premix:
+  privatize the binary logarithm.
+  add the denomlog to the binary logarithm.
+  normalize the binary logarithm.
+  if the binary logarithm's bits are at least 63,
+    put the largest bigint into the premix as a bigint; exit.
+  if the binary logarithm's bits are negative,
+    clear the premix; exit.
+  \ the mantissa is now in 0 <= mantissa < 2^61.
+  unlogify the binary logarithm's mantissa giving a mantissa.
+  subtract 61 from the binary logarithm's bits.
+  if the binary logarithm's bits are positive,
+    left shift the mantissa as a bigint by the binary logarithm's bits;
+    put the mantissa as a bigint in the premix as a bigint;
+    exit.
+  if the binary logarithm's bits are 0,
+    put the mantissa as a bigint in the premix as a bigint;
+    exit.
+  negate the binary logarithm's bits.
+  right shift the mantissa as a bigint by the binary logarithm's bits.
+  put the mantissa as a bigint in the premix as a bigint.
+
+to unlogify some bits [from within a mantissa] giving a mantissa:
+  if the bits are 61, \ 2^61.5      ~ 3260954456333195553 
+    put  759250124 in the mantissa's high number;
+    put  -25716447 in the mantissa's low number;
+    exit.
+  if the bits are 60, \ 2^61.25     ~ 2742124912636209756 
+    put  638450708 in the mantissa's high number;
+    put 1668164188 in the mantissa's low number;
+    exit.
+  if the bits are 59, \ 2^61.125    ~ 2514539631859660218
+    put  585461880 in the mantissa's high number;
+    put  -89983558 in the mantissa's low number;
+    exit.
+  if the bits are 58, \ 2^(61+1/16) ~ 2407931400915394245
+    put  560640217 in the mantissa's high number;
+    put -216916283 in the mantissa's low number;
+    exit.
+  if the bits are 57, \ 2^(61+1/32) ~ 2356334396359501942
+    put  548626854 in the mantissa's high number;
+    put  722135158 in the mantissa's low number;
+    exit.
+  if the bits are 56, \ 2^(61+1/64) ~ 2330951993331335645
+    put  542717052 in the mantissa's high number;
+    put -285163043 in the mantissa's low number;
+    exit.
+  if the bits are 55, \ 2^(61+1/128)~ 2318363508735371995
+    put  539786067 in the mantissa's high number;
+    put -161060133 in the mantissa's low number;
+    exit.
+  if the bits are less than 55,
+    put the unit mantissa in the mantissa; \ 2^61
+    exit.
+  if the bits are 62, \ 2^62
+    put the halfmax bigint in the mantissa as a bigint.
+  put the largest bigint in the mantissa as a bigint. \ 2^63 - 1
