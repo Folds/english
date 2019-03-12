@@ -150,11 +150,19 @@ to convert a bigint to a string:
   if the original bigint is negative, prepend the dash byte to the string.
 
 to convert a binary logarithm to a string:
-  convert the binary logarithm's mantissa as a bigint to the string.
-  if the binary logarithm's bits are 0, exit.
-  append " and " to the string.
-  format the binary logarithm's bits and "bit" or "bits" into another string.
+  if the binary logarithm's bits are not 0,
+    format the binary logarithm's bits and "bit" or "bits" into the string;
+    set a flag.
+  if the binary logarithm's mantissa as a bigint is not zero,
+    set another flag.
+  if the flag and the other flag are both clear,
+    put "0" in the string; exit.
+  if the other flag is clear, exit.
+  if the flag and the other flag are both set,
+    append " and " to the string.
+  convert the binary logarithm's mantissa as a bigint to another string.
   append the other string to the string.
+  append " right shifted 61 bits" to the string.
 
 to convert a mixio to a premix:
   put the unit premix in the premix.
@@ -167,6 +175,15 @@ to convert a mixio to a premix:
 to convert a number to a premix:
   put the unit premix in the premix.
   multiply the premix by the number.
+
+to convert a premix to a mixio:
+  divide the premix as a bigint by the unit premix as a bigint
+    giving a quotient bigint and a remainder bigint.
+  convert the remainder bigint to a number.
+  convert the number / the trifle denominator to the mixio.
+  convert the quotient bigint to another number.
+  add the other number to the mixio.
+  normalize the mixio.
 
 to convert a ratio to a premix:
   convert the ratio to a mixio.
@@ -479,6 +496,18 @@ to divide a bigint left shifted some bits by another bigint:
   repeat.
   if the sign flag is set,
     negate the original bigint.
+
+to divide a binary logarithm by a number:
+  privatize the number.
+  divide the binary logarithm's bits by the number
+    giving a quotient and a remainder.
+  put the quotient in the binary logarithm's bits.
+  divide the binary logarithm's mantissa as a bigint by the number.
+  convert the remainder to a bigint.
+  convert the number to another bigint.
+  divide the bigint left shifted 61 bits by the other bigint.
+  add the bigint to the binary logarithm's mantissa as a bigint.
+  normalize the binary logarithm.
 
 to divide a mantissa by another mantissa:
   divide the mantissa as a bigint left shifted 61 bits
@@ -1106,6 +1135,14 @@ to test (bigints - copy bigint):
   put the bigint in another bigint.
   stash the test result given the other bigint.
 
+to test (bigints - divide 5 bit binary logarithm by 5):
+  create a test result about "bigints"
+    and "divide 5 bit binary logarithm by 5"
+    and expecting "1 bit".
+  put 5 in a binary logarithm's bits.
+  divide the binary logarithm by 5.
+  stash the test result given the binary logarithm.
+
 to test (bigints - divide by large number):
   \ numerator       = 2^62 + 2^30
   \ denominator     = 2^30 +    1
@@ -1190,42 +1227,42 @@ to test (bigints - largest bigint):
 
 to test (bigints - logify 1/2 unit):
   create a test result about "bigints" and "logify 1/2 unit"
-    and expecting "0 and -1 bits". \ -1 bits + 0 * 2^61 [/ 2^61]
+    and expecting "-1 bits". \ -1 bits + 0 * 2^61 [/ 2^61]
   convert 1/2 to a premix.
   logify the premix giving a binary logarithm.
   stash the test result given the binary logarithm.
 
 to test (bigints - logify 1/256 units):
   create a test result about "bigints" and "logify 1/256 units"
-    and expecting "0 and -8 bits". \ -8 bits + 0 * 2^61 [/ 2^61]
+    and expecting "-8 bits". \ -8 bits + 0 * 2^61 [/ 2^61]
   convert 1/256 to a premix.
   logify the premix giving a binary logarithm.
   stash the test result given the binary logarithm.
 
 to test (bigints - logify 1/5 unit):
   create a test result about "bigints" and "logify 1/5 unit"
-    and expecting "1563527362148188915 and -3 bits".
+    and expecting "-3 bits and 1563527362148188915 right shifted 61 bits".
   convert 1/5 to a premix.
   logify the premix giving a binary logarithm.
   stash the test result given the binary logarithm.
 
 to test (bigints - logify 2 units):
   create a test result about "bigints" and "logify 2 units"
-    and expecting "0 and 1 bit". \ 1 bit + 0 * 2^61 [/ 2^61]
+    and expecting "1 bit". \ 1 bit + 0 * 2^61 [/ 2^61]
   convert 2 to a premix.
   logify the premix giving a binary logarithm.
   stash the test result given the binary logarithm.
 
 to test (bigints - logify 256 units):
   create a test result about "bigints" and "logify 256 units"
-    and expecting "0 and 8 bits". \ 8 bits + 0 * 2^61 [/ 2^61]
+    and expecting "8 bits". \ 8 bits + 0 * 2^61 [/ 2^61]
   convert 256 to a premix.
   logify the premix giving a binary logarithm.
   stash the test result given the binary logarithm.
 
 to test (bigints - logify 3125 units):
   create a test result about "bigints" and "logify 3125 units"
-    and expecting "1405735226113842178 and 11 bits".
+    and expecting "11 bits and 1405735226113842178 right shifted 61 bits".
   convert 3125 to a premix.
   logify the premix giving a binary logarithm.
   stash the test result given the binary logarithm.
@@ -1241,7 +1278,7 @@ to test (bigints - logify 3732480000 to mantissa):
 to test (bigints - logify square root of 2 units):
   create a test result about "bigints"
     and "logify square root of 2 units"
-    and expecting "1152921505056615774". \ 0 bits + ~ 0.5 * 2^61 [/ 2^61]
+    and expecting "1152921505056615774 right shifted 61 bits". \ 0 bits + ~ 0.5 * 2^61 [/ 2^61]
   convert "2639261919" to a bigint.
   put the bigint in a premix as a bigint.
   logify the premix giving a binary logarithm.
@@ -1469,7 +1506,7 @@ to test (bigints - stringify 7516192768):
 to test (bigints - subtract binary logarithms):
   create a test result about "bigints"
     and "subtract binary logarithms"
-    and expecting "2017612633174424409". \ 0 bits + ~ 0.5 * 2^61 [/ 2^61]
+    and expecting "2017612633174424409 right shifted 61 bits". \ 0 bits + ~ 0.5 * 2^61 [/ 2^61]
   convert "171489801222601287" to a binary logarithm's mantissa as a bigint.
   put 31 in the binary logarithm's bits.
   convert "459720177261870830" to another binary logarithm's mantissa as a bigint.
@@ -1636,6 +1673,7 @@ to test (bigints):
   test (bigints - divide positive by negative).
   test (bigints - divide negative by positive).
   test (bigints - divide with shift).
+  test (bigints - divide 5 bit binary logarithm by 5).
   test (logify).
   test (unlogify).
 
@@ -1680,7 +1718,7 @@ to unlogify an arg mantissa giving a result mantissa:
   unlogify the arg mantissa giving the result mantissa (high bits).
   multiply the arg mantissa by the antiscale mantissa. \ multiply by ln(2).
   natural unlogify the arg mantissa giving a temp mantissa (other bits).
-  multiply the result mantissa by the temp mantissa.  
+  multiply the result mantissa by the temp mantissa.
 
 to unlogify an arg mantissa giving a result mantissa (high bits):
   \ assumes that 0 <= arg mantissa < 2^61.
@@ -1694,7 +1732,7 @@ to unlogify an arg mantissa giving a result mantissa (high bits):
       unlogify the bits [from within the arg mantissa] giving a temp mantissa;
       multiply the result mantissa by the temp mantissa;
       subtract the place number from the arg mantissa's high number.
-    if the bits are less than 55, exit. 
+    if the bits are less than 56, exit. 
   repeat.
 
 to unlogify a binary logarithm giving a premix:
@@ -1705,7 +1743,7 @@ to unlogify a binary logarithm giving a premix:
     put the largest bigint into the premix as a bigint; exit.
   if the binary logarithm's bits are negative,
     clear the premix; exit.
-  \ the mantissa is now in 0 <= mantissa < 2^61.
+  \ the mantissa is now in 0 <= mantissa < 2^62.
   unlogify the binary logarithm's mantissa giving a mantissa.
   subtract 61 from the binary logarithm's bits.
   if the binary logarithm's bits are positive,
@@ -1718,6 +1756,11 @@ to unlogify a binary logarithm giving a premix:
   negate the binary logarithm's bits.
   right shift the mantissa as a bigint by the binary logarithm's bits.
   put the mantissa as a bigint in the premix as a bigint.
+
+to unlogify a binary logarithm giving a ratio:
+  unlogify the binary logarithm giving a premix.
+  convert the premix to a mixio.
+  convert the mixio to the ratio.
 
 to unlogify some bits [from within a mantissa] giving a mantissa:
   if the bits are 61, \ 2^61.5      ~ 3260954456333195553 

@@ -2160,4 +2160,13 @@ Benefit:   Medium.
   Testing difficulty:  Medium.
   Requested by Jasper Paulsen on February 25, 2019.
 
+355. Make fifth roots faster and more accurate, via logarithms.
+  Will make color difference code faster.
+  Status:  Tested.
+  Audience:  Programmers.
+  Benefit:   Minor.
+  Implementation difficulty:  Hard.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Easy.
+  Requested by Jasper Paulsen on March 3, 2019.
 

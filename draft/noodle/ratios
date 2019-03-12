@@ -28,11 +28,6 @@
 \  put the ratio into the other ratio.
 \  de-sign the other ratio.
 
-to subtract a number from a ratio:
-  subtract the number / 1 from the ratio.
-
-
-
 to add a number to a ratio:
   add the number / 1 to the ratio.
 
@@ -667,56 +662,16 @@ to guess a result ratio given a ratio (cube root):
     put  2/1 in the result; exit.
   put 5/4 in the result.
 
-to guess a result ratio given a ratio (fifth root):
-  privatize the ratio.
-  if the ratio is negative,
-    negate the ratio;
-    guess the result given the ratio (fifth root);
-    negate the result;
-    exit.
-  if the ratio is 0 / 1, put 0 / 1 in the result; exit.
-  if the ratio is 1 / 1, put 1 / 1 in the result; exit.
-  if the ratio is less than 1 / 1,
-    invert the ratio;
-    guess the result given the ratio (fifth root);
-    invert the result;
-    exit.
-  if the ratio is at least 50000 / 1,
-    scale the ratio by 1 / the trifle root;
-    guess the result given the ratio (fifth root);
-    multiply the result by 17 / 2;
-    exit.
-  if the ratio is at least 10000/1,
-    put 22/3 in the result; exit.
-  if the ratio is at least  1865/1,
-    put 16/3 in the result; exit.
-  if the ratio is at least   332/1,
-    put 19/5 in the result; exit.
-  if the ratio is at least    57/1,
-    put  8/3 in the result; exit.
-  if the ratio is at least    13/1,
-    put 29/15 in the result; exit.
-  if the ratio is at least     4/1,
-    put  3/2 in the result; exit.
-  put 23/20 in the result.
-
-to improve a result ratio given a ratio (fifth root):
-  put the result in a temp ratio.
-  multiply the temp by the result.
-  put the temp in another ratio.
-  multiply the temp by the other ratio.
-  privatize the ratio.
-  divide the ratio by the temp.
-  multiply the result by 4.
-  add the ratio to the result.
-  divide the result by 5.
-\  convert the result to a mixio.
-\  convert the mixio to the result.
-  reduce the result.
-
 to invert a ratio;
 to flip a ratio:
   swap the ratio's numerator with the ratio's denominator.
+
+to logify a ratio giving a binary logarithm:
+  convert the ratio's numerator to a bigint.
+  convert the ratio's denominator to another bigint.
+  logify the bigint giving the binary logarithm.
+  logify the other bigint giving another binary logarithm.
+  subtract the other binary logarithm from the binary logarithm.
 
 to make a ratio pair given a ratio and another ratio:
   put the ratio in the ratio pair's ratio.
@@ -931,21 +886,14 @@ to put the fifth root of a ratio into a result ratio;
 to put a ratio's fifth root into a result ratio:
   if the ratio is 0 / 1, put 0 / 1 in the result ratio; exit.
   if the ratio is 1 / 1, put 1 / 1 in the result ratio; exit.
-  guess the result given the ratio (fifth root).
-\  put the result in a delta ratio.
-  put 0 in a count.
-  loop.
-    if the count is at least 40, exit.
-    put the result in a previous ratio.
-    improve the result given the ratio (fifth root).
-\    put the result in the delta ratio.
-\    subtract the previous ratio from the delta ratio.
-    if the result is the previous ratio, exit.
-    if the count is at least 7,
-      add the previous ratio to the result;
-      divide the result by 2.
-    add 1 to the count.
-  repeat.
+  privatize the ratio.
+  if the ratio is negative, set a sign flag.
+  de-sign the ratio.
+  logify the ratio giving a binary logarithm.
+  divide the binary logarithm by 5.
+  unlogify the binary logarithm giving the result ratio.
+  if the sign flag is set,
+    negate the result ratio.
 
 to put a number and another number into a ratio:
   put the number into the ratio's numerator.
@@ -976,6 +924,15 @@ to put a ratio pair's hypotenuse into a ratio:
   add 1/1 to the ratio pair's ratio.
   put the ratio pair's ratio's square root in the ratio.
   multiply the ratio by the ratio pair's other ratio.
+
+to put a ratio's fifth power into another ratio:
+  if the ratio is 0, put 0 into the other ratio; exit.
+  if the ratio is 1, put 1 into the other ratio; exit.
+  privatize the ratio.
+  multiply the ratio by the ratio.
+  multiply the ratio by the ratio.
+  multiply the ratio by the original ratio.
+  put the ratio in the other ratio.
 
 to put a ratio's sign into a number;
 to get the sign of a ratio returning a number:
@@ -1025,6 +982,14 @@ to put a ratio's square root into a result ratio:
   add the other number to the result's numerator.
   reduce the result.
 
+to put a ratio's third power into another ratio:
+  if the ratio is 0, put 0 into the other ratio; exit.
+  if the ratio is 1, put 1 into the other ratio; exit.
+  privatize the ratio.
+  multiply the ratio by the ratio.
+  multiply the ratio by the original ratio.
+  put the ratio in the other ratio.
+
 a ratio has
   a numerator number,
   a denominator number,
@@ -1060,6 +1025,9 @@ to shrink a number and another number by a shrinker:
   scale the other number by the number / the old number.
 
 a shrinker is a number.
+
+to subtract a number from a ratio:
+  subtract the number / 1 from the ratio.
 
 to subtract a ratio from another ratio:
   privatize the ratio.
@@ -1295,6 +1263,15 @@ to test (ratios - average ratios using large numerator):
   average the ratio and the other ratio giving an actual ratio.
   stash the fuzzy test given the actual ratio.
 
+to test (ratios - big hypotenuse):
+  make a fuzzy test about "ratios" and "big hypotenuse"
+    and targeting 963188633/9720 with tolerance 320000 trifles.
+  put -1866285475/18967 in a ratio.
+  put 1866357303/159073 in another ratio.
+  find the hypotenuse of the ratio and the other ratio
+    giving an actual ratio.
+  stash the fuzzy test given the actual ratio.
+
 to test (ratios - compare ratios with big denominators):
   create a test result about "ratios"
     and "compare ratios with big denominators"
@@ -1365,18 +1342,16 @@ to test (ratios - fifth root of -32/1 is -2/1):
   stash the test result given the actual.
 
 to test (ratios - fifth root of 243/100000 is 3/10):
-  \ Can the tolerance be tightened to 5 trifles?  It was 72.
   make a fuzzy test about "ratios"
     and "fifth root of 243/100000 is 3/10"
-    and targeting 3/10 with tolerance 128 trifles.
+    and targeting 3/10 with tolerance 2 trifles.
   put the fifth root of 243/100000 in a ratio.
   stash the fuzzy test given the ratio.
 
 to test (ratios - fifth root of largest ratio):
-  \ can this tolerance be reduced to 120 trifles?
   make a fuzzy test about "ratios"
     and "fifth root of largest ratio"
-    and targeting 914665309/12441600 with tolerance 2000 trifles.
+    and targeting 914665309/12441600 with tolerance 50 trifles.
   put 1/1 in a ratio.
   multiply the ratio by the largest number.
   put the fifth root of the ratio in an actual ratio.
@@ -1842,135 +1817,3 @@ to transfer factors from a ratio to another ratio:
     to the other ratio's numerator.
   transfer factors from the ratio's denominator
     to the other ratio's denominator.
-
-to test (ratios - big hypotenuse):
-  make a fuzzy test about "ratios" and "big hypotenuse"
-    and targeting 963188633/9720 with tolerance 320000 trifles.
-  put -1866285475/18967 in a ratio.
-  put 1866357303/159073 in another ratio.
-  find the hypotenuse of the ratio and the other ratio
-    giving an actual ratio.
-  stash the fuzzy test given the actual ratio.
-
-\to test (ratios - raise e to 799/40):
-\  make a fuzzy test about "ratios" and "raise e to 799/40"
-\    and targeting 473186424/1 with tolerance 466560000 trifles.
-\  put 799/40 in an exponent ratio.
-\  get an actual ratio by raising e to the exponent ratio.
-\  debug the actual ratio's numerator
-\    then " / " then the actual ratio's denominator.
-\  stash the fuzzy test given the actual ratio.
-
-
-
-\to test (ratios - raise e to -215596499/311040000):
-\  make a fuzzy test about "ratios"
-\    and "raise e to -215596499/311040000"
-\    and targeting 1/2 with tolerance 20 trifles.
-\  put -215596499/311040000 in an exponent ratio.
-\  get an actual ratio by raising e to the exponent ratio.
-\  stash the fuzzy test given the actual ratio.
-
-\to get a result ratio by raising e to an exponent ratio:
-\\  debug "alice".
-\  if the exponent is greater than 222783049/10368000,
-\    put the largest number / 1 in the result; exit.
-\\  debug "betty".
-\  if the exponent is less than -222783049/10368000,
-\    put 1 / the largest number in the result; exit.
-\\  debug "cathy".
-\  privatize the exponent.
-\  if the exponent is negative,
-\    negate the exponent;
-\    get the result by raising e to the exponent;
-\    invert the result;
-\    exit.
-\\  debug "diana".
-\  put 1 in the result.
-\  if the exponent is at most 0/1, exit.
-\  if the exponent is at least 16/1,
-\    multiply the result by 426533305/48;       \ very close
-\    subtract 16 from the exponent.
-\\  debug the result's numerator
-\\    then " / " then the result's denominator.
-\  if the exponent is at least 8/1,
-\    multiply the result by 128777385/43200;    \ very close
-\    subtract 8 from the exponent.
-\  if the exponent is at least 4/1,
-\    multiply the result by 1132147239/20736000;\ very close
-\    subtract 4 from the exponent.
-\  if the exponent is at least 2/1,
-\    multiply the result by 2872865/388800;    \ off by 4 ppb
-\    subtract 2 from the exponent.
-\  if the exponent is at least 1/1,
-\    multiply the result by 4697191/1728000;   \ very close
-\    subtract 1 from the exponent.
-\  if the exponent is at most 0/1, exit.
-\\  debug the result's numerator
-\\    then " / " then the result's denominator.
-\  if the exponent is at least 1/2,
-\    multiply the result by 64102283/38880000; \ very close
-\    subtract 1/2 from the exponent.
-\  if the exponent is at least 1/4,
-\    multiply the result by 554699/432000;   \ off by 40 ppb
-\    subtract 1/4 from the exponent.
-\  if the exponent is at least 1/8,
-\    multiply the result by 3671401/3240000; \ off by  4 ppb
-\    subtract 1/8 from the exponent.
-\  if the exponent is at least 1/16,
-\    multiply the result by 191609/180000;   \ off by 16 ppb
-\    subtract 1/16 from the exponent.
-\  if the exponent is at most 0/1, exit.
-\  debug the result's numerator
-\    then " / " then the result's denominator
-\    then "; " then the exponent.
-\  put 1/1 in a temp ratio.
-\  add the exponent to the temp ratio.
-\  put the exponent in another ratio.
-\  multiply the other ratio by the exponent.
-\  divide the other ratio by 2.
-\  if the exponent is at least 1/1024,
-\    add the other ratio to the temp ratio;
-\    put the exponent's third power in the other ratio;
-\    divide the other ratio by 6;
-\    add the other ratio to the temp ratio.
-\  if the exponent is at least 1/128,
-\    put the exponent in the other ratio;
-\    multiply the other ratio by the other ratio;
-\    multiply the other ratio by the other ratio;
-\    divide the other ratio by 24;
-\    add the other ratio to the temp ratio.
-\  if the exponent is at least 1/40,
-\    put the exponent's fifth power in the other ratio;
-\    divide the other ratio by 120;
-\    add the other ratio to the temp ratio.
-\  debug the temp ratio's numerator
-\    then " / " then the temp ratio's denominator.
-\  multiply the result by the temp ratio.
-
-\\ (455759498/1) * (1866240001/1797551951) should be about 473174978.6
-
-\\ In ratios, tried raise e to 799/40.
-\\  Expected '473186424 ± 1/4',
-\\ but I got '528087200-1/3', so the test failed in 00:00:03.
-
-\\ In ratios, tried raise e to -215596499/311040000.
-\\  Expected '1/2 ± 1/93312000',
-\\ but I got '1/1866240000', so the test failed in 56 µs.
-
-to put a ratio's third power into another ratio:
-  if the ratio is 0, put 0 into the other ratio; exit.
-  if the ratio is 1, put 1 into the other ratio; exit.
-  privatize the ratio.
-  multiply the ratio by the ratio.
-  multiply the ratio by the original ratio.
-  put the ratio in the other ratio.
-
-to put a ratio's fifth power into another ratio:
-  if the ratio is 0, put 0 into the other ratio; exit.
-  if the ratio is 1, put 1 into the other ratio; exit.
-  privatize the ratio.
-  multiply the ratio by the ratio.
-  multiply the ratio by the ratio.
-  multiply the ratio by the original ratio.
-  put the ratio in the other ratio.
