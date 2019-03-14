@@ -2170,3 +2170,51 @@ Benefit:   Medium.
   Testing difficulty:  Easy.
   Requested by Jasper Paulsen on March 3, 2019.
 
+309.  Raise e to the power of a ratio.
+  Status:    Tested.
+  Audience:  Programmers.
+  Benefit:   Medium.  Needed for dE-2000 color formula.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Easy.
+  Requested by Jasper Paulsen on September 17, 2017.
+  
+351.  Logify mixios.
+  Be able to convert a mixio to a bigint that is proportional
+  to the mixio's logarithm.  Only needs to be accurate enough
+  to regenerate the mixio.
+  Implemented using a binary logarithm, with a mantissa and some bits.
+  Status:    Tested.
+  Audience:  Programmers.
+  Benefit:   Medium.  Will help speed up complicated roots,
+                      which will speed up color algorithms.
+  Implementation difficulty:  Hard.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Medium.
+  Requested by Jasper Paulsen on February 25, 2019.
+
+352.  Unlogify mixios.
+  Be able to convert a bigint that is proportional
+  to the mixio's logarithm into the mixio.
+  Implemented using a binary logarithm, with a mantissa and some bits.
+  Status:    Tested.
+  Audience:  Programmers.
+  Benefit:   Medium.  Will help speed up complicated roots,
+                      which will speed up color algorithms.
+  Implementation difficulty:  Hard.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Medium.
+  Requested by Jasper Paulsen on February 25, 2019.
+
+353.  Convert a logified bigint to a mixio.
+  Does not need to be accurate enough to regenerate a mixio.
+  Implemented using a binary logarithm, with a mantissa and some bits.
+  Status:  Request.
+  Audience:  Programmers.
+  Benefit:   Medium.  Will speed up color algorithms.
+  Implementation difficulty:  Hard.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Medium.
+  Requested by Jasper Paulsen on February 25, 2019.
+
+

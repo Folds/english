@@ -46,49 +46,23 @@ The following requests have been partially demonstrated.
 The following requests are roughly sorted
 from higher priority to lower priority.
 
-351.  Logify mixios.
-  Be able to convert a mixio to a bigint that is proportional
-  to the mixio's logarithm.  Only needs to be accurate enough
-  to regenerate the mixio.
+356.  Allow fuzzy tests to work for bigints.
   Status:  Request.
   Audience:  Programmers.
-  Benefit:   Medium.  Will help speed up complicated roots,
-                      which will speed up color algorithms.
-  Implementation difficulty:  Hard.
-  Demoing difficulty:  Medium.
-  Testing difficulty:  Medium.
-  Requested by Jasper Paulsen on February 25, 2019.
-
-352.  Unlogify mixios.
-  Be able to convert a bigint that is proportional
-  to the mixio's logarithm into the mixio.
-  Status:  Request.
-  Audience:  Programmers.
-  Benefit:   Medium.  Will help speed up complicated roots,
-                      which will speed up color algorithms.
-  Implementation difficulty:  Hard.
-  Demoing difficulty:  Medium.
-  Testing difficulty:  Medium.
-  Requested by Jasper Paulsen on February 25, 2019.
-
-353.  Convert a logified bigint to a mixio.
-  Does not need to be accurate enough to regenerate a mixio.
-  Status:  Request.
-  Audience:  Programmers.
-  Benefit:   Medium.  Will speed up color algorithms.
-  Implementation difficulty:  Hard.
-  Demoing difficulty:  Medium.
-  Testing difficulty:  Medium.
-  Requested by Jasper Paulsen on February 25, 2019.
-
-309.  Raise e to the power of a ratio.
-  Status:    Designed.
-  Audience:  Programmers.
-  Benefit:   Medium.  Needed for dE-2000 color formula.
+  Benefit:   Medium.
   Implementation difficulty:  Medium.
   Demoing difficulty:  Medium.
-  Testing difficulty:  Easy.
-  Requested by Jasper Paulsen on September 17, 2017.
+  Testing difficulty:  Medium.
+  Requested by Jasper Paulsen on March 13, 2019.
+  
+357.  Use fuzzy tests for bigint calculations that have rounding.
+  Status:  Request.
+  Audience:  Programmers.
+  Benefit:   Medium.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Medium.
+  Requested by Jasper Paulsen on March 13, 2019.
   
 347.  Update the compiler's timers to use milliseconds instead of ticks,
   when supported by the computer's hardware.
@@ -986,5 +960,5 @@ while a letter's menu is visible.
 \ ======================================
 Unsorted requests:
 
-Next item number:  356.
+Next item number:  358.
 

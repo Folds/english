@@ -85,6 +85,7 @@ a binary logarithm has some bits and a mantissa.
 \
 a mantissa is a bigint.
 
+
 to add a bigint to another bigint:
   privatize the bigint.
   add the bigint's low number to the other bigint's low number and carry a flag.
@@ -149,6 +150,13 @@ to convert a bigint to a string:
   repeat.
   if the original bigint is negative, prepend the dash byte to the string.
 
+to convert a binary logarithm to a premix:
+  put the binary logarithm's mantissa as a bigint in the premix.
+  multiply the premix right shifted 61 bits by the unit premix.
+  put the unit premix in another premix.
+  multiply the other premix by the binary logarithm's bits.
+  add the other premix to the premix.
+
 to convert a binary logarithm to a string:
   if the binary logarithm's bits are not 0,
     format the binary logarithm's bits and "bit" or "bits" into the string;
@@ -184,6 +192,16 @@ to convert a premix to a mixio:
   convert the quotient bigint to another number.
   add the other number to the mixio.
   normalize the mixio.
+
+to convert a ratio to a binary logarithm:
+  convert the ratio to a mixed.
+  put the mixed's whole number in the binary logarithm's bits.
+  convert the mixed's numerator
+    to the binary logarithm's mantissa as a bigint.
+  convert the mixed's denominator to another bigint.
+  divide the binary logarithm's mantissa as a bigint
+    left shifted 61 bits by the other bigint.
+  normalize the binary logarithm.
 
 to convert a ratio to a premix:
   convert the ratio to a mixio.
@@ -676,9 +694,12 @@ to initialize bigints:
   \ Set 2^61.5 = 3260954456333195553
   put 759250124 in the threshold mantissa's high number.
   put -25716447 in the threshold mantissa's low number.
-  \ Set 2^61 * 2 / ln 2 = 6653256548922161245
+  \ Set 2^61 * 2 / ln 2 = 6653256548922161246
   put  1549082004 in the rescale mantissa's high number.
-  put -1374947235 in the rescale mantissa's low number.
+  put -1374947234 in the rescale mantissa's low number.
+  \ Set 2^61 / ln 2 = 3326628274461080623
+  put the rescale mantissa in the rebase mantissa.
+  right shift the rebase mantissa as a bigint by 1 bit.
   \ Set 2^61 * (ln 2) / 2 = 799144290325165979
   put  186065279 in the offset mantissa's high number.
   put 2099050395 in the offset mantissa's low number.
@@ -834,6 +855,39 @@ to multiply a bigint right shifted some bits by another bigint:
     clear the bits.
   if the sign flag is set, negate the bigint.
 
+to multiply a binary logarithm by a multiplicand mantissa:
+  multiply the binary logarithm's mantissa by the multiplicand mantissa.
+  if the binary logarithm's bits are negative,
+    set a sign flag.
+  convert the binary logarithm's bits to a bitty mantissa as a bigint.  
+  if the sign flag is set,
+    negate the bitty mantissa.
+  put the bitty mantissa's highest bit into some bits.
+  put the bits into some other bits.
+  subtract 61 from the bits.
+  negate the bits.
+  \ bits have 61 minus the highest bit of the binary logarithm's bits.
+  \ other bits have    the highest bit of the binary logarithm's bits.
+  if the bits are positive,
+    left shift the bitty mantissa by the bits.
+  multiply the bitty mantissa by the multiplicand mantissa.
+  \ split into bits and fraction.
+  put the bitty mantissa into a third mantissa.
+  if the bits are positive,
+    right shift the third mantissa by the bits.
+  convert the third mantissa to the binary logarithm's bits.
+  if the bits are positive,
+    left shift the third mantissa by the bits.
+  subtract the third mantissa from the bitty mantissa.
+  \ the following line might need special cases
+  \  -- but only for ridiculously extreme logarithms.
+  left shift the bitty mantissa by the other bits.
+  if the sign flag is set,
+    negate the binary logarithm's bits;
+    negate the bitty mantissa.
+  add the bitty mantissa to the binary logarithm's mantissa.
+  normalize the binary logarithm.
+
 to multiply a mantissa by another mantissa:
   multiply the mantissa as a bigint right shifted 61 bits
     by the other mantissa as a bigint.
@@ -983,6 +1037,8 @@ to convert a number to a bigint:
   put -1 into the bigint's high number.
   put the number into the bigint's low number.
 
+the rebase mantissa is a mantissa.
+
 the rescale mantissa is a mantissa.  \ initialized to 1 / (2 ln 2).
 
 to shift a bigint left some bits;
@@ -1043,6 +1099,13 @@ to swap a bigint with another bigint:
   swap the bigint's high number with the other bigint's high number.
   swap the bigint's low number with the other bigint's low number.
 
+to test (bigints - 799/40 as a natural logarithm):
+  create a test result about "bigints" and "799/40 as a natural logarithm"
+    and expecting "28 bits and 1885795524376654757 right shifted 61 bits".
+  convert 799/40 to a binary logarithm.
+  multiply the binary logarithm by the rebase mantissa.
+  stash the test result given the binary logarithm.
+
 to test (bigints - add large negative bigints):
   create a test result about "bigints"
     and "add large negative bigints" and expecting "-8010008006004002000".
@@ -1095,6 +1158,18 @@ to test (bigints - convert 123456789 to number):
   convert 123456789 to a bigint.
   convert the bigint to a number.
   stash the test result given the number.
+
+to test (bigints - convert 19/40 to a binary logarithm):
+  create a test result about "bigints" and "convert 19/40 to a binary logarithm"
+    and expecting "1095275429376504627 right shifted 61 bits".
+  convert 19/40 to a binary logarithm.
+  stash the test result given the binary logarithm.
+
+to test (bigints - convert 799/40 to a binary logarithm):
+  create a test result about "bigints" and "convert 19/40 to a binary logarithm"
+    and expecting "19 bits and 2248196933983351603 right shifted 61 bits".
+  convert 799/40 to a binary logarithm.
+  stash the test result given the binary logarithm.
 
 to test (bigints - convert largest bigint to largest number):
   create a test result about "bigints"
@@ -1262,7 +1337,7 @@ to test (bigints - logify 256 units):
 
 to test (bigints - logify 3125 units):
   create a test result about "bigints" and "logify 3125 units"
-    and expecting "11 bits and 1405735226113842178 right shifted 61 bits".
+    and expecting "11 bits and 1405735226113842179 right shifted 61 bits".
   convert 3125 to a premix.
   logify the premix giving a binary logarithm.
   stash the test result given the binary logarithm.
@@ -1674,6 +1749,9 @@ to test (bigints):
   test (bigints - divide negative by positive).
   test (bigints - divide with shift).
   test (bigints - divide 5 bit binary logarithm by 5).
+  test (bigints - convert 19/40 to a binary logarithm).
+  test (bigints - convert 799/40 to a binary logarithm).
+  test (bigints - 799/40 as a natural logarithm).
   test (logify).
   test (unlogify).
 

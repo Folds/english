@@ -27,7 +27,6 @@
 \to put a ratio's absolute value into another ratio:
 \  put the ratio into the other ratio.
 \  de-sign the other ratio.
-
 to add a number to a ratio:
   add the number / 1 to the ratio.
 
@@ -197,6 +196,10 @@ to avoid excessive overflow given a ratio and another ratio (during multiplicati
 
 to clear a ratio:
   put 0 and 1 into the ratio.
+
+to convert a binary logarithm to a result mixio:
+  convert the binary logarithm to a premix.
+  convert the premix to the result mixio.
 
 to convert a fraction to a ratio;
 to convert a ratio to a fraction;
@@ -611,6 +614,11 @@ to get a result number given a number and another number (overflow factor):
   put the quotient in the result.
   if the remainder is positive, add 1 to the result.
 
+to get a result ratio by raising e to an exponent ratio:
+  convert the exponent ratio to a binary logarithm.
+  multiply the binary logarithm by the rebase mantissa.
+  unlogify the binary logarithm giving the result ratio.
+
 to get a shrinker given a number and a number called overflow factor:
   put 1 in the shrinker.
   if the number is greater than the largest square root,
@@ -665,6 +673,10 @@ to guess a result ratio given a ratio (cube root):
 to invert a ratio;
 to flip a ratio:
   swap the ratio's numerator with the ratio's denominator.
+
+to logify a mixio giving a binary logarithm:
+  convert the mixio to a premix.
+  logify the premix giving the binary logarithm.
 
 to logify a ratio giving a binary logarithm:
   convert the ratio's numerator to a bigint.
@@ -1408,6 +1420,22 @@ to test (ratios - invert 0/0):
     then the ratio's denominator in an actual string.
   stash the test result given the actual string.
 
+to test (ratios - multiply mixios using logarithms):
+  put 933120000 in a target mixio's whole number.
+  put 6 in the target mixio's nips.
+  make a fuzzy test about "ratios"
+    and "multiply mixios using logarithms"
+    and targeting the target mixio with tolerance 30 trifles.  \ "933120000 and 6 nips".
+  convert 43200/1 to a mixio.
+  add 6 trifles to the mixio.
+  convert 21600/1 to another mixio.
+  add 3 trifles to the other mixio.
+  logify the mixio giving a binary logarithm.
+  logify the other mixio giving another binary logarithm.
+  add the binary logarithm to the other binary logarithm.
+  unlogify the other binary logarithm giving a result mixio.
+  stash the fuzzy test given the result mixio.
+
 to test (ratios - multiply ratio with big denominator by 116):
   \ Can the tolerance be tightened to 40 trifles?
   make a fuzzy test about "ratios"
@@ -1416,6 +1444,33 @@ to test (ratios - multiply ratio with big denominator by 116):
   put 540235883/933120000 in a ratio.
   multiply the ratio by 116.
   stash the fuzzy test given the ratio.
+
+to test (ratios - put binary logarithm in a mixio):
+  convert 29/1 to a target mixio.
+  add 1488302855 trifles to the target mixio.
+  make a fuzzy test about "ratios"
+    and "put binary logarithm in a mixio"
+    and targeting the target mixio with tolerance 0 trifles.  \ "933120000 and 6 nips".
+  put 933120000 in a mixio's whole number.
+  put 6 in the mixio's nips.
+  logify the mixio giving a binary logarithm.
+  convert the binary logarithm to a result mixio.
+  stash the fuzzy test given the result mixio.
+
+to test (ratios - raise e to -215596499/311040000):
+  make a fuzzy test about "ratios"
+    and "raise e to -215596499/311040000"
+    and targeting 1/2 with tolerance 2 trifles.
+  put -215596499/311040000 in an exponent ratio.
+  get an actual ratio by raising e to the exponent ratio.
+  stash the fuzzy test given the actual ratio.
+
+to test (ratios - raise e to 799/40):
+  make a fuzzy test about "ratios" and "raise e to 799/40"
+    and targeting 473186424/1 with tolerance 466560000 trifles.
+  put 799/40 in an exponent ratio.
+  get an actual ratio by raising e to the exponent ratio.
+  stash the fuzzy test given the actual ratio.
 
 to test (ratios - reduce 0 trifles):
   create a test result about "ratios" and "reduce 0 trifles"
@@ -1766,14 +1821,16 @@ to test (ratios):
   test (ratios - hypotenuse).
   test (ratios - big hypotenuse).
   test (ratios - cube of 615/2048).
-\  test (ratios - raise e to 799/40).
-\  test (ratios - raise e to -215596499/311040000).
+  test (ratios - raise e to 799/40).
+  test (ratios - raise e to -215596499/311040000).
   test (ratios - cube root of -8/1 is -2/1).
   test (ratios - cube root of largest ratio).
   test (ratios - cube root of 27/1000 is 3/10).
   test (ratios - fifth root of largest ratio).
   test (ratios - fifth root of -32/1 is -2/1).
   test (ratios - fifth root of 243/100000 is 3/10).
+  test (ratios - multiply mixios using logarithms).
+  test (ratios - put binary logarithm in a mixio).
 
 to transfer factors from a number to another number:
   if the number is at most 1, exit.
@@ -1817,3 +1874,7 @@ to transfer factors from a ratio to another ratio:
     to the other ratio's numerator.
   transfer factors from the ratio's denominator
     to the other ratio's denominator.
+
+to unlogify a binary logarithm giving a mixio:
+  unlogify the binary logarithm giving a premix.
+  convert the premix to the mixio.
