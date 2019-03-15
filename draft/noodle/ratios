@@ -165,6 +165,11 @@ to add a ratio to another ratio (normal):
   add the ratio's numerator to the other ratio's numerator.
   reduce the other ratio.
 
+to add a ratio triplet to another ratio triplet:
+  add the ratio triplet's x to the other ratio triplet's x.
+  add the ratio triplet's y to the other ratio triplet's y.
+  add the ratio triplet's z to the other ratio triplet's z.
+
 to average a ratio and another ratio giving a mean ratio:
   put the ratio in the mean ratio.
   add the other ratio to the mean ratio.
@@ -221,6 +226,11 @@ to convert a ratio to a mixed:
     giving the mixed's whole number and a remainder.
   put the remainder and the ratio's denominator into the mixed's ratio.
 
+to convert a ratio triplet to a string:
+  put the ratio triplet's x then " x;"
+    then the ratio triplet's y then " y; "
+    then the ratio triplet's z then " z" in the string.
+
 to de-sign a ratio:
   de-sign the ratio's numerator.
   de-sign the ratio's denominator.
@@ -240,6 +250,11 @@ to debug a ratio and another ratio:
    append ", denominator=" to the string.
    append the other ratio's denominator to the string.
    debug the string.
+
+to debug a ratio triplet:
+  debug the ratio triplet's x then " x; "
+    then the ratio triplet's y then " y; "
+    then the ratio triplet's z.
 
 to decide if adding a ratio and another ratio will fit numerator:
   get a gcd given the ratio's denominator
@@ -602,6 +617,16 @@ to get a ratio given a ratio pair (ordinary hypotenuse):
   add the ratio pair's other ratio to the ratio pair's ratio.
   put the ratio pair's ratio's square root in the ratio.
 
+to get a ratio given a ratio triplet and another ratio triplet:
+  \ computes the dot product.
+  privatize the ratio triplet.
+  scale the ratio triplet's x by the other ratio triplet's x.
+  scale the ratio triplet's y by the other ratio triplet's y.
+  scale the ratio triplet's z by the other ratio triplet's z.
+  put the ratio triplet's x in the ratio.
+  add the ratio triplet's y to the ratio.
+  add the ratio triplet's z to the ratio.
+
 to get a result number given a number and another number (overflow factor):
   privatize the number.
   privatize the other number.
@@ -688,6 +713,11 @@ to logify a ratio giving a binary logarithm:
 to make a ratio pair given a ratio and another ratio:
   put the ratio in the ratio pair's ratio.
   put the other ratio in the ratio pair's other ratio.
+
+to make a ratio triplet given a ratio and another ratio and a third ratio:
+  put the ratio in the ratio triplet's x ratio.
+  put the other ratio in the ratio triplet's y ratio.
+  put the third ratio in the ratio triplet's z ratio.
 
 to mitigate a ratio giving another ratio:
   privatize the ratio.
@@ -863,6 +893,11 @@ to multiply a ratio by a number:
 to negate a ratio:
   negate the ratio's numerator.
 
+to negate a ratio triplet:
+  negate the ratio triplet's x.
+  negate the ratio triplet's y.
+  negate the ratio triplet's z.
+
 to normalize a ratio and another ratio:
   reduce the ratio.
   reduce the other ratio.
@@ -907,6 +942,16 @@ to put a ratio's fifth root into a result ratio:
   if the sign flag is set,
     negate the result ratio.
 
+to put the hypotenuse of a ratio triplet into a ratio;
+to put a ratio triplet's hypotenuse into a ratio:
+  put the ratio triplet in another ratio triplet.
+  multiply the other ratio triplet's x by the ratio triplet's x.
+  multiply the other ratio triplet's y by the ratio triplet's y.
+  multiply the other ratio triplet's z by the ratio triplet's z.
+  add the other ratio triplet's y to the other ratio triplet's x.
+  add the other ratio triplet's z to the other ratio triplet's y.
+  put the other ratio triplet's x's square root in the ratio.  
+
 to put a number and another number into a ratio:
   put the number into the ratio's numerator.
   put the other number into the ratio's denominator.
@@ -936,6 +981,11 @@ to put a ratio pair's hypotenuse into a ratio:
   add 1/1 to the ratio pair's ratio.
   put the ratio pair's ratio's square root in the ratio.
   multiply the ratio by the ratio pair's other ratio.
+
+to put a ratio triplet in another ratio triplet:
+  put the ratio triplet's x ratio in the other ratio triplet's x ratio.
+  put the ratio triplet's y ratio in the other ratio triplet's y ratio.
+  put the ratio triplet's z ratio in the other ratio triplet's z ratio.
 
 to put a ratio's fifth power into another ratio:
   if the ratio is 0, put 0 into the other ratio; exit.
@@ -1010,6 +1060,11 @@ a ratio has
 
 a ratio pair has a ratio and another ratio.
 
+a ratio triplet has
+  an x ratio,
+  a y ratio, and
+  a z ratio.
+
 to reduce and sort a ratio and another ratio (during multiplication):
   reduce the ratio.
   reduce the other ratio.
@@ -1045,6 +1100,11 @@ to subtract a ratio from another ratio:
   privatize the ratio.
   negate the ratio.
   add the ratio to the other ratio.
+
+to subtract a ratio triplet from another ratio triplet:
+  privatize the ratio triplet.
+  negate the ratio triplet.
+  add the ratio triplet to the other ratio triplet.
 
 to test (ratios - 1 times 17 does not have 31 bits of overflow):
   create a test result about "ratios"

@@ -2,7 +2,10 @@
 \ are copyright 2006 by the Osmosian Order.
 \ The portions of this file that are from CAL-4700
 \ are copyright 2017 by the Osmosian Order.
-\ The remainder is copyright 2014, 2017 by Jasper Paulsen.
+\ Code for converting between color mixes,
+\ and measuring distances between lab color mixes,
+\ is adapted from http://www.easyrgb.com/en/math.php
+\ The remainder is copyright 2014, 2017, 2019 by Jasper Paulsen.
 
 the black color is a color.
 
@@ -53,6 +56,11 @@ to convert a color to a colorref:
     with the color's hue and the color's lightness and the color's saturation
     returning the colorref.
 
+to convert a color to an hsl color mix:
+  put the color's hue / 3600 in the hsl color mix's hue ratio.
+  put the color's saturation / 1000 in the hsl color mix's saturation ratio.
+  put the color's lightness / 1000 in the hsl color mix's lightness ratio.
+
 to convert a color into a string:
   clear the string.
   append "hue=" to the string.
@@ -88,6 +96,118 @@ to convert a colorref to a rgb:
   put the colorref into the rgb's green byte.
   shift the colorref right 8 bits.
   put the colorref into the rgb's blue byte.
+
+to convert an hsl color mix to an rgb color mix:
+  \ adapted from http://www.easyrgb.com/en/math.php
+  privatize the hsl color mix.
+  limit the hsl color mix.
+  if the hsl color mix's saturation is not positive,
+    put the hsl color mix's lightness ratio in the rgb color mix's red ratio;
+    put the hsl color mix's lightness ratio in the rgb color mix's green ratio;
+    put the hsl color mix's lightness ratio in the rgb color mix's blue ratio;
+    exit.
+\
+  put the hsl color mix's saturation ratio in a synergy ratio.
+  multiply the synergy ratio by the hsl color mix's lightness ratio.
+  if the hsl color mix's lightness ratio is at least 1/2,
+    negate the synergy ratio;
+    add the hsl color mix's saturation ratio to the synergy ratio.
+  add the hsl color mix's lightness to the synergy ratio.
+\
+  put the hsl color mix's lightness in a twin ratio.
+  multiply the twin ratio by 2.
+  subtract the synergy ratio from the twin ratio.
+  put the hsl color mix's hue ratio in a temp ratio.
+  add 1/3 to the temp ratio.
+  get the rgb color mix's red ratio given the twin ratio
+    and the synergy ratio and the temp ratio (hsl to rgb).
+  get the rgb color mix's green ratio given the twin ratio
+    and the synergy ratio and the hsl color mix's hue ratio (hsl to rgb).
+  put the hsl color mix's hue ratio in the temp ratio.
+  subtract 1/3 from the temp ratio.
+  get the rgb color mix's blue ratio given the twin ratio
+    and the synergy ratio and the temp ratio (hsl to rgb).
+
+to convert an hsl color mix to a string:
+  put the hsl color mix's hue then " hue; "
+    then the hsl color mix's saturation then " sat; "
+    then the hsl color mix's lightness then " light"
+    in the string.
+
+to convert a ratio to another ratio (rgb toward xyz):
+  \ adapted from http://www.easyrgb.com/en/math.php
+  if the ratio is at most 4045/100000,
+    put the ratio in the other ratio;
+    scale the other ratio by 100/1292;
+    exit.
+  put the ratio in the other ratio.
+  add 55/1000 to the other ratio.
+  scale the other ratio by 1000/1055.
+  multiply the other ratio by the other ratio.
+  multiply the other ratio by the other ratio's fifth root.
+
+to convert a ratio to another ratio (xyz toward lab):
+  \ adapted from http://www.easyrgb.com/en/math.php
+  if the ratio is at most 8856/1000000,
+    put the ratio in the other ratio;
+    scale the other ratio by 7787/1000;
+    add 16/116 to the other ratio;
+    exit.
+  put the ratio's cube root in the other ratio.
+
+to convert a ratio called mean chroma to a g ratio (mean chroma to g):
+  get the g ratio from the mean chroma (chroma weight).
+  negate the g ratio.
+  add 1/1 to the g ratio.
+  scale the g ratio by 1/2.
+
+to convert an rgb color mix to a string:
+  put the rgb color mix's red then " red; "
+    then the rgb color mix's green then " green; "
+    then the rgb color mix's blue then " blue"
+    in the string.
+
+to convert an rgb color mix to an xyz color mix:
+  \ adapted from http://www.easyrgb.com/en/math.php
+  \ The rgb color mix is a "standard rgb" color mix.
+  \ The xyz color mix uses the "D65/2° standard illuminant".
+  convert the rgb color mix's red ratio
+    to a reddish ratio (rgb toward xyz).
+  convert the rgb color mix's green ratio
+    to a greenish ratio (rgb toward xyz).
+  convert the rgb color mix's blue ratio
+    to a bluish ratio (rgb toward xyz).
+  make a ratio triplet given the reddish ratio
+    and the greenish ratio and the bluish ratio.
+  make a ratio triplet called x-weights given
+    4124/10000 and 3576/10000 and 1805/10000.
+  make a ratio triplet called y-weights given
+    2126/10000 and 7152/10000 and  722/10000.
+  make a ratio triplet called z-weights given
+     193/10000 and 1192/10000 and 9505/10000.
+  get the xyz color mix's x ratio given the ratio triplet and the x-weights.
+  get the xyz color mix's y ratio given the ratio triplet and the y-weights.
+  get the xyz color mix's z ratio given the ratio triplet and the z-weights.
+
+to convert an xyz color mix to a lab color mix:
+  \ adapted from http://www.easyrgb.com/en/math.php
+  \ The xyz color mix uses the "D65/2° standard illuminant".
+  privatize the xyz color mix.
+  scale the xyz color mix's x by 100000/95047.
+  \ scale the xyz color mix's y by 1/1.
+  scale the xyz color mix's z by 100000/108883.
+  convert the xyz color mix's x to an x-ish ratio (xyz toward lab).
+  convert the xyz color mix's y to a  y-ish ratio (xyz toward lab).
+  convert the xyz color mix's z to a  z-ish ratio (xyz toward lab).
+  put the y-ish ratio in the lab color mix's lambda.
+  multiply the lab color mix's lambda by 116.
+  subtract 16 from the lab color mix's lambda.
+  put the x-ish ratio in the lab color mix's alpha.
+  subtract the y-ish ratio from the lab color mix's alpha.
+  multiply the lab color mix's alpha by 500.
+  put the y-ish ratio in the lab color mix's beta.
+  subtract the z-ish ratio from the lab color mix's beta.
+  multiply the lab color mix's beta by 200.
 
 the current rainbow color number is a number.
   \ 1 to 6 indicating, respectively,
@@ -157,7 +277,219 @@ to decide if a color is very very light:
   if the color's lightness is greater than or equal to 875, say yes.
   say no.
 
+to decide if a ratio is between another ratio and a third ratio:
+  if the ratio is less than the other ratio, say no.
+  if the ratio is greater than the third ratio, say no.
+  say yes.
+
+to decide if a ratio is between a number and another number:
+  if the ratio is less than the number / 1, say no.
+  if the ratio is greater than the other number / 1, say no.
+  say yes.
+
 to finalize the colors:
+
+to get an lch color difference from an lch color mix and another lch color mix:
+  put the other lch color mix's lambda   in the lch color difference's lambda.
+  subtract  the lch color mix's lambda from the lch color difference's lambda.
+  put the other lch color mix's adjusted chroma   in the lch color difference's chroma.
+  subtract  the lch color mix's adjusted chroma from the lch color difference's chroma.
+  if the lch color mix's adjusted chroma's numerator is 0,
+    put 0 in the lch color difference's hue; exit.
+  if the other lch color mix's adjusted chroma's numerator is 0,
+    put 0 in the lch color difference's hue; exit.
+  put the other lch color mix's adjusted hue in a ratio called delta hue.
+  subtract  the lch color mix's adjusted hue from the delta hue.
+  if the delta hue is greater than 180/1,
+    subtract 360 from the delta hue.
+  if the delta hue is less than -180/1,
+    add 360 to the delta hue.
+  divide the delta hue by 2.
+  get some radians given the delta hue (in degrees).
+  put the radians' sine in the lch color difference's hue.
+  multiply the lch color difference's hue by 2.
+  average the lch color mix's adjusted chroma
+    and the other lch color mix's adjusted chroma
+    giving a ratio called mean chroma (geometric mean).
+  scale the lch color difference's hue by the mean chroma.
+
+to get an lch color mix called lefto and an lch color mix called righto from a lab color mix called leftie and a lab color mix called rightie:
+  \ adapted from http://www.easyrgb.com/en/math.php and
+  \ http://www.ece.rochester.edu/~gsharma/ciede2000/ciede2000noteCRNA.pdf
+  \ uses the Delta-E 2000 formula.
+  put the leftie's lambda in the lefto's lambda.
+  put the rightie's lambda in the righto's lambda.
+\
+  find the hypotenuse of the leftie's alpha and the leftie's beta
+    giving a ratio called chroma.
+  find the hypotenuse of the rightie's alpha and the rightie's beta
+    giving a ratio called other chroma.
+  average the chroma and the other chroma
+    giving a ratio called mean chroma.
+  convert the mean chroma to a g ratio (mean chroma to g).
+  put the g ratio in a temp ratio.
+  add 1/1 to the temp ratio.
+  put the leftie's alpha in an alpha ratio.
+  multiply the alpha ratio by the temp ratio.
+  put the rightie's alpha in another alpha ratio.
+  multiply the other alpha ratio by the temp ratio.
+\
+  find the hypotenuse of the alpha ratio and the leftie's beta
+    giving the lefto's adjusted chroma.
+  find the hypotenuse of the other alpha ratio and the rightie's beta
+    giving the righto's adjusted chroma.
+\  
+  get the lefto's adjusted hue
+    given the alpha and the leftie's beta (lab toward hue).
+  get the righto's adjusted hue
+    given the other alpha and the rightie's beta (lab toward hue).
+
+to get a ratio from another ratio (lch hue):
+  privatize the other ratio.
+  scale the other ratio by 1/25.
+  subtract 11/1 from the other ratio.
+  put the other ratio in an exponent ratio.
+  multiply the exponent by the other ratio.
+  negate the exponent.
+  get the ratio by raising e to the exponent.
+  multiply the ratio by 30.
+
+to get a ratio from an lch color mix and another lch color mix (average hue):
+  put the lch color mix's adjusted hue in the ratio.
+  add the other lch color mix's adjusted hue to the ratio.
+  if the lch color mix's adjusted chroma is 0/1, exit.
+  if the other lch color mix's adjusted chroma is 0/1, exit.
+  scale the ratio by 1/2.
+  put the lch color mix's adjusted hue in another ratio.
+  subtract the other lch color mix's adjusted hue from the other ratio.
+  if the other ratio is between -180 and 180, exit.
+  if the ratio is less than 180/1,
+    add 180 to the ratio; exit.
+  subtract 180 from the ratio.
+
+to get a ratio given another ratio (hue toward t):
+  put 1/1 in the ratio.
+  \
+  put the other ratio in a temp ratio.
+  subtract 30 from the temp ratio.
+  get some radians given the temp ratio (in degrees).
+  put the radians' cosine in the temp ratio.
+  multiply the temp ratio by 17/100.
+  subtract the temp ratio from the ratio.
+  \
+  put the other ratio in the temp ratio.
+  multiply the temp ratio by 2.
+  get the radians given the temp ratio (in degrees).
+  put the radians' cosine in the temp ratio.
+  multiply the temp ratio by 24/100.
+  add the temp ratio to the ratio.  
+  \
+  put the other ratio in the temp ratio.
+  multiply the temp ratio by 3.
+  add 6 to the temp ratio.
+  get the radians given the temp ratio (in degrees).
+  put the radians' cosine in the temp ratio.
+  multiply the temp ratio by 32/100.
+  add the temp ratio to the ratio.  
+  \
+  put the other ratio in the temp ratio.
+  multiply the temp ratio by 4.
+  subtract 63 from the temp ratio.
+  get the radians given the temp ratio (in degrees).
+  put the radians' cosine in the temp ratio.
+  multiply the temp ratio by 20/100.
+  subtract the temp ratio from the ratio.
+
+to get a ratio given another ratio and a third ratio (lab toward hue):
+  put 0/1 in the ratio.
+  if the other ratio is negative, put 180/1 in the ratio.
+  if the third ratio is 0/1, exit.
+  put 90/1 in the ratio.
+  if the third ratio is negative, put 270/1 in the ratio.
+  if the other ratio is 0/1, exit.
+  put 0/1 in the ratio.
+  if the other ratio is negative, put 180/1 in the ratio.
+  privatize the other ratio.
+  invert the other ratio.
+  privatize the third ratio.
+  scale the third ratio by the other ratio.
+  put the third ratio in a tangent.
+  get some radians given the tangent.
+  put the radians in a mixio.
+  multiply the mixio by 6.
+  put tau in some tau radians.
+  divide the mixio by the tau radians.
+  multiply the mixio by 60.
+  convert the mixio to a temp ratio.
+  add the temp ratio to the ratio.
+  if the ratio is at least 360/1,
+    subtract 360/1 from the ratio.
+  if the ratio is negative,
+    add 360/1 to the ratio.
+
+to get a result ratio from a chroma ratio (chroma weight):
+  put the chroma in the result.
+  put 5/4 in a ratio called squeeze.
+  if the chroma is between -18/1 and 18/1,
+    divide the result by the squeeze.
+  if the chroma is greater than 18/1,
+    put the chroma in the squeeze;
+    put 72/5 in the result;
+    divide the squeeze by the result.
+  if the chroma is less than -18/1,
+    put the chroma in the squeeze;
+    put -72/5 in the result;
+    divide the squeeze by the result.
+  put the result's seventh power in a temp ratio.
+  put the temp ratio in the result.
+  put 25/1 in a ratio called offset.
+  divide the offset by the squeeze.
+  put the offset's seventh power in the temp ratio.
+  put the temp ratio in the offset.
+  add the result to the offset.
+  divide the result by the offset.
+  put the result's square root in the temp ratio.
+  put the temp ratio in the result.
+
+to get a result ratio from a ratio (lambda divisor):
+  put the ratio in a temp ratio.
+  subtract 50 from the temp ratio.
+  multiply the temp ratio by the temp ratio.
+  put the temp ratio in the result.
+  add 20 to the temp ratio.
+  divide the result by the temp ratio's square root.
+  multiply the result by 3 / 200.
+  add 1 to the result.
+
+to get an rgb ratio given a twin ratio and a synergy ratio and a hue ratio (hsl to rgb):
+  \ adapted from http://www.easyrgb.com/en/math.php
+  privatize the hue ratio.
+  \ Assume that the hue ratio is between -1 through 2.
+  \ Wrap the hue ratio to be between 0 through 1.
+  if the hue ratio is greater than 1/1,
+    subtract 1 from the hue ratio.
+  if the hue ratio is negative,
+    add 1 to the hue ratio.
+  if the hue ratio is less than 1/6,
+    put the synergy ratio in the rgb ratio;
+    subtract the twin ratio from the rgb ratio;
+    multiply the rgb ratio by 6;
+    multiply the rgb ratio by the hue ratio;
+    add the twin ratio to the rgb ratio;
+    exit.
+  if the hue ratio is less than 1/2,
+    put the synergy ratio in the rgb ratio;
+    exit.
+  if the hue ratio is less than 2/3,
+    put the synergy ratio in the rgb ratio;
+    subtract the twin ratio from the rgb ratio;
+    put 6 times the hue ratio in a ratio;
+    negate the ratio;
+    add 4 to the ratio;
+    multiply the rgb ratio by the ratio;
+    add the twin ratio to the rgb ratio;
+    exit.
+  put the twin ratio in the rgb ratio.
 
 the gold color is a color.
 
@@ -176,6 +508,11 @@ the green pen is a pen.
 a greenish color is a color.
 
 the hilite color is a color.
+
+an hsl color mix has
+  a hue ratio,             \ ranges from 0 through 1; wraps.
+  a saturation ratio, and  \ ranges from 0 through 1.
+  a lightness ratio.       \ ranges from 0 through 1.
 
 a hue is an angle [0 to 3600].
 
@@ -247,6 +584,21 @@ to interpret a rainbow color:
   if the remainder is 5, put the blue   color into the rainbow color.
   if the remainder is 6, put the purple color into the rainbow color.
 
+a lab color mix has
+  an lambda ratio,      \ Lightness
+  an alpha ratio, and   \ Negative is greener, positive is redder.
+  a beta ratio.         \ Negative is bluer, positive is yellower.
+
+an lch color difference has
+  a lambda ratio,
+  a chroma ratio, and
+  a hue ratio.
+
+an lch color mix has
+  a lambda ratio,
+  an adjusted chroma ratio, and
+  an adjusted hue ratio.
+
 a light color is a color.
 
 to lighten a color by an amount:
@@ -265,6 +617,24 @@ a lightness is a number [0 to 1000].
 the lime color is a color.
 
 the lime pen is a pen.
+
+to limit an hsl color mix:
+  if the hsl color mix's hue is negative,
+    negate the hsl color mix's hue;
+    add 1 to the hsl color mix's hue.
+  if the hsl color mix's hue is greater than 1/1,
+    divide the hsl color mix's hue's numerator
+      by the hsl color mix's hue's denominator
+      giving a quotient and a remainder;
+    put the remainder in the hsl color mix's numerator.
+  if the hsl color mix's saturation is negative,
+    put 0 in the hsl color mix's saturation.
+  if the hsl color mix's saturation is greater than 1/1,
+    put 1/1 in the hsl color mix's saturation.
+  if the hsl color mix's lightness is negative,
+    put 0 in the hsl color mix's lightness.
+  if the hsl color mix's lightness is greater than 1/1,
+    put 1/1 in the hsl color mix's lightness.
 
 the magenta color is a color.
 
@@ -350,6 +720,79 @@ to make a greenish color:
   pick the greenish color's hue between 900 and 1200.
   pick the greenish color's saturation between 500 and 1000.
   pick the greenish color's brightness between 250 and 875.
+
+to make a lab color mix from a lambda ratio and an alpha ratio and a beta ratio:
+  put the lambda ratio in the lab color mix's lambda ratio.
+  put the alpha ratio in the lab color mix's alpha ratio.
+  put the beta ratio in the lab color mix's beta ratio.
+
+to measure a delta ratio between a lab color mix and another lab color mix:
+  \ adapted from http://www.easyrgb.com/en/math.php and
+  \ http://www.ece.rochester.edu/~gsharma/ciede2000/ciede2000noteCRNA.pdf
+  \ uses the Delta-E 2000 formula.
+  \
+  get an lch color mix and another lch color mix
+    from the lab color mix and the other lab color mix. \ L*, C', h' in the pdf
+  get an lch color difference
+    from the lch color mix and the other lch color mix. \ dL', dC', dH' in the pdf
+  \
+  average the lch color mix's lambda
+    and the other lch color mix's lambda
+    giving a ratio called mean lambda.
+  average the lch color mix's adjusted chroma
+    and the other lch color mix's adjusted chroma
+    giving a ratio called mean chroma.
+  get a ratio called mean hue from the lch color mix
+    and the other lch color mix (average hue).
+  get a t ratio given the mean hue (hue toward t). \ T in the pdf
+  get a sweep ratio from the mean hue (lch hue).   \ delta theta in the pdf
+  get a ratio called chroma weight from the mean chroma (chroma weight).
+  multiply the chroma weight by 2. \RC in the pdf
+  \
+  get a ratio called lambda scale from the mean lambda (lambda divisor).
+  put the mean chroma in a ratio called chroma scale.
+  multiply the chroma scale by 9/200.
+  add 1 to the chroma scale. \ SL in the pdf
+  \
+  put the mean chroma in a ratio called hue scale.
+  multiply the hue scale by the t.
+  multiply the hue scale by 3/200.
+  add 1 to the hue scale. \SH in the pdf
+  \
+  get some radians given the sweep ratio (in degrees).
+  multiply the radians by 2.
+  put the radians' sine in a ratio called synergy weight.
+  multiply the synergy weight by the chroma weight.
+  negate the synergy weight. \ RT in the pdf
+  \
+  make a ratio triplet given the lambda scale
+    and the chroma scale and the hue scale.
+  measure the delta given the lch color difference
+    and the ratio triplet and the synergy weight.
+
+to measure a delta ratio given an lch color difference and a ratio triplet and a ratio called synergy weight:
+  put the lch color difference's lambda in a temp ratio.
+  divide the temp by the ratio triplet's x.
+  multiply the temp by the temp.
+  put the temp in the delta.
+  \
+  put the lch color difference's chroma in the temp.
+  divide the temp by the ratio triplet's y.
+  multiply the temp by the temp.
+  add the temp to the delta.
+  \
+  put the lch color difference's hue in the temp.
+  divide the temp by the ratio triplet's z.
+  multiply the temp by the temp.
+  add the temp to the delta.
+  \
+  put the lch color difference's chroma in the temp.
+  divide the temp ratio by the ratio triplet's y.
+  multiply the temp by the lch color difference's hue.
+  divide the temp by the ratio triplet's z.
+  multiply the temp by the synergy weight.
+  add the delta to the temp.
+  put the temp's square root in the delta.
 
 to normalize a color:
   normalize the color's hue.
@@ -441,6 +884,11 @@ to put a color's lightest shade into another color:
   put the color into the other color.
   brighten the other color by 375.
 
+to put an hsl color mix in another hsl color mix:
+  put the hsl color mix's hue in the other hsl color mix's hue.
+  put the hsl color mix's saturation in the other hsl color mix's saturation.
+  put the hsl color mix's lightness in the other hsl color mix's lightness.
+
 to put a hue and a saturation and a lightness into a color:
   put the hue into the color's hue.
   if the color's hue is not -1,
@@ -449,6 +897,20 @@ to put a hue and a saturation and a lightness into a color:
   limit the color's saturation to 0 and 1000.
   put the lightness into the color's lightness.
   limit the color's lightness to 0 and 1000.
+
+to put a ratio's seventh power into another ratio:
+  if the ratio is 0, put 0 in the other ratio; exit.
+  if the ratio is 1, put 1 in the other ratio; exit.
+  privatize the ratio.
+  multiply the ratio by the ratio.
+  multiply the ratio by the ratio.
+  multiply the ratio by the original ratio's third power.
+  put the ratio in the other ratio.
+
+to put an xyz color mix in another xyz color mix:
+  put the xyz color mix's x in the other xyz color mix's x.
+  put the xyz color mix's y in the other xyz color mix's y.
+  put the xyz color mix's z in the other xyz color mix's z.
 
 a rainbow color is a color.
 
@@ -473,6 +935,11 @@ to reverse a color:
   put 1000 minus the color's lightness into the color's lightness.
   add 1800 to the color's hue.
   normalize the color's hue.
+
+an rgb color mix has
+  a red ratio,             \ ranges from 0 through 1.
+  a green ratio, and       \ ranges from 0 through 1.
+  a blue ratio.            \ ranges from 0 through 1.
 
 a rgb is a record with
   a byte called blue byte,
@@ -506,6 +973,358 @@ the teal color is a color.
 
 the teal pen is a pen.
 
+to test (colors - 01 007FFF vs 0081FF):
+  \ Test case 1 of
+  \ http://www.ece.rochester.edu/~gsharma/ciede2000/ciede2000noteCRNA.pdf
+  make a fuzzy test about "colors" and "01 007FFF vs 0081FF"
+    and targeting 20425/10000 with tolerance 96000 trifles.
+  make a lab color mix called darker from 50/1 and 26772/10000 and -797751/10000.
+  make a lab color mix called dodger blue from 50/1 and 0/1 and -827485/10000.
+  measure a delta ratio between the darker and the dodger blue.
+  stash the fuzzy test given the delta ratio.
+
+to test (colors - 02 007EFC vs 0081FF):
+  \ Test case 2 of
+  \ http://www.ece.rochester.edu/~gsharma/ciede2000/ciede2000noteCRNA.pdf
+  make a fuzzy test about "colors" and "02 007EFC vs 0081FF"
+    and targeting 28615/10000 with tolerance 96000 trifles.
+  make a lab color mix called darker from 50/1 and 31571/10000 and -772803/10000.
+  make a lab color mix called dodger blue from 50/1 and 0/1 and -827485/10000.
+  measure a delta ratio between the darker and the dodger blue.
+  stash the fuzzy test given the delta ratio.
+
+to test (colors - 03 007EF6 vs 0081FF):
+  \ Test case 3 of
+  \ http://www.ece.rochester.edu/~gsharma/ciede2000/ciede2000noteCRNA.pdf
+  make a fuzzy test about "colors" and "03 007EF6 vs 0081FF"
+    and targeting 34412/10000 with tolerance 96000 trifles.
+  make a lab color mix called darker from 50/1 and 28361/10000 and -740200/10000.
+  make a lab color mix called dodger blue from 50/1 and 0/1 and -827485/10000.
+  measure a delta ratio between the darker and the dodger blue.
+  stash the fuzzy test given the delta ratio.
+
+to test (colors - 04 0082FF vs 0081FF):
+  \ Test case 4 of
+  \ http://www.ece.rochester.edu/~gsharma/ciede2000/ciede2000noteCRNA.pdf
+  make a fuzzy test about "colors" and "04 0082FF vs 0081FF"
+    and targeting 10000/10000 with tolerance 96000 trifles.
+  make a lab color mix called lighter from 50/1 and -13802/10000 and -842814/10000.
+  make a lab color mix called dodger blue from 50/1 and 0/1 and -827485/10000.
+  measure a delta ratio between the lighter and the dodger blue.
+  stash the fuzzy test given the delta ratio.
+
+to test (colors - 05 0082FF vs 0081FF):
+  \ Test case 5 of
+  \ http://www.ece.rochester.edu/~gsharma/ciede2000/ciede2000noteCRNA.pdf
+  make a fuzzy test about "colors" and "05 0082FF vs 0081FF"
+    and targeting 10000/10000 with tolerance 96000 trifles.
+  make a lab color mix called lighter from 50/1 and -11848/10000 and -848006/10000.
+  make a lab color mix called dodger blue from 50/1 and 0/1 and -827485/10000.
+  measure a delta ratio between the lighter and the dodger blue.
+  stash the fuzzy test given the delta ratio.
+
+to test (colors - 06 0082FF vs 0081FF):
+  \ Test case 6 of
+  \ http://www.ece.rochester.edu/~gsharma/ciede2000/ciede2000noteCRNA.pdf
+  make a fuzzy test about "colors" and "06 0082FF vs 0081FF"
+    and targeting 10000/10000 with tolerance 96000 trifles.
+  make a lab color mix called lighter from 50/1 and -9009/10000 and -855211/10000.
+  make a lab color mix called dodger blue from 50/1 and 0/1 and -827485/10000.
+  measure a delta ratio between the lighter and the dodger blue.
+  stash the fuzzy test given the delta ratio.
+
+to test (colors - 07 777777 vs 777774):
+  \ Test case 7 of
+  \ http://www.ece.rochester.edu/~gsharma/ciede2000/ciede2000noteCRNA.pdf
+  make a fuzzy test about "colors" and "07 777777 vs 777774"
+    and targeting 23669/10000 with tolerance 96000 trifles.
+  make a lab color mix called gray from 50/1 and 0/1 and 0/1.
+  make a lab color mix called tapa from 50/1 and -1/1 and 2/1.
+  measure a delta ratio between the gray and the tapa.
+  stash the fuzzy test given the delta ratio.
+
+to test (colors - 08 777774 vs 777777):
+  \ Test case 8 of
+  \ http://www.ece.rochester.edu/~gsharma/ciede2000/ciede2000noteCRNA.pdf
+  make a fuzzy test about "colors" and "08 777774 vs 777777"
+    and targeting 23669/10000 with tolerance 96000 trifles.
+  make a lab color mix called tapa from 50/1 and -1/1 and 2/1.
+  make a lab color mix called gray from 50/1 and 0/1 and 0/1.
+  measure a delta ratio between the tapa and the gray.
+  stash the fuzzy test given the delta ratio.
+
+to test (colors - 09 7B7677 vs 727877):
+  \ Test case 9 of
+  \ http://www.ece.rochester.edu/~gsharma/ciede2000/ciede2000noteCRNA.pdf
+  make a fuzzy test about "colors" and "09 7B7677 vs 727877"
+    and targeting 71792/10000 with tolerance 96000 trifles.
+  make a lab color mix called empress from 50/1 and 24900/10000 and -10/10000.
+  make a lab color mix called stone from 50/1 and -24900/10000 and 9/10000.
+  measure a delta ratio between the empress and the stone.
+  stash the fuzzy test given the delta ratio.
+
+to test (colors - 10 7B7677 vs 727877):
+  \ Test case 10 of
+  \ http://www.ece.rochester.edu/~gsharma/ciede2000/ciede2000noteCRNA.pdf
+  make a fuzzy test about "colors" and "10 7B7677 vs 727877"
+    and targeting 71792/10000 with tolerance 96000 trifles.
+  make a lab color mix called empress from 50/1 and 24900/10000 and -10/10000.
+  make a lab color mix called stone from 50/1 and -24900/10000 and 10/10000.
+  measure a delta ratio between the empress and the stone.
+  stash the fuzzy test given the delta ratio.
+
+to test (colors - 11 7B7677 vs 727877):
+  \ Test case 11 of
+  \ http://www.ece.rochester.edu/~gsharma/ciede2000/ciede2000noteCRNA.pdf
+  make a fuzzy test about "colors" and "11 7B7677 vs 727877"
+    and targeting 72195/10000 with tolerance 96000 trifles.
+  make a lab color mix called empress from 50/1 and 24900/10000 and -10/10000.
+  make a lab color mix called stone from 50/1 and -24900/10000 and 11/10000.
+  measure a delta ratio between the empress and the stone.
+  stash the fuzzy test given the delta ratio.
+
+to test (colors - 12 7B7677 vs 727877):
+  \ Test case 12 of
+  \ http://www.ece.rochester.edu/~gsharma/ciede2000/ciede2000noteCRNA.pdf
+  make a fuzzy test about "colors" and "12 7B7677 vs 727877"
+    and targeting 72195/10000 with tolerance 96000 trifles.
+  make a lab color mix called empress from 50/1 and 24900/10000 and -10/10000.
+  make a lab color mix called stone from 50/1 and -24900/10000 and 12/10000.
+  measure a delta ratio between the empress and the stone.
+  stash the fuzzy test given the delta ratio.
+
+to test (colors - 13 797773 vs 75777B):
+  \ Test case 13 of
+  \ http://www.ece.rochester.edu/~gsharma/ciede2000/ciede2000noteCRNA.pdf
+  make a fuzzy test about "colors" and "13 797773 vs 75777B"
+    and targeting 48045/10000 with tolerance 96000 trifles.
+  make a lab color mix called dove gray from 50/1 and -10/10000 and 24900/10000.
+  make a lab color mix called storm gray from 50/1 and 9/10000 and -24900/10000.
+  measure a delta ratio between the dove gray and the storm gray.
+  stash the fuzzy test given the delta ratio.
+
+to test (colors - 14 797773 vs 75777B):
+  \ Test case 14 of
+  \ http://www.ece.rochester.edu/~gsharma/ciede2000/ciede2000noteCRNA.pdf
+  make a fuzzy test about "colors" and "14 797773 vs 75777B"
+    and targeting 48045/10000 with tolerance 96000 trifles.
+  make a lab color mix called dove gray from 50/1 and -10/10000 and 24900/10000.
+  make a lab color mix called storm gray from 50/1 and 10/10000 and -24900/10000.
+  measure a delta ratio between the dove gray and the storm gray.
+  stash the fuzzy test given the delta ratio.
+
+to test (colors - 15 797773 vs 75777B):
+  \ Test case 15 of
+  \ http://www.ece.rochester.edu/~gsharma/ciede2000/ciede2000noteCRNA.pdf
+  make a fuzzy test about "colors" and "15 797773 vs 75777B"
+    and targeting 47461/10000 with tolerance 96000 trifles.
+  make a lab color mix called dove gray from 50/1 and -10/10000 and 24900/10000.
+  make a lab color mix called storm gray from 50/1 and 11/10000 and -24900/10000.
+  measure a delta ratio between the dove gray and the storm gray.
+  stash the fuzzy test given the delta ratio.
+
+to test (colors - 16 7B7677 vs 75777B):
+  \ Test case 16 of
+  \ http://www.ece.rochester.edu/~gsharma/ciede2000/ciede2000noteCRNA.pdf
+  make a fuzzy test about "colors" and "16 7B7677 vs 75777B"
+    and targeting 43065/10000 with tolerance 96000 trifles.
+  make a lab color mix called empress from 50/1 and 5/2 and 0/1.
+  make a lab color mix called storm gray from 50/1 and 0/1 and -5/2.
+  measure a delta ratio between the empress and the storm gray.
+  stash the fuzzy test given the delta ratio.
+
+to test (colors - 17 7B7677 vs D2A4D5):
+  \ Test case 17 of
+  \ http://www.ece.rochester.edu/~gsharma/ciede2000/ciede2000noteCRNA.pdf
+  make a fuzzy test about "colors" and "17 7B7677 vs D2A4D5"
+    and targeting 271492/10000 with tolerance 96000 trifles.
+  make a lab color mix called empress from 50/1 and 5/2 and 0/1.
+  make a lab color mix called plum from 73/1 and 25/1 and -18/1.
+  measure a delta ratio between the empress and the plum.
+  stash the fuzzy test given the delta ratio.
+
+to test (colors - 18 7B7677 vs 9D9460):
+  \ Test case 18 of
+  \ http://www.ece.rochester.edu/~gsharma/ciede2000/ciede2000noteCRNA.pdf
+  make a fuzzy test about "colors" and "18 7B7677 vs 9D9460"
+    and targeting 228977/10000 with tolerance 96000 trifles.
+  make a lab color mix called empress from 50/1 and 5/2 and 0/1.
+  make a lab color mix called gurkha from 61/1 and -5/1 and 29/1.
+  measure a delta ratio between the empress and the gurkha.
+  stash the fuzzy test given the delta ratio.
+
+to test (colors - 19 7B7677 to 41938B):
+  make a color from 3451 and 24 and 472.
+  make an expected color from 1737 and 385 and 417.
+  make a fuzzy test about "colors" and "19 7B7677 to 41938B"
+    and targeting 0/1 with tolerance 933120000 trifles. \ = 1/2
+  put 2643/100 in a difference ratio.
+  get some longitude radians given 1732/10 (in degrees).
+  get some latitude  radians given -116/15 (in degrees).
+  get an actual color given the color and the longitude and the latitude and the difference.
+  measure an actual ratio between the expected color and the actual color.
+  stash the fuzzy test given the actual ratio.
+
+to test (colors - 19 7B7677 vs 41938B):
+  \ Test case 19 of
+  \ http://www.ece.rochester.edu/~gsharma/ciede2000/ciede2000noteCRNA.pdf
+  make a fuzzy test about "colors" and "19 7B7677 vs 41938B"
+    and targeting 319030/10000 with tolerance 96000 trifles.
+  make a lab color mix called empress from 50/1 and 5/2 and 0/1.
+  make a lab color mix called chill from 56/1 and -27/1 and -3/1.
+  measure a delta ratio between the empress and the chill.
+  stash the fuzzy test given the delta ratio.
+
+to test (colors - 20 7B7677 vs BB7B72):
+  \ Test case 20 of
+  \ http://www.ece.rochester.edu/~gsharma/ciede2000/ciede2000noteCRNA.pdf
+  make a fuzzy test about "colors" and "20 7B7677 vs BB7B72"
+    and targeting 194535/10000 with tolerance 96000 trifles.
+  make a lab color mix called empress from 50/1 and 5/2 and 0/1.
+  make a lab color mix called brandy from 58/1 and 24/1 and 15/1.
+  measure a delta ratio between the empress and the brandy.
+  stash the fuzzy test given the delta ratio.
+
+to test (colors - 21 7B7677 vs 7D7576):
+  \ Test case 21 of
+  \ http://www.ece.rochester.edu/~gsharma/ciede2000/ciede2000noteCRNA.pdf
+  make a fuzzy test about "colors" and "21 7B7677 vs 7D7576"
+    and targeting 10000/10000 with tolerance 96000 trifles.
+  make a lab color mix called empress from 50/1 and 5/2 and 0/1.
+  make a lab color mix called redder from 50/1 and 31736/10000 and 5854/10000.
+  measure a delta ratio between the empress and the redder.
+  stash the fuzzy test given the delta ratio.
+
+to test (colors - 22 7B7677 vs 7D7577):
+  \ Test case 22 of
+  \ http://www.ece.rochester.edu/~gsharma/ciede2000/ciede2000noteCRNA.pdf
+  make a fuzzy test about "colors" and "22 7B7677 vs 7D7577"
+    and targeting 10000/10000 with tolerance 96000 trifles.
+  make a lab color mix called empress from 50/1 and 5/2 and 0/1.
+  make a lab color mix called redder from 50/1 and 32972/10000 and 0/1.
+  measure a delta ratio between the empress and the redder.
+  stash the fuzzy test given the delta ratio.
+
+to test (colors - 23 7B7677 vs 7B7676):
+  \ Test case 23 of
+  \ http://www.ece.rochester.edu/~gsharma/ciede2000/ciede2000noteCRNA.pdf
+  make a fuzzy test about "colors" and "23 7B7677 vs 7B7676"
+    and targeting 10000/10000 with tolerance 96000 trifles.
+  make a lab color mix called empress from 50/1 and 5/2 and 0/1.
+  make a lab color mix called browner from 50/1 and 18634/10000 and 5757/10000.
+  measure a delta ratio between the empress and the browner.
+  stash the fuzzy test given the delta ratio.
+
+to test (colors - 24 7B7677 vs 7D7576):
+  \ Test case 24 of
+  \ http://www.ece.rochester.edu/~gsharma/ciede2000/ciede2000noteCRNA.pdf
+  make a fuzzy test about "colors" and "24 7B7677 vs 7D7576"
+    and targeting 10000/10000 with tolerance 96000 trifles.
+  make a lab color mix called empress from 50/1 and 5/2 and 0/1.
+  make a lab color mix called redder from 50/1 and 32592/10000 and 3350/10000.
+  measure a delta ratio between the empress and the redder.
+  stash the fuzzy test given the delta ratio.
+
+to test (colors - 25 67A04E vs 69A049):
+  \ Test case 25 of
+  \ http://www.ece.rochester.edu/~gsharma/ciede2000/ciede2000noteCRNA.pdf
+  make a fuzzy test about "colors" and "25 67A04E vs 69A049"
+    and targeting 12644/10000 with tolerance 96000 trifles.
+  make a lab color mix called apple from 602574/10000 and -340099/10000 and 362677/10000.
+  make a lab color mix called redder from 604626/10000 and -341751/10000 and 394387/10000.
+  measure a delta ratio between the apple and the redder.
+  stash the fuzzy test given the delta ratio.
+
+to test (colors - 26 00ADFF vs 48A79E):
+  \ Test case 26 of
+  \ http://www.ece.rochester.edu/~gsharma/ciede2000/ciede2000noteCRNA.pdf
+  make a fuzzy test about "colors" and "26 00ADFF vs 48A79E"
+    and targeting 12630/10000 with tolerance 96000 trifles.
+  make a lab color mix called deep sky from 630109/10000 and -310961/10000 and -58663/10000.
+  make a lab color mix called cadet from 628187/10000 and -297946/10000 and -40864/10000.
+  measure a delta ratio between the deep sky and the cadet.
+  stash the fuzzy test given the delta ratio.
+
+to test (colors - 27 A080F4 vs 4698EC):
+  \ Test case 27 of
+  \ http://www.ece.rochester.edu/~gsharma/ciede2000/ciede2000noteCRNA.pdf
+  make a fuzzy test about "colors" and "27 A080F4 vs 4698EC"
+    and targeting 18731/10000 with tolerance 96000 trifles.
+  make a lab color mix called medium purple from 612901/10000 and 37196/10000 and -53901/10000.
+  make a lab color mix called cornflower from 614292/10000 and 22480/10000 and -49620/10000.
+  measure a delta ratio between the medium purple and the cornflower.
+  stash the fuzzy test given the delta ratio.
+
+to test (colors - 28 00610A vs 006138):
+  \ Test case 28 of
+  \ http://www.ece.rochester.edu/~gsharma/ciede2000/ciede2000noteCRNA.pdf
+  make a fuzzy test about "colors" and "28 00610A vs 006138"
+    and targeting 18645/10000 with tolerance 96000 trifles.
+  make a lab color mix called green from 350831/10000 and -441164/10000 and 37933/10000.
+  make a lab color mix called fun from 350232/10000 and -400716/10000 and 15901/10000.
+  measure a delta ratio between the green and the fun.
+  stash the fuzzy test given the delta ratio.
+
+to test (colors - 29 0F307D vs 0A3377):
+  \ Test case 29 of
+  \ http://www.ece.rochester.edu/~gsharma/ciede2000/ciede2000noteCRNA.pdf
+  make a fuzzy test about "colors" and "29 0F307D vs 0A3377"
+    and targeting 20373/10000 with tolerance 96000 trifles.
+  make a lab color mix called sapphire from 227233/10000 and 200904/10000 and -466940/10000.
+  make a lab color mix called greener from 230331/10000 and 149730/10000 and -425619/10000.
+  measure a delta ratio between the sapphire and the greener.
+  stash the fuzzy test given the delta ratio.
+
+to test (colors - 30 9D2B3B vs A12536):
+  \ Test case 30 of
+  \ http://www.ece.rochester.edu/~gsharma/ciede2000/ciede2000noteCRNA.pdf
+  make a fuzzy test about "colors" and "30 9D2B3B vs A12536"
+    and targeting 14146/10000 with tolerance 96000 trifles.
+  make a lab color mix called red from 364612/10000 and 478580/10000 and 183852/10000.
+  make a lab color mix called redder from 362715/10000 and 505065/10000 and 212231/10000.
+  measure a delta ratio between the red and the redder.
+  stash the fuzzy test given the delta ratio.
+
+to test (colors - 31 B8F0E1 vs C2EFE5):
+  \ Test case 31 of
+  \ http://www.ece.rochester.edu/~gsharma/ciede2000/ciede2000noteCRNA.pdf
+  make a fuzzy test about "colors" and "31 B8F0E1 vs C2EFE5"
+    and targeting 14441/10000 with tolerance 96000 trifles.
+  make a lab color mix called water leaf from 908027/10000 and -20831/10000 and 14410/10000.
+  make a lab color mix called jagged ice from 911528/10000 and -16435/10000 and 447/10000.
+  measure a delta ratio between the water leaf and the jagged ice.
+  stash the fuzzy test given the delta ratio.
+
+to test (colors - 32 E3E5E7 vs DCDFE0):
+  \ Test case 32 of
+  \ http://www.ece.rochester.edu/~gsharma/ciede2000/ciede2000noteCRNA.pdf
+  make a fuzzy test about "colors" and "32 E3E5E7 vs DCDFE0"
+    and targeting 15381/10000 with tolerance 96000 trifles.
+  make a lab color mix called solitude from 909257/10000 and -5406/10000 and -9208/10000.
+  make a lab color mix called pattens from 886381/10000 and -8985/10000 and -7239/10000.
+  measure a delta ratio between the solitude and the pattens.
+  stash the fuzzy test given the delta ratio.
+
+to test (colors - 33 131518 vs 111316):
+  \ Test case 33 of
+  \ http://www.ece.rochester.edu/~gsharma/ciede2000/ciede2000noteCRNA.pdf
+  make a fuzzy test about "colors" and "33 131518 vs 111316"
+    and targeting 6377/10000 with tolerance 96000 trifles.
+  make a lab color mix called black pearl from 67747/10000 and -2908/10000 and -24247/10000.
+  make a lab color mix called darker from 58714/10000 and  -985/10000 and -22286/10000.
+  measure a delta ratio between the black pearl and the darker.
+  stash the fuzzy test given the delta ratio.
+
+to test (colors - 34 06080A vs 020305):
+  \ Test case 34 of
+  \ http://www.ece.rochester.edu/~gsharma/ciede2000/ciede2000noteCRNA.pdf
+  make a fuzzy test about "colors" and "34 06080A vs 020305"
+    and targeting 9082/10000 with tolerance 96000 trifles.
+  make a lab color mix called black pearl from 20776/10000 and  795/10000 and -11350/10000.
+  make a lab color mix called black russian from  9033/10000 and -636/10000 and  -5514/10000.
+  measure a delta ratio between the black pearl and the black russian.
+  stash the fuzzy test given the delta ratio.
+
 to test (colors - brightness):
   create a test result about "colors" and "brightness"
     and expecting "pink is 375 brighter than red.".
@@ -514,6 +1333,19 @@ to test (colors - brightness):
   put "pink is " then the number then " brighter than red."
     in an actual string.
   stash the test result given the actual.
+
+to test (colors - brown to alpha):
+  make a fuzzy test about "colors" and "brown to alpha"
+    and targeting 631388293/1866240000 with tolerance 105000 trifles. \ ± 1 percent
+  put the brown color in a color.
+  convert the color to an hsl color mix.
+  convert the hsl color mix to an rgb color mix.
+  \ next step takes 5 ms to compute 3 ratios' fifth roots.
+  convert the rgb color mix to an xyz color mix.
+  convert the xyz color mix to a lab color mix.
+  put the lab color mix's alpha ratio in an actual ratio.
+  scale the actual ratio by 1/100.
+  stash the fuzzy test given the actual ratio.
 
 to test (colors - brown and tan):
   create a test result about "colors" and "brown and tan"
@@ -524,6 +1356,79 @@ to test (colors - brown and tan):
     put "orange is 1/4 of the way from brown toward tan"
       in the actual.
   stash the test result given the actual.
+
+to test (colors - brown to beta):
+  make a fuzzy test about "colors" and "brown to beta"
+    and targeting 1115684834/1866240000 with tolerance 144000 trifles. \ ± 1 percent
+  put the brown color in a color.
+  convert the color to an hsl color mix.
+  convert the hsl color mix to an rgb color mix.
+  \ next step takes 5 ms to compute 3 ratios' fifth roots.
+  convert the rgb color mix to an xyz color mix.
+  convert the xyz color mix to a lab color mix.
+  put the lab color mix's beta ratio in an actual ratio.
+  scale the actual ratio by 1/100.
+  stash the fuzzy test given the actual ratio.
+
+to test (colors - brown to hsl):
+  create a test result about "colors" and "brown to hsl"
+    and expecting "1/12 hue; 1 sat; 3/8 light".
+  put the brown color in a color.
+  convert the color to an hsl color mix.
+  convert the hsl color mix to an actual string.
+  stash the test result given the actual.
+
+to test (colors - brown to lambda):
+  make a fuzzy test about "colors" and "brown to lambda"
+    and targeting 954753230/1866240000 with tolerance 81000 trifles. \ ± 1 percent
+  put the brown color in a color.
+  convert the color to an hsl color mix.
+  convert the hsl color mix to an rgb color mix.
+  \ next step takes 5 ms to compute 3 ratios' fifth roots.
+  convert the rgb color mix to an xyz color mix.
+  convert the xyz color mix to a lab color mix.
+  put the lab color mix's lambda ratio in an actual ratio.
+  scale the actual ratio by 1/100.
+  stash the fuzzy test given the actual ratio.
+
+to test (colors - brown to rgb):
+  create a test result about "colors" and "brown to rgb"
+    and expecting "3/4 red; 3/8 green; 0 blue".
+  put the brown color in a color.
+  convert the color to an hsl color mix.
+  convert the hsl color mix to an rgb color mix.
+  convert the rgb color mix to an actual string.
+  stash the test result given the actual.
+
+to test (colors - brown to x):
+  make a fuzzy test about "colors" and "brown to x"
+    and targeting 479577506/1866240000 with tolerance 60000 trifles. \ ± 1 percent
+  put the brown color in a color.
+  convert the color to an hsl color mix.
+  convert the hsl color mix to an rgb color mix.
+  \ next step takes 5 ms to compute 3 ratios' fifth roots.
+  convert the rgb color mix to an xyz color mix.
+  stash the fuzzy test given the xyz color mix's x.
+
+to test (colors - brown to y):
+  make a fuzzy test about "colors" and "brown to y"
+    and targeting 603613/3110400 with tolerance 80000 trifles. \ ± 1 percent
+  put the brown color in a color.
+  convert the color to an hsl color mix.
+  convert the hsl color mix to an rgb color mix.
+  \ next step takes 5 ms to compute 3 ratios' fifth roots.
+  convert the rgb color mix to an xyz color mix.
+  stash the fuzzy test given the xyz color mix's y.
+
+to test (colors - brown to z):
+  make a fuzzy test about "colors" and "brown to z"
+    and targeting 1487629/62208000 with tolerance 43200 trifles. \ ± 1 percent
+  put the brown color in a color.
+  convert the color to an hsl color mix.
+  convert the hsl color mix to an rgb color mix.
+  \ next step takes 5 ms to compute 3 ratios' fifth roots.
+  convert the rgb color mix to an xyz color mix.
+  stash the fuzzy test given the xyz color mix's z.
 
 to test (colors - dark purples):
   create a test result about "colors" and "purples"
@@ -545,6 +1450,14 @@ to test (colors - gold):
       in the actual.
   stash the test result given the actual.
 
+to test (colors - high chroma weight):
+  make a fuzzy test about "colors"
+    and "high chroma weight"
+    and targeting 892217416/1866240000 with tolerance 10 trifles.
+  put 1019256941/48508096 in a chroma ratio.
+  get an actual ratio from the chroma ratio (chroma weight).
+  stash the fuzzy test given the actual ratio.
+
 to test (colors - light sky blues):
   create a test result about "colors" and "light sky blues"
     and expecting "light sky blue's light is lighter.".
@@ -554,6 +1467,23 @@ to test (colors - light sky blues):
   if the other color is the sky blue color's lighter shade,
     put "light sky blue's light is lighter." in the actual.
   stash the test result given the actual.
+
+to test (colors - low chroma weight):
+  \ Tolerance was 120 trifles.
+  make a fuzzy test about "colors"
+    and "low chroma weight"
+    and targeting 2404714/1866240000 with tolerance 180 trifles.
+  put 21206305/5678214 in a chroma ratio.
+  get an actual ratio from the chroma ratio (chroma weight).
+  stash the fuzzy test given the actual ratio.
+
+to test (colors - medium chroma weight):
+  make a fuzzy test about "colors"
+    and "medium chroma weight"
+    and targeting 296440607/1866240000 with tolerance 10 trifles.
+  put 585700316/39486095 in a chroma ratio.
+  get an actual ratio from the chroma ratio (chroma weight).
+  stash the fuzzy test given the actual ratio.
 
 to test (colors - pinks):
   create a test result about "colors" and "pinks"
@@ -593,6 +1523,34 @@ to test (colors - reverse):
       in the actual.
   stash the test result given the actual.
 
+to test (colors - shift arctangent above 179):
+  make a fuzzy test about "colors"
+    and "shift arctangent above 179"
+    and targeting 373219369/2073600 with tolerance 20 trifles.
+  put -2142632799/573712510 in a ratio.
+  put 9/10000 in another ratio.
+  get a hue ratio given the ratio and the other ratio (lab toward hue).
+  stash the fuzzy test given the hue ratio.
+
+to test (colors - shift arctangent above 359):
+  make a fuzzy test about "colors"
+    and "shift arctangent above 359"
+    and targeting 671817769/1866240 with tolerance 40 trifles.
+  put 2142632799/573712510 in a ratio.
+  put -10/10000 in another ratio.
+  get a hue ratio given the ratio and the other ratio (lab toward hue).
+  stash the fuzzy test given the hue ratio.
+
+to test (colors - shift trivial arctangent):
+  create a test result about "colors"
+    and "shift trivial tangent"
+    and expecting "270".
+  put 0/0 in a ratio.
+  put -10/10000 in another ratio.
+  get a hue ratio given the ratio and the other ratio (lab toward hue).
+  convert the hue ratio to an actual string.
+  stash the test result given the actual.
+
 to test (colors):
   test (colors - rainbow).
   test (colors - brightness).
@@ -602,6 +1560,54 @@ to test (colors):
   test (colors - light sky blues).
   test (colors - pinks).
   test (colors - dark purples).
+  test (colors - brown to hsl).
+  test (colors - brown to rgb).
+  test (colors - brown to x).
+  test (colors - brown to y).
+  test (colors - brown to z).
+  test (colors - brown to lambda).
+  test (colors - brown to alpha).
+  test (colors - brown to beta).
+  test (colors - low chroma weight).
+  test (colors - medium chroma weight).
+  test (colors - high chroma weight).
+  test (colors - shift trivial arctangent).
+  test (colors - shift arctangent above 179).
+  test (colors - shift arctangent above 359).
+  test (colors - 01 007FFF vs 0081FF).
+  test (colors - 02 007EFC vs 0081FF).
+  test (colors - 03 007EF6 vs 0081FF).
+  test (colors - 04 0082FF vs 0081FF).
+  test (colors - 05 0082FF vs 0081FF).
+  test (colors - 06 0082FF vs 0081FF).
+  test (colors - 07 777777 vs 777774).
+  test (colors - 08 777774 vs 777777).
+  test (colors - 09 7B7677 vs 727877).
+  test (colors - 10 7B7677 vs 727877).
+  test (colors - 11 7B7677 vs 727877).
+  test (colors - 12 7B7677 vs 727877).
+  test (colors - 13 797773 vs 75777B).
+  test (colors - 14 797773 vs 75777B).
+  test (colors - 15 797773 vs 75777B).
+  test (colors - 16 7B7677 vs 75777B).
+  test (colors - 17 7B7677 vs D2A4D5).
+  test (colors - 18 7B7677 vs 9D9460).
+  test (colors - 19 7B7677 vs 41938B).
+  test (colors - 20 7B7677 vs BB7B72).
+  test (colors - 21 7B7677 vs 7D7576).
+  test (colors - 22 7B7677 vs 7D7577).
+  test (colors - 23 7B7677 vs 7B7676).
+  test (colors - 24 7B7677 vs 7D7576).
+  test (colors - 25 67A04E vs 69A049).
+  test (colors - 26 00ADFF vs 48A79E).
+  test (colors - 27 A080F4 vs 4698EC).
+  test (colors - 28 00610A vs 006138).
+  test (colors - 29 0F307D vs 0A3377).
+  test (colors - 30 9D2B3B vs A12536).
+  test (colors - 31 B8F0E1 vs C2EFE5).
+  test (colors - 32 E3E5E7 vs DCDFE0).
+  test (colors - 33 131518 vs 111316).
+  test (colors - 34 06080A vs 020305).
 
 a very dark color is a color.
 
@@ -618,6 +1624,11 @@ the violet pen is a pen.
 the white color is a color.
 
 the white pen is a pen.
+
+an xyz color mix has
+  an x ratio,              \ ranges from 0 past 1.
+  a y ratio, and           \ ranges from 0 through 1.
+  a z ratio.               \ ranges from 0 past 1.
 
 the yellow color is a color.
 
