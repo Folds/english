@@ -579,6 +579,16 @@ to divide a ratio by another ratio:
   flip the other ratio.
   multiply the ratio by the other ratio.
 
+to divide a ratio by another ratio giving a quotient and a remainder ratio:
+  put the ratio in a third ratio.
+  divide the third ratio by the other ratio.
+  convert the third ratio to a mixed.
+  put the mixed's whole number in the quotient.
+  privatize the other ratio.
+  scale the other ratio by the quotient / 1.
+  put the ratio in the remainder ratio.
+  subtract the other ratio from the remainder ratio.
+
 to divide a ratio by a number:
   multiply the ratio by 1 / the number.
   reduce the ratio.
@@ -626,6 +636,11 @@ to get a ratio given a ratio triplet and another ratio triplet:
   put the ratio triplet's x in the ratio.
   add the ratio triplet's y to the ratio.
   add the ratio triplet's z to the ratio.
+
+to get a ratio triplet given some radians and some other radians and a third ratio:
+  convert the radians to the ratio triplet's x ratio.
+  convert the other radians to the ratio triplet's y ratio.
+  put the third ratio in the ratio triplet's z ratio.
 
 to get a result number given a number and another number (overflow factor):
   privatize the number.

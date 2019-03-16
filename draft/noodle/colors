@@ -70,6 +70,12 @@ to convert a color into a string:
   append ", lightness=" to the string.
   append the color's lightness to the string.
 
+to convert a color to a lab color mix:
+  convert the color to an hsl color mix.
+  convert the hsl color mix to an rgb color mix.
+  convert the rgb color mix to an xyz color mix.
+  convert the xyz color mix to the lab color mix.
+
 to convert a color to a rgb:
   convert the color to a colorref.
   convert the colorref to the rgb.
@@ -289,6 +295,264 @@ to decide if a ratio is between a number and another number:
 
 to finalize the colors:
 
+to get a color given another color and some longitude radians and some latitude radians and a difference ratio:
+  put 1/2 in a tolerance ratio.
+  if the difference ratio is at most the tolerance ratio,
+    put the other color in the color;
+    exit.
+  put the difference ratio in a min ratio.
+  subtract the tolerance ratio from the min ratio.
+  put the difference ratio in a max ratio.
+  add the tolerance ratio to the max ratio.
+  privatize the other color.
+  normalize the other color.
+  get a ratio triplet given the other color.
+  get a cusp ratio given the other color and the longitude and the latitude (escape length).
+  put 0/1 in a near ratio.
+  put 0/1 in a nearby ratio.
+  put 500/1 in a mid ratio.
+  if the cusp ratio is at most the mid ratio,
+    put the cusp ratio in the mid ratio;
+    set a flag.
+  get another ratio triplet given the longitude and the latitude and the mid ratio.
+  get a mid color given the other ratio triplet.
+  measure a midby ratio between the other color and the mid color.
+  if the midby ratio is between the min ratio and the max ratio,
+    put the mid color in the color;
+    exit.
+  if the mid ratio is at least the min ratio,
+    put the mid ratio in a far ratio;
+    put the midby ratio in a farby ratio;
+    get the color given the other color
+      and the longitude and the latitude
+      and the difference
+      and the near and the nearby
+      and the far and the farby (linear interpolation);
+    exit.
+  put the mid ratio in the near ratio.
+  put the midby ratio in the nearby ratio.
+  if the flag is clear,
+    put the cusp ratio in the mid ratio;
+    get the other ratio triplet given the longitude and the latitude and the mid ratio;
+    get the mid color given the other ratio triplet;
+    measure the midby ratio between the other color and the mid color.
+  if the midby ratio is between the min ratio and the max ratio,
+    put the mid color in the color;
+    exit.
+  if the mid ratio is at least the min ratio,
+    put the mid ratio in the far ratio;
+    put the midby ratio in the farby ratio;
+    get the color given the other color
+      and the longitude and the latitude
+      and the difference
+      and the near and the nearby
+      and the far and the farby (linear interpolation);
+    exit.
+  put the mid ratio in the near ratio.
+  put the midby ratio in the nearby ratio.
+  put 100000/1 in the far ratio.
+  get the other ratio triplet
+    given the longitude and the latitude and the far ratio.
+  get a far color given the other ratio triplet.
+  measure the farby ratio between the other color and the far color.
+  if the min ratio is at least the farby ratio,
+    put the far color in the color;
+    exit.
+  get the color given the other color
+    and the longitude and the latitude
+    and the difference
+    and the near and the nearby
+    and the far ratio and the farby (hyperbolic interpolation).
+
+to get a color given another color and some longitude radians and some latitude radians and a difference ratio and a near ratio and a nearby ratio and a far ratio and a farby ratio (hyperbolic interpolation):
+  put 1/2 in a tolerance ratio.
+  put the difference ratio in a min ratio.
+  subtract the tolerance ratio from the min ratio.
+  put the difference ratio in a max ratio.
+  add the tolerance ratio to the max ratio.
+  privatize the other color.
+  normalize the other color.
+  get a ratio triplet given the other color.
+  put the latitude's cosine in a scale ratio.
+  multiply the scale ratio by 1/1000.
+  get a nearish ratio given the near ratio
+    and the scale ratio (sloppy arctangent).
+  get a farrish ratio given the far ratio
+    and the scale ratio (sloppy arctangent).
+  loop.
+    add 1 to a counter.
+    put the difference ratio in a slope ratio.
+    subtract the nearby ratio from the slope ratio.
+    put the farby ratio in a denny ratio.
+    subtract the nearby ratio from the denny ratio.
+    divide the slope ratio by the denny ratio.
+    put the farrish ratio in a middish ratio.
+    subtract the nearish ratio from the middish ratio.
+    multiply the middish ratio by the slope ratio.
+    add the nearish ratio to the middish ratio.
+    get a mid ratio given the middish ratio
+      and the scale ratio (sloppy tangent).
+    get another ratio triplet given the longitude and the latitude and the mid ratio.
+    add the ratio triplet to the other ratio triplet.
+    get a mid color given the other ratio triplet.
+    if the counter is at least 9,
+      put the mid color in the color;
+      exit.
+    measure a midby ratio between the other color and the mid color.
+    if the midby ratio is between the min ratio and the max ratio,
+      put the mid color in the color;
+      exit.
+    if the midby ratio is at least the min ratio,
+      put the middish ratio in the farrish ratio;
+      put the midby ratio in the farby ratio;
+      repeat.
+    put the middish ratio in the nearish ratio.
+    put the midby ratio in the nearby ratio.
+  repeat.
+
+to get a color given another color and some longitude radians and some latitude radians and a difference ratio and a near ratio and a nearby ratio and a far ratio and a farby ratio (linear interpolation):
+  put 1/2 in a tolerance ratio.
+  put the difference ratio in a min ratio.
+  subtract the tolerance ratio from the min ratio.
+  put the difference ratio in a max ratio.
+  add the tolerance ratio to the max ratio.
+  privatize the other color.
+  normalize the other color.
+  get a ratio triplet given the other color.
+  loop.
+    add 1 to a counter.
+    put the difference ratio in a slope ratio.
+    subtract the nearby ratio from the slope ratio.
+    put the farby ratio in a denny ratio.
+    subtract the nearby ratio from the denny ratio.
+    divide the slope ratio by the denny ratio.
+    put the far ratio in a mid ratio.
+    subtract the near ratio from the mid ratio.
+    multiply the mid ratio by the slope ratio.
+    add the near ratio to the mid ratio.
+    get another ratio triplet given the longitude and the latitude and the mid ratio.
+    add the ratio triplet to the other ratio triplet.
+    get a mid color given the other ratio triplet.
+    if the counter is at least 9,
+      put the mid color in the color;
+      exit.
+    measure a midby ratio between the other color and the mid color.
+    if the midby ratio is between the min ratio and the max ratio,
+      put the mid color in the color;
+      exit.
+    if the midby ratio is at least the min ratio,
+      put the mid ratio in the far ratio;
+      put the midby ratio in the farby ratio;
+      repeat.
+    put the mid ratio in the near ratio.
+    put the midby ratio in the nearby ratio.
+  repeat.  
+
+to get a color given a ratio triplet:
+  \ The scale, and the orientation of the zero hue, and the
+  \ direction of hue rotation, only matter to the extent that
+  \ this routine and its inverse need to be true inverses.
+  put 1 in the color's lightness.
+  scale the color's lightness by the ratio triplet's z.
+  find the hypotenuse of the ratio triplet's x
+    and the ratio triplet's y giving a ratio.
+  put 1 in the color's saturation.
+  scale the color's saturation by the ratio.
+  get a hue ratio given the ratio triplet's x
+    and the ratio triplet's y (lab toward hue).
+  put 10 in the color's hue.
+  scale the color's hue by the hue ratio.
+  normalize the color.
+
+to get a cusp ratio given a color and some longitude radians and some latitude radians (escape length):
+  privatize the color.
+  normalize the color.
+  privatize the latitude radians.
+  normalize the latitude radians.
+  put half pi in some bogus radians.
+  put 1000/1 in a ceiling ratio.
+  subtract the color's lightness / 1 from the ceiling ratio.
+  if the latitude radians are the bogus radians,
+    put the ceiling ratio in the cusp ratio;
+    exit.
+  negate the bogus radians.
+  normalize the bogus radians.
+  if the latitude radians are the bogus radians,
+    put the color's lightness / 1 in the cusp ratio;
+    exit.  
+  privatize the longitude radians.
+  get a ratio triplet given the color.
+  put the color's hue / 10 in a ratio.
+  get some other longitude radians given the ratio (in degrees).
+  subtract the other longitude radians from the longitude radians.
+  get the ratio given the color's saturation / 1 and 1000 / 1 and the longitude radians (escape length).
+  put the latitude's tangent in a tangent.
+  put the tangent in a z ratio.
+  multiply the z ratio by the ratio.
+  if the z ratio is 0/1,
+    put 0/1 in the cusp ratio;
+    exit.
+  if the z ratio is at most - the color's lightness / 1,
+    divide the ratio by the z ratio;
+    put the ratio in an area ratio;
+    multiply the area ratio by the ratio;
+    add 1/1 to the area ratio;
+    put the area ratio's square root in the cusp ratio;
+    multiply the cusp ratio by the color's lightness / 1;
+    exit.
+  if the z ratio is at least the ceiling ratio,
+    divide the ratio by the z ratio;
+    put the ratio in the area ratio;
+    multiply the area ratio by the ratio;
+    add 1/1 to the area ratio;
+    put the area ratio's square root in the cusp ratio;
+    multiply the cusp ratio by the ceiling ratio;
+    exit.    
+  put the tangent in the area ratio.
+  multiply the area ratio by the tangent.
+  add 1/1 to the area ratio.
+  put the area ratio's square root in the cusp ratio.
+  multiply the cusp ratio by the ratio.
+  de-sign the cusp ratio.  
+
+to get a cusp ratio given a ratio and a radius ratio and some longitude radians (escape length):
+  privatize the longitude radians.
+  normalize the longitude radians.
+  put half pi in some bogus radians.
+  put the radius ratio in a temp ratio.
+  multiply the temp ratio by the radius ratio.
+  put the ratio in another ratio.
+  multiply the other ratio by the ratio.
+  if the longitude radians are the bogus radians,
+    subtract the other ratio from the temp ratio;
+    put the temp ratio's square root into the cusp ratio;
+    exit.
+  negate the bogus radians.
+  normalize the bogus radians.
+  if the longitude radians are the bogus radians,
+    subtract the other ratio from the temp ratio;
+    put the temp ratio's square root into the cusp ratio;
+    exit.
+  put the longitude's tangent in a tangent.
+  put the tangent in an area ratio.
+  multiply the area ratio by the tangent.
+  put the area ratio in a beta ratio.
+  scale the beta ratio by the ratio.
+  put the area ratio in an alpha ratio.
+  add 1/1 to the alpha ratio.
+  put the beta ratio in a determinant ratio.
+  scale the determinant ratio by the beta ratio.
+  multiply the other ratio by the area ratio.
+  subtract the other ratio from the temp ratio.
+  multiply the temp ratio by the alpha ratio.
+  add the temp ratio to the determinant ratio.
+  put the longitude's cosine in a cosine.
+  put the cosine's sign in a number.
+  put the determinant ratio's square root in the cusp ratio.
+  multiply the cusp ratio by the number.
+  add the beta ratio to the cusp ratio.
+  divide the cusp ratio by the alpha ratio.
+
 to get an lch color difference from an lch color mix and another lch color mix:
   put the other lch color mix's lambda   in the lch color difference's lambda.
   subtract  the lch color mix's lambda from the lch color difference's lambda.
@@ -400,6 +664,85 @@ to get a ratio given another ratio (hue toward t):
   multiply the temp ratio by 20/100.
   subtract the temp ratio from the ratio.
 
+to get a ratio given another ratio (sloppy arctangent):
+  if the other ratio is 0/1,
+    put 0/1 in the ratio; exit.
+  if the other ratio is negative,
+    put the other ratio in a third ratio;
+    negate the third ratio;
+    get the ratio given the third ratio (sloppy arctangent);
+    negate the ratio;
+    exit.
+  if the other ratio is 1/1,
+    put 2278909/2880000 in the ratio; exit. \ sloppy pi / 4
+  put the other ratio in a square ratio.
+  multiply the square ratio by the other ratio.
+  put the square ratio in a determinant ratio.
+  if the other ratio is at most 1/1,
+    multiply the determinant ratio by 12/1;
+    add 9/1 to the determinant ratio;
+    put the determinant ratio's square root in the ratio;
+    subtract 3/1 from the ratio;
+    multiply the ratio by 1/2;
+    divide the ratio by the other ratio;
+    exit.
+  multiply the determinant ratio by 9/1.
+  add 12/1 to the determinant ratio.
+  put the determinant ratio's square root in the ratio.
+  put the other ratio in a beta ratio.
+  multiply the beta ratio by 3/1.
+  subtract the beta ratio from the ratio.
+  multiply the ratio by 1/2.
+  negate the ratio.
+  add 977160979 / 622080000 to the ratio. \ pi / 2
+
+to get a ratio given another ratio (sloppy tangent):
+  if the other ratio is 0/1,
+    put 0/1 in the ratio; exit.
+  if the other ratio is negative,
+    put the other ratio in a third ratio;
+    negate the third ratio;
+    get the ratio given the third ratio (sloppy tangent);
+    negate the ratio;
+    exit.
+  put 977160979 / 622080000 in a bogus ratio. \ pi / 2
+  if the other ratio is the bogus ratio,
+    put the largest number / 1 in the ratio;
+    exit.
+  if the other ratio is greater than the bogus ratio,
+    put the other ratio in the third ratio;
+    divide the third ratio by 977160979/311040000
+      giving a quotient and a remainder ratio;
+    get the ratio given the remainder ratio (sloppy tangent);
+    exit.
+  put 2278909/2880000 in a special ratio. \ (sqrt(21)-3)/2 = sloppy pi/4
+  if the other ratio is the special ratio,
+    put 1/1 in the ratio;
+    exit.
+  if the other ratio is at most the special ratio,
+    put the other ratio in the ratio;
+    put the other ratio in a denny ratio;
+    multiply the denny ratio by the other ratio;
+    multiply the denny ratio by -1/3;
+    add 1/1 to the denny ratio;
+    divide the ratio by the denny ratio;
+    exit.
+  put the bogus ratio in a complement ratio.
+  subtract the other ratio from the complement ratio.
+  put the complement ratio in the ratio.
+  invert the ratio.
+  multiply the complement ratio by -1/3.
+  add the complement ratio to the ratio.
+
+to get a ratio given another ratio and a scale ratio (sloppy arctangent):
+  privatize the other ratio.
+  multiply the other ratio by the scale ratio.
+  get the ratio given the other ratio (sloppy arctangent).
+
+to get a ratio given another ratio and a scale ratio (sloppy tangent):
+  get the ratio given the other ratio (sloppy tangent).
+  divide the ratio by the scale ratio.
+
 to get a ratio given another ratio and a third ratio (lab toward hue):
   put 0/1 in the ratio.
   if the other ratio is negative, put 180/1 in the ratio.
@@ -426,6 +769,18 @@ to get a ratio given another ratio and a third ratio (lab toward hue):
     subtract 360/1 from the ratio.
   if the ratio is negative,
     add 360/1 to the ratio.
+
+to get a ratio triplet given a color:
+  \ The scale, and the orientation of the zero hue, and the
+  \ direction of hue rotation, only matter to the extent that
+  \ this routine and its inverse need to be true inverses.
+  put the color's hue / 10 in a ratio.
+  get some longitude radians given the ratio (in degrees).
+  put the color's lightness in the ratio triplet's z.
+  put the color's saturation in the ratio triplet's x.
+  put the color's saturation in the ratio triplet's y.
+  multiply the ratio triplet's x by the longitude's cosine.
+  multiply the ratio triplet's y by the longitude's sine.
 
 to get a result ratio from a chroma ratio (chroma weight):
   put the chroma in the result.
@@ -571,6 +926,7 @@ to initialize the colors:
   \ "sky" renamed "sky blue"
   put the sky color into the sky blue color.
   put the sky color into the sky blue pen.
+  get fresh random numbers.
 
 to interpret a rainbow color:
   put the current rainbow color number in a number.
@@ -714,17 +1070,19 @@ to make a color a ratio from a left color toward a right color:
   normalize the color.
 
 to make a greenish color:
-  \ To-do:  update "make a color like another color"
-  \ by inverting the dE-2000 formula,
-  \ and pass it a green color as a starting color.
-  pick the greenish color's hue between 900 and 1200.
-  pick the greenish color's saturation between 500 and 1000.
-  pick the greenish color's brightness between 250 and 875.
+  make a color given 1050 and 875 and 375.
+  pick the greenish color near the color. 
 
 to make a lab color mix from a lambda ratio and an alpha ratio and a beta ratio:
   put the lambda ratio in the lab color mix's lambda ratio.
   put the alpha ratio in the lab color mix's alpha ratio.
   put the beta ratio in the lab color mix's beta ratio.
+
+to measure a delta ratio between a color and another color:
+  convert the color to a lab color mix.
+  convert the other color to another lab color mix.
+  measure the delta ratio between the lab color mix
+    and the other lab color mix.
 
 to measure a delta ratio between a lab color mix and another lab color mix:
   \ adapted from http://www.easyrgb.com/en/math.php and
@@ -832,6 +1190,27 @@ to pick a color between another color and a third color:
     between the other color's saturation and the third color's saturation.
   pick the color's lightness
     between the other color's lightness and the third color's lightness.
+
+to pick a color given another color and a difference ratio:
+  put the trifle denominator in a number.
+  negate the number.
+  pick a numerator number between the number and the trifle denominator.
+  put the numerator / the trifle denominator in a sine.
+  get some latitude radians given the sine.
+  add 1 to the number.
+  pick the numerator number between the number and 0.
+  convert the numerator / the trifle denominator to a mixio.
+  pick the number between -179 and 180.
+  add the number to the mixio.
+  get some longitude radians given the mixio (in degrees).
+  get the color given the other color
+    and the longitude and the latitude and the difference.
+
+to pick a color near another color:
+  put 20/1 in a difference ratio.
+  pick a number between 0 and the trifle denominator.
+  scale the difference ratio by the number / the trifle denominator.
+  pick the color given the other color and the difference ratio.
 
 the pink color is a color.
 
@@ -1450,6 +1829,27 @@ to test (colors - gold):
       in the actual.
   stash the test result given the actual.
 
+to test (colors - greenish color):
+  create a test result about "colors" and "greenish color"
+    and expecting "within 20 of pastel-gray lime-green "
+      then "(hue=1050, sat=875, light=375)".
+  put 20/1 in a threshold ratio.
+  put 1050 and 875 and 375 into a starting color.
+  make a greenish color.
+  measure a delta ratio
+    between the starting color and the greenish color.
+  if the delta ratio is at most the threshold ratio,
+    put "within " then the threshold ratio
+      then " of pastel-gray lime-green "
+      then "(hue=1050, sat=875, light=375)"
+      in an actual string.
+  if the delta ratio is greater than the threshold ratio,
+    put the greenish color then " is "
+      then the delta ratio then " away from "
+      then "unsaturated pastel lime-green."
+      in the actual string. 
+  stash the test result given the actual.
+
 to test (colors - high chroma weight):
   make a fuzzy test about "colors"
     and "high chroma weight"
@@ -1476,6 +1876,26 @@ to test (colors - low chroma weight):
   put 21206305/5678214 in a chroma ratio.
   get an actual ratio from the chroma ratio (chroma weight).
   stash the fuzzy test given the actual ratio.
+
+to test (colors - measure green):
+  create a test result about "colors" and "measure green"
+    and expecting "within 20 of pastel-gray lime-green "
+    then "(hue=1050, sat=875, light=375)".
+  put 20/1 in a threshold ratio.
+  put 1050 and 875 and 375 into a starting color.
+  measure a delta ratio
+    between the starting color and the green color.
+  if the delta ratio is at most the threshold ratio,
+    put "within " then the threshold ratio
+      then " of pastel-gray lime-green "
+      then "(hue=1050, sat=875, light=375)"
+      in an actual string.
+  if the delta ratio is greater than the threshold ratio,
+    put the green color then " is "
+      then the delta ratio then " away from "
+      then "pastel-gray lime-green."
+      in the actual string. 
+  stash the test result given the actual.
 
 to test (colors - medium chroma weight):
   make a fuzzy test about "colors"
@@ -1608,6 +2028,8 @@ to test (colors):
   test (colors - 32 E3E5E7 vs DCDFE0).
   test (colors - 33 131518 vs 111316).
   test (colors - 34 06080A vs 020305).
+  test (colors - measure green).
+  test (colors - greenish color).
 
 a very dark color is a color.
 
