@@ -46,6 +46,16 @@ The following requests have been partially demonstrated.
 The following requests are roughly sorted
 from higher priority to lower priority.
 
+308.  Speed up code to choose colors.
+  Status:    Tested.
+  Audience:  Programmers.
+  Benefit:   Medium.  Sped up choosing colors by 40 - 50 percent.
+                      Further sped up to 80 - 350 milliseconds; first test case is 136 - 155 milliseconds.
+  Implementation difficulty:  Hard.
+  Demoing difficulty:  Easy.
+  Testing difficulty:  Easy.
+  Requested by Jasper Paulsen on September 29, 2017.
+
 347.  Update the compiler's timers to use milliseconds instead of ticks,
   when supported by the computer's hardware.
   Status:    Designed.

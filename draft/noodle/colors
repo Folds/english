@@ -7,6 +7,13 @@
 \ is adapted from http://www.easyrgb.com/en/math.php
 \ The remainder is copyright 2014, 2017, 2019 by Jasper Paulsen.
 
+to add a color to another color:
+  add the color's hue to the other color's hue.
+  add the color's saturation to the other color's saturation.
+  add the color's lightness to the other color's lightness.
+  \ the resulting color sum might be out of bounds.
+  \ allow the client code to decide whether to normalize the color.
+
 the black color is a color.
 
 the black pen is a pen.
@@ -267,6 +274,12 @@ to decide if a color is normal:
   if the color's lightness is between 375 and 624, say yes.
   say no.
 
+to decide if a color is normalized:
+  put the color in another color.
+  normalize the other color.
+  if the color is the other color, say yes.
+  say no.
+
 to decide if a color is very dark:
   if the color's lightness is between 125 and 249, say yes.
   say no.
@@ -293,160 +306,14 @@ to decide if a ratio is between a number and another number:
   if the ratio is greater than the other number / 1, say no.
   say yes.
 
+to divide a color by a number:
+  divide the color's hue by the number.
+  divide the color's saturation by the number.
+  divide the color's lightness by the number.
+  \ the resulting color sum might be out of bounds.
+  \ allow the client code to decide whether to normalize the color.
+
 to finalize the colors:
-
-to get a color given another color and some longitude radians and some latitude radians and a difference ratio:
-  put 1/2 in a tolerance ratio.
-  if the difference ratio is at most the tolerance ratio,
-    put the other color in the color;
-    exit.
-  put the difference ratio in a min ratio.
-  subtract the tolerance ratio from the min ratio.
-  put the difference ratio in a max ratio.
-  add the tolerance ratio to the max ratio.
-  privatize the other color.
-  normalize the other color.
-  get a ratio triplet given the other color.
-  get a cusp ratio given the other color and the longitude and the latitude (escape length).
-  put 0/1 in a near ratio.
-  put 0/1 in a nearby ratio.
-  put 500/1 in a mid ratio.
-  if the cusp ratio is at most the mid ratio,
-    put the cusp ratio in the mid ratio;
-    set a flag.
-  get another ratio triplet given the longitude and the latitude and the mid ratio.
-  get a mid color given the other ratio triplet.
-  measure a midby ratio between the other color and the mid color.
-  if the midby ratio is between the min ratio and the max ratio,
-    put the mid color in the color;
-    exit.
-  if the mid ratio is at least the min ratio,
-    put the mid ratio in a far ratio;
-    put the midby ratio in a farby ratio;
-    get the color given the other color
-      and the longitude and the latitude
-      and the difference
-      and the near and the nearby
-      and the far and the farby (linear interpolation);
-    exit.
-  put the mid ratio in the near ratio.
-  put the midby ratio in the nearby ratio.
-  if the flag is clear,
-    put the cusp ratio in the mid ratio;
-    get the other ratio triplet given the longitude and the latitude and the mid ratio;
-    get the mid color given the other ratio triplet;
-    measure the midby ratio between the other color and the mid color.
-  if the midby ratio is between the min ratio and the max ratio,
-    put the mid color in the color;
-    exit.
-  if the mid ratio is at least the min ratio,
-    put the mid ratio in the far ratio;
-    put the midby ratio in the farby ratio;
-    get the color given the other color
-      and the longitude and the latitude
-      and the difference
-      and the near and the nearby
-      and the far and the farby (linear interpolation);
-    exit.
-  put the mid ratio in the near ratio.
-  put the midby ratio in the nearby ratio.
-  put 100000/1 in the far ratio.
-  get the other ratio triplet
-    given the longitude and the latitude and the far ratio.
-  get a far color given the other ratio triplet.
-  measure the farby ratio between the other color and the far color.
-  if the min ratio is at least the farby ratio,
-    put the far color in the color;
-    exit.
-  get the color given the other color
-    and the longitude and the latitude
-    and the difference
-    and the near and the nearby
-    and the far ratio and the farby (hyperbolic interpolation).
-
-to get a color given another color and some longitude radians and some latitude radians and a difference ratio and a near ratio and a nearby ratio and a far ratio and a farby ratio (hyperbolic interpolation):
-  put 1/2 in a tolerance ratio.
-  put the difference ratio in a min ratio.
-  subtract the tolerance ratio from the min ratio.
-  put the difference ratio in a max ratio.
-  add the tolerance ratio to the max ratio.
-  privatize the other color.
-  normalize the other color.
-  get a ratio triplet given the other color.
-  put the latitude's cosine in a scale ratio.
-  multiply the scale ratio by 1/1000.
-  get a nearish ratio given the near ratio
-    and the scale ratio (sloppy arctangent).
-  get a farrish ratio given the far ratio
-    and the scale ratio (sloppy arctangent).
-  loop.
-    add 1 to a counter.
-    put the difference ratio in a slope ratio.
-    subtract the nearby ratio from the slope ratio.
-    put the farby ratio in a denny ratio.
-    subtract the nearby ratio from the denny ratio.
-    divide the slope ratio by the denny ratio.
-    put the farrish ratio in a middish ratio.
-    subtract the nearish ratio from the middish ratio.
-    multiply the middish ratio by the slope ratio.
-    add the nearish ratio to the middish ratio.
-    get a mid ratio given the middish ratio
-      and the scale ratio (sloppy tangent).
-    get another ratio triplet given the longitude and the latitude and the mid ratio.
-    add the ratio triplet to the other ratio triplet.
-    get a mid color given the other ratio triplet.
-    if the counter is at least 9,
-      put the mid color in the color;
-      exit.
-    measure a midby ratio between the other color and the mid color.
-    if the midby ratio is between the min ratio and the max ratio,
-      put the mid color in the color;
-      exit.
-    if the midby ratio is at least the min ratio,
-      put the middish ratio in the farrish ratio;
-      put the midby ratio in the farby ratio;
-      repeat.
-    put the middish ratio in the nearish ratio.
-    put the midby ratio in the nearby ratio.
-  repeat.
-
-to get a color given another color and some longitude radians and some latitude radians and a difference ratio and a near ratio and a nearby ratio and a far ratio and a farby ratio (linear interpolation):
-  put 1/2 in a tolerance ratio.
-  put the difference ratio in a min ratio.
-  subtract the tolerance ratio from the min ratio.
-  put the difference ratio in a max ratio.
-  add the tolerance ratio to the max ratio.
-  privatize the other color.
-  normalize the other color.
-  get a ratio triplet given the other color.
-  loop.
-    add 1 to a counter.
-    put the difference ratio in a slope ratio.
-    subtract the nearby ratio from the slope ratio.
-    put the farby ratio in a denny ratio.
-    subtract the nearby ratio from the denny ratio.
-    divide the slope ratio by the denny ratio.
-    put the far ratio in a mid ratio.
-    subtract the near ratio from the mid ratio.
-    multiply the mid ratio by the slope ratio.
-    add the near ratio to the mid ratio.
-    get another ratio triplet given the longitude and the latitude and the mid ratio.
-    add the ratio triplet to the other ratio triplet.
-    get a mid color given the other ratio triplet.
-    if the counter is at least 9,
-      put the mid color in the color;
-      exit.
-    measure a midby ratio between the other color and the mid color.
-    if the midby ratio is between the min ratio and the max ratio,
-      put the mid color in the color;
-      exit.
-    if the midby ratio is at least the min ratio,
-      put the mid ratio in the far ratio;
-      put the midby ratio in the farby ratio;
-      repeat.
-    put the mid ratio in the near ratio.
-    put the midby ratio in the nearby ratio.
-  repeat.  
 
 to get a color given a ratio triplet:
   \ The scale, and the orientation of the zero hue, and the
@@ -1005,7 +872,7 @@ to make a brownish color:
   pick the brownish color's brightness between 125 and 375.
 
 to make a color:
-  pick the color's hue between 0 and 3600.
+  pick the color's hue between 0 and 3599.        \ 3600 normalizes to 0.
   pick the color's saturation between 0 and 1000.
   pick the color's lightness between 0 and 1000.
 
@@ -1071,7 +938,7 @@ to make a color a ratio from a left color toward a right color:
 
 to make a greenish color:
   make a color given 1050 and 875 and 375.
-  pick the greenish color near the color. 
+  pick the greenish color near the color.
 
 to make a lab color mix from a lambda ratio and an alpha ratio and a beta ratio:
   put the lambda ratio in the lab color mix's lambda ratio.
@@ -1191,26 +1058,59 @@ to pick a color between another color and a third color:
   pick the color's lightness
     between the other color's lightness and the third color's lightness.
 
-to pick a color given another color and a difference ratio:
-  put the trifle denominator in a number.
-  negate the number.
-  pick a numerator number between the number and the trifle denominator.
-  put the numerator / the trifle denominator in a sine.
-  get some latitude radians given the sine.
-  add 1 to the number.
-  pick the numerator number between the number and 0.
-  convert the numerator / the trifle denominator to a mixio.
-  pick the number between -179 and 180.
-  add the number to the mixio.
-  get some longitude radians given the mixio (in degrees).
-  get the color given the other color
-    and the longitude and the latitude and the difference.
+to pick a result color near a starting color:
+  pick the result color within 20/1 of the starting color.
 
-to pick a color near another color:
-  put 20/1 in a difference ratio.
-  pick a number between 0 and the trifle denominator.
-  scale the difference ratio by the number / the trifle denominator.
-  pick the color given the other color and the difference ratio.
+to pick a result color within a difference ratio of a starting color:
+  make a possible color.
+  measure a delta ratio between the starting color and the possible color.
+  if the delta ratio is at most the difference ratio,
+    put the possible color in the result color; exit.
+  put 1 in a count.
+  divide the delta ratio by the difference ratio
+    giving a quotient and a remainder ratio.
+  \
+  round the quotient up to the nearest power of two.
+  divide the largest number by the quotient
+    giving another quotient and a remainder.
+  pick a random number between 1 and the other quotient.
+  put the quotient / 1 in a ratio.
+  multiply the ratio by the other quotient / the random number.
+  divide the ratio's numerator by the ratio's denominator
+    giving the quotient and another remainder.
+  \
+  pick a flag.
+  if the flag is set, negate the quotient.
+  loop.
+    if the count is at least 9,
+      put the possible color in the result color; exit.
+    put the possible color in an offset color.
+    subtract the starting color from the offset color.
+    divide the offset color by the quotient.
+    put the starting color in the possible color.
+    add the offset color to the possible color.
+    normalize the possible color's hue.
+    if the possible color is not normalized,
+      divide the offset color by -1;
+      put the starting color in the possible color;
+      add the offset color to the possible color.
+    normalize the possible color.
+    measure the delta ratio between the starting color and the possible color.
+    if the delta ratio is at most the difference ratio,
+      put the possible color in the result color; exit.
+    add 1 to the count.
+    divide the delta ratio by the difference ratio
+      giving the quotient and the remainder ratio.
+    \
+    round the quotient up to the nearest power of two.
+    divide the largest number by the quotient
+      giving the other quotient and the remainder.
+    pick the random number between 1 and the other quotient.
+    put the quotient / 1 in the ratio.
+    multiply the ratio by the other quotient / the random number.
+    divide the ratio's numerator by the ratio's denominator
+      giving the quotient and the other remainder.
+  repeat.
 
 the pink color is a color.
 
@@ -1338,6 +1238,13 @@ the sky color is a color.
 The sky pen is a pen.
 
 a solid color is a color.
+
+to subtract a color from another color:
+  subtract the color's hue from the other color's hue.
+  subtract the color's saturation from the other color's saturation.
+  subtract the color's lightness from the other color's lightness.
+  \ the resulting color difference might be out of bounds.
+  \ allow the client code to decide whether to normalize the color.
 
 to swap a color with another color:
   swap the color's hue with the other color's hue.
@@ -1846,7 +1753,7 @@ to test (colors - greenish color):
   if the delta ratio is greater than the threshold ratio,
     put the greenish color then " is "
       then the delta ratio then " away from "
-      then "unsaturated pastel lime-green."
+      then "pastel-gray lime-green."
       in the actual string. 
   stash the test result given the actual.
 
@@ -2029,7 +1936,18 @@ to test (colors):
   test (colors - 33 131518 vs 111316).
   test (colors - 34 06080A vs 020305).
   test (colors - measure green).
+  \ make the pick a color near a color test take
+  \ a repeatable amount of time, by de-randomizing it.
+  put the seed in a seedling number.
+  put 285324593 in the seed.
   test (colors - greenish color).
+\  loop.
+\    add 1 to a counter.
+\    test (colors - greenish color).
+\    if the counter is at least 100, break.
+\  repeat.
+  \ restore randomization.
+  put the seedling in the seed.
 
 a very dark color is a color.
 

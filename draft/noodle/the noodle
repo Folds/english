@@ -7121,6 +7121,11 @@ the pen size is a number.
 
 a percent is a number. \ a scale with 100 in the denominator
 
+to pick a flag:
+  pick a number between the smallest number and the largest number.
+  if the number is negative, clear the flag; exit.
+  set the flag.
+
 to pick a number:
   pick the number between 0 and the largest number.
 
