@@ -27,6 +27,52 @@ to add some trifles to a mixio:
   add the trifles to the mixio's trifles.
   normalize the mixio.
 
+to cache mixios given a mixio and a number:
+  if the number is less than 1, exit.
+  if the mixio is not the first cached mixio,
+    clear cached mixios;
+    put the mixio in the first cached mixio.
+  if the number is less than 2, exit.
+  if the second cached mixio is 0,
+    put the mixio in the second cached mixio;
+    multiply the second cached mixio by the mixio.
+  if the number is less than 3, exit.
+  if the number is at least 4 and the fourth cached mixio is zero,
+    put the second cached mixio in the fourth cached mixio;
+    multiply the fourth cached mixio by the second cached mixio.
+  if the number is at least 8 and the eighth cached mixio is zero,
+    put the fourth cached mixio in the eighth cached mixio;
+    multiply the eighth cached mixio by the fourth cached mixio.
+  if the number is at least 16 and the sixteenth cached mixio is zero,
+    put the eighth cached mixio in the sixteenth cached mixio;
+    multiply the sixteenth cached mixio by the eighth cached mixio.
+  divide the number by 4 giving a quotient and a remainder.
+  if the remainder is 3 and the third cached mixio is zero,
+    put the mixio in the third cached mixio;
+    multiply the third cached mixio by the second cached mixio.
+  if the number is less than 5, exit.
+  divide the number by 8 giving the quotient and the remainder.
+  if the remainder is 5 and the fifth cached mixio is zero,
+    put the mixio in the fifth cached mixio;
+    multiply the fifth cached mixio by the fourth cached mixio.
+  if the remainder is 6 and the sixth cached mixio is zero,
+    put the second cached mixio in the sixth cached mixio;
+    multiply the sixth cached mixio by the fourth cached mixio.
+  if the remainder is 7 and the seventh cached mixio is zero,
+    put the third cached mixio in the seventh cached mixio;
+    multiply the seventh cached mixio by the fourth cached mixio.
+
+to clear cached mixios:
+  clear the first cached mixio.
+  clear the second cached mixio.
+  clear the third cached mixio.
+  clear the fourth cached mixio.
+  clear the fifth cached mixio.
+  clear the sixth cached mixio.
+  clear the seventh cached mixio.
+  clear the eighth cached mixio.
+  clear the sixteenth cached mixio.
+
 to clear a mixio:
   clear the mixio's whole number.
   clear the mixio's nips.
@@ -343,6 +389,16 @@ to decide if a mixio is properly non-negative:
   privatize the mixio.
   normalize the mixio.
   if the mixio's whole number is not 0, say no.
+  say yes.
+
+to decide if a number is another number and a mixio is zero:
+  if the number is not the other number, say no.
+  if the mixio is not 0, say no.
+  say yes.
+
+to decide if a number is at least another number and a mixio is zero:
+  if the number is less than the other number, say no.
+  if the mixio is not 0, say no.
   say yes.
 
 to decide if a number is wrapped given a number called alpha and a number called omega:
@@ -785,12 +841,33 @@ to divide a mixio by a number returning another mixio (modest divisor):
     subtract 1 from the other mixio's trifles.
   normalize the other mixio.
 
+the first cached mixio is a mixio.
+the second cached mixio is a mixio.
+the third cached mixio is a mixio.
+the fourth cached mixio is a mixio.
+the fifth cached mixio is a mixio.
+the sixth cached mixio is a mixio.
+the seventh cached mixio is a mixio.
+the eighth cached mixio is a mixio.
+the sixteenth cached mixio is a mixio.
+
 a fuzzy test has 
   a string called context, 
   a string called test name,   
   a bullseye mixio, 
   some tolerance trifles, and \ implied denominator of 43,200 * 43,200.
   a timer. 
+
+to get a cached mixio given a number:
+  if the number is 1, put the first cached mixio in the cached mixio; exit.
+  if the number is 2, put the second cached mixio in the cached mixio; exit.
+  if the number is 3, put the third cached mixio in the cached mixio; exit.
+  if the number is 4, put the fourth cached mixio in the cached mixio; exit.
+  if the number is 5, put the fifth cached mixio in the cached mixio; exit.
+  if the number is 6, put the sixth cached mixio in the cached mixio; exit.
+  if the number is 7, put the seventh cached mixio in the cached mixio; exit.
+  if the number is 8, put the eighth cached mixio in the cached mixio; exit.
+  if the number is 16, put the sixteenth cached mixio in the cached mixio; exit.
 
 to get modesty threshold given a mixio called divisor returning a number:
   put the divisor's whole number in the number.
@@ -1308,36 +1385,19 @@ to raise a mixio to a number:
     convert 0/1 to the mixio; exit.
   if raising the mixio to the number is trifling,
     convert 1 / the trifle denominator to the mixio; exit.
-  if the number is at least 2,
-    put the mixio in a square mixio;
-    multiply the square mixio by the mixio.
-  if the number is at least 4,
-    put the square mixio in a fourth mixio;
-    multiply the fourth mixio by the square mixio.
-  if the number is at least 8,
-    put the fourth mixio in an eighth mixio;
-    multiply the eighth mixio by the fourth mixio.
-  if the number is at least 16,
-    put the eighth mixio in a sixteenth mixio;
-    multiply the sixteenth mixio by the eighth mixio.
+  cache mixios given the mixio and the number.
   convert 1/1 to a result mixio.
   loop.
     if the number is less than 16, break.
     subtract 16 from the number.
-    multiply the result mixio by the sixteenth mixio.
+    multiply the result mixio by the sixteenth cached mixio.
   repeat.
   if the number is at least 8,
     subtract 8 from the number;
-    multiply the result mixio by the eighth mixio.
-  if the number is at least 4,
-    subtract 4 from the number;
-    multiply the result mixio by the fourth mixio.
-  if the number is at least 2,
-    subtract 2 from the number;
-    multiply the result mixio by the square mixio.
-  if the number is at least 1,
-    subtract 1 from the number;
-    multiply the result mixio by the mixio.
+    multiply the result mixio by the eighth cached mixio.
+  if the number is positive,
+    get a cached mixio given the number;
+    multiply the result mixio by the cached mixio.
   put the result mixio in the mixio.
   if the original number is at least 24, exit.
   if the mixio is less than 2 trifles,
