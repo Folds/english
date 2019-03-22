@@ -313,112 +313,17 @@ to divide a color by a number:
   \ the resulting color sum might be out of bounds.
   \ allow the client code to decide whether to normalize the color.
 
+to embiggen a quotient:
+  round the quotient up to the nearest power of two.
+  divide the largest number by the quotient
+    giving another quotient and a remainder.
+  pick a random number between 1 and the other quotient.
+  put the quotient / 1 in a ratio.
+  multiply the ratio by the other quotient / the random number.
+  divide the ratio's numerator by the ratio's denominator
+    giving the quotient and another remainder.
+
 to finalize the colors:
-
-to get a color given a ratio triplet:
-  \ The scale, and the orientation of the zero hue, and the
-  \ direction of hue rotation, only matter to the extent that
-  \ this routine and its inverse need to be true inverses.
-  put 1 in the color's lightness.
-  scale the color's lightness by the ratio triplet's z.
-  find the hypotenuse of the ratio triplet's x
-    and the ratio triplet's y giving a ratio.
-  put 1 in the color's saturation.
-  scale the color's saturation by the ratio.
-  get a hue ratio given the ratio triplet's x
-    and the ratio triplet's y (lab toward hue).
-  put 10 in the color's hue.
-  scale the color's hue by the hue ratio.
-  normalize the color.
-
-to get a cusp ratio given a color and some longitude radians and some latitude radians (escape length):
-  privatize the color.
-  normalize the color.
-  privatize the latitude radians.
-  normalize the latitude radians.
-  put half pi in some bogus radians.
-  put 1000/1 in a ceiling ratio.
-  subtract the color's lightness / 1 from the ceiling ratio.
-  if the latitude radians are the bogus radians,
-    put the ceiling ratio in the cusp ratio;
-    exit.
-  negate the bogus radians.
-  normalize the bogus radians.
-  if the latitude radians are the bogus radians,
-    put the color's lightness / 1 in the cusp ratio;
-    exit.  
-  privatize the longitude radians.
-  get a ratio triplet given the color.
-  put the color's hue / 10 in a ratio.
-  get some other longitude radians given the ratio (in degrees).
-  subtract the other longitude radians from the longitude radians.
-  get the ratio given the color's saturation / 1 and 1000 / 1 and the longitude radians (escape length).
-  put the latitude's tangent in a tangent.
-  put the tangent in a z ratio.
-  multiply the z ratio by the ratio.
-  if the z ratio is 0/1,
-    put 0/1 in the cusp ratio;
-    exit.
-  if the z ratio is at most - the color's lightness / 1,
-    divide the ratio by the z ratio;
-    put the ratio in an area ratio;
-    multiply the area ratio by the ratio;
-    add 1/1 to the area ratio;
-    put the area ratio's square root in the cusp ratio;
-    multiply the cusp ratio by the color's lightness / 1;
-    exit.
-  if the z ratio is at least the ceiling ratio,
-    divide the ratio by the z ratio;
-    put the ratio in the area ratio;
-    multiply the area ratio by the ratio;
-    add 1/1 to the area ratio;
-    put the area ratio's square root in the cusp ratio;
-    multiply the cusp ratio by the ceiling ratio;
-    exit.    
-  put the tangent in the area ratio.
-  multiply the area ratio by the tangent.
-  add 1/1 to the area ratio.
-  put the area ratio's square root in the cusp ratio.
-  multiply the cusp ratio by the ratio.
-  de-sign the cusp ratio.  
-
-to get a cusp ratio given a ratio and a radius ratio and some longitude radians (escape length):
-  privatize the longitude radians.
-  normalize the longitude radians.
-  put half pi in some bogus radians.
-  put the radius ratio in a temp ratio.
-  multiply the temp ratio by the radius ratio.
-  put the ratio in another ratio.
-  multiply the other ratio by the ratio.
-  if the longitude radians are the bogus radians,
-    subtract the other ratio from the temp ratio;
-    put the temp ratio's square root into the cusp ratio;
-    exit.
-  negate the bogus radians.
-  normalize the bogus radians.
-  if the longitude radians are the bogus radians,
-    subtract the other ratio from the temp ratio;
-    put the temp ratio's square root into the cusp ratio;
-    exit.
-  put the longitude's tangent in a tangent.
-  put the tangent in an area ratio.
-  multiply the area ratio by the tangent.
-  put the area ratio in a beta ratio.
-  scale the beta ratio by the ratio.
-  put the area ratio in an alpha ratio.
-  add 1/1 to the alpha ratio.
-  put the beta ratio in a determinant ratio.
-  scale the determinant ratio by the beta ratio.
-  multiply the other ratio by the area ratio.
-  subtract the other ratio from the temp ratio.
-  multiply the temp ratio by the alpha ratio.
-  add the temp ratio to the determinant ratio.
-  put the longitude's cosine in a cosine.
-  put the cosine's sign in a number.
-  put the determinant ratio's square root in the cusp ratio.
-  multiply the cusp ratio by the number.
-  add the beta ratio to the cusp ratio.
-  divide the cusp ratio by the alpha ratio.
 
 to get an lch color difference from an lch color mix and another lch color mix:
   put the other lch color mix's lambda   in the lch color difference's lambda.
@@ -995,6 +900,11 @@ to measure a delta ratio between a lab color mix and another lab color mix:
   measure the delta given the lch color difference
     and the ratio triplet and the synergy weight.
 
+to measure a delta ratio between a lab color mix and a color:
+  convert the color to another lab color mix.
+  measure the delta ratio between the lab color mix
+    and the other lab color mix.
+
 to measure a delta ratio given an lch color difference and a ratio triplet and a ratio called synergy weight:
   put the lch color difference's lambda in a temp ratio.
   divide the temp by the ratio triplet's x.
@@ -1063,22 +973,14 @@ to pick a result color near a starting color:
 
 to pick a result color within a difference ratio of a starting color:
   make a possible color.
-  measure a delta ratio between the starting color and the possible color.
+  convert the starting color to a starting lab color mix.
+  measure a delta ratio between the starting lab color mix and the possible color.
   if the delta ratio is at most the difference ratio,
     put the possible color in the result color; exit.
   put 1 in a count.
   divide the delta ratio by the difference ratio
     giving a quotient and a remainder ratio.
-  \
-  round the quotient up to the nearest power of two.
-  divide the largest number by the quotient
-    giving another quotient and a remainder.
-  pick a random number between 1 and the other quotient.
-  put the quotient / 1 in a ratio.
-  multiply the ratio by the other quotient / the random number.
-  divide the ratio's numerator by the ratio's denominator
-    giving the quotient and another remainder.
-  \
+  embiggen the quotient.
   pick a flag.
   if the flag is set, negate the quotient.
   loop.
@@ -1095,21 +997,13 @@ to pick a result color within a difference ratio of a starting color:
       put the starting color in the possible color;
       add the offset color to the possible color.
     normalize the possible color.
-    measure the delta ratio between the starting color and the possible color.
+    measure the delta ratio between the starting lab color mix and the possible color.
     if the delta ratio is at most the difference ratio,
       put the possible color in the result color; exit.
     add 1 to the count.
     divide the delta ratio by the difference ratio
       giving the quotient and the remainder ratio.
-    \
-    round the quotient up to the nearest power of two.
-    divide the largest number by the quotient
-      giving the other quotient and the remainder.
-    pick the random number between 1 and the other quotient.
-    put the quotient / 1 in the ratio.
-    multiply the ratio by the other quotient / the random number.
-    divide the ratio's numerator by the ratio's denominator
-      giving the quotient and the other remainder.
+    embiggen the quotient.
   repeat.
 
 the pink color is a color.
