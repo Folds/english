@@ -46,19 +46,9 @@ The following requests have been partially demonstrated.
 The following requests are roughly sorted
 from higher priority to lower priority.
 
-308.  Speed up code to choose colors.
-  Status:    Tested.
-  Audience:  Programmers.
-  Benefit:   Medium.  Sped up choosing colors by 40 - 50 percent.
-                      Further sped up to 80 - 350 milliseconds; first test case is 136 - 155 milliseconds.
-  Implementation difficulty:  Hard.
-  Demoing difficulty:  Easy.
-  Testing difficulty:  Easy.
-  Requested by Jasper Paulsen on September 29, 2017.
-
 347.  Update the compiler's timers to use milliseconds instead of ticks,
   when supported by the computer's hardware.
-  Status:    Designed.
+  Status:    Implemented.
   Audience:  Programmers.
   Benefit:   Minor.
   Implementation difficulty:  Easy.
@@ -83,6 +73,18 @@ from higher priority to lower priority.
   Demoing difficulty:  Medium.
   Testing difficulty:  Medium.
   Requested by Gerry Rzeppa on June 25, 2018.
+
+308.  Speed up code to choose colors.
+  Status:    Tested.
+  Audience:  Programmers.
+  Benefit:   Medium.
+             Sped up choosing colors by 40 - 50 percent.
+             Further sped up to 80 - 350 milliseconds; first test case is 136 - 155 milliseconds.
+             Further sped up to 66 - 300 milliseconds; first test case is 100 milliseconds; mean is 120 milliseconds.
+  Implementation difficulty:  Hard.
+  Demoing difficulty:  Easy.
+  Testing difficulty:  Easy.
+  Requested by Jasper Paulsen on September 29, 2017.
 
 340.  Use temp variables when bumping a rider.
   According to Mike Gonta, this will prevent Windows Defender

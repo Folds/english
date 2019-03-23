@@ -1011,6 +1011,15 @@ to put a ratio's fifth power into another ratio:
   multiply the ratio by the original ratio.
   put the ratio in the other ratio.
 
+to put a ratio's seventh power into another ratio:
+  if the ratio is 0, put 0 in the other ratio; exit.
+  if the ratio is 1, put 1 in the other ratio; exit.
+  privatize the ratio.
+  multiply the ratio by the ratio.
+  multiply the ratio by the ratio.
+  multiply the ratio by the original ratio's third power.
+  put the ratio in the other ratio.
+
 to put a ratio's sign into a number;
 to get the sign of a ratio returning a number:
   get the sign of the ratio's denominator returning the number.

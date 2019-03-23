@@ -961,8 +961,17 @@ a pastel color is a color.
 an pen is a color.
 
 to pick a color between another color and a third color:
+  privatize the other color.
+  privatize the third color.
+  if the third color's hue is more than
+    the other color's hue plus 1800,
+      add 3600 to the other color's hue.
+  if the other color's hue is more than
+    the third color's hue plus 1800,
+      add 3600 to the third color's hue.
   pick the color's hue
     between the other color's hue and the third color's hue.
+  normalize the color's hue.
   pick the color's saturation
     between the other color's saturation and the third color's saturation.
   pick the color's lightness
@@ -1070,15 +1079,6 @@ to put a hue and a saturation and a lightness into a color:
   limit the color's saturation to 0 and 1000.
   put the lightness into the color's lightness.
   limit the color's lightness to 0 and 1000.
-
-to put a ratio's seventh power into another ratio:
-  if the ratio is 0, put 0 in the other ratio; exit.
-  if the ratio is 1, put 1 in the other ratio; exit.
-  privatize the ratio.
-  multiply the ratio by the ratio.
-  multiply the ratio by the ratio.
-  multiply the ratio by the original ratio's third power.
-  put the ratio in the other ratio.
 
 to put an xyz color mix in another xyz color mix:
   put the xyz color mix's x in the other xyz color mix's x.
@@ -1639,17 +1639,20 @@ to test (colors - greenish color):
   make a greenish color.
   measure a delta ratio
     between the starting color and the greenish color.
+  put the greenish color then " is "
+    then the delta ratio then " away from "
+    then "pastel-gray lime-green."
+    into the test result's actual value. 
+  if the delta ratio is greater than the threshold ratio,
+    put "more than " then the threshold ratio then " away"
+    in the test result's interpretation.
   if the delta ratio is at most the threshold ratio,
     put "within " then the threshold ratio
       then " of pastel-gray lime-green "
       then "(hue=1050, sat=875, light=375)"
-      in an actual string.
-  if the delta ratio is greater than the threshold ratio,
-    put the greenish color then " is "
-      then the delta ratio then " away from "
-      then "pastel-gray lime-green."
-      in the actual string. 
-  stash the test result given the actual.
+      in the test result's interpretation.
+  stop the test result's timer.
+  append the test result to the status' all test results.
 
 to test (colors - high chroma weight):
   make a fuzzy test about "colors"
@@ -1686,17 +1689,20 @@ to test (colors - measure green):
   put 1050 and 875 and 375 into a starting color.
   measure a delta ratio
     between the starting color and the green color.
+  put the green color then " is "
+    then the delta ratio then " away from "
+    then "pastel-gray lime-green."
+    into the test result's actual value. 
+  if the delta ratio is greater than the threshold ratio,
+    put "more than " then the threshold ratio then " away"
+    in the test result's interpretation.
   if the delta ratio is at most the threshold ratio,
     put "within " then the threshold ratio
       then " of pastel-gray lime-green "
       then "(hue=1050, sat=875, light=375)"
-      in an actual string.
-  if the delta ratio is greater than the threshold ratio,
-    put the green color then " is "
-      then the delta ratio then " away from "
-      then "pastel-gray lime-green."
-      in the actual string. 
-  stash the test result given the actual.
+      in the test result's interpretation.
+  stop the test result's timer.
+  append the test result to the status' all test results.
 
 to test (colors - medium chroma weight):
   make a fuzzy test about "colors"

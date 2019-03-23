@@ -8134,7 +8134,13 @@ to put a timer's precise string into a string:
   if the string ends with " ", remove the last byte from the string.
 
 to put a timer's string into a string:
-  convert the timer's ticks to the string.
+  if the timer is imprecise,
+    convert the timer's ticks to the string;
+    exit.
+  put the timer's jiffies into a bigint.
+  multiply the bigint by 1000.
+  divide the bigint by the timer's precision. \ in milliseconds.
+  convert the bigint to the string.
 
 to put a timer's ticks into some ticks:
   put the timer's total ticks into the ticks.
