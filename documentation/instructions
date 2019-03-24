@@ -8,7 +8,7 @@ ream cal-3024
        "the CAL-3040 instructions are copyright © 2006"
        "by The Osmosian Order of Plain English Programmers."
        ""
-       "The remainder is copyright © 2014, 2017-2018 by Jasper Paulsen."
+       "The remainder is copyright © 2014, 2017-2019 by Jasper Paulsen."
        ""
        "https://github.com/Folds/english"
     end
@@ -43,9 +43,9 @@ ream cal-3024
     text -1 0 0 -1 0 0 2160 2160 10170 14400 0 "title" "Arial" 320 "left" 0 0 0 yes
        "INTRODUCTION"
        ""
-       "I am the CAL-4016. My primary function is to compile Plain English text files"
+       "I am the CAL-4017. My primary function is to compile Plain English text files"
        "into executable programs compatible with the Windows operating system."
-       "My code — just 40,000 lines of Plain English — is surprisingly broad in scope."
+       "My code — just 44,000 lines of Plain English — is surprisingly broad in scope."
        ""
        "The ""noodle"" subfolder is my frontal lobe, which goes with me wherever I go."
        "You can use (or omit) the other subfolders and files, depending on what kind of program you want to write."
@@ -63,7 +63,7 @@ ream cal-3024
        "INSTALLATION"
        ""
        "I don't require special installation procedures. My source code, my"
-       "executable self, and this very documentation (in both native and PDF format) are all contained in the CAL-4016 folder.  Simply double-click the executable file to activate me."
+       "executable self, and this very documentation (in both native and PDF format) are all contained in the CAL-4017 folder.  Simply double-click the executable file to activate me."
        ""
        "If you usually want me to use different fonts, or if you usually want me to"
        "cover the whole screen, you can make a desktop icon for my executable."
@@ -82,7 +82,7 @@ ream cal-3024
        ""
        "Let me put it this way."
        ""
-       "The CAL-4016 is one of the most advanced Plain English compilers ever made. But I am currently in ""alpha test"".  Sometimes the kluge says I ""cannot continue."""
+       "The CAL-4017 is one of the most advanced Plain English compilers ever made. But I am currently in ""alpha test"".  Sometimes the kluge says I ""cannot continue."""
        "So please, save your work often."
        ""
        "Questions, comments, and crash reports may be directed to — https://github.com/Folds/english/wiki."
@@ -850,7 +850,7 @@ ream cal-3024
        ""
        "It's actually pretty easy.  I'll lead you through it:"
        ""
-       "(1) Open the CAL-4016 directory and copy my desktop subfolder and my noodle subfolder. Shift-click or drag to select. Copy is under ""C""."
+       "(1) Open the CAL-4017 directory and copy my desktop subfolder and my noodle subfolder. Shift-click or drag to select. Copy is under ""C""."
        ""
        "(2) Make a new directory on your ""C"" drive with an appropriate name like ""Baby Cal"". Then open it up and paste the two subfolders into it. Open one of the subfolders.  Now open any of the files. To open a bunch of files, just drag to select and tap the ENTER key."
        ""
@@ -1003,7 +1003,7 @@ ream cal-3024
     end
     rectangle 0 0 0 -1 0 0 6840 7740 8280 8100 90
     text -1 0 0 -1 0 0 6960 7740 8160 8100 0 "" "Arial" 360 "right" 0 0 0 yes
-       "5622:1"
+       "5694:1"
     end
     rectangle 0 0 0 -1 0 0 9810 10500 10080 10770 90
     rectangle 0 0 0 -1 0 0 9810 8370 10080 10500 90
@@ -1246,7 +1246,7 @@ ream cal-3024
        "c:\cal monet"
     end
     text -1 0 0 -1 0 0 2520 6660 9720 7020 0 "" "Arial" 360 "left" 0 0 0 yes
-       "c:\cal-4016"
+       "c:\cal-4017"
     end
     text -1 0 0 -1 0 0 2520 7020 9720 7380 0 "" "Arial" 360 "left" 0 0 0 yes
        "c:\another directory that you already had"
@@ -1382,7 +1382,7 @@ ream cal-3024
        "And now we're ready to write some Plain English code."
     end
     text -1 0 0 -1 0 0 2160 8100 10440 10260 0 "" "arial" 320 "left" 0 0 0 yes
-       "Good. Now get a copy of my noodle subfolder from the CAL-4016 directory, open our new directory, and slip it in there with CTRL-V."
+       "Good. Now get a copy of my noodle subfolder from the CAL-4017 directory, open our new directory, and slip it in there with CTRL-V."
        ""
        "Last step. Make a new text file in our new directory and call it whatever you please. But don't give it an extension. I only compile files with no extension."
        "I'm going to assume you decided to call it ""How to Paint"", like this:"
@@ -1855,7 +1855,7 @@ ream cal-3024
        ""
        "Now I know it doesn't look like it, but it is running. And running. And running. You can't see it because we haven't told it to do anything visible or audible yet. But it is running. And running. And running. So stop it. Like this:"
        ""
-       "(1) ALT-TAB back to me, the CAL-4016."
+       "(1) ALT-TAB back to me, the CAL-4017."
        ""
        "(2) Execute the Stop command. It's under ""S""."
     end
@@ -6973,7 +6973,7 @@ ream cal-3024
     polygon 0 0 0 -1 0 0 4 2160 5760 5040 5670 7920 5850 10080 5760
     polygon 0 0 0 -1 0 0 2 10080 4320 10080 5760
     text -1 0 0 -1 0 0 2520 4320 9720 5400 0 "" "Arial" 320 "left" 0 0 0 yes
-       "I am the CAL-4016. What is your name?"
+       "I am the CAL-4017. What is your name?"
        "> Dr. Chandra"
        "Good morning, Dr. Chandra. I'm ready for my first lesson."
     end
@@ -7031,7 +7031,7 @@ ream cal-3024
        "DECISIONS I KNOW HOW TO MAKE"
        ""
        "I like deciders because they make me smarter. In fact, I collect them. "
-       "Right now I have 279 deciders in my noodle subfolder."
+       "Right now I have 300 deciders in my noodle subfolder."
        "By the time you read this, I'm sure there will be many more."
        "Here is a sampling of the operational phrases:"
        ""
@@ -9165,7 +9165,7 @@ ream cal-3024
        ""
        "I like tests because they encourage you to tell me how to do new things,"
        "because you can check whether I still know how to do old things."
-       "So I collect tests.  Right now I have 256 tests in my noodle subfolder."
+       "So I collect tests.  Right now I have 392 tests in my noodle subfolder."
        ""
        ""
        ""
@@ -9296,7 +9296,7 @@ ream cal-3024
     end
     rectangle 0 0 0 -1 0 0 6840 3870 8280 4230 90
     text -1 0 0 -1 0 0 6960 3870 8160 4230 0 "" "Arial" 360 "right" 0 0 0 yes
-       "10196:1"
+       "10568:1"
     end
     rectangle 0 0 0 -1 0 0 9810 6796 10080 7066 90
     rectangle 0 0 0 -1 0 0 9810 4500 10080 6796 90
@@ -9495,13 +9495,13 @@ ream cal-3024
        "START a timer."
        "STOP a timer."
        ""
-       "I use timers to make sure I can recompile myself in less than five seconds. Look in the bottom of a ""listing"" to see them all. You can use them to make your programs lightning-fast, as well."
+       "I use timers to make sure I can recompile myself in less than seven seconds. Look in the bottom of a ""listing"" to see them all. You can use them to make your programs lightning-fast, as well."
        ""
        "One-shot timings can be accomplished simply by inserting ""start a timer"" and ""stop the timer"" at the appropriate spots in your code. "
        ""
        "Cumulative timings can be collected by calling ""reset"" once, then ""restart"" and ""stop"" in pairs throughout your code."
        ""
-       "There is a function in my noodle that will get you ""a timer's string"" anytime you need it — even while it is running — and you can also concatenate timers and strings for display at any time using the infix THEN operator."
+       "There are functions in my noodle that will get you ""a timer's string"" or ""a timer's microsecond string"" anytime you need it — even while it is running — and you can also concatenate timers and strings for display at any time using the infix THEN operator."
     end
     text -1 0 0 -1 0 0 10800 14760 11520 15120 0 "page number" "Arial" 320 "right" 0 0 0 yes
        "124"
