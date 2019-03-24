@@ -195,9 +195,7 @@ to handle an event (regression test):
   untint the status.
   show status "Testing...".
   test.
-\  put "Tests took " then the status' all test results' timer's string
-\    then " ms" in a message.
-  put "Tests took " then the status' all test results' timer's careful string
+  put "Tests took " then the status' all test results' timer's formatted string
     in a message.
   show status the message.
   if the current tab is nil,
@@ -606,8 +604,6 @@ to test (the testing time):
     and expecting the expectation.
   put the status' all test results' timer's string
     then " ms" in a string called actual.
-\  put the status' all test results' timer's careful string
-\    in a string called actual.
   if the status' all test results' timer's total ticks is at most the maximum,
     pass the test result given the actual.
   if the status' all test results' timer's total ticks is more than the maximum,

@@ -2605,6 +2605,10 @@ to decide if a number is prime (ignore large cache):
   if the number is evenly divisible by any of the early primes, say no.
   say yes.
 
+to decide if a number is zero:
+  if the number is 0, say yes.
+  say no.
+
 to decide if the osmosian font is loaded:
   if the osmosian font resource is 0, say no.
   say yes.
@@ -8009,6 +8013,7 @@ to put some things' count into a count:
   repeat.
 
 to put a timer into another timer:
+  put the timer's count into the other timer's count.
   put the timer's start ticks into the other timer's start ticks.
   put the timer's total ticks into the other timer's total ticks.
   put the timer's imprecise flag into the other timer's imprecise flag.
@@ -8092,7 +8097,7 @@ to put a timer's cached seconds into a number:
   subtract the other bigint from the bigint.
   convert the bigint to the number.
 
-to put a timer's careful string into a string:
+to put a timer's formatted string into a string:
   clear the string.
   cache the timer.
   if the timer is imprecise,
@@ -8119,9 +8124,23 @@ to put a timer's jiffies into some jiffies:
   subtract the timer's start jiffies from the other jiffies.
   add the other jiffies to the jiffies.
 
+to put a timer's microsecond string into a string:
+  if the timer is imprecise,
+    put the timer's ticks in some ticks;
+    convert the ticks to the string.
+  if the ticks are not zero,
+    append "000 " then the micro byte then "s" to the string.
+  if the timer is imprecise, exit.
+  put the timer's jiffies into a bigint.
+  multiply the bigint by 1000000.
+  divide the bigint by the timer's precision. \ in microseconds.
+  convert the bigint to the string.
+  if the bigint is not zero,
+    append " " then the micro byte then "s" to the string.
+
 to put a timer's precise string into a string:
   clear the string.
-  put the timer's careful string into the string.
+  put the timer's formatted string into the string.
   if the timer is imprecise, exit.
   append " " to the string.
   put the timer's cached microseconds in the number.
@@ -8130,7 +8149,7 @@ to put a timer's precise string into a string:
   put the timer's cached nanoseconds in the number.
   if the number is positive,
     append the number then " ns " to the string.
-  if the string ends with " ", remove the first byte from the string.
+  if the string begins with " ", remove the first byte from the string.
   if the string ends with " ", remove the last byte from the string.
 
 to put a timer's string into a string:
@@ -10483,6 +10502,39 @@ to test (the noodle - sorting):
   stash the test result given the actual.
   destroy the nametags.
 
+to test (the noodle - timer microsecond string):
+  \ Assumes that either the tests have been running long enough
+  \ that the ticks are not zero, or that the tests have been
+  \ running for at least a millisecond and the timers are precise.
+  create a test result about "the noodle" and "timer microsecond string"
+    and expecting "about 1000 microseconds per millisecond".
+  put the status' all test results' timer in a timer.
+  stop the timer.
+  put the timer's string in a millisecond string.
+  put the timer's microsecond string in a microsecond string.
+  put the millisecond string then " ms in " then the microsecond string
+    in the test result's actual value.
+  if the microsecond string does not start with the millisecond string,
+    stop the test result's timer;
+    append the test result to the status' all test results;
+    exit.
+  if the microsecond string does not end with " µs",
+    stop the test result's timer;
+    append the test result to the status' all test results;
+    exit.
+  put the millisecond string's length in a millisecond length.
+  put the microsecond string's length in a microsecond length.
+  put the millisecond length in an expected microsecond length.
+  add 6 to the expected microsecond length. \ 3 extra digits, plus " µs" 
+  if the microsecond length is not the expected microsecond length,
+    stop the test result's timer;
+    append the test result to the status' all test results;
+    exit.
+  put "about 1000 microseconds per millisecond"
+    in the test result's interpretation.  
+  stop the test result's timer.
+  append the test result to the status' all test results.
+
 to test (the noodle - timer precision is not negative):
   create a test result about "the noodle" and "timer precision is not negative"
     and expecting "precision is not negative".
@@ -10566,6 +10618,7 @@ to test (the noodle):
   test (the noodle - timer precision is not negative).
   test (string widths).
   test (unicode).
+  test (the noodle - timer microsecond string).
 
 to test (the talker - find PlaySound):
   create a test result about "the noodle" and "find PlaySound"
