@@ -147,6 +147,24 @@ to convert an hsl color mix to a string:
     then the hsl color mix's lightness then " light"
     in the string.
 
+to convert a lab color mix to a string:
+  put the lab color mix's lambda then " L; "
+    then the lab color mix's alpha then " a; "
+    then the lab color mix's beta then " b"
+    in the string.
+
+to convert an lch color difference to a string:
+  put the lch color difference's lambda then " L; "
+    then the lch color difference's chroma then " chroma; "
+    then the lch color difference's hue then " hue"
+    in the string.
+
+to convert an lch color mix to a string:
+  put the lch color mix's lambda then " L; "
+    then the lch color mix's adjusted chroma then " chroma; "
+    then the lch color mix's adjusted hue then " hue"
+    in the string.
+
 to convert a ratio to another ratio (rgb toward xyz):
   \ adapted from http://www.easyrgb.com/en/math.php
   if the ratio is at most 4045/100000,
@@ -221,6 +239,12 @@ to convert an xyz color mix to a lab color mix:
   put the y-ish ratio in the lab color mix's beta.
   subtract the z-ish ratio from the lab color mix's beta.
   multiply the lab color mix's beta by 200.
+
+to convert an xyz color mix to a string:
+  put the xyz color mix's x then " x; "
+    then the xyz color mix's y then " y; "
+    then the xyz color mix's z then " z"
+    in the string.
 
 the current rainbow color number is a number.
   \ 1 to 6 indicating, respectively,
@@ -314,6 +338,7 @@ to divide a color by a number:
   \ allow the client code to decide whether to normalize the color.
 
 to embiggen a quotient:
+  if the quotient is 1, put 2 in the quotient; exit.
   round the quotient up to the nearest power of two.
   divide the largest number by the quotient
     giving another quotient and a remainder.
@@ -610,9 +635,9 @@ to get an rgb ratio given a twin ratio and a synergy ratio and a hue ratio (hsl 
   if the hue ratio is less than 2/3,
     put the synergy ratio in the rgb ratio;
     subtract the twin ratio from the rgb ratio;
-    put 6 times the hue ratio in a ratio;
+    put 6/1 times the hue ratio in a ratio;
     negate the ratio;
-    add 4 to the ratio;
+    add 4/1 to the ratio;
     multiply the rgb ratio by the ratio;
     add the twin ratio to the rgb ratio;
     exit.
@@ -646,6 +671,34 @@ a hue is an angle [0 to 3600].
 to imagine a color from a hue and a saturation and a lightness;
 to make a color from a hue and a saturation and a lightness:
   put the hue and the saturation and the lightness into the color.
+
+to imagine a color a ratio from a second color toward a third color:
+  privatize the second color.
+  privatize the third color.
+  normalize the second color.
+  normalize the third color.
+  if the second color's hue minus the third color's hue
+    is more than 1800, add 3600 to the third color's hue.
+  if the third color's hue minus the second color's hue
+    is more than 1800, add 3600 to the second color's hue.
+  put the second color in the color.
+  \
+  put the third color's hue in a hue.
+  subtract the second color's hue from the hue.
+  multiply the hue by the ratio.
+  add the hue to the color's hue.
+  \
+  put the third color's saturation in a saturation.
+  subtract the second color's saturation from the saturation.
+  multiply the saturation by the ratio.
+  add the saturation to the color's saturation.
+  \
+  put the third color's lightness in a lightness.
+  subtract the second color's lightness from the lightness.
+  multiply the lightness by the ratio.
+  add the lightness to the color's lightness.
+  \
+  normalize the color.
 
 to initialize the colors:
   call "gdi32.dll" "GetStockObject"
@@ -769,12 +822,8 @@ the magenta color is a color.
 the magenta pen is a pen.
 
 to make a brownish color:
-  \ To-do:  update "make a color like another color"
-  \ by inverting the dE-2000 formula,
-  \ and pass it a brown color as a starting color.
-  pick the brownish color's hue between 250 and 350.
-  pick the brownish color's saturation between 500 and 1000.
-  pick the brownish color's brightness between 125 and 375.
+  make a color given 300 and 750 and 250.
+  pick the brownish color near the color.
 
 to make a color:
   pick the color's hue between 0 and 3599.        \ 3600 normalizes to 0.
@@ -814,15 +863,10 @@ to make a color be very very light:
   put 875 into the color's lightness.
 
 to make a color like another color:
-  \ To-do:  Invert the dE-2000 formula to choose a similar looking color.
+  \ Invert the dE-2000 formula to choose a similar looking color.
   \ http://www.colorwiki.com/wiki/Delta_E:_The_Color_Difference
   \ http://www.ece.rochester.edu/~gsharma/ciede2000/ciede2000noteCRNA.pdf
-  put the other color into the color.
-  pick a number between -100 and 100.
-  add the number to the color's hue.
-  normalize the color's hue.
-  set the color's saturation to something between 100 and 1000.
-  set the color's lightness to something between 0 and 800.
+  pick the color near the other color.
 
 to make a color a ratio from a left color toward a right color:
   privatize the left color.
@@ -865,7 +909,6 @@ to measure a delta ratio between a lab color mix and another lab color mix:
     from the lab color mix and the other lab color mix. \ L*, C', h' in the pdf
   get an lch color difference
     from the lch color mix and the other lch color mix. \ dL', dC', dH' in the pdf
-  \
   average the lch color mix's lambda
     and the other lch color mix's lambda
     giving a ratio called mean lambda.
@@ -978,7 +1021,7 @@ to pick a color between another color and a third color:
     between the other color's lightness and the third color's lightness.
 
 to pick a result color near a starting color:
-  pick the result color within 20/1 of the starting color.
+  pick the result color within 27/2 of the starting color.
 
 to pick a result color within a difference ratio of a starting color:
   make a possible color.
@@ -1505,6 +1548,15 @@ to test (colors - 34 06080A vs 020305):
   measure a delta ratio between the black pearl and the black russian.
   stash the fuzzy test given the delta ratio.
 
+to test (colors - 353F4B vs 34404B):
+  \ both colors are very dark grayish blues, per https://www.colorhexa.com/
+  make a fuzzy test about "colors" and "353F4B vs 34404B"
+    and targeting 413/10000 with tolerance 96000 trifles.
+  make a color from 2100 and 176 and 250.
+  make another color from 2099 and 177 and 250.
+  measure a delta ratio between the color and the other color.
+  stash the fuzzy test given the delta ratio.
+
 to test (colors - brightness):
   create a test result about "colors" and "brightness"
     and expecting "pink is 375 brighter than red.".
@@ -1632,10 +1684,10 @@ to test (colors - gold):
 
 to test (colors - greenish color):
   create a test result about "colors" and "greenish color"
-    and expecting "within 20 of pastel-gray lime-green "
-      then "(hue=1050, sat=875, light=375)".
-  put 20/1 in a threshold ratio.
-  put 1050 and 875 and 375 into a starting color.
+    and expecting "within 13-1/2 of pastel-gray lime-green "
+      then "(hue=1050, sat=875, light=425)".
+  put 27/2 in a threshold ratio.
+  put 1050 and 875 and 425 into a starting color.
   make a greenish color.
   measure a delta ratio
     between the starting color and the greenish color.
@@ -1649,7 +1701,7 @@ to test (colors - greenish color):
   if the delta ratio is at most the threshold ratio,
     put "within " then the threshold ratio
       then " of pastel-gray lime-green "
-      then "(hue=1050, sat=875, light=375)"
+      then "(hue=1050, sat=875, light=425)"
       in the test result's interpretation.
   stop the test result's timer.
   append the test result to the status' all test results.
@@ -1661,6 +1713,18 @@ to test (colors - high chroma weight):
   put 1019256941/48508096 in a chroma ratio.
   get an actual ratio from the chroma ratio (chroma weight).
   stash the fuzzy test given the actual ratio.
+
+to test (colors - inkwell to rgb):
+  create a test result about "colors" and "inkwell to rgb"
+    and expecting "103/500 red; 1/4 green; 147/500 blue".
+  \ similar to Sherwin-Williams' "inkwell" color # 6992,
+  \ per http://colormaid.spektran.com/hsl/210,17.6,25
+  make an inkwell color with 2100 and 176 and 250. 
+  put the inkwell color in a color.
+  convert the color to an hsl color mix.
+  convert the hsl color mix to an rgb color mix.
+  convert the rgb color mix to an actual string.
+  stash the test result given the actual.
 
 to test (colors - light sky blues):
   create a test result about "colors" and "light sky blues"
@@ -1683,10 +1747,10 @@ to test (colors - low chroma weight):
 
 to test (colors - measure green):
   create a test result about "colors" and "measure green"
-    and expecting "within 20 of pastel-gray lime-green "
-    then "(hue=1050, sat=875, light=375)".
-  put 20/1 in a threshold ratio.
-  put 1050 and 875 and 375 into a starting color.
+    and expecting "within 13-1/2 of pastel-gray lime-green "
+    then "(hue=1050, sat=875, light=425)".
+  put 27/2 in a threshold ratio.
+  put 1050 and 875 and 425 into a starting color.
   measure a delta ratio
     between the starting color and the green color.
   put the green color then " is "
@@ -1699,7 +1763,7 @@ to test (colors - measure green):
   if the delta ratio is at most the threshold ratio,
     put "within " then the threshold ratio
       then " of pastel-gray lime-green "
-      then "(hue=1050, sat=875, light=375)"
+      then "(hue=1050, sat=875, light=425)"
       in the test result's interpretation.
   stop the test result's timer.
   append the test result to the status' all test results.
@@ -1778,6 +1842,32 @@ to test (colors - shift trivial arctangent):
   convert the hue ratio to an actual string.
   stash the test result given the actual.
 
+to test (colors - splash color):
+  make a starting color.
+  create a test result about "colors" and "splash color"
+    and expecting "within 13-1/2 of "
+      then the starting color.
+  put 27/2 in a threshold ratio.
+  pick a random number.
+  put the random number in the seed.
+  pick a color near the starting color.
+  measure a delta ratio
+    between the starting color and the color.
+  put "from a random seed of " then the random number
+    then ", " then the color then " is "
+    then the delta ratio then " away from "
+    then the starting color
+    into the test result's actual value. 
+  if the delta ratio is greater than the threshold ratio,
+    put "more than " then the threshold ratio then " away"
+    in the test result's interpretation.
+  if the delta ratio is at most the threshold ratio,
+    put "within " then the threshold ratio then " of "
+      then the starting color
+      in the test result's interpretation.
+  stop the test result's timer.
+  append the test result to the status' all test results.
+
 to test (colors):
   test (colors - rainbow).
   test (colors - brightness).
@@ -1789,6 +1879,7 @@ to test (colors):
   test (colors - dark purples).
   test (colors - brown to hsl).
   test (colors - brown to rgb).
+  test (colors - inkwell to rgb).
   test (colors - brown to x).
   test (colors - brown to y).
   test (colors - brown to z).
@@ -1835,6 +1926,7 @@ to test (colors):
   test (colors - 32 E3E5E7 vs DCDFE0).
   test (colors - 33 131518 vs 111316).
   test (colors - 34 06080A vs 020305).
+  test (colors - 353F4B vs 34404B).
   test (colors - measure green).
   \ make the pick a color near a color test take
   \ a repeatable amount of time, by de-randomizing it.
@@ -1843,11 +1935,32 @@ to test (colors):
   test (colors - greenish color).
 \  loop.
 \    add 1 to a counter.
-\    test (colors - greenish color).
-\    if the counter is at least 100, break.
+\    test (colors - splash color).
+\    if the counter is at least 1000, break.
 \  repeat.
   \ restore randomization.
   put the seedling in the seed.
+
+to test given a starting color (colors - similar color):
+  create a test result about "colors" and "similar color"
+    and expecting "within 13-1/2 of " then the starting color.
+  put 27/2 in a threshold ratio.
+  pick a color near the starting color.
+  measure a delta ratio
+    between the starting color and the color.
+  put the color then " is "
+    then the delta ratio then " away from "
+    then the starting color
+    into the test result's actual value. 
+  if the delta ratio is greater than the threshold ratio,
+    put "more than " then the threshold ratio then " away"
+    in the test result's interpretation.
+  if the delta ratio is at most the threshold ratio,
+    put "within " then the threshold ratio then " of "
+      then the starting color
+      in the test result's interpretation.
+  stop the test result's timer.
+  append the test result to the status' all test results.
 
 a very dark color is a color.
 

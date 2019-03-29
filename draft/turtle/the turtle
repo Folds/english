@@ -2926,7 +2926,8 @@ to use a letter height of some twips:
 to use a pen:
   put the pen into the context's pen.
 
-to use the skinny pen:
+to use the skinny pen;
+to use the thin pen:
   \ changing the pen size affects the context
   \ the next time the context is saved.
   put 1 into the pen size.
