@@ -55,18 +55,6 @@ from higher priority to lower priority.
   Testing difficulty:  Medium.
   Requested by Gerry Rzeppa on June 25, 2018.
 
-308.  Speed up code to choose colors.
-  Status:    Tested.
-  Audience:  Programmers.
-  Benefit:   Medium.
-             Sped up choosing colors by 40 - 50 percent.
-             Further sped up to 80 - 350 milliseconds; first test case is 136 - 155 milliseconds.
-             Further sped up to 66 - 300 milliseconds; first test case is 100 milliseconds; mean is 120 milliseconds.
-  Implementation difficulty:  Hard.
-  Demoing difficulty:  Easy.
-  Testing difficulty:  Easy.
-  Requested by Jasper Paulsen on September 29, 2017.
-
 340.  Use temp variables when bumping a rider.
   According to Mike Gonta, this will prevent Windows Defender
   from complaining about CAL.
