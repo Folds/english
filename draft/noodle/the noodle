@@ -2,6 +2,8 @@
 \ are copyright 2006 by the Osmosian Order.
 \ The portions of this file that are from CAL-4700
 \ are copyright 2017 by the Osmosian Order.
+\ The "To bump a rider" routine was adapted from a patch
+\ by Mike Gonta; the patch was was copyright 2018.
 \ The remainder is copyright 2014, 2017, 2019 by Jasper Paulsen.
 
 \ Arrays (but not strings) are defined and manipulated in 'arrays'.
@@ -13,7 +15,6 @@
 \
 \ Texts (and their events, rows, carets, anchors, positions,
 \ and selections) are defined and manipulated in 'text'.
-
 
 an abc is a record with
   a number called abca,
@@ -464,9 +465,9 @@ to bump a number limiting it to another number and a third number:
     put the other number into the number.
 
 to bump a rider:
-  intel $8B9D08000000. \ mov ebx,[ebp+8] \ the rider
-  intel $FF8314000000. \ inc [ebx+20] \ the rider's token's last
-  intel $FF8308000000. \ inc [ebx+8] \ the rider's source's first
+  \ use temp to prevent false positives from Windows Defender's antivirus feature.
+  increment the rider's token's last (via temp).
+  increment the rider's source's first (via temp).
 
 to bump a rider by a number:
   add the number to the rider's token's last.
@@ -5642,6 +5643,11 @@ to include a font in a pdf object:
   if the string thing is not nil, exit.
   create a new string thing given the string.
   append the new string thing to the pdf object's font strings.
+
+to increment a byte pointer (via temp):
+  put the byte pointer into a number.
+  add 1 to the number.
+  put the number into the byte pointer.
 
 to indent a box given a number:
   add the number to the box's left.

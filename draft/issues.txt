@@ -55,17 +55,6 @@ from higher priority to lower priority.
   Testing difficulty:  Medium.
   Requested by Gerry Rzeppa on June 25, 2018.
 
-340.  Use temp variables when bumping a rider.
-  According to Mike Gonta, this will prevent Windows Defender
-  from complaining about CAL.
-  Status:    Designed.
-  Audience:  All users.
-  Benefit:   Critical.  Anti-virus programs scare away users.
-  Implementation difficulty:  Easy.
-  Demoing difficulty:  Medium.
-  Testing difficulty:  Covered by existing tests.
-  Requested by Mike Gonta on January 13, 2018.
-
 279.  In the editor, allow counting the characters
   in a multi-line selection.
   Status:    Request.
