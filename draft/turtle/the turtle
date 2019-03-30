@@ -475,6 +475,26 @@ to face south:
 to face west:
   put 2880 into the context's heading.
 
+to fade a line a length long from a color to another color:
+  if the color is the other color,
+    use the color;
+    draw the line the length long;
+    exit.
+  clear an old distance.
+  loop.
+    if a counter is at least 10, break.
+    add 1 to the counter.
+    imagine a temp color the counter / 10 from the color toward the other color.
+    use the temp color.
+    put the length / 1 in a ratio.
+    multiply the ratio by the counter / 10.
+    convert the ratio to a mixed.
+    put the mixed's whole number in a new distance.
+    subtract the old distance from the new distance.
+    draw another line the new distance long.
+    add the new distance to the old distance.
+  repeat.
+
 a figure is a polygon.
 a circle is a  figure.
 a cube is a figure.

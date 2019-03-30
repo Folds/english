@@ -8,6 +8,9 @@
 \ The remainder is copyright 2014, 2017, 2019 by Jasper Paulsen.
 
 to add a color to another color:
+  if the color is the clear color, exit.
+  if the other color is the clear color,
+    put the color in the other color; exit.
   add the color's hue to the other color's hue.
   add the color's saturation to the other color's saturation.
   add the color's lightness to the other color's lightness.
@@ -35,6 +38,7 @@ the brown pen is a pen.
 a brownish color is a color.
 
 to clear a color:
+  \ does not make the clear color, which is -1 and 0 and 0.
   put 0 and 0 and 0 into the color.
 
 the clear color is a color.
@@ -54,11 +58,11 @@ to convert a color to a colorref:
     put 16777215 [$00FFFFFF] into the colorref; exit. \ clear pen becomes white
   privatize the color.
   scale the color's saturation given 240/1000.
-  limit the color's saturation to 1 and 239.
+  limit the color's saturation to 1 and 240. \ Allowing 0 causes the child program to be mostly black.
   scale the color's lightness given 240/1000.
-  limit the color's lightness to 1 and 239.
+  limit the color's lightness to 0 and 240.
   scale the color's hue given 240/3600.
-  limit the color's hue to 1 and 239.
+  limit the color's hue to 0 and 240.
   call "shlwapi.dll" "ColorHLSToRGB"
     with the color's hue and the color's lightness and the color's saturation
     returning the colorref.
@@ -76,6 +80,8 @@ to convert a color into a string:
   append the color's saturation to the string.
   append ", lightness=" to the string.
   append the color's lightness to the string.
+  if the color is the clear color,
+    append " (clear)" to the string.
 
 to convert a color to a lab color mix:
   convert the color to an hsl color mix.
@@ -283,7 +289,7 @@ to decide if a color is another color:
   say yes.
 
 to decide if a color is clear:
-  if the color's hue is less than 0, say yes.
+  if the color is the clear color, say yes.
   say no.
 
 to decide if a color is dark:
@@ -319,16 +325,6 @@ to decide if a color is very very dark:
 to decide if a color is very very light:
   if the color's lightness is greater than or equal to 875, say yes.
   say no.
-
-to decide if a ratio is between another ratio and a third ratio:
-  if the ratio is less than the other ratio, say no.
-  if the ratio is greater than the third ratio, say no.
-  say yes.
-
-to decide if a ratio is between a number and another number:
-  if the ratio is less than the number / 1, say no.
-  if the ratio is greater than the other number / 1, say no.
-  say yes.
 
 to divide a color by a number:
   divide the color's hue by the number.
@@ -666,38 +662,36 @@ an hsl color mix has
   a saturation ratio, and  \ ranges from 0 through 1.
   a lightness ratio.       \ ranges from 0 through 1.
 
-a hue is an angle [0 to 3600].
+a hue is an angle [0 to 3600]. \ or -1 for the clear color.
 
 to imagine a color from a hue and a saturation and a lightness;
 to make a color from a hue and a saturation and a lightness:
   put the hue and the saturation and the lightness into the color.
 
-to imagine a color a ratio from a second color toward a third color:
-  privatize the second color.
-  privatize the third color.
-  normalize the second color.
-  normalize the third color.
-  if the second color's hue minus the third color's hue
-    is more than 1800, add 3600 to the third color's hue.
-  if the third color's hue minus the second color's hue
-    is more than 1800, add 3600 to the second color's hue.
-  put the second color in the color.
-  \
-  put the third color's hue in a hue.
-  subtract the second color's hue from the hue.
-  multiply the hue by the ratio.
-  add the hue to the color's hue.
-  \
-  put the third color's saturation in a saturation.
-  subtract the second color's saturation from the saturation.
-  multiply the saturation by the ratio.
-  add the saturation to the color's saturation.
-  \
-  put the third color's lightness in a lightness.
-  subtract the second color's lightness from the lightness.
-  multiply the lightness by the ratio.
-  add the lightness to the color's lightness.
-  \
+to imagine a color a ratio from a second color toward a third color;
+to make a color a ratio from a left color toward a right color:
+  if the left color is the clear color,
+    put the right color in the color; exit.
+  if the right color is the clear color,
+    put the left color in the color; exit.
+  privatize the left color.
+  privatize the right color.
+  normalize the left color.
+  normalize the right color.
+  if the left color's hue minus the right color's hue
+    is more than 1800, add 3600 to the right color's hue.
+  if the right color's hue minus the left color's hue
+    is more than 1800, add 3600 to the left color's hue.
+  put the left color in the color.
+  subtract the left color's hue from the right color's hue.
+  subtract the left color's saturation from the right color's saturation.
+  subtract the left color's brightness from the right color's brightness.
+  multiply the right color's hue by the ratio.
+  multiply the right color's saturation by the ratio.
+  multiply the right color's brightness by the ratio.
+  add the right color's hue to the color's hue.
+  add the right color's saturation to the color's saturation.
+  add the right color's brightness to the color's brightness.
   normalize the color.
 
 to initialize the colors:
@@ -783,6 +777,7 @@ an lch color mix has
 a light color is a color.
 
 to lighten a color by an amount:
+  if the color is the clear color, exit.
   add the amount to the color's lightness.
   limit the color's lightness to 0 and 1000.
 
@@ -868,25 +863,8 @@ to make a color like another color:
   \ http://www.ece.rochester.edu/~gsharma/ciede2000/ciede2000noteCRNA.pdf
   pick the color near the other color.
 
-to make a color a ratio from a left color toward a right color:
-  privatize the left color.
-  privatize the right color.
-  normalize the left color.
-  normalize the right color.
-  put the left color in the color.
-  subtract the left color's hue from the right color's hue.
-  subtract the left color's saturation from the right color's saturation.
-  subtract the left color's brightness from the right color's brightness.
-  multiply the right color's hue by the ratio.
-  multiply the right color's saturation by the ratio.
-  multiply the right color's brightness by the ratio.
-  add the right color's hue to the color's hue.
-  add the right color's saturation to the color's saturation.
-  add the right color's brightness to the color's brightness.
-  normalize the color.
-
 to make a greenish color:
-  make a color given 1050 and 875 and 375.
+  make a color given 1050 and 875 and 425.
   pick the greenish color near the color.
 
 to make a lab color mix from a lambda ratio and an alpha ratio and a beta ratio:
@@ -895,6 +873,10 @@ to make a lab color mix from a lambda ratio and an alpha ratio and a beta ratio:
   put the beta ratio in the lab color mix's beta ratio.
 
 to measure a delta ratio between a color and another color:
+  if the color is the clear color,
+    put 0/1 in the delta ratio; exit.
+  if the other color is the clear color,
+    put 0/1 in the delta ratio; exit.
   convert the color to a lab color mix.
   convert the other color to another lab color mix.
   measure the delta ratio between the lab color mix
@@ -944,6 +926,8 @@ to measure a delta ratio between a lab color mix and another lab color mix:
     and the ratio triplet and the synergy weight.
 
 to measure a delta ratio between a lab color mix and a color:
+  if the color is the clear color,
+    put 0/1 in the delta ratio; exit.
   convert the color to another lab color mix.
   measure the delta ratio between the lab color mix
     and the other lab color mix.
@@ -973,6 +957,7 @@ to measure a delta ratio given an lch color difference and a ratio triplet and a
   put the temp's square root in the delta.
 
 to normalize a color:
+  if the color is the clear color, exit.
   normalize the color's hue.
   limit the color's saturation to 0 and 1000.
   limit the color's lightness  to 0 and 1000.
@@ -1004,6 +989,10 @@ a pastel color is a color.
 an pen is a color.
 
 to pick a color between another color and a third color:
+  if the other color is the clear color,
+    put the third color in the color; exit.
+  if the third color is the clear color,
+    put the other color in the color; exit.
   privatize the other color.
   privatize the third color.
   if the third color's hue is more than
@@ -1024,6 +1013,8 @@ to pick a result color near a starting color:
   pick the result color within 27/2 of the starting color.
 
 to pick a result color within a difference ratio of a starting color:
+  if the starting color is the clear color,
+    put the starting color in the result color; exit.
   make a possible color.
   convert the starting color to a starting lab color mix.
   measure a delta ratio between the starting lab color mix and the possible color.
@@ -1086,6 +1077,7 @@ to put a color's darkest shade into another color:
 to put a color's description into a string:
   \ first draft written for testing the rainbow colors.
   \ other descriptions can be added as needed.
+  if the color is the clear color,  put "clear" in the string; exit.
   if the color is the black color,  put "black" in the string; exit.
   if the color's lightness is not 500,
     put "not solid" in the string; exit.
@@ -1146,6 +1138,7 @@ to reset the rainbow colors:
   put 0 into the current rainbow color number.
 
 to reverse a color:
+  if the color is the clear color, exit.
   if the color is the black color, put the white color into the color; exit.
   if the color is the white color, put the black color into the color; exit.
   put 1000 minus the color's lightness into the color's lightness.

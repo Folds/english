@@ -2741,6 +2741,16 @@ to decide if a polygon is closed:
   if the polygon's first vertex's spot is the polygon's last vertex's spot, say yes.
   say no.
 
+to decide if a ratio is between another ratio and a third ratio:
+  if the ratio is less than the other ratio, say no.
+  if the ratio is greater than the third ratio, say no.
+  say yes.
+
+to decide if a ratio is between a number and another number:
+  if the ratio is less than the number / 1, say no.
+  if the ratio is greater than the other number / 1, say no.
+  say yes.
+
 to decide if a rider is stashable:
   if the rider's source is not blank, say no.
   if the rider's token is stashable given yes, say yes.
