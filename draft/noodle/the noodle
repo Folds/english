@@ -2,8 +2,8 @@
 \ are copyright 2006 by the Osmosian Order.
 \ The portions of this file that are from CAL-4700
 \ are copyright 2017 by the Osmosian Order.
-\ The "To bump a rider" routine was adapted from a patch
-\ by Mike Gonta; the patch was was copyright 2018.
+\ The "to bump a rider" routine was adapted from a patch
+\ by Mike Gonta; the patch was copyright 2018.
 \ The remainder is copyright 2014, 2017, 2019 by Jasper Paulsen.
 
 \ Arrays (but not strings) are defined and manipulated in 'arrays'.
