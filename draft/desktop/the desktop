@@ -795,10 +795,33 @@ to draw a tab:
   mask only outside the tab's box.
   draw the tab's box with the desktop color
     and the desktop color and 1/8 inch (rounding the bottom).
+  put the tab's box's left line into a line.
+  if the tab is the current tab,
+    add 1/12 inch to the line's start's y;
+    subtract the tpp from the line's start's y.
+  if the tab's previous is the current tab,
+    add 1/8 inch to the line's start's y.
   if the tab's previous is not nil,
-    draw the tab's box's left line with the black color.
+    draw the line with the black color.
+  put the tab's box's top line into the line.
+  if the tab's previous is the current tab,
+    add 1/8 inch to the line's start's x.
+  if the tab's next is the current tab,
+    subtract 1/8 inch from the line's end's x;
+    add the tpp to the line's end's x.
   if the tab is not the current tab,
-    draw the tab's box's top line with the black color.
+    draw the line with the black color.
+  if the tab's previous is the current tab,
+    put the tab's box's top-left into a spot;
+    add 1/8 inch to the spot's x;
+    add 1/8 inch to the spot's y;
+    roundover 1/8 inch from the spot (northwest). 
+  if the tab's next is the current tab,
+    put the tab's box's top-right into the spot;
+    subtract 1/8 inch from the spot's x;
+    add the tpp to the spot's x;
+    add 1/8 inch to the spot's y;
+    roundover 1/8 inch from the spot (northeast). 
   reabbreviate the tab's name giving a wide string called wide name.
   if the tab's mode is "finder",
     draw the wide name in the center of the tab's info box

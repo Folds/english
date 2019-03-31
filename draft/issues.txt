@@ -74,15 +74,6 @@ from higher priority to lower priority.
   Testing difficulty:  Medium.
   Requested by Jasper Paulsen on March 13, 2019.
   
-216.  Fillet the top corner(s) of the active tab.
-  Status:    Request.
-  Audience:  Application users.
-  Benefit:   Minor.
-  Implementation difficulty:  Medium.
-  Demoing difficulty:  Easy.
-  Testing difficulty:  Medium.
-  Requested by Jasper Paulsen on April 25, 2017.
-
 342.  In the github wiki, on each page explaining how to
   perform a source control action using the git command line,
   also explain how to perform the action using GitKraken.

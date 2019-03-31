@@ -850,3 +850,14 @@ next to the first instance, instead of covering the first instance.
   Demoing difficulty:  Medium.
   Testing difficulty:  Medium.
   Requested by Jasper Paulsen on June 7, 2017.
+
+216.  Fillet the top corner(s) of the active tab.
+  Status:    Demonstrated.
+  Audience:  Application users.
+  Benefit:   Minor.
+  Implementation difficulty:  Medium.
+    Unfortunately, gdi32.dll's AngleArc function
+    requires floats for the starting and ending angles.
+  Demoing difficulty:  Easy.
+  Testing difficulty:  Medium.
+  Requested by Jasper Paulsen on April 25, 2017.

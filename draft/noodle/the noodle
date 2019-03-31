@@ -7449,16 +7449,17 @@ to put a box's right-center into a spot:
   put the box's right into the spot's x.
   put the box's center's y into the spot's y.
 
-to put a box's right-top into a spot:
-  put the box's right into the spot's x.
-  put the box's top into the spot's y.
-
 to put a box's top line into a horizontal line:
   put the box's left and the box's top into the horizontal line's start.
   put the box's right and the box's top into the horizontal line's end.
 
 to put a box's top-center into a spot:
   put the box's center's x into the spot's x.
+  put the box's top into the spot's y.
+
+to put a box's top-right into a spot;
+to put a box's right-top into a spot:
+  put the box's right into the spot's x.
   put the box's top into the spot's y.
 
 to put a box's width into a width:
@@ -8958,6 +8959,54 @@ to round a pair to the nearest multiple of a number:
 
 to round a pair to a number:
   round the pair to the nearest multiple of the number.
+
+to roundover a distance from a spot (northeast):
+  roundover the distance from the spot
+    with the black color and the clear color (northeast).
+
+to roundover a distance from a spot (northwest):
+  roundover the distance from the spot
+    with the black color and the clear color (northwest).
+
+to roundover a distance from a spot with a border color and a fill color (northeast):
+  if the pdf state's page flag is set,
+    \ pdf version not implemented yet;
+    exit.
+  privatize the spot.
+  create the hpen of the current canvas given the border.
+  create the hbrush of the current canvas given the fill.
+  call "gdi32.dll" "MoveToEx" with the current canvas
+    and the spot's x plus the distance
+    and the spot's y
+    and another spot's whereabouts.
+  call "gdi32.dll" "AngleArc" with the current canvas
+    and the spot's x
+    and the spot's y
+    and the distance
+    and 0           \ start at east-most point of an ellipse
+    and 1119092736. \ 90 degree long arc
+  destroy the hbrush of the current canvas.
+  destroy the hpen of the current canvas.
+
+to roundover a distance from a spot with a border color and a fill color (northwest):
+  if the pdf state's page flag is set,
+    \ pdf version not implemented yet;
+    exit.
+  privatize the spot.
+  create the hpen of the current canvas given the border.
+  create the hbrush of the current canvas given the fill.
+  call "gdi32.dll" "MoveToEx" with the current canvas
+    and the spot's x
+    and the spot's y minus the distance
+    and another spot's whereabouts.
+  call "gdi32.dll" "AngleArc" with the current canvas
+    and the spot's x
+    and the spot's y
+    and the distance
+    and 1119092736   \ start at north-most point of an ellipse
+    and 1119092736.  \ 90 degree long arc
+  destroy the hbrush of the current canvas.
+  destroy the hpen of the current canvas.
 
 a roundy box is a box with
   a left coord, a top coord, a right coord, a bottom coord,
