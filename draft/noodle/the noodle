@@ -143,6 +143,14 @@ an and-mask is a mask.
 
 an angle is a number [0 through 3599].
 
+an appbardata has
+  a number called cbsize,
+  a handle,
+  a number called callback message,
+  a number called edge,
+  a box, and
+  an l-param.
+
 to append a buffer to a file:
   clear the i/o error.
   call "kernel32.dll" "SetFilePointer" with the file
@@ -3224,6 +3232,92 @@ to decide if a substring is on any contraction:
   if the byte pointer's target is not any letter, say no.
   say yes.
 
+to decide if the taskbar does matter;
+to decide if the taskbar matters:
+  if the taskbar's height is 0, say no.
+  if the taskbar's width is 0, say no.
+  say yes.
+
+to decide if the taskbar fits (horizontal taskbar):
+  if the taskbar is not horizontal, say no.
+  call "user32.dll" "GetSystemMetrics" with 1 [sm_cyscreen]
+    returning a pixel height.
+  subtract the taskbar's height from the pixel height.
+  put the screen's basic height in a number.
+  if the pixel height is at least the number, say yes.
+  say no.
+
+to decide if the taskbar fits (left taskbar):
+  if the taskbar is not at the left, say no.
+  if the taskbar fits (vertical taskbar), say yes.
+  say no.
+
+to decide if the taskbar fits (top taskbar):
+  if the taskbar is not at the top, say no.
+  if the taskbar fits (horizontal taskbar), say yes.
+  say no.
+
+to decide if the taskbar fits (vertical taskbar):
+  if the taskbar is not vertical, say no.
+  call "user32.dll" "GetSystemMetrics" with 0 [sm_cxscreen]
+    returning a pixel width.
+  subtract the taskbar's width from the pixel width.
+  put the screen's basic width in a number.
+  double the number.
+  if the pixel width is at least the number, say yes.
+  say no.
+
+to decide if the taskbar is at the bottom:
+  if the taskbar does not matter, say no.
+  if the taskbar's left is not 0, say no.
+  call "user32.dll" "GetSystemMetrics" with 0 [sm_cxscreen]
+    returning a pixel width.
+  if the taskbar's right is not the pixel width, say no.
+  call "user32.dll" "GetSystemMetrics" with 1 [sm_cyscreen]
+    returning a pixel height.
+  if the taskbar's bottom is the pixel height, say yes.
+  say no.
+
+to decide if the taskbar is at the left:
+  if the taskbar does not matter, say no.
+  if the taskbar's top is not 0, say no.
+  if the taskbar's left is not 0, say no.
+  call "user32.dll" "GetSystemMetrics" with 1 [sm_cyscreen]
+    returning a pixel height.
+  if the taskbar's height is the pixel height, say yes.
+  say no.
+
+to decide if the taskbar is at the right:
+  if the taskbar does not matter, say no.
+  if the taskbar's top is not 0, say no.
+  if the taskbar's left is 0, say no.
+  call "user32.dll" "GetSystemMetrics" with 1 [sm_cyscreen]
+    returning a pixel height.
+  if the taskbar's height is not the pixel height, say no.
+  call "user32.dll" "GetSystemMetrics" with 0 [sm_cxscreen]
+    returning a pixel width.
+  if the taskbar's right is the pixel width, say yes.
+  say no.
+
+to decide if the taskbar is at the top:
+  if the taskbar does not matter, say no.
+  if the taskbar's top is not 0, say no.
+  if the taskbar's left is not 0, say no.
+  call "user32.dll" "GetSystemMetrics" with 0 [sm_cxscreen]
+    returning a pixel width.
+  if the taskbar's right is the pixel width, say yes.
+  say no.
+
+to decide if the taskbar is horizontal:
+  if the taskbar is at the top, say yes.
+  if the taskbar is at the bottom, say yes.
+  say no.
+
+to decide if the taskbar is vertical:
+  if the taskbar is at the left, say yes.
+  if the taskbar is at the right, say yes.
+  say no.
+
 to decide if test was requested:
   if compile or list was requested, say no.
   get a string (command line).
@@ -5710,6 +5804,14 @@ to index a string in an index:
 \  if the index is nil, exit. \ to make compiler faster
   index nil given the string and the index.
 
+to initialize an appbardata:
+  put the appbardata's magnitude in the appbardata's cbsize.
+  clear the appbardata's handle.
+  clear the appbardata's callback message.
+  clear the appbardata's edge.
+  clear the appbardata's box.
+  clear the appbardata's l-param.
+
 to initialize before run:
   call "user32.dll" "DisableProcessWindowsGhosting".
   call "kernel32.dll" "GetProcessHeap" returning the heap pointer.
@@ -5877,16 +5979,18 @@ to initialize the printer canvas:
   put the printdlgex's hdc into the printer canvas.
 
 to initialize the screen:
+  put the system's taskbar box into the taskbar.
   call "user32.dll" "GetSystemMetrics" with 0 [sm_cxscreen]
     returning the screen's maximum pixel width.
   call "user32.dll" "GetSystemMetrics" with 1 [sm_cyscreen]
     returning the screen's maximum pixel height.
-  \   1000 pixels - 13/3 inches * 96 pixels/inch
-  \ = 1000 pixels - 416 pixels = 584 pixels
-  \ 584 pixels > (13/3 inches + 3/3 inches + 2/4 inches) * 96 pixels/inch
-  \            >  416 pixels  +  96 pixels +  48 pixels
-  \            >  560 pixels
-  put 584 in a number called basic width.
+  if the taskbar fits (vertical taskbar),
+    subtract the taskbar's width
+      from the screen's maximum pixel width.
+  if the taskbar fits (horizontal taskbar),
+    subtract the taskbar's height
+      from the screen's maximum pixel height.
+  put the screen's basic width in a number called basic width.
   put 2 times the basic width in a number called double width.
   put the basic width in the screen's restored pixel width.
   if the screen's maximum pixel width is greater than the double width,
@@ -5895,11 +5999,7 @@ to initialize the screen:
   if the screen's maximum pixel width is not greater than the basic width,
     put the screen's maximum pixel width
     in the screen's restored pixel width.
-  if the screen's maximum pixel height is greater than 100,
-    put the screen's maximum pixel height minus 50
-    in the screen's restored pixel height.
-  if the screen's maximum pixel height is not greater than 100,
-    put the screen's maximum pixel height divided by 2
+  put the screen's maximum pixel height
     in the screen's restored pixel height.
   put 96 into the ppi. \ pixels per inch.
   put the tpi divided by the ppi into the tpp. \ twips per pixel.
@@ -7879,6 +7979,20 @@ to put a roundy box into another roundy box:
   put the roundy box's bottom into the other roundy box's bottom.
   put the roundy box's radius into the other roundy box's radius.
 
+to put the screen's basic height into a number:
+  \ 288 pixels = 3 inches.
+  \ The editor's top margin features take 1-1/6 inches.
+  \ The editor's bottom margin features take about 3/4 inch.
+  put 288 in the number.
+
+to put the screen's basic width into a number:
+  \   1000 pixels - 13/3 inches * 96 pixels/inch
+  \ = 1000 pixels - 416 pixels = 584 pixels
+  \ 584 pixels > (13/3 inches + 3/3 inches + 2/4 inches) * 96 pixels/inch
+  \            >  416 pixels  +  96 pixels +  48 pixels
+  \            >  560 pixels
+  put 584 in the number.
+
 to put a sockaddr into another sockaddr:
   copy bytes from the sockaddr's whereabouts to the other sockaddr's whereabouts for the sockaddr's magnitude.
 
@@ -8030,6 +8144,20 @@ to put the system's precision into a bigint: \ measured in jiffies per second.
 \    put the system's last error in another number;
 \    debug "QueryPerformanceFrequency failed with error " then the other number;
     clear the bigint.
+
+to put the system's taskbar box into a box:
+  clear the box.
+  put "shell32.dll" in a library.
+  put "SHAppBarMessage" in a library procedure.
+  if cannot find the library procedure in the library, exit.
+  \ https://docs.microsoft.com/en-us/windows/desktop/api/shellapi/nf-shellapi-shappbarmessage
+  initialize an appbardata.
+  call "shell32.dll" "SHAppBarMessage"
+    with 5 [abm_gettaskbarpos]
+    and the appbardata's whereabouts
+    returning a flag.
+  if the flag is clear, exit.  \ call failed.
+  put the appbardata's box in the box. \ dimensions are in pixels, not twips.
 
 to put the system's tick count into some ticks: \ wraps every 24.8 days or so
   call "kernel32.dll" "GetTickCount" returning the ticks.
@@ -8725,17 +8853,7 @@ to resize a screen given a pixel width and a pixel height:
     into the screen's box.
   subtract the tpp from the screen's right-bottom.
 
-to resize a window given a box (using MoveWindow):
-   put the box's left divided by the tpp into a number called left.
-   put the box's top divided by the tpp into a number called top.
-   put the box's right divided by the tpp into a number called right.
-   put the box's bottom divided by the tpp into a number called bottom.
-   put 1 plus the right minus the left into a number called width.
-   put 1 plus the bottom minus the top into a number called height.
-   call "user32.dll" "MoveWindow" with the window
-     and the left and the top and the width and the height and no.
-
-to resize a window given a box (using SetWindowPlacement):
+to resize a window given a box:
   put the box in a box called pixel box.
   scale the pixel box given 1 / the tpp.
   adjust the pixel box given 0 and 0 and 1 and 1.
@@ -8749,7 +8867,7 @@ to resize a window given a box (using SetWindowPlacement):
 
 to resize a window given a screen:
   if the screen is maximized,
-    resize the window given the screen's box (using MoveWindow); exit.
+    resize the window given the screen's box; exit.
   put the screen's box in a box.
   if right was requested,
     put the screen's maximum pixel width
@@ -8757,7 +8875,7 @@ to resize a window given a screen:
     put the pixie times the tpp in a number called leftie;
     put the leftie plus the box's left in the box's left;
     put the leftie plus the box's right in the box's right.
-  resize the window given the box (using SetWindowPlacement).
+  resize the window given the box.
 
 to restart a timer:
   add 1 to the timer's count.
@@ -9910,6 +10028,8 @@ a talker vtable record is a record with
   a pointer called speakcompleteevent,
   a pointer called isuisupported,
   a pointer called displayui.
+
+the taskbar is a box.
 
 the temp path is a path.
 

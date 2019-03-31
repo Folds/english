@@ -141,34 +141,6 @@ from higher priority to lower priority.
   Testing difficulty:  Not applicable.
   Requested by Jasper Paulsen on September 15, 2018.
   
-331.  At desktop startup, determine which edge the taskbar is on.
-  Status:  Request.
-  Audience:  Application users.
-  Benefit:   Medium.
-  Implementation difficulty:  Hard.
-  Demoing difficulty:  Hard.
-  Testing difficulty:  Medium.
-  Requested by Jasper Paulsen on September 17, 2018.
-  
-332.  At desktop startup, determine size of taskbar.
-  Status:  Request.
-  Audience:  Application users.
-  Benefit:   Medium.
-  Implementation difficulty:  Hard.
-  Demoing difficulty:  Hard.
-  Testing difficulty:  Medium.
-  Requested by Jasper Paulsen on September 17, 2018.
-  
-333.  At desktop startup, adjust size and position of half-screens
-  to accommodate taskbar.
-  Status:  Request.
-  Audience:  Application users.
-  Benefit:   Medium.
-  Implementation difficulty:  Hard.
-  Demoing difficulty:  Hard.
-  Testing difficulty:  Medium.
-  Requested by Jasper Paulsen on September 17, 2018.
-
 337.  The status's test results use a small font when viewed
   in the writer, when the writer is in reduced mode.
   Fix the bug.
@@ -766,5 +738,5 @@ while a letter's menu is visible.
 \ ======================================
 Unsorted requests:
 
-Next item number:  358.
+Next item number:  359.
 
