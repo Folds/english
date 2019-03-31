@@ -469,6 +469,15 @@ next to the first instance, instead of covering the first instance.
   Testing difficulty:  Hard.
   Requested by Jasper Paulsen on March 7, 2014.
 
+343.  In the finder, allow sorting files by date.
+  Status:  Demonstrated.
+  Audience:  Programmers.
+  Benefit:   Medium.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Medium.
+  Requested by Gerry Rzeppa on June 25, 2018.
+
 210.  In colors, add a "pen" alias for each color.
   Status:  Implemented.
   Audience:  Turtle programmers.
@@ -479,7 +488,7 @@ next to the first instance, instead of covering the first instance.
   Requested by Gerry Rzeppa on March 13, 2017.
  
 240.  Add CAL-4700 writer's trace polygon feature.
-  In the writer, old down the alt key or control key,
+  In the writer, hold down the alt key or control key,
   and click a bunch of points to make a polygon.
   Status:    Demonstrated.
   Audience:  Cartoonists.

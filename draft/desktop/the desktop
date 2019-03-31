@@ -1385,6 +1385,8 @@ to handle a command:
     handle sort nodettes given "extension"; exit.
   if the handler is "handle sort nodettes by kind",
     handle sort nodettes given "kind"; exit.
+  if the handler is "handle sort nodettes by last modified date",
+    handle sort nodettes given "last modified date"; exit.
   if the handler is "handle sort nodettes by name",
     handle sort nodettes given "name"; exit.
   if the handler is "handle stop", handle stop; exit.
@@ -1500,6 +1502,8 @@ to handle a command (sort...):
     add "By Name"  and "handle sort nodettes by name" to the submenu.
   if the current tab's mode is "finder",
     add "By Extension"  and "handle sort nodettes by extension" to the submenu.
+  if the current tab's mode is "finder",
+    add "By Date"  and "handle sort nodettes by last modified date" to the submenu.
   handle the command given the submenu.
 
 to handle a command given a submenu:

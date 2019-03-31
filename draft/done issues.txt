@@ -2284,3 +2284,117 @@ Benefit:   Medium.
   Testing difficulty:  Covered by existing tests.
   Requested by Mike Gonta on January 13, 2018.
 
+319.  Store ratios of 64-bit signed integers.
+  Status:    Won't do.
+  Audience:  Programmers.
+  Benefit.   Minor.
+  Implementation difficulty:  Easy.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Easy.
+  Requested by Jasper Paulsen on September 17, 2018.
+
+320.  Invert ratios of 64-bit signed integers.
+  Status:    Won't do.
+  Audience:  Programmers.
+  Benefit.   Minor.
+  Implementation difficulty:  Easy.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Easy.
+  Requested by Jasper Paulsen on September 17, 2018.
+
+321.  Negate ratios of 64-bit signed integers.
+  Status:    Won't do.
+  Audience:  Programmers.
+  Benefit.   Minor.
+  Implementation difficulty:  Easy.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Easy.
+  Requested by Jasper Paulsen on September 17, 2018.
+
+322.  Add ratios of 64-bit signed integers.
+  Status:    Won't do.
+  Audience:  Programmers.
+  Benefit.   Minor.
+  Implementation difficulty:  Hard.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Medium.
+  Requested by Jasper Paulsen on September 17, 2018.
+
+323.  Subtract ratios of 64-bit signed integers.
+  Status:    Won't do.
+  Audience:  Programmers.
+  Benefit.   Minor.
+  Implementation difficulty:  Hard.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Medium.
+  Requested by Jasper Paulsen on September 17, 2018.
+
+324.  Multiply ratios of 64-bit signed integers.
+  Status:    Won't do.
+  Audience:  Programmers.
+  Benefit.   Minor.
+  Implementation difficulty:  Hard.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Medium.
+  Requested by Jasper Paulsen on September 17, 2018.
+
+325.  Divide ratios of 64-bit signed integers.
+  Status:    Won't do.
+  Audience:  Programmers.
+  Benefit.   Minor.
+  Implementation difficulty:  Hard.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Medium.
+  Requested by Jasper Paulsen on September 17, 2018.
+
+326.  Convert from ratios of 64-bit signed integers
+  to ratios of 32-bit signed integers.
+  Status:    Won't do.
+  Audience:  Programmers.
+  Benefit.   Minor.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Easy.
+  Requested by Jasper Paulsen on October 22, 2017.
+
+327.  Convert from ratios of 64-bit signed integers to mixios.
+  Status:    Won't do.
+  Audience:  Programmers.
+  Benefit.   Minor.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Easy.
+  Requested by Jasper Paulsen on October 22, 2017.
+
+328.  Convert from mixios to ratios of 64-bit signed integers.
+  Status:    Won't do.
+  Audience:  Programmers.
+  Benefit.   Minor.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Easy.
+  Requested by Jasper Paulsen on October 22, 2017.
+
+040.  Reduce the font leading (in fonts other than the old default font).
+  Currently, fonts like Courier New have a large gap between rows.
+  This gap is much larger than in other text editors,
+  such as gedit or Notepad.
+  This leading could be reduced to typical heights.
+  Benefit:  Minor.
+  Audiences:  Windows programmers and Linux programmers.
+  Status:     Won't do.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Easy.
+  Testing difficulty:  Medium.
+  Requested by Jasper Paulsen on March 7, 2014.
+
+219.  From "the editor", factor out blocks and sorting code into a "text sorter" file.
+  Status:    Won't do.
+  Audience:  Programmers.
+  Benefit:   Minor.
+  Implementation difficulty:  Easy.
+  Demoing difficulty:  Not applicable.
+  Testing difficulty:  Not applicable.
+  Requested by Jasper Paulsen on April 27, 2017.
+ 
+

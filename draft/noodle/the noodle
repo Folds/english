@@ -4357,9 +4357,12 @@ a file name is a string. \ after the last backslash to end of path = file.ext
 a file name w/o extension is a string.
   \ after the last backslash to last dot or end of path = file
 
-a filetime is a record with
-  a number called dwlowdatetime,
-  a number called dwhighdatetime.
+a filetime is a bigint.
+  \ not meant to be human readable.  System Times are meant to be human readable.
+  \ only positive values represent times.  -1 means use previous time, according to:
+  \ https://docs.microsoft.com/en-us/windows/desktop/api/minwinbase/ns-minwinbase-filetime
+  \ 0 means the field is not supported by the underlying file system, per:
+  \ https://docs.microsoft.com/en-us/windows/desktop/api/fileapi/ns-fileapi-_win32_file_attribute_data
 
 to fill a box with a color:
   draw the box with the clear color and the color.
@@ -4865,6 +4868,29 @@ to get an environment variable given an environment variable name:
 to get an environment variable given a string:
   put the string in an environment variable name.
   get the environment variable given the environment variable name.
+
+to get a filetime given a path in the file system (last modified):
+  \ if the result is not positive, ignore it.
+  \ negative means this routine failed to get a value.
+  \ zero means the underlying file system does not support the field, per
+  \ https://docs.microsoft.com/en-us/windows/desktop/api/fileapi/ns-fileapi-_win32_file_attribute_data
+  privatize the path.
+  null terminate the path.
+  call "kernel32.dll" "CreateFileA" with the path's first
+    and the smallest number [generic_read]
+    and 0 and 0 and 3 [open_existing]
+    and 0 and 0 returning a handle.
+  if the handle is -1,
+    call "kernel32.dll" "CloseHandle" with the handle;
+    convert -1 to the filetime;
+    exit.
+  call "kernel32.dll" "GetFileTime" with the handle
+    and 0 \ optionally, a creation filetime's whereabouts
+    and 0 \ optionally, a last accessed filetime's whereabouts
+    and the filetime's whereabouts returning a number. \ also optional.
+  if the number is -1,
+    convert -1 to the filetime.
+  call "kernel32.dll" "CloseHandle" with the handle.
 
 to get a font given a command line:
   put 2/9 inch in the font's height.

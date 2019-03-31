@@ -811,6 +811,7 @@ to handle sort nodettes given a node and a string:
   if the string is "kind", sort the node by kind.
   if the string is "name", sort the node by designator.
   if the string is "extension", sort the node by extension.
+  if the string is "last modified date", sort the node by last modified date.
   show the desktop.
   show status the node's nodettes' count and "item sorted" or "items sorted".
   flush the event queue.
@@ -842,6 +843,7 @@ a node is a thing with
   a node selection called selection,
   a kind,
   a path, a directory, a designator, a designator called designator w/o backslash, an extension,
+  a last modified filetime,
   a selected flag, a previously selected flag,
   some nodettes,
   a source, or 
@@ -978,6 +980,17 @@ to paste an item into a node and into the file system before a nodette:
   adjust every nodette in the node.
 
 a path link is a string thing.
+
+to populate last modified dates in a node:
+  if the node is nil, exit.
+  loop.
+    get a nodette from the node's nodettes.
+    if the nodette is nil, break.
+    get a filetime given the nodette's path
+      in the file system (last modified).
+    if the filetime is positive,
+      put the filetime in the nodette's last modified filetime.
+  repeat.
 
 to position the selection in a node given a spot:
   if the node is nil, exit.
@@ -1250,6 +1263,12 @@ to sort a node by kind:
   sort the node's nodettes by kind.
   adjust every nodette in the node.
 
+to sort a node by last modified date:
+  if the node is nil, exit.
+  populate last modified dates in the node.
+  sort the node's nodettes by last modified date.
+  adjust every nodette in the node.
+
 to sort some nodettes by designator:
   if the nodettes' first is the nodettes' last, exit.
   split the nodettes into some left nodettes and some right nodettes.
@@ -1289,6 +1308,23 @@ to sort some nodettes by kind:
     if the left nodette is nil, append the right nodettes to the nodettes; exit.
     if the right nodette is nil, append the left nodettes to the nodettes; exit.
     if the left nodette's kind is greater than the right nodette's kind, move the right nodette from the right nodettes to the nodettes; repeat.
+    move the left nodette from the left nodettes to the nodettes.
+  repeat.
+
+to sort some nodettes by last modified date:
+  if the nodettes' first is the nodettes' last, exit.
+  split the nodettes into some left nodettes and some right nodettes.
+  sort the left nodettes by last modified date.
+  sort the right nodettes by last modified date.
+  loop.
+    put the left nodettes' first into a left nodette.
+    put the right nodettes' first into a right nodette.
+    if the left nodette is nil, append the right nodettes to the nodettes; exit.
+    if the right nodette is nil, append the left nodettes to the nodettes; exit.
+    if the left nodette's last modified filetime
+     is greater than the right nodette's last modified filetime,
+       move the right nodette from the right nodettes to the nodettes;
+       repeat.
     move the left nodette from the left nodettes to the nodettes.
   repeat.
 

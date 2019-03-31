@@ -46,15 +46,6 @@ The following requests have been partially demonstrated.
 The following requests are roughly sorted
 from higher priority to lower priority.
 
-343.  In the finder, allow sorting files by date.
-  Status:  Designed.
-  Audience:  Programmers.
-  Benefit:   Medium.
-  Implementation difficulty:  Medium.
-  Demoing difficulty:  Medium.
-  Testing difficulty:  Medium.
-  Requested by Gerry Rzeppa on June 25, 2018.
-
 279.  In the editor, allow counting the characters
   in a multi-line selection.
   Status:    Request.
@@ -384,97 +375,6 @@ from higher priority to lower priority.
   Audience:  Windows and Linux programmers.
   Requested by Jasper Paulsen on September 16, 2018.
   
-319.  Store ratios of 64-bit signed integers.
-  Status:  Request.
-  Audience:  Programmers.
-  Benefit.  Minor.
-  Implementation difficulty:  Easy.
-  Demoing difficulty:  Medium.
-  Testing difficulty:  Easy.
-  Requested by Jasper Paulsen on September 17, 2018.
-
-320.  Invert ratios of 64-bit signed integers.
-  Status:  Request.
-  Audience:  Programmers.
-  Benefit.  Minor.
-  Implementation difficulty:  Easy.
-  Demoing difficulty:  Medium.
-  Testing difficulty:  Easy.
-  Requested by Jasper Paulsen on September 17, 2018.
-
-321.  Negate ratios of 64-bit signed integers.
-  Status:  Request.
-  Audience:  Programmers.
-  Benefit.  Minor.
-  Implementation difficulty:  Easy.
-  Demoing difficulty:  Medium.
-  Testing difficulty:  Easy.
-  Requested by Jasper Paulsen on September 17, 2018.
-
-322.  Add ratios of 64-bit signed integers.
-  Status:  Request.
-  Audience:  Programmers.
-  Benefit.  Minor.
-  Implementation difficulty:  Hard.
-  Demoing difficulty:  Medium.
-  Testing difficulty:  Medium.
-  Requested by Jasper Paulsen on September 17, 2018.
-
-323.  Subtract ratios of 64-bit signed integers.
-  Status:  Request.
-  Audience:  Programmers.
-  Benefit.  Minor.
-  Implementation difficulty:  Hard.
-  Demoing difficulty:  Medium.
-  Testing difficulty:  Medium.
-  Requested by Jasper Paulsen on September 17, 2018.
-
-324.  Multiply ratios of 64-bit signed integers.
-  Status:  Request.
-  Audience:  Programmers.
-  Benefit.  Minor.
-  Implementation difficulty:  Hard.
-  Demoing difficulty:  Medium.
-  Testing difficulty:  Medium.
-  Requested by Jasper Paulsen on September 17, 2018.
-
-325.  Divide ratios of 64-bit signed integers.
-  Status:  Request.
-  Audience:  Programmers.
-  Benefit.  Minor.
-  Implementation difficulty:  Hard.
-  Demoing difficulty:  Medium.
-  Testing difficulty:  Medium.
-  Requested by Jasper Paulsen on September 17, 2018.
-
-326.  Convert from ratios of 64-bit signed integers
-  to ratios of 32-bit signed integers.
-  Status:  Request.
-  Audience:  Programmers.
-  Benefit.  Minor.
-  Implementation difficulty:  Medium.
-  Demoing difficulty:  Medium.
-  Testing difficulty:  Easy.
-  Requested by Jasper Paulsen on October 22, 2017.
-
-327.  Convert from ratios of 64-bit signed integers to mixios.
-  Status:  Request.
-  Audience:  Programmers.
-  Benefit.  Minor.
-  Implementation difficulty:  Medium.
-  Demoing difficulty:  Medium.
-  Testing difficulty:  Easy.
-  Requested by Jasper Paulsen on October 22, 2017.
-
-328.  Convert from mixios to ratios of 64-bit signed integers.
-  Status:  Request.
-  Audience:  Programmers.
-  Benefit.  Minor.
-  Implementation difficulty:  Medium.
-  Demoing difficulty:  Medium.
-  Testing difficulty:  Easy.
-  Requested by Jasper Paulsen on October 22, 2017.
-
 282.  Cache large numbers that have been checked for primality.
   Store them as a sorted linked list of numeric ranges.
   When a number that is adjacent to an existing range
@@ -534,14 +434,6 @@ open the files that are found.
             files into smaller files.
   Requested by Jasper Paulsen on March 7, 2014.
 
-171.  Add mouse scrolling to writer's page editing feature.
-  Status:   Request.
-  Benefit:  Medium.
-  Implementation difficulty:  Medium.
-  Demoing difficulty:  Medium.
-  Testing difficulty:  Medium.
-  Requested by Jasper Paulsen on March 13, 2014.
-
 034.  Have an option to search upward, such as Shift-F3.
   Audience:  Windows programmers.
   Status:  request.
@@ -583,19 +475,6 @@ open the files that are found.
     and verify that the editor can compute
     the intended delta-x and delta-y values.
     The test would not need to actually pan the screen.
-  Requested by Jasper Paulsen on March 7, 2014.
-
-040.  Reduce the font leading (in fonts other than the old default font).
-  Currently, fonts like Courier New have a large gap between rows.
-  This gap is much larger than in other text editors,
-  such as gedit or Notepad.
-  This leading could be reduced to typical heights.
-  Benefit:  Minor.
-  Audiences:  Windows programmers and Linux programmers.
-  Status:  Request.
-  Implementation difficulty:  Medium.
-  Demoing difficulty:  Easy.
-  Testing difficulty:  Medium.
   Requested by Jasper Paulsen on March 7, 2014.
 
 041.  Use the correct number of pixels per inch.
@@ -736,15 +615,6 @@ err:ole:CoInitializeEx Attempt to change threading model of this apartment from 
   Testing difficulty:  not applicable.
   Requested by Jasper Paulsen on March 7, 2014.
 
-219.  From "the editor", factor out blocks and sorting code into a "text sorter" file.
-  Status:    Designed.  Do after project can handle multiple folders.
-  Audience:  Programmers.
-  Benefit:   Minor.
-  Implementation difficulty:  Easy.
-  Demoing difficulty:  Not applicable.
-  Testing difficulty:  Not applicable.
-  Requested by Jasper Paulsen on April 27, 2017.
- 
 028.  Update the documentation (or F1-help, or a wiki)
   to discuss scrolling via the Ctrl-Home and Ctrl-End keys.
   Audience:  programmers.
@@ -835,6 +705,14 @@ err:ole:CoInitializeEx Attempt to change threading model of this apartment from 
   Requested by Jasper Paulsen on March 7, 2014.
 
 170.  Add scrollbar to writer's page editing feature.
+  Status:   Request.
+  Benefit:  Medium.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Medium.
+  Requested by Jasper Paulsen on March 13, 2014.
+
+171.  Add mouse scrolling to writer's page editing feature.
   Status:   Request.
   Benefit:  Medium.
   Implementation difficulty:  Medium.
