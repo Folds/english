@@ -1241,16 +1241,16 @@ ream cal-3024
     polygon 0 0 0 -1 0 0 2 2160 5940 2160 7740
     polygon 0 0 0 -1 0 0 2 10080 5940 10080 7740
     text -1 0 0 -1 0 0 2520 5940 9720 6300 0 "" "Arial" 360 "left" 0 0 0 yes
-       "c:\a directory that you already had with a very long name"
+       "c:\a directory that you already had with a very long name\"
     end
     text -1 0 0 -1 0 0 2520 6300 9720 6660 0 "" "Arial" 360 "left" 0 0 0 yes
-       "c:\cal monet"
+       "c:\cal monet\"
     end
     text -1 0 0 -1 0 0 2520 6660 9720 7020 0 "" "Arial" 360 "left" 0 0 0 yes
-       "c:\cal-4018"
+       "c:\cal-4018\"
     end
     text -1 0 0 -1 0 0 2520 7020 9720 7380 0 "" "Arial" 360 "left" 0 0 0 yes
-       "c:\another directory that you already had"
+       "c:\another directory that you already had\"
     end
     rectangle 0 0 0 -1 0 0 2520 10890 2880 11250 90
     text -1 0 0 -1 0 0 2520 10890 2880 11250 0 "" "Arial" 360 "center" 0 0 0 yes
@@ -9297,7 +9297,7 @@ ream cal-3024
     end
     rectangle 0 0 0 -1 0 0 6840 3870 8280 4230 90
     text -1 0 0 -1 0 0 6960 3870 8160 4230 0 "" "Arial" 360 "right" 0 0 0 yes
-       "10779:1"
+       "10780:1"
     end
     rectangle 0 0 0 -1 0 0 9810 6796 10080 7066 90
     rectangle 0 0 0 -1 0 0 9810 4500 10080 6796 90
