@@ -46,15 +46,15 @@ The following requests have been partially demonstrated.
 The following requests are roughly sorted
 from higher priority to lower priority.
 
-279.  In the editor, allow counting the characters
-  in a multi-line selection.
-  Status:    Request.
-  Benefit:   Minor.  Would make it easier to play "code golf".
-  Audience:  Programmers who play code golf.
-  Implementation difficulty:  Hard.
-  Demoing difficulty:  Easy.
-  Testing difficulty:  Medium.
-  Requested by Jasper Paulsen on June 27, 2017.
+342.  In the github wiki, on each page explaining how to
+  perform a source control action using the git command line,
+  also explain how to perform the action using GitKraken.
+  Status:  Request.
+  Audience:  Programmers.
+  Benefit:   Minor.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Not applicable.
 
 356.  Allow fuzzy tests to work for bigints.
   Status:  Request.
@@ -74,15 +74,15 @@ from higher priority to lower priority.
   Testing difficulty:  Medium.
   Requested by Jasper Paulsen on March 13, 2019.
   
-342.  In the github wiki, on each page explaining how to
-  perform a source control action using the git command line,
-  also explain how to perform the action using GitKraken.
-  Status:  Request.
-  Audience:  Programmers.
-  Benefit:   Minor.
-  Implementation difficulty:  Medium.
-  Demoing difficulty:  Medium.
-  Testing difficulty:  Not applicable.
+279.  In the editor, allow counting the characters
+  in a multi-line selection.
+  Status:    Request.
+  Benefit:   Minor.  Would make it easier to play "code golf".
+  Audience:  Programmers who play code golf.
+  Implementation difficulty:  Hard.
+  Demoing difficulty:  Easy.
+  Testing difficulty:  Medium.
+  Requested by Jasper Paulsen on June 27, 2017.
 
 020.  Provide wrappers and/or documentation for the hash map feature.
   Audience:  Windows programmers and Linux programmers.
@@ -640,15 +640,6 @@ err:ole:CoInitializeEx Attempt to change threading model of this apartment from 
   Test difficulty:  not applicable.
   Requested by Jasper Paulsen on March 7, 2014.
 
-172.  From "the noodle", factor out command-line parsing into a "commands" file.
-  Status:  request.
-  Audience:  Programmers.
-  Benefit:   minor.
-  Implementation difficulty:  Easy.
-  Demoing difficulty:  Not applicable.
-  Testing difficulty:  Not applicable.
-  Requested by Jasper Paulsen on March 20, 2017.
-
 285.  Allow reducing the size of flag arrays.
   Audience:  Windows programmers and Linux programmers.
   Status:  request.
@@ -694,27 +685,6 @@ err:ole:CoInitializeEx Attempt to change threading model of this apartment from 
   The benefit is minor.
   Requested by Jasper Paulsen on March 7, 2014.
 
-012.  If there are multiple rows of menu letters, fade out the irrelevant row(s)
-while a letter's menu is visible.
-  Audience:  Windows programmers and Linux programmers.
-  Benefit:  Important.  This will mitigate the confusion
-    caused by folding the menu bar.
-  Implementation difficulty:  Medium.
-  Demoing difficulty: Hard (without the ability
-    to adjust the main window's width at run time);
-    Easy (if the user can adjust the main window's width at run time).
-  Testing difficulty:  Hard.
-  Status:  request.
-  Requested by Jasper Paulsen on March 7, 2014.
-
-048.  Use shading to better distinguish the active tab from inactive tab(s).
-  Status:  request.
-  Benefit:  Minor.
-  Implementation difficulty:  Medium.
-  Demoing difficulty:  Easy.
-  Testing difficulty:  Medium.
-  Requested by Jasper Paulsen on March 7, 2014.
-
 058.  Show the line number(s) in the left margin.
   Audience:  Linux programmers -- IntelliJ has this feature.
   Status:  request.
@@ -738,5 +708,5 @@ while a letter's menu is visible.
 \ ======================================
 Unsorted requests:
 
-Next item number:  359.
+Next item number:  360.
 

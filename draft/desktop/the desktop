@@ -1,6 +1,6 @@
 \ The portions of this file that are from CAL-3040
 \ are copyright 2006 by the Osmosian Order.
-\ The remainder is copyright 2014, 2017 by Jasper Paulsen.
+\ The remainder is copyright 2014, 2017, 2019 by Jasper Paulsen.
 
 \ The desktop's bar includes the dialog.  The dialog's code is in another file.
 \ The dialog shares screen space with the menus and the status,
@@ -1386,6 +1386,7 @@ to handle a command:
   if the handler is "handle quit", handle quit; exit.
   if the handler is "handle redo", handle redo; exit.
   if the handler is "handle reduce", handle reduce; exit.
+  if the handler is "handle refresh", handle refresh; exit.
   if the handler is "handle rename", handle rename; exit.
   if the handler is "handle renumber pages", handle renumber pages; exit.
   if the handler is "handle restore", handle restore; exit.
@@ -1715,6 +1716,7 @@ to handle an event (key down - shortcut):
   \ the f5-key is for refresh.
   \ For example, to run a program being compiled or interpreted.
   if the key is the f5-key and the mode is "editor", handle run; exit.
+  if the key is the f5-key and the mode is "finder", handle refresh; exit.
   \ the f6-key is for moving between panes or windows.
   \ In Microsoft Office, the f9-key recalculates or updates calculated fields.
   \ the f11-key is for toggling full-screen mode.
@@ -2173,6 +2175,11 @@ to handle redo:
 to handle reduce:
   if the current tab's mode is "writer",
     handle reduce given the current tab's node's page; exit.
+  cluck.
+
+to handle refresh:
+  if the current tab's mode is "finder",
+    handle refresh given the current tab's node; exit.
   cluck.
 
 to handle rename:
@@ -2694,6 +2701,8 @@ to populate a submenu given a tab (r):
     given the tab has "editor or writer" and wants "redoable".
   add "Reduce" and "R" and "handle reduce" to the submenu
     given the tab has "writer" and wants "reducible".
+  add "Refresh" and "F5" and "handle refresh" to the submenu
+    given the tab has "finder".
   add "Rename..." to the submenu
     given the tab has "finder" and wants "selection".
   add "Renumber Pages..." to the submenu

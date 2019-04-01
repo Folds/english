@@ -1,6 +1,6 @@
 \ The portions of this file that are from CAL-3040
 \ are copyright 2006 by the Osmosian Order.
-\ The remainder is copyright 2014, 2017 by Jasper Paulsen.
+\ The remainder is copyright 2014, 2017, 2019 by Jasper Paulsen.
 
 to add a nodette to a node and to the file system given a path:
   if the node is nil, exit.
@@ -756,6 +756,26 @@ to handle paste given a node:
   show status the count and "item pasted" or "items pasted".
   flush the event queue.
 
+to handle refresh given a node:
+  if the node is nil, exit.
+  if the node's kind is "file", exit.
+  show status "Refreshing...".
+\  put the node's reversal flag in a reversal flag.
+\  put the node's sort string in a sort string.
+\  debug the sort string then "; " then the reversal flag.
+  destroy the node's nodettes.
+  if the node's kind is "root", open the node (root).
+  if the node's kind is "disk", open the node (disk or directory).
+  if the node's kind is "directory", open the node (disk or directory).
+  if the node is not root-level,
+    sort nodettes given the node and the node's sort string.
+  if the node's reversal flag is set,
+    handle reverse given the node;
+    set the node's reversal flag.
+  get the status for the node.
+  show the desktop.
+  flush the event queue.
+
 to handle rename given a node:
   if the node is root-level, cluck; exit.
   if the node's path is read-only, show error "I'm sorry, but this directory is read only."; exit.
@@ -808,10 +828,10 @@ to handle select all given a node:
 
 to handle sort nodettes given a node and a string:
   if the node is root-level, cluck; exit.
-  if the string is "kind", sort the node by kind.
-  if the string is "name", sort the node by designator.
-  if the string is "extension", sort the node by extension.
-  if the string is "last modified date", sort the node by last modified date.
+  if the string is not the node's sort string,
+    clear the node's reversal flag;
+    put the string in the node's sort string.
+  sort nodettes given the node and the string.
   show the desktop.
   show status the node's nodettes' count and "item sorted" or "items sorted".
   flush the event queue.
@@ -845,6 +865,7 @@ a node is a thing with
   a path, a directory, a designator, a designator called designator w/o backslash, an extension,
   a last modified filetime,
   a selected flag, a previously selected flag,
+  a sort string, a reversal flag,
   some nodettes,
   a source, or 
   a document and a page (reference).
@@ -1105,6 +1126,7 @@ to resize the finder:
 
 to reverse a node:
   if the node is nil, exit.
+  reverse the node's reversal flag.
   reverse the node's nodettes.
   adjust every nodette in the node.
 
@@ -1327,6 +1349,12 @@ to sort some nodettes by last modified date:
        repeat.
     move the left nodette from the left nodettes to the nodettes.
   repeat.
+
+to sort nodettes given a node and a string:
+  if the string is "kind", sort the node by kind.
+  if the string is "name", sort the node by designator.
+  if the string is "extension", sort the node by extension.
+  if the string is "last modified date", sort the node by last modified date.
 
 to test (the finder - destutter a path):
   create a test result about "the finder" and "destutter a path"

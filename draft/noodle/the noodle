@@ -8151,6 +8151,7 @@ to put the system's taskbar box into a box:
   put "SHAppBarMessage" in a library procedure.
   if cannot find the library procedure in the library, exit.
   \ https://docs.microsoft.com/en-us/windows/desktop/api/shellapi/nf-shellapi-shappbarmessage
+  \ https://docs.microsoft.com/en-us/windows/desktop/shell/abm-gettaskbarpos
   initialize an appbardata.
   call "shell32.dll" "SHAppBarMessage"
     with 5 [abm_gettaskbarpos]

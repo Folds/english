@@ -106,6 +106,17 @@ but do not have test plans yet.
   Requested by Jasper Paulsen on March 9, 2014.
   Benefit:  Very important
 
+359.  Allow refreshing the finder.
+  The previous work-around was to go up one level,
+  and then re-open the item to be refreshed.
+  Status:    Demonstrated.
+  Audience:  All users.
+  Benefit:   Medium.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Easy.
+  Testing difficulty:  Medium.
+  Requested by Jasper Paulsen on March 31, 2019.
+
 096.  Enable minimize on Windows kluges, but not on WINE kluges.
   Benefit:  Important.
   Audience:  Windows programmers.
