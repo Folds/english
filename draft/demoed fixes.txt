@@ -117,6 +117,31 @@ but do not have test plans yet.
   Testing difficulty:  Medium.
   Requested by Jasper Paulsen on March 31, 2019.
 
+360.  In the finder, allow sorting the root node.
+  Status:   Demonstrated.
+  Benefit:  Minor.  Would make UI more consistent.
+  Implementation difficulty:  Easy.
+  Demoing difficulty:  Easy.
+  Testing difficulty:  Medium.
+  Requested by Jasper Paulsen on April 1, 2019.
+
+361.  In the finder, allow reversing the root node's sort order.
+  Status:   Demonstrated.
+  Benefit:  Minor.  Would make UI more consistent.
+  Implementation difficulty:  Easy.
+  Demoing difficulty:  Easy.
+  Testing difficulty:  Medium.
+  Requested by Jasper Paulsen on April 1, 2019.
+
+362.  In the finder, make refreshing the root node
+  handle sort order the same way it does for other directory nodes.
+  Status:   Demonstrated.
+  Benefit:  Minor.  Would make UI more consistent.
+  Implementation difficulty:  Easy.
+  Demoing difficulty:  Easy.
+  Testing difficulty:  Medium.
+  Requested by Jasper Paulsen on April 1, 2019.
+
 096.  Enable minimize on Windows kluges, but not on WINE kluges.
   Benefit:  Important.
   Audience:  Windows programmers.

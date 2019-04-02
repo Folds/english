@@ -760,15 +760,11 @@ to handle refresh given a node:
   if the node is nil, exit.
   if the node's kind is "file", exit.
   show status "Refreshing...".
-\  put the node's reversal flag in a reversal flag.
-\  put the node's sort string in a sort string.
-\  debug the sort string then "; " then the reversal flag.
   destroy the node's nodettes.
   if the node's kind is "root", open the node (root).
   if the node's kind is "disk", open the node (disk or directory).
   if the node's kind is "directory", open the node (disk or directory).
-  if the node is not root-level,
-    sort nodettes given the node and the node's sort string.
+  sort nodettes given the node and the node's sort string.
   if the node's reversal flag is set,
     handle reverse given the node;
     set the node's reversal flag.
@@ -795,7 +791,6 @@ to handle rename given a node:
   flush the event queue.
 
 to handle reverse given a node:
-  if the node is root-level, cluck; exit.
   reverse the node.
   show the desktop with status.
   flush the event queue.
@@ -827,7 +822,6 @@ to handle select all given a node:
   show the desktop with status.
 
 to handle sort nodettes given a node and a string:
-  if the node is root-level, cluck; exit.
   if the string is not the node's sort string,
     clear the node's reversal flag;
     put the string in the node's sort string.

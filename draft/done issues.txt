@@ -2397,4 +2397,34 @@ Benefit:   Medium.
   Testing difficulty:  Not applicable.
   Requested by Jasper Paulsen on April 27, 2017.
  
+048.  Use shading to better distinguish the active tab from inactive tab(s).
+  Status:   Won't do.  Filleted corner tabs are good enough.
+  Benefit:  Minor.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Easy.
+  Testing difficulty:  Medium.
+  Requested by Jasper Paulsen on March 7, 2014.
+
+012.  If there are multiple rows of menu letters, fade out the irrelevant row(s)
+while a letter's menu is visible.
+  Audience:  Windows programmers and Linux programmers.
+  Status:  Won't do.
+  Benefit:  Negligible.  This will mitigate the confusion
+    caused by folding the menu bar.
+  Implementation difficulty:  Medium.
+  Demoing difficulty: Hard (without the ability
+    to adjust the main window's width at run time);
+    Easy (if the user can adjust the main window's width at run time).
+  Testing difficulty:  Hard.
+  Requested by Jasper Paulsen on March 7, 2014.
+
+172.  From "the noodle", factor out command-line parsing into a "commands" file.
+  Status:    Won't do.  Command-line parsing is not much code.
+  Audience:  Programmers.
+  Benefit:   minor.
+  Implementation difficulty:  Easy.
+  Demoing difficulty:  Not applicable.
+  Testing difficulty:  Not applicable.
+  Requested by Jasper Paulsen on March 20, 2017.
+
 
