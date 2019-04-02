@@ -8164,6 +8164,14 @@ to put the system's tick count into some ticks: \ wraps every 24.8 days or so
   call "kernel32.dll" "GetTickCount" returning the ticks.
   bitwise and the ticks with the largest number.
 
+to put the taskbar's pixel height into a number:
+  put the taskbar's height in the number.
+  subtract the tpp from the number.
+
+to put the taskbar's pixel width into a number:
+  put the taskbar's width in the number.
+  subtract the tpp from the number.
+
 to put a thing at the end of some things;
 to append a thing to some things:
   if the thing is nil, exit.
@@ -10581,6 +10589,140 @@ to test (the noodle - 200023 is prime):
     put "200023 is prime" in the actual string.
   stash the test result given the actual.
 
+to test (the noodle - accommodated taskbar height):
+  create a test result about "the noodle" and "accommodated taskbar height"
+    and expecting "accommodated taskbar height".
+  if the taskbar is horizontal, set a flag.
+  call "user32.dll" "GetSystemMetrics" with 1 [sm_cyscreen]
+    returning a pixel height.
+  put the pixel height in a number.
+  subtract the taskbar's pixel height from the pixel height.
+  if the pixel height is at least 288, set another flag.
+  if the flag and the other flag are both set, set a third flag.
+  if the pixel height is the screen's maximum pixel height, set a fourth flag.
+  if the third flag and the fourth flag are both set,
+    put "screen height and horizontal taskbar height add up to system's screen height"
+      in the test result's actual value;
+    put "accommodated taskbar height"
+      in the test result's interpretation;
+    stop the test result's timer;
+    append the test result to the status' all test results;
+    exit.
+  reverse the fourth flag.
+  if the third flag and the fourth flag are both set,
+    stash the test result using "system's screen height's "
+      then the number then " pixels have room for both the screen's "
+      then the screen's maximum pixel height
+      then " pixels and the horizontal task bar's "
+      then the taskbar's pixel height then " pixels,"
+      then " but they don't add up";
+      exit.
+  if the pixel height is the screen's maximum pixel height,
+    put "screen height is the system's screen height"
+      in the test result's actual value;
+    put "accommodated taskbar height"
+      in the test result's interpretation;
+    stop the test result's timer;
+    append the test result to the status' all test results;
+    exit.
+  stash the test result using
+    "screen height does not match the system's screen height".
+
+to test (the noodle - accommodated taskbar width):
+  create a test result about "the noodle" and "accommodated taskbar width"
+    and expecting "accommodated taskbar width".
+  if the taskbar is vertical, set a flag.
+  call "user32.dll" "GetSystemMetrics" with 0 [sm_cxscreen]
+    returning a pixel width.
+  put the pixel width in a number.
+  subtract the taskbar's pixel width from the pixel width.
+  put 2 times the screen's basic width [584] in a width.
+  if the pixel width is at least the width, set another flag.
+  if the flag and the other flag are both set, set a third flag.
+  if the pixel width is the screen's maximum pixel width, set a fourth flag.
+  if the third flag and the fourth flag are both set,
+    put "screen width and vertical taskbar width add up to system's screen width"
+      in the test result's actual value;
+    put "accommodated taskbar width"
+      in the test result's interpretation;
+    stop the test result's timer;
+    append the test result to the status' all test results;
+    exit.
+  reverse the fourth flag.
+  if the third flag and the fourth flag are both set,
+    stash the test result using "system's screen width's "
+      then the number then " pixels have room for both the screen's "
+      then the screen's maximum pixel width
+      then " pixels and the horizontal task bar's "
+      then the taskbar's pixel width then " pixels,"
+      then " but they don't add up";
+      exit.
+  if the screen's maximum pixel width is the number,
+    put "screen width is the system's screen width"
+      in the test result's actual value;
+    put "accommodated taskbar width"
+      in the test result's interpretation;
+    stop the test result's timer;
+    append the test result to the status' all test results;
+    exit.
+  stash the test result using
+    "screen width of " then the screen's maximum pixel width
+    then " pixels does not match the system's screen width of "
+    then the number then " pixels".
+
+to test (the noodle - can find taskbar side):
+  create a test result about "the noodle" and "can find taskbar side"
+    and expecting "taskbar location as expected".
+  clear a count.
+  if the taskbar is at the left,
+    add one to the count;
+    put "at the left" in a string.
+  if the taskbar is at the right,
+    add one to the count;
+    put "at the right" in the string.
+  if the taskbar is at the top,
+    add one to the count;
+    put "at the top" in the string.
+  if the taskbar is at the bottom,
+    add one to the count;
+    put "at the bottom" in the string.
+  if the count is 0, set a flag.
+  if the taskbar does not matter, set another flag.
+  if the flag and the other flag are both set,
+    put "taskbar does not matter, and not on any side"
+      in the test result's actual value;
+    put "taskbar location as expected"
+      in the test result's interpretation;
+    stop the test result's timer;
+    append the test result to the status' all test results;
+    exit.
+  if the count is 4, set the flag.
+  reverse the other flag.
+  \ assumes that the screen size is not 0 by 0.
+  if the flag and the other flag are both set,
+    put "taskbar fills whole screen, and is on all four sides"
+      in the test result's actual value;
+    put "taskbar location as expected"
+      in the test result's interpretation;
+    stop the test result's timer;
+    append the test result to the status' all test results;
+    exit.
+  if the count is 1, set the flag.
+  if the flag and the other flag are both set,
+    put "taskbar matters, and is " then the string
+      in the test result's actual value;
+    put "taskbar location as expected"
+      in the test result's interpretation;
+    stop the test result's timer;
+    append the test result to the status' all test results;
+    exit.
+  format the count and " side" or " sides" into an actual string.
+  if the flag is set,
+    prepend "taskbar matters, and is on " to the actual string.
+  if the flag is clear,
+    prepend "taskbar does not matter, and is on " to the actual string.
+  stash the test result using the actual.
+
 to test (the noodle - count primes through 250000):
   create a test result about "the noodle"
     and "count primes through 250000" and expecting "22044".
@@ -10697,6 +10839,34 @@ to test (the noodle - replace substring):
   put "ABRACADABRA abracadabra" in a string called actual.
   replace "ab" with "wow" in the actual (throughout).
   stash the test result given the actual.
+
+to test (the noodle - restored height matches max height):
+  create a test result about "the noodle"
+    and "restored height matches max height"
+    and expecting "restored height matches max height".
+  put "restore to " then the screen's restored pixel height
+    then " pixels of " then the screen's maximum pixel height
+    then " pixels" in the test result's actual value.
+  if the screen's restored pixel height
+    is the screen's maximum pixel height,
+      put "restored height matches max height"
+        in the test result's interpretation.
+  stop the test result's timer.
+  append the test result to the status' all test results.
+
+to test (the noodle - restored width is half of max width):
+  create a test result about "the noodle"
+    and "restored width is half of max width"
+    and expecting "restored width is half of max width".
+  put "restore to " then the screen's restored pixel width
+    then " pixels of " then the screen's maximum pixel width
+    then " pixels" in the test result's actual value.
+  if the screen's restored pixel width
+    is the screen's maximum pixel width divided by 2,
+      put "restored width is half of max width"
+        in the test result's interpretation.
+  stop the test result's timer.
+  append the test result to the status' all test results.
 
 to test (the noodle - sorting):
   create a test result about "the noodle" and "sorting"
@@ -10831,6 +11001,11 @@ to test (the noodle):
   test (string widths).
   test (unicode).
   test (the noodle - timer microsecond string).
+  test (the noodle - can find taskbar side).
+  test (the noodle - restored width is half of max width).
+  test (the noodle - restored height matches max height).
+  test (the noodle - accommodated taskbar height).
+  test (the noodle - accommodated taskbar width).
 
 to test (the talker - find PlaySound):
   create a test result about "the noodle" and "find PlaySound"

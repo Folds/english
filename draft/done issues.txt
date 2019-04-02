@@ -2427,4 +2427,43 @@ while a letter's menu is visible.
   Testing difficulty:  Not applicable.
   Requested by Jasper Paulsen on March 20, 2017.
 
+331.  At desktop startup, determine which edge the taskbar is on.
+  Status:    Tested.
+  Audience:  Application users.
+  Benefit:   Medium.
+  Implementation difficulty:  Hard.
+  Demoing difficulty:  Hard.
+  Testing difficulty:  Medium.
+  Requested by Jasper Paulsen on September 17, 2018.
+  
+332.  At desktop startup, determine size of taskbar.
+  Status:    Tested.
+  Audience:  Application users.
+  Benefit:   Medium.
+  Implementation difficulty:  Hard.
+  Demoing difficulty:  Hard.
+  Testing difficulty:  Medium.
+  Requested by Jasper Paulsen on September 17, 2018.
+
+333.  At desktop startup, adjust size and position of half-screens
+  to accommodate taskbar.  If the taskbar doesn't fit, don't bother.
+  If the taskbar is hidden, it is okay to not adjust the half-screens.
+  Status:    Tested.
+  Audience:  Application users.
+  Benefit:   Medium.
+  Implementation difficulty:  Hard.
+  Demoing difficulty:  Hard.
+  Testing difficulty:  Medium.
+  Requested by Jasper Paulsen on September 17, 2018.
+
+358.  At desktop startup, adjust size and position of full-screen
+  to accommodate taskbar.  If the taskbar doesn't fit, don't bother.
+  If the taskbar is hidden, it is okay to not adjust the full-screen.
+  Status:    Tested.
+  Audience:  Application users.
+  Benefit:   Minor.
+  Implementation difficulty:  Hard.
+  Demoing difficulty:  Hard.
+  Testing difficulty:  Medium.
+  Requested by Jasper Paulsen on March 31, 2018.
 
