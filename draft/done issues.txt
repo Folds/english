@@ -2467,3 +2467,54 @@ while a letter's menu is visible.
   Testing difficulty:  Medium.
   Requested by Jasper Paulsen on March 31, 2018.
 
+179.  Use more precise and accurate timing ticks.
+  Status:  Tested.
+  Audience:  Programmers.
+  Benefit:  Important.
+  Implementation difficulty:  Profound.  Requires support for 64-bit numbers.
+  Demoing difficulty:  Easy.
+  Testing difficulty:  Medium.
+  Requested by Jasper Paulsen on April 4, 2017.
+
+178.  Time each test, from test creation to stashing of result.
+  Status:  Tested.
+  Audience:  Programmers.
+  Benefit:  Important.
+  Implementation difficulty:  Profound.  Requires support for 64-bit numbers.
+  Demoing difficulty:  Easy.
+  Testing difficulty:  Medium.
+  Requested by Jasper Paulsen on April 4, 2017.
+
+013.  Allow changing the main window size and location at run-time.
+  Currently, the main window is fixed at the top-left corner of the screen.
+  Currently, the main window's size is fixed.
+  Currently, the program does not have mouse cursors available
+  for changing widths, changing heights, nor dragging window corners.
+  Status:  Demonstrated.
+  Audience:  Windows programmers and Linux programmers.
+  Benefit:  Important.  It will allow users to adjust the size of Cal
+            depending on how important their distractions from Cal are.
+  Implementation difficulty:  Hard.
+  Demoing difficulty:  Easy.
+  Testing difficulty:  n/a
+  Requested by Jasper Paulsen on March 7, 2014.
+
+356.  Allow fuzzy tests to work for bigints.
+  Status:    Tested.
+  Audience:  Programmers.
+  Benefit:   Medium.
+  Implementation difficulty:  Hard.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Medium.
+  Requested by Jasper Paulsen on March 13, 2019.
+  
+357.  Use fuzzy tests for bigint calculations that have rounding.
+  Status:    Tested.
+  Audience:  Programmers.
+  Benefit:   Medium.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Medium.
+  Requested by Jasper Paulsen on March 13, 2019.
+  
+

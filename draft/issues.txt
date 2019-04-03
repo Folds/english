@@ -46,6 +46,27 @@ The following requests have been partially demonstrated.
 The following requests are roughly sorted
 from higher priority to lower priority.
 
+092.  Document how to use git to manage the code.
+  Implementation difficulty:  Hard.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Profound.
+  Requested by Gerry Rzeppa on March 7, 2014.
+
+093.  Document how to use GitHub to share the code.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Profound.
+  Requested by Gerry Rzeppa on March 7, 2014.
+
+334.  Document how to run measure.bat and test.bat .
+  Status:  Request.
+  Audience:  Programmers.
+  Benefit:   Medium.
+  Implementation difficulty:  Hard.
+  Demoing difficulty:  Easy.
+  Testing difficulty:  Not applicable.
+  Requested by Jasper Paulsen on September 15, 2018.
+  
 342.  In the github wiki, on each page explaining how to
   perform a source control action using the git command line,
   also explain how to perform the action using GitKraken.
@@ -56,24 +77,48 @@ from higher priority to lower priority.
   Demoing difficulty:  Medium.
   Testing difficulty:  Not applicable.
 
-356.  Allow fuzzy tests to work for bigints.
+252.  Document how to find lines of code based on memory addresses.
+  If a program crashes, and if a program like WinCrashReport
+  is installed, it is possible to view the stack.
+  The stack will include addresses of function calls in
+  the *.exe.  It is possible to use a *.lst file's routines
+  section to roughly find which line of source code
+  corresponded to the address of the function call.
   Status:  Request.
-  Audience:  Programmers.
-  Benefit:   Medium.
-  Implementation difficulty:  Hard.
-  Demoing difficulty:  Medium.
-  Testing difficulty:  Medium.
-  Requested by Jasper Paulsen on March 13, 2019.
-  
-357.  Use fuzzy tests for bigint calculations that have rounding.
-  Status:  Request.
-  Audience:  Programmers.
-  Benefit:   Medium.
+  Audience:  Windows programmers.
+  Benefit:   Major -- helps diagnose crashing bugs.
   Implementation difficulty:  Medium.
-  Demoing difficulty:  Medium.
-  Testing difficulty:  Medium.
-  Requested by Jasper Paulsen on March 13, 2019.
-  
+  Demoing difficulty:  Hard.
+  Testing difficulty:  Not applicable.
+  Requested by Jasper Paulsen on June 2, 2017.
+
+253.  Document that null pointer errors cause crashes.
+  Add a paragraph or page to the instructions.
+  Status:  Request.
+  Audience:  Windows programmers.
+  Benefit:   Minor.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Hard.
+  Testing difficulty:  Not applicable.
+  Requested by Jasper Paulsen on June 2, 2017.
+
+254.  Document that stack overflows cause crashes.
+  For example, recursive "eternal loops".
+  Add a paragraph or page to the instructions.
+  Status:  Request.
+  Audience:  Windows programmers.
+  Benefit:   Minor.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Hard.
+  Testing difficulty:  Not applicable.
+  Requested by Jasper Paulsen on June 2, 2017.
+
+094.  Document "Plain English programming idioms",
+  and how they compare to other common programming languages.
+  Implementation difficulty:  Hard.
+  Testing difficulty:  Profound.
+  Requested by Jasper Paulsen on March 15, 2014.
+
 279.  In the editor, allow counting the characters
   in a multi-line selection.
   Status:    Request.
@@ -120,27 +165,6 @@ from higher priority to lower priority.
   Testing difficulty:  Medium.
   Requested by Jasper Paulsen on April 4, 2017.
 
-092.  Document how to use git to manage the code.
-  Implementation difficulty:  Hard.
-  Demoing difficulty:  Medium.
-  Testing difficulty:  Profound.
-  Requested by Gerry Rzeppa on March 7, 2014.
-
-093.  Document how to use GitHub to share the code.
-  Implementation difficulty:  Medium.
-  Demoing difficulty:  Medium.
-  Testing difficulty:  Profound.
-  Requested by Gerry Rzeppa on March 7, 2014.
-
-334.  Document how to run measure.bat and test.bat .
-  Status:  Request.
-  Audience:  Programmers.
-  Benefit:   Medium.
-  Implementation difficulty:  Hard.
-  Demoing difficulty:  Easy.
-  Testing difficulty:  Not applicable.
-  Requested by Jasper Paulsen on September 15, 2018.
-  
 337.  The status's test results use a small font when viewed
   in the writer, when the writer is in reduced mode.
   Fix the bug.
@@ -188,48 +212,6 @@ from higher priority to lower priority.
   Demoing difficulty:  Medium.
   Testing difficulty:  Medium.
   Requested by Jasper Paulsen on September 18, 2018.
-
-252.  Document how to find lines of code based on memory addresses.
-  If a program crashes, and if a program like WinCrashReport
-  is installed, it is possible to view the stack.
-  The stack will include addresses of function calls in
-  the *.exe.  It is possible to use a *.lst file's routines
-  section to roughly find which line of source code
-  corresponded to the address of the function call.
-  Status:  Request.
-  Audience:  Windows programmers.
-  Benefit:   Major -- helps diagnose crashing bugs.
-  Implementation difficulty:  Medium.
-  Demoing difficulty:  Hard.
-  Testing difficulty:  Not applicable.
-  Requested by Jasper Paulsen on June 2, 2017.
-
-253.  Document that null pointer errors cause crashes.
-  Add a paragraph or page to the instructions.
-  Status:  Request.
-  Audience:  Windows programmers.
-  Benefit:   Minor.
-  Implementation difficulty:  Medium.
-  Demoing difficulty:  Hard.
-  Testing difficulty:  Not applicable.
-  Requested by Jasper Paulsen on June 2, 2017.
-
-254.  Document that stack overflows cause crashes.
-  For example, recursive "eternal loops".
-  Add a paragraph or page to the instructions.
-  Status:  Request.
-  Audience:  Windows programmers.
-  Benefit:   Minor.
-  Implementation difficulty:  Medium.
-  Demoing difficulty:  Hard.
-  Testing difficulty:  Not applicable.
-  Requested by Jasper Paulsen on June 2, 2017.
-
-094.  Document "Plain English programming idioms",
-  and how they compare to other common programming languages.
-  Implementation difficulty:  Hard.
-  Testing difficulty:  Profound.
-  Requested by Jasper Paulsen on March 15, 2014.
 
 031.  Regularly back up unsaved work, in temporary files.
   Delete each temporary file after successfully

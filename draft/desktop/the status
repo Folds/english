@@ -289,16 +289,36 @@ to linger the status:
 
 the lingering status string is a string.
 
+to make a fuzzy test about a string and another string and targeting a binary logarithm with tolerance a number:
+  convert the number to a tolerance bigint.
+  make the fuzzy test about the string and the other string
+    and targeting the binary logarithm's mantissa as a bigint
+    with tolerance the tolerance bigint.
+  put the binary logarithm's bits in the fuzzy test's bits.
+
+to make a fuzzy test about a string and another string and targeting a bullseye bigint with tolerance a tolerance bigint:
+  start the fuzzy test's timer.
+  put the string in the fuzzy test's context.
+  put the other string in the fuzzy test's test name.
+  put the bullseye bigint in the fuzzy test's bullseye.
+  put the tolerance bigint in the fuzzy test's tolerance bigint.
+
+to make a fuzzy test about a string and another string and targeting a bullseye string with tolerance a number:
+  convert the bullseye string to a bullseye bigint.
+  convert the number to a tolerance bigint.
+  make the fuzzy test about the string and the other string
+    and targeting the bullseye bigint with tolerance the tolerance bigint.
+
 to make a fuzzy test about a string and another string and targeting a mixio with tight tolerance:
   make the fuzzy test about the string and the other string  
     and targeting the mixio with tolerance 4 trifles.
 
 to make a fuzzy test about a string and another string and targeting a mixio with tolerance some trifles:
-  start the fuzzy test's timer.
-  put the string in the fuzzy test's context.
-  put the other string in the fuzzy test's test name.
-  put the mixio in the fuzzy test's bullseye.
-  put the trifles in the fuzzy test's tolerance trifles.
+  convert the mixio to a premix.
+  convert the trifles to a tolerance bigint.
+  make the fuzzy test about the string and the other string
+    and targeting the premix as a bigint
+    with tolerance the tolerance bigint.
 
 to make a fuzzy test about a string and another string and targeting a ratio with tight tolerance:
   convert the ratio to a mixio.
@@ -317,17 +337,18 @@ to pass a test result given a string called actual:
   put the actual in the test result's actual value.
   put the test result's expectation in the test result's interpretation.
 
-to put a fuzzy test's maximum into a mixio:
-  put the fuzzy test's bullseye mixio in the mixio.
-  add the fuzzy test's tolerance trifles to the mixio.
+to put a fuzzy test's maximum into a bigint:
+  put the fuzzy test's bullseye bigint in the bigint.
+  add the fuzzy test's tolerance bigint to the bigint.
 
-to put a fuzzy test's minimum into a mixio:
-  put the fuzzy test's bullseye mixio in the mixio.
-  subtract the fuzzy test's tolerance trifles from the mixio.
+to put a fuzzy test's minimum into a bigint:
+  put the fuzzy test's bullseye bigint in the bigint.
+  subtract the fuzzy test's tolerance bigint from the bigint.
 
 to put a fuzzy test's tolerance ratio into a ratio:
-  put the fuzzy test's tolerance trifles / the trifle denominator
-    into the ratio.
+  put the fuzzy test's tolerance bigint into a premix as a bigint.
+  convert the premix into a mixio.
+  convert the mixio into the ratio.
   reduce the ratio.
 
 to put a test result's timeliness into a string:
@@ -421,28 +442,75 @@ to sort some test results (by jiffies):
     move the left test result from the left test results to the test results.
   repeat.
 
-to stash a fuzzy test given a mixio:
+to stash a fuzzy test given a bigint:
   create a test result (without starting timer).
   put the fuzzy test's context in the test result's context.
   put the fuzzy test's test name in the test result's test name.
-  if the fuzzy test's tolerance trifles are 0,
-    convert the fuzzy test's bullseye into the test result's expectation.
-  if the fuzzy test's tolerance trifles are not 0,
-    put the fuzzy test's bullseye  
-      then " ± " then the fuzzy test's tolerance ratio
-      in the test result's expectation.
-  convert the mixio into a string.
+  convert the fuzzy test's bullseye bigint into the test result's expectation.
+  if the fuzzy test's tolerance bigint is not 0,
+    append " ± " then the fuzzy test's tolerance bigint
+     to the test result's expectation.
+  convert the bigint into a string.
   pass the test result given the string.
-  if the mixio is greater than the fuzzy test's maximum,
-\    debug the mixio then " is greater than " then the fuzzy test's maximum;
+  if the bigint is greater than the fuzzy test's maximum,
+\    debug the premix then " is greater than " then the fuzzy test's maximum;
     fail the test result given the string.
-  if the mixio is less than the fuzzy test's minimum, 
+  if the bigint is less than the fuzzy test's minimum,
 \    debug the fuzzy test's bullseye
 \      then " ± " then the fuzzy test's tolerance ratio
 \      then "; expected " then the test result's expectation
 \      then "; " then the mixio then " is less than " then the fuzzy test's minimum;
-\    debug the mixio (long);
-\    debug the fuzzy test's minimum (long);
+\    debug the premix;
+\    debug the fuzzy test's minimum;
+    fail the test result given the string.
+  stop the fuzzy test's timer.
+  put the fuzzy test's timer in the test result's timer.
+  append the test result to the status' all test results.
+
+to stash a fuzzy test given a binary logarithm:
+  create a test result (without starting timer).
+  put the fuzzy test's context in the test result's context.
+  put the fuzzy test's test name in the test result's test name.
+  convert the fuzzy test's binary logarithm
+    and the fuzzy test's tolerance bigint
+    into the test result's expectation.
+  convert the binary logarithm into a string.
+  pass the test result given the string.
+  if the binary logarithm's bits are not the fuzzy test's bits,
+    fail the test result given the string.
+  if the binary logarithm's mantissa as a bigint
+    is greater than the fuzzy test's maximum,
+      fail the test result given the string.
+  if the binary logarithm's mantissa as a bigint
+    is less than the fuzzy test's minimum,
+      fail the test result given the string.
+  stop the fuzzy test's timer.
+  put the fuzzy test's timer in the test result's timer.
+  append the test result to the status' all test results.
+
+to stash a fuzzy test given a mixio:
+  create a test result (without starting timer).
+  put the fuzzy test's context in the test result's context.
+  put the fuzzy test's test name in the test result's test name.
+  put the fuzzy test's bullseye bigint into a bullseye premix as a bigint.
+  convert the bullseye premix to a bullseye mixio.
+  convert the bullseye mixio into the test result's expectation.
+  if the fuzzy test's tolerance bigint is not 0,
+    append " ± " then the fuzzy test's tolerance ratio
+     to the test result's expectation.
+  convert the mixio into a string.
+  pass the test result given the string.
+  convert the mixio to a premix.
+  if the premix as a bigint is greater than the fuzzy test's maximum,
+\    debug the premix then " is greater than " then the fuzzy test's maximum;
+    fail the test result given the string.
+  if the premix as a bigint is less than the fuzzy test's minimum,
+\    debug the fuzzy test's bullseye
+\      then " ± " then the fuzzy test's tolerance ratio
+\      then "; expected " then the test result's expectation
+\      then "; " then the mixio then " is less than " then the fuzzy test's minimum;
+\    debug the premix;
+\    debug the fuzzy test's minimum;
     fail the test result given the string.
   stop the fuzzy test's timer.
   put the fuzzy test's timer in the test result's timer.
@@ -645,4 +713,3 @@ to widen a submenu to a width:
     if the command is nil, exit.
     widen the command to the width.
   repeat.
-

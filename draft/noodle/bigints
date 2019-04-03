@@ -149,6 +149,14 @@ to convert a bigint to a string:
   repeat.
   if the original bigint is negative, prepend the dash byte to the string.
 
+to convert a binary logarithm and a tolerance bigint to a string:
+  convert the binary logarithm to the string.
+  if the tolerance bigint is zero, exit.
+  if the string ends with " right shifted 61 bits",
+    remove trailing bytes from the string given 22.
+  append " ± " then the tolerance bigint to the string.
+  append " right shifted 61 bits" to the string.
+
 to convert a binary logarithm to a premix:
   put the binary logarithm's mantissa as a bigint in the premix.
   multiply the premix right shifted 61 bits by the unit premix.
@@ -170,6 +178,10 @@ to convert a binary logarithm to a string:
   convert the binary logarithm's mantissa as a bigint to another string.
   append the other string to the string.
   append " right shifted 61 bits" to the string.
+
+to convert some bits and a string into a binary logarithm:
+  put the bits in the binary logarithm's bits.
+  convert the string into the binary logarithm's mantissa as a bigint.
 
 to convert a mixio to a premix:
   put the unit premix in the premix.
@@ -1078,11 +1090,12 @@ to swap a bigint with another bigint:
   swap the bigint's low number with the other bigint's low number.
 
 to test (bigints - 799/40 as a natural logarithm):
-  create a test result about "bigints" and "799/40 as a natural logarithm"
-    and expecting "28 bits and 1885795524376654757 right shifted 61 bits".
-  convert 799/40 to a binary logarithm.
-  multiply the binary logarithm by the rebase mantissa.
-  stash the test result given the binary logarithm.
+  convert 28 bits and "1885795524376654787" into a binary logarithm.
+  make a fuzzy test about "bigints" and "799/40 as a natural logarithm"
+    and targeting the binary logarithm with tolerance 60.
+  convert 799/40 to another binary logarithm.
+  multiply the other binary logarithm by the rebase mantissa.
+  stash the fuzzy test given the other binary logarithm.
 
 to test (bigints - add large negative bigints):
   create a test result about "bigints"
@@ -1138,16 +1151,18 @@ to test (bigints - convert 123456789 to number):
   stash the test result given the number.
 
 to test (bigints - convert 19/40 to a binary logarithm):
-  create a test result about "bigints" and "convert 19/40 to a binary logarithm"
-    and expecting "1095275429376504627 right shifted 61 bits".
-  convert 19/40 to a binary logarithm.
-  stash the test result given the binary logarithm.
+  convert 0 bits and "1095275429376504627" into a binary logarithm.
+  make a fuzzy test about "bigints" and "convert 19/40 to a binary logarithm"
+    and targeting the binary logarithm with tolerance 1.
+  convert 19/40 to another binary logarithm.
+  stash the fuzzy test given the other binary logarithm.
 
 to test (bigints - convert 799/40 to a binary logarithm):
-  create a test result about "bigints" and "convert 19/40 to a binary logarithm"
-    and expecting "19 bits and 2248196933983351603 right shifted 61 bits".
-  convert 799/40 to a binary logarithm.
-  stash the test result given the binary logarithm.
+  convert 19 bits and "2248196933983351603" into a binary logarithm.
+  make a fuzzy test about "bigints" and "convert 799/40 to a binary logarithm"
+    and targeting the binary logarithm with tolerance 1.
+  convert 799/40 to another binary logarithm.
+  stash the fuzzy test given the other binary logarithm.
 
 to test (bigints - convert largest bigint to largest number):
   create a test result about "bigints"
@@ -1257,21 +1272,21 @@ to test (bigints - divide with shift):
   stash the test result given the bigint.
 
 to test (bigints - half natural logify 2306821983129182773):
-  create a test result about "bigints"
+  make a fuzzy test about "bigints"
     and "half natural logify 2306821983129182773"
-    and expecting "489383078301447". 
+    and targeting "489383078301448" with tolerance 2. 
   convert "2306821983129182773" to a bigint.
   half natural logify the bigint giving a result mantissa.
-  stash the test result given the result mantissa as a bigint.
+  stash the fuzzy test given the result mantissa as a bigint.
 
 to test (bigints - half natural logify 2329962779071883937):
-  create a test result about "bigints"
+  make a fuzzy test about "bigints"
     and "half natural logify 2329962779071883937"
-    and expecting "11997246458029266". 
+    and targeting "11997246458029270" with tolerance 8. 
   convert "2329962779071883937" to a bigint.
   put the bigint into an arg mantissa as a bigint.
   half natural logify the arg mantissa giving a result mantissa.
-  stash the test result given the result mantissa as a bigint.
+  stash the fuzzy test given the result mantissa as a bigint.
 
 to test (bigints - largest bigint):
   create a test result about "bigints" and "largest bigint"
@@ -1293,11 +1308,12 @@ to test (bigints - logify 1/256 units):
   stash the test result given the binary logarithm.
 
 to test (bigints - logify 1/5 unit):
-  create a test result about "bigints" and "logify 1/5 unit"
-    and expecting "-3 bits and 1563527362148186763 right shifted 61 bits".
+  convert -3 bits and "1563527362148186753" into a binary logarithm.
+  make a fuzzy test about "bigints" and "logify 1/5 unit"
+    and targeting the binary logarithm with tolerance 20.
   convert 1/5 to a premix.
-  logify the premix giving a binary logarithm.
-  stash the test result given the binary logarithm.
+  logify the premix giving another binary logarithm.
+  stash the fuzzy test given the other binary logarithm.
 
 to test (bigints - logify 2 units):
   create a test result about "bigints" and "logify 2 units"
@@ -1314,28 +1330,30 @@ to test (bigints - logify 256 units):
   stash the test result given the binary logarithm.
 
 to test (bigints - logify 3125 units):
-  create a test result about "bigints" and "logify 3125 units"
-    and expecting "11 bits and 1405735226113842059 right shifted 61 bits".
+  convert 11 bits and "1405735226113842044" into a binary logarithm.
+  make a fuzzy test about "bigints" and "logify 3125 units"
+    and targeting the binary logarithm with tolerance 30.
   convert 3125 to a premix.
-  logify the premix giving a binary logarithm.
-  stash the test result given the binary logarithm.
+  logify the premix giving another binary logarithm.
+  stash the fuzzy test given the other binary logarithm.
 
 to test (bigints - logify 3732480000 to mantissa):
-  create a test result about "bigints"
+  make a fuzzy test about "bigints"
     and "logify 3732480000 to mantissa"
-    and expecting "1838880709047483325".
+    and targeting "1838880709047483316" with tolerance 18.
   convert 2 into a premix.
   logify the premix as a bigint giving a mantissa.
-  stash the test result given the mantissa as a bigint.
+  stash the fuzzy test given the mantissa as a bigint.
 
 to test (bigints - logify square root of 2 units):
-  create a test result about "bigints"
+  convert 0 bits and "1152921505056615797" into a binary logarithm.
+  make a fuzzy test about "bigints"
     and "logify square root of 2 units"
-    and expecting "1152921505056615797 right shifted 61 bits". \ 0 bits + ~ 0.5 * 2^61 [/ 2^61]
+    and targeting the binary logarithm with tolerance 1. \ 0 bits + ~ 0.5 * 2^61 [/ 2^61]
   convert "2639261919" to a bigint.
   put the bigint in a premix as a bigint.
-  logify the premix giving a binary logarithm.
-  stash the test result given the binary logarithm.
+  logify the premix giving another binary logarithm.
+  stash the fuzzy test given the other binary logarithm.
 
 to test (bigints - logify unit):
   create a test result about "bigints" and "logify unit"
@@ -1379,13 +1397,13 @@ to test (bigints - multiply 1234567890 by ten):
   stash the test result given the bigint.
 
 to test (bigints - multiply mantissa by itself):
-  create a test result about "bigints" and "multiply mantissa by itself"
-    and expecting "11321402898891335".
+  make a fuzzy test about "bigints" and "multiply mantissa by itself"
+    and targeting "11321402898891336" with tolerance 1.
   convert "161571587009907888" to a bigint.
   put the bigint in a mantissa as a bigint.
   put the mantissa in another mantissa.
   multiply the mantissa by the other mantissa.
-  stash the test result given the mantissa as a bigint.
+  stash the fuzzy test given the mantissa as a bigint.
 
 to test (bigints - multiply negative by positive):
   create a test result about "bigints" and "multiply negative by positive"
@@ -1592,35 +1610,35 @@ to test (bigints - unlogify 8):
   stash the test result given the premix as a bigint.
 
 to test (bigints - unlogify high bit):
-  create a test result about "bigints" and "unlogify high bit"
-    and expecting "3260954456333195553".
+  make a fuzzy test about "bigints" and "unlogify high bit"
+    and targeting "3260954456333195553" with tolerance 0.
   convert "1152921504606846976" to a mantissa as a bigint.
   unlogify the mantissa giving a result mantissa (high bits).
-  stash the test result given the result mantissa as a bigint.
+  stash the fuzzy test given the result mantissa as a bigint.
 
 to test (bigints - unlogify mantissa of 1152921504606846976):
-  create a test result about "bigints"
+  make a fuzzy test about "bigints"
     and "unlogify mantissa of 1152921504606846976"
-    and expecting "3260954456333195553".
+    and targeting "3260954456333195553" with tolerance 0.
   convert "1152921504606846976" to a mantissa as a bigint. \ 102/128 * 2^61
   unlogify the mantissa giving a result mantissa.
-  stash the test result given the result mantissa as a bigint.
+  stash the fuzzy test given the result mantissa as a bigint.
 
 to test (bigints - unlogify mantissa of 1837468647967162368):
-  create a test result about "bigints"
+  make a fuzzy test about "bigints"
     and "unlogify mantissa of 1837468647967162368"
-    and expecting "4006019078736290886".
+    and targeting "4006019078736290886" with tolerance 0.
   convert "1837468647967162368" to a mantissa as a bigint. \ 102/128 * 2^61
   unlogify the mantissa giving a result mantissa.
-  stash the test result given the result mantissa as a bigint.
+  stash the fuzzy test given the result mantissa as a bigint.
 
 to test (bigints - unlogify mantissa of 1838880709047483326):
-  create a test result about "bigints"
+  make a fuzzy test about "bigints"
     and "unlogify mantissa of 1838880709047483326"
-    and expecting "4007719883243520005".
+    and targeting "4007719883243520012" with tolerance 14.
   convert "1838880709047483326" to a mantissa as a bigint.
   unlogify the mantissa giving a result mantissa.
-  stash the test result given the result mantissa as a bigint.
+  stash the fuzzy test given the result mantissa as a bigint.
 
 to test (bigints - unstringify -8765432109876543210):
   create a test result about "bigints"

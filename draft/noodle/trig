@@ -853,10 +853,16 @@ the sixteenth cached mixio is a mixio.
 
 a fuzzy test has 
   a string called context, 
-  a string called test name,   
-  a bullseye mixio, 
-  some tolerance trifles, and \ implied denominator of 43,200 * 43,200.
-  a timer. 
+  a string called test name,
+  some bits,   
+  a bullseye bigint,
+  a tolerance bigint,
+  a timer, and
+  a binary logarithm at the bits.
+\ The bullseye bigint is often interpreted as a premix,
+\ which is equivalent to a mixio.  The implied denominator
+\ of a premix is 43,200 * 43,200, which makes
+\ the corresponding tolerance be in trifles.
 
 to get a cached mixio given a number:
   if the number is 1, put the first cached mixio in the cached mixio; exit.
