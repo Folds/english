@@ -46,17 +46,53 @@ The following requests have been partially demonstrated.
 The following requests are roughly sorted
 from higher priority to lower priority.
 
-092.  Document how to use git to manage the code.
-  Implementation difficulty:  Hard.
-  Demoing difficulty:  Medium.
-  Testing difficulty:  Profound.
-  Requested by Gerry Rzeppa on March 7, 2014.
-
-093.  Document how to use GitHub to share the code.
+342.  In the github wiki, on each page explaining how to
+  perform a source control action using the git command line,
+  also explain how to perform the action using GitKraken.
+  Status:  Request.
+  Audience:  Programmers.
+  Benefit:   Minor.
   Implementation difficulty:  Medium.
   Demoing difficulty:  Medium.
-  Testing difficulty:  Profound.
-  Requested by Gerry Rzeppa on March 7, 2014.
+  Testing difficulty:  Not applicable.
+
+279.  In the editor, allow counting the characters
+  in a multi-line selection.
+  Status:    Request.
+  Benefit:   Minor.  Would make it easier to play "code golf".
+  Audience:  Programmers who play code golf.
+  Implementation difficulty:  Hard.
+  Demoing difficulty:  Easy.
+  Testing difficulty:  Medium.
+  Requested by Jasper Paulsen on June 27, 2017.
+
+004.  Allow true vertical panning.
+  Currently, the user can pan a text document
+  by right-clicking and dragging the mouse.
+  Unfortunately, this often causes the text to move over to the left,
+  so that the left part of the text is off the screen.
+  This is disorienting.
+  The current work-around is to pan up-and-to-the-right,
+  or pan down-and-to-the-right.
+  It would be possible to modify
+     the right-click-and-drag mouse event handler
+     so that if the item being viewed is a text file,
+     and the absolute value of the mouse's change in x is less
+     than an arbitrary fraction of
+     the absolute value of the mouse's change in y,
+     the pan is purely vertical.
+  The audiences are Windows programmers and Linux programmers.
+  The benefit is important -- the non-vertical panning
+  is very jarring to new users of the system.
+  The status is designed.
+  Implementation would be easy.
+  Demoing would be easy.
+  Testing would be easy.  The test could propose
+    possible mouse event delta-x and delta-y values,
+    and verify that the editor can compute
+    the intended delta-x and delta-y values.
+    The test would not need to actually pan the screen.
+  Requested by Jasper Paulsen on March 7, 2014.
 
 334.  Document how to run measure.bat and test.bat .
   Status:  Request.
@@ -67,15 +103,25 @@ from higher priority to lower priority.
   Testing difficulty:  Not applicable.
   Requested by Jasper Paulsen on September 15, 2018.
   
-342.  In the github wiki, on each page explaining how to
-  perform a source control action using the git command line,
-  also explain how to perform the action using GitKraken.
+020.  Provide wrappers and/or documentation for the hash map feature.
+  Audience:  Windows programmers and Linux programmers.
+  Status:  request.
+  Benefit:  Important -- this makes many algorithms easier.
+  Implementation difficulty:  Medium.
+  Demo difficulty:  Medium.
+  Test difficulty:  Medium.
+  Requested by Jasper Paulsen on March 7, 2014.
+
+337.  The status's test results use a small font when viewed
+  in the writer, when the writer is in reduced mode.
+  Fix the bug.
   Status:  Request.
   Audience:  Programmers.
   Benefit:   Minor.
   Implementation difficulty:  Medium.
-  Demoing difficulty:  Medium.
-  Testing difficulty:  Not applicable.
+  Demoing difficulty:  Easy.
+  Testing difficulty:  Medium.
+  Requested by Jasper Paulsen on September 18, 2018.
 
 252.  Document how to find lines of code based on memory addresses.
   If a program crashes, and if a program like WinCrashReport
@@ -92,100 +138,34 @@ from higher priority to lower priority.
   Testing difficulty:  Not applicable.
   Requested by Jasper Paulsen on June 2, 2017.
 
-253.  Document that null pointer errors cause crashes.
-  Add a paragraph or page to the instructions.
-  Status:  Request.
+031.  Regularly back up unsaved work, in temporary files.
+  Delete each temporary file after successfully
+    saving the corresponding real file.
   Audience:  Windows programmers.
-  Benefit:   Minor.
-  Implementation difficulty:  Medium.
-  Demoing difficulty:  Hard.
-  Testing difficulty:  Not applicable.
-  Requested by Jasper Paulsen on June 2, 2017.
-
-254.  Document that stack overflows cause crashes.
-  For example, recursive "eternal loops".
-  Add a paragraph or page to the instructions.
-  Status:  Request.
-  Audience:  Windows programmers.
-  Benefit:   Minor.
-  Implementation difficulty:  Medium.
-  Demoing difficulty:  Hard.
-  Testing difficulty:  Not applicable.
-  Requested by Jasper Paulsen on June 2, 2017.
-
-094.  Document "Plain English programming idioms",
-  and how they compare to other common programming languages.
-  Implementation difficulty:  Hard.
-  Testing difficulty:  Profound.
-  Requested by Jasper Paulsen on March 15, 2014.
-
-279.  In the editor, allow counting the characters
-  in a multi-line selection.
-  Status:    Request.
-  Benefit:   Minor.  Would make it easier to play "code golf".
-  Audience:  Programmers who play code golf.
-  Implementation difficulty:  Hard.
-  Demoing difficulty:  Easy.
-  Testing difficulty:  Medium.
-  Requested by Jasper Paulsen on June 27, 2017.
-
-020.  Provide wrappers and/or documentation for the hash map feature.
-  Audience:  Windows programmers and Linux programmers.
   Status:  request.
-  Benefit:  Important -- this makes many algorithms easier.
+  Benefit:  Minor.
   Implementation difficulty:  Medium.
-  Demo difficulty:  Medium.
-  Test difficulty:  Medium.
+  Demoing difficulty:  Easy.
+  Testing difficulty:  Hard.
   Requested by Jasper Paulsen on March 7, 2014.
 
-198.  In finder, allow running a .lnk file.
-  Some hints are in:
-  https://msdn.microsoft.com/en-us/library/ms861519.aspx
-  Status:  Requested.
-  Audience:  Application users.
-  Benefit:  Medium.
-  Implementation difficulty:  Hard.
-  Demoing difficulty:  Medium.
-  Testing difficulty:  Medium.
-  Requested by Jasper Paulsen on April 4, 2017.
-
-177.  Let user create shell shortcuts.
-  Status:  request.
-  Implementation difficulty:  Hard.
-  Demoing difficulty:  medium.
-  Testing difficulty:  Medium.
-  Requested by Jasper Paulsen on April 4, 2017.
-
-199.  In finder, allow creating a .lnk file.
-  Status:  Designed.
-  Audience:  Application users.
-  Benefit:  Medium.
-  Implementation difficulty:  Hard.
-  Demoing difficulty:  Medium.
-  Testing difficulty:  Medium.
-  Requested by Jasper Paulsen on April 4, 2017.
-
-337.  The status's test results use a small font when viewed
-  in the writer, when the writer is in reduced mode.
-  Fix the bug.
-  Status:  Request.
+338.  Count test cases in the noodle subfolder.
+  Status:    Request.
   Audience:  Programmers.
   Benefit:   Minor.
-  Implementation difficulty:  Medium.
-  Demoing difficulty:  Easy.
+  Implementation difficulty:  Hard.
+  Demoing difficulty:  Medium.
   Testing difficulty:  Medium.
   Requested by Jasper Paulsen on September 18, 2018.
 
-035.  Indent the contents of loops.
-  Pretty print loops so that the row(s) after Loop: and before Repeat
-  are indented twice as much as the Loop: statement.
-  Status:  request.
-  Audience:  Windows programmers and Linux programmers.
-  Benefit:  minor.
-  Implementation difficulty:  Easy.
+339.  Count deciders in the noodle subfolder.
+  Status:    Request.
+  Audience:  Programmers.
+  Benefit:   Minor.
+  Implementation difficulty:  Hard.
   Demoing difficulty:  Medium.
   Testing difficulty:  Medium.
-  Requested by Jasper Paulsen on March 7, 2014.
+  Requested by Jasper Paulsen on September 18, 2018.
 
 223.  Make the editor's Capitalize feature generate sentence case.
   The Capitalize feature does not work the way its authors intended.
@@ -212,86 +192,6 @@ from higher priority to lower priority.
   Demoing difficulty:  Medium.
   Testing difficulty:  Medium.
   Requested by Jasper Paulsen on September 18, 2018.
-
-031.  Regularly back up unsaved work, in temporary files.
-  Delete each temporary file after successfully
-    saving the corresponding real file.
-  Audience:  Windows programmers.
-  Status:  request.
-  Benefit:  Minor.
-  Implementation difficulty:  Medium.
-  Demoing difficulty:  Easy.
-  Testing difficulty:  Hard.
-  Requested by Jasper Paulsen on March 7, 2014.
-
-036.  Implement code-folding.  (Part 1)
-  For example, it would be nice to view a summarized list
-    of these feature requests.
-  It would also be nice to be able to scroll through
-    all of the procedure headers in a file, in just a few screens.
-  The status is a request.  A simple version could be implemented by:
-    just display the first row of each block,
-    hide the blank lines between blocks,
-    show a symbol that the code has been abbreviated,
-    allow the user to click on the symbol to see the rest of the block,
-    have a "fold all" feature and an "unfold all" feature.
-  The benefit is important -- it will help find code,
-    and help know what features are available.
-    This will help the system scale to have more features.
-  The difficulty level is medium.
-  The testing difficulty is medium.
-  The audience is programmers.
-  Requested by Jasper Paulsen on March 7, 2014.
-
-037.  Implement code-folding.  (Part 2)
-  For example, it would be nice to view a summarized list
-    of these feature requests, with the implementation difficulty,
-    demoing difficulty, testing difficulty, benefit rating,
-    audience, and status all in the summary.
-  The status is a request.  It would be possible to have a request
-    output a two-line summary, and have the code-folding feature
-    (from Part 1) show the two line summary.
-  The difficulty level is medium.
-  The testing difficulty is medium.
-  The audience is programmers.
-  Requested by Jasper Paulsen on March 7, 2014.
-
-330.  In measure.bat, correctly count linewrap counts.
-  Status:    Request.
-  Audience:  Programmers.
-  Benefit:   Minor.
-  Implementation difficulty:  Hard.
-  Demoing difficulty:  Easy.
-  Testing difficulty:  Not applicable.
-  Requested by Jasper Paulsen on September 17, 2018.
-
-338.  Count test cases in the noodle subfolder.
-  Status:    Request.
-  Audience:  Programmers.
-  Benefit:   Minor.
-  Implementation difficulty:  Hard.
-  Demoing difficulty:  Medium.
-  Testing difficulty:  Medium.
-  Requested by Jasper Paulsen on September 18, 2018.
-
-339.  Count deciders in the noodle subfolder.
-  Status:    Request.
-  Audience:  Programmers.
-  Benefit:   Minor.
-  Implementation difficulty:  Hard.
-  Demoing difficulty:  Medium.
-  Testing difficulty:  Medium.
-  Requested by Jasper Paulsen on September 18, 2018.
-
-133.  Allow marking comments in the vertical scroll bar.
-  Benefit:  Medium.  Would make it easier to find
-            major section breaks in source code by scrolling.
-  Implementation difficulty:  Medium.
-            Might be hard to make run efficiently.
-  Demoing difficulty:  Easy.
-  Testing difficulty:  Medium.
-  Audience:  Windows and Linux programmers.
-  Requested by Jasper Paulsen on March 1, 2017.
 
 134.  Allow marking "find requests" in the vertical scroll bar.
   Benefit:  Medium.  Would make it easier to skip
@@ -320,23 +220,6 @@ from higher priority to lower priority.
   Audience:  Windows and Linux programmers.
   Requested by Jasper Paulsen on September 16, 2018.
   
-282.  Cache large numbers that have been checked for primality.
-  Store them as a sorted linked list of numeric ranges.
-  When a number that is adjacent to an existing range
-  is inserted into the cache, modify the existing range.
-  When a number that is adjacent to two existing ranges
-  is inserted into the cache, combine the existing ranges.
-  This cache can be used to quickly identify large
-  non-prime numbers that have already been checked for primality.
-  In finalize after run, destroy the cache.
-  Status:    Designed.
-  Audience:  Programmers.
-  Benefit:   Minor.
-  Implementation difficulty:  Medium.
-  Demoing difficulty:  Hard.
-  Testing difficulty:  Already done.
-  Requested by Jasper Paulsen on June 29, 2017.
-
 024.  Make it easy to search all files in a project,
 regardless of whether the file is open in the editor.
 If the the search item finds files that are not open yet,
@@ -394,32 +277,116 @@ open the files that are found.
   Testing difficulty:  Medium.
   Requested by Jasper Paulsen on March 7, 2014.
 
-004.  Allow true vertical panning.
-  Currently, the user can pan a text document
-  by right-clicking and dragging the mouse.
-  Unfortunately, this often causes the text to move over to the left,
-  so that the left part of the text is off the screen.
-  This is disorienting.
-  The current work-around is to pan up-and-to-the-right,
-  or pan down-and-to-the-right.
-  It would be possible to modify
-     the right-click-and-drag mouse event handler
-     so that if the item being viewed is a text file,
-     and the absolute value of the mouse's change in x is less
-     than an arbitrary fraction of
-     the absolute value of the mouse's change in y,
-     the pan is purely vertical.
-  The audiences are Windows programmers and Linux programmers.
-  The benefit is important -- the non-vertical panning
-  is very jarring to new users of the system.
-  The status is designed.
-  Implementation would be easy.
-  Demoing would be easy.
-  Testing would be easy.  The test could propose
-    possible mouse event delta-x and delta-y values,
-    and verify that the editor can compute
-    the intended delta-x and delta-y values.
-    The test would not need to actually pan the screen.
+035.  Indent the contents of loops.
+  Pretty print loops so that the row(s) after Loop: and before Repeat
+  are indented twice as much as the Loop: statement.
+  Status:  request.
+  Audience:  Windows programmers and Linux programmers.
+  Benefit:  minor.
+  Implementation difficulty:  Easy.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Medium.
+  Requested by Jasper Paulsen on March 7, 2014.
+
+036.  Implement code-folding.  (Part 1)
+  For example, it would be nice to view a summarized list
+    of these feature requests.
+  It would also be nice to be able to scroll through
+    all of the procedure headers in a file, in just a few screens.
+  The status is a request.  A simple version could be implemented by:
+    just display the first row of each block,
+    hide the blank lines between blocks,
+    show a symbol that the code has been abbreviated,
+    allow the user to click on the symbol to see the rest of the block,
+    have a "fold all" feature and an "unfold all" feature.
+  The benefit is important -- it will help find code,
+    and help know what features are available.
+    This will help the system scale to have more features.
+  The difficulty level is medium.
+  The testing difficulty is medium.
+  The audience is programmers.
+  Requested by Jasper Paulsen on March 7, 2014.
+
+037.  Implement code-folding.  (Part 2)
+  For example, it would be nice to view a summarized list
+    of these feature requests, with the implementation difficulty,
+    demoing difficulty, testing difficulty, benefit rating,
+    audience, and status all in the summary.
+  The status is a request.  It would be possible to have a request
+    output a two-line summary, and have the code-folding feature
+    (from Part 1) show the two line summary.
+  The difficulty level is medium.
+  The testing difficulty is medium.
+  The audience is programmers.
+  Requested by Jasper Paulsen on March 7, 2014.
+
+330.  In measure.bat, correctly count linewrap counts.
+  Status:    Request.
+  Audience:  Programmers.
+  Benefit:   Minor.
+  Implementation difficulty:  Hard.
+  Demoing difficulty:  Easy.
+  Testing difficulty:  Not applicable.
+  Requested by Jasper Paulsen on September 17, 2018.
+
+253.  Document that null pointer errors cause crashes.
+  Add a paragraph or page to the instructions.
+  Status:  Request.
+  Audience:  Windows programmers.
+  Benefit:   Minor.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Hard.
+  Testing difficulty:  Not applicable.
+  Requested by Jasper Paulsen on June 2, 2017.
+
+254.  Document that stack overflows cause crashes.
+  For example, recursive "eternal loops".
+  Add a paragraph or page to the instructions.
+  Status:  Request.
+  Audience:  Windows programmers.
+  Benefit:   Minor.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Hard.
+  Testing difficulty:  Not applicable.
+  Requested by Jasper Paulsen on June 2, 2017.
+
+092.  Document how to use git to manage the code.
+  Implementation difficulty:  Hard.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Profound.
+  Requested by Gerry Rzeppa on March 7, 2014.
+
+093.  Document how to use GitHub to share the code.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Profound.
+  Requested by Gerry Rzeppa on March 7, 2014.
+
+050.  On WINE systems, prevent the following error messages:
+  Currently, the "wine cmd" shell reports something like the following after Cal quits:
+err:ole:CoGetClassObject class {96749377-3391-11d2-9ee3-00c04f797396} not registered
+err:ole:CoGetClassObject class {96749377-3391-11d2-9ee3-00c04f797396} not registered
+err:ole:create_server class {96749377-3391-11d2-9ee3-00c04f797396} not registered
+err:ole:CoGetClassObject no class object {96749377-3391-11d2-9ee3-00c04f797396} could be created for context 0x7
+  Audience:  Linux programmers.
+  Status:  request.
+  Benefit:  Important.  This problem is caused by the talker failing to find
+    WINE's sapi.dll; this failure prevents Linux users from listening
+    to CAL's text-to-speech features.
+  Implementation difficulty:  Profound.
+  Demo difficulty:  Hard, unless the programmer is using WINE (which makes it easy).
+  Test difficulty:  Profound.
+  Requested by Jasper Paulsen on March 7, 2014.
+
+051.  On WINE systems, prevent the following error message:
+  Currently, the "wine cmd" shell reports something like the following after Cal quits:
+err:ole:CoInitializeEx Attempt to change threading model of this apartment from multi-threaded to apartment threaded
+  Audience:  Linux programmers.
+  Status:  request.
+  Implementation difficulty:  Profound.
+  Benefit:  minor.
+  Demo difficulty:  Hard, unless the programmer is using WINE (which makes it easy).
+  Test difficulty:  Hard.
   Requested by Jasper Paulsen on March 7, 2014.
 
 041.  Use the correct number of pixels per inch.
@@ -460,20 +427,38 @@ open the files that are found.
   Audience:  Windows and Linux programmers.
   Requested by Jasper Paulsen on March 1, 2017.
 
-123.  A way to test event queueing and dequeing.
-  Currently, enque and deque go through a global event queue.
-  It would be good to be able to verify that events can be
-  processed without affecting the user-visible state of CAL.
-  Benefit:  Major.  Many features are currently untested
-            because of this issue.  Also, writing the code
-            to take a windows message, create an event,
-            enque and deque the event, and pass the event
-            to a handler method is error-prone.
+094.  Document "Plain English programming idioms",
+  and how they compare to other common programming languages.
   Implementation difficulty:  Hard.
-  Demoing difficulty:  n/a (use tests instead)
-  Testing difficulty:  Medium (once implemented).
+  Testing difficulty:  Profound.
+  Requested by Jasper Paulsen on March 15, 2014.
+
+133.  Allow marking comments in the vertical scroll bar.
+  Benefit:  Medium.  Would make it easier to find
+            major section breaks in source code by scrolling.
+  Implementation difficulty:  Medium.
+            Might be hard to make run efficiently.
+  Demoing difficulty:  Easy.
+  Testing difficulty:  Medium.
   Audience:  Windows and Linux programmers.
-  Requested by Jasper Paulsen on February 28, 2017.
+  Requested by Jasper Paulsen on March 1, 2017.
+
+282.  Cache large numbers that have been checked for primality.
+  Store them as a sorted linked list of numeric ranges.
+  When a number that is adjacent to an existing range
+  is inserted into the cache, modify the existing range.
+  When a number that is adjacent to two existing ranges
+  is inserted into the cache, combine the existing ranges.
+  This cache can be used to quickly identify large
+  non-prime numbers that have already been checked for primality.
+  In finalize after run, destroy the cache.
+  Status:    Designed.
+  Audience:  Programmers.
+  Benefit:   Minor.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Hard.
+  Testing difficulty:  Already done.
+  Requested by Jasper Paulsen on June 29, 2017.
 
 017.  Automate collecting the unit tests.
 In practice, automated testing needs tool support for building test suites.
@@ -483,81 +468,6 @@ In practice, automated testing needs tool support for building test suites.
   Implementation difficulty:  Medium.
   Demo difficulty:  Easy.
   Test difficulty:  Medium.
-  Requested by Jasper Paulsen on March 7, 2014.
-
-050.  On WINE systems, prevent the following error messages:
-  Currently, the "wine cmd" shell reports something like the following after Cal quits:
-err:ole:CoGetClassObject class {96749377-3391-11d2-9ee3-00c04f797396} not registered
-err:ole:CoGetClassObject class {96749377-3391-11d2-9ee3-00c04f797396} not registered
-err:ole:create_server class {96749377-3391-11d2-9ee3-00c04f797396} not registered
-err:ole:CoGetClassObject no class object {96749377-3391-11d2-9ee3-00c04f797396} could be created for context 0x7
-  Audience:  Linux programmers.
-  Status:  request.
-  Benefit:  Important.  This problem is caused by the talker failing to find
-    WINE's sapi.dll; this failure prevents Linux users from listening
-    to CAL's text-to-speech features.
-  Implementation difficulty:  Profound.
-  Demo difficulty:  Hard, unless the programmer is using WINE (which makes it easy).
-  Test difficulty:  Profound.
-  Requested by Jasper Paulsen on March 7, 2014.
-
-066.  Allow user to enter font heights in decimal inches.
-  Audience:  Windows programmers.
-  Status:  request.
-  Benefit:  Minor.
-  Implementation difficulty:  Easy.
-  Demoing difficulty:  Easy.
-  Testing difficulty:  Medium.
-  Requested by Jasper Paulsen on March 7, 2014.
-
-091.  Allow using mouse and windows events to change the window size at run-time.
-  Currently, the main window is fixed at the top-left corner of the screen.
-  As of March 15, 2014, the main window's size has one of two sizes:
-  full screen, or a "restored" size that is calculated at startup.
-  Currently, the program does not have mouse cursors available
-  for changing widths, changing heights, nor dragging window corners.
-  When the mouse is close to the edges of the window, and the window
-  is in "restore" mode, change the cursor accordingly.
-  If the user clicks-and-drags the mouse
-  while the mouse has such a cursor,
-  adjust the window size and location.  Do not allow the window height
-  or width to exceed the corresponding screen dimension.
-  Status:  request.
-  Audience:  Windows programmers and Linux programmers.
-  Benefit:  Minor.  It will allow users to adjust the size of Cal
-            depending on how important their distractions from Cal are.
-  Implementation difficulty:  Hard.
-  Demoing difficulty:  Easy.
-  Testing difficulty:  Hard.
-  Requested by Jasper Paulsen on March 7, 2014.
-
-054.  Add namespaces.
-  Several features currently use names that would be very handy
-    for describing parts of new features.
-  This pre-emption makes it far more difficult to add features.
-  The audience is programmers.
-  The implementation difficulty is profound.
-  The testing difficulty is medium.
-  Benefit: Very important.
-  Requested by Jasper Paulsen on March 7, 2014.
-  
-051.  On WINE systems, prevent the following error message:
-  Currently, the "wine cmd" shell reports something like the following after Cal quits:
-err:ole:CoInitializeEx Attempt to change threading model of this apartment from multi-threaded to apartment threaded
-  Audience:  Linux programmers.
-  Status:  request.
-  Implementation difficulty:  Profound.
-  Benefit:  minor.
-  Demo difficulty:  Hard, unless the programmer is using WINE (which makes it easy).
-  Test difficulty:  Hard.
-  Requested by Jasper Paulsen on March 7, 2014.
-
-014.  Update the documentation after new cursors are added.
-  Status:  request.
-  Benefit:  Important -- the documentation needs to be accurate.
-  Implementation difficulty:  Easy.
-  Demoing difficulty:  Easy.
-  Testing difficulty:  not applicable.
   Requested by Jasper Paulsen on March 7, 2014.
 
 028.  Update the documentation (or F1-help, or a wiki)
@@ -570,31 +480,6 @@ err:ole:CoInitializeEx Attempt to change threading model of this apartment from 
   Test difficulty:  not applicable.
   Requested by Jasper Paulsen on March 7, 2014.
     
-042.  Use border shading to suggest whether a button is pressed in.
-  Audience:  Windows programmers -- this was a feature of Visual Basic.
-  Status:  request.
-  Benefit:  Minor.
-  Implementation difficulty:  Medium.
-  Demoing difficulty:  Easy.
-  Testing difficulty:  Medium.
-  Requested by Jasper Paulsen on March 7, 2014.
-
-160.  Make new editor panes use recent pane(s)' font name.
-  Status:   Request.
-  Benefit:  Medium.
-  Implementation difficulty:  Medium.
-  Demoing difficulty:  Medium.
-  Testing difficulty:  Medium.
-  Requested by Jasper Paulsen on March 13, 2014.
-
-161.  Make new editor panes use recent pane(s)' font height.
-  Status:   Request.
-  Benefit:  Medium.
-  Implementation difficulty:  Medium.
-  Demoing difficulty:  Medium.
-  Testing difficulty:  Medium.
-  Requested by Jasper Paulsen on March 13, 2014.
-
 055.  Add an array feature (either dynamic or fixed length).
   Audience:  Windows programmers and Linux programmers.
   Status:  request.
@@ -640,6 +525,111 @@ err:ole:CoInitializeEx Attempt to change threading model of this apartment from 
   Test difficulty:  Medium.
   Requested by Jasper Paulsen on March 7, 2014.
 
+198.  In finder, allow running a .lnk file.
+  Some hints are in:
+  https://msdn.microsoft.com/en-us/library/ms861519.aspx
+  Status:  Requested.
+  Audience:  Application users.
+  Benefit:  Medium.
+  Implementation difficulty:  Hard.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Medium.
+  Requested by Jasper Paulsen on April 4, 2017.
+
+177.  Let user create shell shortcuts.
+  Status:  request.
+  Implementation difficulty:  Hard.
+  Demoing difficulty:  medium.
+  Testing difficulty:  Medium.
+  Requested by Jasper Paulsen on April 4, 2017.
+
+199.  In finder, allow creating a .lnk file.
+  Status:  Designed.
+  Audience:  Application users.
+  Benefit:  Medium.
+  Implementation difficulty:  Hard.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Medium.
+  Requested by Jasper Paulsen on April 4, 2017.
+
+123.  A way to test event queueing and dequeing.
+  Currently, enque and deque go through a global event queue.
+  It would be good to be able to verify that events can be
+  processed without affecting the user-visible state of CAL.
+  Benefit:  Major.  Many features are currently untested
+            because of this issue.  Also, writing the code
+            to take a windows message, create an event,
+            enque and deque the event, and pass the event
+            to a handler method is error-prone.
+  Implementation difficulty:  Hard.
+  Demoing difficulty:  n/a (use tests instead)
+  Testing difficulty:  Medium (once implemented).
+  Audience:  Windows and Linux programmers.
+  Requested by Jasper Paulsen on February 28, 2017.
+
+091.  Allow using mouse and windows events to change the window size at run-time.
+  Currently, the main window is fixed at the top-left corner of the screen.
+  As of March 15, 2014, the main window's size has one of two sizes:
+  full screen, or a "restored" size that is calculated at startup.
+  Currently, the program does not have mouse cursors available
+  for changing widths, changing heights, nor dragging window corners.
+  When the mouse is close to the edges of the window, and the window
+  is in "restore" mode, change the cursor accordingly.
+  If the user clicks-and-drags the mouse
+  while the mouse has such a cursor,
+  adjust the window size and location.  Do not allow the window height
+  or width to exceed the corresponding screen dimension.
+  Status:  request.
+  Audience:  Windows programmers and Linux programmers.
+  Benefit:  Minor.  It will allow users to adjust the size of Cal
+            depending on how important their distractions from Cal are.
+  Implementation difficulty:  Hard.
+  Demoing difficulty:  Easy.
+  Testing difficulty:  Hard.
+  Requested by Jasper Paulsen on March 7, 2014.
+
+014.  Update the documentation after new cursors are added.
+  Status:  request.
+  Benefit:  Important -- the documentation needs to be accurate.
+  Implementation difficulty:  Easy.
+  Demoing difficulty:  Easy.
+  Testing difficulty:  not applicable.
+  Requested by Jasper Paulsen on March 7, 2014.
+
+066.  Allow user to enter font heights in decimal inches.
+  Audience:  Windows programmers.
+  Status:  request.
+  Benefit:  Minor.
+  Implementation difficulty:  Easy.
+  Demoing difficulty:  Easy.
+  Testing difficulty:  Medium.
+  Requested by Jasper Paulsen on March 7, 2014.
+
+042.  Use border shading to suggest whether a button is pressed in.
+  Audience:  Windows programmers -- this was a feature of Visual Basic.
+  Status:  request.
+  Benefit:  Minor.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Easy.
+  Testing difficulty:  Medium.
+  Requested by Jasper Paulsen on March 7, 2014.
+
+160.  Make new editor panes use recent pane(s)' font name.
+  Status:   Request.
+  Benefit:  Medium.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Medium.
+  Requested by Jasper Paulsen on March 13, 2014.
+
+161.  Make new editor panes use recent pane(s)' font height.
+  Status:   Request.
+  Benefit:  Medium.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Medium.
+  Testing difficulty:  Medium.
+  Requested by Jasper Paulsen on March 13, 2014.
+
 170.  Add scrollbar to writer's page editing feature.
   Status:   Request.
   Benefit:  Medium.
@@ -656,6 +646,25 @@ err:ole:CoInitializeEx Attempt to change threading model of this apartment from 
   Testing difficulty:  Medium.
   Requested by Jasper Paulsen on March 13, 2014.
 
+058.  Show the line number(s) in the left margin.
+  Audience:  Linux programmers -- IntelliJ has this feature.
+  Status:  request.
+  Benefit:  Minor.
+  Implementation difficulty:  Medium.
+  Demoing difficulty:  Easy.
+  Testing difficulty:  Medium.
+  Requested by Jasper Paulsen on March 7, 2014.
+  
+054.  Add namespaces.
+  Several features currently use names that would be very handy
+    for describing parts of new features.
+  This pre-emption makes it far more difficult to add features.
+  The audience is programmers.
+  The implementation difficulty is profound.
+  The testing difficulty is medium.
+  Benefit: Very important.
+  Requested by Jasper Paulsen on March 7, 2014.
+  
 059.  Implement enumerated types.
   For example, it would be nice to have
     an enumerated type of difficulty rating levels.
@@ -667,15 +676,6 @@ err:ole:CoInitializeEx Attempt to change threading model of this apartment from 
   The benefit is minor.
   Requested by Jasper Paulsen on March 7, 2014.
 
-058.  Show the line number(s) in the left margin.
-  Audience:  Linux programmers -- IntelliJ has this feature.
-  Status:  request.
-  Benefit:  Minor.
-  Implementation difficulty:  Medium.
-  Demoing difficulty:  Easy.
-  Testing difficulty:  Medium.
-  Requested by Jasper Paulsen on March 7, 2014.
-  
 251.  In the writer, changing the pen color should affect new texts.
   Similar to how changing the font name or height affects new texts.
   Status:    Request.
