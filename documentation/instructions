@@ -45,7 +45,7 @@ ream cal-3024
        ""
        "I am the CAL-4018. My primary function is to compile Plain English text files"
        "into executable programs compatible with the Windows operating system."
-       "My code — just 44,000 lines of Plain English — is surprisingly broad in scope."
+       "My code — just 45,000 lines of Plain English — is surprisingly broad in scope."
        ""
        "The ""noodle"" subfolder is my frontal lobe, which goes with me wherever I go."
        "You can use (or omit) the other subfolders and files, depending on what kind of program you want to write."
@@ -58,7 +58,7 @@ ream cal-3024
        "         (9) the compiler, mentioned above"
        "The ""turtle"" subfolder has routines for drawing turtle graphics."
        ""
-       "I am capable of replication and can recompile myself in under seven seconds. Which is less time than it takes Microsoft Word just to start up."
+       "I am capable of replication and can recompile myself in under eight seconds. Which is less time than it takes Microsoft Word just to start up."
        ""
        "INSTALLATION"
        ""
@@ -9166,7 +9166,7 @@ ream cal-3024
        ""
        "I like tests because they encourage you to tell me how to do new things,"
        "because you can check whether I still know how to do old things."
-       "So I collect tests.  Right now I have 396 tests in my noodle subfolder."
+       "So I collect tests.  Right now I have 401 tests in my noodle subfolder."
        ""
        ""
        ""
@@ -9297,7 +9297,7 @@ ream cal-3024
     end
     rectangle 0 0 0 -1 0 0 6840 3870 8280 4230 90
     text -1 0 0 -1 0 0 6960 3870 8160 4230 0 "" "Arial" 360 "right" 0 0 0 yes
-       "10780:1"
+       "10950:1"
     end
     rectangle 0 0 0 -1 0 0 9810 6796 10080 7066 90
     rectangle 0 0 0 -1 0 0 9810 4500 10080 6796 90
